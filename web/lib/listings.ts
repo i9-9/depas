@@ -97,7 +97,9 @@ export function inScope(item: Pick<RawListing, "title" | "address" | "zone" | "u
   return ALLOWED_BARRIOS.some((b) => hay.includes(b));
 }
 
-export type RawListing = Partial<Listing> & { id: string };
+export type RawListing = {
+  [K in keyof Listing]?: Listing[K] | null;
+} & { id: string };
 
 export type CatalogFile = {
   last_change: string | null;
