@@ -16,12 +16,14 @@
       "jardin botanico",
       "palermo chico"
     ],
-    "reject": [
+    "reject_text": [
       "en pozo",
       "pozo",
       "en construccion",
       "en cuotas",
-      "cuotas desde",
+      "cuotas desde"
+    ],
+    "reject_barrios": [
       "tigre",
       "quilmes",
       "lanus",
@@ -39,6 +41,7 @@
       "constitucion"
     ]
   },
+  "heartbeat": false,
   "signals": [
     {
       "id": "epoca",

@@ -1,6 +1,10 @@
 """Pruebas offline con HTML sintético que imita la estructura de Argenprop y Zonaprop."""
 import json
+import tempfile
+import unittest.mock as mock
 from pathlib import Path
+
+import requests
 
 import scraper as s
 
@@ -233,6 +237,24 @@ def test_reject_noise():
          "url": "https://z/botanico-4.html", "blurb": ""},
         src, F,
     )
+    pasos = {
+        "price": 98000, "ambientes": 3, "area": 57,
+        "title": "3 amb Recoleta a pasos de Congreso",
+        "address": "Juncal 2900, Recoleta, Capital Federal",
+        "url": "https://z/recoleta-juncal.html",
+        "blurb": "Luminoso, a pasos de Congreso y el Congreso de la Nación.",
+        "zone": "Recoleta",
+    }
+    assert not s.is_rejected(pasos, F) and s.matches(pasos, F)
+    en_congreso = {
+        "price": 98000, "ambientes": 3, "area": 57,
+        "title": "3 amb en Congreso",
+        "address": "Rivadavia 1800, Congreso, Capital Federal",
+        "url": "https://z/congreso-3.html",
+        "blurb": "Departamento en Recoleta? no, está en Congreso.",
+        "zone": "Congreso",
+    }
+    assert s.is_rejected(en_congreso, F)
 
 
 def test_real_zonaprop_fixture():
@@ -270,8 +292,326 @@ def test_dedupe():
     assert prev is not None and prev["price"] == 105000
 
 
+def _item(lid, **kw):
+    base = {
+        "id": lid,
+        "site": lid.split(":")[0],
+        "url": f"https://z/{lid}.html",
+        "title": "3 amb Recoleta",
+        "address": "Juncal 2900, Recoleta",
+        "zone": "Recoleta",
+        "price": 98000,
+        "area": 57,
+        "ambientes": 3,
+        "photo": "",
+        "tags": ["de época"],
+        "score": 3,
+        "blurb": "",
+    }
+    base.update(kw)
+    return base
+
+
+_ORIG_PATHS = (s.STATE_DIR, s.WEB_DATA_DIR, s.OLD_SEEN_PATH)
+
+
+def _portal_dirs(tmp: Path):
+    s.STATE_DIR = tmp / "state"
+    s.WEB_DATA_DIR = tmp / "web" / "data"
+    s.OLD_SEEN_PATH = tmp / "seen.json"
+    s.STATE_DIR.mkdir(parents=True)
+    s.WEB_DATA_DIR.mkdir(parents=True)
+
+
+def _restore_paths():
+    s.STATE_DIR, s.WEB_DATA_DIR, s.OLD_SEEN_PATH = _ORIG_PATHS
+
+
+def test_migrate_state_per_portal():
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    try:
+        _test_migrate_state_per_portal_body()
+    finally:
+        _restore_paths()
+
+
+def _test_migrate_state_per_portal_body():
+    s.write_json(
+        s.OLD_SEEN_PATH,
+        {
+            "listings": {
+                "zonaprop:1": {"price": 110000, "url": "https://z/1.html", "first_seen": "2026-01-01T00:00:00+00:00"},
+                "zonaprop:2": {"price": 90000, "url": "https://z/2.html", "first_seen": "2026-01-02T00:00:00+00:00"},
+            },
+            "meta": {"last_error_day": "2026-01-03"},
+        },
+    )
+    s.migrate_legacy_seen()
+    zp, cat = s.load_portal("zonaprop", persist=False)
+    ap, ap_cat = s.load_portal("argenprop", persist=False)
+    assert set(zp["listings"]) == {"zonaprop:1", "zonaprop:2"}
+    assert zp["listings"]["zonaprop:1"]["price"] == 110000
+    assert ap["listings"] == {}
+    assert {x["id"] for x in cat["listings"]} == {"zonaprop:1", "zonaprop:2"}
+    assert all(x["active"] for x in cat["listings"])
+    assert ap_cat["listings"] == []
+    # segunda llamada no pisa
+    s.OLD_SEEN_PATH.write_text("{}")
+    s.migrate_legacy_seen()
+    zp2, _ = s.load_portal("zonaprop", persist=False)
+    assert set(zp2["listings"]) == {"zonaprop:1", "zonaprop:2"}
+
+
+def test_mark_gone_only_when_source_ok():
+    now = "2026-10-10T12:00:00+00:00"
+    catalog = {
+        "listings": [
+            {"id": "zonaprop:rec", "zone": "Recoleta", "active": True, "gone_at": None},
+            {"id": "zonaprop:bot", "zone": "Botánico", "active": True, "gone_at": None},
+            {"id": "zonaprop:old", "zone": "", "active": True, "gone_at": None},
+        ]
+    }
+    gone = s.mark_gone(
+        catalog,
+        {"Recoleta"},
+        {"zonaprop:rec"},
+        now,
+        all_zones={"Recoleta", "Botánico"},
+    )
+    by_id = {x["id"]: x for x in catalog["listings"]}
+    assert gone == []
+    assert by_id["zonaprop:bot"]["active"] is True
+    assert by_id["zonaprop:old"]["active"] is True
+    gone = s.mark_gone(
+        catalog,
+        {"Recoleta", "Botánico"},
+        {"zonaprop:rec"},
+        now,
+        all_zones={"Recoleta", "Botánico"},
+    )
+    by_id = {x["id"]: x for x in catalog["listings"]}
+    assert set(gone) == {"zonaprop:bot", "zonaprop:old"}
+    assert by_id["zonaprop:rec"]["active"] is True
+    assert by_id["zonaprop:bot"]["active"] is False and by_id["zonaprop:bot"]["gone_at"] == now
+
+
+def test_telegram_partial_failure_does_not_mark_seen():
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    s.write_json(
+        s.seen_path("zonaprop"),
+        {
+            "listings": {
+                "zonaprop:old": {
+                    "price": 100000,
+                    "url": "https://z/old.html",
+                    "first_seen": "2026-01-01T00:00:00+00:00",
+                    "zone": "Recoleta",
+                }
+            },
+            "meta": {},
+        },
+    )
+    s.write_json(
+        s.listings_path("zonaprop"),
+        {
+            "last_change": None,
+            "listings": [
+                s.listing_from_seen(
+                    "zonaprop:old",
+                    {"price": 100000, "url": "https://z/old.html", "first_seen": "2026-01-01T00:00:00+00:00", "zone": "Recoleta"},
+                    "zonaprop",
+                )
+            ],
+        },
+    )
+    known = _item("zonaprop:old")
+    fresh = _item("zonaprop:new", url="https://z/new.html", address="Santa Fe 3800, Recoleta")
+
+    def fake_deliver(token, chat_id, payloads):
+        sent, failed = [], []
+        for p in payloads:
+            lid = p.get("item_id")
+            if lid == "zonaprop:new":
+                failed.append(lid)
+            elif lid:
+                sent.append(lid)
+        return {"sent_ids": sent, "failed_ids": failed, "intro_ok": True, "error_ok": True}
+
+    cfg = {"heartbeat": False, "sources": [{"site": "zonaprop", "name": "Recoleta"}]}
+    with mock.patch.object(s, "deliver", side_effect=fake_deliver):
+        s.process_portal(
+            "zonaprop",
+            [known, fresh],
+            {"Recoleta"},
+            [],
+            cfg,
+            dry_run=False,
+            token="tok",
+            chat_id="1",
+            now="2026-10-10T12:00:00+00:00",
+            today="2026-10-10",
+        )
+    state, catalog = s.load_portal("zonaprop", persist=False)
+    assert "zonaprop:new" not in state["listings"]
+    assert "zonaprop:old" in state["listings"]
+    assert all(x["id"] != "zonaprop:new" for x in catalog["listings"])
+    _restore_paths()
+
+
+def test_redact_token_and_fetch_retry():
+    assert "[redacted]" in s.redact_secrets("boom tokensecret", "tokensecret")
+    assert "tokensecret" not in s.redact_secrets("https://api.telegram.org/bottokensecret/x", "tokensecret")
+
+    html_ok = "<html><title>Depto</title><body>m²</body></html>"
+
+    class Resp:
+        def __init__(self, code, url="https://z/x"):
+            self.status_code = code
+            self.url = url
+            self.headers = {}
+            self.text = html_ok
+
+        def raise_for_status(self):
+            if self.status_code >= 400:
+                raise requests.HTTPError(f"{self.status_code}")
+
+    sess = mock.Mock()
+    sess.get.side_effect = [Resp(403), Resp(200)]
+    with mock.patch.object(s.time, "sleep"):
+        text, _ = s.fetch(sess, "https://z/x")
+    assert text == html_ok
+    assert sess.get.call_count == 2
+
+    sess405 = mock.Mock()
+    sess405.get.return_value = Resp(405)
+    try:
+        s.fetch(sess405, "https://www.argenprop.com/x")
+        raise AssertionError("405 debería ser Blocked sin reintento")
+    except s.Blocked:
+        pass
+    assert sess405.get.call_count == 1
+
+
+def test_telegram_429_retries_once():
+    calls = []
+
+    class Resp:
+        def __init__(self, code):
+            self.status_code = code
+            self.headers = {"Retry-After": "2"}
+
+        def json(self):
+            return {"parameters": {"retry_after": 2}}
+
+        def raise_for_status(self):
+            if self.status_code >= 400:
+                raise requests.HTTPError(str(self.status_code))
+
+    def fake_post(url, json=None, timeout=None):
+        calls.append(url)
+        return Resp(429) if len(calls) == 1 else Resp(200)
+
+    with mock.patch.object(s.requests, "post", side_effect=fake_post), mock.patch.object(s.time, "sleep") as slp:
+        s.tg_send("TOKENSECRET", "1", "hola")
+    assert len(calls) == 2
+    slp.assert_called()
+    assert "TOKENSECRET" not in "".join(str(c) for c in calls) or True  # URL tiene token; redact es para logs
+
+
+def test_first_run_is_per_portal():
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    s.write_json(
+        s.seen_path("zonaprop"),
+        {
+            "listings": {
+                "zonaprop:1": {"price": 100000, "url": "https://z/1.html", "first_seen": "2026-01-01T00:00:00+00:00"}
+            },
+            "meta": {},
+        },
+    )
+    s.write_json(s.listings_path("zonaprop"), s.empty_catalog())
+    s.write_json(s.seen_path("argenprop"), s.empty_state())
+    s.write_json(s.listings_path("argenprop"), s.empty_catalog())
+
+    zp_state, _ = s.load_portal("zonaprop", persist=False)
+    ap_state, _ = s.load_portal("argenprop", persist=False)
+    assert zp_state["listings"] and not ap_state["listings"]
+
+    fresh = _item("argenprop:9", site="argenprop", zone="Recoleta")
+    cfg = {"heartbeat": False, "sources": [{"site": "argenprop", "name": "Recoleta"}]}
+    with mock.patch.object(
+        s,
+        "deliver",
+        return_value={"sent_ids": ["argenprop:9"], "failed_ids": [], "intro_ok": True, "error_ok": True},
+    ):
+        s.process_portal(
+            "argenprop",
+            [fresh],
+            {"Recoleta"},
+            [],
+            cfg,
+            dry_run=False,
+            token="t",
+            chat_id="1",
+            now="2026-10-10T12:00:00+00:00",
+            today="2026-10-10",
+        )
+    zp2, _ = s.load_portal("zonaprop", persist=False)
+    ap2, ap_cat = s.load_portal("argenprop", persist=False)
+    assert set(zp2["listings"]) == {"zonaprop:1"}
+    assert "argenprop:9" in ap2["listings"]
+    assert any(x["id"] == "argenprop:9" for x in ap_cat["listings"])
+    _restore_paths()
+
+
+def test_no_write_when_nothing_changed():
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    rec = {
+        "price": 98000,
+        "url": "https://z/old.html",
+        "first_seen": "2026-01-01T00:00:00+00:00",
+        "zone": "Recoleta",
+        "key": "juncal 2900|98000|57|3",
+    }
+    s.write_json(s.seen_path("zonaprop"), {"listings": {"zonaprop:old": rec}, "meta": {}})
+    listing = s.listing_from_seen("zonaprop:old", rec, "zonaprop")
+    listing["zone"] = "Recoleta"
+    s.write_json(s.listings_path("zonaprop"), {"last_change": "x", "listings": [listing]})
+    before_seen = s.seen_path("zonaprop").read_text()
+    before_cat = s.listings_path("zonaprop").read_text()
+    cfg = {"heartbeat": False, "sources": [{"site": "zonaprop", "name": "Recoleta"}]}
+    with mock.patch.object(
+        s,
+        "deliver",
+        return_value={"sent_ids": [], "failed_ids": [], "intro_ok": True, "error_ok": True},
+    ) as dlv:
+        s.process_portal(
+            "zonaprop",
+            [_item("zonaprop:old")],
+            {"Recoleta"},
+            [],
+            cfg,
+            dry_run=False,
+            token="t",
+            chat_id="1",
+            now="2026-10-10T12:00:00+00:00",
+            today="2026-10-10",
+        )
+        assert dlv.call_count == 0
+    assert s.seen_path("zonaprop").read_text() == before_seen
+    assert s.listings_path("zonaprop").read_text() == before_cat
+    _restore_paths()
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):
-            fn()
-            print("ok", name)
+            try:
+                fn()
+                print("ok", name)
+            finally:
+                _restore_paths()

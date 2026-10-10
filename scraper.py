@@ -25,7 +25,9 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).parent
 CONFIG_PATH = ROOT / "config.json"
-STATE_PATH = ROOT / "seen.json"
+OLD_SEEN_PATH = ROOT / "seen.json"
+STATE_DIR = ROOT / "state"
+WEB_DATA_DIR = ROOT / "web" / "data"
 
 UA = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -206,6 +208,12 @@ def _haystack(item: dict, where: str) -> str:
     return fold(f"{title} {extra}")
 
 
+def _location_hay(item: dict) -> str:
+    """Dirección + URL (y zona). No incluye título ni descripción."""
+    slug = re.sub(r"[-_./]+", " ", item.get("url") or "")
+    return fold(f"{item.get('address') or ''} {item.get('zone') or ''} {slug}")
+
+
 def apply_budget(item: dict, f: dict) -> dict:
     """125k es el gusto; pasarse un poco baja el ranking, no saca el aviso."""
     preferred = f.get("max_price_usd")
@@ -354,9 +362,15 @@ def _phrase_in(hay: str, phrase: str) -> bool:
 
 
 def is_rejected(item: dict, f: dict) -> bool:
-    """Pozo, cuotas u otro barrio: no entra aunque el resto cierre."""
+    """Pozo/cuotas sobre el texto; otros barrios solo en dirección/URL."""
+    text_kws = f.get("reject_text")
+    if text_kws is None:
+        text_kws = f.get("reject") or []
     hay = _haystack(item, "any")
-    return any(_phrase_in(hay, kw) for kw in f.get("reject") or [] if str(kw).strip())
+    if any(_phrase_in(hay, kw) for kw in text_kws if str(kw).strip()):
+        return True
+    loc = _location_hay(item)
+    return any(_phrase_in(loc, kw) for kw in f.get("reject_barrios") or [] if str(kw).strip())
 
 
 def in_allowed_area(item: dict, f: dict) -> bool:
@@ -424,7 +438,7 @@ def _log_fetch_failure(url: str, r: requests.Response) -> None:
     )
 
 
-def fetch(session: requests.Session, url: str) -> tuple[str, str]:
+def fetch(session: requests.Session, url: str, *, _retried: bool = False) -> tuple[str, str]:
     r = session.get(url, timeout=30)
     if r.url.split("?")[0].rstrip("/") != url.split("?")[0].rstrip("/"):
         print(f"[fetch] redirect {url} → {r.url}", file=sys.stderr)
@@ -432,6 +446,12 @@ def fetch(session: requests.Session, url: str) -> tuple[str, str]:
     if r.status_code == 202 or waf in ("challenge", "block"):
         _log_fetch_failure(url, r)
         raise Blocked(f"HTTP {r.status_code} (WAF {waf or 'challenge'})")
+    # 403/429/503 de Zonaprop suelen ser intermitentes; 405/WAF de Argenprop, no.
+    if r.status_code in (403, 429, 503) and not _retried:
+        wait = random.uniform(20, 30)
+        print(f"[fetch] {r.status_code} {url}; reintento en {wait:.0f}s", file=sys.stderr)
+        time.sleep(wait)
+        return fetch(session, url, _retried=True)
     if r.status_code in (403, 405, 429, 503):
         _log_fetch_failure(url, r)
         raise Blocked(f"HTTP {r.status_code} (posible bloqueo anti-bot)")
@@ -472,32 +492,74 @@ def scrape_source(session, src: dict, cfg: dict) -> list[dict]:
 
 # ---------------------------------------------------------------- telegram --
 
+def redact_secrets(msg: str, token: str = "") -> str:
+    out = str(msg or "")
+    tok = token or os.environ.get("TELEGRAM_BOT_TOKEN", "")
+    if tok:
+        out = out.replace(tok, "[redacted]")
+    return out
+
+
+def site_footer() -> str:
+    url = (os.environ.get("SITE_URL") or "").strip()
+    if not url:
+        return ""
+    return f"\n🌐 {html.escape(url)}"
+
+
+def _tg_retry_after(r: requests.Response) -> float:
+    try:
+        data = r.json()
+        wait = (data.get("parameters") or {}).get("retry_after")
+        if wait is not None:
+            return max(1.0, float(wait))
+    except (ValueError, TypeError):
+        pass
+    hdr = r.headers.get("Retry-After")
+    if hdr:
+        try:
+            return max(1.0, float(hdr))
+        except ValueError:
+            pass
+    return 5.0
+
+
+def _tg_post(token: str, method: str, payload: dict) -> requests.Response:
+    url = f"https://api.telegram.org/bot{token}/{method}"
+    r = requests.post(url, json=payload, timeout=30)
+    if r.status_code == 429:
+        wait = _tg_retry_after(r)
+        print(f"[telegram] 429; reintento en {wait:.0f}s", file=sys.stderr)
+        time.sleep(wait)
+        r = requests.post(url, json=payload, timeout=30)
+    r.raise_for_status()
+    return r
+
+
 def tg_send(token: str, chat_id: str, text: str) -> None:
-    r = requests.post(
-        f"https://api.telegram.org/bot{token}/sendMessage",
-        json={
+    _tg_post(
+        token,
+        "sendMessage",
+        {
             "chat_id": chat_id,
             "text": text,
             "parse_mode": "HTML",
             "disable_web_page_preview": True,
         },
-        timeout=30,
     )
-    r.raise_for_status()
 
 
 def tg_send_photo(token: str, chat_id: str, photo: str, caption: str) -> None:
-    r = requests.post(
-        f"https://api.telegram.org/bot{token}/sendPhoto",
-        json={
+    _tg_post(
+        token,
+        "sendPhoto",
+        {
             "chat_id": chat_id,
             "photo": photo,
             "caption": caption[:1024],
             "parse_mode": "HTML",
         },
-        timeout=30,
     )
-    r.raise_for_status()
 
 
 def why_line(i: dict) -> str:
@@ -521,6 +583,7 @@ def fmt_item(i: dict, tag: str = "🆕") -> str:
         f"📍 {html.escape(i['zone'])} — {where}\n"
         f"{why_line(i)}\n"
         f"🔗 {site}: {html.escape(i['url'])}"
+        f"{site_footer()}"
     )
 
 
@@ -528,26 +591,63 @@ def notify_payloads(intro: str, items: list[dict], errors_block: str) -> list[di
     """Un payload por pieza: intro/errores son texto; cada aviso puede llevar foto."""
     out: list[dict] = []
     if intro:
-        out.append({"text": intro})
+        out.append({"text": intro + site_footer(), "kind": "intro"})
     for i in items:
-        out.append({"text": fmt_item(i, i.get("_tag") or "🆕"), "photo": i.get("photo") or ""})
+        out.append(
+            {
+                "text": fmt_item(i, i.get("_tag") or "🆕"),
+                "photo": i.get("photo") or "",
+                "item_id": i.get("id"),
+                "kind": "item",
+            }
+        )
     if errors_block:
-        out.append({"text": errors_block})
+        out.append({"text": errors_block + site_footer(), "kind": "error"})
     return out
 
 
-def deliver(token: str, chat_id: str, payloads: list[dict]) -> None:
+def deliver(token: str, chat_id: str, payloads: list[dict]) -> dict:
+    """Envía cada mensaje por separado. Si uno falla, sigue con el resto."""
+    sent_ids: list[str] = []
+    failed_ids: list[str] = []
+    intro_ok = True
+    error_ok = True
     for p in payloads:
+        kind = p.get("kind") or "text"
+        item_id = p.get("item_id")
         photo = p.get("photo") or ""
-        if photo:
-            try:
-                tg_send_photo(token, chat_id, photo, p["text"])
-                time.sleep(1)
-                continue
-            except requests.RequestException as e:
-                print(f"[telegram] foto falló ({e}); mando texto", file=sys.stderr)
-        tg_send(token, chat_id, p["text"])
+        ok = False
+        try:
+            if photo:
+                try:
+                    tg_send_photo(token, chat_id, photo, p["text"])
+                    ok = True
+                except requests.RequestException as e:
+                    print(
+                        f"[telegram] foto falló ({redact_secrets(e, token)}); mando texto",
+                        file=sys.stderr,
+                    )
+                    tg_send(token, chat_id, p["text"])
+                    ok = True
+            else:
+                tg_send(token, chat_id, p["text"])
+                ok = True
+        except Exception as e:
+            print(f"[telegram] {redact_secrets(e, token)}", file=sys.stderr)
+            ok = False
+        if kind == "item" and item_id:
+            (sent_ids if ok else failed_ids).append(item_id)
+        elif kind == "intro":
+            intro_ok = ok
+        elif kind == "error":
+            error_ok = ok
         time.sleep(1)
+    return {
+        "sent_ids": sent_ids,
+        "failed_ids": failed_ids,
+        "intro_ok": intro_ok,
+        "error_ok": error_ok,
+    }
 
 
 def chunk_messages(blocks: list[str], limit: int = 3800) -> list[str]:
@@ -562,12 +662,370 @@ def chunk_messages(blocks: list[str], limit: int = 3800) -> list[str]:
     return msgs
 
 
-# -------------------------------------------------------------------- main --
+# --------------------------------------------------------- state / listings --
 
-def load_state() -> dict:
-    if STATE_PATH.exists():
-        return json.loads(STATE_PATH.read_text())
+SITES = ("zonaprop", "argenprop")
+
+
+def seen_path(site: str) -> Path:
+    return STATE_DIR / f"seen-{site}.json"
+
+
+def listings_path(site: str) -> Path:
+    return WEB_DATA_DIR / f"listings-{site}.json"
+
+
+def empty_state() -> dict:
     return {"listings": {}, "meta": {}}
+
+
+def empty_catalog() -> dict:
+    return {"last_change": None, "listings": []}
+
+
+def _read_json(path: Path, fallback):
+    if not path.exists():
+        return fallback
+    return json.loads(path.read_text())
+
+
+def write_json(path: Path, data) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=1, sort_keys=True) + "\n")
+
+
+def _catalog_map(catalog: dict) -> dict[str, dict]:
+    return {x["id"]: x for x in catalog.get("listings") or [] if x.get("id")}
+
+
+def migrate_legacy_seen() -> None:
+    """seen.json era todo Zonaprop. Se copia una vez, sin reavisar."""
+    if seen_path("zonaprop").exists() or not OLD_SEEN_PATH.exists():
+        return
+    old = _read_json(OLD_SEEN_PATH, empty_state())
+    listings = old.get("listings") or {}
+    if not listings:
+        write_json(seen_path("zonaprop"), empty_state())
+        write_json(seen_path("argenprop"), empty_state())
+        return
+    zp, ap = empty_state(), empty_state()
+    zp["meta"] = {k: v for k, v in (old.get("meta") or {}).items() if k == "last_error_day"}
+    catalog: list[dict] = []
+    for lid, rec in listings.items():
+        site = "argenprop" if str(lid).startswith("argenprop:") else "zonaprop"
+        dest = ap if site == "argenprop" else zp
+        dest["listings"][lid] = {
+            "price": rec.get("price"),
+            "url": rec.get("url"),
+            "first_seen": rec.get("first_seen"),
+            "key": rec.get("key"),
+            "zone": infer_zone(rec.get("url") or "", rec.get("zone") or ""),
+        }
+        if site == "zonaprop":
+            catalog.append(listing_from_seen(lid, rec, site))
+    write_json(seen_path("zonaprop"), zp)
+    write_json(seen_path("argenprop"), ap)
+    if catalog and not listings_path("zonaprop").exists():
+        write_json(listings_path("zonaprop"), {"last_change": None, "listings": catalog})
+    if not listings_path("argenprop").exists():
+        write_json(listings_path("argenprop"), empty_catalog())
+    print(f"[state] migrado seen.json → state/ ({len(zp['listings'])} zonaprop, {len(ap['listings'])} argenprop)", file=sys.stderr)
+
+
+def infer_zone(url: str, explicit: str = "") -> str:
+    if explicit:
+        return explicit
+    u = fold(url or "")
+    mapping = (
+        ("Palermo Chico", ("palermo-chico", "palermo chico")),
+        ("Barrio Norte", ("barrio-norte", "barrio norte")),
+        ("Botánico", ("botanico", "botánico")),
+        ("Recoleta", ("recoleta",)),
+    )
+    for name, keys in mapping:
+        if any(k in u for k in keys):
+            return name
+    return ""
+
+
+def title_from_url(url: str) -> str:
+    slug = (url or "").rstrip("/").rsplit("/", 1)[-1]
+    slug = re.sub(r"\.html?$", "", slug, flags=re.I)
+    slug = re.sub(r"-?\d{6,}$", "", slug)
+    parts = [p for p in slug.split("-") if p and p not in ("veclapin", "veclap", "clasificado") and not p.isdigit()]
+    title = " ".join(parts).strip()
+    return title[:90]
+
+
+def listing_from_seen(lid: str, rec: dict, site: str) -> dict:
+    first = rec.get("first_seen")
+    price = rec.get("price")
+    hist = [{"date": first, "price": price}] if first and price is not None else []
+    url = rec.get("url") or ""
+    return {
+        "id": lid,
+        "site": site,
+        "url": url,
+        "title": rec.get("title") or title_from_url(url),
+        "address": rec.get("address") or "",
+        "zone": infer_zone(url, rec.get("zone") or ""),
+        "price": price,
+        "old_price": None,
+        "price_history": hist,
+        "area": None,
+        "ambientes": None,
+        "photo": "",
+        "tags": [],
+        "score": 0,
+        "first_seen": first,
+        "active": True,
+        "gone_at": None,
+    }
+
+
+def load_portal(site: str, *, persist: bool = True) -> tuple[dict, dict]:
+    if persist:
+        migrate_legacy_seen()
+    state = _read_json(seen_path(site), empty_state())
+    state.setdefault("listings", {})
+    state.setdefault("meta", {})
+    catalog = _read_json(listings_path(site), empty_catalog())
+    catalog.setdefault("listings", [])
+    return state, catalog
+
+
+def dump_equal(a, b) -> bool:
+    return json.dumps(a, sort_keys=True, ensure_ascii=False) == json.dumps(b, sort_keys=True, ensure_ascii=False)
+
+
+def save_portal(site: str, state: dict, catalog: dict, prev_state: dict, prev_catalog: dict) -> bool:
+    """Escribe solo si hubo un cambio real (aviso, precio o baja)."""
+    changed = not dump_equal(state, prev_state) or not dump_equal(catalog, prev_catalog)
+    if not changed:
+        return False
+    write_json(seen_path(site), state)
+    write_json(listings_path(site), catalog)
+    return True
+
+
+def upsert_listing(prev: dict | None, item: dict, now: str, *, active: bool = True, gone_at: str | None = None) -> dict:
+    prev = prev or {}
+    price = item.get("price", prev.get("price"))
+    hist = list(prev.get("price_history") or [])
+    if price is not None and (not hist or hist[-1].get("price") != price):
+        hist.append({"date": now, "price": price})
+    old_price = item.get("old_price")
+    if old_price is None:
+        old_price = prev.get("old_price")
+    first = prev.get("first_seen") or item.get("first_seen") or now
+    return {
+        "id": item.get("id") or prev.get("id"),
+        "site": item.get("site") or prev.get("site"),
+        "url": item.get("url") or prev.get("url") or "",
+        "title": item.get("title") or prev.get("title") or "",
+        "address": item.get("address") or prev.get("address") or "",
+        "zone": item.get("zone") or prev.get("zone") or "",
+        "price": price,
+        "old_price": old_price,
+        "price_history": hist,
+        "area": item.get("area") if item.get("area") is not None else prev.get("area"),
+        "ambientes": item.get("ambientes") if item.get("ambientes") is not None else prev.get("ambientes"),
+        "photo": item.get("photo") or prev.get("photo") or "",
+        "tags": item.get("tags") if item.get("tags") is not None else (prev.get("tags") or []),
+        "score": item.get("score", prev.get("score") or 0),
+        "first_seen": first,
+        "active": active,
+        "gone_at": gone_at if not active else None,
+    }
+
+
+def seen_rec(item: dict, prev: dict | None, now: str) -> dict:
+    prev = prev or {}
+    rec = {
+        "price": item["price"],
+        "url": item["url"],
+        "first_seen": prev.get("first_seen") or now,
+        "zone": item.get("zone") or prev.get("zone"),
+    }
+    k = listing_key(item)
+    if k:
+        rec["key"] = k
+    return rec
+
+
+def mark_gone(
+    catalog: dict,
+    ok_zones: set[str],
+    live_ids: set[str],
+    now: str,
+    *,
+    all_zones: set[str] | None = None,
+) -> list[str]:
+    """Marca dados de baja solo si su zona se scrapeó OK.
+
+    Sin zona conocida, solo si se scrapeó OK el portal entero (todas las zonas).
+    """
+    full_ok = bool(all_zones) and all_zones <= ok_zones
+    gone: list[str] = []
+    out = []
+    for rec in catalog.get("listings") or []:
+        lid = rec.get("id")
+        zone = rec.get("zone") or ""
+        source_ok = zone in ok_zones or (not zone and full_ok)
+        if rec.get("active") and source_ok and lid not in live_ids:
+            rec = {**rec, "active": False, "gone_at": now}
+            gone.append(lid)
+        out.append(rec)
+    catalog["listings"] = out
+    return gone
+
+
+def apply_live_to_catalog(catalog: dict, items: list[dict], now: str) -> None:
+    by_id = _catalog_map(catalog)
+    for i in items:
+        by_id[i["id"]] = upsert_listing(by_id.get(i["id"]), i, now, active=True)
+    catalog["listings"] = sorted(by_id.values(), key=lambda x: x.get("id") or "")
+
+
+def classify_changes(matched: list[dict], state: dict) -> tuple[list[dict], list[dict]]:
+    new_items, drops = [], []
+    for i in matched:
+        prev = find_prev(i, state)
+        if prev is None:
+            new_items.append(i)
+        elif i["price"] is not None and prev.get("price") is not None and i["price"] < prev["price"]:
+            drops.append({**i, "old_price": prev["price"]})
+    return prefer(new_items), prefer(drops)
+
+
+def process_portal(
+    site: str,
+    matched: list[dict],
+    ok_zones: set[str],
+    errors: list[str],
+    cfg: dict,
+    *,
+    dry_run: bool,
+    token: str,
+    chat_id: str,
+    now: str,
+    today: str,
+) -> bool:
+    """Actualiza un portal. Devuelve True si hubo fuentes OK de ese portal."""
+    if not ok_zones:
+        return False
+
+    state, catalog = load_portal(site, persist=not dry_run)
+    prev_state = json.loads(json.dumps(state))
+    prev_catalog = json.loads(json.dumps(catalog))
+    first_run = not state["listings"]
+
+    new_items, drops = classify_changes(matched, state)
+    print(
+        f"[{site}] filtros: {len(matched)} · nuevos: {len(new_items)} · "
+        f"bajas de precio: {len(drops)} · primera={first_run}"
+    )
+
+    intro = ""
+    show: list[dict] = []
+    if first_run:
+        intro = (
+            f"✅ Buscador activo ({site}). Cargué {len(matched)} avisos (con balcón, m², ambientes, "
+            f"hasta USD 140k). El gusto es 125k; un poco más entra pero más abajo. "
+            f"Época / reciclar / edificio pesan más que el precio. De ahora en más, solo nuevos."
+        )
+        show = [{**i, "_tag": "📌"} for i in prefer(matched)[:10]]
+    else:
+        show = [{**i, "_tag": "🆕"} for i in new_items] + [{**i, "_tag": "📉"} for i in drops]
+
+    notify_error = bool(errors) and state["meta"].get("last_error_day") != today
+    err_block = ""
+    if notify_error:
+        err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in errors)
+
+    heartbeat = False
+    if (
+        cfg.get("heartbeat")
+        and not first_run
+        and not new_items
+        and not drops
+        and datetime.now(timezone.utc).hour == 11
+    ):
+        heartbeat = True
+        if not intro:
+            intro = f"⏱ Corrida {site}: sin novedades."
+
+    payloads = notify_payloads(intro, show, err_block)
+    sent_ids: set[str] = set()
+    intro_ok = True
+    error_ok = True
+
+    if dry_run:
+        for p in payloads:
+            extra = f"\n🖼 {p['photo']}" if p.get("photo") else ""
+            print("-----\n" + p["text"] + extra)
+        return True
+
+    if payloads:
+        result = deliver(token, chat_id, payloads)
+        sent_ids = set(result["sent_ids"])
+        intro_ok = result["intro_ok"]
+        error_ok = result["error_ok"]
+        if result["failed_ids"]:
+            print(f"[telegram] no enviados ({site}): {len(result['failed_ids'])}", file=sys.stderr)
+
+    # Primera corrida: marcar todos si el resumen salió. Si no, no tocar.
+    # Corridas siguientes: solo lo que Telegram confirmó (nuevo o baja de precio).
+    mark_ids: set[str]
+    if first_run:
+        mark_ids = {i["id"] for i in matched} if intro_ok else set()
+    else:
+        mark_ids = sent_ids
+
+    catalog_dirty = False
+    if first_run and intro_ok:
+        apply_live_to_catalog(catalog, matched, now)
+        catalog_dirty = True
+    else:
+        live_notify = [i for i in new_items + drops if i["id"] in mark_ids]
+        live_seen = [i for i in matched if i["id"] in state["listings"]]
+        # Enriquecer avisos ya vistos sin reescribir last_seen: solo si cambió precio (drop).
+        apply_live_to_catalog(catalog, live_notify, now)
+        if live_notify:
+            catalog_dirty = True
+        # Avisos ya conocidos que siguen: actualizar ficha (foto, tags) solo si hay drop/new.
+        # Los que ya estaban no se reescriben salvo baja de precio o alta.
+        _ = live_seen
+
+    configured = {src["name"] for src in cfg.get("sources") or [] if src.get("site") == site}
+    gone_ids = mark_gone(catalog, ok_zones, {i["id"] for i in matched}, now, all_zones=configured)
+    if gone_ids:
+        catalog_dirty = True
+        print(f"[{site}] dados de baja: {len(gone_ids)}")
+
+    for i in matched:
+        if i["id"] not in mark_ids:
+            continue
+        state["listings"][i["id"]] = seen_rec(i, state["listings"].get(i["id"]), now)
+
+    if notify_error and error_ok:
+        state["meta"]["last_error_day"] = today
+    elif not errors:
+        state["meta"].pop("last_error_day", None)
+
+    if catalog_dirty:
+        catalog["last_change"] = now
+
+    real_change = bool(mark_ids or gone_ids)
+    if real_change:
+        save_portal(site, state, catalog, prev_state, prev_catalog)
+    elif notify_error and error_ok:
+        # Error real avisado: no commitear seen solo por last_error_day.
+        # Se reintenta el aviso al día siguiente si el error sigue; si se fue, no importa.
+        pass
+
+    _ = heartbeat
+    return True
 
 
 def main() -> int:
@@ -577,8 +1035,6 @@ def main() -> int:
     args = ap.parse_args()
 
     cfg = json.loads(CONFIG_PATH.read_text())
-    state = load_state()
-    first_run = not state["listings"]
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
     if not args.dry_run and not (token and chat_id):
@@ -591,91 +1047,68 @@ def main() -> int:
     in_actions = os.environ.get("GITHUB_ACTIONS", "").lower() == "true"
     sources = [x for x in cfg["sources"] if not args.only or x["site"] == args.only]
 
-    errors: list[str] = []
-    skipped: list[str] = []
-    ok_sources = 0
-    current: dict[str, dict] = {}
+    errors_by_site: dict[str, list[str]] = {k: [] for k in SITES}
+    ok_zones: dict[str, set[str]] = {k: set() for k in SITES}
+    current: dict[str, dict[str, dict]] = {k: {} for k in SITES}
+    attempted = 0
+    skipped_argenprop = False
+
     for src in sources:
-        label = f"{src['site']} · {src['name']}"
-        if in_actions and src["site"] == "argenprop":
-            if not skipped:
-                skipped.append("Argenprop: bloqueado desde Actions (correr en la Mac)")
-            print(f"[skip] {label}: bloqueado desde Actions", file=sys.stderr)
+        site = src["site"]
+        label = f"{site} · {src['name']}"
+        if in_actions and site == "argenprop":
+            skipped_argenprop = True
+            print(f"[skip] {label}: bloqueado desde Actions (sin aviso Telegram)", file=sys.stderr)
             continue
+        attempted += 1
         try:
             items = scrape_source(session, src, cfg)
-            ok_sources += 1
+            ok_zones[site].add(src["name"])
             print(f"[ok] {label}: {len(items)} avisos")
             for i in items:
-                current[i["id"]] = i
+                current[site][i["id"]] = i
         except (Blocked, requests.RequestException) as e:
-            errors.append(f"{label}: {e}")
-            print(f"[error] {label}: {e}", file=sys.stderr)
+            msg = redact_secrets(f"{label}: {e}", token)
+            errors_by_site[site].append(msg)
+            print(f"[error] {msg}", file=sys.stderr)
         time.sleep(random.uniform(*cfg["delay_seconds"]))
 
-    matched = dedupe([i for i in current.values() if matches(i, cfg["filters"])])
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-
-    new_items, drops = [], []
-    for i in matched:
-        prev = find_prev(i, state)
-        if prev is None:
-            new_items.append(i)
-        elif i["price"] < prev["price"]:
-            drops.append({**i, "old_price": prev["price"]})
-    new_items, drops = prefer(new_items), prefer(drops)
-    print(f"Coinciden con filtros: {len(matched)} · nuevos: {len(new_items)} · bajas de precio: {len(drops)}")
-
-    intro = ""
-    show: list[dict] = []
-    if first_run and ok_sources:
-        intro = (
-            f"✅ Buscador activo. Cargué {len(matched)} avisos (con balcón, m², ambientes, "
-            f"hasta USD 140k). El gusto es 125k; un poco más entra pero más abajo. "
-            f"Época / reciclar / edificio pesan más que el precio. De ahora en más, solo nuevos."
-        )
-        show = [{**i, "_tag": "📌"} for i in prefer(matched)[:10]]
-    else:
-        show = [{**i, "_tag": "🆕"} for i in new_items] + [{**i, "_tag": "📉"} for i in drops]
-
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    notes = errors + skipped
-    notify_error = bool(notes) and state["meta"].get("last_error_day") != today
-    err_block = ""
-    if notify_error:
-        err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in notes)
+    any_ok = False
 
-    payloads = notify_payloads(intro, show, err_block)
-    if args.dry_run:
-        for p in payloads:
-            extra = f"\n🖼 {p['photo']}" if p.get("photo") else ""
-            print("-----\n" + p["text"] + extra)
+    for site in SITES:
+        if args.only and site != args.only:
+            continue
+        if in_actions and site == "argenprop":
+            continue
+        matched = dedupe([i for i in current[site].values() if matches(i, cfg["filters"])])
+        if process_portal(
+            site,
+            matched,
+            ok_zones[site],
+            errors_by_site[site],
+            cfg,
+            dry_run=args.dry_run,
+            token=token,
+            chat_id=chat_id,
+            now=now,
+            today=today,
+        ):
+            any_ok = True
+
+    if skipped_argenprop:
+        print("[skip] Argenprop no corre en Actions; no se toca su estado", file=sys.stderr)
+
+    if any_ok:
         return 0
-
-    deliver(token, chat_id, payloads)
-
-    if ok_sources:
-        for i in matched:
-            prev = state["listings"].get(i["id"], {})
-            rec = {
-                "price": i["price"],
-                "url": i["url"],
-                "first_seen": prev.get("first_seen", now),
-                "last_seen": now,
-            }
-            k = listing_key(i)
-            if k:
-                rec["key"] = k
-            state["listings"][i["id"]] = rec
-        state["meta"]["last_run"] = now
-        if not notes:
-            state["meta"].pop("last_error_day", None)
-    if notify_error:
-        state["meta"]["last_error_day"] = today
-    if ok_sources or notify_error:
-        STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=1, sort_keys=True))
-
-    return 0 if ok_sources or (skipped and not errors) else 1
+    if skipped_argenprop and not args.only and not attempted:
+        return 0
+    if skipped_argenprop and args.only == "zonaprop":
+        return 0
+    if skipped_argenprop and not any(errors_by_site[s] for s in SITES):
+        return 0
+    return 1
 
 
 if __name__ == "__main__":

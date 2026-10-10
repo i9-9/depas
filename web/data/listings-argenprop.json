@@ -1,0 +1,105 @@
+{
+ "last_change": null,
+ "listings": [
+  {
+   "active": true,
+   "address": "Juncal 2900, Recoleta",
+   "ambientes": 3,
+   "area": 72,
+   "first_seen": "2026-10-09T15:00:00+00:00",
+   "gone_at": null,
+   "id": "argenprop:ui-recoleta",
+   "old_price": null,
+   "photo": "",
+   "price": 118000,
+   "price_history": [
+    {
+     "date": "2026-10-09T15:00:00+00:00",
+     "price": 118000
+    }
+   ],
+   "score": 5,
+   "site": "argenprop",
+   "tags": ["de época", "edificio ok"],
+   "title": "3 ambientes de época con balcón",
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--19596287",
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Santa Fe 2300, Barrio Norte",
+   "ambientes": 2,
+   "area": 54,
+   "first_seen": "2026-10-10T01:00:00+00:00",
+   "gone_at": null,
+   "id": "argenprop:ui-norte",
+   "old_price": 129000,
+   "photo": "",
+   "price": 121000,
+   "price_history": [
+    {
+     "date": "2026-10-08T12:00:00+00:00",
+     "price": 129000
+    },
+    {
+     "date": "2026-10-10T01:00:00+00:00",
+     "price": 121000
+    }
+   ],
+   "score": 2,
+   "site": "argenprop",
+   "tags": ["para reciclar"],
+   "title": "2 ambientes para reciclar",
+   "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-2-ambientes--20079141",
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "República Árabe Siria 3000, Botánico",
+   "ambientes": 3,
+   "area": 68,
+   "first_seen": "2026-10-10T02:10:00+00:00",
+   "gone_at": null,
+   "id": "argenprop:ui-botanico",
+   "old_price": null,
+   "photo": "",
+   "price": 132000,
+   "price_history": [
+    {
+     "date": "2026-10-10T02:10:00+00:00",
+     "price": 132000
+    }
+   ],
+   "score": 1,
+   "site": "argenprop",
+   "tags": ["sobre presupuesto"],
+   "title": "3 ambientes con balcón al jardín",
+   "url": "https://www.argenprop.com/departamento-en-venta-en-botanico-3-ambientes--18880001",
+   "zone": "Botánico"
+  },
+  {
+   "active": false,
+   "address": "Av. del Libertador 2500, Palermo Chico",
+   "ambientes": 2,
+   "area": 61,
+   "first_seen": "2026-09-20T10:00:00+00:00",
+   "gone_at": "2026-10-08T20:00:00+00:00",
+   "id": "argenprop:ui-chico",
+   "old_price": null,
+   "photo": "",
+   "price": 139000,
+   "price_history": [
+    {
+     "date": "2026-09-20T10:00:00+00:00",
+     "price": 139000
+    }
+   ],
+   "score": 0,
+   "site": "argenprop",
+   "tags": [],
+   "title": "2 ambientes en Palermo Chico",
+   "url": "https://www.argenprop.com/departamento-en-venta-en-palermo-chico-2-ambientes--17770001",
+   "zone": "Palermo Chico"
+  }
+ ]
+}
