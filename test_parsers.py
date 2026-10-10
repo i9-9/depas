@@ -611,6 +611,33 @@ def test_no_write_when_nothing_changed():
     _restore_paths()
 
 
+def test_median_and_decision_fields():
+    now = "2026-10-10T12:00:00+00:00"
+    small = [_item(f"zonaprop:{i}", zone="Recoleta", price=100000 + i * 1000, area=50) for i in range(5)]
+    assert s.zone_medians(small, 8) == {}
+    big = [_item(f"zonaprop:{i}", zone="Recoleta", price=100000, area=50) for i in range(8)]
+    big.append(_item("zonaprop:9", zone="Recoleta", price=200000, area=50))
+    meds = s.zone_medians(big, 8)
+    assert "Recoleta" in meds and meds["Recoleta"]["n"] == 9
+    cheap = _item("zonaprop:x", zone="Recoleta", price=80000, area=50, first_seen="2026-10-01T00:00:00+00:00",
+                  price_history=[{"date": "a", "price": 90000}, {"date": "b", "price": 80000}])
+    s.apply_decision(cheap, meds, {"closing_discount_pct": 5, "median_min_n": 8}, now)
+    assert cheap["usd_per_m2"] == 1600
+    assert cheap["vs_median_pct"] is not None and cheap["vs_median_pct"] < 0
+    assert cheap["vs_median_n"] == 9
+    assert cheap["days_seen"] == 9
+    assert cheap["price_drops"] == 1
+    assert cheap["closing_ref_usd"] == 76000
+    thin = _item("zonaprop:y", zone="Botánico", price=120000, area=60, first_seen=now)
+    s.apply_decision(thin, meds, {"closing_discount_pct": 5}, now)
+    assert thin["usd_per_m2"] == 2000
+    assert thin["vs_median_pct"] is None
+    assert thin["days_seen"] == 0
+    msg = s.fmt_item(cheap)
+    assert "USD 1.600/m²" in msg and "vs mediana de Recoleta" in msg
+    assert "visto hace 9 días" in msg and "Referencia de cierre" in msg
+
+
 def test_coverage_last_page_unseen():
     seen = {"zonaprop:old"}
     last = [

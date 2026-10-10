@@ -405,6 +405,109 @@ def matches(item: dict, f: dict) -> bool:
     return item["area"] >= f["min_area_m2"]
 
 
+# ----------------------------------------------------------- decision stats --
+
+def usd_per_m2(price, area) -> int | None:
+    if price is None or area is None or area <= 0:
+        return None
+    return int(round(price / area))
+
+
+def median(values: list[float]) -> float | None:
+    xs = sorted(v for v in values if v is not None)
+    if not xs:
+        return None
+    mid = len(xs) // 2
+    if len(xs) % 2:
+        return float(xs[mid])
+    return (xs[mid - 1] + xs[mid]) / 2.0
+
+
+def listing_usd_m2(item: dict) -> int | None:
+    if item.get("usd_per_m2") is not None:
+        return item["usd_per_m2"]
+    return usd_per_m2(item.get("price"), item.get("area"))
+
+
+def zone_medians(listings: list[dict], min_n: int = 8) -> dict[str, dict]:
+    buckets: dict[str, list[int]] = {}
+    for i in listings:
+        if i.get("active") is False:
+            continue
+        zone = i.get("zone") or ""
+        u = listing_usd_m2(i)
+        if not zone or u is None:
+            continue
+        buckets.setdefault(zone, []).append(u)
+    out: dict[str, dict] = {}
+    for zone, vals in buckets.items():
+        if len(vals) < min_n:
+            continue
+        med = median(vals)
+        if med is None:
+            continue
+        out[zone] = {"median": med, "n": len(vals)}
+    return out
+
+
+def days_seen(first_seen: str | None, now: str) -> int | None:
+    if not first_seen:
+        return None
+    try:
+        a = datetime.fromisoformat(first_seen[:19]).date()
+        b = datetime.fromisoformat(now[:19]).date()
+    except ValueError:
+        return None
+    return max(0, (b - a).days)
+
+
+def price_drop_count(history: list | None) -> int:
+    return max(0, len(history or []) - 1)
+
+
+def closing_ref(price, pct) -> int | None:
+    if price is None or pct is None:
+        return None
+    return int(round(price * (1 - float(pct) / 100.0)))
+
+
+def apply_decision(item: dict, medians: dict[str, dict], cfg: dict, now: str) -> dict:
+    """usd/m², vs mediana, días vistos, bajas y referencia de cierre."""
+    u = listing_usd_m2(item)
+    item["usd_per_m2"] = u
+    info = medians.get(item.get("zone") or "")
+    if u is not None and info and info.get("median"):
+        item["vs_median_pct"] = int(round((u - info["median"]) * 100 / info["median"]))
+        item["vs_median_n"] = info["n"]
+    else:
+        item["vs_median_pct"] = None
+        item["vs_median_n"] = None
+    first = item.get("first_seen")
+    item["days_seen"] = days_seen(first, now)
+    hist = list(item.get("price_history") or [])
+    if item.get("old_price") and item.get("price") is not None:
+        if not hist or hist[-1].get("price") != item["price"]:
+            hist = hist + [{"date": now, "price": item["price"]}]
+    item["price_drops"] = price_drop_count(hist)
+    item["closing_ref_usd"] = closing_ref(item.get("price"), cfg.get("closing_discount_pct", 5))
+    return item
+
+
+def pool_for_median(matched: list[dict], extra: list[dict]) -> list[dict]:
+    by_id: dict[str, dict] = {}
+    for i in extra + matched:
+        if i.get("id"):
+            by_id[i["id"]] = i
+    return list(by_id.values())
+
+
+def attach_decisions(items: list[dict], extra: list[dict], cfg: dict, now: str) -> dict[str, dict]:
+    medians = zone_medians(pool_for_median(items, extra), cfg.get("median_min_n", 8))
+    for i in items:
+        apply_decision(i, medians, cfg, now)
+    return medians
+
+
 # ----------------------------------------------------------------- fetching --
 
 def page_url(site: str, url: str, n: int) -> str:
@@ -599,6 +702,36 @@ def why_line(i: dict) -> str:
     return "por qué: cumple precio, m² y zona"
 
 
+def _fmt_int(n: int) -> str:
+    return f"{n:,}".replace(",", ".")
+
+
+def decision_lines(i: dict) -> list[str]:
+    lines = []
+    u = i.get("usd_per_m2")
+    if u is not None:
+        bit = f"USD {_fmt_int(u)}/m²"
+        pct = i.get("vs_median_pct")
+        n = i.get("vs_median_n")
+        zone = i.get("zone") or ""
+        if pct is not None and n:
+            sign = f"+{pct}" if pct > 0 else str(pct)
+            bit += f" · {sign}% vs mediana de {zone} (n={n})"
+        lines.append(bit)
+    days = i.get("days_seen")
+    drops = i.get("price_drops") or 0
+    if days is not None:
+        when = "hoy" if days == 0 else ("1 día" if days == 1 else f"{days} días")
+        drop_txt = "sin bajas de precio" if drops == 0 else (
+            "1 baja de precio" if drops == 1 else f"{drops} bajas de precio"
+        )
+        lines.append(f"visto hace {when} · {drop_txt}")
+    ref = i.get("closing_ref_usd")
+    if ref is not None:
+        lines.append(f"Referencia de cierre ≈ USD {_fmt_int(ref)} (no es tasación; promedio CABA)")
+    return lines
+
+
 def fmt_item(i: dict, tag: str = "🆕") -> str:
     area = f"{i['area']:g} m²" if i["area"] is not None else "m² s/d"
     amb = f"{i['ambientes']} amb" if i["ambientes"] is not None else "amb s/d"
@@ -608,9 +741,11 @@ def fmt_item(i: dict, tag: str = "🆕") -> str:
     if i.get("old_price"):
         extra = f" (antes USD {i['old_price']:,})".replace(",", ".")
     price = f"USD {i['price']:,}".replace(",", ".")
+    extra_lines = "".join(f"\n{html.escape(x)}" for x in decision_lines(i))
     return (
         f"{tag} <b>{price}</b>{extra} · {area} · {amb}\n"
-        f"📍 {html.escape(i['zone'])} — {where}\n"
+        f"📍 {html.escape(i['zone'])} — {where}"
+        f"{extra_lines}\n"
         f"{why_line(i)}\n"
         f"🔗 {site}: {html.escape(i['url'])}"
         f"{site_footer()}"
@@ -866,6 +1001,12 @@ def upsert_listing(prev: dict | None, item: dict, now: str, *, active: bool = Tr
         "first_seen": first,
         "active": active,
         "gone_at": gone_at if not active else None,
+        "usd_per_m2": item.get("usd_per_m2") if item.get("usd_per_m2") is not None else prev.get("usd_per_m2"),
+        "vs_median_pct": item.get("vs_median_pct") if item.get("vs_median_pct") is not None else prev.get("vs_median_pct"),
+        "vs_median_n": item.get("vs_median_n") if item.get("vs_median_n") is not None else prev.get("vs_median_n"),
+        "days_seen": item.get("days_seen") if item.get("days_seen") is not None else prev.get("days_seen"),
+        "price_drops": item.get("price_drops") if item.get("price_drops") is not None else prev.get("price_drops"),
+        "closing_ref_usd": item.get("closing_ref_usd") if item.get("closing_ref_usd") is not None else prev.get("closing_ref_usd"),
     }
 
 
@@ -964,7 +1105,20 @@ def process_portal(
     prev_catalog = json.loads(json.dumps(catalog))
     first_run = not state["listings"]
 
+    by_cat = _catalog_map(catalog)
+    for i in matched:
+        prev = by_cat.get(i["id"]) or state["listings"].get(i["id"]) or {}
+        i["first_seen"] = prev.get("first_seen") or now
+        i["price_history"] = list(prev.get("price_history") or [])
+    extra = list(catalog.get("listings") or [])
+    for other in SITES:
+        if other != site:
+            extra.extend(load_portal(other, persist=False)[1].get("listings") or [])
+    attach_decisions(matched, extra, cfg, now)
+
     new_items, drops = classify_changes(matched, state)
+    for d in drops:
+        apply_decision(d, zone_medians(pool_for_median(matched, extra), cfg.get("median_min_n", 8)), cfg, now)
     print(
         f"[{site}] filtros: {len(matched)} · nuevos: {len(new_items)} · "
         f"bajas de precio: {len(drops)} · primera={first_run}"

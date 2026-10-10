@@ -45,6 +45,7 @@ Editá `config.json`: `max_price_usd` (gusto), `max_price_usd_hard` (corte), `mi
 `include_unknown_area: true` te avisa también de los avisos que no publican m² (así no se te escapa ninguno).
 Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pesos. No filtran; si el portal no lo escribe en el listado, el aviso igual entra y vos lo juzgás por las fotos.
 `heartbeat: false` (default): si lo prendes, la primera corrida del día (08:17 ART) avisa por Telegram cuando no hubo novedades.
+`closing_discount_pct` (5) y `closing_discount_source` alimentan la “referencia de cierre” (no es tasación; promedio CABA). La mediana de USD/m² se calcula sobre tus avisos activos del mismo barrio y solo se muestra si hay al menos `median_min_n` (8).
 
 ## Cosas a tener en cuenta
 
@@ -57,6 +58,7 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
   - Zonaprop: slug `-orden-publicado-descendente` (el `<title>` pasa a “Departamentos más recientes…” y la página 2 conserva filtros). El slug `ordenado-publicado-descendente` **no** sirve: tira el filtro de balcón.
   - Argenprop: `?orden=masnuevos` (el propio listado pagina como `?orden=masnuevos&pagina-2`).
 - **Cobertura**: si en la última de las 3 páginas todavía hay avisos que pasan filtros y nunca vimos, se loguea un warning y Telegram avisa como máximo una vez por semana (`state/*/meta.coverage_week`).
+- **Fecha de publicación del portal**: las cards de listado de Zonaprop (fixture real) no traen “publicado hace X”. No se parsea. `días` es desde `first_seen` del buscador.
 - **Balcón en Argenprop**: el portal no deja un filtro de balcón usable en la URL. `/con-balcon/` se ignora o redirige al listado general. El recorte queda en el texto (`require_balcon` + “sin balcón”). Zonaprop sí filtra con `-con-balcon-` en el slug.
 - **Respeto de robots.txt**: se leen solo las páginas de listado permitidas (máx. 3 páginas por barrio), con pausa de 3–6 s entre pedidos. Sin proxies ni evasión anti-bot.
 - **m²**: Argenprop publica cubierta/semicubierta (se suman); Zonaprop publica total. Pueden diferir un poco del m² "real" del aviso.

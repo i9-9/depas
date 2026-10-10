@@ -117,6 +117,9 @@ export function Catalog({
           <span aria-hidden="true"> · </span>
           última novedad: {formatWhen(lastNovelty)}
         </p>
+        <p className="mt-2 text-sm text-muted">
+          La mediana de USD/m² compara solo contra los avisos que cumplen tus filtros.
+        </p>
       </header>
 
       <section
@@ -328,6 +331,7 @@ function Card({
           )}
         </div>
         <p className="text-sm text-muted">{facts.join(" · ") || "Datos incompletos"}</p>
+        <Decision item={item} />
         <h2 className="font-display text-xl leading-snug text-ink">
           {item.title || item.address || "Aviso sin título"}
         </h2>
@@ -375,6 +379,42 @@ function Card({
         </div>
       </div>
     </article>
+  );
+}
+
+function Decision({ item }: { item: Listing }) {
+  const bits: string[] = [];
+  if (item.usd_per_m2 != null) {
+    let line = `${formatUsd(item.usd_per_m2)}/m²`;
+    if (item.vs_median_pct != null && item.vs_median_n && item.zone) {
+      const sign = item.vs_median_pct > 0 ? `+${item.vs_median_pct}` : `${item.vs_median_pct}`;
+      line += ` · ${sign}% vs mediana de ${item.zone} (n=${item.vs_median_n})`;
+    }
+    bits.push(line);
+  }
+  const days = item.days_seen;
+  const drops = item.price_drops || 0;
+  const seenLine =
+    days == null
+      ? null
+      : `visto hace ${days === 0 ? "hoy" : days === 1 ? "1 día" : `${days} días`} · ${
+          drops === 0 ? "sin bajas" : drops === 1 ? "1 baja" : `${drops} bajas`
+        }`;
+  return (
+    <div className="space-y-1 text-sm text-muted">
+      {bits.map((b) => (
+        <p key={b}>{b}</p>
+      ))}
+      {seenLine && (
+        <p title="Cuándo lo vio el buscador, no la fecha de publicación del portal.">{seenLine}</p>
+      )}
+      {item.closing_ref_usd != null && (
+        <p title="No es una tasación; promedio CABA abril 2026, CEMA / RE/MAX / Reporte Inmobiliario.">
+          Referencia de cierre ≈ {formatUsd(item.closing_ref_usd)}
+          <span className="block text-xs">no es una tasación; promedio CABA</span>
+        </p>
+      )}
+    </div>
   );
 }
 

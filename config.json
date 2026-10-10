@@ -42,6 +42,9 @@
     ]
   },
   "heartbeat": false,
+  "median_min_n": 8,
+  "closing_discount_pct": 5,
+  "closing_discount_source": "promedio CABA abril 2026, CEMA / RE/MAX / Reporte Inmobiliario",
   "signals": [
     {
       "id": "epoca",

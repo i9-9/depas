@@ -24,11 +24,22 @@ export type Listing = {
   first_seen: string | null;
   active: boolean;
   gone_at: string | null;
+  usd_per_m2: number | null;
+  vs_median_pct: number | null;
+  vs_median_n: number | null;
+  days_seen: number | null;
+  price_drops: number;
+  closing_ref_usd: number | null;
 };
+
+export const CLOSING_DISCOUNT_PCT = 5;
+export const MEDIAN_MIN_N = 8;
+
+type RawListing = Partial<Listing> & { id: string };
 
 export type CatalogFile = {
   last_change: string | null;
-  listings: Listing[];
+  listings: RawListing[];
 };
 
 const FILES: CatalogFile[] = [
@@ -59,10 +70,62 @@ export function loadListings(): Listing[] {
         first_seen: raw.first_seen || null,
         active: raw.active !== false,
         gone_at: raw.gone_at || null,
+        usd_per_m2: raw.usd_per_m2 ?? usdPerM2(raw.price ?? null, raw.area ?? null),
+        vs_median_pct: raw.vs_median_pct ?? null,
+        vs_median_n: raw.vs_median_n ?? null,
+        days_seen: raw.days_seen ?? daysSeen(raw.first_seen || null),
+        price_drops: raw.price_drops ?? Math.max(0, (raw.price_history || []).length - 1),
+        closing_ref_usd: raw.closing_ref_usd ?? closingRef(raw.price ?? null),
       });
     }
   }
-  return out;
+  return withMedians(out);
+}
+
+function withMedians(listings: Listing[]): Listing[] {
+  const buckets = new Map<string, number[]>();
+  for (const item of listings) {
+    if (!item.active || !item.zone || item.usd_per_m2 == null) continue;
+    const arr = buckets.get(item.zone) || [];
+    arr.push(item.usd_per_m2);
+    buckets.set(item.zone, arr);
+  }
+  const medians = new Map<string, { median: number; n: number }>();
+  for (const [zone, vals] of buckets) {
+    if (vals.length < MEDIAN_MIN_N) continue;
+    const xs = [...vals].sort((a, b) => a - b);
+    const mid = Math.floor(xs.length / 2);
+    const median = xs.length % 2 ? xs[mid] : (xs[mid - 1] + xs[mid]) / 2;
+    medians.set(zone, { median, n: xs.length });
+  }
+  return listings.map((item) => {
+    const info = item.zone ? medians.get(item.zone) : undefined;
+    if (item.usd_per_m2 == null || !info) {
+      return { ...item, vs_median_pct: null, vs_median_n: null };
+    }
+    return {
+      ...item,
+      vs_median_pct: Math.round(((item.usd_per_m2 - info.median) * 100) / info.median),
+      vs_median_n: info.n,
+    };
+  });
+}
+
+export function usdPerM2(price: number | null, area: number | null): number | null {
+  if (price == null || area == null || area <= 0) return null;
+  return Math.round(price / area);
+}
+
+export function daysSeen(firstSeen: string | null, now = Date.now()): number | null {
+  if (!firstSeen) return null;
+  const t = Date.parse(firstSeen);
+  if (Number.isNaN(t)) return null;
+  return Math.max(0, Math.floor((now - t) / 86400000));
+}
+
+export function closingRef(price: number | null, pct = CLOSING_DISCOUNT_PCT): number | null {
+  if (price == null) return null;
+  return Math.round(price * (1 - pct / 100));
 }
 
 export function lastNovelty(listings: Listing[]): string | null {
