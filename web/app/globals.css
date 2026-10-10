@@ -245,8 +245,8 @@ select {
 }
 
 .link,
-a.hit:hover .name,
-a.hit:focus-visible .name {
+.hit:hover .name,
+.hit:focus-visible .name {
   color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 0.2em;

@@ -11,7 +11,7 @@ export function specsOf(item: Listing): Spec[] {
   if (item.ambientes != null) rows.push({ label: "Ambientes", value: String(item.ambientes) });
   if (item.zone) rows.push({ label: "Barrio", value: item.zone });
   if (item.piso != null) rows.push({ label: "Piso", value: item.piso === 0 ? "Planta baja" : String(item.piso) });
-  if (item.expensas_ars != null) {
+  if (item.expensas_ars != null && item.expensas_ars >= 10000) {
     rows.push({ label: "Expensas", value: `$${item.expensas_ars.toLocaleString("es-AR")}` });
   }
   if (item.antiguedad_years != null) {
@@ -51,4 +51,10 @@ export function specsCells(item: Listing): { m2: string; amb: string; zone: stri
     amb: item.ambientes != null ? String(item.ambientes) : "—",
     zone: item.zone || "—",
   };
+}
+
+const ROW_SPECS = new Set(["Metros", "Ambientes", "Barrio"]);
+
+export function extraSpecsOf(item: Listing): Spec[] {
+  return specsOf(item).filter((row) => !ROW_SPECS.has(row.label));
 }

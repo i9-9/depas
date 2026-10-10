@@ -21,8 +21,10 @@ import {
 import { FavoriteButton, StarIcon } from "@/components/FavoriteMark";
 import { Photo } from "@/components/Photo";
 import { PricePair } from "@/components/PricePair";
-import { specsCells } from "@/components/Specs";
+import { extraSpecsOf, specsCells } from "@/components/Specs";
+import { Verdict } from "@/components/Verdict";
 import { readPrefs, writePrefs } from "@/lib/storage";
+import { airLine, joinEs, medianLine, seenLine } from "@/lib/verdict";
 
 type SortKey = "tier" | "new" | "price-asc" | "price-desc" | "m2-asc" | "vs-median" | "air";
 
@@ -31,6 +33,7 @@ type Filters = {
   zone: string;
   site: string;
   ambientes: string;
+  minArea: string;
   minPrice: string;
   maxPrice: string;
   maxExpensas: string;
@@ -51,6 +54,7 @@ const INITIAL: Filters = {
   zone: "",
   site: "",
   ambientes: "",
+  minArea: "",
   minPrice: "",
   maxPrice: "",
   maxExpensas: "",
@@ -110,6 +114,7 @@ function extraLabel(filters: Filters, sort: SortKey): string | null {
   if (filters.zone) bits.push(filters.zone);
   if (filters.site) bits.push(siteLabel(filters.site));
   if (filters.ambientes) bits.push(`${filters.ambientes} amb.`);
+  if (filters.minArea) bits.push(`desde ${filters.minArea} m²`);
   if (filters.minPrice || filters.maxPrice) bits.push("precio");
   if (filters.maxExpensas) bits.push("expensas");
   if (filters.epoca) bits.push("de época");
@@ -126,18 +131,20 @@ function extraLabel(filters: Filters, sort: SortKey): string | null {
   return bits.length ? bits.join(" · ") : null;
 }
 
-function readQuery(): { filters: Filters; sort: SortKey } {
-  if (typeof window === "undefined") return { filters: { ...INITIAL }, sort: "tier" };
+function readQuery(): { filters: Filters; sort: SortKey; openId: string | null } {
+  if (typeof window === "undefined") return { filters: { ...INITIAL }, sort: "tier", openId: null };
   const p = new URLSearchParams(window.location.search);
   const flag = (key: string) => p.get(key) === "1";
   const orden = p.get("orden");
   return {
+    openId: p.get("d"),
     filters: {
       ...INITIAL,
       q: p.get("q") ?? "",
       zone: p.get("zona") ?? "",
       site: p.get("portal") ?? "",
       ambientes: p.get("amb") ?? "",
+      minArea: p.get("m2") ?? "",
       minPrice: p.get("min") ?? "",
       maxPrice: p.get("max") ?? "",
       maxExpensas: p.get("exp") ?? "",
@@ -156,12 +163,13 @@ function readQuery(): { filters: Filters; sort: SortKey } {
   };
 }
 
-function writeQuery(filters: Filters, sort: SortKey) {
+function writeQuery(filters: Filters, sort: SortKey, openId: string | null) {
   const p = new URLSearchParams();
   if (filters.q) p.set("q", filters.q);
   if (filters.zone) p.set("zona", filters.zone);
   if (filters.site) p.set("portal", filters.site);
   if (filters.ambientes) p.set("amb", filters.ambientes);
+  if (filters.minArea) p.set("m2", filters.minArea);
   if (filters.minPrice) p.set("min", filters.minPrice);
   if (filters.maxPrice) p.set("max", filters.maxPrice);
   if (filters.maxExpensas) p.set("exp", filters.maxExpensas);
@@ -176,6 +184,7 @@ function writeQuery(filters: Filters, sort: SortKey) {
   if (filters.pb) p.set("pb", "1");
   if (filters.belowMedian) p.set("mediana", "1");
   if (sort !== "tier") p.set("orden", sort);
+  if (openId) p.set("d", openId);
   const qs = p.toString();
   const next = `${window.location.pathname}${qs ? `?${qs}` : ""}`;
   const cur = `${window.location.pathname}${window.location.search}`;
@@ -188,6 +197,10 @@ function idsOf(item: Listing): string[] {
 
 function isMarked(item: Listing, bag: string[]): boolean {
   return idsOf(item).some((id) => bag.includes(id));
+}
+
+function isOpen(item: Listing, openId: string | null): boolean {
+  return Boolean(openId && idsOf(item).includes(openId));
 }
 
 function passesFilters(
@@ -208,6 +221,10 @@ function passesFilters(
     return false;
   }
   if (filters.ambientes && String(item.ambientes ?? "") !== filters.ambientes) return false;
+  if (filters.minArea) {
+    const min = Number(filters.minArea);
+    if (item.area == null || item.area < min) return false;
+  }
   if (filters.minPrice) {
     const min = Number(filters.minPrice);
     if (item.price == null || item.price < min) return false;
@@ -249,11 +266,13 @@ export function Catalog({
   const [discarded, setDiscarded] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
   const [note, setNote] = useState("");
+  const [openId, setOpenId] = useState<string | null>(null);
 
   useEffect(() => {
     const fromUrl = readQuery();
     setFilters(fromUrl.filters);
     setSort(fromUrl.sort);
+    setOpenId(fromUrl.openId);
     const prefs = readPrefs();
     setSaved(prefs.saved);
     setDiscarded(prefs.discarded);
@@ -267,8 +286,8 @@ export function Catalog({
 
   useEffect(() => {
     if (!ready) return;
-    writeQuery(filters, sort);
-  }, [filters, sort, ready]);
+    writeQuery(filters, sort, openId);
+  }, [filters, sort, openId, ready]);
 
   useEffect(() => {
     if (!ready || discarded.length || !filters.onlyDiscarded) return;
@@ -309,6 +328,14 @@ export function Catalog({
 
   const shown = visible.length + (pickShown ? 1 : 0);
   const extras = extraLabel(filters, sort);
+
+  useEffect(() => {
+    if (!ready || !openId) return;
+    const still =
+      (pickShown && pick && isOpen(pick, openId)) ||
+      visible.some((item) => isOpen(item, openId));
+    if (!still) setOpenId(null);
+  }, [ready, openId, visible, pick, pickShown]);
 
   function set<K extends keyof Filters>(key: K, value: Filters[K]) {
     setFilters((f) => {
@@ -437,6 +464,8 @@ export function Catalog({
           sort={sort}
           saved={saved}
           discarded={discarded}
+          openId={openId}
+          onOpen={setOpenId}
           onSave={toggleSave}
           onDiscard={toggleDiscard}
         />
@@ -496,6 +525,9 @@ function FilterFields({
           <option value="3">3</option>
         </select>
       </Field>
+      <Field label="Desde m²" className="col-span-6 lg:col-span-4">
+        <Amount value={filters.minArea} placeholder="Mínimo" onChange={(v) => onFilter("minArea", v)} />
+      </Field>
       <Field label="Desde USD" className="col-span-6 lg:col-span-4">
         <Amount value={filters.minPrice} placeholder="Mínimo" onChange={(v) => onFilter("minPrice", v)} />
       </Field>
@@ -533,6 +565,8 @@ function Results({
   sort,
   saved,
   discarded,
+  openId,
+  onOpen,
   onSave,
   onDiscard,
 }: {
@@ -541,6 +575,8 @@ function Results({
   sort: SortKey;
   saved: string[];
   discarded: string[];
+  openId: string | null;
+  onOpen: (id: string | null) => void;
   onSave: (id: string) => void;
   onDiscard: (id: string) => void;
 }) {
@@ -593,8 +629,10 @@ function Results({
                 item={pick}
                 rank={1}
                 pinned
+                open={isOpen(pick, openId)}
                 saved={isMarked(pick, saved)}
                 discarded={isMarked(pick, discarded)}
+                onToggle={() => onOpen(isOpen(pick, openId) ? null : pick.id)}
                 onSave={() => onSave(pick.id)}
                 onDiscard={() => onDiscard(pick.id)}
               />
@@ -614,8 +652,10 @@ function Results({
                 <Row
                   item={item}
                   rank={offset + i + 1}
+                  open={isOpen(item, openId)}
                   saved={isMarked(item, saved)}
                   discarded={isMarked(item, discarded)}
+                  onToggle={() => onOpen(isOpen(item, openId) ? null : item.id)}
                   onSave={() => onSave(item.id)}
                   onDiscard={() => onDiscard(item.id)}
                 />
@@ -638,8 +678,10 @@ function Results({
                 <Row
                   item={item}
                   rank={ranks.get(item.id) || 0}
+                  open={isOpen(item, openId)}
                   saved={isMarked(item, saved)}
                   discarded={isMarked(item, discarded)}
+                  onToggle={() => onOpen(isOpen(item, openId) ? null : item.id)}
                   onSave={() => onSave(item.id)}
                   onDiscard={() => onDiscard(item.id)}
                 />
@@ -772,20 +814,31 @@ function Actions({
   );
 }
 
+function whyTeaser(item: Listing): { entra: string; resta: string } {
+  return {
+    entra: joinEs(item.verdict?.entra || []),
+    resta: joinEs(item.verdict?.resta || []),
+  };
+}
+
 function Row({
   item,
   rank,
   pinned = false,
+  open,
   saved,
   discarded,
+  onToggle,
   onSave,
   onDiscard,
 }: {
   item: Listing;
   rank: number;
   pinned?: boolean;
+  open: boolean;
   saved: boolean;
   discarded: boolean;
+  onToggle: () => void;
   onSave: () => void;
   onDiscard: () => void;
 }) {
@@ -794,6 +847,7 @@ function Row({
   const street = streetOf(item);
   const tip = item.title && item.title !== street ? item.title : undefined;
   const gone = !item.active && !pinned;
+  const why = whyTeaser(item);
   const meta = (
     <>
       {marks.map((mark, i) => (
@@ -809,44 +863,54 @@ function Row({
         : ""}
     </>
   );
+  const teaser = !open && (why.entra || why.resta) && (
+    <p className="mt-1 text-[0.8125rem] leading-snug md:truncate">
+      {why.entra ? <span className="text-ink">{why.entra}</span> : null}
+      {why.entra && why.resta ? ". " : null}
+      {why.resta ? <span className="text-muted">{why.resta}</span> : null}
+    </p>
+  );
   return (
-    <article>
+    <article className={open ? "bg-bg" : undefined}>
       <div className="flex items-start gap-3 px-3 py-4 md:hidden">
         <Photo src={item.photo} alt={street} className="size-16 shrink-0" />
-        <a
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
           title={tip}
-          className="hit min-w-0 flex-1"
+          aria-expanded={open}
+          onClick={onToggle}
+          className="hit min-w-0 flex-1 text-left"
         >
           <h3 className={`name text-[1.0625rem] leading-snug ${gone ? "text-muted" : "text-title"}`}>{street}</h3>
           <p className="mt-1 text-[0.8125rem] leading-snug text-muted">
             {meta}
             {cells.zone && cells.zone !== "—" ? ` · ${cells.zone}` : ""}
           </p>
+          {teaser}
           <p className="idx mt-2 text-[1.25rem] leading-none">
             <PricePair item={item} inline />
             <span className="ml-2 text-[0.8125rem] text-muted">
               {cells.m2} m² · {cells.amb === "—" ? "sin ambientes" : `${cells.amb} ambientes`}
+              {item.usd_per_m2 != null ? ` · USD ${formatNum(item.usd_per_m2)}/m²` : ""}
             </span>
           </p>
-        </a>
+        </button>
         <Actions saved={saved} discarded={discarded} onSave={onSave} onDiscard={onDiscard} />
       </div>
       <div className="tt hidden px-3 py-3 md:grid">
-        <a
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          type="button"
           title={tip}
-          className="hit col-span-3 grid grid-cols-subgrid items-center md:col-span-8"
+          aria-expanded={open}
+          onClick={onToggle}
+          className="hit col-span-3 grid grid-cols-subgrid items-center text-left md:col-span-8"
         >
           <p className="idx text-[0.75rem] text-muted">{String(rank).padStart(2, "0")}</p>
           <Photo src={item.photo} alt={street} className="size-12" />
           <div className="min-w-0">
             <h3 className={`name truncate text-[0.9375rem] leading-snug ${gone ? "text-muted" : "text-title"}`}>{street}</h3>
             <p className="mt-0.5 truncate text-[0.8125rem] leading-snug text-muted">{meta}</p>
+            {teaser}
           </div>
           <p className="idx text-right text-muted">{cells.m2}</p>
           <p className="idx text-right text-muted">{cells.amb}</p>
@@ -857,11 +921,82 @@ function Row({
           <p className="idx text-right text-muted">
             {item.usd_per_m2 != null ? formatNum(item.usd_per_m2) : "—"}
           </p>
-        </a>
+        </button>
         <div className="col-span-1">
           <Actions saved={saved} discarded={discarded} onSave={onSave} onDiscard={onDiscard} />
         </div>
       </div>
+      {open ? <RowDetail item={item} /> : null}
     </article>
+  );
+}
+
+function RowDetail({ item }: { item: Listing }) {
+  const extra = extraSpecsOf(item);
+  const median = medianLine(item);
+  const air = airLine(item);
+  const seen = seenLine(item);
+  const title = item.title && item.title !== streetOf(item) ? item.title : null;
+  const photo = item.photo ? (
+    <Photo src={item.photo} alt={streetOf(item)} className="aspect-[4/3] max-h-52 w-full md:max-h-none" />
+  ) : (
+    <p className="flex aspect-[4/3] max-h-52 items-end bg-photo p-3 text-muted md:max-h-none">
+      Este aviso no trae foto
+    </p>
+  );
+  const links = (
+    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+      <a
+        href={item.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-solid"
+      >
+        Abrir el aviso en {siteLabel(item.site)}
+      </a>
+      {item.mirrors.map((m) => (
+        <a
+          key={m.id}
+          href={m.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ghost"
+        >
+          También en {siteLabel(m.site)}
+          {m.price != null ? ` · USD ${m.price.toLocaleString("es-AR")}` : ""}
+        </a>
+      ))}
+    </div>
+  );
+  const copy = (
+    <div className="min-w-0 space-y-4">
+      {title ? <p className="text-ink">{title}</p> : null}
+      <Verdict data={item.verdict} stacked />
+      {extra.length ? (
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">
+          {extra.map((row) => (
+            <div key={row.label}>
+              <dt className="kicker text-muted">{row.label}</dt>
+              <dd className="idx text-title">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
+      <div className="measure space-y-1 text-muted">
+        {median ? <p>{median}</p> : null}
+        {air ? <p>{air}</p> : null}
+        {seen ? <p>{seen}</p> : null}
+      </div>
+      {links}
+    </div>
+  );
+  return (
+    <div className="space-y-5 border-t border-line px-3 py-5">
+      <div className="grid gap-5 md:grid-cols-[minmax(0,16rem)_minmax(0,1fr)]">
+        <div className="hidden md:block">{photo}</div>
+        {copy}
+        <div className="md:hidden">{photo}</div>
+      </div>
+    </div>
   );
 }

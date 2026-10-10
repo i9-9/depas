@@ -10,6 +10,7 @@ import {
   daysSeen,
   clusterListings,
   flipKeep,
+  classifyZone,
   inScope,
   markFirstWave,
   usdPerM2,
@@ -29,13 +30,14 @@ export function loadListings(): Listing[] {
   for (const file of FILES) {
     for (const raw of file.listings || []) {
       if (!raw?.id || !inScope(raw)) continue;
+      const zone = classifyZone(raw) || raw.zone || "";
       out.push({
         id: raw.id,
         site: raw.site || raw.id.split(":")[0],
         url: raw.url || "",
         title: raw.title || "",
         address: raw.address || "",
-        zone: raw.zone || "",
+        zone,
         price: raw.price ?? null,
         old_price: raw.old_price ?? null,
         price_history: raw.price_history || [],

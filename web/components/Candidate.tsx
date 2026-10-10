@@ -113,9 +113,10 @@ export function Candidate({
             </summary>
             <p className="mt-2 leading-relaxed text-ink">
               Buscamos un flip: edificio que no haya que tocar, unidad para
-              reciclar, y precio con aire contra la salida del barrio. Lo que
-              no se arregla con obra (edificio flojo, metro caro, expensas
-              disparadas, sin metros) no entra. El resto está en Todos.
+              reciclar, cuadra que pague la salida del barrio, y precio con
+              aire. Lo que no se arregla con obra (edificio flojo, metro caro,
+              expensas disparadas, sin metros) no entra. Una buena unidad en
+              una cuadra floja no es el elegido. El resto está en Todos.
             </p>
           </details>
         </footer>

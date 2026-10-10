@@ -460,6 +460,57 @@ def test_dedupe():
     assert prev is not None and prev["price"] == 105000
 
 
+def test_street_zones():
+    f = CFG["filters"]
+    def z(address, title=""):
+        return s.classify_zone({"address": address, "title": title}, f)
+
+    assert z("Fitz Roy al 2400") is None
+    assert z("Thames Al 2400, Botánico") is None
+    assert z("Armenia 2100, Botánico") is None
+    assert z("José A. Cabrera 3275") is None
+    assert z("Corrientes 1900") is None
+    assert z("Tucumán 1900") is None
+    assert z("Sarmiento 1400") is None
+    assert z("Av. Cordoba al 1332") is None
+    assert z("Av. Cordoba al 1500") == "Barrio Norte"
+    assert z("CORDOBA 3300") is None
+    assert z("Montevideo al 600") is None
+    assert z("Marcelo Torcuato de Alvear 900") is None
+    assert z("Suipacha e/ Avenida Córdoba y Paraguay", "Suipacha") is None
+    assert z("Viamonte y Rodriguez Peña - Unidad 103") is None
+    assert z("San Luis 3376") is None
+    assert z("Güemes 4700") is None
+    assert z("Paraguay 1200") is None
+    assert z("Arenales 1100") is None
+
+    assert z("Paso 760") == "Barrio Norte"
+    assert z("Av. Córdoba 1800") == "Barrio Norte"
+    assert z("Paraguay 1878") == "Barrio Norte"
+    assert z("French 2668") == "Recoleta"
+    assert z("French") == "Recoleta"
+    assert z("Juncal Al 2077") == "Recoleta"
+    assert z("Venta Depto Juncal Al 2077. Recoleta Oportunidad!!!! 56") == "Recoleta"
+    assert z("Ayacucho 1400") == "Recoleta"
+    assert z("Juncal 2900") == "Recoleta"
+    assert z("Av. Las Heras 3100") == "Recoleta"
+    assert z("Cabello al 3900") == "Botánico"
+    assert z("Cabello 3200") == "Palermo Chico"
+    assert z("Salguero 3078") == "Palermo Chico"
+    assert z("Scalabrini Ortiz al 2300") == "Botánico"
+    assert z("Santa Fe 3800") == "Botánico"
+    assert z("Charcas 3245") == "Recoleta"
+
+    web = json.loads((Path(__file__).parent / "web" / "data" / "street-zones.json").read_text())
+    assert web["street_zones"] == f["street_zones"]
+    assert web["reject_barrios"] == f["reject_barrios"]
+
+    src = {"name": "Recoleta", "zone": "Recoleta", "aliases": ["recoleta"]}
+    bad = {"address": "Fitz Roy al 2400", "title": "Depto Recoleta", "url": "https://z/recoleta-1.html",
+           "price": 98000, "area": 55, "ambientes": 2, "blurb": ""}
+    assert not s.keep_listing(bad, src, f)
+
+
 def test_place_key_cross_portal():
     zp = {"address": "Paso 760, Barrio Norte", "title": "Paso 760", "area": 76, "ambientes": 3, "price": 112000}
     ml = {"address": "Paso al 760", "title": "Depto Paso 760", "area": 74, "ambientes": 3, "price": 109000}
@@ -1081,6 +1132,30 @@ def test_flip_cuts_and_air():
     )
     s.apply_air(combo)
     assert "tesis" in combo["tags"] and combo["score"] >= 6
+
+    edge = _item(
+        "zonaprop:paso760",
+        zone="Barrio Norte",
+        price=112000,
+        area=76,
+        score=5,
+        tags=["de época", "edificio ok"],
+        address="Paso 760",
+        title="Paso 760 Y avenida córdoba: Semipiso",
+    )
+    assert s.is_weak_street(edge)
+    s.apply_air(edge)
+    assert "zona floja" in edge["tags"]
+    assert edge["exit_usd_m2"] == 2200
+    assert edge["air_usd"] == 36200
+    assert "aire amplio" not in edge["tags"] and "aire" in edge["tags"]
+    s.apply_air(edge)
+    assert edge["tags"].count("zona floja") == 1
+    assert edge["score"] == 3
+    pasos = _item("zonaprop:pasos", address="Juncal 2900, Recoleta", title="3 amb a pasos de Congreso")
+    assert not s.is_weak_street(pasos)
+    juncal = _item("zonaprop:juncal", address="Juncal 2900, Recoleta", title="De época Recoleta")
+    assert not s.is_weak_street(juncal)
 
     rich = _item("zonaprop:rich", tags=["metro caro"])
     assert not s.keep_flip(rich) and s.keep_flip(_item("zonaprop:ok", tags=[]))

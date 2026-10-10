@@ -18,6 +18,7 @@ const SAY: Record<string, string> = {
   "sin aire": "no tiene aire para la obra",
   "ya hecho": "ya está reciclado o a estrenar",
   tesis: "es el combo: buen edificio y unidad a reciclar",
+  "zona floja": "la cuadra no paga la salida del barrio",
   "cumple barrio, metros y balcón": "pasa barrio, metros y balcón; no hay más señales",
 };
 
@@ -65,7 +66,8 @@ export function verdictOf(
       t === "expensas muy altas" ||
       t === "sin aire" ||
       t === "ya hecho" ||
-      t === "planta baja"
+      t === "planta baja" ||
+      t === "zona floja"
     ) {
       resta.push(say(t));
     } else {

@@ -379,6 +379,7 @@ FLIP_TAGS = {
     "sin aire": -2,
     "tesis": 2,
     "planta baja": -1,
+    "zona floja": -4,
 }
 
 DEFAULT_EXIT_USD_M2 = {
@@ -390,6 +391,8 @@ DEFAULT_EXIT_USD_M2 = {
 DEFAULT_RENO_USD_M2 = 250
 DEFAULT_AIR_OK_USD = 25000
 DEFAULT_AIR_WIDE_USD = 40000
+DEFAULT_WEAK_STREETS = ("paso", "jean jaures", "jean jaure")
+DEFAULT_WEAK_STREET_EXIT_USD_M2 = 2200
 
 
 def apply_value(item: dict, cfg: dict | None = None) -> dict:
@@ -431,8 +434,31 @@ def apply_value(item: dict, cfg: dict | None = None) -> dict:
     return item
 
 
-def exit_usd_m2_of(zone: str, cfg: dict | None = None) -> int | None:
+def street_name_of(item: dict) -> str:
+    key = street_key(item.get("address") or "") or street_key(item.get("title") or "")
+    if not key:
+        return ""
+    return re.sub(r"\s+\d+$", "", key).strip()
+
+
+def is_weak_street(item: dict, cfg: dict | None = None) -> bool:
+    """Borde Once/Abasto: el depto puede servir; la cuadra no paga salida de Recoleta/BN."""
     cfg = cfg or {}
+    streets = [fold(x) for x in (cfg.get("weak_streets") or DEFAULT_WEAK_STREETS) if str(x).strip()]
+    name = street_name_of(item)
+    hay = fold(f"{item.get('address') or ''} {item.get('title') or ''}")
+    for w in streets:
+        if name == w or name.startswith(w + " "):
+            return True
+        if re.search(rf"(?<![a-z0-9]){re.escape(w)}\s+\d{{2,5}}\b", hay):
+            return True
+    return False
+
+
+def exit_usd_m2_of(zone: str, cfg: dict | None = None, item: dict | None = None) -> int | None:
+    cfg = cfg or {}
+    if item is not None and is_weak_street(item, cfg):
+        return int(cfg.get("weak_street_exit_usd_m2", DEFAULT_WEAK_STREET_EXIT_USD_M2))
     mapping = cfg.get("exit_usd_m2") or DEFAULT_EXIT_USD_M2
     if zone in mapping:
         return int(mapping[zone])
@@ -443,7 +469,7 @@ def air_usd_of(item: dict, cfg: dict | None = None) -> int | None:
     cfg = cfg or {}
     price = item.get("price")
     area = item.get("area")
-    exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg)
+    exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg, item)
     if price is None or area is None or area <= 0 or exit_m2 is None:
         return None
     reno = int(cfg.get("reno_usd_m2", DEFAULT_RENO_USD_M2))
@@ -462,7 +488,7 @@ def apply_air(item: dict, cfg: dict | None = None) -> dict:
         else:
             kept.append(t)
     reno = int(cfg.get("reno_usd_m2", DEFAULT_RENO_USD_M2))
-    exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg)
+    exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg, item)
     air = air_usd_of(item, cfg)
     item["air_usd"] = air
     item["exit_usd_m2"] = exit_m2
@@ -481,6 +507,8 @@ def apply_air(item: dict, cfg: dict | None = None) -> dict:
         added.append("tesis")
     if item.get("piso") == 0 and "planta baja" not in kept:
         added.append("planta baja")
+    if is_weak_street(item, cfg) and "zona floja" not in kept:
+        added.append("zona floja")
     for t in added:
         score += FLIP_TAGS[t]
         kept.append(t)
@@ -525,6 +553,7 @@ _VERDICT_SAY = {
     "sin aire": "no tiene aire para la obra",
     "ya hecho": "ya está reciclado o a estrenar",
     "tesis": "es el combo: buen edificio y unidad a reciclar",
+    "zona floja": "la cuadra no paga la salida del barrio",
     "cumple barrio, metros y balcón": "pasa barrio, metros y balcón; no hay más señales",
 }
 _FALTA_SAY = {
@@ -563,6 +592,7 @@ def verdict(item: dict, cfg: dict | None = None) -> dict:
             "sin aire",
             "ya hecho",
             "planta baja",
+            "zona floja",
         }:
             resta.append(_say_hit(t))
         else:
@@ -654,6 +684,189 @@ def street_key(address: str) -> str:
     t = re.sub(r"\s+", " ", t).strip()
     m = re.search(r"([a-z]+(?:\s+[a-z]+){0,3})\s+(\d{2,5})\b", t)
     return f"{m.group(1)} {m.group(2)}" if m else ""
+
+
+_STREET_ALIASES = (
+    ("marcelo torcuato de alvear", "alvear"),
+    ("general lucio norberto mansilla", "mansilla"),
+    ("lucio mansilla", "mansilla"),
+    ("jose antonio cabrera", "cabrera"),
+    ("jose a cabrera", "cabrera"),
+    ("av scalabrini ortiz", "scalabrini ortiz"),
+    ("scalabrini", "scalabrini ortiz"),
+    ("cnel diaz", "coronel diaz"),
+    ("cnl diaz", "coronel diaz"),
+    ("av las heras", "las heras"),
+    ("av santa fe", "santa fe"),
+    ("av cordoba", "cordoba"),
+    ("av pueyrredon", "pueyrredon"),
+    ("jose maria gutierrez", "gutierrez"),
+    ("j m gutierrez", "gutierrez"),
+    ("san martin de tours", "san martin de tours"),
+    ("republica de la india", "republica de la india"),
+    ("rodriguez pena", "rodriguez pena"),
+    ("jean jaures", "jean jaures"),
+    ("coronel diaz", "coronel diaz"),
+    ("mario bravo", "mario bravo"),
+    ("pacheco de melo", "pacheco de melo"),
+    ("vicente lopez", "vicente lopez"),
+)
+
+
+def norm_street(name: str) -> str:
+    n = fold(name or "")
+    n = re.sub(r"\b(av|avenida)\b", " ", n)
+    n = re.sub(r"\s+", " ", n).strip()
+    for raw, canon in _STREET_ALIASES:
+        if n == raw or n.startswith(raw + " "):
+            return canon
+    return n
+
+
+def _street_names(f: dict | None = None) -> list[str]:
+    names = {canon for _, canon in _STREET_ALIASES}
+    names.update(raw for raw, _ in _STREET_ALIASES)
+    for rule in (f or {}).get("street_zones") or []:
+        st = fold(rule.get("street") or "")
+        if st:
+            names.add(st)
+    return sorted(names, key=len, reverse=True)
+
+
+def _clean_street_text(text: str) -> str:
+    t = fold(text or "")
+    t = t.replace("avenida", " ").replace("av.", " ")
+    t = re.sub(r"(\d)\.(\d{3})\b", r"\1\2", t)
+    t = re.sub(r"\bal\s+", " ", t)
+    t = _STREET_NOISE.sub(" ", t)
+    t = re.sub(r"[^a-z0-9\s]", " ", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def _token_in(hay: str, phrase: str) -> bool:
+    phrase = fold(phrase)
+    if not phrase:
+        return False
+    return re.search(rf"(?<![a-z0-9]){re.escape(phrase)}(?![a-z0-9])", fold(hay)) is not None
+
+
+def _find_street(text: str, streets: list[str]) -> tuple[str, int | None]:
+    t = _clean_street_text(text)
+    if not t:
+        return "", None
+    best_name, best_num, best_score = "", None, -1
+    for street in streets:
+        for m in re.finditer(rf"(?<![a-z0-9]){re.escape(street)}(?![a-z0-9])", t):
+            rest = t[m.end():].strip()
+            nm = re.match(r"(\d{2,5})\b", rest)
+            num = int(nm.group(1)) if nm else None
+            score = len(street) * 10 + (5 if num is not None else 0)
+            if score > best_score:
+                best_name, best_num, best_score = street, num, score
+    if best_name:
+        return norm_street(best_name), best_num
+    return "", None
+
+
+def parse_street(text: str, f: dict | None = None) -> tuple[str, int | None]:
+    streets = _street_names(f)
+    key = street_key(text or "")
+    if key:
+        name, _, num = key.rpartition(" ")
+        if num.isdigit():
+            n = norm_street(name)
+            if n in streets:
+                return n, int(num)
+            for st in streets:
+                if n == st or n.endswith(" " + st):
+                    return norm_street(st), int(num)
+    found = _find_street(text or "", streets)
+    if found[0]:
+        return found
+    t = _clean_street_text(text or "")
+    if not t:
+        return "", None
+    return norm_street(t), None
+
+
+def _rule_hits(rule: dict, name: str, num: int | None) -> bool:
+    street = fold(rule.get("street") or "")
+    if not street or not name:
+        return False
+    if not (name == street or name.startswith(street + " ") or street.startswith(name + " ")):
+        return False
+    if num is None:
+        return rule.get("min") is None and rule.get("max") is None
+    lo = rule.get("min")
+    hi = rule.get("max")
+    if lo is not None and num < int(lo):
+        return False
+    if hi is not None and num > int(hi):
+        return False
+    return True
+
+
+def _out_only_streets(f: dict | None = None) -> set[str]:
+    by: dict[str, list[dict]] = {}
+    for rule in (f or {}).get("street_zones") or []:
+        st = fold(rule.get("street") or "")
+        if st:
+            by.setdefault(st, []).append(rule)
+    return {st for st, rules in by.items() if rules and all(r.get("out") for r in rules)}
+
+
+def _mentions_out_street(text: str, f: dict | None = None) -> bool:
+    """Calle 100% fuera, solo en la dirección (el título miente: 'a pasos de…')."""
+    if not text:
+        return False
+    names = _street_names(f)
+    out_only = _out_only_streets(f)
+    for st in sorted(out_only, key=len, reverse=True):
+        if not _token_in(text, st):
+            continue
+        longer = [x for x in names if x != st and x.startswith(st + " ") and _token_in(text, x)]
+        if longer:
+            continue
+        return True
+    return False
+
+
+def classify_zone(item: dict, f: dict | None = None) -> str | None:
+    """Barrio por calle + altura. None = fuera. '' = no se pudo fijar."""
+    f = f or {}
+    rules = f.get("street_zones") or []
+    address = item.get("address") or ""
+    if _mentions_out_street(address, f):
+        return None
+    name, num = parse_street(address, f)
+    if not name:
+        name, num = parse_street(item.get("title") or "", f)
+    if not name:
+        return ""
+    hits = [r for r in rules if _rule_hits(r, name, num)]
+    if not hits and num is not None:
+        hits = [r for r in rules if _rule_hits(r, name, None) and r.get("out")]
+    if not hits:
+        return ""
+    hits.sort(key=lambda r: (len(fold(r.get("street") or "")), 1 if r.get("min") or r.get("max") else 0), reverse=True)
+    rule = hits[0]
+    if rule.get("out"):
+        return None
+    return rule.get("zone") or ""
+
+
+def apply_zone(item: dict, f: dict, src: dict | None = None) -> bool:
+    """Escribe item['zone']. False si la calle está fuera de los 4 barrios."""
+    z = classify_zone(item, f)
+    if z is None:
+        item["zone"] = ""
+        return False
+    if z:
+        item["zone"] = z
+        return not is_rejected(item, f)
+    if src:
+        item["zone"] = source_zone(src)
+    return keep_zone(item, src or {}) and in_scope(item, f)
 
 
 def listing_key(item: dict) -> str:
@@ -817,7 +1030,7 @@ def in_scope(item: dict, f: dict) -> bool:
 
 
 def keep_listing(item: dict, src: dict, f: dict) -> bool:
-    return keep_zone(item, src) and in_scope(item, f)
+    return apply_zone(item, f, src)
 
 
 def matches(item: dict, f: dict) -> bool:
@@ -1068,7 +1281,7 @@ def scrape_source(session, src: dict, cfg: dict) -> tuple[list[dict], list[dict]
             last_page_items = []
             break
         for i in new:
-            i["zone"] = source_zone(src)
+            apply_zone(i, cfg.get("filters") or {}, src)
             apply_signals(i, cfg.get("signals") or [], cfg.get("filters") or {})
             found[i["id"]] = i
         last_page_items = new
@@ -1671,8 +1884,11 @@ def drop_out_of_scope(catalog: dict, f: dict, now: str) -> list[str]:
     gone: list[str] = []
     out = []
     for rec in catalog.get("listings") or []:
-        if rec.get("active") is not False and not in_scope(rec, f):
-            rec = {**rec, "active": False, "gone_at": rec.get("gone_at") or now}
+        rec = {**rec}
+        ok = apply_zone(rec, f)
+        if rec.get("active") is not False and not ok:
+            rec["active"] = False
+            rec["gone_at"] = rec.get("gone_at") or now
             if rec.get("id"):
                 gone.append(rec["id"])
         out.append(rec)
@@ -1698,6 +1914,7 @@ _ENRICH_KEYS = (
     "piso",
     "cochera",
     "title",
+    "zone",
 )
 
 

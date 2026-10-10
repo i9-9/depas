@@ -26,9 +26,11 @@ function Block({
 export function Verdict({
   data,
   compact = false,
+  stacked = false,
 }: {
   data: VerdictData;
   compact?: boolean;
+  stacked?: boolean;
 }) {
   if (compact) {
     const bits = [
@@ -39,7 +41,7 @@ export function Verdict({
     return <p className="text-[13px]">{bits.join(". ")}.</p>;
   }
   return (
-    <div className="grid gap-6 sm:grid-cols-3">
+    <div className={stacked ? "grid gap-4" : "grid gap-6 sm:grid-cols-3"}>
       <Block title="A favor" items={data.entra} tone="title" />
       <Block title="En contra" items={data.resta} />
       <Block title="No dice" items={data.falta} />
