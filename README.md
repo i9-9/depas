@@ -2,7 +2,7 @@
 
 Corre solo en GitHub Actions (gratis), 5 veces por día, y te manda por Telegram los avisos **nuevos** (y las bajas de precio) que cumplan tus filtros.
 
-Filtros actuales (`config.json`): venta · con balcón · Recoleta, Barrio Norte, Botánico, Palermo Chico · hasta 3 ambientes · mínimo 50 m² · presupuesto USD 125.000 (techo duro 140.000).
+Filtros actuales (`config.json`): venta · con balcón · Recoleta, Barrio Norte, Botánico, Palermo Chico · hasta 3 ambientes · mínimo 50 m² · precio entre USD 20.000 y 140.000 (gusto 125.000).
 
 Criterio (no todo es excluyente):
 
@@ -32,8 +32,8 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
 
 ## Cosas a tener en cuenta
 
-- **Bloqueos anti-bot**: Zonaprop (Cloudflare) y Argenprop (AWS WAF) a veces bloquean IPs de datacenter como las de GitHub. Si pasa, el bot te manda un aviso por Telegram (una vez por día) con el motivo. Si es persistente, la alternativa gratis es correr el mismo script en tu Mac con `cron`/`launchd`, donde la IP es residencial.
-- **Slugs de barrio sin verificar**: los slugs de `botanico`, `palermo-chico` y `barrio-norte` están armados con el patrón de cada portal pero no pude probarlos en vivo. Si alguno da 404, el aviso de error te lo dice; corregí la URL abriendo el portal, filtrando a mano y copiando la dirección.
+- **Argenprop desde Actions**: AWS WAF bloquea las IPs de GitHub (405 / challenge). El workflow **salta Argenprop** y avisa una vez por día. Zonaprop sigue en Actions. Argenprop se corre en la Mac (abajo).
+- **Slugs de Zonaprop**: Botánico es `botanico-palermo` (el slug `botanico` solo redirige a todo el país). Barrio Norte y Palermo Chico están verificados. Cada aviso se descarta si la card no nombra esa zona.
 - **Respeto de robots.txt**: se leen solo las páginas de listado permitidas (máx. 3 páginas por barrio), con pausa de 3–6 s entre pedidos.
 - **m²**: Argenprop publica cubierta/semicubierta (se suman); Zonaprop publica total. Pueden diferir un poco del m² "real" del aviso.
 - Alternativa sin código: ambos portales tienen "Crear alerta" por email con tus filtros; sirve de respaldo.
@@ -44,4 +44,22 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
 pip install -r requirements.txt
 python test_parsers.py            # pruebas offline del parser y filtros
 python scraper.py --dry-run       # búsqueda real, imprime en consola (sin Telegram)
+python scraper.py --only argenprop
 ```
+
+## Argenprop en la Mac (launchd)
+
+Actions no puede scrapear Argenprop. En la Mac, una vez:
+
+1. Creá `.env` en la raíz (no se sube a git) con `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID`.
+2. `chmod +x scripts/buscar-argenprop-local.sh`
+3. `cp scripts/com.search-amb.argenprop.plist ~/Library/LaunchAgents/`
+4. `launchctl load ~/Library/LaunchAgents/com.search-amb.argenprop.plist`
+
+Corre a las 8:20, 11:20, 14:20, 17:20 y 20:20. Log: `argenprop-local.log`.
+
+Para probar ahora: `./scripts/buscar-argenprop-local.sh` (o `python scraper.py --only argenprop` con las env vars).
+
+Si querés que Actions no vuelva a avisarte avisos ya vistos en la Mac, después de una corrida local: `git add seen.json && git commit -m "seen argenprop" && git push`.
+
+Cron equivalente: `20 8,11,14,17,20 * * * /Users/ivan/Documents/Codigo/search_amb/scripts/buscar-argenprop-local.sh`

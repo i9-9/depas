@@ -144,6 +144,75 @@ def test_preferences_not_exclusive():
     assert "para reciclar" in rec["tags"], rec  # está en el slug del título
 
 
+def test_price_parsing():
+    assert s.parse_price("Le Parc Alcorta USD 1 Living") is None
+    assert s.parse_price("USD 1.250.000 + expensas") == 1250000
+    assert s.parse_price("Consultar precio") is None
+    assert s.parse_price("Departamentos desde USD 114.000") is None
+    assert s.parse_price("Departamento USD 98.000 + $150.000 expensas") == 98000
+    cheap = {"price": 1, "ambientes": 2, "area": 60}
+    luxury = {"price": 1250000, "ambientes": 3, "area": 80}
+    ok = {"price": 98000, "ambientes": 3, "area": 57}
+    assert not s.matches(cheap, F) and not s.matches(luxury, F) and s.matches(ok, F)
+
+    html = """
+    <div class="card">
+      <h2>USD 1</h2><h3>120 m² tot.3 amb.</h3>
+      <h4>Figueroa Alcorta 3000</h4><h4>Palermo, Capital Federal</h4>
+      <a href="/propiedades/clasificado/veclapin-le-parc-alcorta-59999999.html">Le Parc Alcorta</a>
+    </div>
+    <div class="card">
+      <h2>USD 1.250.000</h2><h3>120 m² tot.3 amb.</h3>
+      <h4>Figueroa Alcorta 3100</h4><h4>Palermo, Capital Federal</h4>
+      <a href="/propiedades/clasificado/veclapin-torre-cara-58888888.html">Torre cara</a>
+    </div>
+    """
+    items = {i["id"]: i for i in s.parse_page(html, "zonaprop", "https://www.zonaprop.com.ar/x.html")}
+    assert "zonaprop:59999999" not in items  # USD 1 no entra
+    assert items["zonaprop:58888888"]["price"] == 1250000
+
+
+def test_zone_validation():
+    botanico = {"name": "Botánico", "aliases": ["botanico", "palermo botanico", "jardin botanico"]}
+    recoleta = {"name": "Recoleta", "aliases": ["recoleta"]}
+    zp = """
+    <div id="list">
+     <div class="card">
+       <h2>USD 85.000</h2><h3>55 m² tot.2 amb.</h3>
+       <h4>Caaguazú 6425</h4><h4>Quilmes Oeste, Buenos Aires</h4>
+       <a href="/propiedades/clasificado/veclapin-depto-quilmes-61111111.html">Depto Quilmes</a>
+     </div>
+     <div class="card">
+       <h2>USD 108.000</h2><h3>56 m² tot.3 amb.</h3>
+       <h4>Santa Fe 3800</h4><h4>Botánico, Palermo</h4>
+       <a href="/propiedades/clasificado/veclapin-depto-botanico-62222222.html">Depto Botánico</a>
+     </div>
+    </div>
+    """
+    items = {i["id"]: i for i in s.parse_page(zp, "zonaprop", "https://www.zonaprop.com.ar/x.html")}
+    quilmes, bueno = items["zonaprop:61111111"], items["zonaprop:62222222"]
+    assert not s.keep_zone(quilmes, botanico)
+    assert s.keep_zone(bueno, botanico)
+    assert not s.keep_zone(bueno, recoleta)
+
+    wide = "<html><head><title>73.638 Departamentos en venta en Argentina - Zonaprop</title></head><h1>73.638 Departamentos en venta en Argentina</h1></html>"
+    ok_page = "<html><head><title>38 Departamentos en venta en Botánico, Palermo - Zonaprop</title></head><h1>38 Departamentos en venta en Botánico, Palermo</h1></html>"
+    assert not s.page_matches_zone(wide, "https://www.zonaprop.com.ar/departamentos-venta-con-balcon.html", botanico)
+    assert s.page_matches_zone(ok_page, "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo.html", botanico)
+    norte = {"name": "Barrio Norte", "aliases": ["barrio norte"]}
+    chico = {"name": "Palermo Chico", "aliases": ["palermo chico"]}
+    assert s.page_matches_zone(
+        "<title>302 Departamentos en venta en Barrio Norte, CABA - Zonaprop</title><h1>Barrio Norte, CABA</h1>",
+        "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte.html",
+        norte,
+    )
+    assert s.page_matches_zone(
+        "<title>58 Departamentos en venta en Palermo Chico, Palermo - Zonaprop</title><h1>Palermo Chico, Palermo</h1>",
+        "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico.html",
+        chico,
+    )
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

@@ -2,8 +2,9 @@
 """Buscador de departamentos en venta (Argenprop + Zonaprop) con aviso por Telegram.
 
 Uso:
-    python scraper.py              # corrida normal (usa TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID)
-    python scraper.py --dry-run    # no manda Telegram ni guarda estado, imprime en consola
+    python scraper.py                    # corrida normal (usa TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID)
+    python scraper.py --dry-run          # no manda Telegram ni guarda estado, imprime en consola
+    python scraper.py --only argenprop   # solo Argenprop (para cron/launchd en la Mac)
 """
 from __future__ import annotations
 
@@ -76,12 +77,24 @@ def card_for(link, link_re):
     return node
 
 
+def parse_price(text: str) -> int | None:
+    """Lee un precio en USD. Ignora 'desde USD', 'Consultar' y trozos tipo 'USD 1'."""
+    if re.search(r"consultar\s+precio", text, re.I) and not re.search(r"USD\s*\d", text, re.I):
+        return None
+    # miles con punto (1.250.000) o al menos 4 dígitos seguidos; no "USD 1"
+    for m in re.finditer(r"(desde\s+)?USD\s*(\d{1,3}(?:\.\d{3})+|\d{4,})", text, re.I):
+        if m.group(1):
+            continue
+        try:
+            return to_price(m.group(2))
+        except ValueError:
+            continue
+    return None
+
+
 def parse_card(site: str, text: str) -> dict:
     out = {"price": None, "area": None, "ambientes": None, "address": ""}
-
-    m = re.search(r"USD\s*([\d.]+)", text)
-    if m:
-        out["price"] = to_price(m.group(1))
+    out["price"] = parse_price(text)
 
     if site == "argenprop":
         cub = re.search(r"([\d.,]+)\s*m²\s*cubie", text)
@@ -211,9 +224,36 @@ def has_balcon(item: dict) -> bool | None:
     return None
 
 
+def zone_aliases(src: dict) -> list[str]:
+    raw = src.get("aliases") or [src.get("name") or ""]
+    return [fold(a) for a in raw if str(a).strip()]
+
+
+def page_matches_zone(html_text: str, final_url: str, src: dict) -> bool:
+    """True si el listado quedó en el barrio pedido (no un fallback nacional)."""
+    soup = BeautifulSoup(html_text, "html.parser")
+    title = soup.title.get_text(" ", strip=True) if soup.title else ""
+    h1 = soup.find("h1")
+    h1t = h1.get_text(" ", strip=True) if h1 else ""
+    heading = fold(f"{title} {h1t}")
+    if "en venta en argentina" in heading:
+        return False
+    hay = fold(f"{final_url} {title} {h1t}")
+    return any(a in hay for a in zone_aliases(src))
+
+
+def keep_zone(item: dict, src: dict) -> bool:
+    """Descarta cards cuyo barrio/dirección no coincide con la zona pedida."""
+    aliases = zone_aliases(src)
+    if not aliases:
+        return True
+    return any(a in _haystack(item, "any") for a in aliases)
+
+
 def matches(item: dict, f: dict) -> bool:
     hard = f.get("max_price_usd_hard", f["max_price_usd"])
-    if item["price"] is None or item["price"] > hard:
+    min_p = f.get("min_price_usd", 20000)
+    if item["price"] is None or item["price"] > hard or item["price"] < min_p:
         return False
     if item["ambientes"] is not None and item["ambientes"] > f["max_ambientes"]:
         return False
@@ -242,17 +282,47 @@ class Blocked(Exception):
     pass
 
 
-def fetch(session: requests.Session, url: str) -> str:
+def _log_fetch_failure(url: str, r: requests.Response) -> None:
+    keys = (
+        "server",
+        "x-amzn-waf-action",
+        "cf-ray",
+        "location",
+        "content-type",
+    )
+    hdrs = ", ".join(f"{k}={r.headers.get(k)}" for k in keys if r.headers.get(k))
+    body = re.sub(r"\s+", " ", (r.text or "")[:300])
+    print(
+        f"[fetch] FAIL {r.status_code} {url}\n"
+        f"  final={r.url}\n"
+        f"  headers: {hdrs or '(sin headers relevantes)'}\n"
+        f"  body: {body}",
+        file=sys.stderr,
+    )
+
+
+def fetch(session: requests.Session, url: str) -> tuple[str, str]:
     r = session.get(url, timeout=30)
-    if r.status_code in (403, 429, 503):
+    if r.url.split("?")[0].rstrip("/") != url.split("?")[0].rstrip("/"):
+        print(f"[fetch] redirect {url} → {r.url}", file=sys.stderr)
+    waf = (r.headers.get("x-amzn-waf-action") or "").lower()
+    if r.status_code == 202 or waf in ("challenge", "block"):
+        _log_fetch_failure(url, r)
+        raise Blocked(f"HTTP {r.status_code} (WAF {waf or 'challenge'})")
+    if r.status_code in (403, 405, 429, 503):
+        _log_fetch_failure(url, r)
         raise Blocked(f"HTTP {r.status_code} (posible bloqueo anti-bot)")
     if r.status_code == 404:
+        _log_fetch_failure(url, r)
         raise Blocked("HTTP 404 (revisar el slug de la URL en config.json)")
-    r.raise_for_status()
+    if r.status_code >= 400:
+        _log_fetch_failure(url, r)
+        r.raise_for_status()
     head = r.text[:4000].lower()
     if any(k in head for k in BLOCK_MARKERS) and "m²" not in r.text:
+        _log_fetch_failure(url, r)
         raise Blocked("página de desafío anti-bot")
-    return r.text
+    return r.text, r.url
 
 
 def scrape_source(session, src: dict, cfg: dict) -> list[dict]:
@@ -260,11 +330,13 @@ def scrape_source(session, src: dict, cfg: dict) -> list[dict]:
     found: dict[str, dict] = {}
     for n in range(1, cfg["pages"][site] + 1):
         url = page_url(site, src["url"], n)
-        html_text = fetch(session, url)
-        items = parse_page(html_text, site, url)
+        html_text, final_url = fetch(session, url)
+        if n == 1 and not page_matches_zone(html_text, final_url, src):
+            raise Blocked(f"slug inválido: redirigió fuera de {src['name']} → {final_url}")
+        items = [i for i in parse_page(html_text, site, url) if keep_zone(i, src)]
         new = [i for i in items if i["id"] not in found]
         if n == 1 and not items:
-            raise Blocked("0 avisos en la página 1 (¿cambió el HTML o el slug?)")
+            raise Blocked("0 avisos de la zona en la página 1 (¿cambió el HTML o el slug?)")
         if not new:
             break
         for i in new:
@@ -332,6 +404,7 @@ def load_state() -> dict:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--only", choices=["argenprop", "zonaprop"])
     args = ap.parse_args()
 
     cfg = json.loads(CONFIG_PATH.read_text())
@@ -346,11 +419,20 @@ def main() -> int:
     session = requests.Session()
     session.headers.update({"User-Agent": UA, "Accept-Language": "es-AR,es;q=0.9"})
 
+    in_actions = os.environ.get("GITHUB_ACTIONS", "").lower() == "true"
+    sources = [x for x in cfg["sources"] if not args.only or x["site"] == args.only]
+
     errors: list[str] = []
+    skipped: list[str] = []
     ok_sources = 0
     current: dict[str, dict] = {}
-    for src in cfg["sources"]:
+    for src in sources:
         label = f"{src['site']} · {src['name']}"
+        if in_actions and src["site"] == "argenprop":
+            if not skipped:
+                skipped.append("Argenprop: bloqueado desde Actions (correr en la Mac)")
+            print(f"[skip] {label}: bloqueado desde Actions", file=sys.stderr)
+            continue
         try:
             items = scrape_source(session, src, cfg)
             ok_sources += 1
@@ -389,9 +471,10 @@ def main() -> int:
         blocks += [fmt_item(i, "📉") for i in drops]
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    notify_error = bool(errors) and state["meta"].get("last_error_day") != today
+    notes = errors + skipped
+    notify_error = bool(notes) and state["meta"].get("last_error_day") != today
     if notify_error:
-        blocks.append("⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in errors))
+        blocks.append("⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in notes))
 
     if args.dry_run:
         for m in chunk_messages(blocks):
@@ -411,14 +494,15 @@ def main() -> int:
                 "first_seen": prev.get("first_seen", now),
                 "last_seen": now,
             }
-        if notify_error:
-            state["meta"]["last_error_day"] = today
-        if not errors:
-            state["meta"].pop("last_error_day", None)
         state["meta"]["last_run"] = now
+        if not notes:
+            state["meta"].pop("last_error_day", None)
+    if notify_error:
+        state["meta"]["last_error_day"] = today
+    if ok_sources or notify_error:
         STATE_PATH.write_text(json.dumps(state, ensure_ascii=False, indent=1, sort_keys=True))
 
-    return 0 if ok_sources else 1
+    return 0 if ok_sources or (skipped and not errors) else 1
 
 
 if __name__ == "__main__":
