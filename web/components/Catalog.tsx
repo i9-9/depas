@@ -4,13 +4,14 @@ import { useEffect, useMemo, useState } from "react";
 import {
   TIERS,
   dropLine,
+  formatNum,
   formatWhen,
   hasDrop,
-  inIsoWeek,
   isNew,
   listingTier,
   rankByScore,
   siteLabel,
+  streetOf,
   zonesOf,
   type Listing,
 } from "@/lib/listings";
@@ -73,13 +74,14 @@ export function Catalog({
     writePrefs({ saved, discarded });
   }, [saved, discarded, ready]);
 
-  const activeCount = listings.filter((x) => x.active).length;
   const zones = zonesOf(listings);
+  const pick = pickId ? listings.find((x) => x.id === pickId) ?? null : null;
 
   const visible = useMemo(() => {
     const max = Number(filters.maxPrice);
     const now = Date.now();
     const rows = listings.filter((item) => {
+      if (pickId && item.id === pickId) return false;
       if (discarded.includes(item.id) && !filters.onlySaved) return false;
       if (filters.onlySaved && !saved.includes(item.id)) return false;
       if (filters.hideGone && !item.active) return false;
@@ -101,7 +103,7 @@ export function Catalog({
       return Date.parse(b.first_seen || "") - Date.parse(a.first_seen || "");
     });
     return ranked;
-  }, [listings, filters, sort, saved, discarded]);
+  }, [listings, filters, sort, saved, discarded, pickId]);
 
   function set<K extends keyof Filters>(key: K, value: Filters[K]) {
     setFilters((f) => ({ ...f, [key]: value }));
@@ -120,8 +122,8 @@ export function Catalog({
   return (
     <div>
       <h1 className="sr-only">Archivo</h1>
-      <p className="idx border-b border-ink py-4 text-[13px]">
-        {activeCount} activos · {week} · {formatWhen(lastNovelty)} · {visible.length} en vista
+      <p className="idx border-b border-ink py-3 text-[13px]">
+        {visible.length + (pick ? 1 : 0)} en vista · {week} · {formatWhen(lastNovelty)}
       </p>
 
       <div className="g border-b border-ink py-4">
@@ -145,33 +147,17 @@ export function Catalog({
         </Field>
         <Field label="Amb" className="col-span-4 sm:col-span-2 lg:col-span-1">
           <select className="input" value={filters.ambientes} onChange={(e) => set("ambientes", e.target.value)}>
-            <option value="">—</option>
+            <option value="">Todos</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
         </Field>
         <Field label="USD máx." className="col-span-4 sm:col-span-2 lg:col-span-2">
-          <input
-            className="input"
-            type="number"
-            inputMode="numeric"
-            min={0}
-            placeholder="140000"
-            value={filters.maxPrice}
-            onChange={(e) => set("maxPrice", e.target.value)}
-          />
+          <Amount value={filters.maxPrice} placeholder="140.000" onChange={(v) => set("maxPrice", v)} />
         </Field>
         <Field label="Exp. máx." className="col-span-4 sm:col-span-2 lg:col-span-2">
-          <input
-            className="input"
-            type="number"
-            inputMode="numeric"
-            min={0}
-            placeholder="—"
-            value={filters.maxExpensas}
-            onChange={(e) => set("maxExpensas", e.target.value)}
-          />
+          <Amount value={filters.maxExpensas} placeholder="s/d" onChange={(v) => set("maxExpensas", v)} />
         </Field>
         <Field label="Orden" className="col-span-6 sm:col-span-3 lg:col-span-3">
           <select className="input" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>
@@ -183,11 +169,11 @@ export function Catalog({
         </Field>
       </div>
 
-      <div className="flex flex-wrap gap-x-6 gap-y-2 border-b border-ink py-3 text-[13px]">
-        <Check checked={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
-        <Check checked={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Baja de precio" />
-        <Check checked={filters.hideGone} onChange={(v) => set("hideGone", v)} label="Ocultar bajas" />
-        <Check checked={filters.onlySaved} onChange={(v) => set("onlySaved", v)} label="Guardados" />
+      <div className="flex flex-wrap gap-x-5 gap-y-1 border-b border-ink py-2 text-[13px]">
+        <Toggle on={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
+        <Toggle on={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Bajó el precio" />
+        <Toggle on={!filters.hideGone} onChange={(v) => set("hideGone", !v)} label="Dados de baja" />
+        <Toggle on={filters.onlySaved} onChange={(v) => set("onlySaved", v)} label="Guardados" />
       </div>
 
       {!listings.length ? (
@@ -195,14 +181,13 @@ export function Catalog({
           title="Todavía no hay avisos"
           text="Cuando el buscador encuentre departamentos que pasen los filtros, van a aparecer acá."
         />
-      ) : !visible.length ? (
+      ) : !visible.length && !pick ? (
         <Empty title="Nada con estos filtros" text="Probá ampliar barrio, precio o mostrar los dados de baja." />
       ) : (
         <Results
           items={visible}
+          pick={pick}
           sort={sort}
-          week={week}
-          pickId={pickId}
           saved={saved}
           discarded={discarded}
           onSave={toggleSave}
@@ -215,18 +200,16 @@ export function Catalog({
 
 function Results({
   items,
+  pick,
   sort,
-  week,
-  pickId,
   saved,
   discarded,
   onSave,
   onDiscard,
 }: {
   items: Listing[];
+  pick: Listing | null;
   sort: SortKey;
-  week: string;
-  pickId: string | null;
   saved: string[];
   discarded: string[];
   onSave: (id: string) => void;
@@ -242,33 +225,55 @@ function Results({
       : [{ tier: null, rows: items }];
 
   return (
-    <div className="mt-0">
+    <div>
+      <div className="tt sticky top-0 z-10 hidden border-b border-ink bg-bg py-2 text-[11px] uppercase tracking-[0.12em] md:grid">
+        <span>Nr</span>
+        <span />
+        <span>Dirección</span>
+        <span className="text-right">m²</span>
+        <span className="text-right">Amb</span>
+        <span>Barrio</span>
+        <span className="text-right">USD</span>
+        <span className="text-right">USD/m²</span>
+        <span />
+      </div>
+      {pick && (
+        <section>
+          <h2 className="band flex items-center justify-between px-2 py-1.5 text-[12px] uppercase tracking-[0.16em]">
+            <span>Candidato</span>
+            <a href="/" className="normal-case tracking-normal text-[12px] text-bg/80 hover:text-bg">
+              Ver ficha
+            </a>
+          </h2>
+          <ul>
+            <li className="border-b border-ink/20">
+              <Row
+                item={pick}
+                rank={1}
+                pinned
+                saved={saved.includes(pick.id)}
+                discarded={discarded.includes(pick.id)}
+                onSave={() => onSave(pick.id)}
+                onDiscard={() => onDiscard(pick.id)}
+              />
+            </li>
+          </ul>
+        </section>
+      )}
       {groups.map((group) => (
         <section key={group.tier?.id || "flat"}>
           {group.tier && (
-            <h2 className="band mt-0 flex items-center justify-between px-2 py-2 text-[13px] uppercase tracking-[0.16em]">
+            <h2 className="band flex items-center justify-between px-2 py-1.5 text-[12px] uppercase tracking-[0.16em]">
               <span>{group.tier.label}</span>
               <span className="idx">{group.rows.length}</span>
             </h2>
           )}
-          <div className="hidden border-b border-ink text-[11px] uppercase tracking-[0.12em] md:grid md:grid-cols-[40px_48px_minmax(0,1fr)_56px_40px_120px_88px_88px] md:gap-3 md:py-2">
-            <span>Nr</span>
-            <span />
-            <span>Dirección</span>
-            <span className="text-right">m²</span>
-            <span className="text-right">Amb</span>
-            <span>Barrio</span>
-            <span className="text-right">USD</span>
-            <span />
-          </div>
           <ul>
             {group.rows.map((item) => (
-              <li key={item.id} className="border-b border-ink/25">
+              <li key={item.id} className="border-b border-ink/20">
                 <Row
                   item={item}
                   rank={ranks.get(item.id) || 0}
-                  week={week}
-                  isPick={item.id === pickId}
                   saved={saved.includes(item.id)}
                   discarded={discarded.includes(item.id)}
                   onSave={() => onSave(item.id)}
@@ -300,25 +305,45 @@ function Field({
   );
 }
 
-function Check({
-  checked,
+function Amount({
+  value,
+  onChange,
+  placeholder,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+}) {
+  const shown = value ? Number(value).toLocaleString("es-AR") : "";
+  return (
+    <input
+      className="input idx"
+      inputMode="numeric"
+      placeholder={placeholder}
+      value={shown}
+      onChange={(e) => onChange(e.target.value.replace(/\D/g, ""))}
+    />
+  );
+}
+
+function Toggle({
+  on,
   onChange,
   label,
 }: {
-  checked: boolean;
+  on: boolean;
   onChange: (v: boolean) => void;
   label: string;
 }) {
   return (
-    <label className="inline-flex min-h-10 cursor-pointer items-center gap-2">
-      <input
-        type="checkbox"
-        className="size-4 accent-[var(--ink)]"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-      />
+    <button
+      type="button"
+      aria-pressed={on}
+      onClick={() => onChange(!on)}
+      className={`min-h-9 border-b-2 ${on ? "border-accent text-ink" : "border-transparent text-ink/40"}`}
+    >
       {label}
-    </label>
+    </button>
   );
 }
 
@@ -331,13 +356,15 @@ function Empty({ title, text }: { title: string; text: string }) {
   );
 }
 
-function flags(item: Listing, week: string, isPick: boolean): string[] {
+function flags(item: Listing): string[] {
   const out: string[] = [];
-  if (isPick) out.push("Candidato");
-  if (isNew(item)) out.push("Nuevo");
-  else if (inIsoWeek(item.first_seen, week)) out.push("Esta semana");
+  if (!isNew(item)) {
+    const days = item.days_seen;
+    if (days === 1) out.push("ayer");
+    else if (days != null && days > 1) out.push(`hace ${days} d`);
+  }
   if (hasDrop(item)) out.push(dropLine(item, { short: true }) || "Bajó");
-  if (!item.active) out.push("Baja");
+  if (!item.active) out.push("Dado de baja");
   return out;
 }
 
@@ -353,13 +380,40 @@ function Actions({
   onDiscard: () => void;
 }) {
   return (
-    <div className="flex gap-3 text-[11px] uppercase tracking-[0.12em]">
-      <button type="button" onClick={onSave} aria-pressed={saved} className="min-h-10">
-        {saved ? "Ok" : "Guardar"}
+    <div className="flex flex-col items-end gap-0 text-[11px] uppercase tracking-[0.12em] leading-none">
+      <button
+        type="button"
+        onClick={onSave}
+        aria-pressed={saved}
+        aria-label={saved ? "Quitar de guardados" : "Guardar"}
+        className={`min-h-6 ${saved ? "text-ink" : "text-ink/35"}`}
+      >
+        Ok
       </button>
-      <button type="button" onClick={onDiscard} aria-pressed={discarded} className={`min-h-10 ${discarded ? "text-accent" : "text-ink/40"}`}>
-        {discarded ? "Fuera" : "Descartar"}
+      <button
+        type="button"
+        onClick={onDiscard}
+        aria-pressed={discarded}
+        aria-label={discarded ? "Volver a la lista" : "Descartar"}
+        className={`min-h-6 ${discarded ? "text-accent" : "text-ink/35"}`}
+      >
+        No
       </button>
+    </div>
+  );
+}
+
+function Photo({ src }: { src: string }) {
+  return (
+    <div className="relative size-10 overflow-hidden bg-photo">
+      {src ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={src} alt="" className="absolute inset-0 size-full object-cover" />
+      ) : (
+        <span className="absolute inset-0 flex items-center justify-center text-[9px] uppercase tracking-[0.08em] text-ink/40">
+          s/f
+        </span>
+      )}
     </div>
   );
 }
@@ -367,8 +421,7 @@ function Actions({
 function Row({
   item,
   rank,
-  week,
-  isPick,
+  pinned = false,
   saved,
   discarded,
   onSave,
@@ -376,55 +429,53 @@ function Row({
 }: {
   item: Listing;
   rank: number;
-  week: string;
-  isPick: boolean;
+  pinned?: boolean;
   saved: boolean;
   discarded: boolean;
   onSave: () => void;
   onDiscard: () => void;
 }) {
-  const marks = flags(item, week, isPick);
+  const marks = flags(item);
   const cells = specsCells(item);
+  const street = streetOf(item);
+  const tip = item.title && item.title !== street ? item.title : undefined;
   return (
-    <article className={!item.active ? "opacity-35" : ""}>
-      <div className="grid grid-cols-[32px_48px_minmax(0,1fr)] items-center gap-3 py-3 md:grid-cols-[40px_48px_minmax(0,1fr)_56px_40px_120px_88px_88px]">
+    <article className={!item.active && !pinned ? "opacity-35" : ""}>
+      <div className="tt grid py-1.5">
         <a
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="hit col-span-3 grid grid-cols-subgrid items-center gap-3 md:col-span-7"
+          title={tip}
+          className="hit col-span-3 grid grid-cols-subgrid items-center md:col-span-8"
         >
-          <p className="idx text-[12px] text-ink/50">{String(rank).padStart(2, "0")}</p>
-          <div className="size-12 bg-photo">
-            {item.photo ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={item.photo} alt="" className="size-full object-cover" />
-            ) : null}
-          </div>
+          <p className="idx text-[11px] text-ink/45">{String(rank).padStart(2, "0")}</p>
+          <Photo src={item.photo} />
           <div className="min-w-0">
-            <h3 className="name truncate text-[16px]">
-              {item.address || item.title || "Aviso sin dirección"}
-            </h3>
-            <p className="truncate text-[11px] text-ink/50">
+            <h3 className="name truncate text-[14px] leading-tight">{street}</h3>
+            <p className="truncate text-[11px] leading-tight text-ink/45">
               {marks.length ? `${marks.join(" · ")} · ` : ""}
               {siteLabel(item.site)}
             </p>
-            <p className="mt-1 text-[14px] md:hidden">
+            <p className="idx mt-0.5 text-[16px] leading-none md:hidden">
               <PricePair item={item} inline />
-              <span className="text-ink/50">
+              <span className="text-[12px] text-ink/45">
                 {" "}
-                · {cells.m2} · {cells.amb} · {cells.zone}
+                · {cells.m2} · {cells.amb} · {item.usd_per_m2 != null ? formatNum(item.usd_per_m2) : "s/d"}/m²
               </span>
             </p>
           </div>
-          <p className="idx hidden text-right md:block">{cells.m2}</p>
-          <p className="idx hidden text-right md:block">{cells.amb}</p>
-          <p className="hidden truncate md:block">{cells.zone}</p>
-          <p className="idx hidden text-right md:block">
+          <p className="idx hidden text-right text-[12px] md:block">{cells.m2}</p>
+          <p className="idx hidden text-right text-[12px] md:block">{cells.amb}</p>
+          <p className="hidden truncate text-[12px] md:block">{cells.zone}</p>
+          <p className="idx hidden text-right text-[18px] leading-none md:block">
             <PricePair item={item} inline />
           </p>
+          <p className="idx hidden text-right text-[12px] text-ink/70 md:block">
+            {item.usd_per_m2 != null ? formatNum(item.usd_per_m2) : "s/d"}
+          </p>
         </a>
-        <div className="col-span-3 md:col-span-1">
+        <div className="col-span-1">
           <Actions saved={saved} discarded={discarded} onSave={onSave} onDiscard={onDiscard} />
         </div>
       </div>

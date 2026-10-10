@@ -228,9 +228,18 @@ function tidy(s: string): string {
 
 function streetCore(s: string): string {
   const t = tidy(s)
+    .replace(/\b([A-Za-zÁÉÍÓÚÑ])\./g, "$1")
     .replace(/,?\s*(capital federal|caba|argentina)\b.*$/i, "")
     .replace(/,?\s*(recoleta|barrio norte|botánico|botanico|palermo chico|palermo)\s*$/i, "");
-  return (t.split(/[,.]/)[0] || t).trim();
+  return (t.split(",")[0] || t).trim();
+}
+
+function intersectionOf(s: string): string | null {
+  const m = tidy(s).match(
+    /\b((?:av(?:\.|enida)?\s+)?[A-Za-záéíóúñ][A-Za-záéíóúñ]{2,20})\s+y\s+((?:av(?:\.|enida)?\s+)?[A-Za-záéíóúñ][A-Za-záéíóúñ]{2,20})\b/i,
+  );
+  if (!m) return null;
+  return `${m[1]} y ${m[2]}`;
 }
 
 function looksLikeStreet(s: string): boolean {
@@ -250,12 +259,16 @@ function clipWords(s: string, max: number): string {
 }
 
 export function streetOf(item: Pick<Listing, "address" | "title">): string {
-  const addr = tidy(item.address || "");
-  if (looksLikeStreet(addr)) return streetCore(addr);
-  const titled = streetCore(item.title || "");
-  if (looksLikeStreet(titled)) return titled;
-  if (addr && addr.length < 48 && !/venta|departamento de|excelente/i.test(addr)) return addr;
-  return clipWords(item.title || addr || "Sin dirección", 40);
+  const fromAddr = streetCore(item.address || "");
+  if (looksLikeStreet(fromAddr)) return fromAddr;
+  const fromTitle = streetCore(item.title || "");
+  if (looksLikeStreet(fromTitle)) return fromTitle;
+  const cross = intersectionOf(item.address || "") || intersectionOf(item.title || "");
+  if (cross) return cross;
+  if (fromAddr && fromAddr.length < 48 && !/venta|departamento de|excelente/i.test(fromAddr)) {
+    return fromAddr;
+  }
+  return clipWords(item.title || fromAddr || "Sin dirección", 40);
 }
 
 export function formatWhen(iso: string | null): string {
