@@ -25,12 +25,12 @@ export function SaveCandidate({ id, ids }: { id: string; ids?: string[] }) {
       discarded: prefs.discarded.filter((x) => !all.includes(x)),
     });
     setSaved(!on);
-    setNote(on ? "Sacado de favoritos." : "Guardado en favoritos.");
+    setNote(on ? "Sacado de guardados." : "Guardado para después.");
   }
 
   return (
-    <div className="absolute right-3 top-3 z-[1] bg-card">
-      <FavoriteButton on={saved} onClick={toggle} disabled={!ready} size="lg" />
+    <div className="absolute right-2 top-2 z-[1] bg-card md:right-3 md:top-3">
+      <FavoriteButton on={saved} onClick={toggle} disabled={!ready} size="md" />
       <p aria-live="polite" className="sr-only">
         {note}
       </p>

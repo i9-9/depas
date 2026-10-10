@@ -29,18 +29,18 @@ export function FavoriteButton({
   onClick,
   disabled,
   size = "md",
-  labelOn = "Sacar de favoritos",
-  labelOff = "Agregar a favoritos",
+  labelOn = "Sacar de guardados",
+  labelOff = "Guardar para después",
 }: {
   on: boolean;
   onClick: () => void;
   disabled?: boolean;
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
   labelOn?: string;
   labelOff?: string;
 }) {
-  const box = size === "lg" ? "size-16" : "size-14";
-  const star = size === "lg" ? 36 : 30;
+  const box = size === "lg" ? "size-16" : size === "sm" ? "size-11" : "size-14";
+  const star = size === "lg" ? 36 : size === "sm" ? 22 : 30;
   return (
     <button
       type="button"

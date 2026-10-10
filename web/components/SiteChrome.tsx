@@ -1,10 +1,17 @@
+import { Pulse } from "@/components/Pulse";
+import type { Listing } from "@/lib/listings";
+
 export function SiteChrome({
   current,
   archiveCount,
+  listings = [],
+  pickId = null,
   children,
 }: {
   current: "candidato" | "archivo";
   archiveCount?: number;
+  listings?: Listing[];
+  pickId?: string | null;
   children: React.ReactNode;
 }) {
   return (
@@ -12,27 +19,26 @@ export function SiteChrome({
       <a href="#contenido" className="skip">
         Ir al contenido
       </a>
-      <div className="page pb-24 pt-5">
-        <header className="border-b border-line pb-3">
-          <div className="g items-end">
-            <p className="col-span-12 text-[0.6875rem] leading-none tracking-[0.18em] uppercase text-ink sm:col-span-8">
-              Recoleta y alrededores
-            </p>
+      <div className="page pb-8 pt-4 md:pb-24 md:pt-5">
+        <header className="border-b border-line pb-4">
+          <div className="flex items-baseline justify-between gap-4">
+            <p className="kicker text-muted">Recoleta y alrededores</p>
             {archiveCount != null ? (
-              <p className="col-span-12 text-right idx text-[0.6875rem] leading-none text-ink sm:col-span-4">
-                {archiveCount} {archiveCount === 1 ? "aviso" : "avisos"}
+              <p className="idx kicker shrink-0 text-muted">
+                {archiveCount} {archiveCount === 1 ? "departamento" : "departamentos"}
               </p>
             ) : null}
           </div>
-          <nav aria-label="Secciones" className="g mt-4">
+          <nav aria-label="Secciones" className="g mt-5">
             <NavLink href="/" active={current === "candidato"}>
-              Candidato
+              El de ahora
             </NavLink>
             <NavLink href="/archivo/" active={current === "archivo"}>
-              Lista
+              Todos
             </NavLink>
           </nav>
         </header>
+        <Pulse listings={listings} pickId={pickId} current={current} />
         <div id="contenido">{children}</div>
       </div>
     </>

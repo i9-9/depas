@@ -4,6 +4,7 @@ import zonaprop from "../data/listings-zonaprop.json";
 import {
   CLOSING_DISCOUNT_PCT,
   MEDIAN_MIN_N,
+  applyValue,
   closingRef,
   daysSeen,
   clusterListings,
@@ -54,13 +55,18 @@ export function loadListings(): Listing[] {
         antiguedad_years: raw.antiguedad_years ?? null,
         piso: raw.piso ?? null,
         cochera: raw.cochera ?? null,
-        verdict: verdictOf(raw),
+        verdict: { entra: [], resta: [], falta: [], text: "" },
         ids: [raw.id],
         mirrors: [],
       });
     }
   }
-  return clusterListings(withMedians(out));
+  return clusterListings(
+    withMedians(out).map((item) => {
+      const valued = applyValue(item);
+      return { ...valued, verdict: verdictOf(valued) };
+    }),
+  );
 }
 
 function withMedians(listings: Listing[]): Listing[] {

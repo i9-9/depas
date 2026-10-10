@@ -8,6 +8,11 @@ const SAY: Record<string, string> = {
   "edificio a reciclar": "el edificio está para reciclar",
   "planta baja": "es planta baja",
   "sobre presupuesto": "está sobre el presupuesto",
+  "metro barato": "el metro está barato para el barrio",
+  "metro muy barato": "el metro está muy barato para el barrio",
+  "metro caro": "el metro está caro para el barrio",
+  "expensas altas": "las expensas son altas",
+  "expensas muy altas": "las expensas son muy altas",
   "cumple barrio, metros y balcón": "pasa barrio, metros y balcón; no hay más señales",
 };
 
@@ -45,7 +50,13 @@ export function verdictOf(item: Pick<Listing, "tags" | "price" | "photo" | "expe
           ? `pide ${fmtUsd(item.price)} y el gusto es ${fmtUsd(GUSTO_USD)}`
           : say(t),
       );
-    } else if (t === "edificio flojo" || t === "edificio a reciclar") {
+    } else if (
+      t === "edificio flojo" ||
+      t === "edificio a reciclar" ||
+      t === "metro caro" ||
+      t === "expensas altas" ||
+      t === "expensas muy altas"
+    ) {
       resta.push(say(t));
     } else {
       entra.push(say(t));
@@ -72,10 +83,10 @@ export function medianLine(item: Listing): string | null {
   const where = item.zone;
   const n = item.vs_median_n;
   if (pct === 0) {
-    return `El m² sale lo mismo que el resto de ${where} (${n} avisos).`;
+    return `El metro sale lo mismo que los demás de ${where}.`;
   }
   const dir = pct < 0 ? "más barato" : "más caro";
-  return `El m² está ${Math.abs(pct)}% ${dir} que el resto de ${where} (${n} avisos).`;
+  return `El metro está ${Math.abs(pct)}% ${dir} que los demás de ${where}.`;
 }
 
 export function seenLine(item: Listing): string | null {
@@ -83,7 +94,7 @@ export function seenLine(item: Listing): string | null {
   if (days == null) return null;
   const when = days === 0 ? "hoy" : days === 1 ? "hace 1 día" : `hace ${days} días`;
   const drops = item.price_drops || 0;
-  if (drops === 0) return `Lo vimos ${when}.`;
+  if (drops === 0) return `Está en la lista desde ${when}.`;
   const dropTxt = drops === 1 ? "bajó una vez" : `bajó ${drops} veces`;
-  return `Lo vimos ${when} y ${dropTxt}.`;
+  return `Está en la lista desde ${when} y ${dropTxt}.`;
 }

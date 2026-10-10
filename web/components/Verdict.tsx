@@ -1,12 +1,20 @@
 import type { Verdict as VerdictData } from "@/lib/listings";
 import { joinEs } from "@/lib/verdict";
 
-function Block({ title, items }: { title: string; items: string[] }) {
+function Block({
+  title,
+  items,
+  tone = "ink",
+}: {
+  title: string;
+  items: string[];
+  tone?: "title" | "ink";
+}) {
   if (!items.length) return null;
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-[0.14em] text-muted">{title}</p>
-      <ul className="mt-2">
+      <p className={tone === "title" ? "text-title" : "text-muted"}>{title}</p>
+      <ul className="mt-2 space-y-1 text-ink">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -32,7 +40,7 @@ export function Verdict({
   }
   return (
     <div className="grid gap-6 sm:grid-cols-3">
-      <Block title="A favor" items={data.entra} />
+      <Block title="A favor" items={data.entra} tone="title" />
       <Block title="En contra" items={data.resta} />
       <Block title="No dice" items={data.falta} />
     </div>

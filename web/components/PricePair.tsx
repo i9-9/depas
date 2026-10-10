@@ -20,12 +20,12 @@ export function PricePair({
   }
   return (
     <div>
-      <p className="text-[0.6875rem] uppercase tracking-[0.18em] text-muted">USD</p>
+      <p className="kicker text-muted">USD</p>
       <p className={`idx mt-1 font-normal text-title ${large ? "display-xl" : "display"}`}>
         {amount(item.price)}
       </p>
       {drop && detail && (
-        <p className="mt-2 text-[13px] text-signal">
+        <p className="mt-3 max-w-prose text-signal">
           <span className="idx line-through text-muted">{amount(drop.from)}</span>
           {" · "}
           {detail}

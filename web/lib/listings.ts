@@ -60,6 +60,47 @@ export type Listing = {
 export const CLOSING_DISCOUNT_PCT = 5;
 export const MEDIAN_MIN_N = 8;
 export const GUSTO_USD = 125000;
+export const VALUE_CHEAP_PCT = -8;
+export const VALUE_STEAL_PCT = -15;
+export const VALUE_RICH_PCT = 20;
+export const EXPENSAS_HIGH_ARS = 300000;
+export const EXPENSAS_LOUD_ARS = 380000;
+
+const VALUE_TAGS: Record<string, number> = {
+  "metro barato": 1,
+  "metro muy barato": 2,
+  "metro caro": -1,
+  "expensas altas": -1,
+  "expensas muy altas": -2,
+};
+
+export function applyValue(item: Listing): Listing {
+  let score = item.score || 0;
+  const kept = (item.tags || []).filter((t) => {
+    if (t in VALUE_TAGS) {
+      score -= VALUE_TAGS[t];
+      return false;
+    }
+    return true;
+  });
+  const added: string[] = [];
+  const vs = item.vs_median_pct;
+  if (vs != null) {
+    if (vs <= VALUE_STEAL_PCT) added.push("metro muy barato");
+    else if (vs <= VALUE_CHEAP_PCT) added.push("metro barato");
+    else if (vs >= VALUE_RICH_PCT) added.push("metro caro");
+  }
+  const exp = item.expensas_ars;
+  if (exp != null) {
+    if (exp >= EXPENSAS_LOUD_ARS) added.push("expensas muy altas");
+    else if (exp >= EXPENSAS_HIGH_ARS) added.push("expensas altas");
+  }
+  for (const t of added) {
+    score += VALUE_TAGS[t];
+    kept.push(t);
+  }
+  return { ...item, score, tags: kept };
+}
 
 const ALLOWED_BARRIOS = [
   "recoleta",
@@ -189,11 +230,58 @@ export function closingRef(price: number | null, pct = CLOSING_DISCOUNT_PCT): nu
   return Math.round(price * (1 - pct / 100));
 }
 
+const FRESH_MS = 48 * 60 * 60 * 1000;
+export const LOUD_SCORE = 3;
+
 export function isNew(item: Listing, now = Date.now()): boolean {
   if (!item.first_seen || !item.active) return false;
   const t = Date.parse(item.first_seen);
   if (Number.isNaN(t)) return false;
-  return now - t <= 48 * 60 * 60 * 1000;
+  return now - t <= FRESH_MS;
+}
+
+export function isStrong(item: Pick<Listing, "score">): boolean {
+  return (item.score || 0) >= LOUD_SCORE;
+}
+
+export function isRecentDrop(item: Listing, now = Date.now()): boolean {
+  const d = lastDrop(item);
+  if (!d) return false;
+  if (!d.at) return true;
+  const t = Date.parse(d.at);
+  if (Number.isNaN(t)) return true;
+  return now - t <= FRESH_MS;
+}
+
+export function isAlert(item: Listing, now = Date.now()): boolean {
+  if (!item.active) return false;
+  if (!isStrong(item)) return false;
+  return isNew(item, now) || isRecentDrop(item, now);
+}
+
+export function hotListings(listings: Listing[], now = Date.now()): Listing[] {
+  return listings
+    .filter((item) => isAlert(item, now))
+    .sort((a, b) => {
+      const byScore = rankByScore(a, b);
+      if (byScore) return byScore;
+      return Date.parse(b.first_seen || "") - Date.parse(a.first_seen || "");
+    });
+}
+
+export function publishedAgo(iso: string | null, now = Date.now()): string | null {
+  if (!iso) return null;
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return null;
+  const mins = Math.floor((now - t) / 60000);
+  if (mins < 1) return "recién";
+  if (mins < 60) return `hace ${mins} min`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return hours === 1 ? "hace 1 hora" : `hace ${hours} horas`;
+  const days = Math.floor(hours / 24);
+  if (days === 1) return "ayer";
+  if (days < 7) return days === 1 ? "hace 1 día" : `hace ${days} días`;
+  return formatWhen(iso);
 }
 
 export type DropFact = {
@@ -281,12 +369,12 @@ export function dropLine(
 }
 
 export function formatNum(n: number | null | undefined): string {
-  if (n == null || Number.isNaN(n)) return "s/d";
+  if (n == null || Number.isNaN(n)) return "—";
   return n.toLocaleString("es-AR");
 }
 
 export function formatUsd(n: number | null): string {
-  if (n == null) return "USD s/d";
+  if (n == null) return "USD —";
   return `USD ${formatNum(n)}`;
 }
 
@@ -364,10 +452,10 @@ export function zonesOf(listings: Listing[]): string[] {
 }
 
 export const TIERS = [
-  { id: "mejor", label: "Mejor", min: 3 },
-  { id: "bien", label: "Bien", min: 1 },
-  { id: "ok", label: "Ok", min: 0 },
-  { id: "flojo", label: "Flojo", min: Number.NEGATIVE_INFINITY },
+  { id: "mejor", label: "Los que más encajan", min: 3 },
+  { id: "bien", label: "Andan bien", min: 1 },
+  { id: "ok", label: "Sirven", min: 0 },
+  { id: "flojo", label: "Más flojos", min: Number.NEGATIVE_INFINITY },
 ] as const;
 
 export type TierId = (typeof TIERS)[number]["id"];

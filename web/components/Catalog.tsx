@@ -8,8 +8,10 @@ import {
   formatNum,
   formatWhen,
   hasDrop,
+  isAlert,
   isNew,
   listingTier,
+  publishedAgo,
   rankByScore,
   siteLabel,
   streetOf,
@@ -34,8 +36,9 @@ type Filters = {
   maxExpensas: string;
   onlyNew: boolean;
   onlyDrop: boolean;
-  hideGone: boolean;
+  onlyGone: boolean;
   onlySaved: boolean;
+  onlyDiscarded: boolean;
   epoca: boolean;
   reciclar: boolean;
   cochera: boolean;
@@ -53,8 +56,9 @@ const INITIAL: Filters = {
   maxExpensas: "",
   onlyNew: false,
   onlyDrop: false,
-  hideGone: true,
+  onlyGone: false,
   onlySaved: false,
+  onlyDiscarded: false,
   epoca: false,
   reciclar: false,
   cochera: false,
@@ -63,6 +67,63 @@ const INITIAL: Filters = {
 };
 
 const SORTS: SortKey[] = ["tier", "new", "price-asc", "price-desc", "m2-asc", "vs-median"];
+
+function emptyCopy(filters: Filters): { title: string; text: string } {
+  if (filters.onlyGone) {
+    return {
+      title: "Ninguno se dio de baja",
+      text: "Cuando un aviso deje de aparecer en los portales, lo vas a ver acá.",
+    };
+  }
+  if (filters.onlyDrop) {
+    return {
+      title: "Ninguno bajó el precio",
+      text: "Cuando un aviso baje, lo vas a ver acá.",
+    };
+  }
+  if (filters.onlySaved) {
+    return {
+      title: "No hay ninguno guardado",
+      text: "Tocá la estrella en un aviso para verlo acá.",
+    };
+  }
+  if (filters.onlyDiscarded) {
+    return {
+      title: "No hay ninguno sacado",
+      text: "Los que marques con la cruz aparecen acá.",
+    };
+  }
+  if (filters.onlyNew) {
+    return {
+      title: "Ninguno es nuevo",
+      text: "Cuando salga uno que no estaba, lo vas a ver acá.",
+    };
+  }
+  return {
+    title: "No hay ninguno así",
+    text: "Probá sacar un filtro, o mirá solo los que guardaste.",
+  };
+}
+
+function extraLabel(filters: Filters, sort: SortKey): string | null {
+  const bits: string[] = [];
+  if (filters.zone) bits.push(filters.zone);
+  if (filters.site) bits.push(siteLabel(filters.site));
+  if (filters.ambientes) bits.push(`${filters.ambientes} amb.`);
+  if (filters.minPrice || filters.maxPrice) bits.push("precio");
+  if (filters.maxExpensas) bits.push("expensas");
+  if (filters.epoca) bits.push("de época");
+  if (filters.reciclar) bits.push("reciclar");
+  if (filters.cochera) bits.push("cochera");
+  if (filters.pb) bits.push("planta baja");
+  if (filters.belowMedian) bits.push("más barato que el barrio");
+  if (sort === "new") bits.push("más nuevos");
+  if (sort === "price-asc") bits.push("más barato");
+  if (sort === "price-desc") bits.push("más caro");
+  if (sort === "m2-asc") bits.push("metro más barato");
+  if (sort === "vs-median") bits.push("más barato que el barrio");
+  return bits.length ? bits.join(" · ") : null;
+}
 
 function readQuery(): { filters: Filters; sort: SortKey } {
   if (typeof window === "undefined") return { filters: { ...INITIAL }, sort: "tier" };
@@ -81,8 +142,9 @@ function readQuery(): { filters: Filters; sort: SortKey } {
       maxExpensas: p.get("exp") ?? "",
       onlyNew: flag("nuevos"),
       onlyDrop: flag("bajo"),
-      hideGone: !flag("dados"),
+      onlyGone: flag("dados"),
       onlySaved: flag("fav"),
+      onlyDiscarded: flag("sacados"),
       epoca: flag("epoca"),
       reciclar: flag("reciclar"),
       cochera: flag("cochera"),
@@ -104,8 +166,9 @@ function writeQuery(filters: Filters, sort: SortKey) {
   if (filters.maxExpensas) p.set("exp", filters.maxExpensas);
   if (filters.onlyNew) p.set("nuevos", "1");
   if (filters.onlyDrop) p.set("bajo", "1");
-  if (!filters.hideGone) p.set("dados", "1");
+  if (filters.onlyGone) p.set("dados", "1");
   if (filters.onlySaved) p.set("fav", "1");
+  if (filters.onlyDiscarded) p.set("sacados", "1");
   if (filters.epoca) p.set("epoca", "1");
   if (filters.reciclar) p.set("reciclar", "1");
   if (filters.cochera) p.set("cochera", "1");
@@ -132,9 +195,13 @@ function passesFilters(
   saved: string[],
   discarded: string[],
 ): boolean {
-  if (isMarked(item, discarded) && !filters.onlySaved) return false;
+  if (filters.onlyDiscarded) {
+    if (!isMarked(item, discarded)) return false;
+  } else if (isMarked(item, discarded)) {
+    return false;
+  }
   if (filters.onlySaved && !isMarked(item, saved)) return false;
-  if (filters.hideGone && !item.active) return false;
+  if (filters.onlyGone ? item.active : !item.active) return false;
   if (filters.zone && item.zone !== filters.zone) return false;
   if (filters.site && item.site !== filters.site && !item.mirrors.some((m) => m.site === filters.site)) {
     return false;
@@ -202,6 +269,11 @@ export function Catalog({
     writeQuery(filters, sort);
   }, [filters, sort, ready]);
 
+  useEffect(() => {
+    if (!ready || discarded.length || !filters.onlyDiscarded) return;
+    setFilters((f) => (f.onlyDiscarded ? { ...f, onlyDiscarded: false } : f));
+  }, [discarded.length, filters.onlyDiscarded, ready]);
+
   const zones = zonesOf(listings);
   const sites = useMemo(() => {
     const seen = new Set<string>();
@@ -234,10 +306,21 @@ export function Catalog({
   }, [listings, filters, sort, saved, discarded, pickId, ready]);
 
   const shown = visible.length + (pickShown ? 1 : 0);
+  const extras = extraLabel(filters, sort);
 
   function set<K extends keyof Filters>(key: K, value: Filters[K]) {
-    setFilters((f) => ({ ...f, [key]: value }));
+    setFilters((f) => {
+      const next = { ...f, [key]: value };
+      if (key === "onlyDiscarded" && value) next.onlySaved = false;
+      if (key === "onlySaved" && value) next.onlyDiscarded = false;
+      return next;
+    });
   }
+
+  const seedDump =
+    filters.onlyNew &&
+    shown > 0 &&
+    listings.filter((item) => item.active && !isMarked(item, discarded)).every((item) => isNew(item));
 
   function clusterIds(id: string): string[] {
     const item = listings.find((x) => x.id === id || x.ids.includes(id));
@@ -249,7 +332,7 @@ export function Catalog({
     setSaved((prev) => {
       const on = ids.some((x) => prev.includes(x));
       const next = on ? prev.filter((x) => !ids.includes(x)) : [...prev, ...ids];
-      setNote(on ? "Sacado de favoritos." : "Guardado en favoritos.");
+      setNote(on ? "Sacado de guardados." : "Guardado para después.");
       return next;
     });
     setDiscarded((prev) => prev.filter((x) => !ids.includes(x)));
@@ -268,78 +351,80 @@ export function Catalog({
 
   return (
     <div>
-      <h1 className="sr-only">Lista de departamentos</h1>
-      <p aria-live="polite" aria-atomic="true" className="idx border-b border-line py-3 text-ink">
-        {ready ? `${shown} ${shown === 1 ? "aviso" : "avisos"}` : "…"}
-        {lastNovelty ? ` · actualizado ${formatWhen(lastNovelty)}` : ""}
-      </p>
-      <p className="border-b border-line py-3 text-ink">
-        Marcá favoritos. Quedan en este teléfono.
-      </p>
+      <h1 className="sr-only">Todos los departamentos</h1>
+      {lastNovelty ? (
+        <p className="sr-only">Lista revisada {formatWhen(lastNovelty)}</p>
+      ) : null}
 
-      <label className="block border-b border-line">
-        <span className="sr-only">Buscar calle</span>
-        <input
-          className="input w-full"
-          type="search"
-          placeholder="Buscar calle — Juncal, Paso, Esmeralda"
-          value={filters.q}
-          onChange={(e) => set("q", e.target.value)}
-        />
-      </label>
-
-      <div className="flex flex-wrap gap-x-5 gap-y-1 border-b border-line py-1">
-        <Toggle
-          on={filters.onlySaved}
-          onChange={(v) => set("onlySaved", v)}
-          label="Favoritos"
-          icon
-        />
-        <Toggle on={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Bajó el precio" />
-        <Toggle on={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
-        <Toggle on={!filters.hideGone} onChange={(v) => set("hideGone", !v)} label="Dados de baja" />
+      <div className="border-b border-line">
+        <label className="block">
+          <span className="sr-only">Buscar calle</span>
+          <input
+            className="input w-full"
+            type="search"
+            placeholder="Buscar calle"
+            value={filters.q}
+            onChange={(e) => set("q", e.target.value)}
+          />
+        </label>
+        <div className="flex flex-wrap items-center justify-between gap-x-5">
+          <div className="flex flex-wrap gap-x-5">
+            <Toggle
+              on={filters.onlySaved}
+              onChange={(v) => set("onlySaved", v)}
+              label="Guardados"
+              icon
+            />
+            <Toggle on={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Bajó el precio" />
+            <Toggle on={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
+            <Toggle on={filters.onlyGone} onChange={(v) => set("onlyGone", v)} label="Ya no están" />
+            {discarded.length > 0 ? (
+              <Toggle
+                on={filters.onlyDiscarded}
+                onChange={(v) => set("onlyDiscarded", v)}
+                label="Sacados"
+              />
+            ) : null}
+          </div>
+          <p aria-live="polite" aria-atomic="true" className="idx kicker text-muted">
+            {ready ? shown : "…"}
+          </p>
+        </div>
+        <details>
+          <summary
+            className={`flex min-h-11 cursor-pointer list-none items-center border-b-2 [&::-webkit-details-marker]:hidden ${
+              extras ? "border-accent text-title" : "border-transparent text-ink"
+            }`}
+          >
+            {extras ? `Más filtros · ${extras}` : "Más filtros"}
+          </summary>
+          <FilterFields
+            filters={filters}
+            sort={sort}
+            zones={zones}
+            sites={sites}
+            onFilter={set}
+            onSort={setSort}
+          />
+        </details>
       </div>
 
-      <details className="border-b border-line md:hidden">
-        <summary className="flex min-h-11 cursor-pointer items-center text-ink">
-          Filtrar y ordenar
-        </summary>
-        <FilterFields
-          filters={filters}
-          sort={sort}
-          zones={zones}
-          sites={sites}
-          onFilter={set}
-          onSort={setSort}
-        />
-      </details>
-      <div className="hidden border-b border-line md:block">
-        <FilterFields
-          filters={filters}
-          sort={sort}
-          zones={zones}
-          sites={sites}
-          onFilter={set}
-          onSort={setSort}
-        />
-      </div>
-
-      <p aria-live="polite" className="sr-only">
+      <p aria-live="polite" className={note ? "kicker py-2 text-muted" : "sr-only"}>
         {note}
       </p>
+      {seedDump ? (
+        <p className="kicker py-2 text-muted">Están todos: la lista arrancó hoy.</p>
+      ) : null}
 
       {!ready ? (
         <p className="py-16 text-[14px] text-ink">Cargando tu lista…</p>
       ) : !listings.length ? (
         <Empty
-          title="Todavía no hay avisos"
-          text="Cuando el buscador encuentre departamentos, van a aparecer acá."
+          title="Todavía no hay departamentos"
+          text="Cuando aparezcan, los vas a ver acá."
         />
       ) : !shown ? (
-        <Empty
-          title="Nada con estos filtros"
-          text="Sacá algún filtro, o mirá solo favoritos."
-        />
+        <Empty {...emptyCopy(filters)} />
       ) : (
         <Results
           items={visible}
@@ -371,8 +456,8 @@ function FilterFields({
   onSort: (value: SortKey) => void;
 }) {
   return (
-    <div className="g py-4">
-      <Field label="Barrio" className="col-span-6 sm:col-span-4 lg:col-span-2">
+    <div className="g pb-4 pt-2">
+      <Field label="Barrio" className="col-span-6 lg:col-span-4">
         <select className="input" value={filters.zone} onChange={(e) => onFilter("zone", e.target.value)}>
           <option value="">Todos</option>
           {zones.map((z) => (
@@ -383,7 +468,7 @@ function FilterFields({
         </select>
       </Field>
       {sites.length > 1 ? (
-        <Field label="Portal" className="col-span-6 sm:col-span-4 lg:col-span-2">
+        <Field label="Dónde está" className="col-span-6 lg:col-span-4">
           <select className="input" value={filters.site} onChange={(e) => onFilter("site", e.target.value)}>
             <option value="">Todos</option>
             {sites.map((s) => (
@@ -394,7 +479,7 @@ function FilterFields({
           </select>
         </Field>
       ) : null}
-      <Field label="Ambientes" className="col-span-6 sm:col-span-4 lg:col-span-2">
+      <Field label="Ambientes" className="col-span-6 lg:col-span-4">
         <select
           className="input"
           value={filters.ambientes}
@@ -406,33 +491,31 @@ function FilterFields({
           <option value="3">3</option>
         </select>
       </Field>
-      <Field label="Desde USD" className="col-span-6 sm:col-span-4 lg:col-span-2">
+      <Field label="Desde USD" className="col-span-6 lg:col-span-4">
         <Amount value={filters.minPrice} placeholder="Mínimo" onChange={(v) => onFilter("minPrice", v)} />
       </Field>
-      <Field label="Hasta USD" className="col-span-6 sm:col-span-4 lg:col-span-2">
+      <Field label="Hasta USD" className="col-span-6 lg:col-span-4">
         <Amount value={filters.maxPrice} placeholder="Máximo" onChange={(v) => onFilter("maxPrice", v)} />
       </Field>
-      <Field label="Expensas máx." className="col-span-6 sm:col-span-4 lg:col-span-2">
+      <Field label="Expensas hasta" className="col-span-6 lg:col-span-4">
         <Amount value={filters.maxExpensas} placeholder="Máximo" onChange={(v) => onFilter("maxExpensas", v)} />
       </Field>
-      <div className="g col-span-12 border-t border-line pt-3">
-        <Field label="Orden" className="col-span-12 sm:col-span-4 lg:col-span-3">
-          <select className="input" value={sort} onChange={(e) => onSort(e.target.value as SortKey)}>
-            <option value="tier">Mejor primero</option>
-            <option value="new">Más nuevos</option>
-            <option value="price-asc">Más barato</option>
-            <option value="price-desc">Más caro</option>
-            <option value="m2-asc">USD/m² más bajo</option>
-            <option value="vs-median">Más barato que el barrio</option>
-          </select>
-        </Field>
-        <div className="col-span-12 flex flex-wrap items-end gap-x-5 sm:col-span-8 lg:col-span-9">
-          <Toggle on={filters.epoca} onChange={(v) => onFilter("epoca", v)} label="De época" />
-          <Toggle on={filters.reciclar} onChange={(v) => onFilter("reciclar", v)} label="Reciclar" />
-          <Toggle on={filters.cochera} onChange={(v) => onFilter("cochera", v)} label="Cochera" />
-          <Toggle on={filters.pb} onChange={(v) => onFilter("pb", v)} label="Planta baja" />
-          <Toggle on={filters.belowMedian} onChange={(v) => onFilter("belowMedian", v)} label="Bajo la mediana" />
-        </div>
+      <Field label="Orden" className="col-span-12 lg:col-span-4">
+        <select className="input" value={sort} onChange={(e) => onSort(e.target.value as SortKey)}>
+          <option value="tier">Los que más encajan</option>
+          <option value="new">Los más nuevos</option>
+          <option value="price-asc">El más barato</option>
+          <option value="price-desc">El más caro</option>
+          <option value="m2-asc">El metro más barato</option>
+          <option value="vs-median">Más barato que el barrio</option>
+        </select>
+      </Field>
+      <div className="col-span-12 flex flex-wrap items-end gap-x-5 lg:col-span-8">
+        <Toggle on={filters.epoca} onChange={(v) => onFilter("epoca", v)} label="De época" />
+        <Toggle on={filters.reciclar} onChange={(v) => onFilter("reciclar", v)} label="Reciclar" />
+        <Toggle on={filters.cochera} onChange={(v) => onFilter("cochera", v)} label="Cochera" />
+        <Toggle on={filters.pb} onChange={(v) => onFilter("pb", v)} label="Planta baja" />
+        <Toggle on={filters.belowMedian} onChange={(v) => onFilter("belowMedian", v)} label="Más barato que el barrio" />
       </div>
     </div>
   );
@@ -455,16 +538,18 @@ function Results({
   onSave: (id: string) => void;
   onDiscard: (id: string) => void;
 }) {
+  const hoy = items.filter(isAlert).sort(rankByScore);
+  const rest = items.filter((item) => !hoy.some((h) => h.id === item.id));
   const offset = pick ? 1 : 0;
   const groups =
     sort === "tier"
       ? TIERS.map((tier) => ({
           tier,
-          rows: items.filter((item) => listingTier(item.score || 0).id === tier.id),
+          rows: rest.filter((item) => listingTier(item.score || 0).id === tier.id),
         })).filter((g) => g.rows.length)
-      : [{ tier: null, rows: items }];
+      : [{ tier: null, rows: rest }];
 
-  let n = offset;
+  let n = offset + hoy.length;
   const ranks = new Map<string, number>();
   for (const group of groups) {
     for (const item of group.rows) {
@@ -475,25 +560,25 @@ function Results({
 
   return (
     <div className="card mt-2 overflow-hidden">
-      <div className="tt sticky top-0 z-10 hidden border-b border-line bg-card px-2 py-2 text-[11px] uppercase tracking-[0.12em] text-ink md:grid">
-        <span>Nr</span>
+      <div className="tt sticky top-0 z-10 hidden border-b border-line bg-card px-3 py-2.5 text-muted md:grid">
+        <span>Nº</span>
         <span />
         <span>Dirección</span>
         <span className="text-right">m²</span>
-        <span className="text-right">Amb</span>
+        <span className="text-right">Amb.</span>
         <span>Barrio</span>
-        <span className="text-right">USD</span>
-        <span className="text-right">USD/m²</span>
+        <span className="text-right">Precio</span>
+        <span className="text-right">El m²</span>
         <span className="flex justify-end">
           <StarIcon on={false} size={14} />
         </span>
       </div>
       {pick && (
         <section>
-          <h2 className="band flex items-center justify-between px-2 py-1.5 text-[12px] uppercase tracking-[0.16em]">
-            <span>Candidato</span>
-            <a href="/" className="link normal-case tracking-normal text-[12px]">
-              Ver ficha
+          <h2 className="band flex items-center justify-between px-3 py-2.5">
+            <span>El de ahora</span>
+            <a href="/" className="link">
+              Verlo
             </a>
           </h2>
           <ul>
@@ -511,12 +596,34 @@ function Results({
           </ul>
         </section>
       )}
+      {hoy.length > 0 && (
+        <section>
+          <h2 className="band flex items-center justify-between px-3 py-2.5">
+            <span>También salieron ahora</span>
+            <span className="text-muted">{hoy.length}</span>
+          </h2>
+          <ul>
+            {hoy.map((item, i) => (
+              <li key={item.id} className="border-b border-line">
+                <Row
+                  item={item}
+                  rank={offset + i + 1}
+                  saved={isMarked(item, saved)}
+                  discarded={isMarked(item, discarded)}
+                  onSave={() => onSave(item.id)}
+                  onDiscard={() => onDiscard(item.id)}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       {groups.map((group) => (
         <section key={group.tier?.id || "flat"}>
           {group.tier && (
-            <h2 className="band flex items-center justify-between px-2 py-1.5 text-[12px] uppercase tracking-[0.16em]">
+            <h2 className="band flex items-center justify-between px-3 py-2.5">
               <span>{group.tier.label}</span>
-              <span className="idx">{group.rows.length}</span>
+              <span className="text-muted">{group.rows.length}</span>
             </h2>
           )}
           <ul>
@@ -550,7 +657,7 @@ function Field({
 }) {
   return (
     <label className={className}>
-      <span className="block text-[0.6875rem] uppercase tracking-[0.14em] text-ink">{label}</span>
+      <span className="kicker block text-muted">{label}</span>
       {children}
     </label>
   );
@@ -614,14 +721,19 @@ type Flag = { text: string; tone: "muted" | "signal" };
 
 function flags(item: Listing): Flag[] {
   const out: Flag[] = [];
-  if (isNew(item)) out.push({ text: "Nuevo", tone: "signal" });
-  else {
+  if (isNew(item)) {
+    const ago = publishedAgo(item.first_seen);
+    out.push({
+      text: ago ? `Salió ${ago}` : "Salió recién",
+      tone: isAlert(item) ? "signal" : "muted",
+    });
+  } else {
     const days = item.days_seen;
-    if (days === 1) out.push({ text: "ayer", tone: "muted" });
-    else if (days != null && days > 1) out.push({ text: `hace ${days} d`, tone: "muted" });
+    if (days === 1) out.push({ text: "desde ayer", tone: "muted" });
+    else if (days != null && days > 1) out.push({ text: `hace ${days} días`, tone: "muted" });
   }
-  if (hasDrop(item)) out.push({ text: dropLine(item, { short: true }) || "Bajó", tone: "signal" });
-  if (!item.active) out.push({ text: "Dado de baja", tone: "muted" });
+  if (hasDrop(item)) out.push({ text: dropLine(item, { short: true }) || "Bajó el precio", tone: "signal" });
+  if (!item.active) out.push({ text: "Ya no está", tone: "muted" });
   return out;
 }
 
@@ -637,14 +749,14 @@ function Actions({
   onDiscard: () => void;
 }) {
   return (
-    <div className="flex flex-col items-center">
-      <FavoriteButton on={saved} onClick={onSave} />
+    <div className="flex flex-col items-center md:flex-col">
+      <FavoriteButton on={saved} onClick={onSave} size="sm" />
       <button
         type="button"
         onClick={onDiscard}
         aria-pressed={discarded}
-        aria-label={discarded ? "Volver a la lista" : "Sacar de la lista"}
-        className={`hit-44 grid size-10 place-items-center ${discarded ? "text-title" : "text-ink"}`}
+        aria-label={discarded ? "Volver a mostrar" : "No me interesa"}
+        className={`hit-44 grid size-11 place-items-center ${discarded ? "text-title" : "text-ink"}`}
       >
         <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
           <path d="M3 3l10 10M13 3 3 13" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -676,9 +788,47 @@ function Row({
   const street = streetOf(item);
   const tip = item.title && item.title !== street ? item.title : undefined;
   const gone = !item.active && !pinned;
+  const meta = (
+    <>
+      {marks.map((mark, i) => (
+        <span key={`${mark.text}-${i}`}>
+          {i > 0 ? " · " : ""}
+          <span className={mark.tone === "signal" ? "text-signal" : undefined}>{mark.text}</span>
+        </span>
+      ))}
+      {marks.length ? " · " : ""}
+      {siteLabel(item.site)}
+      {item.mirrors.length
+        ? ` · también ${item.mirrors.map((m) => siteLabel(m.site)).join(", ")}`
+        : ""}
+    </>
+  );
   return (
     <article>
-      <div className="tt grid px-2 py-2">
+      <div className="flex items-start gap-3 px-3 py-4 md:hidden">
+        <Photo src={item.photo} alt={street} className="size-16 shrink-0" />
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={tip}
+          className="hit min-w-0 flex-1"
+        >
+          <h3 className={`name text-[1.0625rem] leading-snug ${gone ? "text-muted" : "text-title"}`}>{street}</h3>
+          <p className="mt-1 text-[0.8125rem] leading-snug text-muted">
+            {meta}
+            {cells.zone && cells.zone !== "—" ? ` · ${cells.zone}` : ""}
+          </p>
+          <p className="idx mt-2 text-[1.25rem] leading-none">
+            <PricePair item={item} inline />
+            <span className="ml-2 text-[0.8125rem] text-muted">
+              {cells.m2} m² · {cells.amb === "—" ? "sin ambientes" : `${cells.amb} ambientes`}
+            </span>
+          </p>
+        </a>
+        <Actions saved={saved} discarded={discarded} onSave={onSave} onDiscard={onDiscard} />
+      </div>
+      <div className="tt hidden px-3 py-3 md:grid">
         <a
           href={item.url}
           target="_blank"
@@ -686,39 +836,20 @@ function Row({
           title={tip}
           className="hit col-span-3 grid grid-cols-subgrid items-center md:col-span-8"
         >
-          <p className="idx text-[11px] text-muted">{String(rank).padStart(2, "0")}</p>
+          <p className="idx text-[0.75rem] text-muted">{String(rank).padStart(2, "0")}</p>
           <Photo src={item.photo} alt={street} className="size-12" />
           <div className="min-w-0">
-            <h3 className={`name truncate text-[14px] leading-tight ${gone ? "text-muted" : "text-title"}`}>{street}</h3>
-            <p className="truncate text-[11px] leading-tight text-muted">
-              {marks.map((mark, i) => (
-                <span key={`${mark.text}-${i}`}>
-                  {i > 0 ? " · " : ""}
-                  <span className={mark.tone === "signal" ? "text-signal" : undefined}>{mark.text}</span>
-                </span>
-              ))}
-              {marks.length ? " · " : ""}
-              {siteLabel(item.site)}
-              {item.mirrors.length
-                ? ` · también ${item.mirrors.map((m) => siteLabel(m.site)).join(", ")}`
-                : ""}
-            </p>
-            <p className="idx mt-0.5 text-[16px] leading-none md:hidden">
-              <PricePair item={item} inline />
-              <span className="text-[12px] text-muted">
-                {" "}
-                · {cells.m2} · {cells.amb} · {item.usd_per_m2 != null ? formatNum(item.usd_per_m2) : "s/d"}/m²
-              </span>
-            </p>
+            <h3 className={`name truncate text-[0.9375rem] leading-snug ${gone ? "text-muted" : "text-title"}`}>{street}</h3>
+            <p className="mt-0.5 truncate text-[0.8125rem] leading-snug text-muted">{meta}</p>
           </div>
-          <p className="idx hidden text-right text-[12px] text-muted md:block">{cells.m2}</p>
-          <p className="idx hidden text-right text-[12px] text-muted md:block">{cells.amb}</p>
-          <p className="hidden truncate text-[12px] text-muted md:block">{cells.zone}</p>
-          <p className="idx hidden text-right text-[18px] leading-none md:block">
+          <p className="idx text-right text-muted">{cells.m2}</p>
+          <p className="idx text-right text-muted">{cells.amb}</p>
+          <p className="truncate text-muted">{cells.zone}</p>
+          <p className="idx text-right text-[1.125rem] leading-none">
             <PricePair item={item} inline />
           </p>
-          <p className="idx hidden text-right text-[12px] text-muted md:block">
-            {item.usd_per_m2 != null ? formatNum(item.usd_per_m2) : "s/d"}
+          <p className="idx text-right text-muted">
+            {item.usd_per_m2 != null ? formatNum(item.usd_per_m2) : "—"}
           </p>
         </a>
         <div className="col-span-1">

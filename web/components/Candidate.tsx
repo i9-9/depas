@@ -1,4 +1,4 @@
-import { siteLabel, streetOf } from "@/lib/listings";
+import { isNew, publishedAgo, siteLabel, streetOf } from "@/lib/listings";
 import { medianLine, seenLine } from "@/lib/verdict";
 import type { ResolvedPick } from "@/lib/pick";
 import { Photo } from "@/components/Photo";
@@ -19,8 +19,8 @@ export function Candidate({
         <div className="col-span-12 md:col-span-6">
           <h1 className="display text-title">Todavía no hay un departamento</h1>
           <p className="measure mt-6 text-ink">
-            Cuando aparezca uno que pase barrio, metros y balcón, lo vas a ver
-            acá.
+            Cuando aparezca uno en Recoleta o cerca, con los metros y el
+            balcón, lo vas a ver acá.
           </p>
         </div>
       </section>
@@ -30,75 +30,90 @@ export function Candidate({
   const median = medianLine(item);
   const seen = seenLine(item);
   const street = streetOf(item);
+  const published = isNew(item) ? publishedAgo(item.first_seen) : null;
   const why =
     pick.manual && pick.note
       ? pick.note
-      : `El que más encaja ahora, de ${pick.total} avisos.`;
+      : `De los ${pick.total} que hay, este es el que más encaja.`;
+
+  const photo = (
+    <div className="card relative">
+      {item.photo ? (
+        <Photo
+          src={item.photo}
+          alt={street}
+          priority
+          className="aspect-[4/3] w-full"
+        />
+      ) : (
+        <p className="flex aspect-[4/3] items-end p-4 text-muted">
+          Este aviso no trae foto
+        </p>
+      )}
+      <SaveCandidate id={item.id} ids={item.ids} />
+    </div>
+  );
 
   return (
-    <article className="g mt-6 items-start">
-      <div className="card relative col-span-12 lg:order-2 lg:col-span-7">
-        {item.photo ? (
-          <div className="overflow-hidden">
-            <Photo
-              src={item.photo}
-              alt={street}
-              priority
-              className="aspect-[4/3] w-full"
-            />
-          </div>
-        ) : (
-          <p className="flex aspect-[4/3] items-end p-4 text-[0.8125rem] text-muted">
-            Este aviso no trae foto
-          </p>
-        )}
-        <SaveCandidate id={item.id} ids={item.ids} />
-      </div>
+    <article className="g mt-8 items-start">
+      <header className="col-span-12 lg:col-span-5">
+        {published ? <p className="kicker text-signal">Salió {published}</p> : null}
+        <h1 className={`display text-title ${published ? "mt-3" : ""}`}>
+          {item.address || item.title || "Sin dirección"}
+        </h1>
+        <div className="mt-6">
+          <PricePair item={item} large />
+        </div>
+        <p className="measure mt-4 text-ink">{why}</p>
+      </header>
 
-      <div className="col-span-12 mt-6 flex min-w-0 flex-col gap-6 lg:order-1 lg:col-span-5 lg:mt-0">
-        <PricePair item={item} large />
+      <div className="col-span-12 lg:col-span-7 lg:row-span-3">{photo}</div>
 
-        <header>
-          <h1 className="display text-title">
-            {item.address || item.title || "Aviso sin dirección"}
-          </h1>
-          <p className="measure mt-3 text-ink">{why}</p>
-        </header>
+      <div className="col-span-12 flex min-w-0 flex-col gap-8 lg:col-span-5">
+        <div className="cta-dock">
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-solid"
+          >
+            Abrir el aviso en {siteLabel(item.site)}
+          </a>
+        </div>
 
         <Specs item={item} />
 
         <Verdict data={item.verdict} />
 
-        <a
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-solid self-start"
-        >
-          Ver aviso · {siteLabel(item.site)}
-        </a>
-        {item.mirrors.map((m) => (
-          <a
-            key={m.id}
-            href={m.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-ghost"
-          >
-            También en {siteLabel(m.site)}
-            {m.price != null ? ` · USD ${m.price.toLocaleString("es-AR")}` : ""}
-          </a>
-        ))}
+        {item.mirrors.length ? (
+          <div className="flex flex-col">
+            {item.mirrors.map((m) => (
+              <a
+                key={m.id}
+                href={m.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-ghost"
+              >
+                También en {siteLabel(m.site)}
+                {m.price != null ? ` · USD ${m.price.toLocaleString("es-AR")}` : ""}
+              </a>
+            ))}
+          </div>
+        ) : null}
 
-        <footer className="measure space-y-2 border-t border-line pt-4 text-[0.8125rem] text-ink">
+        <footer className="measure space-y-2 border-t border-line pt-5 text-muted">
           {median && <p>{median}</p>}
           {seen && <p>{seen}</p>}
           <details>
-            <summary className="link flex min-h-11 cursor-pointer items-center text-ink">Por qué este</summary>
-            <p className="mt-2 leading-relaxed">
-              Sumamos si es de época, si está para reciclar o si el edificio
-              está bien. Pasarse de USD 125.000 resta, no lo saca. El resto de
-              avisos está en la lista, para marcar favoritos.
+            <summary className="link flex min-h-11 cursor-pointer items-center text-ink">
+              ¿Por qué este?
+            </summary>
+            <p className="mt-2 leading-relaxed text-ink">
+              Cuenta a favor si es de época, si está para reciclar o si el
+              edificio está bien. Si pide más de USD 125.000, pierde un poco,
+              pero no se descarta. El resto está en Todos, para guardar los
+              que te gusten.
             </p>
           </details>
         </footer>
