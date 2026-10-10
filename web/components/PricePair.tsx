@@ -16,17 +16,17 @@ export function PricePair({
   const drop = lastDrop(item);
   const detail = dropLine(item);
   if (inline) {
-    return <span className="idx">{amount(item.price)}</span>;
+    return <span className="idx text-title">{amount(item.price)}</span>;
   }
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-[0.18em]">USD</p>
-      <p className={`idx display mt-1 font-normal text-ink ${large ? "text-[56px] sm:text-[72px]" : "text-[40px]"}`}>
+      <p className="text-[0.6875rem] uppercase tracking-[0.18em] text-muted">USD</p>
+      <p className={`idx mt-1 font-normal text-title ${large ? "display-xl" : "display"}`}>
         {amount(item.price)}
       </p>
       {drop && detail && (
-        <p className="mt-2 text-[13px] text-accent">
-          <span className="idx line-through text-quiet">{amount(drop.from)}</span>
+        <p className="mt-2 text-[13px] text-signal">
+          <span className="idx line-through text-muted">{amount(drop.from)}</span>
           {" · "}
           {detail}
         </p>

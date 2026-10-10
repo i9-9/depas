@@ -2,32 +2,34 @@
 
 import { useEffect, useState } from "react";
 import { FavoriteButton } from "@/components/FavoriteMark";
-import { readPrefs, toggleId, writePrefs } from "@/lib/storage";
+import { readPrefs, writePrefs } from "@/lib/storage";
 
-export function SaveCandidate({ id }: { id: string }) {
+export function SaveCandidate({ id, ids }: { id: string; ids?: string[] }) {
+  const all = ids?.length ? ids : [id];
   const [saved, setSaved] = useState(false);
   const [ready, setReady] = useState(false);
   const [note, setNote] = useState("");
 
   useEffect(() => {
-    setSaved(readPrefs().saved.includes(id));
+    const prefs = readPrefs();
+    setSaved(all.some((x) => prefs.saved.includes(x)));
     setReady(true);
-  }, [id]);
+  }, [all.join("|")]);
 
   function toggle() {
     const prefs = readPrefs();
-    const next = toggleId(prefs.saved, id);
+    const on = all.some((x) => prefs.saved.includes(x));
+    const next = on ? prefs.saved.filter((x) => !all.includes(x)) : [...prefs.saved, ...all];
     writePrefs({
       saved: next,
-      discarded: prefs.discarded.filter((x) => x !== id),
+      discarded: prefs.discarded.filter((x) => !all.includes(x)),
     });
-    const on = next.includes(id);
-    setSaved(on);
-    setNote(on ? "Guardado en favoritos." : "Sacado de favoritos.");
+    setSaved(!on);
+    setNote(on ? "Sacado de favoritos." : "Guardado en favoritos.");
   }
 
   return (
-    <div className="absolute right-3 top-3 z-[1] bg-bg">
+    <div className="absolute right-3 top-3 z-[1] bg-card">
       <FavoriteButton on={saved} onClick={toggle} disabled={!ready} size="lg" />
       <p aria-live="polite" className="sr-only">
         {note}

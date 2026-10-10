@@ -15,8 +15,9 @@ export function resolvePick(listings: Listing[], pick: PickFile | null): Resolve
     .sort(rankByScore);
   const total = listings.filter((x) => x.active).length;
   const note = pick?.note || "";
-  if (pick?.manual && pick.id) {
-    const listing = listings.find((x) => x.id === pick.id) || null;
+  const pinned = pick?.manual ? pick.id : null;
+  if (pinned) {
+    const listing = listings.find((x) => x.id === pinned || x.ids.includes(pinned)) || null;
     if (listing) {
       const idx = active.findIndex((x) => x.id === listing.id);
       return { listing, rank: idx >= 0 ? idx + 1 : 0, total, manual: true, note };

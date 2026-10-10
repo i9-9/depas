@@ -9,11 +9,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" className="bg-bg text-ink">
       <head>
         <meta name="robots" content="noindex, nofollow" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#F2F0EB" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)" />
       </head>
-      <body>{children}</body>
+      <body className="bg-bg text-ink">{children}</body>
     </html>
   );
 }

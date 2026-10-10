@@ -12,7 +12,7 @@ export function Photo({
   if (!src) {
     return (
       <span
-        className={`flex items-center justify-center bg-photo text-[10px] uppercase tracking-[0.08em] text-quiet ${className}`}
+        className={`flex items-center justify-center bg-photo text-[10px] uppercase tracking-[0.08em] text-muted ${className}`}
       >
         sin foto
       </span>

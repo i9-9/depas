@@ -16,6 +16,13 @@ export type PickFile = {
   note?: string;
 };
 
+export type Mirror = {
+  id: string;
+  site: string;
+  url: string;
+  price: number | null;
+};
+
 export type Listing = {
   id: string;
   site: "zonaprop" | "argenprop" | string;
@@ -46,6 +53,8 @@ export type Listing = {
   piso: number | null;
   cochera: boolean | null;
   verdict: Verdict;
+  ids: string[];
+  mirrors: Mirror[];
 };
 
 export const CLOSING_DISCOUNT_PCT = 5;
@@ -74,8 +83,65 @@ const REJECT_CITIES = [
   "pilar",
 ];
 
-function fold(s: string): string {
+export function fold(s: string): string {
   return (s || "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+}
+
+const STREET_NOISE =
+  /\b(recoleta|barrio norte|botanico|palermo chico|palermo|capital federal|caba|argentina|departamento|depto|ambientes|amb)\b/g;
+
+export function streetKey(address: string): string {
+  let t = fold(address || "");
+  t = t.replace(/avenida/g, "av").replace(/av\./g, "av ");
+  t = t.replace(/(\d)\.(\d{3})\b/g, "$1$2");
+  t = t.replace(/\bal\s+/g, " ");
+  t = t.replace(STREET_NOISE, " ");
+  t = t.replace(/[^a-z0-9\s]/g, " ");
+  t = t.replace(/\s+/g, " ").trim();
+  const m = t.match(/([a-z]+(?:\s+[a-z]+){0,3})\s+(\d{2,5})\b/);
+  return m ? `${m[1]} ${m[2]}` : "";
+}
+
+export function placeKey(item: Pick<Listing, "address" | "title" | "area" | "ambientes">): string {
+  const street = streetKey(item.address || "") || streetKey(item.title || "");
+  if (!street || item.area == null || item.ambientes == null) return "";
+  const bucket = Math.round(item.area / 5) * 5;
+  return `${street}|${bucket}|${item.ambientes}`;
+}
+
+export function clusterListings(items: Listing[]): Listing[] {
+  const groups = new Map<string, Listing[]>();
+  const leftover: Listing[] = [];
+  for (const item of items) {
+    const key = placeKey(item);
+    if (!key) {
+      leftover.push({ ...item, ids: item.ids?.length ? item.ids : [item.id], mirrors: item.mirrors || [] });
+      continue;
+    }
+    const arr = groups.get(key) || [];
+    arr.push(item);
+    groups.set(key, arr);
+  }
+  const clustered: Listing[] = [];
+  for (const arr of groups.values()) {
+    const ranked = [...arr].sort((a, b) => {
+      if (a.active !== b.active) return a.active ? -1 : 1;
+      if (Boolean(a.photo) !== Boolean(b.photo)) return a.photo ? -1 : 1;
+      return rankByScore(a, b);
+    });
+    const primary = ranked[0];
+    clustered.push({
+      ...primary,
+      ids: arr.map((x) => x.id),
+      mirrors: ranked.slice(1).map((x) => ({
+        id: x.id,
+        site: x.site,
+        url: x.url,
+        price: x.price,
+      })),
+    });
+  }
+  return [...clustered, ...leftover];
 }
 
 function cityHay(item: Pick<RawListing, "title" | "address" | "zone" | "url">): string {

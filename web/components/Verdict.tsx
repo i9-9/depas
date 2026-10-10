@@ -5,7 +5,7 @@ function Block({ title, items }: { title: string; items: string[] }) {
   if (!items.length) return null;
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-[0.14em] text-quiet">{title}</p>
+      <p className="text-[11px] uppercase tracking-[0.14em] text-muted">{title}</p>
       <ul className="mt-2">
         {items.map((item) => (
           <li key={item}>{item}</li>

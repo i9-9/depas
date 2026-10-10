@@ -48,7 +48,7 @@ export function FavoriteButton({
       aria-label={on ? labelOn : labelOff}
       disabled={disabled}
       onClick={onClick}
-      className={`grid ${box} place-items-center ${on ? "text-accent" : "text-ink"}`}
+      className={`grid ${box} place-items-center ${on ? "text-title" : "text-ink"}`}
     >
       <StarIcon on={on} size={star} />
     </button>

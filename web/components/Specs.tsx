@@ -25,14 +25,14 @@ export function specsOf(item: Listing): Spec[] {
 export function Specs({ item }: { item: Listing }) {
   const rows = specsOf(item);
   if (!rows.length) {
-    return <p className="text-[13px]">El listado no trae metros, ambientes ni barrio.</p>;
+    return <p className="text-[13px] text-muted">El listado no trae metros, ambientes ni barrio.</p>;
   }
   return (
-    <dl className="grid grid-cols-2 border-y border-ink">
+    <dl className="grid grid-cols-2 border-y border-line">
       {rows.map((row) => (
-        <div key={row.label} className="flex justify-between gap-3 border-b border-ink/20 py-2 pr-4 last:border-b-0">
-          <dt className="text-[11px] uppercase tracking-[0.14em]">{row.label}</dt>
-          <dd className="idx text-right">{row.value}</dd>
+        <div key={row.label} className="flex justify-between gap-3 border-b border-line py-2 pr-4 last:border-b-0">
+          <dt className="text-[11px] uppercase tracking-[0.14em] text-muted">{row.label}</dt>
+          <dd className="idx text-right text-ink">{row.value}</dd>
         </div>
       ))}
     </dl>

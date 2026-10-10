@@ -6,6 +6,7 @@ import {
   MEDIAN_MIN_N,
   closingRef,
   daysSeen,
+  clusterListings,
   inScope,
   usdPerM2,
   type CatalogFile,
@@ -54,10 +55,12 @@ export function loadListings(): Listing[] {
         piso: raw.piso ?? null,
         cochera: raw.cochera ?? null,
         verdict: verdictOf(raw),
+        ids: [raw.id],
+        mirrors: [],
       });
     }
   }
-  return withMedians(out);
+  return clusterListings(withMedians(out));
 }
 
 function withMedians(listings: Listing[]): Listing[] {
