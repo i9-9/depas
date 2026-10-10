@@ -1,8 +1,19 @@
 #!/bin/bash
-# Corre solo Argenprop desde la Mac (IP residencial). Actions se salta ese portal.
+# Argenprop desde la Mac (IP residencial) y sync de seen.json con GitHub.
+# Usage:
+#   ./scripts/buscar-argenprop-local.sh           # scrape + commit/push seen.json
+#   ./scripts/buscar-argenprop-local.sh --no-sync # solo scrape (no git)
 set -euo pipefail
+
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:${PATH:-}"
+
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+LOG="$ROOT/argenprop-local.log"
+SYNC=1
+if [[ "${1:-}" == "--no-sync" ]] || [[ "${SYNC_GIT:-1}" == "0" ]]; then
+  SYNC=0
+fi
 
 if [[ -f "$ROOT/.env" ]]; then
   set -a
@@ -17,8 +28,49 @@ else
   PY="python3"
 fi
 
-LOG="$ROOT/argenprop-local.log"
-{
+log() { echo "$*"; }
+
+other_dirty() {
+  git status --porcelain | grep -vE '^\?\?|seen\.json' | grep -q .
+}
+
+sync_seen() {
+  local branch
+  branch="$(git rev-parse --abbrev-ref HEAD)"
+  git add seen.json
+  if git diff --cached --quiet; then
+    log "seen.json sin cambios; no hay commit"
+    return 0
+  fi
+  git commit -m "Actualizar avisos vistos (Argenprop local)"
+  if other_dirty; then
+    log "hay otros cambios locales; no hago rebase. git push a mano si hace falta"
+    git push "origin" "$branch" || log "WARN push falló"
+    return 0
+  fi
+  git pull --rebase "origin" "$branch" || log "WARN rebase falló"
+  git push "origin" "$branch" || log "WARN push falló"
+  log "seen.json pusheado a origin/$branch"
+}
+
+run() {
   echo "==== $(date) ===="
+  if [[ "$SYNC" -eq 1 ]]; then
+    branch="$(git rev-parse --abbrev-ref HEAD)"
+    if other_dirty; then
+      log "hay cambios locales; salteo pull y scrapeo igual"
+    else
+      log "pull origin/$branch"
+      git pull --rebase "origin" "$branch" || log "WARN pull falló; sigo con el scrape"
+    fi
+  fi
   "$PY" "$ROOT/scraper.py" --only argenprop
-} >>"$LOG" 2>&1
+  if [[ "$SYNC" -eq 1 ]]; then
+    sync_seen
+  else
+    log "sync git desactivado"
+  fi
+}
+
+run 2>&1 | tee -a "$LOG"
+exit "${PIPESTATUS[0]}"

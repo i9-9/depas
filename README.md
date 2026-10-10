@@ -1,13 +1,14 @@
 # Buscador de departamentos (Argenprop + Zonaprop → Telegram)
 
-Corre solo en GitHub Actions (gratis), 5 veces por día, y te manda por Telegram los avisos **nuevos** (y las bajas de precio) que cumplan tus filtros.
+Corre solo en GitHub Actions (gratis), 5 veces por día, y te manda por Telegram los avisos **nuevos** (y las bajas de precio) que cumplan tus filtros. Cada aviso dice *por qué* entró y, si la card trae foto, la manda.
 
 Filtros actuales (`config.json`): venta · con balcón · Recoleta, Barrio Norte, Botánico, Palermo Chico · hasta 3 ambientes · mínimo 50 m² · precio entre USD 20.000 y 140.000 (gusto 125.000).
 
 Criterio (no todo es excluyente):
 
-- **Corta** (si no entra, no avisa): **balcón**, ambientes, m², y techos de precio *duros* (más de 140k). La búsqueda en el portal ya viene filtrada `con-balcon`; si el texto dice “sin balcón”, también se descarta.
+- **Corta** (si no entra, no avisa): **balcón**, ambientes, m², techo de precio, y **zona**. Tiene que nombrar Recoleta / Barrio Norte / Botánico / Palermo Chico. Se descartan pozo, cuotas, y otros barrios (Tigre, Once, Lanús, etc.).
 - **Suma** (ordena y etiqueta, no descarta): de época (mejor), “para reciclar” en el título, edificio en buen estado. El precio viene después: 125k es el gusto; un poco más entra con etiqueta `sobre presupuesto` y baja un poco el ranking. Un de época a 132k sale antes que un genérico a 108k.
+- **Un aviso por depto**: si el mismo (calle + altura + precio + m²) sale en los dos portales o en Recoleta y Barrio Norte, te llega una vez. Si no hay dirección con número, no se agrupa.
 
 ## Setup (una sola vez, ~10 minutos)
 
@@ -49,17 +50,21 @@ python scraper.py --only argenprop
 
 ## Argenprop en la Mac (launchd)
 
-Actions no puede scrapear Argenprop. En la Mac, una vez:
+Actions no puede scrapear Argenprop. El script local hace `pull → scrape → commit seen.json → push`, así Actions no te reavisa lo mismo.
+
+Una vez:
 
 1. Creá `.env` en la raíz (no se sube a git) con `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID`.
 2. `chmod +x scripts/buscar-argenprop-local.sh`
 3. `cp scripts/com.search-amb.argenprop.plist ~/Library/LaunchAgents/`
-4. `launchctl load ~/Library/LaunchAgents/com.search-amb.argenprop.plist`
+4. `launchctl load ~/Library/LaunchAgents/com.search-amb.argenprop.plist`  
+   Si ya lo tenías cargado: `launchctl unload ...` y después `load` de nuevo.
 
-Corre a las 8:20, 11:20, 14:20, 17:20 y 20:20. Log: `argenprop-local.log`.
+La Mac tiene que estar encendida, y git tiene que poder pushear solo (llave SSH o `gh auth`). Horarios: 8:20, 11:20, 14:20, 17:20, 20:20. Log: `argenprop-local.log`.
 
-Para probar ahora: `./scripts/buscar-argenprop-local.sh` (o `python scraper.py --only argenprop` con las env vars).
-
-Si querés que Actions no vuelva a avisarte avisos ya vistos en la Mac, después de una corrida local: `git add seen.json && git commit -m "seen argenprop" && git push`.
+```bash
+./scripts/buscar-argenprop-local.sh           # scrape + sync
+./scripts/buscar-argenprop-local.sh --no-sync # solo scrape
+```
 
 Cron equivalente: `20 8,11,14,17,20 * * * /Users/ivan/Documents/Codigo/search_amb/scripts/buscar-argenprop-local.sh`

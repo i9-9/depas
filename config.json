@@ -7,7 +7,37 @@
     "max_ambientes": 3,
     "include_unknown_area": true,
     "require_balcon": true,
-    "include_unknown_balcon": true
+    "include_unknown_balcon": true,
+    "allowed_barrios": [
+      "recoleta",
+      "barrio norte",
+      "botanico",
+      "palermo botanico",
+      "jardin botanico",
+      "palermo chico"
+    ],
+    "reject": [
+      "en pozo",
+      "pozo",
+      "en construccion",
+      "en cuotas",
+      "cuotas desde",
+      "tigre",
+      "quilmes",
+      "lanus",
+      "liniers",
+      "once",
+      "congreso",
+      "abasto",
+      "valentin alsina",
+      "paternal",
+      "villa crespo",
+      "caballito",
+      "flores",
+      "almagro",
+      "san telmo",
+      "constitucion"
+    ]
   },
   "signals": [
     {

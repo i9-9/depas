@@ -123,6 +123,33 @@ def parse_card(site: str, text: str) -> dict:
     return out
 
 
+def card_photo(card, base_url: str) -> str:
+    """Primera foto usable de la card. Vacío si no hay (logo / placeholder no cuenta)."""
+    parts = base_url.split("/", 3)
+    host = f"{parts[0]}//{parts[2]}" if len(parts) > 2 else ""
+    skip = ("logo", "icon", "sprite", "placeholder", "1x1", "pixel")
+    candidates: list[str] = []
+    for img in card.find_all("img"):
+        raw = img.get("src") or img.get("data-src") or img.get("data-lazy") or ""
+        if not raw and img.get("srcset"):
+            raw = img["srcset"].split(",")[0].split()[0]
+        if raw:
+            candidates.append(raw)
+    for src in candidates:
+        src = src.strip()
+        if src.startswith("data:") or not src:
+            continue
+        if src.startswith("//"):
+            src = "https:" + src
+        elif src.startswith("/"):
+            src = host + src
+        low = src.lower()
+        if not src.startswith("http") or any(s in low for s in skip):
+            continue
+        return src.split("?")[0] if "http" in src else src
+    return ""
+
+
 def parse_page(html_text: str, site: str, base_url: str) -> list[dict]:
     soup = BeautifulSoup(html_text, "html.parser")
     link_re = LINK_RE[site]
@@ -152,6 +179,7 @@ def parse_page(html_text: str, site: str, base_url: str) -> list[dict]:
             "url": url,
             "title": title,
             "blurb": (sep_text if site == "zonaprop" else flat_text)[:500],
+            "photo": card_photo(card, url),
             **data,
         }
     return list(listings.values())
@@ -214,6 +242,69 @@ def prefer(items: list[dict]) -> list[dict]:
     return sorted(items, key=lambda x: (-x.get("score", 0), x["price"]))
 
 
+_STREET_NOISE = re.compile(
+    r"\b(recoleta|barrio norte|botanico|palermo chico|palermo|capital federal|caba|"
+    r"argentina|departamento|depto|ambientes|amb)\b"
+)
+
+
+def street_key(address: str) -> str:
+    """Calle + altura, sin barrio. Vacío si no hay número (no se puede deduplicar)."""
+    t = fold(address or "")
+    t = t.replace("avenida", "av").replace("av.", "av ")
+    t = re.sub(r"(\d)\.(\d{3})\b", r"\1\2", t)
+    t = re.sub(r"\bal\s+", " ", t)
+    t = _STREET_NOISE.sub(" ", t)
+    t = re.sub(r"[^a-z0-9\s]", " ", t)
+    t = re.sub(r"\s+", " ", t).strip()
+    m = re.search(r"([a-z]+(?:\s+[a-z]+){0,3})\s+(\d{2,5})\b", t)
+    return f"{m.group(1)} {m.group(2)}" if m else ""
+
+
+def listing_key(item: dict) -> str:
+    street = street_key(item.get("address") or "")
+    if not street or item.get("price") is None:
+        return ""
+    area = item.get("area")
+    area_b = str(int(round(area))) if area is not None else "x"
+    amb = item["ambientes"] if item.get("ambientes") is not None else "x"
+    return f"{street}|{item['price']}|{area_b}|{amb}"
+
+
+def _richer(a: dict, b: dict) -> bool:
+    if a.get("score", 0) != b.get("score", 0):
+        return a.get("score", 0) > b.get("score", 0)
+    return len(a.get("address") or "") > len(b.get("address") or "")
+
+
+def dedupe(items: list[dict]) -> list[dict]:
+    """Un aviso por depto (mismo portal, otro portal, o Recoleta ∩ Barrio Norte)."""
+    by_key: dict[str, dict] = {}
+    leftover: list[dict] = []
+    for i in items:
+        k = listing_key(i)
+        if not k:
+            leftover.append(i)
+            continue
+        prev = by_key.get(k)
+        if prev is None or _richer(i, prev):
+            by_key[k] = i
+    return prefer(list(by_key.values()) + leftover)
+
+
+def find_prev(item: dict, state: dict) -> dict | None:
+    listings = state.get("listings") or {}
+    if item["id"] in listings:
+        return listings[item["id"]]
+    k = listing_key(item)
+    if not k:
+        return None
+    for rec in listings.values():
+        if rec.get("key") == k:
+            return rec
+    return None
+
+
 def has_balcon(item: dict) -> bool | None:
     """True / False si el texto lo dice; None si la card no menciona balcón."""
     hay = _haystack(item, "any")
@@ -250,10 +341,39 @@ def keep_zone(item: dict, src: dict) -> bool:
     return any(a in _haystack(item, "any") for a in aliases)
 
 
+def _phrase_in(hay: str, phrase: str) -> bool:
+    phrase = fold(phrase)
+    if not phrase:
+        return False
+    if " " in phrase or len(phrase) >= 6:
+        return phrase in hay
+    return re.search(rf"(?<![a-z0-9]){re.escape(phrase)}(?![a-z0-9])", hay) is not None
+
+
+def is_rejected(item: dict, f: dict) -> bool:
+    """Pozo, cuotas u otro barrio: no entra aunque el resto cierre."""
+    hay = _haystack(item, "any")
+    return any(_phrase_in(hay, kw) for kw in f.get("reject") or [] if str(kw).strip())
+
+
+def in_allowed_area(item: dict, f: dict) -> bool:
+    """Tiene que nombrar uno de los 4 barrios (todos CABA)."""
+    allowed = [fold(b) for b in f.get("allowed_barrios") or [] if str(b).strip()]
+    if not allowed:
+        return True
+    return any(b in _haystack(item, "any") for b in allowed)
+
+
+def keep_listing(item: dict, src: dict, f: dict) -> bool:
+    return keep_zone(item, src) and not is_rejected(item, f) and in_allowed_area(item, f)
+
+
 def matches(item: dict, f: dict) -> bool:
     hard = f.get("max_price_usd_hard", f["max_price_usd"])
     min_p = f.get("min_price_usd", 20000)
     if item["price"] is None or item["price"] > hard or item["price"] < min_p:
+        return False
+    if is_rejected(item, f) or not in_allowed_area(item, f):
         return False
     if item["ambientes"] is not None and item["ambientes"] > f["max_ambientes"]:
         return False
@@ -333,7 +453,7 @@ def scrape_source(session, src: dict, cfg: dict) -> list[dict]:
         html_text, final_url = fetch(session, url)
         if n == 1 and not page_matches_zone(html_text, final_url, src):
             raise Blocked(f"slug inválido: redirigió fuera de {src['name']} → {final_url}")
-        items = [i for i in parse_page(html_text, site, url) if keep_zone(i, src)]
+        items = [i for i in parse_page(html_text, site, url) if keep_listing(i, src, cfg.get("filters") or {})]
         new = [i for i in items if i["id"] not in found]
         if n == 1 and not items:
             raise Blocked("0 avisos de la zona en la página 1 (¿cambió el HTML o el slug?)")
@@ -363,6 +483,27 @@ def tg_send(token: str, chat_id: str, text: str) -> None:
     r.raise_for_status()
 
 
+def tg_send_photo(token: str, chat_id: str, photo: str, caption: str) -> None:
+    r = requests.post(
+        f"https://api.telegram.org/bot{token}/sendPhoto",
+        json={
+            "chat_id": chat_id,
+            "photo": photo,
+            "caption": caption[:1024],
+            "parse_mode": "HTML",
+        },
+        timeout=30,
+    )
+    r.raise_for_status()
+
+
+def why_line(i: dict) -> str:
+    tags = [t for t in (i.get("tags") or []) if t]
+    if tags:
+        return "por qué: " + " · ".join(html.escape(t) for t in tags)
+    return "por qué: cumple precio, m² y zona"
+
+
 def fmt_item(i: dict, tag: str = "🆕") -> str:
     area = f"{i['area']:g} m²" if i["area"] is not None else "m² s/d"
     amb = f"{i['ambientes']} amb" if i["ambientes"] is not None else "amb s/d"
@@ -372,13 +513,38 @@ def fmt_item(i: dict, tag: str = "🆕") -> str:
     if i.get("old_price"):
         extra = f" (antes USD {i['old_price']:,})".replace(",", ".")
     price = f"USD {i['price']:,}".replace(",", ".")
-    tags = i.get("tags") or []
-    pref = f"\n✦ {' · '.join(html.escape(t) for t in tags)}" if tags else ""
     return (
-        f"{tag} <b>{price}</b>{extra} · {area} · {amb}{pref}\n"
+        f"{tag} <b>{price}</b>{extra} · {area} · {amb}\n"
         f"📍 {html.escape(i['zone'])} — {where}\n"
+        f"{why_line(i)}\n"
         f"🔗 {site}: {html.escape(i['url'])}"
     )
+
+
+def notify_payloads(intro: str, items: list[dict], errors_block: str) -> list[dict]:
+    """Un payload por pieza: intro/errores son texto; cada aviso puede llevar foto."""
+    out: list[dict] = []
+    if intro:
+        out.append({"text": intro})
+    for i in items:
+        out.append({"text": fmt_item(i, i.get("_tag") or "🆕"), "photo": i.get("photo") or ""})
+    if errors_block:
+        out.append({"text": errors_block})
+    return out
+
+
+def deliver(token: str, chat_id: str, payloads: list[dict]) -> None:
+    for p in payloads:
+        photo = p.get("photo") or ""
+        if photo:
+            try:
+                tg_send_photo(token, chat_id, photo, p["text"])
+                time.sleep(1)
+                continue
+            except requests.RequestException as e:
+                print(f"[telegram] foto falló ({e}); mando texto", file=sys.stderr)
+        tg_send(token, chat_id, p["text"])
+        time.sleep(1)
 
 
 def chunk_messages(blocks: list[str], limit: int = 3800) -> list[str]:
@@ -444,12 +610,12 @@ def main() -> int:
             print(f"[error] {label}: {e}", file=sys.stderr)
         time.sleep(random.uniform(*cfg["delay_seconds"]))
 
-    matched = prefer([i for i in current.values() if matches(i, cfg["filters"])])
+    matched = dedupe([i for i in current.values() if matches(i, cfg["filters"])])
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
 
     new_items, drops = [], []
     for i in matched:
-        prev = state["listings"].get(i["id"])
+        prev = find_prev(i, state)
         if prev is None:
             new_items.append(i)
         elif i["price"] < prev["price"]:
@@ -457,43 +623,47 @@ def main() -> int:
     new_items, drops = prefer(new_items), prefer(drops)
     print(f"Coinciden con filtros: {len(matched)} · nuevos: {len(new_items)} · bajas de precio: {len(drops)}")
 
-    blocks: list[str] = []
+    intro = ""
+    show: list[dict] = []
     if first_run and ok_sources:
-        blocks.append(
+        intro = (
             f"✅ Buscador activo. Cargué {len(matched)} avisos (con balcón, m², ambientes, "
             f"hasta USD 140k). El gusto es 125k; un poco más entra pero más abajo. "
             f"Época / reciclar / edificio pesan más que el precio. De ahora en más, solo nuevos."
         )
-        sample = prefer(matched)[:10]
-        blocks += [fmt_item(i, "📌") for i in sample]
+        show = [{**i, "_tag": "📌"} for i in prefer(matched)[:10]]
     else:
-        blocks += [fmt_item(i) for i in new_items]
-        blocks += [fmt_item(i, "📉") for i in drops]
+        show = [{**i, "_tag": "🆕"} for i in new_items] + [{**i, "_tag": "📉"} for i in drops]
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     notes = errors + skipped
     notify_error = bool(notes) and state["meta"].get("last_error_day") != today
+    err_block = ""
     if notify_error:
-        blocks.append("⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in notes))
+        err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in notes)
 
+    payloads = notify_payloads(intro, show, err_block)
     if args.dry_run:
-        for m in chunk_messages(blocks):
-            print("-----\n" + m)
+        for p in payloads:
+            extra = f"\n🖼 {p['photo']}" if p.get("photo") else ""
+            print("-----\n" + p["text"] + extra)
         return 0
 
-    for m in chunk_messages(blocks):
-        tg_send(token, chat_id, m)
-        time.sleep(1)
+    deliver(token, chat_id, payloads)
 
     if ok_sources:
         for i in matched:
             prev = state["listings"].get(i["id"], {})
-            state["listings"][i["id"]] = {
+            rec = {
                 "price": i["price"],
                 "url": i["url"],
                 "first_seen": prev.get("first_seen", now),
                 "last_seen": now,
             }
+            k = listing_key(i)
+            if k:
+                rec["key"] = k
+            state["listings"][i["id"]] = rec
         state["meta"]["last_run"] = now
         if not notes:
             state["meta"].pop("last_error_day", None)

@@ -54,7 +54,7 @@ ARGENPROP = """
 ZONAPROP = """
 <div id="list">
  <div data-id="59844590" class="card">
-   <img src="x.jpg"><h2>USD 115.000</h2><h3>50 m² tot.2 amb.1 dorm.1 baño</h3>
+   <img src="https://img.zonapropcdn.com/avisos/1/logo.png"><img src="https://img.zonapropcdn.com/avisos/1/depto-59844590.jpg"><h2>USD 115.000</h2><h3>50 m² tot.2 amb.1 dorm.1 baño</h3>
    <h4>AV Cordoba al 1800</h4><h4>Recoleta, Capital Federal</h4>
    <h2><a href="/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-recoleta.-59844590.html?n_src=Listado">Hermoso depto</a></h2>
  </div>
@@ -99,6 +99,7 @@ def test_zonaprop():
     assert b["address"] == "Juncal 2900", b
     ok = {k for k, v in items.items() if s.matches(v, F)}
     assert ok == {"zonaprop:59844590", "zonaprop:60189306"}, ok  # 50 m² ahora entra
+    assert items["zonaprop:59844590"]["photo"].endswith("depto-59844590.jpg")
 
 
 def test_pagination_urls():
@@ -113,8 +114,9 @@ def test_formatting():
          "tags": ["de época", "para reciclar"]}
     msg = s.fmt_item(i, "📉")
     assert "USD 98.000" in msg and "antes USD 105.000" in msg and "57 m²" in msg
-    assert "de época" in msg and "para reciclar" in msg
+    assert "por qué: de época · para reciclar" in msg
     assert "Zonaprop: https://z/1" in msg and "<a href" not in msg
+    assert s.why_line({"tags": []}) == "por qué: cumple precio, m² y zona"
 
 
 def test_preferences_not_exclusive():
@@ -153,7 +155,7 @@ def test_price_parsing():
     assert s.parse_price("Departamento USD 98.000 + $150.000 expensas") == 98000
     cheap = {"price": 1, "ambientes": 2, "area": 60}
     luxury = {"price": 1250000, "ambientes": 3, "area": 80}
-    ok = {"price": 98000, "ambientes": 3, "area": 57}
+    ok = {"price": 98000, "ambientes": 3, "area": 57, "address": "Juncal 2900, Recoleta", "title": "", "url": ""}
     assert not s.matches(cheap, F) and not s.matches(luxury, F) and s.matches(ok, F)
 
     html = """
@@ -212,6 +214,44 @@ def test_zone_validation():
         "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico.html",
         chico,
     )
+
+
+def test_reject_noise():
+    tigre = {"price": 131000, "ambientes": 2, "area": 55, "title": "Departamento Tigre residencial",
+             "address": "Tigre", "url": "https://z/tigre-residencial-1.html", "blurb": ""}
+    pozo = {"price": 98000, "ambientes": 2, "area": 55, "title": "Departamento en pozo",
+            "address": "Recoleta, Capital Federal", "url": "https://z/en-pozo-2.html", "blurb": ""}
+    rec = {"price": 98000, "ambientes": 3, "area": 57, "title": "3 amb Recoleta",
+           "address": "Juncal 2900, Recoleta, Capital Federal", "url": "https://z/recoleta-3.html", "blurb": ""}
+    assert s.is_rejected(tigre, F) and not s.in_allowed_area(tigre, F)
+    assert s.is_rejected(pozo, F) and s.in_allowed_area(pozo, F)
+    assert not s.matches(tigre, F) and not s.matches(pozo, F) and s.matches(rec, F)
+    src = {"name": "Botánico", "aliases": ["botanico"]}
+    assert not s.keep_listing(tigre, src, F)
+    assert s.keep_listing(
+        {"price": 108000, "title": "Depto Botánico", "address": "Botánico, Palermo",
+         "url": "https://z/botanico-4.html", "blurb": ""},
+        src, F,
+    )
+
+
+def test_dedupe():
+    a = {"id": "argenprop:1", "site": "argenprop", "price": 98000, "area": 57, "ambientes": 3,
+         "address": "Juncal 2900, Recoleta", "score": 0, "title": "x", "url": "https://a/1"}
+    b = {"id": "zonaprop:2", "site": "zonaprop", "price": 98000, "area": 57, "ambientes": 3,
+         "address": "Juncal al 2900", "score": 3, "title": "de época", "url": "https://z/2"}
+    c = {"id": "zonaprop:3", "site": "zonaprop", "price": 98000, "area": 57, "ambientes": 3,
+         "address": "Santa Fe 3800, Botánico", "score": 0, "title": "y", "url": "https://z/3"}
+    d = {"id": "zonaprop:4", "site": "zonaprop", "price": 98000, "area": 57, "ambientes": 3,
+         "address": "", "score": 0, "title": "sin calle", "url": "https://z/4"}
+    assert s.listing_key(a) == s.listing_key(b) == "juncal 2900|98000|57|3"
+    assert s.listing_key(a) != s.listing_key(c)
+    assert s.listing_key(d) == ""
+    out = s.dedupe([a, b, c, d])
+    ids = {i["id"] for i in out}
+    assert ids == {"zonaprop:2", "zonaprop:3", "zonaprop:4"}, ids  # 1 y 2 son el mismo depto; gana el de más score
+    prev = s.find_prev(b, {"listings": {"argenprop:1": {"price": 105000, "key": s.listing_key(a)}}})
+    assert prev is not None and prev["price"] == 105000
 
 
 if __name__ == "__main__":

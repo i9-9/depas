@@ -10,6 +10,11 @@
   </array>
   <key>WorkingDirectory</key>
   <string>/Users/ivan/Documents/Codigo/search_amb</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
   <key>StartCalendarInterval</key>
   <array>
     <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>20</integer></dict>
