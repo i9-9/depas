@@ -53,6 +53,10 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
 - **Commit solo si cambió algo**: aviso nuevo, baja de precio o aviso dado de baja. Una corrida sin novedades no genera commit.
 - **Dados de baja**: `active=false` solo si esa zona se scrapeó OK. Si Zonaprop Botánico falló, esos avisos quedan como estaban.
 - **Slugs de Zonaprop**: Botánico es `botanico-palermo` (el slug `botanico` solo redirige a todo el país). Barrio Norte y Palermo Chico están verificados. Cada aviso se descarta si la card no nombra esa zona.
+- **Orden por más recientes** (verificado en HTML real, oct 2026):
+  - Zonaprop: slug `-orden-publicado-descendente` (el `<title>` pasa a “Departamentos más recientes…” y la página 2 conserva filtros). El slug `ordenado-publicado-descendente` **no** sirve: tira el filtro de balcón.
+  - Argenprop: `?orden=masnuevos` (el propio listado pagina como `?orden=masnuevos&pagina-2`).
+- **Cobertura**: si en la última de las 3 páginas todavía hay avisos que pasan filtros y nunca vimos, se loguea un warning y Telegram avisa como máximo una vez por semana (`state/*/meta.coverage_week`).
 - **Balcón en Argenprop**: el portal no deja un filtro de balcón usable en la URL. `/con-balcon/` se ignora o redirige al listado general. El recorte queda en el texto (`require_balcon` + “sin balcón”). Zonaprop sí filtra con `-con-balcon-` en el slug.
 - **Respeto de robots.txt**: se leen solo las páginas de listado permitidas (máx. 3 páginas por barrio), con pausa de 3–6 s entre pedidos. Sin proxies ni evasión anti-bot.
 - **m²**: Argenprop publica cubierta/semicubierta (se suman); Zonaprop publica total. Pueden diferir un poco del m² "real" del aviso.

@@ -108,7 +108,11 @@ def test_zonaprop():
 
 def test_pagination_urls():
     assert s.page_url("argenprop", "https://a/b", 2) == "https://a/b?pagina-2"
+    assert s.page_url("argenprop", "https://a/b?orden=masnuevos", 2) == "https://a/b?orden=masnuevos&pagina-2"
     assert s.page_url("zonaprop", "https://z/x-dolar.html", 3) == "https://z/x-dolar-pagina-3.html"
+    assert s.page_url("zonaprop", "https://z/x-dolar-orden-publicado-descendente.html", 2) == (
+        "https://z/x-dolar-orden-publicado-descendente-pagina-2.html"
+    )
     assert s.page_url("zonaprop", "https://z/x-dolar.html", 1) == "https://z/x-dolar.html"
 
 
@@ -605,6 +609,27 @@ def test_no_write_when_nothing_changed():
     assert s.seen_path("zonaprop").read_text() == before_seen
     assert s.listings_path("zonaprop").read_text() == before_cat
     _restore_paths()
+
+
+def test_coverage_last_page_unseen():
+    seen = {"zonaprop:old"}
+    last = [
+        _item("zonaprop:old"),
+        _item("zonaprop:fresh", url="https://z/fresh.html", address="Arenales 1200, Recoleta"),
+    ]
+    unseen = s.coverage_unseen(last, seen, F)
+    assert [i["id"] for i in unseen] == ["zonaprop:fresh"]
+    assert s.coverage_warning("zonaprop · Recoleta", last, seen, F, 3) == (
+        "3 páginas pueden no alcanzar para zonaprop · Recoleta"
+    )
+    assert s.coverage_unseen(last, set(), F) == []
+    assert s.coverage_warning("x", last, set(), F, 3) is None
+    assert s.coverage_warning("x", [_item("zonaprop:old")], seen, F, 3) is None
+    assert s.iso_week("2026-10-12") == "2026-W42"  # lunes
+    assert s.iso_week("2026-10-11T23:00:00+00:00") == "2026-W41"
+    assert s.should_send_coverage({"meta": {}}, "2026-10-10")
+    assert not s.should_send_coverage({"meta": {"coverage_week": "2026-W41"}}, "2026-10-10")
+    assert s.should_send_coverage({"meta": {"coverage_week": "2026-W40"}}, "2026-10-10")
 
 
 if __name__ == "__main__":

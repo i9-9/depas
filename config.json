@@ -105,13 +105,13 @@
   },
   "delay_seconds": [3, 6],
   "sources": [
-    {"site": "argenprop", "name": "Recoleta", "url": "https://www.argenprop.com/departamentos/venta/recoleta/dolares-hasta-140000", "aliases": ["recoleta"]},
-    {"site": "argenprop", "name": "Barrio Norte", "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/dolares-hasta-140000", "aliases": ["barrio norte"]},
-    {"site": "argenprop", "name": "Botánico", "url": "https://www.argenprop.com/departamentos/venta/botanico/dolares-hasta-140000", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "argenprop", "name": "Palermo Chico", "url": "https://www.argenprop.com/departamentos/venta/palermo-chico/dolares-hasta-140000", "aliases": ["palermo chico"]},
-    {"site": "zonaprop", "name": "Recoleta", "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-hasta-3-ambientes-menos-140000-dolar.html", "aliases": ["recoleta"]},
-    {"site": "zonaprop", "name": "Barrio Norte", "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-hasta-3-ambientes-menos-140000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Botánico", "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-hasta-3-ambientes-menos-140000-dolar.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "zonaprop", "name": "Palermo Chico", "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-hasta-3-ambientes-menos-140000-dolar.html", "aliases": ["palermo chico"]}
+    {"site": "argenprop", "name": "Recoleta", "url": "https://www.argenprop.com/departamentos/venta/recoleta/dolares-hasta-140000?orden=masnuevos", "aliases": ["recoleta"]},
+    {"site": "argenprop", "name": "Barrio Norte", "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/dolares-hasta-140000?orden=masnuevos", "aliases": ["barrio norte"]},
+    {"site": "argenprop", "name": "Botánico", "url": "https://www.argenprop.com/departamentos/venta/botanico/dolares-hasta-140000?orden=masnuevos", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
+    {"site": "argenprop", "name": "Palermo Chico", "url": "https://www.argenprop.com/departamentos/venta/palermo-chico/dolares-hasta-140000?orden=masnuevos", "aliases": ["palermo chico"]},
+    {"site": "zonaprop", "name": "Recoleta", "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-hasta-3-ambientes-menos-140000-dolar-orden-publicado-descendente.html", "aliases": ["recoleta"]},
+    {"site": "zonaprop", "name": "Barrio Norte", "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-hasta-3-ambientes-menos-140000-dolar-orden-publicado-descendente.html", "aliases": ["barrio norte"]},
+    {"site": "zonaprop", "name": "Botánico", "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-hasta-3-ambientes-menos-140000-dolar-orden-publicado-descendente.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
+    {"site": "zonaprop", "name": "Palermo Chico", "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-hasta-3-ambientes-menos-140000-dolar-orden-publicado-descendente.html", "aliases": ["palermo chico"]}
   ]
 }

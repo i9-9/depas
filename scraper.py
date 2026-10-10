@@ -411,7 +411,8 @@ def page_url(site: str, url: str, n: int) -> str:
     if n == 1:
         return url
     if site == "argenprop":
-        return f"{url}?pagina-{n}"
+        sep = "&" if "?" in url else "?"
+        return f"{url}{sep}pagina-{n}"
     return url.replace(".html", f"-pagina-{n}.html")
 
 
@@ -468,10 +469,14 @@ def fetch(session: requests.Session, url: str, *, _retried: bool = False) -> tup
     return r.text, r.url
 
 
-def scrape_source(session, src: dict, cfg: dict) -> list[dict]:
+def scrape_source(session, src: dict, cfg: dict) -> tuple[list[dict], list[dict]]:
+    """Devuelve (avisos, última página si se llegó al tope de páginas)."""
     site = src["site"]
     found: dict[str, dict] = {}
-    for n in range(1, cfg["pages"][site] + 1):
+    last_page_items: list[dict] = []
+    max_pages = cfg["pages"][site]
+    hit_cap = False
+    for n in range(1, max_pages + 1):
         url = page_url(site, src["url"], n)
         html_text, final_url = fetch(session, url)
         if n == 1 and not page_matches_zone(html_text, final_url, src):
@@ -481,13 +486,38 @@ def scrape_source(session, src: dict, cfg: dict) -> list[dict]:
         if n == 1 and not items:
             raise Blocked("0 avisos de la zona en la página 1 (¿cambió el HTML o el slug?)")
         if not new:
+            hit_cap = False
+            last_page_items = []
             break
         for i in new:
             i["zone"] = src["name"]
             apply_signals(i, cfg.get("signals") or [], cfg.get("filters") or {})
             found[i["id"]] = i
+        last_page_items = new
+        hit_cap = n == max_pages
         time.sleep(random.uniform(*cfg["delay_seconds"]))
-    return list(found.values())
+    return list(found.values()), last_page_items if hit_cap else []
+
+
+def iso_week(day: str) -> str:
+    """Semana ISO (lunes) a partir de YYYY-MM-DD o ISO datetime."""
+    raw = (day or "")[:10]
+    dt = datetime.fromisoformat(raw).replace(tzinfo=timezone.utc)
+    return f"{dt.isocalendar().year}-W{dt.isocalendar().week:02d}"
+
+
+def coverage_unseen(last_page_items: list[dict], seen_ids: set[str], filters: dict) -> list[dict]:
+    """Avisos de la última página que pasan filtros y nunca vimos."""
+    if not seen_ids:
+        return []
+    return [i for i in last_page_items if i["id"] not in seen_ids and matches(i, filters)]
+
+
+def coverage_warning(label: str, last_page_items: list[dict], seen_ids: set[str], filters: dict, pages: int) -> str | None:
+    unseen = coverage_unseen(last_page_items, seen_ids, filters)
+    if not unseen:
+        return None
+    return f"{pages} páginas pueden no alcanzar para {label}"
 
 
 # ---------------------------------------------------------------- telegram --
@@ -898,6 +928,11 @@ def classify_changes(matched: list[dict], state: dict) -> tuple[list[dict], list
     return prefer(new_items), prefer(drops)
 
 
+def should_send_coverage(state: dict, today: str) -> bool:
+    last = (state.get("meta") or {}).get("coverage_week")
+    return last != iso_week(today)
+
+
 def process_portal(
     site: str,
     matched: list[dict],
@@ -910,6 +945,7 @@ def process_portal(
     chat_id: str,
     now: str,
     today: str,
+    coverage_notes: list[str] | None = None,
 ) -> bool:
     """Actualiza un portal. Devuelve True si hubo fuentes OK de ese portal."""
     if not ok_zones:
@@ -950,6 +986,11 @@ def process_portal(
     err_block = ""
     if notify_error:
         err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in errors)
+    notes = [n for n in (coverage_notes or []) if n]
+    notify_coverage = bool(notes) and should_send_coverage(state, today)
+    if notify_coverage:
+        extra = "⚠️ Cobertura:\n" + "\n".join(f"• {html.escape(n)}" for n in notes)
+        err_block = (err_block + "\n\n" if err_block else "") + extra
 
     heartbeat = False
     if (
@@ -1020,12 +1061,14 @@ def process_portal(
         state["meta"]["last_error_day"] = today
     elif not errors:
         state["meta"].pop("last_error_day", None)
+    if notify_coverage and (dry_run or error_ok):
+        state["meta"]["coverage_week"] = iso_week(today)
 
     if catalog_dirty:
         catalog["last_change"] = now
 
-    real_change = bool(mark_ids or gone_ids)
-    if real_change:
+    real_change = bool(mark_ids or gone_ids or (notify_coverage and not dry_run))
+    if real_change and not dry_run:
         save_portal(site, state, catalog, prev_state, prev_catalog)
     elif notify_error and error_ok:
         # Error real avisado: no commitear seen solo por last_error_day.
@@ -1058,6 +1101,7 @@ def main() -> int:
     errors_by_site: dict[str, list[str]] = {k: [] for k in SITES}
     ok_zones: dict[str, set[str]] = {k: set() for k in SITES}
     current: dict[str, dict[str, dict]] = {k: {} for k in SITES}
+    last_pages: dict[str, list[tuple[str, list[dict]]]] = {k: [] for k in SITES}
     attempted = 0
     skipped_argenprop = False
 
@@ -1070,9 +1114,10 @@ def main() -> int:
             continue
         attempted += 1
         try:
-            items = scrape_source(session, src, cfg)
+            items, last_page = scrape_source(session, src, cfg)
             ok_zones[site].add(src["name"])
             print(f"[ok] {label}: {len(items)} avisos")
+            last_pages[site].append((label, last_page))
             for i in items:
                 current[site][i["id"]] = i
         except (Blocked, requests.RequestException) as e:
@@ -1091,6 +1136,15 @@ def main() -> int:
         if in_actions and site == "argenprop":
             continue
         matched = dedupe([i for i in current[site].values() if matches(i, cfg["filters"])])
+        state_preview, _ = load_portal(site, persist=not args.dry_run)
+        seen_ids = set(state_preview.get("listings") or {})
+        max_pages = cfg["pages"].get(site, 3)
+        coverage_notes = []
+        for label, last_page in last_pages[site]:
+            warn = coverage_warning(label, last_page, seen_ids, cfg["filters"], max_pages)
+            if warn:
+                print(f"[warn] {warn}", file=sys.stderr)
+                coverage_notes.append(warn)
         if process_portal(
             site,
             matched,
@@ -1102,6 +1156,7 @@ def main() -> int:
             chat_id=chat_id,
             now=now,
             today=today,
+            coverage_notes=coverage_notes,
         ):
             any_ok = True
 
