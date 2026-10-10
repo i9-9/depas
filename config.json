@@ -1,0 +1,83 @@
+{
+  "filters": {
+    "max_price_usd": 125000,
+    "max_price_usd_hard": 140000,
+    "min_area_m2": 50,
+    "max_ambientes": 3,
+    "include_unknown_area": true,
+    "require_balcon": true,
+    "include_unknown_balcon": true
+  },
+  "signals": [
+    {
+      "id": "epoca",
+      "label": "de época",
+      "weight": 3,
+      "where": "any",
+      "keywords": [
+        "de epoca",
+        "epoca",
+        "estilo frances",
+        "petit hotel",
+        "palacete",
+        "art deco",
+        "art nouveau",
+        "casa chorizo"
+      ]
+    },
+    {
+      "id": "reciclar",
+      "label": "para reciclar",
+      "weight": 2,
+      "where": "title",
+      "keywords": [
+        "para reciclar",
+        "a reciclar",
+        "para reformar",
+        "a reformar"
+      ]
+    },
+    {
+      "id": "edificio_ok",
+      "label": "edificio ok",
+      "weight": 2,
+      "where": "any",
+      "keywords": [
+        "edificio en excelente estado",
+        "edificio excelente estado",
+        "edificio impecable",
+        "edificio de categoria",
+        "edificio reciclado",
+        "edificio restaurado",
+        "excelente edificio"
+      ]
+    },
+    {
+      "id": "edificio_malo",
+      "label": "edificio flojo",
+      "weight": -2,
+      "where": "any",
+      "keywords": [
+        "edificio a reciclar",
+        "edificio para reciclar",
+        "edificio en mal estado",
+        "edificio a demoler"
+      ]
+    }
+  ],
+  "pages": {
+    "argenprop": 3,
+    "zonaprop": 3
+  },
+  "delay_seconds": [3, 6],
+  "sources": [
+    {"site": "argenprop", "name": "Recoleta", "url": "https://www.argenprop.com/departamentos/venta/recoleta/con-balcon/dolares-hasta-140000"},
+    {"site": "argenprop", "name": "Barrio Norte", "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/con-balcon/dolares-hasta-140000"},
+    {"site": "argenprop", "name": "Botánico", "url": "https://www.argenprop.com/departamentos/venta/botanico/con-balcon/dolares-hasta-140000"},
+    {"site": "argenprop", "name": "Palermo Chico", "url": "https://www.argenprop.com/departamentos/venta/palermo-chico/con-balcon/dolares-hasta-140000"},
+    {"site": "zonaprop", "name": "Recoleta", "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-hasta-3-ambientes-con-balcon-menos-140000-dolar.html"},
+    {"site": "zonaprop", "name": "Barrio Norte", "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-hasta-3-ambientes-con-balcon-menos-140000-dolar.html"},
+    {"site": "zonaprop", "name": "Botánico", "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-hasta-3-ambientes-con-balcon-menos-140000-dolar.html"},
+    {"site": "zonaprop", "name": "Palermo Chico", "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-hasta-3-ambientes-con-balcon-menos-140000-dolar.html"}
+  ]
+}
