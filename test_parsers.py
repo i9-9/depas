@@ -612,6 +612,36 @@ def test_no_write_when_nothing_changed():
     _restore_paths()
 
 
+def test_weekly_summary_with_and_without_snapshot():
+    today = "2026-10-12"  # lunes
+    now = "2026-10-12T11:20:00+00:00"
+    assert s.is_weekly_slot(today, 11) and not s.is_weekly_slot("2026-10-10", 11)
+    listings = [
+        {**_item("zonaprop:a", zone="Recoleta", price=90000, area=50),
+         "active": True, "first_seen": "2026-10-12T10:00:00+00:00",
+         "price_history": [{"date": "2026-10-01T00:00:00+00:00", "price": 100000},
+                           {"date": "2026-10-12T10:00:00+00:00", "price": 90000}]},
+        {**_item("zonaprop:b", zone="Recoleta", price=100000, area=50),
+         "active": True, "first_seen": "2026-09-01T00:00:00+00:00",
+         "price_history": [{"date": "2026-09-01T00:00:00+00:00", "price": 100000}]},
+        {**_item("zonaprop:c", zone="Botánico", price=120000, area=60),
+         "active": True, "first_seen": "2026-09-01T00:00:00+00:00",
+         "price_history": [{"date": "2026-10-13T00:00:00+00:00", "price": 110000}]},
+    ]
+    snap = s.build_weekly_snapshot(listings, now, today)
+    assert snap["week"] == "2026-W42"
+    assert snap["zones"]["Recoleta"]["active"] == 2
+    assert snap["zones"]["Recoleta"]["new"] == 1
+    assert snap["zones"]["Recoleta"]["drops"] == 1
+    assert snap["top_drops"][0]["delta"] == 10000
+    bare = s.format_weekly(snap, None)
+    assert "USD 1.900/m²" in bare or "USD" in bare
+    assert "vs sem. anterior" not in bare
+    prev = {"week": "2026-W41", "zones": {"Recoleta": {"median_usd_m2": 2200}}}
+    with_prev = s.format_weekly(snap, prev)
+    assert "vs sem. anterior" in with_prev
+
+
 def test_notify_loud_and_silent():
     cfg = {"notify_loud_min_score": 2, "notify_loud_drop_pct": 5}
     assert s.is_loud({"score": 3, "price": 100000}, cfg)

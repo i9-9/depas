@@ -17,7 +17,7 @@ import re
 import sys
 import time
 import unicodedata
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -28,6 +28,7 @@ CONFIG_PATH = ROOT / "config.json"
 OLD_SEEN_PATH = ROOT / "seen.json"
 STATE_DIR = ROOT / "state"
 WEB_DATA_DIR = ROOT / "web" / "data"
+WEEKLY_PATH = STATE_DIR / "weekly.json"
 
 UA = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -1173,6 +1174,130 @@ def classify_changes(matched: list[dict], state: dict) -> tuple[list[dict], list
     return prefer(new_items), prefer(drops)
 
 
+def week_start(day: str):
+    dt = datetime.fromisoformat(day[:10]).date()
+    return dt - timedelta(days=dt.weekday())
+
+
+def in_iso_week(iso: str | None, day: str) -> bool:
+    if not iso:
+        return False
+    try:
+        d = datetime.fromisoformat(iso[:10]).date()
+    except ValueError:
+        return False
+    start = week_start(day)
+    return start <= d < start + timedelta(days=7)
+
+
+def dropped_this_week(item: dict, day: str) -> int:
+    hist = item.get("price_history") or []
+    delta = 0
+    for a, b in zip(hist, hist[1:]):
+        pa, pb = a.get("price"), b.get("price")
+        if pa is None or pb is None or pb >= pa:
+            continue
+        if in_iso_week(b.get("date"), day):
+            delta += pa - pb
+    return delta
+
+
+def build_weekly_snapshot(listings: list[dict], now: str, today: str) -> dict:
+    zones: dict[str, list[dict]] = {}
+    for i in listings:
+        if not i.get("id"):
+            continue
+        zones.setdefault(i.get("zone") or "s/d", []).append(i)
+    out_zones = {}
+    for zone, rows in zones.items():
+        active = [x for x in rows if x.get("active") is not False]
+        usd = [listing_usd_m2(x) for x in active if listing_usd_m2(x) is not None]
+        med = median([u for u in usd if u is not None])
+        out_zones[zone] = {
+            "active": len(active),
+            "new": sum(1 for x in active if in_iso_week(x.get("first_seen"), today)),
+            "drops": sum(1 for x in rows if dropped_this_week(x, today) > 0),
+            "median_usd_m2": int(round(med)) if med is not None else None,
+            "n": len(usd),
+        }
+    ranked = []
+    for i in listings:
+        delta = dropped_this_week(i, today)
+        if delta > 0:
+            ranked.append({
+                "id": i.get("id"),
+                "zone": i.get("zone") or "",
+                "title": i.get("title") or i.get("address") or i.get("id"),
+                "price": i.get("price"),
+                "delta": delta,
+            })
+    ranked.sort(key=lambda x: -x["delta"])
+    return {
+        "week": iso_week(today),
+        "saved_at": now,
+        "zones": out_zones,
+        "top_drops": ranked[:3],
+    }
+
+
+def format_weekly(snap: dict, prev: dict | None) -> str:
+    prev_zones = (prev or {}).get("zones") or {}
+    lines = [f"📊 Resumen semanal {snap.get('week')}"]
+    for zone in sorted(snap.get("zones") or {}):
+        z = snap["zones"][zone]
+        med = z.get("median_usd_m2")
+        med_txt = f"USD {_fmt_int(med)}/m²" if med is not None else "mediana s/d"
+        prev_med = (prev_zones.get(zone) or {}).get("median_usd_m2")
+        if med is not None and prev_med:
+            pct = int(round((med - prev_med) * 100 / prev_med))
+            sign = f"+{pct}" if pct > 0 else str(pct)
+            med_txt += f" ({sign}% vs sem. anterior)"
+        lines.append(
+            f"• {zone}: {z.get('active', 0)} activos · {z.get('new', 0)} nuevos · "
+            f"{z.get('drops', 0)} bajas · {med_txt}"
+        )
+    tops = snap.get("top_drops") or []
+    if tops:
+        lines.append("Más bajaron:")
+        for t in tops:
+            lines.append(
+                f"• {html.escape(str(t.get('title') or t.get('id')))} "
+                f"(−USD {_fmt_int(int(t.get('delta') or 0))})"
+            )
+    else:
+        lines.append("Sin bajas de precio esta semana.")
+    return "\n".join(lines)
+
+
+def is_weekly_slot(today: str, hour: int | None = None) -> bool:
+    dt = datetime.fromisoformat(today[:10])
+    if dt.weekday() != 0:
+        return False
+    return hour is None or hour == 11
+
+
+def maybe_weekly_summary(cfg: dict, *, dry_run: bool, token: str, chat_id: str, now: str, today: str, persist: bool) -> None:
+    hour = datetime.now(timezone.utc).hour
+    if not is_weekly_slot(today, hour):
+        return
+    prev = _read_json(WEEKLY_PATH, {})
+    if prev.get("week") == iso_week(today):
+        return
+    listings = []
+    for site in SITES:
+        listings.extend(load_portal(site, persist=False)[1].get("listings") or [])
+    snap = build_weekly_snapshot(listings, now, today)
+    text = format_weekly(snap, prev if prev.get("week") else None)
+    payloads = [{"text": text + site_footer(), "kind": "intro", "silent": True}]
+    if dry_run:
+        print("-----\n" + payloads[0]["text"])
+        return
+    if token and chat_id:
+        deliver(token, chat_id, payloads)
+    if persist:
+        write_json(WEEKLY_PATH, snap)
+
+
 def should_send_coverage(state: dict, today: str) -> bool:
     last = (state.get("meta") or {}).get("coverage_week")
     return last != iso_week(today)
@@ -1420,6 +1545,16 @@ def main() -> int:
             coverage_notes=coverage_notes,
         ):
             any_ok = True
+
+    maybe_weekly_summary(
+        cfg,
+        dry_run=args.dry_run,
+        token=token,
+        chat_id=chat_id,
+        now=now,
+        today=today,
+        persist=not args.dry_run,
+    )
 
     if skipped_argenprop:
         print("[skip] Argenprop no corre en Actions; no se toca su estado", file=sys.stderr)

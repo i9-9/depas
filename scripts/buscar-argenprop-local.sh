@@ -30,7 +30,7 @@ fi
 
 log() { echo "$*"; }
 
-AP_PATHS='state/seen-argenprop.json|web/data/listings-argenprop.json'
+AP_PATHS='state/seen-argenprop.json|web/data/listings-argenprop.json|state/weekly.json'
 
 other_dirty() {
   git status --porcelain | grep -vE "^\?\?|${AP_PATHS}" | grep -q .
@@ -39,7 +39,7 @@ other_dirty() {
 sync_argenprop() {
   local branch
   branch="$(git rev-parse --abbrev-ref HEAD)"
-  git add state/seen-argenprop.json web/data/listings-argenprop.json
+  git add state/seen-argenprop.json web/data/listings-argenprop.json state/weekly.json
   if git diff --cached --quiet; then
     log "Argenprop sin cambios; no hay commit"
     return 0

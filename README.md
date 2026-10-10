@@ -52,7 +52,8 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
 
 - **Argenprop desde Actions**: AWS WAF bloquea las IPs de GitHub (405 / challenge). El workflow **salta Argenprop** (solo log, sin Telegram de error) y no toca sus archivos. Zonaprop sigue en Actions. Argenprop se corre en la Mac (abajo).
 - **Estado separado**: `state/seen-zonaprop.json` + `web/data/listings-zonaprop.json` los escribe Actions. `state/seen-argenprop.json` + `web/data/listings-argenprop.json` los escribe la Mac. Así no se pisan.
-- **Commit solo si cambió algo**: aviso nuevo, baja de precio o aviso dado de baja. Una corrida sin novedades no genera commit.
+- **Commit solo si cambió algo**: aviso nuevo, baja de precio, aviso dado de baja, warning de cobertura (máx. semanal) o el resumen semanal (`state/weekly.json`, los lunes). Una corrida sin novedades no genera commit.
+- **Resumen semanal**: los lunes en la primera corrida (08:17 ART) Telegram manda, silencioso, activos / nuevos / bajas / mediana USD/m² por barrio y los 3 que más bajaron. Si no hay snapshot previo, la mediana va sin variación.
 - **Dados de baja**: `active=false` solo si esa zona se scrapeó OK. Si Zonaprop Botánico falló, esos avisos quedan como estaban.
 - **Slugs de Zonaprop**: Botánico es `botanico-palermo` (el slug `botanico` solo redirige a todo el país). Barrio Norte y Palermo Chico están verificados. Cada aviso se descarta si la card no nombra esa zona.
 - **Orden por más recientes** (verificado en HTML real, oct 2026):
@@ -66,6 +67,14 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
 - **Respeto de robots.txt**: se leen solo las páginas de listado permitidas (máx. 3 páginas por barrio), con pausa de 3–6 s entre pedidos. Sin proxies ni evasión anti-bot.
 - **m²**: Argenprop publica cubierta/semicubierta (se suman); Zonaprop publica total. Pueden diferir un poco del m² "real" del aviso.
 - Alternativa sin código: ambos portales tienen "Crear alerta" por email con tus filtros; sirve de respaldo.
+
+## Pendiente / no verificado
+
+- **Fecha de publicación del portal**: las cards de listado de Zonaprop no la muestran; no se parsea.
+- **Argenprop, fixture fresco**: esta ronda el WAF contestó 202 y no se pudo guardar HTML nuevo. Expensas/`N años` se parsean con el formato ya visto en cards (y en el HTML sintético de tests). Conviene bajar un listado desde la Mac y dejarlo en `fixtures/`.
+- **Piso / cochera / antigüedad en Zonaprop**: no hay campo estructurado en la card; solo se toma si el texto trae un patrón claro. “Piso alto” no se convierte a número.
+- **Expensas a USD**: no hay fuente de cotización verificada; se dejan en ARS.
+- **Slug `ordenado-publicado-descendente` de Zonaprop**: no usarlo; en una prueba real tiró el filtro de balcón.
 
 ## Pruebas locales
 
