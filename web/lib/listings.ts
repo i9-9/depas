@@ -30,6 +30,11 @@ export type Listing = {
   days_seen: number | null;
   price_drops: number;
   closing_ref_usd: number | null;
+  expensas_ars: number | null;
+  expensas_text: string;
+  antiguedad_years: number | null;
+  piso: number | null;
+  cochera: boolean | null;
 };
 
 export const CLOSING_DISCOUNT_PCT = 5;
@@ -76,6 +81,11 @@ export function loadListings(): Listing[] {
         days_seen: raw.days_seen ?? daysSeen(raw.first_seen || null),
         price_drops: raw.price_drops ?? Math.max(0, (raw.price_history || []).length - 1),
         closing_ref_usd: raw.closing_ref_usd ?? closingRef(raw.price ?? null),
+        expensas_ars: raw.expensas_ars ?? null,
+        expensas_text: raw.expensas_text || "",
+        antiguedad_years: raw.antiguedad_years ?? null,
+        piso: raw.piso ?? null,
+        cochera: raw.cochera ?? null,
       });
     }
   }

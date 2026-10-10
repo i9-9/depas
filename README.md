@@ -41,7 +41,7 @@ La web es `noindex`. En el celular, desde Telegram, se abre la grilla de cards. 
 
 ## Cambiar filtros
 
-Editá `config.json`: `max_price_usd` (gusto), `max_price_usd_hard` (corte), `min_area_m2`, `max_ambientes`, y la lista `sources` (una URL por portal y barrio; las URLs tienen que llegar hasta el techo duro).
+Editá `config.json`: `max_price_usd` (gusto), `max_price_usd_hard` (corte), `min_area_m2`, `max_ambientes`, `max_expensas_ars` (null = sin tope; sin dato de expensas el aviso entra), y la lista `sources` (una URL por portal y barrio; las URLs tienen que llegar hasta el techo duro).
 `include_unknown_area: true` te avisa también de los avisos que no publican m² (así no se te escapa ninguno).
 Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pesos. No filtran; si el portal no lo escribe en el listado, el aviso igual entra y vos lo juzgás por las fotos.
 `heartbeat: false` (default): si lo prendes, la primera corrida del día (08:17 ART) avisa por Telegram cuando no hubo novedades.
@@ -59,6 +59,8 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
   - Argenprop: `?orden=masnuevos` (el propio listado pagina como `?orden=masnuevos&pagina-2`).
 - **Cobertura**: si en la última de las 3 páginas todavía hay avisos que pasan filtros y nunca vimos, se loguea un warning y Telegram avisa como máximo una vez por semana (`state/*/meta.coverage_week`).
 - **Fecha de publicación del portal**: las cards de listado de Zonaprop (fixture real) no traen “publicado hace X”. No se parsea. `días` es desde `first_seen` del buscador.
+- **Campos extra verificados**: expensas ARS en Zonaprop (`$ 350.000 Expensas` en la card). Piso/cochera solo si el texto de la card lo dice con un patrón claro (`7° piso`, `planta baja`, `cochera` / `sin cochera`). Antigüedad: `N años` o “a estrenar”.
+- **Argenprop HTML de esta ronda**: WAF (202) desde este entorno; no se guardó fixture nuevo. El parseo de expensas/`N años` usa el mismo formato que el HTML sintético de tests (copiado de cards reales en la primera versión). Pendiente: bajar un fixture fresco desde la Mac.
 - **Balcón en Argenprop**: el portal no deja un filtro de balcón usable en la URL. `/con-balcon/` se ignora o redirige al listado general. El recorte queda en el texto (`require_balcon` + “sin balcón”). Zonaprop sí filtra con `-con-balcon-` en el slug.
 - **Respeto de robots.txt**: se leen solo las páginas de listado permitidas (máx. 3 páginas por barrio), con pausa de 3–6 s entre pedidos. Sin proxies ni evasión anti-bot.
 - **m²**: Argenprop publica cubierta/semicubierta (se suman); Zonaprop publica total. Pueden diferir un poco del m² "real" del aviso.

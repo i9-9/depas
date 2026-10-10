@@ -8,6 +8,7 @@
     "include_unknown_area": true,
     "require_balcon": true,
     "include_unknown_balcon": true,
+    "max_expensas_ars": null,
     "allowed_barrios": [
       "recoleta",
       "barrio norte",

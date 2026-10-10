@@ -19,6 +19,7 @@ type Filters = {
   site: string;
   ambientes: string;
   maxPrice: string;
+  maxExpensas: string;
   onlyNew: boolean;
   onlyDrop: boolean;
   hideGone: boolean;
@@ -30,6 +31,7 @@ const INITIAL: Filters = {
   site: "",
   ambientes: "",
   maxPrice: "",
+  maxExpensas: "",
   onlyNew: false,
   onlyDrop: false,
   hideGone: true,
@@ -75,6 +77,8 @@ export function Catalog({
       if (filters.site && item.site !== filters.site) return false;
       if (filters.ambientes && String(item.ambientes ?? "") !== filters.ambientes) return false;
       if (filters.maxPrice && (item.price == null || item.price > max)) return false;
+      const maxE = Number(filters.maxExpensas);
+      if (filters.maxExpensas && item.expensas_ars != null && item.expensas_ars > maxE) return false;
       if (filters.onlyNew && !isNew(item, now)) return false;
       if (filters.onlyDrop && !hasDrop(item)) return false;
       return true;
@@ -173,6 +177,17 @@ export function Catalog({
               placeholder="140000"
               value={filters.maxPrice}
               onChange={(e) => set("maxPrice", e.target.value)}
+            />
+          </Field>
+          <Field label="Expensas máximas (ARS)">
+            <input
+              className="input"
+              type="number"
+              inputMode="numeric"
+              min={0}
+              placeholder="sin tope"
+              value={filters.maxExpensas}
+              onChange={(e) => set("maxExpensas", e.target.value)}
             />
           </Field>
         </div>
@@ -331,6 +346,7 @@ function Card({
           )}
         </div>
         <p className="text-sm text-muted">{facts.join(" · ") || "Datos incompletos"}</p>
+        <p className="text-sm text-muted">{extrasLine(item)}</p>
         <Decision item={item} />
         <h2 className="font-display text-xl leading-snug text-ink">
           {item.title || item.address || "Aviso sin título"}
@@ -380,6 +396,22 @@ function Card({
       </div>
     </article>
   );
+}
+
+function extrasLine(item: Listing): string {
+  const bits: string[] = [];
+  if (item.expensas_ars != null) {
+    bits.push(`expensas $ ${item.expensas_ars.toLocaleString("es-AR")}`);
+  } else {
+    bits.push("expensas s/d");
+  }
+  if (item.piso != null) bits.push(item.piso === 0 ? "PB" : `piso ${item.piso}`);
+  if (item.antiguedad_years != null) {
+    bits.push(item.antiguedad_years === 0 ? "a estrenar" : `${item.antiguedad_years} años`);
+  }
+  if (item.cochera === true) bits.push("cochera");
+  if (item.cochera === false) bits.push("sin cochera");
+  return bits.join(" · ");
 }
 
 function Decision({ item }: { item: Listing }) {

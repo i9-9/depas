@@ -273,6 +273,7 @@ def test_real_zonaprop_fixture():
     armenia = next(i for i in items if i["id"] == "zonaprop:53929445")
     assert armenia["address"].lower().startswith("armenia")
     assert armenia["ambientes"] == 1 and armenia["area"] == 38
+    assert armenia["expensas_ars"] == 350000 and "350.000" in armenia["expensas_text"]
     kept = [i for i in items if s.keep_listing(i, src, F)]
     assert kept, "el fixture real debería dejar avisos de Botánico"
 
@@ -609,6 +610,34 @@ def test_no_write_when_nothing_changed():
     assert s.seen_path("zonaprop").read_text() == before_seen
     assert s.listings_path("zonaprop").read_text() == before_cat
     _restore_paths()
+
+
+def test_expensas_and_extras():
+    html = (Path(__file__).parent / "fixtures" / "zonaprop-botanico.html").read_text(encoding="utf-8")
+    items = {i["id"]: i for i in s.parse_page(html, "zonaprop", "https://www.zonaprop.com.ar/x.html")}
+    with_exp = [i for i in items.values() if i.get("expensas_ars")]
+    without = [i for i in items.values() if not i.get("expensas_ars")]
+    assert with_exp and without
+    assert all(i["expensas_text"] for i in with_exp)
+    assert s.parse_expensas("USD 100.000 sin dato") == (None, "")
+    assert s.parse_expensas("USD 110.000 + $150.000 expensas") == (150000, "$150.000 expensas")
+    assert s.parse_piso("Departamento en 7° piso, luminoso") == 7
+    assert s.parse_piso("planta baja con patio") == 0
+    assert s.parse_piso("pisos de madera") is None
+    assert s.parse_cochera("con cochera fija") is True
+    assert s.parse_cochera("sin cochera") is False
+    assert s.parse_cochera("luminoso") is None
+    assert s.parse_antiguedad(" - 70 años - 1 baño") == 70
+    assert s.parse_antiguedad("departamento A estrenar, impecable") == 0
+    f = dict(F)
+    f["max_expensas_ars"] = 200000
+    high = {"price": 98000, "ambientes": 3, "area": 57, "title": "x", "address": "Juncal 2900, Recoleta",
+            "url": "https://z/rec.html", "blurb": "", "expensas_ars": 350000}
+    unknown = {**high, "expensas_ars": None}
+    low = {**high, "expensas_ars": 110000}
+    assert not s.matches(high, f) and s.matches(unknown, f) and s.matches(low, f)
+    assert "expensas s/d" in s.fmt_item(_item("zonaprop:1"))
+    assert "expensas $ 110.000" in s.fmt_item({**_item("zonaprop:1"), "expensas_ars": 110000, "piso": 8, "cochera": True})
 
 
 def test_median_and_decision_fields():

@@ -94,9 +94,73 @@ def parse_price(text: str) -> int | None:
     return None
 
 
-def parse_card(site: str, text: str) -> dict:
-    out = {"price": None, "area": None, "ambientes": None, "address": ""}
+def parse_expensas(text: str, card=None) -> tuple[int | None, str]:
+    """Expensas en ARS tal como se publican. Vacío si la card no las muestra."""
+    chunks = []
+    if card is not None:
+        node = card.select_one('[class*="expenses"]')
+        if node:
+            chunks.append(node.get_text(" ", strip=True))
+    chunks.append(text or "")
+    for chunk in chunks:
+        m = re.search(r"\$\s*(\d{1,3}(?:\.\d{3})+|\d+)\s*expensas", chunk, re.I)
+        if m:
+            return to_price(m.group(1)), re.sub(r"\s+", " ", m.group(0)).strip()
+    return None, ""
+
+
+def parse_piso(text: str) -> int | None:
+    t = text or ""
+    if re.search(r"\bplanta baja\b", t, re.I):
+        return 0
+    m = re.search(r"(\d{1,2})\s*°\s*piso\b", t, re.I) or re.search(
+        r"\bpiso\s+(\d{1,2})\b", t, re.I
+    )
+    if m:
+        n = int(m.group(1))
+        return n if 0 <= n <= 40 else None
+    return None
+
+
+def parse_cochera(text: str) -> bool | None:
+    hay = fold(text)
+    if "sin cochera" in hay or "sin cocheras" in hay:
+        return False
+    if re.search(r"(?<![a-z])cocheras?(?![a-z])", hay):
+        return True
+    return None
+
+
+def parse_antiguedad(text: str) -> int | None:
+    hay = fold(text)
+    if re.search(r"\ba estrenar\b", hay):
+        return 0
+    m = re.search(r"(?:^|[\s\-•|,])(\d{1,3})\s*años(?:[\s\-•|,]|$)", text or "", re.I)
+    if not m:
+        return None
+    n = int(m.group(1))
+    return n if n <= 200 else None
+
+
+def parse_card(site: str, text: str, card=None) -> dict:
+    out = {
+        "price": None,
+        "area": None,
+        "ambientes": None,
+        "address": "",
+        "expensas_ars": None,
+        "expensas_text": "",
+        "antiguedad_years": None,
+        "piso": None,
+        "cochera": None,
+    }
     out["price"] = parse_price(text)
+    exp_n, exp_t = parse_expensas(text, card)
+    out["expensas_ars"] = exp_n
+    out["expensas_text"] = exp_t
+    out["piso"] = parse_piso(text)
+    out["cochera"] = parse_cochera(text)
+    out["antiguedad_years"] = parse_antiguedad(text)
 
     if site == "argenprop":
         cub = re.search(r"([\d.,]+)\s*m²\s*cubie", text)
@@ -172,7 +236,7 @@ def parse_page(html_text: str, site: str, base_url: str) -> list[dict]:
         card = card_for(a, link_re)
         sep_text = card.get_text("\n", strip=True)
         flat_text = re.sub(r"\s+", " ", sep_text)
-        data = parse_card(site, sep_text if site == "zonaprop" else flat_text)
+        data = parse_card(site, sep_text if site == "zonaprop" else flat_text, card)
         if data["price"] is None:
             continue  # sin precio en USD: no se puede comparar
         url = href if href.startswith("http") else base_url.split("/", 3)[0] + "//" + base_url.split("/")[2] + href
@@ -400,6 +464,9 @@ def matches(item: dict, f: dict) -> bool:
             return False
         if bal is None and not f.get("include_unknown_balcon", True):
             return False
+    max_e = f.get("max_expensas_ars")
+    if max_e is not None and item.get("expensas_ars") is not None and item["expensas_ars"] > max_e:
+        return False
     if item["area"] is None:
         return bool(f.get("include_unknown_area", True))
     return item["area"] >= f["min_area_m2"]
@@ -706,6 +773,23 @@ def _fmt_int(n: int) -> str:
     return f"{n:,}".replace(",", ".")
 
 
+def extras_line(i: dict) -> str:
+    bits = []
+    if i.get("expensas_ars") is not None:
+        bits.append(f"expensas $ {_fmt_int(i['expensas_ars'])}")
+    else:
+        bits.append("expensas s/d")
+    if i.get("piso") is not None:
+        bits.append("PB" if i["piso"] == 0 else f"piso {i['piso']}")
+    if i.get("antiguedad_years") is not None:
+        bits.append("a estrenar" if i["antiguedad_years"] == 0 else f"{i['antiguedad_years']} años")
+    if i.get("cochera") is True:
+        bits.append("cochera")
+    elif i.get("cochera") is False:
+        bits.append("sin cochera")
+    return " · ".join(bits)
+
+
 def decision_lines(i: dict) -> list[str]:
     lines = []
     u = i.get("usd_per_m2")
@@ -741,7 +825,8 @@ def fmt_item(i: dict, tag: str = "🆕") -> str:
     if i.get("old_price"):
         extra = f" (antes USD {i['old_price']:,})".replace(",", ".")
     price = f"USD {i['price']:,}".replace(",", ".")
-    extra_lines = "".join(f"\n{html.escape(x)}" for x in decision_lines(i))
+    extras = extras_line(i)
+    extra_lines = "".join(f"\n{html.escape(x)}" for x in ([extras] if extras else []) + decision_lines(i))
     return (
         f"{tag} <b>{price}</b>{extra} · {area} · {amb}\n"
         f"📍 {html.escape(i['zone'])} — {where}"
@@ -1007,6 +1092,11 @@ def upsert_listing(prev: dict | None, item: dict, now: str, *, active: bool = Tr
         "days_seen": item.get("days_seen") if item.get("days_seen") is not None else prev.get("days_seen"),
         "price_drops": item.get("price_drops") if item.get("price_drops") is not None else prev.get("price_drops"),
         "closing_ref_usd": item.get("closing_ref_usd") if item.get("closing_ref_usd") is not None else prev.get("closing_ref_usd"),
+        "expensas_ars": item.get("expensas_ars") if item.get("expensas_ars") is not None else prev.get("expensas_ars"),
+        "expensas_text": item.get("expensas_text") or prev.get("expensas_text") or "",
+        "antiguedad_years": item.get("antiguedad_years") if item.get("antiguedad_years") is not None else prev.get("antiguedad_years"),
+        "piso": item.get("piso") if item.get("piso") is not None else prev.get("piso"),
+        "cochera": item.get("cochera") if item.get("cochera") is not None else prev.get("cochera"),
     }
 
 
