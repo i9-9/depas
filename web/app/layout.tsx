@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Candidato · Recoleta y alrededores",
-  description: "Un departamento. El resto queda en el archivo. Uso privado.",
+  description: "Un departamento para mirar. El resto, para marcar favoritos. Uso privado.",
   robots: { index: false, follow: false, nocache: true },
 };
 

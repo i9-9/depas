@@ -72,10 +72,10 @@ export function medianLine(item: Listing): string | null {
   const where = item.zone;
   const n = item.vs_median_n;
   if (pct === 0) {
-    return `El m² está en la mediana de ${where} (entre ${n} avisos que vemos).`;
+    return `El m² sale lo mismo que el resto de ${where} (${n} avisos).`;
   }
-  const dir = pct < 0 ? "debajo" : "arriba";
-  return `El m² está ${Math.abs(pct)}% ${dir} de la mediana de ${where} (entre ${n} avisos que vemos).`;
+  const dir = pct < 0 ? "más barato" : "más caro";
+  return `El m² está ${Math.abs(pct)}% ${dir} que el resto de ${where} (${n} avisos).`;
 }
 
 export function seenLine(item: Listing): string | null {
@@ -83,7 +83,7 @@ export function seenLine(item: Listing): string | null {
   if (days == null) return null;
   const when = days === 0 ? "hoy" : days === 1 ? "hace 1 día" : `hace ${days} días`;
   const drops = item.price_drops || 0;
-  const dropTxt =
-    drops === 0 ? "sin bajas nuestras" : drops === 1 ? "1 baja nuestra" : `${drops} bajas nuestras`;
-  return `Lo vimos por primera vez ${when} · ${dropTxt}`;
+  if (drops === 0) return `Lo vimos ${when}.`;
+  const dropTxt = drops === 1 ? "bajó una vez" : `bajó ${drops} veces`;
+  return `Lo vimos ${when} y ${dropTxt}.`;
 }

@@ -26,7 +26,7 @@ export function PricePair({
       </p>
       {drop && detail && (
         <p className="mt-2 text-[13px] text-accent">
-          <span className="idx line-through text-ink/50">{amount(drop.from)}</span>
+          <span className="idx line-through text-quiet">{amount(drop.from)}</span>
           {" · "}
           {detail}
         </p>

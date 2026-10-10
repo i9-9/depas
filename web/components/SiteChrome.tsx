@@ -9,6 +9,9 @@ export function SiteChrome({
 }) {
   return (
     <>
+      <a href="#contenido" className="skip">
+        Ir al contenido
+      </a>
       <div className="h-1.5 bg-accent" />
       <div className="page pb-24 pt-5">
         <header className="border-b border-ink pb-3">
@@ -17,7 +20,9 @@ export function SiteChrome({
               Recoleta y alrededores
             </p>
             {archiveCount != null ? (
-              <p className="col-span-12 text-right idx text-[11px] leading-none sm:col-span-4">{archiveCount}</p>
+              <p className="col-span-12 text-right idx text-[11px] leading-none text-quiet sm:col-span-4">
+                {archiveCount} {archiveCount === 1 ? "aviso" : "avisos"}
+              </p>
             ) : null}
           </div>
           <nav aria-label="Secciones" className="g mt-4">
@@ -25,11 +30,11 @@ export function SiteChrome({
               Candidato
             </NavLink>
             <NavLink href="/archivo/" active={current === "archivo"}>
-              Archivo
+              Lista
             </NavLink>
           </nav>
         </header>
-        {children}
+        <div id="contenido">{children}</div>
       </div>
     </>
   );
@@ -53,7 +58,7 @@ function NavLink({
     );
   }
   return (
-    <a href={href} className={`${cls} border-transparent text-ink/40 hover:text-ink`}>
+    <a href={href} className={`${cls} border-transparent text-quiet hover:text-ink`}>
       {children}
     </a>
   );

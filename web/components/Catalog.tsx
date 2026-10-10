@@ -15,6 +15,8 @@ import {
   zonesOf,
   type Listing,
 } from "@/lib/listings";
+import { FavoriteButton, StarIcon } from "@/components/FavoriteMark";
+import { Photo } from "@/components/Photo";
 import { PricePair } from "@/components/PricePair";
 import { specsCells } from "@/components/Specs";
 import { readPrefs, toggleId, writePrefs } from "@/lib/storage";
@@ -45,15 +47,37 @@ const INITIAL: Filters = {
   onlySaved: false,
 };
 
+function passesFilters(
+  item: Listing,
+  filters: Filters,
+  saved: string[],
+  discarded: string[],
+): boolean {
+  if (discarded.includes(item.id) && !filters.onlySaved) return false;
+  if (filters.onlySaved && !saved.includes(item.id)) return false;
+  if (filters.hideGone && !item.active) return false;
+  if (filters.zone && item.zone !== filters.zone) return false;
+  if (filters.site && item.site !== filters.site) return false;
+  if (filters.ambientes && String(item.ambientes ?? "") !== filters.ambientes) return false;
+  if (filters.maxPrice) {
+    const max = Number(filters.maxPrice);
+    if (item.price == null || item.price > max) return false;
+  }
+  if (filters.maxExpensas && item.expensas_ars != null) {
+    if (item.expensas_ars > Number(filters.maxExpensas)) return false;
+  }
+  if (filters.onlyNew && !isNew(item)) return false;
+  if (filters.onlyDrop && !hasDrop(item)) return false;
+  return true;
+}
+
 export function Catalog({
   listings,
   lastNovelty,
-  week,
   pickId = null,
 }: {
   listings: Listing[];
   lastNovelty: string | null;
-  week: string;
   pickId?: string | null;
 }) {
   const [filters, setFilters] = useState<Filters>(INITIAL);
@@ -61,6 +85,7 @@ export function Catalog({
   const [saved, setSaved] = useState<string[]>([]);
   const [discarded, setDiscarded] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
+  const [note, setNote] = useState("");
 
   useEffect(() => {
     const prefs = readPrefs();
@@ -75,118 +100,119 @@ export function Catalog({
   }, [saved, discarded, ready]);
 
   const zones = zonesOf(listings);
+  const sites = useMemo(() => {
+    const seen = new Set(listings.map((x) => x.site).filter(Boolean));
+    return (["zonaprop", "argenprop", "mercadolibre"] as const).filter((s) => seen.has(s));
+  }, [listings]);
   const pick = pickId ? listings.find((x) => x.id === pickId) ?? null : null;
+  const pickShown = Boolean(pick && ready && passesFilters(pick, filters, saved, discarded));
 
   const visible = useMemo(() => {
-    const max = Number(filters.maxPrice);
-    const now = Date.now();
+    if (!ready) return [];
     const rows = listings.filter((item) => {
       if (pickId && item.id === pickId) return false;
-      if (discarded.includes(item.id) && !filters.onlySaved) return false;
-      if (filters.onlySaved && !saved.includes(item.id)) return false;
-      if (filters.hideGone && !item.active) return false;
-      if (filters.zone && item.zone !== filters.zone) return false;
-      if (filters.site && item.site !== filters.site) return false;
-      if (filters.ambientes && String(item.ambientes ?? "") !== filters.ambientes) return false;
-      if (filters.maxPrice && (item.price == null || item.price > max)) return false;
-      const maxE = Number(filters.maxExpensas);
-      if (filters.maxExpensas && item.expensas_ars != null && item.expensas_ars > maxE) return false;
-      if (filters.onlyNew && !isNew(item, now)) return false;
-      if (filters.onlyDrop && !hasDrop(item)) return false;
-      return true;
+      return passesFilters(item, filters, saved, discarded);
     });
-    const ranked = [...rows];
-    ranked.sort((a, b) => {
+    rows.sort((a, b) => {
       if (sort === "price-asc") return (a.price ?? 1e12) - (b.price ?? 1e12);
       if (sort === "price-desc") return (b.price ?? 0) - (a.price ?? 0);
       if (sort === "tier") return rankByScore(a, b);
       return Date.parse(b.first_seen || "") - Date.parse(a.first_seen || "");
     });
-    return ranked;
-  }, [listings, filters, sort, saved, discarded, pickId]);
+    return rows;
+  }, [listings, filters, sort, saved, discarded, pickId, ready]);
+
+  const shown = visible.length + (pickShown ? 1 : 0);
 
   function set<K extends keyof Filters>(key: K, value: Filters[K]) {
     setFilters((f) => ({ ...f, [key]: value }));
   }
 
   function toggleSave(id: string) {
-    setSaved((prev) => toggleId(prev, id));
+    setSaved((prev) => {
+      const next = toggleId(prev, id);
+      setNote(next.includes(id) ? "Guardado en favoritos." : "Sacado de favoritos.");
+      return next;
+    });
     setDiscarded((prev) => prev.filter((x) => x !== id));
   }
 
   function toggleDiscard(id: string) {
-    setDiscarded((prev) => toggleId(prev, id));
+    setDiscarded((prev) => {
+      const next = toggleId(prev, id);
+      setNote(next.includes(id) ? "Sacado de la lista." : "Volvió a la lista.");
+      return next;
+    });
     setSaved((prev) => prev.filter((x) => x !== id));
   }
 
   return (
     <div>
-      <h1 className="sr-only">Archivo</h1>
+      <h1 className="sr-only">Lista de departamentos</h1>
       <p className="idx border-b border-ink py-3 text-[13px]">
-        {visible.length + (pick ? 1 : 0)} en vista · {week} · {formatWhen(lastNovelty)}
+        {ready ? `${shown} ${shown === 1 ? "aviso" : "avisos"}` : "…"}
+        {lastNovelty ? ` · actualizado ${formatWhen(lastNovelty)}` : ""}
+      </p>
+      <p className="border-b border-ink py-3 text-[13px] text-quiet">
+        Marcá favoritos. Quedan en este teléfono.
       </p>
 
-      <div className="g border-b border-ink py-4">
-        <Field label="Barrio" className="col-span-6 sm:col-span-3 lg:col-span-2">
-          <select className="input" value={filters.zone} onChange={(e) => set("zone", e.target.value)}>
-            <option value="">Todos</option>
-            {zones.map((z) => (
-              <option key={z} value={z}>
-                {z}
-              </option>
-            ))}
-          </select>
-        </Field>
-        <Field label="Portal" className="col-span-6 sm:col-span-3 lg:col-span-2">
-          <select className="input" value={filters.site} onChange={(e) => set("site", e.target.value)}>
-            <option value="">Todos</option>
-            <option value="zonaprop">Zonaprop</option>
-            <option value="argenprop">Argenprop</option>
-            <option value="mercadolibre">Mercado Libre</option>
-          </select>
-        </Field>
-        <Field label="Amb" className="col-span-4 sm:col-span-2 lg:col-span-1">
-          <select className="input" value={filters.ambientes} onChange={(e) => set("ambientes", e.target.value)}>
-            <option value="">Todos</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-        </Field>
-        <Field label="USD máx." className="col-span-4 sm:col-span-2 lg:col-span-2">
-          <Amount value={filters.maxPrice} placeholder="140.000" onChange={(v) => set("maxPrice", v)} />
-        </Field>
-        <Field label="Exp. máx." className="col-span-4 sm:col-span-2 lg:col-span-2">
-          <Amount value={filters.maxExpensas} placeholder="s/d" onChange={(v) => set("maxExpensas", v)} />
-        </Field>
-        <Field label="Orden" className="col-span-6 sm:col-span-3 lg:col-span-3">
-          <select className="input" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>
-            <option value="tier">Tiers</option>
-            <option value="new">Más nuevos</option>
-            <option value="price-asc">Precio ↑</option>
-            <option value="price-desc">Precio ↓</option>
-          </select>
-        </Field>
-      </div>
-
-      <div className="flex flex-wrap gap-x-5 gap-y-1 border-b border-ink py-2 text-[13px]">
-        <Toggle on={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
+      <div className="flex flex-wrap gap-x-5 gap-y-1 border-b border-ink py-1 text-[13px]">
+        <Toggle
+          on={filters.onlySaved}
+          onChange={(v) => set("onlySaved", v)}
+          label="Favoritos"
+          icon
+        />
         <Toggle on={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Bajó el precio" />
+        <Toggle on={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
         <Toggle on={!filters.hideGone} onChange={(v) => set("hideGone", !v)} label="Dados de baja" />
-        <Toggle on={filters.onlySaved} onChange={(v) => set("onlySaved", v)} label="Guardados" />
       </div>
 
-      {!listings.length ? (
+      <details className="border-b border-ink md:hidden">
+        <summary className="flex min-h-11 cursor-pointer items-center text-[13px]">
+          Filtrar y ordenar
+        </summary>
+        <FilterFields
+          filters={filters}
+          sort={sort}
+          zones={zones}
+          sites={sites}
+          onFilter={set}
+          onSort={setSort}
+        />
+      </details>
+      <div className="hidden border-b border-ink md:block">
+        <FilterFields
+          filters={filters}
+          sort={sort}
+          zones={zones}
+          sites={sites}
+          onFilter={set}
+          onSort={setSort}
+        />
+      </div>
+
+      <p aria-live="polite" className="sr-only">
+        {note}
+      </p>
+
+      {!ready ? (
+        <p className="py-16 text-[14px] text-quiet">Cargando tu lista…</p>
+      ) : !listings.length ? (
         <Empty
           title="Todavía no hay avisos"
-          text="Cuando el buscador encuentre departamentos que pasen los filtros, van a aparecer acá."
+          text="Cuando el buscador encuentre departamentos, van a aparecer acá."
         />
-      ) : !visible.length && !pick ? (
-        <Empty title="Nada con estos filtros" text="Probá ampliar barrio, precio o mostrar los dados de baja." />
+      ) : !shown ? (
+        <Empty
+          title="Nada con estos filtros"
+          text="Sacá algún filtro, o mirá solo favoritos."
+        />
       ) : (
         <Results
           items={visible}
-          pick={pick}
+          pick={pickShown ? pick : null}
           sort={sort}
           saved={saved}
           discarded={discarded}
@@ -194,6 +220,75 @@ export function Catalog({
           onDiscard={toggleDiscard}
         />
       )}
+    </div>
+  );
+}
+
+function FilterFields({
+  filters,
+  sort,
+  zones,
+  sites,
+  onFilter,
+  onSort,
+}: {
+  filters: Filters;
+  sort: SortKey;
+  zones: string[];
+  sites: string[];
+  onFilter: <K extends keyof Filters>(key: K, value: Filters[K]) => void;
+  onSort: (value: SortKey) => void;
+}) {
+  return (
+    <div className="g py-4">
+      <Field label="Barrio" className="col-span-6 sm:col-span-3 lg:col-span-2">
+        <select className="input" value={filters.zone} onChange={(e) => onFilter("zone", e.target.value)}>
+          <option value="">Todos</option>
+          {zones.map((z) => (
+            <option key={z} value={z}>
+              {z}
+            </option>
+          ))}
+        </select>
+      </Field>
+      {sites.length > 1 ? (
+        <Field label="Portal" className="col-span-6 sm:col-span-3 lg:col-span-2">
+          <select className="input" value={filters.site} onChange={(e) => onFilter("site", e.target.value)}>
+            <option value="">Todos</option>
+            {sites.map((s) => (
+              <option key={s} value={s}>
+                {siteLabel(s)}
+              </option>
+            ))}
+          </select>
+        </Field>
+      ) : null}
+      <Field label="Ambientes" className="col-span-4 sm:col-span-2 lg:col-span-2">
+        <select
+          className="input"
+          value={filters.ambientes}
+          onChange={(e) => onFilter("ambientes", e.target.value)}
+        >
+          <option value="">Todos</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </Field>
+      <Field label="Precio máximo" className="col-span-4 sm:col-span-2 lg:col-span-2">
+        <Amount value={filters.maxPrice} placeholder="Hasta USD" onChange={(v) => onFilter("maxPrice", v)} />
+      </Field>
+      <Field label="Expensas máx." className="col-span-4 sm:col-span-2 lg:col-span-2">
+        <Amount value={filters.maxExpensas} placeholder="Hasta $" onChange={(v) => onFilter("maxExpensas", v)} />
+      </Field>
+      <Field label="Orden" className="col-span-6 sm:col-span-3 lg:col-span-2">
+        <select className="input" value={sort} onChange={(e) => onSort(e.target.value as SortKey)}>
+          <option value="tier">Mejor primero</option>
+          <option value="new">Más nuevos</option>
+          <option value="price-asc">Más barato</option>
+          <option value="price-desc">Más caro</option>
+        </select>
+      </Field>
     </div>
   );
 }
@@ -215,7 +310,7 @@ function Results({
   onSave: (id: string) => void;
   onDiscard: (id: string) => void;
 }) {
-  const ranks = new Map(items.map((item, i) => [item.id, i + 1]));
+  const offset = pick ? 1 : 0;
   const groups =
     sort === "tier"
       ? TIERS.map((tier) => ({
@@ -223,6 +318,15 @@ function Results({
           rows: items.filter((item) => listingTier(item.score || 0).id === tier.id),
         })).filter((g) => g.rows.length)
       : [{ tier: null, rows: items }];
+
+  let n = offset;
+  const ranks = new Map<string, number>();
+  for (const group of groups) {
+    for (const item of group.rows) {
+      n += 1;
+      ranks.set(item.id, n);
+    }
+  }
 
   return (
     <div>
@@ -235,13 +339,15 @@ function Results({
         <span>Barrio</span>
         <span className="text-right">USD</span>
         <span className="text-right">USD/m²</span>
-        <span />
+        <span className="flex justify-end">
+          <StarIcon on={false} size={14} />
+        </span>
       </div>
       {pick && (
         <section>
           <h2 className="band flex items-center justify-between px-2 py-1.5 text-[12px] uppercase tracking-[0.16em]">
             <span>Candidato</span>
-            <a href="/" className="normal-case tracking-normal text-[12px] text-bg/80 hover:text-bg">
+            <a href="/" className="normal-case tracking-normal text-[12px] text-bg">
               Ver ficha
             </a>
           </h2>
@@ -330,18 +436,21 @@ function Toggle({
   on,
   onChange,
   label,
+  icon = false,
 }: {
   on: boolean;
   onChange: (v: boolean) => void;
   label: string;
+  icon?: boolean;
 }) {
   return (
     <button
       type="button"
       aria-pressed={on}
       onClick={() => onChange(!on)}
-      className={`min-h-9 border-b-2 ${on ? "border-accent text-ink" : "border-transparent text-ink/40"}`}
+      className={`flex min-h-11 items-center gap-1.5 border-b-2 ${on ? "border-accent text-ink" : "border-transparent text-quiet"}`}
     >
+      {icon ? <StarIcon on={on} size={16} /> : null}
       {label}
     </button>
   );
@@ -351,7 +460,7 @@ function Empty({ title, text }: { title: string; text: string }) {
   return (
     <div className="max-w-md py-16">
       <h2 className="display text-[32px]">{title}</h2>
-      <p className="mt-4 text-[14px]">{text}</p>
+      <p className="mt-4 text-[14px] text-quiet">{text}</p>
     </div>
   );
 }
@@ -380,40 +489,19 @@ function Actions({
   onDiscard: () => void;
 }) {
   return (
-    <div className="flex flex-col items-end gap-0 text-[11px] uppercase tracking-[0.12em] leading-none">
-      <button
-        type="button"
-        onClick={onSave}
-        aria-pressed={saved}
-        aria-label={saved ? "Quitar de guardados" : "Guardar"}
-        className={`min-h-6 ${saved ? "text-ink" : "text-ink/35"}`}
-      >
-        Ok
-      </button>
+    <div className="flex flex-col items-center">
+      <FavoriteButton on={saved} onClick={onSave} />
       <button
         type="button"
         onClick={onDiscard}
         aria-pressed={discarded}
-        aria-label={discarded ? "Volver a la lista" : "Descartar"}
-        className={`min-h-6 ${discarded ? "text-accent" : "text-ink/35"}`}
+        aria-label={discarded ? "Volver a la lista" : "Sacar de la lista"}
+        className={`grid size-10 place-items-center ${discarded ? "text-accent" : "text-quiet"}`}
       >
-        No
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden>
+          <path d="M3 3l10 10M13 3 3 13" fill="none" stroke="currentColor" strokeWidth="1.6" />
+        </svg>
       </button>
-    </div>
-  );
-}
-
-function Photo({ src }: { src: string }) {
-  return (
-    <div className="relative size-10 overflow-hidden bg-photo">
-      {src ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt="" className="absolute inset-0 size-full object-cover" />
-      ) : (
-        <span className="absolute inset-0 flex items-center justify-center text-[9px] uppercase tracking-[0.08em] text-ink/40">
-          s/f
-        </span>
-      )}
     </div>
   );
 }
@@ -439,9 +527,10 @@ function Row({
   const cells = specsCells(item);
   const street = streetOf(item);
   const tip = item.title && item.title !== street ? item.title : undefined;
+  const gone = !item.active && !pinned;
   return (
-    <article className={!item.active && !pinned ? "opacity-35" : ""}>
-      <div className="tt grid py-1.5">
+    <article>
+      <div className="tt grid py-1">
         <a
           href={item.url}
           target="_blank"
@@ -449,17 +538,17 @@ function Row({
           title={tip}
           className="hit col-span-3 grid grid-cols-subgrid items-center md:col-span-8"
         >
-          <p className="idx text-[11px] text-ink/45">{String(rank).padStart(2, "0")}</p>
-          <Photo src={item.photo} />
+          <p className="idx text-[11px] text-quiet">{String(rank).padStart(2, "0")}</p>
+          <Photo src={item.photo} alt={street} className="size-12" />
           <div className="min-w-0">
-            <h3 className="name truncate text-[14px] leading-tight">{street}</h3>
-            <p className="truncate text-[11px] leading-tight text-ink/45">
+            <h3 className={`name truncate text-[14px] leading-tight ${gone ? "text-quiet" : ""}`}>{street}</h3>
+            <p className="truncate text-[11px] leading-tight text-quiet">
               {marks.length ? `${marks.join(" · ")} · ` : ""}
               {siteLabel(item.site)}
             </p>
             <p className="idx mt-0.5 text-[16px] leading-none md:hidden">
               <PricePair item={item} inline />
-              <span className="text-[12px] text-ink/45">
+              <span className="text-[12px] text-quiet">
                 {" "}
                 · {cells.m2} · {cells.amb} · {item.usd_per_m2 != null ? formatNum(item.usd_per_m2) : "s/d"}/m²
               </span>
@@ -471,7 +560,7 @@ function Row({
           <p className="idx hidden text-right text-[18px] leading-none md:block">
             <PricePair item={item} inline />
           </p>
-          <p className="idx hidden text-right text-[12px] text-ink/70 md:block">
+          <p className="idx hidden text-right text-[12px] text-quiet md:block">
             {item.usd_per_m2 != null ? formatNum(item.usd_per_m2) : "s/d"}
           </p>
         </a>

@@ -7,6 +7,7 @@
   --line: #000;
   --photo: #ececec;
   --accent: #e30613;
+  --quiet: #444;
   --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --unit: 8px;
   --gutter: 24px;
@@ -20,6 +21,7 @@
   --color-line: var(--line);
   --color-photo: var(--photo);
   --color-accent: var(--accent);
+  --color-quiet: var(--quiet);
   --font-sans: var(--font-body);
 }
 
@@ -60,15 +62,27 @@ a[href] {
 }
 
 .tt {
-  grid-template-columns: 28px 40px minmax(0, 1fr) 32px;
+  grid-template-columns: 24px 48px minmax(0, 1fr) 56px;
   column-gap: 12px;
   align-items: center;
 }
 
 @media (min-width: 768px) {
   .tt {
-    grid-template-columns: 28px 40px minmax(0, 1fr) 40px 28px minmax(56px, 0.5fr) 76px 52px 32px;
+    grid-template-columns: 24px 48px minmax(0, 1fr) 40px 28px minmax(56px, 0.5fr) 76px 52px 56px;
   }
+}
+
+.hit-44 {
+  position: relative;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.hit-44::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 
 .g {
@@ -127,6 +141,20 @@ a.hit:hover .name,
 a.hit:focus-visible .name {
   text-decoration: underline;
   text-underline-offset: 0.15em;
+}
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -40px;
+  z-index: 20;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 8px 12px;
+}
+
+.skip:focus {
+  top: 8px;
 }
 
 .band {
