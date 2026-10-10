@@ -2,8 +2,9 @@ name: Buscar departamentos
 
 on:
   schedule:
-    # 5 corridas por día (hora Argentina = UTC-3): 08:17, 11:17, 14:17, 17:17, 20:17
-    - cron: "17 11,14,17,20,23 * * *"
+    # 5 corridas por día, hora Argentina. timezone fuerza a GitHub a re-registrar el cron.
+    - cron: "17 8,11,14,17,20 * * *"
+      timezone: America/Argentina/Buenos_Aires
   workflow_dispatch:
 
 permissions:
