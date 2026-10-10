@@ -377,7 +377,7 @@ def fmt_item(i: dict, tag: str = "🆕") -> str:
     return (
         f"{tag} <b>{price}</b>{extra} · {area} · {amb}{pref}\n"
         f"📍 {html.escape(i['zone'])} — {where}\n"
-        f"🔗 <a href=\"{html.escape(i['url'])}\">{site}</a>"
+        f"🔗 {site}: {html.escape(i['url'])}"
     )
 
 

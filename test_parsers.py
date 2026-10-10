@@ -114,6 +114,7 @@ def test_formatting():
     msg = s.fmt_item(i, "📉")
     assert "USD 98.000" in msg and "antes USD 105.000" in msg and "57 m²" in msg
     assert "de época" in msg and "para reciclar" in msg
+    assert "Zonaprop: https://z/1" in msg and "<a href" not in msg
 
 
 def test_preferences_not_exclusive():
