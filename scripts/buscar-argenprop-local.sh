@@ -1,7 +1,7 @@
 #!/bin/bash
-# Argenprop desde la Mac (IP residencial) y sync de seen.json con GitHub.
+# Argenprop desde la Mac (IP residencial) y sync de su estado con GitHub.
 # Usage:
-#   ./scripts/buscar-argenprop-local.sh           # scrape + commit/push seen.json
+#   ./scripts/buscar-argenprop-local.sh           # scrape + commit/push
 #   ./scripts/buscar-argenprop-local.sh --no-sync # solo scrape (no git)
 set -euo pipefail
 
@@ -30,27 +30,29 @@ fi
 
 log() { echo "$*"; }
 
+AP_PATHS='state/seen-argenprop.json|web/data/listings-argenprop.json'
+
 other_dirty() {
-  git status --porcelain | grep -vE '^\?\?|seen\.json' | grep -q .
+  git status --porcelain | grep -vE "^\?\?|${AP_PATHS}" | grep -q .
 }
 
-sync_seen() {
+sync_argenprop() {
   local branch
   branch="$(git rev-parse --abbrev-ref HEAD)"
-  git add seen.json
+  git add state/seen-argenprop.json web/data/listings-argenprop.json
   if git diff --cached --quiet; then
-    log "seen.json sin cambios; no hay commit"
+    log "Argenprop sin cambios; no hay commit"
     return 0
   fi
-  git commit -m "Actualizar avisos vistos (Argenprop local)"
-  if other_dirty; then
+  git commit -m "Actualizar avisos (Argenprop local)"
+  if other_dirty(); then
     log "hay otros cambios locales; no hago rebase. git push a mano si hace falta"
     git push "origin" "$branch" || log "WARN push falló"
     return 0
   fi
   git pull --rebase "origin" "$branch" || log "WARN rebase falló"
   git push "origin" "$branch" || log "WARN push falló"
-  log "seen.json pusheado a origin/$branch"
+  log "Argenprop pusheado a origin/$branch"
 }
 
 run() {
@@ -66,7 +68,7 @@ run() {
   fi
   "$PY" "$ROOT/scraper.py" --only argenprop
   if [[ "$SYNC" -eq 1 ]]; then
-    sync_seen
+    sync_argenprop
   else
     log "sync git desactivado"
   fi

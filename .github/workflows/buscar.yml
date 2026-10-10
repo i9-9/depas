@@ -15,12 +15,12 @@ concurrency:
 
 jobs:
   buscar:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -31,12 +31,19 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SITE_URL: ${{ vars.SITE_URL }}
         run: python scraper.py
 
-      - name: Guardar avisos vistos
+      - name: Guardar avisos
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add seen.json || true
-          git diff --cached --quiet || (git commit -m "Actualizar avisos vistos" && git push)
+          git add state/ web/data/ || true
+          if git diff --cached --quiet; then
+            echo "Sin cambios reales; no hay commit"
+            exit 0
+          fi
+          git commit -m "Actualizar avisos"
+          git pull --rebase origin HEAD
+          git push

@@ -913,6 +913,14 @@ def process_portal(
 ) -> bool:
     """Actualiza un portal. Devuelve True si hubo fuentes OK de ese portal."""
     if not ok_zones:
+        if errors:
+            err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in errors)
+            payloads = notify_payloads("", [], err_block)
+            if dry_run:
+                for p in payloads:
+                    print("-----\n" + p["text"])
+            elif token and chat_id:
+                deliver(token, chat_id, payloads)
         return False
 
     state, catalog = load_portal(site, persist=not dry_run)
