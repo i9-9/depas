@@ -235,6 +235,22 @@ def test_reject_noise():
     )
 
 
+def test_real_zonaprop_fixture():
+    html = (Path(__file__).parent / "fixtures" / "zonaprop-botanico.html").read_text(encoding="utf-8")
+    src = {"name": "Botánico", "aliases": ["botanico", "palermo botanico"]}
+    assert s.page_matches_zone(html, "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo.html", src)
+    items = s.parse_page(html, "zonaprop", "https://www.zonaprop.com.ar/x.html")
+    assert len(items) >= 6, len(items)
+    assert all(i["price"] and i["price"] >= 20000 for i in items)
+    assert all(i.get("photo", "").startswith("http") for i in items)
+    assert sum(1 for i in items if i.get("address")) >= 6
+    armenia = next(i for i in items if i["id"] == "zonaprop:53929445")
+    assert armenia["address"].lower().startswith("armenia")
+    assert armenia["ambientes"] == 1 and armenia["area"] == 38
+    kept = [i for i in items if s.keep_listing(i, src, F)]
+    assert kept, "el fixture real debería dejar avisos de Botánico"
+
+
 def test_dedupe():
     a = {"id": "argenprop:1", "site": "argenprop", "price": 98000, "area": 57, "ambientes": 3,
          "address": "Juncal 2900, Recoleta", "score": 0, "title": "x", "url": "https://a/1"}

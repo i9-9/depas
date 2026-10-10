@@ -43,7 +43,7 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
 
 ```bash
 pip install -r requirements.txt
-python test_parsers.py            # pruebas offline del parser y filtros
+python test_parsers.py            # parser, filtros, y un HTML real de Zonaprop (fixtures/)
 python scraper.py --dry-run       # búsqueda real, imprime en consola (sin Telegram)
 python scraper.py --only argenprop
 ```

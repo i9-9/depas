@@ -117,7 +117,10 @@ def parse_card(site: str, text: str) -> dict:
         if m and len(m.group(1)) < 120:
             out["address"] = m.group(1).strip()
     else:
-        m = re.search(r"\n([^\n]+)\n[^\n]*(?:Capital Federal|CABA)", text)
+        m = re.search(
+            r"\n([^\n]{3,80})\n[^\n]*(?:Capital Federal|CABA|Botánico|Botanico|Recoleta|Barrio Norte|Palermo Chico|Palermo)\b",
+            text,
+        )
         if m and len(m.group(1)) < 120:
             out["address"] = m.group(1).strip()
     return out
