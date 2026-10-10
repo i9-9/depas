@@ -1,0 +1,55 @@
+{
+  "median_min_n": 8,
+  "value_cheap_pct": -8,
+  "value_steal_pct": -15,
+  "value_rich_pct": 20,
+  "value_suspect_pct": -30,
+  "expensas_high_ars": 300000,
+  "expensas_loud_ars": 380000,
+  "expensas_min_valid_ars": 10000,
+  "air_ok_usd": 25000,
+  "air_wide_usd": 40000,
+  "exit_usd_m2": {
+    "Recoleta": 2750,
+    "Barrio Norte": 2750,
+    "Botánico": 3000,
+    "Palermo Chico": 3600
+  },
+  "weak_streets": [
+    {
+      "street": "paso"
+    },
+    {
+      "street": "jean jaures"
+    },
+    {
+      "street": "jean jaure"
+    }
+  ],
+  "weak_street_exit_usd_m2": 2200,
+  "closing_discount_pct": 3.9,
+  "buy_cost_pct": 5,
+  "buy_cost_pct_hard": 8,
+  "reno_usd_m2_recycle": 375,
+  "reno_usd_m2_ok": 250,
+  "reno_usd_m2_recycle_hard": 550,
+  "reno_usd_m2_ok_hard": 300,
+  "hold_months": 6,
+  "hold_months_hard": 9,
+  "fx_ars_usd": 1540,
+  "sale_cost_pct": 5,
+  "sale_cost_pct_hard": 6,
+  "neto_hard_mejor_usd": 15000,
+  "neto_hard_bien_usd": 0,
+  "neto_hard_ok_usd": -25000,
+  "source_stale_hours": 36,
+  "area_weight_covered": 1,
+  "area_weight_semi": 0.5,
+  "area_weight_uncovered": 0.3,
+  "cochera_usd": null,
+  "rule_70_pct": 70,
+  "decision_buy_pct": 92,
+  "decision_watch_pct": 108,
+  "gusto_usd": 125000,
+  "min_area_m2": 50
+}

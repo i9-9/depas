@@ -628,9 +628,19 @@
     },
     {
       "street": "jean jaures",
+      "max": 699,
+      "out": true
+    },
+    {
+      "street": "jean jaures",
       "min": 700,
       "max": 1399,
       "zone": "Barrio Norte"
+    },
+    {
+      "street": "anchorena",
+      "max": 699,
+      "out": true
     },
     {
       "street": "anchorena",
@@ -640,13 +650,24 @@
     },
     {
       "street": "ecuador",
-      "zone": "Barrio Norte"
+      "max": 699,
+      "out": true
     },
     {
       "street": "ecuador",
       "min": 700,
       "max": 1399,
       "zone": "Barrio Norte"
+    },
+    {
+      "street": "ecuador",
+      "min": 1400,
+      "zone": "Recoleta"
+    },
+    {
+      "street": "aguero",
+      "max": 699,
+      "out": true
     },
     {
       "street": "aguero",
@@ -656,15 +677,30 @@
     },
     {
       "street": "laprida",
+      "max": 699,
+      "out": true
+    },
+    {
+      "street": "laprida",
       "min": 700,
       "max": 1399,
       "zone": "Barrio Norte"
     },
     {
       "street": "paso",
+      "max": 699,
+      "out": true
+    },
+    {
+      "street": "paso",
       "min": 700,
       "max": 1399,
       "zone": "Barrio Norte"
+    },
+    {
+      "street": "gallo",
+      "max": 699,
+      "out": true
     },
     {
       "street": "gallo",

@@ -6,10 +6,9 @@
   <string>com.search-amb.argenprop</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/ivan/Documents/Codigo/search_amb/scripts/buscar-argenprop-local.sh</string>
+    <string>/bin/bash</string>
+    <string>/Users/ivan/Library/Application Support/search-amb/run-argenprop.sh</string>
   </array>
-  <key>WorkingDirectory</key>
-  <string>/Users/ivan/Documents/Codigo/search_amb</string>
   <key>EnvironmentVariables</key>
   <dict>
     <key>PATH</key>
@@ -24,8 +23,8 @@
     <dict><key>Hour</key><integer>20</integer><key>Minute</key><integer>20</integer></dict>
   </array>
   <key>StandardOutPath</key>
-  <string>/Users/ivan/Documents/Codigo/search_amb/argenprop-local.log</string>
+  <string>/Users/ivan/Library/Logs/search-amb/argenprop-local.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/ivan/Documents/Codigo/search_amb/argenprop-local.log</string>
+  <string>/Users/ivan/Library/Logs/search-amb/argenprop-local.log</string>
 </dict>
 </plist>

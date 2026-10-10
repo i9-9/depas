@@ -1,10 +1,26 @@
-import type { Listing } from "@/lib/listings";
+import { EXPENSAS_MIN_VALID_ARS, type Listing } from "@/lib/listings";
 
 export type Spec = { label: string; value: string };
 
 export function specsOf(item: Listing): Spec[] {
   const rows: Spec[] = [];
-  if (item.area != null) rows.push({ label: "Metros", value: `${item.area.toLocaleString("es-AR")} m²` });
+  if (item.area != null) {
+    const bits = [`${item.area.toLocaleString("es-AR")} m²`];
+    if (item.area_covered != null && item.area_total != null && item.area_covered !== item.area_total) {
+      bits.push(`(${item.area_covered.toLocaleString("es-AR")} cub. / ${item.area_total.toLocaleString("es-AR")} tot.)`);
+    }
+    rows.push({ label: "Metros", value: bits.join(" ") });
+  }
+  if (item.neto_hard_usd != null) {
+    const n = item.neto_hard_usd;
+    rows.push({
+      label: "Neto duro",
+      value: `${n >= 0 ? "" : "−"}USD ${Math.abs(n).toLocaleString("es-AR")}`,
+    });
+  }
+  if (item.max_offer_usd != null) {
+    rows.push({ label: "Oferta máx.", value: `USD ${item.max_offer_usd.toLocaleString("es-AR")}` });
+  }
   if (item.air_usd != null) {
     rows.push({
       label: "Aire",
@@ -14,7 +30,7 @@ export function specsOf(item: Listing): Spec[] {
   if (item.ambientes != null) rows.push({ label: "Ambientes", value: String(item.ambientes) });
   if (item.zone) rows.push({ label: "Barrio", value: item.zone });
   if (item.piso != null) rows.push({ label: "Piso", value: item.piso === 0 ? "Planta baja" : String(item.piso) });
-  if (item.expensas_ars != null && item.expensas_ars >= 10000) {
+  if (item.expensas_ars != null && item.expensas_ars >= EXPENSAS_MIN_VALID_ARS) {
     rows.push({ label: "Expensas", value: `$${item.expensas_ars.toLocaleString("es-AR")}` });
   }
   if (item.antiguedad_years != null) {

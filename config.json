@@ -57,154 +57,794 @@
       "chacarita"
     ],
     "street_zones": [
-      {"street": "corrientes", "out": true},
-      {"street": "sarmiento", "out": true},
-      {"street": "tucuman", "out": true},
-      {"street": "viamonte", "out": true},
-      {"street": "lavalle", "out": true},
-      {"street": "fitz roy", "out": true},
-      {"street": "thames", "out": true},
-      {"street": "armenia", "out": true},
-      {"street": "serrano", "out": true},
-      {"street": "honduras", "out": true},
-      {"street": "costa rica", "out": true},
-      {"street": "nicaragua", "out": true},
-      {"street": "el salvador", "out": true},
-      {"street": "borges", "out": true},
-      {"street": "godoy cruz", "out": true},
-      {"street": "carranza", "out": true},
-      {"street": "bonpland", "out": true},
-      {"street": "dorrego", "out": true},
-      {"street": "arevalo", "out": true},
-      {"street": "suipacha", "out": true},
-      {"street": "esmeralda", "out": true},
-      {"street": "florida", "out": true},
-      {"street": "maipu", "out": true},
-      {"street": "san martin", "out": true},
-      {"street": "cerrito", "out": true},
-      {"street": "montevideo", "max": 699, "out": true},
-      {"street": "montevideo", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "montevideo", "min": 1400, "zone": "Recoleta"},
-      {"street": "uruguay", "max": 699, "out": true},
-      {"street": "uruguay", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "uruguay", "min": 1400, "zone": "Recoleta"},
-      {"street": "virasoro", "out": true},
-      {"street": "soler", "out": true},
-      {"street": "humboldt", "out": true},
-      {"street": "guatemala", "out": true},
-      {"street": "malabia", "out": true},
-      {"street": "juana manso", "out": true},
-      {"street": "talcahuano", "out": true},
-      {"street": "libertad", "out": true},
-      {"street": "cabrera", "out": true},
-      {"street": "cordoba", "max": 1499, "out": true},
-      {"street": "cordoba", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "cordoba", "min": 3200, "out": true},
-      {"street": "paraguay", "max": 1499, "out": true},
-      {"street": "paraguay", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "paraguay", "min": 3200, "out": true},
-      {"street": "santa fe", "max": 1499, "out": true},
-      {"street": "santa fe", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "santa fe", "min": 3200, "max": 3499, "zone": "Recoleta"},
-      {"street": "santa fe", "min": 3500, "max": 4299, "zone": "Botánico"},
-      {"street": "santa fe", "min": 4300, "out": true},
-      {"street": "charcas", "max": 1499, "out": true},
-      {"street": "charcas", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "charcas", "min": 3200, "max": 3499, "zone": "Recoleta"},
-      {"street": "charcas", "min": 3500, "out": true},
-      {"street": "arenales", "max": 1499, "out": true},
-      {"street": "arenales", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "arenales", "min": 3200, "max": 3599, "zone": "Recoleta"},
-      {"street": "arenales", "min": 3600, "max": 4299, "zone": "Botánico"},
-      {"street": "arenales", "min": 4300, "out": true},
-      {"street": "mansilla", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "mansilla", "min": 3200, "max": 3499, "zone": "Recoleta"},
-      {"street": "mansilla", "min": 3500, "out": true},
-      {"street": "beruti", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "beruti", "min": 3200, "max": 3599, "zone": "Recoleta"},
-      {"street": "beruti", "min": 3600, "max": 4299, "zone": "Botánico"},
-      {"street": "beruti", "min": 4300, "out": true},
-      {"street": "guemes", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "guemes", "min": 3200, "max": 3699, "zone": "Recoleta"},
-      {"street": "guemes", "min": 3700, "max": 4299, "zone": "Botánico"},
-      {"street": "guemes", "min": 4300, "out": true},
-      {"street": "las heras", "min": 1500, "max": 3199, "zone": "Recoleta"},
-      {"street": "las heras", "min": 3200, "max": 3599, "zone": "Palermo Chico"},
-      {"street": "las heras", "min": 3600, "max": 4299, "zone": "Botánico"},
-      {"street": "las heras", "min": 4300, "out": true},
-      {"street": "french", "zone": "Recoleta"},
-      {"street": "french", "min": 1500, "max": 3299, "zone": "Recoleta"},
-      {"street": "pena", "min": 1500, "max": 3299, "zone": "Recoleta"},
-      {"street": "juncal", "min": 1500, "max": 3199, "zone": "Recoleta"},
-      {"street": "juncal", "min": 3200, "max": 3699, "zone": "Palermo Chico"},
-      {"street": "juncal", "min": 3700, "max": 4299, "zone": "Botánico"},
-      {"street": "cabello", "min": 2900, "max": 3699, "zone": "Palermo Chico"},
-      {"street": "cabello", "min": 3700, "max": 4299, "zone": "Botánico"},
-      {"street": "salguero", "min": 2000, "max": 2799, "zone": "Botánico"},
-      {"street": "salguero", "min": 2800, "max": 3499, "zone": "Palermo Chico"},
-      {"street": "scalabrini ortiz", "min": 1800, "max": 2899, "zone": "Botánico"},
-      {"street": "scalabrini ortiz", "min": 2900, "out": true},
-      {"street": "ugarteche", "min": 2400, "max": 3299, "zone": "Botánico"},
-      {"street": "casares", "zone": "Palermo Chico"},
-      {"street": "cavia", "zone": "Palermo Chico"},
-      {"street": "tagle", "zone": "Palermo Chico"},
-      {"street": "ombu", "zone": "Palermo Chico"},
-      {"street": "san martin de tours", "zone": "Palermo Chico"},
-      {"street": "republica de la india", "zone": "Botánico"},
-      {"street": "gutierrez", "min": 2400, "max": 3499, "zone": "Palermo Chico"},
-      {"street": "quintana", "zone": "Recoleta"},
-      {"street": "posadas", "zone": "Recoleta"},
-      {"street": "guido", "min": 1500, "zone": "Recoleta"},
-      {"street": "alvear", "max": 1499, "out": true},
-      {"street": "alvear", "min": 1500, "max": 2199, "zone": "Barrio Norte"},
-      {"street": "alvear", "min": 2200, "zone": "Recoleta"},
-      {"street": "callao", "max": 699, "out": true},
-      {"street": "callao", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "callao", "min": 1400, "zone": "Recoleta"},
-      {"street": "ayacucho", "max": 699, "out": true},
-      {"street": "ayacucho", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "ayacucho", "min": 1400, "zone": "Recoleta"},
-      {"street": "junin", "max": 699, "out": true},
-      {"street": "junin", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "junin", "min": 1400, "zone": "Recoleta"},
-      {"street": "uriburu", "max": 699, "out": true},
-      {"street": "uriburu", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "uriburu", "min": 1400, "zone": "Recoleta"},
-      {"street": "azcuenaga", "max": 699, "out": true},
-      {"street": "azcuenaga", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "azcuenaga", "min": 1400, "zone": "Recoleta"},
-      {"street": "larrea", "max": 699, "out": true},
-      {"street": "larrea", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "larrea", "min": 1400, "zone": "Recoleta"},
-      {"street": "pueyrredon", "max": 699, "out": true},
-      {"street": "pueyrredon", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "pueyrredon", "min": 1400, "zone": "Recoleta"},
-      {"street": "rodriguez pena", "max": 699, "out": true},
-      {"street": "rodriguez pena", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "rodriguez pena", "min": 1400, "zone": "Recoleta"},
-      {"street": "jean jaures", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "anchorena", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "ecuador", "zone": "Barrio Norte"},
-      {"street": "ecuador", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "aguero", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "laprida", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "paso", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "gallo", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "san luis", "min": 1800, "max": 3199, "zone": "Barrio Norte"},
-      {"street": "san luis", "min": 3200, "out": true},
-      {"street": "riobamba", "max": 699, "out": true},
-      {"street": "riobamba", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "riobamba", "min": 1400, "zone": "Recoleta"},
-      {"street": "mario bravo", "max": 699, "out": true},
-      {"street": "mario bravo", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "coronel diaz", "min": 1000, "max": 1899, "zone": "Recoleta"},
-      {"street": "coronel diaz", "min": 1900, "max": 3499, "zone": "Palermo Chico"},
-      {"street": "billinghurst", "max": 699, "out": true},
-      {"street": "billinghurst", "min": 700, "max": 1399, "zone": "Barrio Norte"},
-      {"street": "billinghurst", "min": 1400, "zone": "Recoleta"},
-      {"street": "austria", "min": 1600, "max": 2899, "zone": "Recoleta"},
-      {"street": "pacheco de melo", "zone": "Recoleta"},
-      {"street": "vicente lopez", "zone": "Recoleta"}
+      {
+        "street": "corrientes",
+        "out": true
+      },
+      {
+        "street": "sarmiento",
+        "out": true
+      },
+      {
+        "street": "tucuman",
+        "out": true
+      },
+      {
+        "street": "viamonte",
+        "out": true
+      },
+      {
+        "street": "lavalle",
+        "out": true
+      },
+      {
+        "street": "fitz roy",
+        "out": true
+      },
+      {
+        "street": "thames",
+        "out": true
+      },
+      {
+        "street": "armenia",
+        "out": true
+      },
+      {
+        "street": "serrano",
+        "out": true
+      },
+      {
+        "street": "honduras",
+        "out": true
+      },
+      {
+        "street": "costa rica",
+        "out": true
+      },
+      {
+        "street": "nicaragua",
+        "out": true
+      },
+      {
+        "street": "el salvador",
+        "out": true
+      },
+      {
+        "street": "borges",
+        "out": true
+      },
+      {
+        "street": "godoy cruz",
+        "out": true
+      },
+      {
+        "street": "carranza",
+        "out": true
+      },
+      {
+        "street": "bonpland",
+        "out": true
+      },
+      {
+        "street": "dorrego",
+        "out": true
+      },
+      {
+        "street": "arevalo",
+        "out": true
+      },
+      {
+        "street": "suipacha",
+        "out": true
+      },
+      {
+        "street": "esmeralda",
+        "out": true
+      },
+      {
+        "street": "florida",
+        "out": true
+      },
+      {
+        "street": "maipu",
+        "out": true
+      },
+      {
+        "street": "san martin",
+        "out": true
+      },
+      {
+        "street": "cerrito",
+        "out": true
+      },
+      {
+        "street": "montevideo",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "montevideo",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "montevideo",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "uruguay",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "uruguay",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "uruguay",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "virasoro",
+        "out": true
+      },
+      {
+        "street": "soler",
+        "out": true
+      },
+      {
+        "street": "humboldt",
+        "out": true
+      },
+      {
+        "street": "guatemala",
+        "out": true
+      },
+      {
+        "street": "malabia",
+        "out": true
+      },
+      {
+        "street": "juana manso",
+        "out": true
+      },
+      {
+        "street": "talcahuano",
+        "out": true
+      },
+      {
+        "street": "libertad",
+        "out": true
+      },
+      {
+        "street": "cabrera",
+        "out": true
+      },
+      {
+        "street": "cordoba",
+        "max": 1499,
+        "out": true
+      },
+      {
+        "street": "cordoba",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "cordoba",
+        "min": 3200,
+        "out": true
+      },
+      {
+        "street": "paraguay",
+        "max": 1499,
+        "out": true
+      },
+      {
+        "street": "paraguay",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "paraguay",
+        "min": 3200,
+        "out": true
+      },
+      {
+        "street": "santa fe",
+        "max": 1499,
+        "out": true
+      },
+      {
+        "street": "santa fe",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "santa fe",
+        "min": 3200,
+        "max": 3499,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "santa fe",
+        "min": 3500,
+        "max": 4299,
+        "zone": "Botánico"
+      },
+      {
+        "street": "santa fe",
+        "min": 4300,
+        "out": true
+      },
+      {
+        "street": "charcas",
+        "max": 1499,
+        "out": true
+      },
+      {
+        "street": "charcas",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "charcas",
+        "min": 3200,
+        "max": 3499,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "charcas",
+        "min": 3500,
+        "out": true
+      },
+      {
+        "street": "arenales",
+        "max": 1499,
+        "out": true
+      },
+      {
+        "street": "arenales",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "arenales",
+        "min": 3200,
+        "max": 3599,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "arenales",
+        "min": 3600,
+        "max": 4299,
+        "zone": "Botánico"
+      },
+      {
+        "street": "arenales",
+        "min": 4300,
+        "out": true
+      },
+      {
+        "street": "mansilla",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "mansilla",
+        "min": 3200,
+        "max": 3499,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "mansilla",
+        "min": 3500,
+        "out": true
+      },
+      {
+        "street": "beruti",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "beruti",
+        "min": 3200,
+        "max": 3599,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "beruti",
+        "min": 3600,
+        "max": 4299,
+        "zone": "Botánico"
+      },
+      {
+        "street": "beruti",
+        "min": 4300,
+        "out": true
+      },
+      {
+        "street": "guemes",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "guemes",
+        "min": 3200,
+        "max": 3699,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "guemes",
+        "min": 3700,
+        "max": 4299,
+        "zone": "Botánico"
+      },
+      {
+        "street": "guemes",
+        "min": 4300,
+        "out": true
+      },
+      {
+        "street": "las heras",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "las heras",
+        "min": 3200,
+        "max": 3599,
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "las heras",
+        "min": 3600,
+        "max": 4299,
+        "zone": "Botánico"
+      },
+      {
+        "street": "las heras",
+        "min": 4300,
+        "out": true
+      },
+      {
+        "street": "french",
+        "zone": "Recoleta"
+      },
+      {
+        "street": "french",
+        "min": 1500,
+        "max": 3299,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "pena",
+        "min": 1500,
+        "max": 3299,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "juncal",
+        "min": 1500,
+        "max": 3199,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "juncal",
+        "min": 3200,
+        "max": 3699,
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "juncal",
+        "min": 3700,
+        "max": 4299,
+        "zone": "Botánico"
+      },
+      {
+        "street": "cabello",
+        "min": 2900,
+        "max": 3699,
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "cabello",
+        "min": 3700,
+        "max": 4299,
+        "zone": "Botánico"
+      },
+      {
+        "street": "salguero",
+        "min": 2000,
+        "max": 2799,
+        "zone": "Botánico"
+      },
+      {
+        "street": "salguero",
+        "min": 2800,
+        "max": 3499,
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "scalabrini ortiz",
+        "min": 1800,
+        "max": 2899,
+        "zone": "Botánico"
+      },
+      {
+        "street": "scalabrini ortiz",
+        "min": 2900,
+        "out": true
+      },
+      {
+        "street": "ugarteche",
+        "min": 2400,
+        "max": 3299,
+        "zone": "Botánico"
+      },
+      {
+        "street": "casares",
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "cavia",
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "tagle",
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "ombu",
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "san martin de tours",
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "republica de la india",
+        "zone": "Botánico"
+      },
+      {
+        "street": "gutierrez",
+        "min": 2400,
+        "max": 3499,
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "quintana",
+        "zone": "Recoleta"
+      },
+      {
+        "street": "posadas",
+        "zone": "Recoleta"
+      },
+      {
+        "street": "guido",
+        "min": 1500,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "alvear",
+        "max": 1499,
+        "out": true
+      },
+      {
+        "street": "alvear",
+        "min": 1500,
+        "max": 2199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "alvear",
+        "min": 2200,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "callao",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "callao",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "callao",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "ayacucho",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "ayacucho",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "ayacucho",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "junin",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "junin",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "junin",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "uriburu",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "uriburu",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "uriburu",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "azcuenaga",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "azcuenaga",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "azcuenaga",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "larrea",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "larrea",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "larrea",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "pueyrredon",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "pueyrredon",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "pueyrredon",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "rodriguez pena",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "rodriguez pena",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "rodriguez pena",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "jean jaures",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "jean jaures",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "anchorena",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "anchorena",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "ecuador",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "ecuador",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "ecuador",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "aguero",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "aguero",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "laprida",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "laprida",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "paso",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "paso",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "gallo",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "gallo",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "san luis",
+        "min": 1800,
+        "max": 3199,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "san luis",
+        "min": 3200,
+        "out": true
+      },
+      {
+        "street": "riobamba",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "riobamba",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "riobamba",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "mario bravo",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "mario bravo",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "coronel diaz",
+        "min": 1000,
+        "max": 1899,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "coronel diaz",
+        "min": 1900,
+        "max": 3499,
+        "zone": "Palermo Chico"
+      },
+      {
+        "street": "billinghurst",
+        "max": 699,
+        "out": true
+      },
+      {
+        "street": "billinghurst",
+        "min": 700,
+        "max": 1399,
+        "zone": "Barrio Norte"
+      },
+      {
+        "street": "billinghurst",
+        "min": 1400,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "austria",
+        "min": 1600,
+        "max": 2899,
+        "zone": "Recoleta"
+      },
+      {
+        "street": "pacheco de melo",
+        "zone": "Recoleta"
+      },
+      {
+        "street": "vicente lopez",
+        "zone": "Recoleta"
+      }
     ],
     "reject_cities": [
       "rosario",
@@ -217,7 +857,8 @@
       "nueva cordoba",
       "mar de las pampas",
       "pilar"
-    ]
+    ],
+    "expensas_min_valid_ars": 10000
   },
   "heartbeat": false,
   "notify_loud_min_score": 3,
@@ -229,7 +870,6 @@
   "value_rich_pct": 20,
   "expensas_high_ars": 300000,
   "expensas_loud_ars": 380000,
-  "reno_usd_m2": 250,
   "air_ok_usd": 25000,
   "air_wide_usd": 40000,
   "exit_usd_m2": {
@@ -238,10 +878,20 @@
     "Botánico": 3000,
     "Palermo Chico": 3600
   },
-  "weak_streets": ["paso", "jean jaures", "jean jaure"],
+  "weak_streets": [
+    {
+      "street": "paso"
+    },
+    {
+      "street": "jean jaures"
+    },
+    {
+      "street": "jean jaure"
+    }
+  ],
   "weak_street_exit_usd_m2": 2200,
-  "closing_discount_pct": 5,
-  "closing_discount_source": "promedio CABA abril 2026, CEMA / RE/MAX / Reporte Inmobiliario",
+  "closing_discount_pct": 3.9,
+  "closing_discount_source": "mediana CABA según Mudafy, octubre 2026",
   "signals": [
     {
       "id": "epoca",
@@ -277,7 +927,10 @@
         "para refaccionar",
         "para actualizar",
         "sin actualizar",
-        "a restaurar"
+        "a restaurar",
+        "a modernizar",
+        "para modernizar",
+        "modernizar"
       ]
     },
     {
@@ -304,7 +957,8 @@
         "reciclado a nuevo",
         "a estrenar",
         "listo para entrar",
-        "listo para vivir"
+        "listo para vivir",
+        "listo para mudarse"
       ]
     },
     {
@@ -318,48 +972,489 @@
         "edificio en mal estado",
         "edificio a demoler"
       ]
+    },
+    {
+      "id": "ocupado",
+      "label": "ocupado",
+      "weight": -2,
+      "where": "any",
+      "keywords": [
+        "inquilino",
+        "venta con renta",
+        "ocupado",
+        "sucesion",
+        "en sucesion",
+        "sucesión",
+        "coti",
+        "interno"
+      ]
     }
   ],
-  "delay_seconds": [3, 6],
+  "delay_seconds": [
+    3,
+    6
+  ],
   "sources": [
-    {"site": "argenprop", "name": "Recoleta", "zone": "Recoleta", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/recoleta/dolares-hasta-140000", "aliases": ["recoleta"]},
-    {"site": "argenprop", "name": "Recoleta 2 amb", "zone": "Recoleta", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/recoleta/2-ambientes/dolares-hasta-140000", "aliases": ["recoleta"]},
-    {"site": "argenprop", "name": "Recoleta 3 amb", "zone": "Recoleta", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/recoleta/3-ambientes/dolares-hasta-140000", "aliases": ["recoleta"]},
-    {"site": "argenprop", "name": "Barrio Norte", "zone": "Barrio Norte", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/dolares-hasta-140000", "aliases": ["barrio norte"]},
-    {"site": "argenprop", "name": "Barrio Norte 2 amb", "zone": "Barrio Norte", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/2-ambientes/dolares-hasta-140000", "aliases": ["barrio norte"]},
-    {"site": "argenprop", "name": "Barrio Norte 3 amb", "zone": "Barrio Norte", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/3-ambientes/dolares-hasta-140000", "aliases": ["barrio norte"]},
-    {"site": "argenprop", "name": "Botánico", "zone": "Botánico", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/botanico/dolares-hasta-140000", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "argenprop", "name": "Botánico 2 amb", "zone": "Botánico", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/botanico/2-ambientes/dolares-hasta-140000", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "argenprop", "name": "Palermo Chico", "zone": "Palermo Chico", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/palermo-chico/dolares-hasta-140000", "aliases": ["palermo chico"]},
-    {"site": "zonaprop", "name": "Recoleta 1 amb ≤80k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-1-ambiente-menos-80000-dolar.html", "aliases": ["recoleta"]},
-    {"site": "zonaprop", "name": "Recoleta 1 amb >80k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-1-ambiente-mas-80000-dolar.html", "aliases": ["recoleta"]},
-    {"site": "zonaprop", "name": "Recoleta 2 amb ≤100k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-2-ambientes-menos-100000-dolar.html", "aliases": ["recoleta"]},
-    {"site": "zonaprop", "name": "Recoleta 2 amb >100k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-2-ambientes-mas-100000-dolar.html", "aliases": ["recoleta"]},
-    {"site": "zonaprop", "name": "Recoleta 3 amb ≤110k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-3-ambientes-menos-110000-dolar.html", "aliases": ["recoleta"]},
-    {"site": "zonaprop", "name": "Recoleta 3 amb >110k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-3-ambientes-mas-110000-dolar.html", "aliases": ["recoleta"]},
-    {"site": "zonaprop", "name": "Barrio Norte 1 amb ≤110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-1-ambiente-menos-110000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Barrio Norte 1 amb >110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-1-ambiente-mas-110000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Barrio Norte 2 amb ≤110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-2-ambientes-menos-110000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Barrio Norte 2 amb >110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-2-ambientes-mas-110000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Barrio Norte 3 amb ≤110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-3-ambientes-menos-110000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Barrio Norte 3 amb >110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-3-ambientes-mas-110000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Botánico 1 amb", "zone": "Botánico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-1-ambiente-menos-140000-dolar.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "zonaprop", "name": "Botánico 2 amb", "zone": "Botánico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-2-ambientes-menos-140000-dolar.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "zonaprop", "name": "Botánico 3 amb", "zone": "Botánico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-3-ambientes-menos-140000-dolar.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "zonaprop", "name": "Palermo Chico 1 amb", "zone": "Palermo Chico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-1-ambiente-menos-140000-dolar.html", "aliases": ["palermo chico"]},
-    {"site": "zonaprop", "name": "Palermo Chico 2 amb", "zone": "Palermo Chico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-2-ambientes-menos-140000-dolar.html", "aliases": ["palermo chico"]},
-    {"site": "zonaprop", "name": "Palermo Chico 3 amb", "zone": "Palermo Chico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-3-ambientes-menos-140000-dolar.html", "aliases": ["palermo chico"]},
-    {"site": "mercadolibre", "name": "Recoleta 1 amb", "zone": "Recoleta", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/recoleta/", "aliases": ["recoleta"]},
-    {"site": "mercadolibre", "name": "Recoleta 2 amb", "zone": "Recoleta", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/recoleta/", "aliases": ["recoleta"]},
-    {"site": "mercadolibre", "name": "Recoleta 3 amb", "zone": "Recoleta", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/recoleta/", "aliases": ["recoleta"]},
-    {"site": "mercadolibre", "name": "Barrio Norte 1 amb", "zone": "Barrio Norte", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/barrio-norte/", "aliases": ["barrio norte"]},
-    {"site": "mercadolibre", "name": "Barrio Norte 2 amb", "zone": "Barrio Norte", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/barrio-norte/", "aliases": ["barrio norte"]},
-    {"site": "mercadolibre", "name": "Barrio Norte 3 amb", "zone": "Barrio Norte", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/barrio-norte/", "aliases": ["barrio norte"]},
-    {"site": "mercadolibre", "name": "Botánico 1 amb", "zone": "Botánico", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/botanico/", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "mercadolibre", "name": "Botánico 2 amb", "zone": "Botánico", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/botanico/", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "mercadolibre", "name": "Botánico 3 amb", "zone": "Botánico", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/botanico/", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "mercadolibre", "name": "Palermo Chico 1 amb", "zone": "Palermo Chico", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/palermo-chico/", "aliases": ["palermo chico"]},
-    {"site": "mercadolibre", "name": "Palermo Chico 2 amb", "zone": "Palermo Chico", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/palermo-chico/", "aliases": ["palermo chico"]},
-    {"site": "mercadolibre", "name": "Palermo Chico 3 amb", "zone": "Palermo Chico", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/palermo-chico/", "aliases": ["palermo chico"]}
-  ]
+    {
+      "site": "argenprop",
+      "name": "Recoleta",
+      "zone": "Recoleta",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/recoleta/dolares-hasta-140000",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Recoleta 2 amb",
+      "zone": "Recoleta",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/recoleta/2-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Recoleta 3 amb",
+      "zone": "Recoleta",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/recoleta/3-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Barrio Norte",
+      "zone": "Barrio Norte",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/dolares-hasta-140000",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Barrio Norte 2 amb",
+      "zone": "Barrio Norte",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/2-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Barrio Norte 3 amb",
+      "zone": "Barrio Norte",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/3-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Botánico",
+      "zone": "Botánico",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/botanico/dolares-hasta-140000",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Botánico 2 amb",
+      "zone": "Botánico",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/botanico/2-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Palermo Chico",
+      "zone": "Palermo Chico",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/palermo-chico/dolares-hasta-140000",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Recoleta 1 amb ≤80k",
+      "zone": "Recoleta",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-1-ambiente-menos-80000-dolar.html",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Recoleta 1 amb >80k",
+      "zone": "Recoleta",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-1-ambiente-mas-80000-dolar.html",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Recoleta 2 amb ≤100k",
+      "zone": "Recoleta",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-2-ambientes-menos-100000-dolar.html",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Recoleta 2 amb >100k",
+      "zone": "Recoleta",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-2-ambientes-mas-100000-dolar.html",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Recoleta 3 amb ≤110k",
+      "zone": "Recoleta",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-3-ambientes-menos-110000-dolar.html",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Recoleta 3 amb >110k",
+      "zone": "Recoleta",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-3-ambientes-mas-110000-dolar.html",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Barrio Norte 1 amb ≤110k",
+      "zone": "Barrio Norte",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-1-ambiente-menos-110000-dolar.html",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Barrio Norte 1 amb >110k",
+      "zone": "Barrio Norte",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-1-ambiente-mas-110000-dolar.html",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Barrio Norte 2 amb ≤110k",
+      "zone": "Barrio Norte",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-2-ambientes-menos-110000-dolar.html",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Barrio Norte 2 amb >110k",
+      "zone": "Barrio Norte",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-2-ambientes-mas-110000-dolar.html",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Barrio Norte 3 amb ≤110k",
+      "zone": "Barrio Norte",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-3-ambientes-menos-110000-dolar.html",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Barrio Norte 3 amb >110k",
+      "zone": "Barrio Norte",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-3-ambientes-mas-110000-dolar.html",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Botánico 1 amb",
+      "zone": "Botánico",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-1-ambiente-menos-140000-dolar.html",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Botánico 2 amb",
+      "zone": "Botánico",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-2-ambientes-menos-140000-dolar.html",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Botánico 3 amb",
+      "zone": "Botánico",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-3-ambientes-menos-140000-dolar.html",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Palermo Chico 1 amb",
+      "zone": "Palermo Chico",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-1-ambiente-menos-140000-dolar.html",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Palermo Chico 2 amb",
+      "zone": "Palermo Chico",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-2-ambientes-menos-140000-dolar.html",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Palermo Chico 3 amb",
+      "zone": "Palermo Chico",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-3-ambientes-menos-140000-dolar.html",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Recoleta 1 amb",
+      "zone": "Recoleta",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/recoleta/",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Recoleta 2 amb",
+      "zone": "Recoleta",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/recoleta/",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Recoleta 3 amb",
+      "zone": "Recoleta",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/recoleta/",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Barrio Norte 1 amb",
+      "zone": "Barrio Norte",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/barrio-norte/",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Barrio Norte 2 amb",
+      "zone": "Barrio Norte",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/barrio-norte/",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Barrio Norte 3 amb",
+      "zone": "Barrio Norte",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/barrio-norte/",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Botánico 1 amb",
+      "zone": "Botánico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/botanico/",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Botánico 2 amb",
+      "zone": "Botánico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/botanico/",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Botánico 3 amb",
+      "zone": "Botánico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/botanico/",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Chico 1 amb",
+      "zone": "Palermo Chico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/palermo-chico/",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Chico 2 amb",
+      "zone": "Palermo Chico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/palermo-chico/",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Chico 3 amb",
+      "zone": "Palermo Chico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/palermo-chico/",
+      "aliases": [
+        "palermo chico"
+      ]
+    }
+  ],
+  "expensas_min_valid_ars": 10000,
+  "value_suspect_pct": -30,
+  "buy_cost_pct": 5,
+  "buy_cost_pct_hard": 8,
+  "reno_usd_m2_recycle": 375,
+  "reno_usd_m2_ok": 250,
+  "reno_usd_m2_recycle_hard": 550,
+  "reno_usd_m2_ok_hard": 300,
+  "hold_months": 6,
+  "hold_months_hard": 9,
+  "fx_ars_usd": 1540,
+  "sale_cost_pct": 5,
+  "sale_cost_pct_hard": 6,
+  "neto_hard_mejor_usd": 15000,
+  "neto_hard_bien_usd": 0,
+  "neto_hard_ok_usd": -25000,
+  "source_stale_hours": 36,
+  "_notes": {
+    "closing_discount_pct": "mediana CABA según Mudafy, octubre 2026",
+    "buy_cost_pct": "iProfesional flipping: entrada 5% a 8%",
+    "buy_cost_pct_hard": "iProfesional flipping: techo de entrada 8%",
+    "reno_usd_m2_recycle": "iProfesional: reforma intermedia USD 350–400/m²; usamos 375",
+    "reno_usd_m2_ok": "iProfesional: reforma leve USD 250–300/m²; piso 250",
+    "reno_usd_m2_recycle_hard": "iProfesional: reforma integral USD 450–550/m²; usamos 550",
+    "reno_usd_m2_ok_hard": "iProfesional: reforma leve; techo 300",
+    "hold_months": "supuesto, no verificado",
+    "hold_months_hard": "supuesto, no verificado",
+    "fx_ars_usd": "supuesto, no verificado; referencia 1.540",
+    "sale_cost_pct": "iProfesional: salida 5% a 6%",
+    "sale_cost_pct_hard": "iProfesional: techo de salida 6%",
+    "neto_hard_mejor_usd": "supuesto, no verificado",
+    "neto_hard_bien_usd": "supuesto, no verificado",
+    "neto_hard_ok_usd": "supuesto, no verificado",
+    "weak_streets": "Paso y Jean Jaurès como están. TODO: Azcuénaga y Ecuador — no inventar rangos, Iván confirma.",
+    "expensas_min_valid_ars": "por debajo se trata como dato faltante ($ 1 Expensas)",
+    "value_suspect_pct": "metro tan bajo vs la mediana del pool que hay que verificar la cuadra",
+    "source_stale_hours": "aviso en la web si un portal no actualiza",
+    "area_weight_covered": "Mudafy: cubierto al 100%",
+    "area_weight_semi": "Mudafy: semicubierto (balcón) al 50%",
+    "area_weight_uncovered": "Mudafy: descubierto al 30%",
+    "cochera_usd": "Mudafy resta el valor promedio de la cochera. No hay número verificado; null = no se resta, solo se saca de medianas y aire.",
+    "rule_70_pct": "FlipperForce: control, no veto. Solo el 27,8% de flips rentables la cumplía.",
+    "decision_buy_pct": "supuesto, no verificado: precio ≤ 92% de la oferta máxima → comprar",
+    "decision_watch_pct": "supuesto, no verificado: precio ≤ 108% de la oferta máxima → vigilar; más → descartar",
+    "exit_usd_m2": "fijo por barrio; no hay ventas públicas en Argentina. No es un comparable de cuadra.",
+    "street_zones": "La calle y la altura mandan. El barrio del aviso no. Altura fuera de rango = fuera, aunque la card diga Recoleta."
+  },
+  "area_weight_covered": 1,
+  "area_weight_semi": 0.5,
+  "area_weight_uncovered": 0.3,
+  "cochera_usd": null,
+  "rule_70_pct": 70,
+  "decision_buy_pct": 92,
+  "decision_watch_pct": 108,
+  "min_area_m2": 50
 }

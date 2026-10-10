@@ -7,9 +7,11 @@ set -euo pipefail
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:${PATH:-}"
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+LOG_DIR="${HOME}/Library/Logs/search-amb"
+mkdir -p "$LOG_DIR"
+LOG="$LOG_DIR/argenprop-local.log"
 cd "$ROOT"
-LOG="$ROOT/argenprop-local.log"
 SYNC=1
 if [[ "${1:-}" == "--no-sync" ]] || [[ "${SYNC_GIT:-1}" == "0" ]]; then
   SYNC=0
@@ -31,9 +33,10 @@ fi
 log() { echo "$*"; }
 
 AP_PATHS='state/seen-argenprop.json|web/data/listings-argenprop.json|state/weekly.json'
+NOISE='web/tsconfig.tsbuildinfo|web/AGENTS.md|argenprop-local.log'
 
 other_dirty() {
-  git status --porcelain | grep -vE "^\?\?|${AP_PATHS}" | grep -q .
+  git status --porcelain | grep -vE "^\?\?|${AP_PATHS}|${NOISE}" | grep -q .
 }
 
 sync_argenprop() {

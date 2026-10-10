@@ -1,4 +1,5 @@
 import streetZonesFile from "../data/street-zones.json";
+import scoring from "../data/scoring.json";
 
 type StreetRule = {
   street: string;
@@ -47,6 +48,9 @@ export type Listing = {
   old_price: number | null;
   price_history: PricePoint[];
   area: number | null;
+  area_total: number | null;
+  area_covered: number | null;
+  area_semi: number | null;
   ambientes: number | null;
   photo: string;
   tags: string[];
@@ -68,31 +72,47 @@ export type Listing = {
   air_usd: number | null;
   exit_usd_m2: number | null;
   reno_usd_m2: number | null;
+  neto_base_usd: number | null;
+  neto_hard_usd: number | null;
+  roi_base: number | null;
+  roi_hard: number | null;
+  breakeven_exit_usd_m2: number | null;
+  max_offer_usd: number | null;
+  seventy_offer_usd: number | null;
+  decision: "comprar" | "negociar" | "vigilar" | "descartar" | null;
+  price_source: "card" | string;
+  address_unverified: boolean;
+  zone_unverified: boolean;
   verdict: Verdict;
   ids: string[];
   mirrors: Mirror[];
   from_first_wave: boolean;
 };
 
-export const CLOSING_DISCOUNT_PCT = 5;
-export const MEDIAN_MIN_N = 8;
-export const GUSTO_USD = 125000;
-export const VALUE_CHEAP_PCT = -8;
-export const VALUE_STEAL_PCT = -15;
-export const VALUE_RICH_PCT = 20;
-export const EXPENSAS_HIGH_ARS = 300000;
-export const EXPENSAS_LOUD_ARS = 380000;
-export const RENO_USD_M2 = 250;
-export const AIR_OK_USD = 25000;
-export const AIR_WIDE_USD = 40000;
-export const EXIT_USD_M2: Record<string, number> = {
-  Recoleta: 2750,
-  "Barrio Norte": 2750,
-  Botánico: 3000,
-  "Palermo Chico": 3600,
-};
-export const WEAK_STREETS = ["paso", "jean jaures", "jean jaure"];
-export const WEAK_STREET_EXIT_USD_M2 = 2200;
+export const CLOSING_DISCOUNT_PCT = scoring.closing_discount_pct;
+export const MEDIAN_MIN_N = scoring.median_min_n;
+export const GUSTO_USD = scoring.gusto_usd;
+export const VALUE_CHEAP_PCT = scoring.value_cheap_pct;
+export const VALUE_STEAL_PCT = scoring.value_steal_pct;
+export const VALUE_RICH_PCT = scoring.value_rich_pct;
+export const VALUE_SUSPECT_PCT = scoring.value_suspect_pct;
+export const EXPENSAS_HIGH_ARS = scoring.expensas_high_ars;
+export const EXPENSAS_LOUD_ARS = scoring.expensas_loud_ars;
+export const EXPENSAS_MIN_VALID_ARS = scoring.expensas_min_valid_ars;
+export const RENO_USD_M2 = scoring.reno_usd_m2_recycle;
+export const AIR_OK_USD = scoring.air_ok_usd;
+export const AIR_WIDE_USD = scoring.air_wide_usd;
+export const EXIT_USD_M2: Record<string, number> = scoring.exit_usd_m2;
+export const WEAK_STREET_EXIT_USD_M2 = scoring.weak_street_exit_usd_m2;
+export const SOURCE_STALE_HOURS = scoring.source_stale_hours;
+export const NETO_HARD_MEJOR_USD = scoring.neto_hard_mejor_usd;
+export const NETO_HARD_BIEN_USD = scoring.neto_hard_bien_usd;
+export const NETO_HARD_OK_USD = scoring.neto_hard_ok_usd;
+
+type WeakRule = { street: string; min?: number; max?: number };
+export const WEAK_STREETS: WeakRule[] = (scoring.weak_streets || []).map((x: string | WeakRule) =>
+  typeof x === "string" ? { street: x } : x,
+);
 
 const FLIP_TAGS: Record<string, number> = {
   "aire amplio": 3,
@@ -107,6 +127,7 @@ const VALUE_TAGS: Record<string, number> = {
   "metro barato": 1,
   "metro muy barato": 2,
   "metro caro": -1,
+  "metro sospechoso": -1,
   "expensas altas": -1,
   "expensas muy altas": -2,
 };
@@ -123,7 +144,8 @@ export function applyValue(item: Listing): Listing {
   const added: string[] = [];
   const vs = item.vs_median_pct;
   if (vs != null) {
-    if (vs <= VALUE_STEAL_PCT) added.push("metro muy barato");
+    if (vs <= VALUE_SUSPECT_PCT) added.push("metro sospechoso");
+    else if (vs <= VALUE_STEAL_PCT) added.push("metro muy barato");
     else if (vs <= VALUE_CHEAP_PCT) added.push("metro barato");
     else if (vs >= VALUE_RICH_PCT) added.push("metro caro");
   }
@@ -144,12 +166,81 @@ export function streetNameOf(item: Pick<Listing, "address" | "title">): string {
   return key.replace(/\s+\d+$/, "").trim();
 }
 
+export function dealArea(item: Pick<Listing, "area" | "area_covered"> | RawListing): number | null {
+  if (item.area != null && item.area > 0) return item.area;
+  if (item.area_covered != null && item.area_covered > 0) return item.area_covered;
+  return null;
+}
+
+export function recoverAreas(raw: RawListing): {
+  area: number | null;
+  area_total: number | null;
+  area_covered: number | null;
+  area_semi: number | null;
+} {
+  const hay = `${raw.title || ""} ${raw.address || ""}`;
+  let covered = raw.area_covered ?? null;
+  let total = raw.area_total ?? null;
+  let semi = raw.area_semi ?? null;
+  if (covered == null) {
+    const m = hay.match(/([\d.,]+)\s*m²\s*(?:de\s+)?superficie\s+constru/i);
+    if (m) covered = Number(m[1].replace(".", "").replace(",", "."));
+  }
+  if (covered == null) {
+    const m = hay.match(/([\d.,]+)\s*m²\s*(?:cubiert|cubie)/i);
+    if (m) covered = Number(m[1].replace(",", "."));
+  }
+  if (total == null && raw.area != null && covered == null) total = raw.area;
+  const deal = weightedArea(covered, semi, total) ?? raw.area ?? covered ?? total ?? null;
+  return { area: deal, area_total: total, area_covered: covered, area_semi: semi };
+}
+
+export function weightedArea(
+  covered: number | null,
+  semi: number | null,
+  total: number | null,
+): number | null {
+  const wC = scoring.area_weight_covered;
+  const wS = scoring.area_weight_semi;
+  const wU = scoring.area_weight_uncovered;
+  if (covered != null && semi != null && total != null) {
+    return covered * wC + semi * wS + Math.max(0, total - covered - semi) * wU;
+  }
+  if (covered != null && semi != null) return covered * wC + semi * wS;
+  if (covered != null) return covered * wC;
+  return total;
+}
+
+function renoUsdM2Of(item: Pick<Listing, "tags">, hard = false): number {
+  const tags = item.tags || [];
+  const recycle = tags.includes("para reciclar");
+  const finished = tags.includes("ya hecho") || (tags.includes("edificio ok") && !recycle);
+  if (recycle || !finished) {
+    return hard ? scoring.reno_usd_m2_recycle_hard : scoring.reno_usd_m2_recycle;
+  }
+  return hard ? scoring.reno_usd_m2_ok_hard : scoring.reno_usd_m2_ok;
+}
+
+function holdUsdOf(item: Pick<Listing, "expensas_ars">, hard = false): number {
+  const exp = item.expensas_ars;
+  const fx = scoring.fx_ars_usd;
+  if (exp == null || fx <= 0) return 0;
+  const months = hard ? scoring.hold_months_hard : scoring.hold_months;
+  return (exp / fx) * months;
+}
+
 export function isWeakStreet(item: Pick<Listing, "address" | "title">): boolean {
-  const name = streetNameOf(item);
+  let [name, num] = parseStreet(item.address || "");
+  if (!name) [name, num] = parseStreet(item.title || "");
+  if (!name) return false;
   const hay = fold(`${item.address || ""} ${item.title || ""}`);
-  return WEAK_STREETS.some((w) => {
-    if (name === w || name.startsWith(`${w} `)) return true;
-    return new RegExp(`(?<![a-z0-9])${w}\\s+\\d{2,5}\\b`).test(hay);
+  return WEAK_STREETS.some((rule) => {
+    if (ruleHits(rule, name, num)) return true;
+    const st = fold(rule.street || "");
+    if (num == null && st && new RegExp(`(?<![a-z0-9])${st}\\s+\\d{2,5}\\b`).test(hay)) {
+      return rule.min == null && rule.max == null;
+    }
+    return false;
   });
 }
 
@@ -158,10 +249,78 @@ export function exitUsdM2Of(zone: string, item?: Pick<Listing, "address" | "titl
   return zone in EXIT_USD_M2 ? EXIT_USD_M2[zone] : null;
 }
 
-export function airUsdOf(item: Pick<Listing, "price" | "area" | "zone" | "address" | "title">): number | null {
+export function airUsdOf(
+  item: Pick<Listing, "price" | "area" | "area_covered" | "zone" | "address" | "title" | "tags">,
+): number | null {
+  if ((item.tags || []).includes("incluye cochera")) return null;
   const exitM2 = exitUsdM2Of(item.zone || "", item);
-  if (item.price == null || item.area == null || item.area <= 0 || exitM2 == null) return null;
-  return Math.round(exitM2 * item.area - item.price - RENO_USD_M2 * item.area);
+  const area = dealArea(item);
+  if (item.price == null || area == null || area <= 0 || exitM2 == null) return null;
+  const reno = renoUsdM2Of(item);
+  return Math.round(exitM2 * area - item.price - reno * area);
+}
+
+export function applyNet(item: Listing): Listing {
+  const base = flipResult(item, false);
+  const hard = flipResult(item, true);
+  const maxOffer = hard?.maxOffer ?? null;
+  return {
+    ...item,
+    neto_base_usd: base?.neto ?? null,
+    neto_hard_usd: hard?.neto ?? null,
+    roi_base: base?.roi ?? null,
+    roi_hard: hard?.roi ?? null,
+    breakeven_exit_usd_m2: hard?.breakeven ?? null,
+    max_offer_usd: maxOffer,
+    seventy_offer_usd: seventyOfferOf(item),
+    decision: decisionOf(item.price, maxOffer),
+  };
+}
+
+function flipResult(
+  item: Listing,
+  hard: boolean,
+): { neto: number; roi: number | null; breakeven: number | null; maxOffer: number | null } | null {
+  if ((item.tags || []).includes("incluye cochera")) return null;
+  const area = dealArea(item);
+  const exitM2 = exitUsdM2Of(item.zone || "", item);
+  if (item.price == null || area == null || area <= 0 || exitM2 == null) return null;
+  const buy = (hard ? scoring.buy_cost_pct_hard : scoring.buy_cost_pct) / 100;
+  const sale = (hard ? scoring.sale_cost_pct_hard : scoring.sale_cost_pct) / 100;
+  const closing = hard ? scoring.closing_discount_pct / 100 : 0;
+  const reno = renoUsdM2Of(item, hard);
+  const hold = holdUsdOf(item, hard);
+  const proceeds = exitM2 * area * (1 - closing) * (1 - sale);
+  const cost = item.price * (1 + buy) + reno * area + hold;
+  const neto = proceeds - cost;
+  const denom = area * (1 - closing) * (1 - sale);
+  const maxOffer = 1 + buy ? (proceeds - reno * area - hold) / (1 + buy) : null;
+  return {
+    neto: Math.round(neto),
+    roi: cost ? Math.round((neto / cost) * 10000) / 10000 : null,
+    breakeven: denom ? Math.round(cost / denom) : null,
+    maxOffer: maxOffer == null ? null : Math.round(maxOffer),
+  };
+}
+
+export function seventyOfferOf(item: Listing): number | null {
+  const area = dealArea(item);
+  const exitM2 = exitUsdM2Of(item.zone || "", item);
+  if (area == null || area <= 0 || exitM2 == null) return null;
+  const reno = renoUsdM2Of(item, false);
+  return Math.round((scoring.rule_70_pct / 100) * exitM2 * area - reno * area);
+}
+
+export function decisionOf(
+  price: number | null,
+  maxOffer: number | null,
+): Listing["decision"] {
+  if (price == null || maxOffer == null || maxOffer <= 0) return null;
+  const ratio = price / maxOffer;
+  if (ratio <= scoring.decision_buy_pct / 100) return "comprar";
+  if (price <= maxOffer) return "negociar";
+  if (ratio <= scoring.decision_watch_pct / 100) return "vigilar";
+  return "descartar";
 }
 
 export function applyAir(item: Listing): Listing {
@@ -174,7 +333,8 @@ export function applyAir(item: Listing): Listing {
     return true;
   });
   const exitM2 = exitUsdM2Of(item.zone || "", item);
-  const air = airUsdOf(item);
+  const air = airUsdOf({ ...item, tags: kept });
+  const reno = renoUsdM2Of(item);
   const added: string[] = [];
   if (air != null) {
     if (air >= AIR_WIDE_USD) added.push("aire amplio");
@@ -187,27 +347,48 @@ export function applyAir(item: Listing): Listing {
   if (item.piso === 0 && !kept.includes("planta baja")) added.push("planta baja");
   if (isWeakStreet(item) && !kept.includes("zona floja")) added.push("zona floja");
   for (const t of added) {
-    score += FLIP_TAGS[t];
+    score += FLIP_TAGS[t] || 0;
     kept.push(t);
   }
-  return {
+  return applyNet({
     ...item,
     score,
     tags: kept,
     air_usd: air,
     exit_usd_m2: exitM2,
-    reno_usd_m2: RENO_USD_M2,
-  };
+    reno_usd_m2: reno,
+  });
 }
 
-export function flipKeep(item: Pick<Listing, "active" | "area" | "expensas_ars" | "tags">): boolean {
+export function flipKeep(
+  item: Pick<Listing, "active" | "area" | "expensas_ars" | "tags" | "zone_unverified">,
+): boolean {
   if (!item.active) return true;
   if (item.area == null) return false;
+  if (item.area < scoring.min_area_m2) return false;
   if (item.expensas_ars != null && item.expensas_ars > EXPENSAS_LOUD_ARS) return false;
   const tags = item.tags || [];
   if (tags.includes("metro caro")) return false;
   if (tags.includes("edificio flojo") || tags.includes("edificio a reciclar")) return false;
+  if (tags.includes("zona floja") || tags.includes("barrio del aviso no coincide")) return false;
+  if (item.zone_unverified) return false;
   return true;
+}
+
+export function markClaimedBarrio(
+  item: Pick<Listing, "title" | "url" | "tags">,
+): string[] {
+  const tags = [...(item.tags || [])];
+  const title = fold(`${item.title || ""} ${item.url || ""}`);
+  const claimedBad = REJECT_BARRIOS.some((kw) => {
+    const k = fold(kw);
+    if (!k || !title.includes(k)) return false;
+    return !new RegExp(`a pasos de\\s+${k}`).test(title);
+  });
+  if (claimedBad && !tags.includes("barrio del aviso no coincide")) {
+    tags.push("barrio del aviso no coincide");
+  }
+  return tags;
 }
 
 const ALLOWED_BARRIOS = [
@@ -271,6 +452,7 @@ const STREET_ALIASES: [string, string][] = [
   ["republica de la india", "republica de la india"],
   ["rodriguez pena", "rodriguez pena"],
   ["jean jaures", "jean jaures"],
+  ["jean jaure", "jean jaures"],
   ["coronel diaz", "coronel diaz"],
   ["mario bravo", "mario bravo"],
   ["pacheco de melo", "pacheco de melo"],
@@ -393,18 +575,26 @@ function mentionsOutStreet(text: string): boolean {
   return false;
 }
 
-/** Barrio por calle + altura. `null` = fuera. `""` = no se pudo fijar. */
+function sameStreet(rule: StreetRule, name: string): boolean {
+  return ruleHits({ ...rule, min: undefined, max: undefined }, name, null);
+}
+
+/** Barrio por calle + altura. `null` = fuera. `""` = no se pudo fijar. El aviso no manda. */
 export function classifyZone(item: Pick<RawListing, "address" | "title">): string | null {
   const address = item.address || "";
   if (mentionsOutStreet(address)) return null;
   let [name, num] = parseStreet(address);
   if (!name) [name, num] = parseStreet(item.title || "");
   if (!name) return "";
-  let hits = STREET_ZONES.filter((r) => ruleHits(r, name, num));
+  const mine = STREET_ZONES.filter((r) => sameStreet(r, name));
+  if (!mine.length) return "";
+  const ranged = mine.filter((r) => r.min != null || r.max != null);
+  const pool = num != null && ranged.length ? ranged : mine;
+  let hits = pool.filter((r) => ruleHits(r, name, num));
   if (!hits.length && num != null) {
-    hits = STREET_ZONES.filter((r) => ruleHits(r, name, null) && r.out);
+    hits = mine.filter((r) => r.out && ruleHits(r, name, null));
   }
-  if (!hits.length) return "";
+  if (!hits.length) return num != null ? null : "";
   hits.sort((a, b) => {
     const la = fold(a.street || "").length;
     const lb = fold(b.street || "").length;
@@ -416,6 +606,12 @@ export function classifyZone(item: Pick<RawListing, "address" | "title">): strin
   const rule = hits[0];
   if (rule.out) return null;
   return rule.zone || "";
+}
+
+export function parseStreetNum(item: Pick<RawListing, "address" | "title">): [string, number | null] {
+  let parsed = parseStreet(item.address || "");
+  if (!parsed[0]) parsed = parseStreet(item.title || "");
+  return parsed;
 }
 
 export function placeKey(item: Pick<Listing, "address" | "title" | "area" | "ambientes">): string {
@@ -486,6 +682,8 @@ export function inScope(item: Pick<RawListing, "title" | "address" | "zone" | "u
   const z = classifyZone(item);
   if (z === null) return false;
   if (z) return true;
+  const [, num] = parseStreetNum(item);
+  if (num != null) return false;
   return ALLOWED_BARRIOS.some((b) => hay.includes(b));
 }
 
@@ -773,8 +971,16 @@ export const TIERS = [
 
 export type TierId = (typeof TIERS)[number]["id"];
 
-export function listingTier(score: number): (typeof TIERS)[number] {
-  return TIERS.find((t) => score >= t.min) ?? TIERS[TIERS.length - 1];
+export function listingTier(item: Listing | number): (typeof TIERS)[number] {
+  if (typeof item === "number") {
+    return TIERS.find((t) => item >= t.min) ?? TIERS[TIERS.length - 1];
+  }
+  const n = item.neto_hard_usd;
+  if (n == null) return TIERS[TIERS.length - 1];
+  if (n >= NETO_HARD_MEJOR_USD) return TIERS[0];
+  if (n >= NETO_HARD_BIEN_USD) return TIERS[1];
+  if (n >= NETO_HARD_OK_USD) return TIERS[2];
+  return TIERS[3];
 }
 
 export function isoWeek(iso?: string | null): string {
@@ -793,6 +999,12 @@ export function inIsoWeek(iso: string | null, week = isoWeek()): boolean {
 }
 
 export function rankByScore(a: Listing, b: Listing): number {
+  const na = a.neto_hard_usd ?? -1e12;
+  const nb = b.neto_hard_usd ?? -1e12;
+  if (nb !== na) return nb - na;
+  const aa = a.air_usd ?? -1e12;
+  const ba = b.air_usd ?? -1e12;
+  if (ba !== aa) return ba - aa;
   const ds = (b.score || 0) - (a.score || 0);
   if (ds) return ds;
   return (a.price ?? 1e12) - (b.price ?? 1e12);

@@ -26,6 +26,27 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).parent
 CONFIG_PATH = ROOT / "config.json"
+
+
+def load_dotenv(path: Path | None = None) -> None:
+    """Carga .env sin pisar variables ya exportadas. launchd no puede `source` archivos en Documents."""
+    env_path = path or (ROOT / ".env")
+    try:
+        raw = env_path.read_text()
+    except OSError:
+        return
+    for line in raw.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, val = line.partition("=")
+        key = key.strip()
+        val = val.strip().strip("'").strip('"')
+        if key and key not in os.environ:
+            os.environ[key] = val
+
+
+load_dotenv()
 OLD_SEEN_PATH = ROOT / "seen.json"
 STATE_DIR = ROOT / "state"
 WEB_DATA_DIR = ROOT / "web" / "data"
@@ -123,8 +144,8 @@ def price_from_card(card) -> int | None:
     return parse_price(clone.get_text(" ", strip=True))
 
 
-def parse_expensas(text: str, card=None) -> tuple[int | None, str]:
-    """Expensas en ARS tal como se publican. Vacío si la card no las muestra."""
+def parse_expensas(text: str, card=None, min_valid: int | None = None) -> tuple[int | None, str]:
+    """Expensas en ARS tal como se publican. Vacío si la card no las muestra o es placeholder."""
     chunks = []
     if card is not None:
         node = card.select_one('[class*="expenses"]')
@@ -134,8 +155,21 @@ def parse_expensas(text: str, card=None) -> tuple[int | None, str]:
     for chunk in chunks:
         m = re.search(r"\$\s*(\d{1,3}(?:\.\d{3})+|\d+)\s*expensas", chunk, re.I)
         if m:
-            return to_price(m.group(1)), re.sub(r"\s+", " ", m.group(0)).strip()
+            n = to_price(m.group(1))
+            floor = EXPENSAS_MIN_VALID_ARS if min_valid is None else min_valid
+            if n is None or n < floor:
+                return None, ""
+            return n, re.sub(r"\s+", " ", m.group(0)).strip()
     return None, ""
+
+
+def normalize_expensas(item: dict, cfg: dict | None = None) -> dict:
+    floor = int((cfg or {}).get("expensas_min_valid_ars") or EXPENSAS_MIN_VALID_ARS)
+    n = item.get("expensas_ars")
+    if n is not None and n < floor:
+        item["expensas_ars"] = None
+        item["expensas_text"] = ""
+    return item
 
 
 def parse_piso(text: str) -> int | None:
@@ -171,10 +205,97 @@ def parse_antiguedad(text: str) -> int | None:
     return n if n <= 200 else None
 
 
+def parse_areas(site: str, text: str, cfg: dict | None = None) -> dict:
+    """Cubiertos, semicubiertos y totales. Deal pondera como Mudafy si hay desglose."""
+    blob = text or ""
+    total = covered = semi = None
+    tot = re.search(r"([\d.,]+)\s*m²\s*(?:tot(?:ales?)?\.?|tot\b)", blob, re.I)
+    cub = re.search(r"([\d.,]+)\s*m²\s*(?:cubiert|cubie)", blob, re.I)
+    constr = re.search(r"([\d.,]+)\s*m²\s*(?:de\s+)?superficie\s+constru", blob, re.I)
+    sm = re.search(r"([\d.,]+)\s*m²\s*semicubiert", blob, re.I)
+    if tot:
+        total = to_float(tot.group(1))
+    if cub:
+        covered = to_float(cub.group(1))
+    elif constr:
+        covered = to_float(constr.group(1))
+    if sm:
+        semi = to_float(sm.group(1))
+    if site == "argenprop" and covered is None:
+        cub = re.search(r"([\d.,]+)\s*m²\s*cubie", blob)
+        if cub:
+            covered = to_float(cub.group(1))
+    if site == "mercadolibre" and covered is None:
+        cub = re.search(r"([\d.,]+)\s*m²\s*cubiert", blob, re.I)
+        if cub:
+            covered = to_float(cub.group(1))
+    deal = weighted_area(covered, semi, total, cfg)
+    return {"area": deal, "area_total": total, "area_covered": covered, "area_semi": semi}
+
+
+def weighted_area(
+    covered: float | None,
+    semi: float | None,
+    total: float | None,
+    cfg: dict | None = None,
+) -> float | None:
+    """Mudafy: cubierto 100%, semi 50%, descubierto 30%. Sin desglose no se inventa."""
+    cfg = cfg or {}
+    w_c = float(cfg.get("area_weight_covered", 1))
+    w_s = float(cfg.get("area_weight_semi", 0.5))
+    w_u = float(cfg.get("area_weight_uncovered", 0.3))
+    if covered is not None and semi is not None and total is not None:
+        uncovered = max(0.0, total - covered - semi)
+        return covered * w_c + semi * w_s + uncovered * w_u
+    if covered is not None and semi is not None:
+        return covered * w_c + semi * w_s
+    if covered is not None:
+        return covered * w_c
+    return total
+
+
+def _zonaprop_address(text: str) -> str:
+    """Línea de dirección de la card, no el título de marketing ni el slug."""
+    lines = [ln.strip() for ln in (text or "").splitlines() if ln.strip()]
+    barrios = (
+        "capital federal",
+        "caba",
+        "botánico",
+        "botanico",
+        "recoleta",
+        "barrio norte",
+        "palermo chico",
+        "palermo",
+    )
+    candidates: list[str] = []
+    for i, ln in enumerate(lines[:-1]):
+        nxt = fold(lines[i + 1])
+        if any(b in nxt for b in barrios) and 3 <= len(ln) < 80:
+            candidates.append(ln)
+    def score_line(ln: str) -> tuple:
+        t = fold(ln)
+        noisy = bool(re.search(r"oportunidad|venta departamento|excelente|luminoso|semipiso", t))
+        looks = bool(re.search(r"[a-z]{2,}.+\d{2,5}", t)) and not noisy
+        return (int(looks), int(not noisy), int(len(ln) < 40), -len(ln))
+    if candidates:
+        candidates.sort(key=score_line, reverse=True)
+        return candidates[0]
+    m = re.search(
+        r"\n([^\n]{3,80})\n[^\n]*(?:Capital Federal|CABA|Botánico|Botanico|Recoleta|Barrio Norte|Palermo Chico|Palermo)\b",
+        text or "",
+    )
+    if m and len(m.group(1)) < 80 and not re.search(r"oportunidad|venta departamento", m.group(1), re.I):
+        return m.group(1).strip()
+    return ""
+
+
 def parse_card(site: str, text: str, card=None) -> dict:
     out = {
         "price": None,
         "area": None,
+        "area_total": None,
+        "area_covered": None,
+        "area_semi": None,
         "ambientes": None,
         "address": "",
         "expensas_ars": None,
@@ -182,6 +303,7 @@ def parse_card(site: str, text: str, card=None) -> dict:
         "antiguedad_years": None,
         "piso": None,
         "cochera": None,
+        "price_source": "card",
     }
     out["price"] = price_from_card(card) or parse_price(text)
     exp_n, exp_t = parse_expensas(text, card)
@@ -191,21 +313,13 @@ def parse_card(site: str, text: str, card=None) -> dict:
     out["cochera"] = parse_cochera(text)
     out["antiguedad_years"] = parse_antiguedad(text)
 
+    parsed = parse_areas(site, text)
+    out.update(parsed)
     if site == "argenprop":
-        cub = re.search(r"([\d.,]+)\s*m²\s*cubie", text)
-        semi = re.search(r"([\d.,]+)\s*m²\s*Semicubierta", text, re.I)
-        if cub:
-            out["area"] = to_float(cub.group(1)) + (to_float(semi.group(1)) if semi else 0)
         m = re.search(r"de\s+(\d+)\s+ambientes", text) or re.search(r"(\d+)\s*(?:ambientes|amb\.)", text, re.I)
     elif site == "mercadolibre":
-        cub = re.search(r"([\d.,]+)\s*m²\s*cubiert", text, re.I)
-        if cub:
-            out["area"] = to_float(cub.group(1))
         m = re.search(r"(\d+)\s*ambs?\b", text, re.I) or re.search(r"(\d+)\s*ambientes", text, re.I)
     else:
-        tot = re.search(r"([\d.,]+)\s*m²\s*tot", text)
-        if tot:
-            out["area"] = to_float(tot.group(1))
         m = re.search(r"(\d+)\s*amb\.", text) or re.search(r"(\d+)\s*ambientes", text, re.I)
     if m:
         out["ambientes"] = int(m.group(1))
@@ -228,12 +342,7 @@ def parse_card(site: str, text: str, card=None) -> dict:
         if m and len(m.group(1)) < 120:
             out["address"] = re.sub(r"\s+", " ", m.group(1)).strip()
     else:
-        m = re.search(
-            r"\n([^\n]{3,80})\n[^\n]*(?:Capital Federal|CABA|Botánico|Botanico|Recoleta|Barrio Norte|Palermo Chico|Palermo)\b",
-            text,
-        )
-        if m and len(m.group(1)) < 120:
-            out["address"] = m.group(1).strip()
+        out["address"] = _zonaprop_address(text)
     return out
 
 
@@ -294,7 +403,7 @@ def parse_page(html_text: str, site: str, base_url: str) -> list[dict]:
         url = href if href.startswith("http") else base_url.split("/", 3)[0] + "//" + base_url.split("/")[2] + href
         url = url.split("?")[0]
         title = re.sub(r"^[-\s]+", "", a.get_text(" ", strip=True))[:90]
-        listings[lid] = {
+        item = {
             "id": lid,
             "site": site,
             "url": url,
@@ -303,6 +412,8 @@ def parse_page(html_text: str, site: str, base_url: str) -> list[dict]:
             "photo": card_photo(card, url),
             **data,
         }
+        item.update(parse_areas(site, f"{title}\n{sep_text if site == 'zonaprop' else flat_text}"))
+        listings[lid] = item
     return list(listings.values())
 
 
@@ -360,8 +471,38 @@ def apply_signals(item: dict, signals: list, filters: dict | None = None) -> dic
         hits = [s for s in hits if s.get("id") != "reciclar"]
     item["score"] = sum(s.get("weight", 0) for s in hits)
     item["tags"] = [s["label"] for s in hits if s.get("label")]
+    hay = _haystack(item, "any")
+    if item.get("cochera") is True or (
+        re.search(r"(?<![a-z])cocheras?(?![a-z])", hay) and "sin cochera" not in hay
+    ):
+        if "incluye cochera" not in item["tags"]:
+            item["tags"].append("incluye cochera")
+    if item.get("area_covered") is None and item.get("area") is not None:
+        if "m² sin verificar" not in item["tags"]:
+            item["tags"].append("m² sin verificar")
+    mark_address_conflict(item, filters)
     if filters:
         apply_budget(item, filters)
+        mark_claimed_barrio(item, filters)
+    return item
+
+
+def mark_claimed_barrio(item: dict, f: dict | None = None) -> dict:
+    """El título/URL dice Recoleta; la calle es otra. O nombra Once/Abasto en el título."""
+    f = f or {}
+    tags = item.setdefault("tags", [])
+    title = fold(f"{item.get('title') or ''} {item.get('url') or ''}")
+    claimed_bad = False
+    for kw in f.get("reject_barrios") or []:
+        k = fold(str(kw))
+        if not k or not _phrase_in(title, k):
+            continue
+        if re.search(rf"a pasos de\s+{re.escape(k)}", title):
+            continue
+        claimed_bad = True
+        break
+    if claimed_bad and "barrio del aviso no coincide" not in tags:
+        tags.append("barrio del aviso no coincide")
     return item
 
 
@@ -369,6 +510,7 @@ VALUE_TAGS = {
     "metro barato": 1,
     "metro muy barato": 2,
     "metro caro": -1,
+    "metro sospechoso": -1,
     "expensas altas": -1,
     "expensas muy altas": -2,
 }
@@ -388,11 +530,16 @@ DEFAULT_EXIT_USD_M2 = {
     "Botánico": 3000,
     "Palermo Chico": 3600,
 }
-DEFAULT_RENO_USD_M2 = 250
+DEFAULT_RENO_USD_M2_RECYCLE = 375
+DEFAULT_RENO_USD_M2_OK = 250
+DEFAULT_RENO_USD_M2_RECYCLE_HARD = 550
+DEFAULT_RENO_USD_M2_OK_HARD = 300
 DEFAULT_AIR_OK_USD = 25000
 DEFAULT_AIR_WIDE_USD = 40000
-DEFAULT_WEAK_STREETS = ("paso", "jean jaures", "jean jaure")
+DEFAULT_WEAK_STREETS = ({"street": "paso"}, {"street": "jean jaures"}, {"street": "jean jaure"})
 DEFAULT_WEAK_STREET_EXIT_USD_M2 = 2200
+EXPENSAS_MIN_VALID_ARS = 10000
+VALUE_SUSPECT_PCT = -30
 
 
 def apply_value(item: dict, cfg: dict | None = None) -> dict:
@@ -412,9 +559,12 @@ def apply_value(item: dict, cfg: dict | None = None) -> dict:
     exp_high = int(cfg.get("expensas_high_ars", 300000))
     exp_loud = int(cfg.get("expensas_loud_ars", 380000))
     vs = item.get("vs_median_pct")
+    suspect = int(cfg.get("value_suspect_pct", VALUE_SUSPECT_PCT))
     added: list[str] = []
     if vs is not None:
-        if vs <= steal:
+        if vs <= suspect:
+            added.append("metro sospechoso")
+        elif vs <= steal:
             added.append("metro muy barato")
         elif vs <= cheap:
             added.append("metro barato")
@@ -441,17 +591,34 @@ def street_name_of(item: dict) -> str:
     return re.sub(r"\s+\d+$", "", key).strip()
 
 
+def _weak_rules(cfg: dict | None = None) -> list[dict]:
+    raw = (cfg or {}).get("weak_streets")
+    if raw is None:
+        raw = DEFAULT_WEAK_STREETS
+    rules: list[dict] = []
+    for x in raw or []:
+        if isinstance(x, dict) and x.get("street"):
+            rules.append(x)
+        elif isinstance(x, str) and x.strip():
+            rules.append({"street": x.strip()})
+    return rules
+
+
 def is_weak_street(item: dict, cfg: dict | None = None) -> bool:
     """Borde Once/Abasto: el depto puede servir; la cuadra no paga salida de Recoleta/BN."""
-    cfg = cfg or {}
-    streets = [fold(x) for x in (cfg.get("weak_streets") or DEFAULT_WEAK_STREETS) if str(x).strip()]
-    name = street_name_of(item)
+    name, num = parse_street(item.get("address") or "")
+    if not name:
+        name, num = parse_street(item.get("title") or "")
+    if not name:
+        return False
     hay = fold(f"{item.get('address') or ''} {item.get('title') or ''}")
-    for w in streets:
-        if name == w or name.startswith(w + " "):
+    for rule in _weak_rules(cfg):
+        if _rule_hits(rule, name, num):
             return True
-        if re.search(rf"(?<![a-z0-9]){re.escape(w)}\s+\d{{2,5}}\b", hay):
-            return True
+        st = fold(rule.get("street") or "")
+        if num is None and st and re.search(rf"(?<![a-z0-9]){re.escape(st)}\s+\d{{2,5}}\b", hay):
+            if rule.get("min") is None and rule.get("max") is None:
+                return True
     return False
 
 
@@ -465,14 +632,48 @@ def exit_usd_m2_of(zone: str, cfg: dict | None = None, item: dict | None = None)
     return None
 
 
+def deal_area(item: dict) -> float | None:
+    for key in ("area", "area_covered"):
+        v = item.get(key)
+        if v is not None and v > 0:
+            return float(v)
+    return None
+
+
+def reno_usd_m2_of(item: dict, cfg: dict | None = None, *, hard: bool = False) -> int:
+    cfg = cfg or {}
+    tags = item.get("tags") or []
+    recycle = "para reciclar" in tags
+    finished = "ya hecho" in tags or ("edificio ok" in tags and not recycle)
+    if recycle or not finished:
+        key = "reno_usd_m2_recycle_hard" if hard else "reno_usd_m2_recycle"
+        fallback = DEFAULT_RENO_USD_M2_RECYCLE_HARD if hard else DEFAULT_RENO_USD_M2_RECYCLE
+        return int(cfg.get(key, fallback))
+    key = "reno_usd_m2_ok_hard" if hard else "reno_usd_m2_ok"
+    fallback = DEFAULT_RENO_USD_M2_OK_HARD if hard else DEFAULT_RENO_USD_M2_OK
+    return int(cfg.get(key, fallback))
+
+
+def hold_usd_of(item: dict, cfg: dict | None = None, *, hard: bool = False) -> float:
+    cfg = cfg or {}
+    exp = item.get("expensas_ars")
+    fx = float(cfg.get("fx_ars_usd") or 0)
+    if exp is None or fx <= 0:
+        return 0.0
+    months = int(cfg.get("hold_months_hard" if hard else "hold_months", 9 if hard else 6))
+    return (exp / fx) * months
+
+
 def air_usd_of(item: dict, cfg: dict | None = None) -> int | None:
     cfg = cfg or {}
+    if "incluye cochera" in (item.get("tags") or []):
+        return None
     price = item.get("price")
-    area = item.get("area")
+    area = deal_area(item)
     exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg, item)
     if price is None or area is None or area <= 0 or exit_m2 is None:
         return None
-    reno = int(cfg.get("reno_usd_m2", DEFAULT_RENO_USD_M2))
+    reno = reno_usd_m2_of(item, cfg, hard=False)
     return int(round(exit_m2 * area - price - reno * area))
 
 
@@ -487,7 +688,7 @@ def apply_air(item: dict, cfg: dict | None = None) -> dict:
             score -= FLIP_TAGS[t]
         else:
             kept.append(t)
-    reno = int(cfg.get("reno_usd_m2", DEFAULT_RENO_USD_M2))
+    reno = reno_usd_m2_of(item, cfg, hard=False)
     exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg, item)
     air = air_usd_of(item, cfg)
     item["air_usd"] = air
@@ -510,20 +711,112 @@ def apply_air(item: dict, cfg: dict | None = None) -> dict:
     if is_weak_street(item, cfg) and "zona floja" not in kept:
         added.append("zona floja")
     for t in added:
-        score += FLIP_TAGS[t]
+        score += FLIP_TAGS.get(t, 0)
         kept.append(t)
     item["score"] = score
     item["tags"] = kept
+    apply_net(item, cfg)
     return item
 
 
-def keep_flip(item: dict) -> bool:
-    """Corta lo que no se da vuelta después de medianas (metro caro)."""
-    return "metro caro" not in (item.get("tags") or [])
+def flip_result(item: dict, cfg: dict | None = None, *, hard: bool = False) -> dict | None:
+    """Neto antes de impuestos. Supuestos en config.json."""
+    cfg = cfg or {}
+    if "incluye cochera" in (item.get("tags") or []):
+        return None
+    price = item.get("price")
+    area = deal_area(item)
+    exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg, item)
+    if price is None or area is None or area <= 0 or exit_m2 is None:
+        return None
+    buy = float(cfg.get("buy_cost_pct_hard" if hard else "buy_cost_pct", 8 if hard else 5)) / 100.0
+    sale = float(cfg.get("sale_cost_pct_hard" if hard else "sale_cost_pct", 6 if hard else 5)) / 100.0
+    closing = float(cfg.get("closing_discount_pct", 3.9)) / 100.0 if hard else 0.0
+    reno = reno_usd_m2_of(item, cfg, hard=hard)
+    hold = hold_usd_of(item, cfg, hard=hard)
+    proceeds = exit_m2 * area * (1 - closing) * (1 - sale)
+    cost = price * (1 + buy) + reno * area + hold
+    neto = proceeds - cost
+    roi = (neto / cost) if cost else None
+    denom = area * (1 - closing) * (1 - sale)
+    breakeven = (cost / denom) if denom else None
+    offer = (proceeds - reno * area - hold) / (1 + buy) if (1 + buy) else None
+    return {
+        "neto": int(round(neto)),
+        "roi": None if roi is None else round(roi, 4),
+        "breakeven": None if breakeven is None else int(round(breakeven)),
+        "reno": reno,
+        "max_offer": None if offer is None else int(round(offer)),
+    }
+
+
+def seventy_offer_of(item: dict, cfg: dict | None = None) -> int | None:
+    """Regla 70%: control, no veto (FlipperForce)."""
+    cfg = cfg or {}
+    area = deal_area(item)
+    exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg, item)
+    if area is None or area <= 0 or exit_m2 is None:
+        return None
+    pct = float(cfg.get("rule_70_pct", 70)) / 100.0
+    reno = reno_usd_m2_of(item, cfg, hard=False)
+    return int(round(pct * exit_m2 * area - reno * area))
+
+
+def decision_of(price: int | None, max_offer: int | None, cfg: dict | None = None) -> str | None:
+    cfg = cfg or {}
+    if price is None or max_offer is None or max_offer <= 0:
+        return None
+    buy_cut = float(cfg.get("decision_buy_pct", 92)) / 100.0
+    watch_cut = float(cfg.get("decision_watch_pct", 108)) / 100.0
+    ratio = price / max_offer
+    if ratio <= buy_cut:
+        return "comprar"
+    if price <= max_offer:
+        return "negociar"
+    if ratio <= watch_cut:
+        return "vigilar"
+    return "descartar"
+
+
+def apply_net(item: dict, cfg: dict | None = None) -> dict:
+    cfg = cfg or {}
+    base = flip_result(item, cfg, hard=False)
+    hard = flip_result(item, cfg, hard=True)
+    item["neto_base_usd"] = None if base is None else base["neto"]
+    item["neto_hard_usd"] = None if hard is None else hard["neto"]
+    item["roi_base"] = None if base is None else base["roi"]
+    item["roi_hard"] = None if hard is None else hard["roi"]
+    item["breakeven_exit_usd_m2"] = None if hard is None else hard["breakeven"]
+    item["breakeven_exit_usd_m2_base"] = None if base is None else base["breakeven"]
+    item["max_offer_usd"] = None if hard is None else hard["max_offer"]
+    item["seventy_offer_usd"] = seventy_offer_of(item, cfg)
+    item["decision"] = decision_of(item.get("price"), item.get("max_offer_usd"), cfg)
+    return item
 
 
 def prefer(items: list[dict]) -> list[dict]:
-    return sorted(items, key=lambda x: (-x.get("score", 0), x["price"] if x.get("price") is not None else 10**12))
+    def key(x: dict):
+        neto = x.get("neto_hard_usd")
+        air = x.get("air_usd")
+        return (
+            -10**12 if neto is None else neto,
+            -10**12 if air is None else air,
+            x.get("score") or 0,
+            -(x["price"] if x.get("price") is not None else 10**12),
+        )
+    return sorted(items, key=key, reverse=True)
+
+
+def keep_flip(item: dict) -> bool:
+    """Corta lo que no se da vuelta o no está en una cuadra que pague."""
+    tags = item.get("tags") or []
+    if "metro caro" in tags:
+        return False
+    if "zona floja" in tags or "barrio del aviso no coincide" in tags:
+        return False
+    if item.get("zone_unverified"):
+        return False
+    return True
 
 
 def join_es(parts: list[str]) -> str:
@@ -554,6 +847,11 @@ _VERDICT_SAY = {
     "ya hecho": "ya está reciclado o a estrenar",
     "tesis": "es el combo: buen edificio y unidad a reciclar",
     "zona floja": "la cuadra no paga la salida del barrio",
+    "barrio del aviso no coincide": "el aviso dice un barrio; la calle es otra",
+    "metro sospechoso": "verificar la cuadra: precio por debajo de lo que paga la zona",
+    "m² sin verificar": "los m² son totales; no vimos cubiertos",
+    "incluye cochera": "el precio incluye cochera",
+    "ocupado": "está ocupado o se vende con renta",
     "cumple barrio, metros y balcón": "pasa barrio, metros y balcón; no hay más señales",
 }
 _FALTA_SAY = {
@@ -593,8 +891,14 @@ def verdict(item: dict, cfg: dict | None = None) -> dict:
             "ya hecho",
             "planta baja",
             "zona floja",
+            "barrio del aviso no coincide",
+            "metro sospechoso",
+            "ocupado",
+            "incluye cochera",
         }:
             resta.append(_say_hit(t))
+        elif t == "m² sin verificar":
+            falta.append(_say_hit(t))
         else:
             entra.append(_say_hit(t))
     if item.get("piso") == 0 and "es planta baja" not in resta:
@@ -603,12 +907,19 @@ def verdict(item: dict, cfg: dict | None = None) -> dict:
         entra.append(_say_hit("cumple barrio, metros y balcón"))
     if not item.get("photo"):
         falta.append(_FALTA_SAY["foto"])
-    if item.get("expensas_ars") is None:
+    floor = int((cfg or {}).get("expensas_min_valid_ars") or EXPENSAS_MIN_VALID_ARS)
+    exp = item.get("expensas_ars")
+    if exp is None or exp < floor:
         falta.append(_FALTA_SAY["expensas"])
     if item.get("piso") is None:
         falta.append(_FALTA_SAY["piso"])
-    if item.get("area") is None:
+    if deal_area(item) is None:
         falta.append(_FALTA_SAY["metros"])
+    falta.append("el precio de la ficha interna")
+    if item.get("address_unverified"):
+        falta.append("verificar la dirección")
+    if item.get("zone_unverified"):
+        falta.append("la calle no confirma el barrio del aviso")
     parts = []
     if entra:
         parts.append("A favor: " + join_es(entra) + ".")
@@ -621,17 +932,38 @@ def verdict(item: dict, cfg: dict | None = None) -> dict:
     reno = item.get("reno_usd_m2")
     zone = item.get("zone") or ""
     if air is not None and exit_m2 and zone:
-        reno_n = int(reno or DEFAULT_RENO_USD_M2)
+        reno_n = int(reno or reno_usd_m2_of(item, cfg, hard=False))
         leftover = (
             f"quedarían USD {_fmt_int(int(air))}"
             if air >= 0
             else f"faltarían USD {_fmt_int(int(abs(air)))}"
         )
         parts.append(
-            f"Aire: {leftover} si lo comprás a este precio, le hacés una obra liviana "
+            f"Aire: {leftover} si lo comprás a este precio, le hacés una obra "
             f"(USD {_fmt_int(reno_n)}/m²) y lo vendés al metro de referencia de {zone} "
-            f"(USD {_fmt_int(int(exit_m2))}). No es ganancia neta: no cuenta escribanía ni el cierre real."
+            f"(USD {_fmt_int(int(exit_m2))}). La salida es fija por barrio, no un comparable de la cuadra."
         )
+    neto = item.get("neto_hard_usd")
+    be = item.get("breakeven_exit_usd_m2")
+    if neto is not None:
+        sign = "USD " + _fmt_int(int(neto)) if neto >= 0 else "−USD " + _fmt_int(int(abs(neto)))
+        bit = f"Neto duro {sign}."
+        if be is not None:
+            bit += f" Equilibrio USD {_fmt_int(int(be))}/m²."
+        parts.append(bit)
+    offer = item.get("max_offer_usd")
+    if offer is not None:
+        dec = item.get("decision") or ""
+        label = {
+            "comprar": "Comprar",
+            "negociar": "Negociar",
+            "vigilar": "Vigilar",
+            "descartar": "Descartar",
+        }.get(dec, "")
+        bit = f"Oferta máxima USD {_fmt_int(int(offer))}."
+        if label:
+            bit += f" {label}."
+        parts.append(bit)
     return {"entra": entra, "resta": resta, "falta": falta, "text": " ".join(parts)}
 
 
@@ -712,6 +1044,7 @@ _STREET_ALIASES = (
     ("republica de la india", "republica de la india"),
     ("rodriguez pena", "rodriguez pena"),
     ("jean jaures", "jean jaures"),
+    ("jean jaure", "jean jaures"),
     ("coronel diaz", "coronel diaz"),
     ("mario bravo", "mario bravo"),
     ("pacheco de melo", "pacheco de melo"),
@@ -792,7 +1125,27 @@ def parse_street(text: str, f: dict | None = None) -> tuple[str, int | None]:
     t = _clean_street_text(text or "")
     if not t:
         return "", None
+    m = re.search(r"^([a-z][a-z\s]*?)\s+(\d{2,5})\b", t)
+    if m:
+        return norm_street(m.group(1)), int(m.group(2))
     return norm_street(t), None
+
+
+def mark_address_conflict(item: dict, f: dict | None = None) -> dict:
+    """Card vs título vs slug: si la altura no coincide, hay que verificar."""
+    addr_name, addr_num = parse_street(item.get("address") or "", f)
+    title_name, title_num = parse_street(item.get("title") or "", f)
+    slug = fold(re.sub(r"[-_./]+", " ", item.get("url") or ""))
+    conflict = False
+    if addr_name and title_name and addr_num and title_num:
+        if addr_name == title_name and addr_num != title_num:
+            conflict = True
+    if addr_name and addr_num:
+        m = re.search(rf"(?<![a-z0-9]){re.escape(addr_name)}\s+(\d{{2,5}})\b", slug)
+        if m and int(m.group(1)) != addr_num:
+            conflict = True
+    item["address_unverified"] = conflict
+    return item
 
 
 def _rule_hits(rule: dict, name: str, num: int | None) -> bool:
@@ -837,8 +1190,12 @@ def _mentions_out_street(text: str, f: dict | None = None) -> bool:
     return False
 
 
+def _same_street(rule: dict, name: str) -> bool:
+    return _rule_hits({**rule, "min": None, "max": None}, name, None)
+
+
 def classify_zone(item: dict, f: dict | None = None) -> str | None:
-    """Barrio por calle + altura. None = fuera. '' = no se pudo fijar."""
+    """Barrio por calle + altura. None = fuera. '' = no se pudo fijar. El aviso no manda."""
     f = f or {}
     rules = f.get("street_zones") or []
     address = item.get("address") or ""
@@ -849,12 +1206,20 @@ def classify_zone(item: dict, f: dict | None = None) -> str | None:
         name, num = parse_street(item.get("title") or "", f)
     if not name:
         return ""
-    hits = [r for r in rules if _rule_hits(r, name, num)]
-    if not hits and num is not None:
-        hits = [r for r in rules if _rule_hits(r, name, None) and r.get("out")]
-    if not hits:
+    mine = [r for r in rules if _same_street(r, name)]
+    if not mine:
         return ""
-    hits.sort(key=lambda r: (len(fold(r.get("street") or "")), 1 if r.get("min") or r.get("max") else 0), reverse=True)
+    ranged = [r for r in mine if r.get("min") is not None or r.get("max") is not None]
+    pool = ranged if (num is not None and ranged) else mine
+    hits = [r for r in pool if _rule_hits(r, name, num)]
+    if not hits and num is not None:
+        hits = [r for r in mine if r.get("out") and _rule_hits(r, name, None)]
+    if not hits:
+        return None if num is not None else ""
+    hits.sort(
+        key=lambda r: (len(fold(r.get("street") or "")), 1 if r.get("min") or r.get("max") else 0),
+        reverse=True,
+    )
     rule = hits[0]
     if rule.get("out"):
         return None
@@ -864,14 +1229,27 @@ def classify_zone(item: dict, f: dict | None = None) -> str | None:
 def apply_zone(item: dict, f: dict, src: dict | None = None) -> bool:
     """Escribe item['zone']. False si la calle está fuera de los 4 barrios."""
     z = classify_zone(item, f)
+    name, num = parse_street(item.get("address") or "", f)
+    if not name:
+        name, num = parse_street(item.get("title") or "", f)
     if z is None:
         item["zone"] = ""
+        item["zone_unverified"] = False
         return False
     if z:
         item["zone"] = z
+        item["zone_unverified"] = False
+        mark_claimed_barrio(item, f)
         return not is_rejected(item, f)
+    # Sin tabla de calles no contradecimos el aviso. Con tabla, calle+altura que no entra no hereda Recoleta.
+    if num is not None and (f.get("street_zones") or []):
+        item["zone"] = ""
+        item["zone_unverified"] = True
+        return False
     if src:
         item["zone"] = source_zone(src)
+    item["zone_unverified"] = True
+    mark_claimed_barrio(item, f)
     return keep_zone(item, src or {}) and in_scope(item, f)
 
 
@@ -1057,9 +1435,10 @@ def matches(item: dict, f: dict) -> bool:
     max_e = f.get("max_expensas_ars")
     if max_e is not None and item.get("expensas_ars") is not None and item["expensas_ars"] > max_e:
         return False
-    if item["area"] is None:
+    area = deal_area(item)
+    if area is None:
         return bool(f.get("include_unknown_area", True))
-    return item["area"] >= f["min_area_m2"]
+    return area >= f["min_area_m2"]
 
 
 # ----------------------------------------------------------- decision stats --
@@ -1081,15 +1460,20 @@ def median(values: list[float]) -> float | None:
 
 
 def listing_usd_m2(item: dict) -> int | None:
-    if item.get("usd_per_m2") is not None:
-        return item["usd_per_m2"]
-    return usd_per_m2(item.get("price"), item.get("area"))
+    return usd_per_m2(item.get("price"), deal_area(item))
+
+
+def _median_skip(item: dict) -> bool:
+    tags = item.get("tags") or []
+    return "incluye cochera" in tags
 
 
 def zone_medians(listings: list[dict], min_n: int = 8) -> dict[str, dict]:
     buckets: dict[str, list[int]] = {}
     for i in listings:
         if i.get("active") is False:
+            continue
+        if _median_skip(i):
             continue
         zone = i.get("zone") or ""
         u = listing_usd_m2(i)
@@ -1817,6 +2201,9 @@ def upsert_listing(prev: dict | None, item: dict, now: str, *, active: bool = Tr
         "old_price": old_price,
         "price_history": hist,
         "area": item.get("area") if item.get("area") is not None else prev.get("area"),
+        "area_total": item.get("area_total") if item.get("area_total") is not None else prev.get("area_total"),
+        "area_covered": item.get("area_covered") if item.get("area_covered") is not None else prev.get("area_covered"),
+        "area_semi": item.get("area_semi") if item.get("area_semi") is not None else prev.get("area_semi"),
         "ambientes": item.get("ambientes") if item.get("ambientes") is not None else prev.get("ambientes"),
         "photo": item.get("photo") or prev.get("photo") or "",
         "tags": item.get("tags") if item.get("tags") is not None else (prev.get("tags") or []),
@@ -1830,8 +2217,19 @@ def upsert_listing(prev: dict | None, item: dict, now: str, *, active: bool = Tr
         "days_seen": item.get("days_seen") if item.get("days_seen") is not None else prev.get("days_seen"),
         "price_drops": item.get("price_drops") if item.get("price_drops") is not None else prev.get("price_drops"),
         "closing_ref_usd": item.get("closing_ref_usd") if item.get("closing_ref_usd") is not None else prev.get("closing_ref_usd"),
-        "expensas_ars": item.get("expensas_ars") if item.get("expensas_ars") is not None else prev.get("expensas_ars"),
-        "expensas_text": item.get("expensas_text") or prev.get("expensas_text") or "",
+        "expensas_ars": item["expensas_ars"] if "expensas_ars" in item else prev.get("expensas_ars"),
+        "expensas_text": item["expensas_text"] if "expensas_text" in item else (prev.get("expensas_text") or ""),
+        "price_source": item.get("price_source") or prev.get("price_source") or "card",
+        "address_unverified": item.get("address_unverified", prev.get("address_unverified")),
+        "zone_unverified": item.get("zone_unverified", prev.get("zone_unverified")),
+        "neto_hard_usd": item.get("neto_hard_usd") if item.get("neto_hard_usd") is not None else prev.get("neto_hard_usd"),
+        "neto_base_usd": item.get("neto_base_usd") if item.get("neto_base_usd") is not None else prev.get("neto_base_usd"),
+        "roi_hard": item.get("roi_hard") if item.get("roi_hard") is not None else prev.get("roi_hard"),
+        "roi_base": item.get("roi_base") if item.get("roi_base") is not None else prev.get("roi_base"),
+        "breakeven_exit_usd_m2": item.get("breakeven_exit_usd_m2") if item.get("breakeven_exit_usd_m2") is not None else prev.get("breakeven_exit_usd_m2"),
+        "max_offer_usd": item.get("max_offer_usd") if item.get("max_offer_usd") is not None else prev.get("max_offer_usd"),
+        "seventy_offer_usd": item.get("seventy_offer_usd") if item.get("seventy_offer_usd") is not None else prev.get("seventy_offer_usd"),
+        "decision": item.get("decision") if item.get("decision") is not None else prev.get("decision"),
         "antiguedad_years": item.get("antiguedad_years") if item.get("antiguedad_years") is not None else prev.get("antiguedad_years"),
         "piso": item.get("piso") if item.get("piso") is not None else prev.get("piso"),
         "cochera": item.get("cochera") if item.get("cochera") is not None else prev.get("cochera"),
@@ -1890,11 +2288,10 @@ def drop_out_of_scope(catalog: dict, f: dict, now: str) -> list[str]:
     gone: list[str] = []
     out = []
     for rec in catalog.get("listings") or []:
-        rec = {**rec}
-        ok = apply_zone(rec, f)
+        probe = {**rec}
+        ok = apply_zone(probe, f)
         if rec.get("active") is not False and not ok:
-            rec["active"] = False
-            rec["gone_at"] = rec.get("gone_at") or now
+            rec = {**rec, "active": False, "gone_at": rec.get("gone_at") or now}
             if rec.get("id"):
                 gone.append(rec["id"])
         out.append(rec)
@@ -1944,7 +2341,19 @@ def enrich_catalog(catalog: dict, items: list[dict], now: str | None = None) -> 
             patch["tags"] = tags
         if i.get("score", 0) != (prev.get("score") or 0):
             patch["score"] = i.get("score", 0)
-        for key in ("air_usd", "exit_usd_m2", "reno_usd_m2"):
+        for key in (
+            "air_usd",
+            "exit_usd_m2",
+            "reno_usd_m2",
+            "area_total",
+            "area_covered",
+            "area_semi",
+            "neto_hard_usd",
+            "neto_base_usd",
+            "max_offer_usd",
+            "seventy_offer_usd",
+            "decision",
+        ):
             new, old = i.get(key), prev.get(key)
             if new is not None and new != old:
                 patch[key] = new
@@ -2254,7 +2663,7 @@ def process_portal(
         mark_ids = sent_ids
 
     catalog_dirty = False
-    if first_run and intro_ok:
+    if first_run and intro_ok and matched:
         apply_live_to_catalog(catalog, matched, now)
         catalog_dirty = True
     else:

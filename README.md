@@ -4,10 +4,13 @@ Corre en GitHub Actions (gratis), 5 veces por día, y te manda por Telegram los 
 
 Filtros actuales (`config.json`): venta · con balcón · Recoleta, Barrio Norte, Botánico, Palermo Chico · hasta 3 ambientes · mínimo 50 m² · precio entre USD 20.000 y 140.000 (gusto 125.000).
 
-Criterio (flip: buen edificio, unidad a reciclar, precio con aire):
+Criterio (flip: buen edificio, unidad a reciclar, plata neta):
 
-- **Corta** (si no entra, no avisa): **balcón**, ambientes, **m² publicados** (sin metros no hay deal), techo de precio, expensas ≥ $380.000 si la card las trae, y **zona**. Tiene que nombrar Recoleta / Barrio Norte / Botánico / Palermo Chico. Se descartan pozo y cuotas, **edificio a reciclar / mal estado / a demoler**, otros barrios (`reject_barrios`: Tigre, Once, Congreso, etc., solo dirección/URL) y otras ciudades (`reject_cities`). Después de las medianas se corta también el **metro caro** (≥+20% vs este pool). Av. Santa Fe y Av. General Paz en CABA no se tocan.
-- **Suma** (ordena y etiqueta): de época, “para reciclar” en la card (título o texto), edificio en buen estado, **aire** (salida de referencia del barrio − precio − obra de screening USD 250/m²), y el combo edificio+unidad. Resta: unidad ya hecha / a estrenar, planta baja, metro/expensas altos, sin aire, y **cuadra floja** (`weak_streets`: hoy Paso / Jean Jaurès, borde Once-Abasto; el depto puede servir, la salida no es la del barrio). Esas calles usan una salida más baja (`weak_street_exit_usd_m2`) para no inflar el aire. 125k es el gusto; un poco más entra con `sobre presupuesto`. El ranking persigue aire en una cuadra que pague, no avisos simpáticos. El aire es screening, no P&L.
+- **Corta** (si no entra, no avisa): **cuadra linda** (la calle y la altura mandan; el barrio del aviso no. Ecuador 400 no es Barrio Norte aunque la card lo diga. Sin calle+altura no entra. Once/Abasto/Congreso en el título, o cuadra floja, tampoco), **balcón**, ambientes, **m² de deal** (cubiertos si están; sin metros no hay deal; el mínimo 50 m² usa cubiertos/ponderados, no el total inflado), techo de precio, expensas ≥ $380.000 si la card las trae, y **zona**. Tiene que nombrar Recoleta / Barrio Norte / Botánico / Palermo Chico. Se descartan pozo y cuotas, **edificio a reciclar / mal estado / a demoler**, otros barrios (`reject_barrios`: Tigre, Once, Congreso, etc., solo dirección/URL) y otras ciudades (`reject_cities`). Después de las medianas se corta también el **metro caro** (≥+20% vs este pool). Av. Santa Fe y Av. General Paz en CABA no se tocan. `$ 1 Expensas` se trata como dato faltante.
+- **Ordena** por **neto duro** (obra, entrada, salida y hold). El **aire** desempata. Tiers: Mejor ≥ USD 15.000 neto duro, Bien ≥ 0, Ok ≥ −25.000, Flojo el resto. La etiqueta **comprar / negociar / vigilar / descartar** compara el precio con la oferta máxima.
+- **Suma** (etiqueta): de época, “para reciclar” / modernizar en la card, edificio en buen estado, aire, y el combo edificio+unidad. Resta: unidad ya hecha / listo para mudarse, planta baja, metro/expensas altos, **metro sospechoso** (≤ −30% vs la mediana del pool: verificar la cuadra, no es plus), sin aire, **ocupado** (inquilino, sucesión, COTI, interno), **incluye cochera** (sale de medianas y del aire; no restamos USD de cochera porque no hay número verificado), y **cuadra floja** (`weak_streets`: hoy Paso / Jean Jaurès). Esas calles usan una salida más baja. 125k es el gusto; un poco más entra con `sobre presupuesto`.
+- **m²**: si la card desglosa, Mudafy (cubierto 100%, semi 50%, descubierto 30%). Si solo hay total, se etiqueta `m² sin verificar`. En Zonaprop a veces el título trae “superficie construida” y se usa como cubierto.
+- **Salida**: metro fijo por barrio (Recoleta/BN 2750, Botánico 3000, Palermo Chico 3600). No hay ventas públicas en Argentina; no es un comparable de la cuadra. Lo “interno”, la orientación y el ruido no se parsean: van en la nota de visita.
 - **Un aviso por depto** dentro del mismo portal: si el mismo (calle + altura + precio + m²) sale en Recoleta y Barrio Norte, queda uno. Si no hay dirección con número, no se agrupa.
 
 ## Setup (una sola vez, ~15 minutos)
@@ -37,7 +40,7 @@ La web vive en `web/`: Next.js estático, sin backend. Lee `web/data/listings-*.
    - `SITE_URL` = esa URL (sin slash final).
 6. Cada push a `web/data/` (cuando hay aviso nuevo, baja de precio o dado de baja) redeploya solo. Si una corrida no cambió nada, no hay commit ni deploy.
 
-La web es `noindex`. La home es **un candidato** (el primero del ranking, o el `id` de `web/data/pick.json` si `manual` es true). El resto vive en `/archivo/`, en tiers de la semana (Mejor → Bien → Ok → Flojo). Cada ficha dice en una frase qué entra, qué resta y qué no sabemos. Guardar / descartar del archivo queda en ese dispositivo (`localStorage`).
+La web es `noindex`. La home es **un candidato** (el primero del ranking por neto duro, o el `id` de `web/data/pick.json` si `manual` es true). El resto vive en `/archivo/`, en tiers de neto duro (Mejor → Bien → Ok → Flojo). Cada ficha muestra oferta máxima y un pad de visita que queda en ese dispositivo. Guardar / descartar también es local. Si Argenprop está vacío o un portal no actualiza, la home lo dice.
 Las fotos salen de la card del listado. Si un aviso se cargó sin foto (migración vieja), la próxima corrida que lo vea completa la ficha.
 Para fijar el candidato a mano: `{ "id": "zonaprop:…", "manual": true, "note": "lo vimos el sábado" }` en `web/data/pick.json`.
 
@@ -45,7 +48,7 @@ Para fijar el candidato a mano: `{ "id": "zonaprop:…", "manual": true, "note":
 
 Editá `config.json`: `max_price_usd` (gusto), `max_price_usd_hard` (corte), `min_area_m2`, `max_ambientes`, `max_expensas_ars` (null = sin tope; sin dato de expensas el aviso entra), y la lista `sources`. Cada fuente tiene `pages` (default 3). El tope lo marca robots.txt: Zonaprop 5, Argenprop 3, Mercado Libre 1 (`/*_Desde_` está bloqueado). El código rechaza un valor más alto. Si un barrio satura esas páginas, no se sube el tope: se parte en más URLs (ambientes o tramo de precio), cada una con su `zone` (el barrio, para medianas y dados de baja).
 `include_unknown_area: false`: sin m² no entra. `max_expensas_ars: 380000` corta expensas disparadas; sin dato de expensas el aviso igual entra.
-Las preferencias (época, reciclar, edificio, ya hecho) están en `signals`. Reciclar mira título y texto de la card. `exit_usd_m2` / `reno_usd_m2` / `air_ok_usd` / `air_wide_usd` arman el aire (Recoleta y Barrio Norte 2750, Botánico 3000, Palermo Chico 3600; obra 250 USD/m²).
+Las preferencias (época, reciclar, edificio, ya hecho, ocupado) están en `signals`. Reciclar mira título y texto de la card. Los knobs de plata viven en `config.json` y se copian a `web/data/scoring.json`: obra intermedia 375 / integral 550, leve 250 / 300, entrada 5–8%, salida 5–6%, closing 3,9 (Mudafy oct 2026). El resto de números nuevos es supuesto, no verificado. `días` es desde que el buscador lo vio, no el “publicado hace” del portal.
 `heartbeat: false` (default): si lo prendes, la primera corrida del día (08:17 ART / 11 UTC) avisa por Telegram, siempre silencioso, cuando no hubo novedades, con la cantidad de avisos activos.
 `notify_loud_min_score` (3) y `notify_loud_drop_pct` (5): por debajo, Telegram manda el aviso con `disable_notification` (sin sonido). Época u otra señal fuerte, o una baja de al menos ese %, suenan. Un metro barato solo no alcanza para pitar.
 `alert_top_n` (10): si baja el precio de uno de los N primeros del ranking (score, después precio), Telegram avisa **con sonido** y etiqueta `top 10`. `0` apaga solo esa prioridad; el resto de bajas sigue llegando.
@@ -79,7 +82,7 @@ Las preferencias (época, reciclar, edificio, ya hecho) están en `signals`. Rec
 - **Argenprop HTML de esta ronda**: WAF (202) desde este entorno; no se guardó fixture nuevo. El parseo de expensas/`N años` usa el mismo formato que el HTML sintético de tests (copiado de cards reales en la primera versión). Pendiente: bajar un fixture fresco desde la Mac.
 - **Balcón en Argenprop**: el portal no deja un filtro de balcón usable en la URL. `/con-balcon/` se ignora o redirige al listado general. El recorte queda en el texto (`require_balcon` + “sin balcón”). Zonaprop sí filtra con `-con-balcon-` en el slug. Mercado Libre: no hay slug de balcón verificado en estos listados; también queda en el texto.
 - **Respeto de robots.txt**: solo páginas de listado que el portal permite (Zonaprop 1–5, Argenprop 1–3, Mercado Libre 1), con pausa de 3–6 s entre pedidos. Sin proxies ni evasión anti-bot.
-- **m²**: Argenprop publica cubierta/semicubierta (se suman); Zonaprop publica total; Mercado Libre publica cubiertos. Pueden diferir un poco del m² "real" del aviso.
+- **m²**: Argenprop cubie.; Zonaprop a menudo `N m² tot.` (a veces desglosa Cubiertos/Semicubiertos/Totales en el texto); Mercado Libre cubiertos. Si hay desglose se pondera (100/50/30). El total solo no se trata como cubierto.
 - Alternativa sin código: ambos portales tienen "Crear alerta" por email con tus filtros; sirve de respaldo.
 
 ## Pendiente / no verificado
@@ -93,6 +96,13 @@ Las preferencias (época, reciclar, edificio, ya hecho) están en `signals`. Rec
 - **Orden por más recientes**: bloqueado en ambos robots.txt (salvo precio ascendente / `?orden-menorprecio`). No agregar `-orden-publicado-descendente` ni `?orden=masnuevos`. El slug `ordenado-publicado-descendente` de Zonaprop además tira el balcón.
 - **Properati**: el listado existe (`/s/{barrio}/departamento/venta`) y robots no lo bloquea, pero desde esta red contestó 401 Access Denied. Sin HTML propio no se agrega.
 - **Mercado Libre, más de una página**: no. `_Desde_` está en Disallow.
+- **Comparables de venta**: no hay precios de venta públicos en Argentina. La salida sigue fija por barrio.
+- **USD de cochera**: Mudafy resta un promedio; no hay número verificado acá (`cochera_usd: null`). Solo se saca de medianas y del aire.
+- **Ficha interna / robots**: no se entra al aviso. Cubiertos extra se recuperan del título o del texto de la card si aparecen. Pendiente si robots.txt lo permite.
+- **Ganancias / habitualidad / IIBB**: no se calculan ni se muestran; quedan en los supuestos de `config.json`.
+- **Tiempo en el portal**: “publicado hace N días” no se parsea; `días` es `first_seen`.
+- **Azcuénaga / Ecuador**: no inventar rangos de `weak_streets` hasta confirmar altura.
+- **Orientación / interno / luz / ruido**: no se puntúan. La nota de visita es el lugar.
 
 ## Pruebas locales
 
@@ -112,12 +122,14 @@ Actions no puede scrapear Argenprop. El script local hace `pull → scrape → c
 Una vez:
 
 1. Creá `.env` en la raíz (no se sube a git) con `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID`. Si ya tenés la web, agregá también `SITE_URL`.
-2. `chmod +x scripts/buscar-argenprop-local.sh`
-3. `cp scripts/com.search-amb.argenprop.plist ~/Library/LaunchAgents/`
-4. `launchctl load ~/Library/LaunchAgents/com.search-amb.argenprop.plist`
-   Si ya lo tenías cargado: `launchctl unload ...` y después `load` de nuevo.
+2. `chmod +x scripts/buscar-argenprop-local.sh scripts/launchd-run-argenprop.sh`
+3. `mkdir -p ~/Library/Application\ Support/search-amb ~/Library/Logs/search-amb`
+4. `cp scripts/launchd-run-argenprop.sh ~/Library/Application\ Support/search-amb/run-argenprop.sh`
+5. `cp scripts/com.search-amb.argenprop.plist ~/Library/LaunchAgents/`
+6. `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.search-amb.argenprop.plist`
+   Si ya lo tenías: `launchctl bootout gui/$(id -u)/com.search-amb.argenprop` y después `bootstrap` de nuevo.
 
-La Mac tiene que estar encendida, y git tiene que poder pushear solo (llave SSH o `gh auth`). Horarios: 8:20, 11:20, 14:20, 17:20, 20:20. Log: `argenprop-local.log`.
+La Mac tiene que estar encendida, y git tiene que poder pushear solo (llave SSH o `gh auth`). Horarios: 8:20, 11:20, 14:20, 17:20, 20:20. Log: `~/Library/Logs/search-amb/argenprop-local.log`. El wrapper vive fuera de `Documents`: launchd no puede abrir stdout ahí (EX_CONFIG 78) ni ejecutar scripts de esa carpeta (exit 126).
 
 ```bash
 ./scripts/buscar-argenprop-local.sh           # scrape + sync

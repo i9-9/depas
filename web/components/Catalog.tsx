@@ -23,8 +23,9 @@ import { Photo } from "@/components/Photo";
 import { PricePair } from "@/components/PricePair";
 import { extraSpecsOf, specsCells } from "@/components/Specs";
 import { Verdict } from "@/components/Verdict";
+import { VisitPad } from "@/components/VisitPad";
 import { readPrefs, writePrefs } from "@/lib/storage";
-import { airLine, joinEs, medianLine, seenLine } from "@/lib/verdict";
+import { airLine, joinEs, medianLine, netLine, offerLine, priceLine, seenLine } from "@/lib/verdict";
 
 type SortKey = "tier" | "new" | "price-asc" | "price-desc" | "m2-asc" | "vs-median" | "air";
 
@@ -587,7 +588,7 @@ function Results({
     sort === "tier"
       ? TIERS.map((tier) => ({
           tier,
-          rows: rest.filter((item) => listingTier(item.score || 0).id === tier.id),
+          rows: rest.filter((item) => listingTier(item).id === tier.id),
         })).filter((g) => g.rows.length)
       : [{ tier: null, rows: rest }];
 
@@ -971,6 +972,20 @@ function RowDetail({ item }: { item: Listing }) {
   const copy = (
     <div className="min-w-0 space-y-4">
       {title ? <p className="text-ink">{title}</p> : null}
+      {item.decision ? (
+        <p className="text-title">
+          {item.decision === "comprar"
+            ? "Comprar"
+            : item.decision === "negociar"
+              ? "Negociar"
+              : item.decision === "vigilar"
+                ? "Vigilar"
+                : "Descartar"}
+          {item.max_offer_usd != null
+            ? ` · oferta máx. USD ${item.max_offer_usd.toLocaleString("es-AR")}`
+            : ""}
+        </p>
+      ) : null}
       <Verdict data={item.verdict} stacked />
       {extra.length ? (
         <dl className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">
@@ -985,8 +1000,12 @@ function RowDetail({ item }: { item: Listing }) {
       <div className="measure space-y-1 text-muted">
         {median ? <p>{median}</p> : null}
         {air ? <p>{air}</p> : null}
+        {netLine(item) ? <p>{netLine(item)}</p> : null}
+        {offerLine(item) ? <p>{offerLine(item)}</p> : null}
+        <p>{priceLine(item)}</p>
         {seen ? <p>{seen}</p> : null}
       </div>
+      <VisitPad id={item.id} />
       {links}
     </div>
   );

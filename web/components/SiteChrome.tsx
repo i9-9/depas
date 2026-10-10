@@ -1,3 +1,4 @@
+import { CoverageNotice } from "@/components/CoverageNotice";
 import { Pulse } from "@/components/Pulse";
 import type { Listing } from "@/lib/listings";
 
@@ -38,6 +39,7 @@ export function SiteChrome({
             </NavLink>
           </nav>
         </header>
+        <CoverageNotice />
         <Pulse listings={listings} pickId={pickId} current={current} />
         <div id="contenido">{children}</div>
       </div>

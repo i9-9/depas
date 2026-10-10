@@ -1,5 +1,6 @@
 import { isNew, publishedAgo, siteLabel, streetOf } from "@/lib/listings";
-import { airLine, medianLine, seenLine } from "@/lib/verdict";
+import { airLine, medianLine, netLine, offerLine, priceLine, seenLine } from "@/lib/verdict";
+import { VisitPad } from "@/components/VisitPad";
 import type { ResolvedPick } from "@/lib/pick";
 import { Photo } from "@/components/Photo";
 import { PricePair } from "@/components/PricePair";
@@ -82,9 +83,25 @@ export function Candidate({
           </a>
         </div>
 
+        {item.decision ? (
+          <p className="text-title">
+            {item.decision === "comprar"
+              ? "Comprar"
+              : item.decision === "negociar"
+                ? "Negociar"
+                : item.decision === "vigilar"
+                  ? "Vigilar"
+                  : "Descartar"}
+            {item.max_offer_usd != null
+              ? ` · oferta máx. USD ${item.max_offer_usd.toLocaleString("es-AR")}`
+              : ""}
+          </p>
+        ) : null}
+
         <Specs item={item} />
 
         <Verdict data={item.verdict} />
+        <VisitPad id={item.id} />
 
         {item.mirrors.length ? (
           <div className="flex flex-col">
@@ -106,19 +123,18 @@ export function Candidate({
         <footer className="measure space-y-2 border-t border-line pt-5 text-muted">
           {median && <p>{median}</p>}
           {air && <p>{air}</p>}
+          {netLine(item) && <p>{netLine(item)}</p>}
+          {offerLine(item) && <p>{offerLine(item)}</p>}
+          <p>{priceLine(item)}</p>
           {seen && <p>{seen}</p>}
           <details>
             <summary className="link flex min-h-11 cursor-pointer items-center text-ink">
               ¿Por qué este?
             </summary>
             <p className="mt-2 leading-relaxed text-ink">
-              Buscamos un flip: edificio que no haya que tocar, unidad para
-              reciclar, cuadra que pague, y aire. El aire es el margen que
-              quedaría si lo comprás a este precio, le hacés una obra liviana
-              y lo vendés al metro de referencia del barrio. No es un P&L.
-              Lo que no se arregla con obra (edificio flojo, metro caro,
-              expensas disparadas, sin metros) no entra. Una buena unidad en
-              una cuadra floja no es el elegido. El resto está en Todos.
+              Lo ordenamos por el neto después de obra y gastos. El aire
+              desempata. La salida es el metro del barrio. Lo que no se
+              arregla con obra no entra.
             </p>
           </details>
         </footer>

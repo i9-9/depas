@@ -501,11 +501,31 @@ def test_street_zones():
     assert z("Santa Fe 3800") == "Botánico"
     assert z("Charcas 3245") == "Recoleta"
 
+    src = {"name": "Recoleta", "zone": "Recoleta", "aliases": ["recoleta"]}
+    assert z("Ecuador 400") is None
+    assert z("Ecuador 900") == "Barrio Norte"
+    assert z("Ecuador 1500") == "Recoleta"
+    assert z("French 100") is None
+    assert z("Mansilla 800") is None
+    assert z("Paso 400") is None
+    rec_lie = {
+        "price": 98000, "ambientes": 2, "area": 55,
+        "title": "Depto Recoleta oportunidad", "address": "Ecuador 400",
+        "url": "https://z/recoleta-ecuador.html", "blurb": "",
+    }
+    assert not s.keep_listing(rec_lie, src, f)
+    once_title = _item("zonaprop:once", title="Recoleta límite con Once", address="Juncal 2900, Recoleta")
+    s.mark_claimed_barrio(once_title, f)
+    assert "barrio del aviso no coincide" in once_title["tags"]
+    pasos = _item("zonaprop:pasos2", title="3 amb a pasos de Congreso", address="Juncal 2900, Recoleta")
+    s.mark_claimed_barrio(pasos, f)
+    assert "barrio del aviso no coincide" not in pasos["tags"]
+    assert not s.keep_flip(_item("zonaprop:floja", tags=["zona floja"]))
+
     web = json.loads((Path(__file__).parent / "web" / "data" / "street-zones.json").read_text())
     assert web["street_zones"] == f["street_zones"]
     assert web["reject_barrios"] == f["reject_barrios"]
 
-    src = {"name": "Recoleta", "zone": "Recoleta", "aliases": ["recoleta"]}
     bad = {"address": "Fitz Roy al 2400", "title": "Depto Recoleta", "url": "https://z/recoleta-1.html",
            "price": 98000, "area": 55, "ambientes": 2, "blurb": ""}
     assert not s.keep_listing(bad, src, f)
@@ -806,17 +826,15 @@ def test_no_write_when_nothing_changed():
         "key": "juncal 2900|98000|57|3",
     }
     s.write_json(s.seen_path("zonaprop"), {"listings": {"zonaprop:old": rec}, "meta": {}})
+    live = _item("zonaprop:old", url="https://z/old.html", photo="")
+    s.apply_air(live)
     listing = {
-        **_item("zonaprop:old", url="https://z/old.html", photo="", score=6,
-                tags=["de época", "aire amplio"]),
+        **live,
         "first_seen": rec["first_seen"],
         "active": True,
         "gone_at": None,
         "old_price": None,
         "price_history": [{"date": rec["first_seen"], "price": rec["price"]}],
-        "air_usd": 44500,
-        "exit_usd_m2": 2750,
-        "reno_usd_m2": 250,
     }
     s.write_json(s.listings_path("zonaprop"), {"last_change": "x", "listings": [listing]})
     before_seen = s.seen_path("zonaprop").read_text()
@@ -924,10 +942,8 @@ def test_verdict_and_pick():
         },
         cfg,
     )
-    assert v["text"] == (
-        "A favor: es de época y está para reciclar. "
-        "En contra: pide USD 135.000 y el gusto es USD 125.000."
-    )
+    assert "A favor: es de época y está para reciclar." in v["text"]
+    assert "pide USD 135.000 y el gusto es USD 125.000" in v["text"]
     pb = s.verdict({"tags": ["edificio flojo"], "piso": 0, "photo": "x", "expensas_ars": 1, "area": 50})
     assert "el edificio está flojo" in pb["text"] and "es planta baja" in pb["text"]
     pool = [_item(f"zonaprop:{i}", score=10 - i, price=100000 + i, active=True) for i in range(5)]
@@ -1113,8 +1129,8 @@ def test_flip_cuts_and_air():
 
     justo = _item("zonaprop:justo", zone="Recoleta", price=125000, area=50, score=0, tags=[])
     s.apply_air(justo)
-    assert justo["air_usd"] == 0
-    assert "sin aire" not in justo["tags"] and "aire" not in justo["tags"]
+    assert justo["air_usd"] == -6250, justo
+    assert "sin aire" in justo["tags"]
 
     pb = _item("zonaprop:pb", zone="", price=90000, area=60, score=0, tags=[], piso=0)
     s.apply_air(pb)
@@ -1191,6 +1207,115 @@ def test_coverage_last_page_unseen():
     assert s.should_send_coverage({"meta": {}}, "2026-10-10")
     assert not s.should_send_coverage({"meta": {"coverage_week": "2026-W41"}}, "2026-10-10")
     assert s.should_send_coverage({"meta": {"coverage_week": "2026-W40"}}, "2026-10-10")
+
+
+def test_areas_weights_expensas_signals_and_offer():
+    html = (Path(__file__).parent / "fixtures" / "zonaprop-botanico.html").read_text(encoding="utf-8")
+    items = {i["id"]: i for i in s.parse_page(html, "zonaprop", "https://www.zonaprop.com.ar/x.html")}
+    split = items["zonaprop:60336475"]
+    assert split["area_covered"] == 32, split
+    assert split["area_semi"] == 4, split
+    assert split["area_total"] == 36, split
+    assert split["area"] == 34, split  # 32 + 4*0.5
+
+    blob = "Departamento con 45 m² de superficie construida. 60 m² tot.2 amb."
+    rec = s.parse_areas("zonaprop", blob)
+    assert rec["area_covered"] == 45 and rec["area_total"] == 60
+    assert rec["area"] == 45
+    only_tot = s.parse_areas("zonaprop", "60 m² tot.2 amb.")
+    assert only_tot["area"] == 60 and only_tot["area_covered"] is None
+    w = s.weighted_area(45, 6, 60)
+    assert abs(w - 50.7) < 0.01  # 45 + 3 + 9*0.3
+
+    assert s.parse_expensas("USD 76.000 + $ 1 Expensas") == (None, "")
+    cheap = {"price": 76000, "ambientes": 2, "area": 45, "area_covered": 45, "area_total": 60,
+             "title": "Santa Fe y Callao", "address": "Avenida Santa Fe & Avenida Callao",
+             "url": "https://z/santa-fe.html", "blurb": "", "expensas_ars": 1, "expensas_text": "$ 1 Expensas"}
+    s.normalize_expensas(cheap)
+    assert cheap["expensas_ars"] is None
+    assert s.matches(cheap, F) is False  # 45 cubiertos < 50
+
+    tot_only = {**cheap, "area": 60, "area_covered": None, "expensas_ars": None}
+    s.apply_signals(tot_only, SIGNALS, F)
+    assert "m² sin verificar" in tot_only["tags"]
+
+    occ = {
+        "price": 125000, "ambientes": 2, "area": 66, "title": "En sucesion. Barrio Norte",
+        "address": "Juncal 2800, Barrio Norte", "url": "https://z/sucesion.html",
+        "blurb": "departamento interno, venta con renta", "zone": "Barrio Norte",
+    }
+    s.apply_signals(occ, SIGNALS, F)
+    assert "ocupado" in occ["tags"], occ
+    ready = {
+        "price": 119000, "ambientes": 2, "area": 52, "title": "Listo para mudarse Recoleta",
+        "address": "Arenales 1800, Recoleta", "url": "https://z/mudarse.html", "blurb": "", "zone": "Recoleta",
+    }
+    s.apply_signals(ready, SIGNALS, F)
+    assert "ya hecho" in ready["tags"], ready
+
+    paso_html = """
+    <div data-id="999001" class="card">
+      <h2>USD 112.000</h2><h3>76 m² tot.3 amb.</h3>
+      <h4>Paso 700</h4><h4>Barrio Norte, Capital Federal</h4>
+      <h2><a href="/propiedades/clasificado/veclapin-paso-760-semipiso-999001.html">Paso 760 y avenida Córdoba: Semipiso</a></h2>
+    </div>
+    """
+    paso = s.parse_page(paso_html, "zonaprop", "https://www.zonaprop.com.ar/x.html")[0]
+    assert paso["address"] == "Paso 700", paso
+    s.apply_signals(paso, SIGNALS, F)
+    assert paso["address_unverified"] is True, paso
+
+    steal = _item("zonaprop:s", zone="Recoleta", price=80000, area=50, score=0, tags=[], vs_median_pct=-40)
+    s.apply_value(steal)
+    assert "metro sospechoso" in steal["tags"] and "metro muy barato" not in steal["tags"]
+
+    deal = _item(
+        "zonaprop:neto",
+        zone="Recoleta",
+        price=100000,
+        area=50,
+        score=0,
+        tags=["para reciclar"],
+    )
+    s.apply_air(deal)
+    assert deal["reno_usd_m2"] == 375
+    assert deal["max_offer_usd"] is not None
+    assert deal["neto_hard_usd"] is not None
+    assert deal["decision"] in {"comprar", "negociar", "vigilar", "descartar"}
+    assert deal["seventy_offer_usd"] == 77500  # 0.7*2750*50 - 375*50
+    garage = _item("zonaprop:coch", zone="Recoleta", price=90000, area=80, tags=["incluye cochera"])
+    s.apply_air(garage)
+    assert garage["air_usd"] is None and garage["neto_hard_usd"] is None and garage["max_offer_usd"] is None
+    assert s.decision_of(80000, 100000) == "comprar"
+    assert s.decision_of(100000, 100000) == "negociar"
+    assert s.decision_of(105000, 100000) == "vigilar"
+    assert s.decision_of(120000, 100000) == "descartar"
+
+    cfg = json.loads((Path(__file__).parent / "config.json").read_text())
+    web = json.loads((Path(__file__).parent / "web" / "data" / "scoring.json").read_text())
+    for key in (
+        "buy_cost_pct",
+        "buy_cost_pct_hard",
+        "sale_cost_pct",
+        "sale_cost_pct_hard",
+        "reno_usd_m2_recycle",
+        "reno_usd_m2_recycle_hard",
+        "reno_usd_m2_ok",
+        "reno_usd_m2_ok_hard",
+        "area_weight_covered",
+        "area_weight_semi",
+        "area_weight_uncovered",
+        "closing_discount_pct",
+        "decision_buy_pct",
+        "decision_watch_pct",
+        "rule_70_pct",
+        "expensas_min_valid_ars",
+        "value_suspect_pct",
+        "weak_streets",
+        "exit_usd_m2",
+        "min_area_m2",
+    ):
+        assert web[key] == cfg[key], key
 
 
 if __name__ == "__main__":
