@@ -1,16 +1,18 @@
 {
- "last_change": null,
+ "last_change": "2026-10-10T05:03:12+00:00",
  "listings": [
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
+   "active": false,
+   "address": "Araoz al 2400",
+   "ambientes": 3,
    "area": null,
+   "expensas_ars": 165000,
+   "expensas_text": "$ 165.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:47694195",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/47/69/41/95/720x532/2020875420.jpg",
    "price": 110000,
    "price_history": [
     {
@@ -21,17 +23,54 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "dpto ambientes contrafrente excelente ubicacion",
+   "title": "Edificio antiguo de 10 pisos, en muy buen estado de mantencion, excelente ubicacion a metr",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dpto-3-ambientes-contrafrente-excelente-ubicacion-47694195.html",
    "zone": ""
   },
   {
    "active": true,
+   "address": "Viamonte y Rodriguez Peña - Unidad 103",
+   "ambientes": 1,
+   "antiguedad_years": null,
+   "area": 64.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:49469771",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/49/46/97/71/720x532/2029738990.jpg",
+   "piso": null,
+   "price": 131500,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 131500
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Hermoso monoambiente divisible, cocinas totalmente equipadas, barra desayunadora, living c",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-49469771.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:50396868",
    "old_price": 81000,
    "photo": "",
@@ -48,6 +87,41 @@
    "title": "venta monoambiente cocheras disponibles",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-monoambiente-cocheras-disponibles-50396868.html",
    "zone": ""
+  },
+  {
+   "active": true,
+   "address": "Azcuénaga 700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 80.0,
+   "closing_ref_usd": null,
+   "cochera": true,
+   "days_seen": null,
+   "expensas_ars": 336000,
+   "expensas_text": "$ 336.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:50871263",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/50/87/12/63/720x532/1846874831.jpg",
+   "piso": null,
+   "price": 90000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 90000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Muy buen semipiso apto profesional ubicado en una excelente de la Ciudad Autónoma de Bueno",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-comodisimo-semipiso-apto-profesional-en-venta-ubicado-50871263.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
   },
   {
    "active": false,
@@ -74,12 +148,12 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:53065846",
    "old_price": null,
    "photo": "",
@@ -98,12 +172,12 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:53716444",
    "old_price": null,
    "photo": "",
@@ -123,11 +197,116 @@
   },
   {
    "active": true,
+   "address": "San Luis 3376",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 175000,
+   "expensas_text": "$ 175.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:54370476",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/54/37/04/76/720x532/2075410286.jpg",
+   "piso": null,
+   "price": 108000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 108000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Excelente departamento de 3 ambientes al frente con balcón individual y la mejor orientaci",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-al-frente-54370476.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Cabrera",
+   "ambientes": 1,
+   "antiguedad_years": null,
+   "area": 58.0,
+   "closing_ref_usd": null,
+   "cochera": true,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:54766947",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/54/76/69/47/720x532/1939944243.jpg",
+   "piso": null,
+   "price": 125000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 125000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Unidades de categoría de 1 ambiente con balcón al frente y contrafrente de entre 50 m2 pro",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamentos-estrenar-barrio-norte-cabrera-y-mario-54766947.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Azcuénaga al 700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 160000,
+   "expensas_text": "$ 160.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:55263580",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/55/26/35/80/720x532/1952294644.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 120000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Excelente departamento de 3 ambientes reciclado, con balcón al frente y patio, ubicado en ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-55263580.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:55598633",
    "old_price": null,
    "photo": "",
@@ -146,12 +325,12 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:56176848",
    "old_price": null,
    "photo": "",
@@ -171,11 +350,85 @@
   },
   {
    "active": true,
+   "address": "Corrientes 1900",
+   "ambientes": 1,
+   "antiguedad_years": 0,
+   "area": 51.0,
+   "closing_ref_usd": null,
+   "cochera": true,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:56300185",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/56/30/01/85/720x532/2052478307.jpg",
+   "piso": null,
+   "price": 138537,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 138537
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Met avenida. Edificio a estrenar! Desarrollado en 14 pisos + 3 subsuelos de cocheras en re",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-ubicado-en-barrio-norte-capital-56300185.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Junin al 1000",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 190000,
+   "expensas_text": "$ 190.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:56310880",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/56/31/08/80/720x532/1977616423.jpg",
+   "piso": null,
+   "price": 135000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 135000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente departamento de 3 ambientes en venta en exclusiva zona. posee dos dormitorios co",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-alquiler-56310880.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:56402229",
    "old_price": null,
    "photo": "",
@@ -195,11 +448,46 @@
   },
   {
    "active": true,
+   "address": "ECUADOR",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 71.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 240000,
+   "expensas_text": "$ 240.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:56580351",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/56/58/03/51/720x532/1984525360.jpg",
+   "piso": null,
+   "price": 104900,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 104900
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento 3 ambientes al frente E L mismo cuenta con un increible balcon aterrazado de ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-ecuador-900-hermoso-departamento-3-ambientes-al-frente-56580351.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:56620198",
    "old_price": null,
    "photo": "",
@@ -219,14 +507,16 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Junin al 700",
+   "ambientes": 3,
+   "area": 66.0,
+   "expensas_ars": 210000,
+   "expensas_text": "$ 210.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:56662315",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/56/66/23/15/720x532/1986746001.jpg",
    "price": 115000,
    "price_history": [
     {
@@ -237,17 +527,17 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "departamento dorm. en venta en barrio norte. muy",
+   "title": "Luminoso departamento en excelente ubicación, cercano a avenidas, facultades y red de tran",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-dorm.-en-venta-en-barrio-norte.-muy-56662315.html",
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:56798009",
    "old_price": null,
    "photo": "",
@@ -267,14 +557,50 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
+   "address": "Montevideo al 600",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 68.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 390000,
+   "expensas_text": "$ 390.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:57171459",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/17/14/59/720x532/2001261981.jpg",
+   "piso": null,
+   "price": 89000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 89000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Excelente departamento en Venta ubicado en Recoleta. Inmejorable ubicación, Montevideo ent",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-excelente-departamento-de-3-ambientes-en-venta!-57171459.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Cabello 3200",
+   "ambientes": 1,
    "area": null,
+   "cochera": false,
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:57384223",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/38/42/23/720x532/2006854935.jpg",
    "price": 105000,
    "price_history": [
     {
@@ -285,20 +611,57 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "mono con balcon amenities y seguridad en palermo chico",
+   "title": "Ubicado en la mejor zona de palermo a 1 cuadra de libertador y las heras, parque las heras",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-mono-con-balcon-amenities-y-seguridad-en-palermo-chico-57384223.html",
    "zone": "Palermo Chico"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Paraguay 2500",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 64.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 190000,
+   "expensas_text": "$ 190.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:57386664",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/38/66/64/720x532/2006935986.jpg",
+   "piso": null,
+   "price": 118000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 118000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de 3 ambientes al frente para modernizar, ideal familia o inversión, cercano ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-barrio-norte-57386664.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "French",
+   "ambientes": 2,
+   "area": 65.0,
+   "expensas_ars": 120000,
+   "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:57416646",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/41/66/46/720x532/2007681220.jpg",
    "price": 129000,
    "price_history": [
     {
@@ -306,20 +669,59 @@
      "price": 129000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "divino amb en barrio norte con balcon y terraza",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Divino 2 amb en barrio norte con balcon Y terraza propia. Mucho sol. Departamento al frent",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-divino-2-amb-en-barrio-norte-con-balcon-y-terraza-57416646.html",
    "zone": "Barrio Norte"
   },
   {
    "active": true,
+   "address": "Av. Córdoba 2700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 73.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 270000,
+   "expensas_text": "$ 270.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:57700867",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/70/08/67/720x532/2014866393.jpg",
+   "piso": null,
+   "price": 135000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 135000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Muy buen departamento A la venta ubicado sobre la av. Córdoba al 2700 A una cuadra de av. ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-muy-buen-3-amb.-al-c-frte-muy-luminoso-av-cordoba-y-57700867.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:57717195",
    "old_price": null,
    "photo": "",
@@ -339,14 +741,16 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Larrea al 800",
+   "ambientes": 3,
+   "area": 58.0,
+   "expensas_ars": 185000,
+   "expensas_text": "$ 185.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:57815465",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/81/54/65/720x532/2035129318.jpg",
    "price": 130000,
    "price_history": [
     {
@@ -354,20 +758,22 @@
      "price": 130000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta ambientes barrio norte con balcon reciclado a",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "3 ambientes reciclado a nuevo con balcón en Barrio NorteMuy lindo 3 ambientes al contrafre",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-barrio-norte-con-balcon-reciclado-a-57815465.html",
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:57906166",
    "old_price": null,
    "photo": "",
@@ -387,11 +793,48 @@
   },
   {
    "active": true,
+   "address": "Juncal",
+   "ambientes": 1,
+   "antiguedad_years": 0,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:57950626",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/95/06/26/720x532/2079016768.jpg",
+   "piso": null,
+   "price": 129000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 129000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Monoambiente de 50m² totales y 47 m² cubiertos, cuenta con balcón de 3, 14 m² y una distri",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-monoambiente-divisible-a-estrenar-en-recoleta-amplio-57950626.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58106670",
    "old_price": null,
    "photo": "",
@@ -411,11 +854,46 @@
   },
   {
    "active": true,
+   "address": "Azcuenaga 700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 73.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 290000,
+   "expensas_text": "$ 290.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:58108817",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/10/88/17/720x532/2025766789.jpg",
+   "piso": null,
+   "price": 88000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 88000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de tres ambientes mas dependencia de servicio, muy cerca del Hospital de Clin",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-azcuenaga-y-san-luis-a-m-de-facultades-58108817.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58225180",
    "old_price": null,
    "photo": "",
@@ -435,11 +913,85 @@
   },
   {
    "active": true,
+   "address": "Corrientes 1900",
+   "ambientes": 1,
+   "antiguedad_years": 0,
+   "area": 51.0,
+   "closing_ref_usd": null,
+   "cochera": true,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:58416357",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/41/63/57/720x532/2052477682.jpg",
+   "piso": null,
+   "price": 131800,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 131800
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Met avenida. Edificio a estrenar! Desarrollado en 14 pisos + 3 subsuelos de cocheras en re",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-ubicado-en-barrio-norte-capital-58416357.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Corrientes 1900",
+   "ambientes": 1,
+   "antiguedad_years": 0,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": true,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:58416367",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/41/63/67/720x532/2052475854.jpg",
+   "piso": null,
+   "price": 130200,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 130200
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Met avenida. Edificio a estrenar! Desarrollado en 14 pisos + 3 subsuelos de cocheras en re",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-ubicado-en-barrio-norte-capital-58416367.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58476283",
    "old_price": null,
    "photo": "",
@@ -459,14 +1011,54 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
-   "first_seen": "2026-10-10T01:45:22+00:00",
+   "address": "San Luis 2950",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 77.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 260000,
+   "expensas_text": "$ 260.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": null,
+   "id": "zonaprop:58479279",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/47/92/79/720x532/2036048378.jpg",
+   "piso": null,
+   "price": 139000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 139000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Increíble 3 Ambientes en San Luis y Calle Jean Jaures. Piso bajo (Shabat Friendly). Totalm",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-regio-3-ambientes-totalmente-reciclado-hi-per-58479279.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
+   "address": "Pueyrredon al 1200",
+   "ambientes": 2,
+   "antiguedad_years": 0,
+   "area": 53.0,
+   "expensas_ars": 290000,
+   "expensas_text": "$ 290.000 Expensas",
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58587120",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/58/71/20/720x532/2053820463.jpg",
    "price": 125000,
    "price_history": [
     {
@@ -477,17 +1069,17 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "venta departamento tipo loft divisible a estrenar en",
+   "title": "El espacio que se adapta a tu forma de vivirSe trata de un gran ambiente Tipo Loft divisib",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-tipo-loft-divisible-a-estrenar-en-58587120.html",
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58602114",
    "old_price": null,
    "photo": "",
@@ -506,15 +1098,16 @@
    "zone": ""
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": false,
+   "address": "Marcelo T. De Alvear al 900",
+   "ambientes": 2,
+   "area": 52.0,
+   "cochera": true,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58653601",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/65/36/01/720x532/2040845659.jpg",
    "price": 129000,
    "price_history": [
     {
@@ -522,20 +1115,59 @@
      "price": 129000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento en retiro",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Luminoso departamento en el barrio retiro. Apto creditodepartamento de dos ambientes con b",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-retiro-58653601.html",
    "zone": ""
   },
   {
    "active": true,
+   "address": "Paraguay 3024",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": true,
+   "days_seen": null,
+   "expensas_ars": 160000,
+   "expensas_text": "$ 160.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:58657768",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/65/77/68/720x532/2078095627.jpg",
+   "piso": 7,
+   "price": 139000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 139000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente oportunidad en Recoleta. 3 ambientes con cochera fija cubierta, balcón y muy bue",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-con-cochera-fija-58657768.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58692487",
    "old_price": null,
    "photo": "",
@@ -554,12 +1186,12 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58787627",
    "old_price": null,
    "photo": "",
@@ -578,15 +1210,17 @@
    "zone": ""
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": false,
+   "address": "Guise 1600",
+   "ambientes": 2,
+   "area": 62.0,
+   "expensas_ars": 167000,
+   "expensas_text": "$ 167.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58788346",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/78/83/46/720x532/2044702358.jpg",
    "price": 132000,
    "price_history": [
     {
@@ -594,20 +1228,59 @@
      "price": 132000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta amb con balcon aterrazado palermo",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente ubicación A 450 mts del shopping alto palermo Y estación de subte bulnes linea D",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-2-amb-con-balcon-aterrazado-palermo-58788346.html",
    "zone": ""
   },
   {
    "active": true,
+   "address": "TUCUMAN 2156",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 90.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 250000,
+   "expensas_text": "$ 250.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:58790965",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/79/09/65/720x532/2044514291.jpg",
+   "piso": null,
+   "price": 127000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 127000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Amplio 3 amb - living comedor con salida al balcón - cocina breakfast - lavadero - 2 dormi",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-reservado!-zona-facultad-de-medicina-3-amb-en-58790965.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58809215",
    "old_price": null,
    "photo": "",
@@ -627,14 +1300,53 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
-   "first_seen": "2026-10-10T01:31:10+00:00",
+   "address": "Av. Cordoba al 1500",
+   "ambientes": 3,
+   "antiguedad_years": 60,
+   "area": 75.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 386000,
+   "expensas_text": "$ 386.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": null,
+   "id": "zonaprop:58919977",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/91/99/77/720x532/2055285236.jpg",
+   "piso": null,
+   "price": 129900,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 129900
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Ubicado en el prestigioso barrio de Recoleta, en pleno corazón de la Ciudad Autónoma de Bu",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-58919977.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
+   "address": "Charcas 2800",
+   "ambientes": 3,
+   "area": 60.0,
+   "expensas_ars": 306000,
+   "expensas_text": "$ 306.000 Expensas",
+   "first_seen": "2026-10-10T01:31:10+00:00",
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:58950172",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/95/01/72/720x532/2048652373.jpg",
    "price": 135000,
    "price_history": [
     {
@@ -642,23 +1354,62 @@
      "price": 135000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta departamento ambientes apto profesional",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Salaya Romera Propiedades ofrece a la Venta Departamento de 3 ambientes en Charcas y Ancho",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-apto-profesional-58950172.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Charcas 2755",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 215000,
+   "expensas_text": "$ 215.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:58991402",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/99/14/02/720x532/2049673753.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 120000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Ubicado en Charcas y Anchorena, departamento al frente en piso alto todo luz y sol. Cuenta",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-50-m-sup2--super-luminoso-58991402.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Ayacucho 1000",
+   "ambientes": 2,
+   "area": 66.0,
+   "expensas_ars": 187000,
+   "expensas_text": "$ 187.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:58992764",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/99/27/64/720x532/2068617878.jpg",
    "price": 125000,
    "price_history": [
     {
@@ -669,20 +1420,61 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "en venta barrio norte amb al frente con balcon",
+   "title": "En sucesion. Barrio Norte, En Venta, 2 Amb Al Frente con Balcón. Luminoso 2 ambientes en R",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-en-venta-barrio-norte-2-amb-al-frente-con-balcon-58992764.html",
    "zone": "Barrio Norte"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Cordoba al 1800",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 63.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 138000,
+   "expensas_text": "$ 138.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59047778",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/04/77/78/720x532/2051122813.jpg",
+   "piso": 12,
+   "price": 138000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 138000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento de 3 ambientes en excelente ubicacion!!. Apto credito hipotecario! Ubicado en",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes.-recoleta-59047778.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "AV. Cordoba  al 1800",
+   "ambientes": 3,
+   "antiguedad_years": 45,
+   "area": 63.0,
+   "expensas_ars": 180000,
+   "expensas_text": "$ 180.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:59050824",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/05/08/24/720x532/2051199050.jpg",
+   "piso": 12,
    "price": 138000,
    "price_history": [
     {
@@ -690,20 +1482,22 @@
      "price": 138000
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento de ambientes en barrio norte",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento con hermosa vista, luminoso. Ubicado en el corazón de Barrio Norte, este enca",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-barrio-norte-59050824.html",
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59124802",
    "old_price": null,
    "photo": "",
@@ -723,11 +1517,46 @@
   },
   {
    "active": true,
+   "address": "Paraguay  al 1200",
+   "ambientes": 3,
+   "antiguedad_years": 50,
+   "area": 52.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 243122,
+   "expensas_text": "$ 243.122 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59214423",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/21/44/23/720x532/2055434626.jpg",
+   "piso": null,
+   "price": 110000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 110000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de 3 ambientes al frente en venta, ubicado sobre la calle Paraguay entre Talc",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-en-recoleta-luminoso-59214423.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59238307",
    "old_price": null,
    "photo": "",
@@ -747,11 +1576,83 @@
   },
   {
    "active": true,
+   "address": "Azcuénaga 1400",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 53.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 140000,
+   "expensas_text": "$ 140.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59241746",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/24/17/46/720x532/2067261741.jpg",
+   "piso": null,
+   "price": 128700,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 128700
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta de departamento ubicado en la mejor zona de Recoleta, ideal para quienes buscan como",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-amb.-recoleta-b.-norte-59241746.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Av Cordoba  al 3100",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 150000,
+   "expensas_text": "$ 150.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59249869",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/24/98/69/720x532/2056316400.jpg",
+   "piso": null,
+   "price": 119000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 119000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Luminoso 3 Ambientes en Excelente Ubicación! (Córdoba y Agüero) Ideal para primer vivienda",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-en-venta.-departamento-3-ambientes-en-recoleta.-59249869.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59263159",
    "old_price": null,
    "photo": "",
@@ -771,14 +1672,16 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Pueyrredon  al 1200",
+   "ambientes": 2,
+   "area": 56.0,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:59353042",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/35/30/42/720x532/2059102029.jpg",
    "price": 128000,
    "price_history": [
     {
@@ -786,23 +1689,29 @@
      "price": 128000
     }
    ],
-   "score": 0,
+   "score": 1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "m sup2 gran monoambiente divisible pueyrredon",
+   "tags": [
+    "edificio ok",
+    "sobre presupuesto"
+   ],
+   "title": "Edificio de categoría en el corazón de Barrio Norte, sobre Av. Pueyrredón entre Charcas y ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-56-27-m-sup2--gran-monoambiente-divisible-pueyrredon-59353042.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Scalabrini Ortiz  al 2600 Beruti y Arneales.",
+   "ambientes": 2,
+   "area": 65.0,
+   "expensas_ars": 260000,
+   "expensas_text": "$ 260.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
    "gone_at": null,
    "id": "zonaprop:59388214",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/38/82/14/720x532/2059980098.jpg",
+   "piso": 0,
    "price": 135000,
    "price_history": [
     {
@@ -810,20 +1719,57 @@
      "price": 135000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento en venta ambientes en palermo",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento de 2 ambientes en venta en la prestigiosa zona de Botánico, Palermo, Capital ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-en-palermo-59388214.html",
    "zone": ""
   },
   {
    "active": true,
+   "address": "Av. Santa Fe 1700",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 52.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 380000,
+   "expensas_text": "$ 380.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59404975",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/40/49/75/720x532/2079403251.jpg",
+   "piso": null,
+   "price": 119000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 119000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Excelente oportunidad en Barrio Norte sobre Av. Santa Fe - Galeria Franca - Seguridad 24hs",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-duplex-dos-ambientes-y-medio-con-balcon-en-59404975.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59486370",
    "old_price": null,
    "photo": "",
@@ -843,11 +1789,46 @@
   },
   {
    "active": true,
+   "address": "Talcahuano  al 1000",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 58.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 173500,
+   "expensas_text": "$ 173.500 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59495259",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/49/52/59/720x532/2074522888.jpg",
+   "piso": null,
+   "price": 115000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 115000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Depto de 3 ambientes en Recoleta, con balcón (reservado) No te pierdas este depto en pleno",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-depto-de-tres-ambientes-en-recoleta-con-balcon-59495259.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59549774",
    "old_price": null,
    "photo": "",
@@ -866,15 +1847,19 @@
    "zone": ""
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": false,
+   "address": "AV Corrientes al 1900",
+   "ambientes": 1,
+   "antiguedad_years": 0,
+   "area": 59.0,
+   "cochera": true,
+   "expensas_ars": 182000,
+   "expensas_text": "$ 182.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59566683",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/56/66/83/720x532/2064312329.jpg",
    "price": 130000,
    "price_history": [
     {
@@ -882,20 +1867,59 @@
      "price": 130000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta a estrenar full amenities av corrientes",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente planta libre a estrenar para dividir y organizar según tus necesidad. Edificio m",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-a-estrenar-full-amenities-av-corrientes-1900-59566683.html",
    "zone": ""
   },
   {
    "active": true,
+   "address": "Paraguay 1878",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 84.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 370000,
+   "expensas_text": "$ 370.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59570076",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/57/00/76/720x532/2076156927.jpg",
+   "piso": null,
+   "price": 135000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 135000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Este departamento en venta se ubica en el distinguido barrio de Recoleta. La propiedad cue",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-3-ambientes-apto-credito-59570076.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59570237",
    "old_price": null,
    "photo": "",
@@ -914,12 +1938,12 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59574708",
    "old_price": null,
    "photo": "",
@@ -938,15 +1962,19 @@
    "zone": ""
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": false,
+   "address": "Junin al 1100",
+   "ambientes": 2,
+   "antiguedad_years": 20,
+   "area": 63.0,
+   "cochera": true,
+   "expensas_ars": 240000,
+   "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59582893",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/58/28/93/720x532/2066768977.jpg",
    "price": 139500,
    "price_history": [
     {
@@ -954,23 +1982,27 @@
      "price": 139500
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta ambientes parrilla y terraza cochera",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Hay departamentos. Y hay lugares donde realmente disfrutás estar. Si siempre imaginaste te",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-2-ambientes-parrilla-y-terraza-cochera-59582893.html",
    "zone": ""
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": false,
+   "address": "San Martín 933",
+   "ambientes": 3,
+   "area": 60.0,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59618004",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/61/80/04/720x532/2065568168.jpg",
    "price": 125000,
    "price_history": [
     {
@@ -981,20 +2013,59 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "pisito frances san martin y m. t de alvear",
+   "title": "Exelenta pisito estilio francés - piso alto, muy luminoso - al frente - compuesto de: hall",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-pisito-frances-san-martin-y-m.-t-de-alvear-59618004.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Charcas al 2800",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 97.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59618906",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/61/89/06/720x532/2065594865.jpg",
+   "piso": null,
+   "price": 135000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 135000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta departamento en Recoleta a pocas cuadras del Boulevar charcas. Ubicación privilegiad",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-recoleta-con-patio-y-balcon-59618906.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Avenida Cordoba al 2500",
+   "ambientes": 3,
+   "area": 73.0,
+   "expensas_ars": 395000,
+   "expensas_text": "$ 395.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
    "gone_at": null,
    "id": "zonaprop:59620821",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/62/08/21/720x532/2065640440.jpg",
    "price": 130000,
    "price_history": [
     {
@@ -1002,23 +2073,29 @@
      "price": 130000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "av cordoba y pueyrredon",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento de tres ambientes en venta en Barrio Norte. Unidad luminosa con dos dormitori",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-av-cordoba-y-pueyrredon-59620821.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Salguero 3078 Piso 5 Departamento B",
+   "ambientes": 3,
+   "antiguedad_years": 50,
+   "area": 54.0,
+   "expensas_ars": 180000,
+   "expensas_text": "$ 180.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:59622727",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/62/27/27/720x532/2081333452.jpg",
+   "piso": 5,
    "price": 122000,
    "price_history": [
     {
@@ -1029,20 +2106,22 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "venta departamento ambientes en palermo chico",
+   "title": "Venta | Departamento de 3 Ambientes en la mejor zona de Palermo Chico - Excelente ubicació",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-en-palermo-chico-59622727.html",
    "zone": "Palermo Chico"
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": false,
+   "address": "AV. Pueyrredon al 1000 2°",
+   "ambientes": 3,
+   "area": 62.0,
+   "expensas_ars": 187248,
+   "expensas_text": "$ 187.248 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59630154",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/63/01/54/720x532/2065861366.jpg",
    "price": 130000,
    "price_history": [
     {
@@ -1050,20 +2129,92 @@
      "price": 130000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "c dep en pueyrredon al impecable balcon apto",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "3 ambientes con dependencia. Interno. 62 M2. Impecable. Balcon chico. Apto profesional. Ba",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-c-dep-en-pueyrredon-al-1000-impecable-balcon-apto-59630154.html",
    "zone": ""
   },
   {
    "active": true,
+   "address": "Tucumán 1900",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 140000,
+   "expensas_text": "$ 140.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59633620",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/63/36/20/720x532/2065945516.jpg",
+   "piso": null,
+   "price": 84900,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 84900
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Excelente departamento de dos ambientes en un primer piso al Contrafrente. -Muy buen livin",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-tucuman-1900-venta-departamento-de-dos-ambientes-en-59633620.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Santa fe al 2700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 150000,
+   "expensas_text": "$ 150.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59640123",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/64/01/23/720x532/2066112577.jpg",
+   "piso": null,
+   "price": 125000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 125000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Vivir Av. Santa Fe es un estilo de vida Departamento 3 Ambientes al Frente en Edificio de ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-barrio-norte-3-ambientes-59640123.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59643349",
    "old_price": null,
    "photo": "",
@@ -1082,15 +2233,17 @@
    "zone": ""
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": false,
+   "address": "Fray Justo Santa María de Oro",
+   "ambientes": 3,
+   "area": 65.0,
+   "expensas_ars": 110000,
+   "expensas_text": "$ 110.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59664607",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/66/46/07/720x532/2066708191.jpg",
    "price": 125000,
    "price_history": [
     {
@@ -1101,20 +2254,57 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "departamento amb con patio apto profesional",
+   "title": "Departamento 3 Ambientes con Patio y Balcón en Palermo. Apto profesional. Oro al 2400, a m",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-amb-con-patio-apto-profesional-59664607.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Avenida Santa Fe & Avenida Callao",
+   "ambientes": 2,
+   "antiguedad_years": 40,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 1,
+   "expensas_text": "$ 1 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59692379",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/69/23/79/720x532/2067380823.jpg",
+   "piso": null,
+   "price": 76000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 76000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de 2 ambientes en venta ubicado en Recoleta, con 45 m² de superficie construi",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-dos-ambientes-en-santa-fe-y-callao-59692379.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Suipacha e/ Avenida Córdoba y Paraguay",
+   "ambientes": 2,
+   "area": 63.0,
+   "expensas_ars": 85000,
+   "expensas_text": "$ 85.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
    "gone_at": null,
    "id": "zonaprop:59717289",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/71/72/89/720x532/2067988737.jpg",
    "price": 140000,
    "price_history": [
     {
@@ -1122,20 +2312,22 @@
      "price": 140000
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento en venta dormitorio bano recoleta",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "_ Departamento de un dormitorio en venta ubicado sobre calle Suipacha entre Avenida Córdob",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-1-dormitorio-1-bano-recoleta-59717289.html",
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:59771456",
    "old_price": null,
    "photo": "",
@@ -1155,14 +2347,128 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Ecuador 1066",
+   "ambientes": 3,
+   "antiguedad_years": 2,
+   "area": 63.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 180000,
+   "expensas_text": "$ 180.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59784399",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/78/43/99/720x532/2069620581.jpg",
+   "piso": null,
+   "price": 140000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 140000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Se encuentra alquilado por 2 años, hasta noviembre 2027. excelente valor de renta. Muy lin",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-primer-piso-con-renta-59784399.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Rodriguez Peña  al 1500",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 53.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 165000,
+   "expensas_text": "$ 165.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59785223",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/78/52/23/720x532/2069624463.jpg",
+   "piso": null,
+   "price": 137000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 137000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente departamento de 2 ambientes ubicado en Recoleta. Super luminoso contrafrente a p",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-59785223.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Av. Las Heras 2400",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 58.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 325000,
+   "expensas_text": "$ 325.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59792789",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/79/27/89/720x532/2069805546.jpg",
+   "piso": null,
+   "price": 140000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 140000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente departamento de 3 ambientes ubicado en el quinto piso al contrafrente del primer",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-recoleta-capital-federal-59792789.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Pueyrredon al 900",
+   "ambientes": 3,
+   "area": 91.0,
+   "expensas_ars": 280000,
+   "expensas_text": "$ 280.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:59807839",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/80/78/39/720x532/2070197304.jpg",
+   "piso": 13,
    "price": 139000,
    "price_history": [
     {
@@ -1170,23 +2476,314 @@
      "price": 139000
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "ambientes con dependencia balcon corrido y vista",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente 3 ambientes con dependencia, balcón corrido y vista abierta – Barrio NorteUbicad",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-dependencia-balcon-corrido-y-vista-59807839.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Avenida Cordoba 1500",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 66.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 340000,
+   "expensas_text": "$ 340.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59808236",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/80/82/36/720x532/2070206813.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 120000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de 3 ambientes con balcón al frente sobre Av. Córdoba. Ubicado en un piso alt",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-luminoso-en-piso-alto-59808236.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Larrea  al 1000",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 53.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 270000,
+   "expensas_text": "$ 270.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59823276",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/82/32/76/720x532/2070570165.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 120000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de 3 ambientes en venta – Recoleta | Larrea al 1000Oportunidad en una de las ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta.-3-amb-con-balcon-59823276.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Charcas 3245",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 300000,
+   "expensas_text": "$ 300.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59835668",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/83/56/68/720x532/2070846752.jpg",
+   "piso": null,
+   "price": 125000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 125000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Luminoso 3 ambientes en Venta en Palermo, Excelente Ubicacion Charcas entre billinghurts y",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-al-frente!-59835668.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Marcelo Torcuato de Alvear 900",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 56.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59854175",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/85/41/75/720x532/2071306276.jpg",
+   "piso": null,
+   "price": 130000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 130000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento de 3 ambientes de 56 m² amoblado y con balcón - Retiro / Recoleta. Departamen",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-recoleta-capital-federal-59854175.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Peña al 2700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 170000,
+   "expensas_text": "$ 170.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59864406",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/86/44/06/720x532/2071578664.jpg",
+   "piso": null,
+   "price": 125000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 125000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Te presentamos un departamento de tres ambientes, de 50m2, ubicado en una exclusiva zona c",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-59864406.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Sanchez De Bustamante 800",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 250000,
+   "expensas_text": "$ 250.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59880499",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/88/04/99/720x532/2071957666.jpg",
+   "piso": null,
+   "price": 118000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 118000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Ubicado en una zona estratégica de gran conectividad, próximo a las avenidas Córdoba y Cor",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-balcon-59880499.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Paraguay 2386",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 132000,
+   "expensas_text": "$ 132.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59883738",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/88/37/38/720x532/2072005536.jpg",
+   "piso": null,
+   "price": 139000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 139000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Deparatamento de 3 Ambientes Excelente Ubicacion!! El departamento esta compuesto por un L",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-paraguay-2300-muy-buen-depto-3-amb-barrio-norte-59883738.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Larrea 1257",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 260000,
+   "expensas_text": "$ 260.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59897998",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/89/79/98/720x532/2072329764.jpg",
+   "piso": null,
+   "price": 139900,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 139900
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [
+    "edificio ok",
+    "sobre presupuesto"
+   ],
+   "title": "Departamento de 3 ambientes al contrafrente abierto con vista abierta en 7mo piso, ubicado",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-recoleta-3-amb-cfte-balcon-vista-abierta-super-lum-59897998.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Cabello al 3100",
+   "ambientes": 2,
+   "area": 55.0,
+   "expensas_ars": 130000,
+   "expensas_text": "$ 130.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:59914111",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/91/41/11/720x532/2072724512.jpg",
    "price": 130000,
    "price_history": [
     {
@@ -1194,23 +2791,99 @@
      "price": 130000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta departamento de ambientes palermo chico",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta de departamento de 2 ambientes con balcón aterrazado en Palermo Chico. Muy luminoso,",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-2-ambientes-palermo-chico-59914111.html",
    "zone": "Palermo Chico"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "CORDOBA 3300",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 78.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 180000,
+   "expensas_text": "$ 180.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59919174",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/91/91/74/720x532/2072846822.jpg",
+   "piso": null,
+   "price": 139500,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 139500
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Amplio departamento tres ambientes al frente con balcon corrido al frente sobre Av. Cordob",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-barrio-norte-59919174.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "AYACUCHO 1400. Entre PeÑa y Pacheco De Melo",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 54.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 410000,
+   "expensas_text": "$ 410.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59930722",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/93/07/22/720x532/2075513603.jpg",
+   "piso": null,
+   "price": 122000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 122000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Venta - 3 ambientes - recoleta. hermoso 3 ambientes al contrafrente A pulmon verde. Super ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes.-ayacucho-al-1400-59930722.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Beruti  2300",
+   "ambientes": 3,
+   "area": 55.0,
+   "expensas_ars": 162000,
+   "expensas_text": "$ 162.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:59950051",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/95/00/51/720x532/2084233391.jpg",
    "price": 128000,
    "price_history": [
     {
@@ -1218,23 +2891,97 @@
      "price": 128000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento en venta recoleta amb. c balcon al",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta – 3 ambientes en recoleta | usd 128. 000Excelente departamento de 3 ambientes, ubica",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-recoleta-3-amb.-c-balcon-al-59950051.html",
    "zone": "Recoleta"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Peña 2700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 53.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59950540",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/95/05/40/720x532/2073557069.jpg",
+   "piso": null,
+   "price": 114900,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 114900
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento Semipiso, contra frente, silencioso, luminoso, en la zona mas buscada de Reco",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-semipiso-venta-recoleta-59950540.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "1 baño",
+   "ambientes": 3,
+   "antiguedad_years": 70,
+   "area": 58.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 257829,
+   "expensas_text": "$ 257.829 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:59974238",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/97/42/38/720x532/2074128259.jpg",
+   "piso": null,
+   "price": 125000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 125000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Originalmente se trata de un departamento de 3 ambientes, actualmente adaptado como oficin",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-en-recoleta-59974238.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Pueyrredón 1362",
+   "ambientes": 3,
+   "area": 65.0,
+   "expensas_ars": 270000,
+   "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
    "gone_at": null,
    "id": "zonaprop:60044229",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/04/42/29/720x532/2075842593.jpg",
    "price": 130000,
    "price_history": [
     {
@@ -1242,20 +2989,22 @@
      "price": 130000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta departamento ambientes luminoso en recoleta",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta departamento 3 ambientes en Barrio Norte - Apto crédito y apto profesional, ideal pa",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-luminoso-en-recoleta-60044229.html",
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60047041",
    "old_price": null,
    "photo": "",
@@ -1275,14 +3024,53 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Larrea 832",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 91.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 350000,
+   "expensas_text": "$ 350.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60051769",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/05/17/69/720x532/2077173212.jpg",
+   "piso": null,
+   "price": 140000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 140000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente depto de tres ambientes al frente con balcon, muy luminoso Y soleado, reciclado,",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-larrea-y-paraguay-tres-ambientes-con-dependencia-al-60051769.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Av. Las Heras 3100. Entre Coronel diaz",
+   "ambientes": 3,
+   "area": 57.0,
+   "expensas_ars": 300000,
+   "expensas_text": "$ 300.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60057359",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/05/73/59/720x532/2076164761.jpg",
    "price": 120000,
    "price_history": [
     {
@@ -1293,17 +3081,54 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "venta ambientes palermo chico!",
+   "title": "Venta 3 ambientes en palermo chico!! Av. Las heras a media cuadra de Plaza Las Heras. Cuar",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-palermo-chico!-60057359.html",
    "zone": "Palermo Chico"
   },
   {
    "active": true,
+   "address": "Ecuador  N°1066 -piso  2",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 59.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 108700,
+   "expensas_text": "$ 108.700 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60062899",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/06/28/99/720x532/2079321626.jpg",
+   "piso": 2,
+   "price": 138000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 138000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Muy lindo departamento en venta de 3 ambientes, balcón Y mucha luminosidad. consta de un l",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-60062899.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60063925",
    "old_price": null,
    "photo": "",
@@ -1323,14 +3148,16 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Larrea  al 1400",
+   "ambientes": 2,
+   "area": 54.0,
+   "expensas_ars": 370000,
+   "expensas_text": "$ 370.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60067830",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/06/78/30/720x532/2076413777.jpg",
    "price": 135000,
    "price_history": [
     {
@@ -1338,23 +3165,98 @@
      "price": 135000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento en venta ambientes con dependencia o",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente departamento semipiso de 2 ambientes con dependencia en Recoleta. Se accede medi",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-ambientes-con-dependencia-o-60067830.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "1 baño",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 218000,
+   "expensas_text": "$ 218.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60077990",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/07/79/90/720x532/2076657138.jpg",
+   "piso": null,
+   "price": 119000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 119000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Oportunidad en Barrio Norte: 3 ambientes con dependencia, balcón y apto profesional. A mod",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-barrio-norte-60077990.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Sarmiento 1400",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 54.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 250000,
+   "expensas_text": "$ 250.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60087285",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/08/72/85/720x532/2076854691.jpg",
+   "piso": 8,
+   "price": 119900,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 119900
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento 3 ambientes – apto crédito. Excelente departamento de 3 ambientes al contrafr",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-san-nicolas-capital-federal-60087285.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Arenales al 3000",
+   "ambientes": 2,
+   "antiguedad_years": 50,
+   "area": 51.0,
+   "expensas_ars": 170000,
+   "expensas_text": "$ 170.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60095623",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/09/56/23/720x532/2077060285.jpg",
    "price": 109000,
    "price_history": [
     {
@@ -1365,17 +3267,54 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "venta ambientes con escritorio barrio norte",
+   "title": "Departamento en Venta en Barrio Norte, Capital FederalUbicado en el corazón de Barrio Nort",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-2-ambientes-con-escritorio-barrio-norte-60095623.html",
    "zone": "Barrio Norte"
   },
   {
    "active": true,
    "address": "",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 420000,
+   "expensas_text": "$ 420.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60096367",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/09/63/67/720x532/2077076651.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 120000
+    }
+   ],
+   "score": 3,
+   "site": "zonaprop",
+   "tags": [
+    "de época"
+   ],
+   "title": "Venta. Juncal y Esmeralda. Excelente Ubicación. - Vigilancia 24 Hs. Departamento de 2 Ambi",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-retiro-60096367.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
+   "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60117268",
    "old_price": null,
    "photo": "",
@@ -1394,15 +3333,17 @@
    "zone": ""
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": false,
+   "address": "Uriburu  al 1200",
+   "ambientes": 2,
+   "area": 52.0,
+   "expensas_ars": 179000,
+   "expensas_text": "$ 179.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60118859",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/11/88/59/720x532/2077633331.jpg",
    "price": 138500,
    "price_history": [
     {
@@ -1410,20 +3351,22 @@
      "price": 138500
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta departamento ambientes piso alto uriburu y",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Salaya Romera Propiedades ofrece a la Venta Departamento de 2 ambientes en piso alto al fr",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-piso-alto-uriburu-y-60118859.html",
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60133606",
    "old_price": null,
    "photo": "",
@@ -1443,14 +3386,123 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
-   "first_seen": "2026-10-10T01:31:10+00:00",
+   "address": "Charcas 3200",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 300000,
+   "expensas_text": "$ 300.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": null,
+   "id": "zonaprop:60134783",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/13/47/83/720x532/2078037828.jpg",
+   "piso": 3,
+   "price": 120000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 120000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Corredor Responsable: Fernando Muñoz cucicba 6573 / pablo daniel vicente cmcpsi 6437- Cont",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-amb-barrio-norte-con-balcon-luminoso-60134783.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Paraguay 2617",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 64.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 270000,
+   "expensas_text": "$ 270.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60138686",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/13/86/86/720x532/2078282628.jpg",
+   "piso": 5,
+   "price": 134000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 134000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Tres ambientes al frente con balcón corrido en Recoleta. Paraguay 2617, entre Jean Jaurès ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dto-3-amb-al-frente-con-balcon-60138686.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Azcuenaga al 600",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 84.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60167531",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/16/75/31/720x532/2078845539.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 120000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Amplio · luminoso · al frente · balcón · bauleraexcelente departamento de 3 ambientes al f",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-en-balvanera-cordoba-60167531.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
+   "address": "Paraguay al  2800",
+   "ambientes": 3,
+   "area": 64.0,
+   "expensas_ars": 150000,
+   "expensas_text": "$ 150.000 Expensas",
+   "first_seen": "2026-10-10T01:31:10+00:00",
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60174112",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/17/41/12/720x532/2079010365.jpg",
    "price": 117000,
    "price_history": [
     {
@@ -1458,23 +3510,135 @@
      "price": 117000
     }
    ],
-   "score": 0,
+   "score": 2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "semipiso de ambientes con balcon al frente barrio",
+   "tags": [
+    "para reciclar"
+   ],
+   "title": "Semi Piso de 3 Ambientes con balcón al frente para reciclar Inmueble: - 1er Dormitorios co",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semipiso-de-3-ambientes-con-balcon-al-frente-barrio-60174112.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
-   "first_seen": "2026-10-10T01:45:22+00:00",
+   "address": "Charcas al 2800",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "closing_ref_usd": null,
+   "cochera": true,
+   "days_seen": null,
+   "expensas_ars": 257000,
+   "expensas_text": "$ 257.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": null,
+   "id": "zonaprop:60176760",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/17/67/60/720x532/2079067742.jpg",
+   "piso": null,
+   "price": 85000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 85000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de dos ambientes de 55 m2 con cochera en venta en Charcas al 2800 y Laprida. ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-dos-ambientes-amplio-con-cochera-60176760.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Avenida Santa Fe 2700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 150000,
+   "expensas_text": "$ 150.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60178104",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/17/81/04/720x532/2079101646.jpg",
+   "piso": null,
+   "price": 125000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 125000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento 3 Ambientes al Frente en Edificio de Estilo Primer Piso por Escalera. Un luga",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-en-barrio-norte-60178104.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "French 2668",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 56.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 350000,
+   "expensas_text": "$ 350.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60180708",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/18/07/08/720x532/2079166280.jpg",
+   "piso": null,
+   "price": 130000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 130000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Muy buen departamento tres ambientes con balcón. Al frente, super luminoso. Hall de entrad",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-con-balcon-al-frente-con-60180708.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
+   "address": "República Árabe Siria 2985",
+   "ambientes": 2,
+   "area": 50.0,
+   "expensas_ars": 280000,
+   "expensas_text": "$ 280.000 Expensas",
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60183974",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/18/39/74/720x532/2080294634.jpg",
+   "piso": 8,
    "price": 120000,
    "price_history": [
     {
@@ -1485,9 +3649,44 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "venta departamento ambientes balcon aterrazado",
+   "title": "Venta departamento de 2 ambientes, 50 metros², piso 8° al frente con balcón aterrazado y c",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-balcon-aterrazado-60183974.html",
    "zone": ""
+  },
+  {
+   "active": true,
+   "address": "Arenales 1100",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 370000,
+   "expensas_text": "$ 370.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60190355",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/19/03/55/720x532/2079400903.jpg",
+   "piso": null,
+   "price": 99000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 99000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Corredor Responsable: rmx 1 sas - Lucas Norman cucicba 8008 / cmcpsi 6743- Contacto: Luisa",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-tres-ambientes-recoleta-60190355.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
   },
   {
    "active": true,
@@ -1515,14 +3714,16 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "General Lucio Norberto Mansilla 2800",
+   "ambientes": 3,
+   "area": 50.0,
+   "expensas_ars": 160000,
+   "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60196715",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/19/67/15/720x532/2079586633.jpg",
    "price": 135000,
    "price_history": [
     {
@@ -1530,23 +3731,64 @@
      "price": 135000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "dpto ambientes en barrio norte silencioso y luz",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: uno bienes raices S. R. L. - nicolás sundblad cpi 7144 / csi 5821- C",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dpto-3-ambientes-en-barrio-norte-silencioso-y-luz-60196715.html",
    "zone": "Barrio Norte"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
+   "address": "Paraguay al 2600",
+   "ambientes": 3,
+   "antiguedad_years": null,
    "area": null,
-   "first_seen": "2026-10-10T01:31:10+00:00",
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": null,
+   "id": "zonaprop:60201142",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/20/11/42/720x532/2079692175.jpg",
+   "piso": null,
+   "price": 129000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 129000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "¡Bienvenidos a tu próximo hogar en el corazón palpitante de Recoleta! Ubicado en Paraguay ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-3-amb-60201142.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
+   "address": "Austria  al 2000",
+   "ambientes": 2,
+   "area": 52.0,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
+   "first_seen": "2026-10-10T01:31:10+00:00",
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60202639",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/20/26/39/720x532/2079775338.jpg",
    "price": 135000,
    "price_history": [
     {
@@ -1554,23 +3796,26 @@
      "price": 135000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta departamento ambientes austria y juncal",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Salaya Romera Propiedades ofrece a la venta Departamento de 2 ambientes en Austria y Junca",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-austria-y-juncal-60202639.html",
    "zone": ""
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Avenida Pueyrredon al 1100",
+   "ambientes": 3,
+   "antiguedad_years": 50,
+   "area": 59.0,
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60206397",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/20/63/97/720x532/2079831224.jpg",
    "price": 125000,
    "price_history": [
     {
@@ -1581,20 +3826,23 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "departamento en barrio norte",
+   "title": "Cómodo y luminoso departamento de 3 ambientes en la prestigiosa Avenida Pueyrredon al 1155",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-barrio-norte-60206397.html",
    "zone": "Barrio Norte"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Cabello al 3900",
+   "ambientes": 3,
+   "area": 52.0,
+   "expensas_ars": 220000,
+   "expensas_text": "$ 220.000 Expensas",
    "first_seen": "2026-10-10T01:53:23+00:00",
    "gone_at": null,
    "id": "zonaprop:60206711",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/20/67/11/720x532/2079839686.jpg",
+   "piso": 4,
    "price": 139000,
    "price_history": [
     {
@@ -1602,23 +3850,27 @@
      "price": 139000
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento amb en palermo botanico",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Ubicacion: En la mejor zona de Palermo. A pasos del Ecoparque. Próximo al polo gastronómic",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-amb-en-palermo-botanico-60206711.html",
    "zone": "Botánico"
   },
   {
-   "active": true,
-   "address": "",
-   "ambientes": null,
+   "active": false,
+   "address": "Av. Cerviño 3500",
+   "ambientes": 1,
    "area": null,
+   "expensas_ars": 210000,
+   "expensas_text": "$ 210.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60209466",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/20/94/66/720x532/2079915443.jpg",
    "price": 140000,
    "price_history": [
     {
@@ -1626,20 +3878,57 @@
      "price": 140000
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "av cervino y av scalabrini ortiz palermo",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "En lo mejor de Palermo, a pasos de Av. Del Libertador, hermoso monoambiente apto profesion",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-av-cervino-y-av-scalabrini-ortiz-palermo-60209466.html",
    "zone": ""
   },
   {
    "active": true,
+   "address": "José A. Cabrera 3275",
+   "ambientes": 2,
+   "antiguedad_years": 50,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 160000,
+   "expensas_text": "$ 160.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60213881",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/21/38/81/720x532/2080947934.jpg",
+   "piso": null,
+   "price": 92000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 92000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "2 Ambientes al Frente con Balcón Terraza, Cerramiento! Muy buena ubicación sobre la calle ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-con-balcon-terraza-y-cerramiento-60213881.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60216384",
    "old_price": null,
    "photo": "",
@@ -1658,12 +3947,12 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60221848",
    "old_price": null,
    "photo": "",
@@ -1683,14 +3972,53 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Paraguay 2600",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 63.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 260000,
+   "expensas_text": "$ 260.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60225749",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/22/57/49/720x532/2080307324.jpg",
+   "piso": null,
+   "price": 129000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 129000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: damian perrone cucicba 2787 / patricia alejandra cordoba cmcpdjmgr 2",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-amb.-recoleta-apto-prof.-63-m-60225749.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Azcuénaga 1000",
+   "ambientes": 3,
+   "area": 58.0,
+   "expensas_ars": 38000,
+   "expensas_text": "$ 38.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
    "gone_at": null,
    "id": "zonaprop:60233554",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/23/35/54/720x532/2080512044.jpg",
    "price": 139000,
    "price_history": [
     {
@@ -1698,20 +4026,60 @@
      "price": 139000
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta dpto ambientes recoleta c balcon luminoso",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: uno bienes raices S. R. L. - nicolás sundblad cpi 7144 / csi 5821- C",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-ambientes-recoleta-c-balcon-luminoso-60233554.html",
    "zone": "Recoleta"
   },
   {
    "active": true,
+   "address": "Paso 760",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 76.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 230000,
+   "expensas_text": "$ 230.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60245847",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/24/58/47/720x532/2080844909.jpg",
+   "piso": null,
+   "price": 112000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 112000
+    }
+   ],
+   "score": 5,
+   "site": "zonaprop",
+   "tags": [
+    "de época",
+    "edificio ok"
+   ],
+   "title": "Oportunidad única! Paso 760 Y avenida córdoba: Semipiso - contrafrente - Balcón - 3 Ambien",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-paso-700-ed.-de-categoia-semipiso-3-ambientes-60245847.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60249285",
    "old_price": null,
    "photo": "",
@@ -1731,14 +4099,53 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Paraguay 1200",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 53.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 270000,
+   "expensas_text": "$ 270.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60260134",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/26/01/34/720x532/2081189735.jpg",
+   "piso": null,
+   "price": 125900,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 125900
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente departamento de 3 ambientes en venta en el barrio de Recoleta. - Todos los ambie",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-recoleta-60260134.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Rodríguez Peña 600",
+   "ambientes": 3,
+   "area": 71.0,
+   "expensas_ars": 120000,
+   "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
    "gone_at": null,
    "id": "zonaprop:60262671",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/26/26/71/720x532/2081254121.jpg",
    "price": 110000,
    "price_history": [
     {
@@ -1749,17 +4156,17 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "ambientes racionalista con balcon en recoleta.",
+   "title": "Corredor Responsable: uno bienes raices S. R. L. - nicolás sundblad cpi 7144 / csi 5821- C",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-racionalista-con-balcon-en-recoleta.-60262671.html",
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60265084",
    "old_price": null,
    "photo": "",
@@ -1779,14 +4186,14 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Aguero 1000",
+   "ambientes": 1,
+   "area": 55.0,
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60266140",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/26/61/40/720x532/2081339050.jpg",
    "price": 125000,
    "price_history": [
     {
@@ -1797,17 +4204,17 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "monoambiente divisible en venta en barrio norte",
+   "title": "Hermoso Monoambiente con balcón a la calle. - Ingresamos a la unidad por la cocina, donde ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-monoambiente-divisible-en-venta-en-barrio-norte-60266140.html",
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60266750",
    "old_price": null,
    "photo": "",
@@ -1827,11 +4234,159 @@
   },
   {
    "active": true,
+   "address": "Marcelo Torcuato de Alvear 1900",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 56.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 116000,
+   "expensas_text": "$ 116.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60273177",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/27/31/77/720x532/2081517106.jpg",
+   "piso": 3,
+   "price": 132000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 132000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: Fernando Muñoz cucicba 6573 / pablo daniel vicente cmcpsi 6437- Cont",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-barrio-norte-apto-credito-60273177.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Paraguay 1100",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 52.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 290000,
+   "expensas_text": "$ 290.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60273748",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/27/37/48/720x532/2081724866.jpg",
+   "piso": null,
+   "price": 126000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 126000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento de 3 ambientes con balcón - Excelente ubicación. Ubicado sobre la calle Parag",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-a-la-venta-en-barrio-norte-de-2-dorm.-60273748.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Ecuador 1000",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 66.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 160000,
+   "expensas_text": "$ 160.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60274817",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/27/48/17/720x532/2081553850.jpg",
+   "piso": null,
+   "price": 135000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 135000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: Martin Manias cucicba 6277 / cpmclz 4037- Contacto: Carolina Leiva. ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-barrio-norte-60274817.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Austria 2400",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 54.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 290000,
+   "expensas_text": "$ 290.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60278706",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/27/87/06/720x532/2081648528.jpg",
+   "piso": 0,
+   "price": 135000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 135000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: Gimena Guido cpi 9619 cmcpdjlm 1103- Contacto: Natalia Posadas. Exce",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-amb-recoleta-60278706.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60280258",
    "old_price": null,
    "photo": "",
@@ -1851,14 +4406,16 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Ecuador al 1300",
+   "ambientes": 2,
+   "area": 50.0,
+   "expensas_ars": 266000,
+   "expensas_text": "$ 266.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60283321",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/28/33/21/720x532/2081761997.jpg",
    "price": 115000,
    "price_history": [
     {
@@ -1869,17 +4426,17 @@
    "score": 0,
    "site": "zonaprop",
    "tags": [],
-   "title": "barrio norte ambientes",
+   "title": "Departamento en Ecuador entre Avenida Santa Fe y Charcas. Dos ambientes al frente. Amplio ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-barrio-norte-2-ambientes-60283321.html",
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60285117",
    "old_price": null,
    "photo": "",
@@ -1899,14 +4456,17 @@
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Paraguay al 2600",
+   "ambientes": 3,
+   "area": 54.0,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60293202",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/29/32/02/720x532/2082016846.jpg",
+   "piso": 7,
    "price": 129900,
    "price_history": [
     {
@@ -1914,23 +4474,208 @@
      "price": 129900
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento en recoleta",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta Departamento de 3 ambientes en Recoleta. Piso 7, cuenta con luz natural y privacidad",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-60293202.html",
    "zone": "Recoleta"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Aguero y Av. Cordoba Monoambiente en Venta 55 m²",
+   "ambientes": 1,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 210000,
+   "expensas_text": "$ 210.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60306979",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/30/69/79/720x532/2082357815.jpg",
+   "piso": 3,
+   "price": 119000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 119000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Monoambiente Divisible con Balcón – Barrio Norte – Amenities – Apto ProfesionalExcelente m",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-monoambiente-divisible-con-balcon-y-amenities-barrio-60306979.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Sanchez de Bustamante 1313 \"C\"",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60312107",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/31/21/07/720x532/2082482439.jpg",
+   "piso": 1,
+   "price": 131000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 131000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Emprendimiento en desarrollo – Barrio Norte | Sanchez de Bustamante 1313entrega inicios de",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-en-desarrollo-2-ambientes-c-con-balcon-barrio-60312107.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Mansilla al 2500",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 78.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60318431",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/31/84/31/720x532/2082636766.jpg",
+   "piso": null,
+   "price": 130000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 130000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Inmejorable ubicación geográfica! A metros de Av. Pueyrredón, próximo a Av. Santa Fe y Av.",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-amb-c-balcon-al-frente-recoleta-60318431.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "PARAGUAY 1269",
+   "ambientes": 3,
+   "antiguedad_years": 50,
+   "area": 52.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 300000,
+   "expensas_text": "$ 300.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60343683",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/36/83/720x532/2083131071.jpg",
+   "piso": null,
+   "price": 106000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 106000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Venta de Departamento 3 ambientes en Recoleta, Capital Federal. Ubicación - Calle Paraguay",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-recoleta-60343683.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "San Luis 3057",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 56.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 115000,
+   "expensas_text": "$ 115.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60348201",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/82/01/720x532/2083219957.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 120000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de dos ambientes y medio, muy luminoso, con balcón corrido al frente y excele",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-dos-ambientes-y-medio-con-doble-60348201.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Peña 2500",
+   "ambientes": 1,
+   "area": 52.0,
+   "cochera": true,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60349574",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/95/74/720x532/2083250837.jpg",
+   "piso": 11,
    "price": 140000,
    "price_history": [
     {
@@ -1938,23 +4683,28 @@
      "price": 140000
     }
    ],
-   "score": 0,
+   "score": -2,
    "site": "zonaprop",
-   "tags": [],
-   "title": "en venta barrio norte recoleta piso con balcon",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: Monica Alejandra Mazza cucicba 5609 / Ezequiel Luceti cmcpsi 6635- C",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-en-venta-barrio-norte-recoleta-piso-11-con-balcon-60349574.html",
    "zone": "Barrio Norte"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Peña al 2400",
+   "ambientes": 2,
+   "area": 55.0,
+   "expensas_ars": 240000,
+   "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60351140",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/35/11/40/720x532/2083286152.jpg",
+   "piso": 13,
    "price": 130000,
    "price_history": [
     {
@@ -1962,23 +4712,174 @@
      "price": 130000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento de ambientes en recoleta",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento muy luminoso piso 13, con excelente ventilación cruzada, donde todos los ambi",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-en-recoleta-60351140.html",
    "zone": "Recoleta"
   },
   {
    "active": true,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "address": "Avenida Santa Fe 2600",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 56.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 251000,
+   "expensas_text": "$ 251.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60358759",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/35/87/59/720x532/2083482292.jpg",
+   "piso": 12,
+   "price": 139000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 139000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: Hernán Buezo cpi 8898 cmcpm 3037- Contacto: Daniela Guerrero. depart",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-de-3-ambientes-recoleta-60358759.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Paraguay 1800",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 52.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 230000,
+   "expensas_text": "$ 230.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60373976",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/37/39/76/720x532/2083867441.jpg",
+   "piso": null,
+   "price": 140000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 140000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [
+    "edificio ok",
+    "sobre presupuesto"
+   ],
+   "title": "Se vende departamento en la zona de Recoleta, sobre Paraguay y Callao, muy bien ubicado, a",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dpto-de-3amb-en-venta-en-recoleta-en-estado-60373976.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Anchorena al 1200",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 64.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 140000,
+   "expensas_text": "$ 140.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60376508",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/37/65/08/720x532/2083929004.jpg",
+   "piso": 2,
+   "price": 140000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 140000
+    }
+   ],
+   "score": -2,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento en venta en Barrio Norte — 3 ambientes al contrafrente con terraza, toilette ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-terraza-barrio-norte-60376508.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Larrea  al 1000",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 60.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 320000,
+   "expensas_text": "$ 320.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60376822",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/37/68/22/720x532/2083936313.jpg",
+   "piso": null,
+   "price": 119000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 119000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Rba inmobiliaria vende departamento 3 ambientes en barrio norte - larrea al Ver datos dorm",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-con-balcon-y-patio-60376822.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Scalabrini Ortiz  al 2300",
+   "ambientes": 3,
+   "area": 55.0,
+   "expensas_ars": 260000,
+   "expensas_text": "$ 260.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
    "gone_at": null,
    "id": "zonaprop:60378433",
    "old_price": null,
-   "photo": "",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/37/84/33/720x532/2083973278.jpg",
    "price": 130000,
    "price_history": [
     {
@@ -1986,20 +4887,22 @@
      "price": 130000
     }
    ],
-   "score": 0,
+   "score": -1,
    "site": "zonaprop",
-   "tags": [],
-   "title": "departamento en botanico",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "3 ambientes con balcón en excelente ubicación – palermoexcelente departamento de 3 ambient",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-botanico-60378433.html",
    "zone": "Botánico"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60380185",
    "old_price": null,
    "photo": "",
@@ -2019,11 +4922,46 @@
   },
   {
    "active": true,
+   "address": "Av Santa Fe 2400",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 67.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 130000,
+   "expensas_text": "$ 130.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60381603",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/38/16/03/720x532/2084046441.jpg",
+   "piso": null,
+   "price": 125000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 125000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Departamento de 3 ambientes en venta sobre Av. Santa Fe – Apto Profesional. Excelente depa",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-recoleta-capital-60381603.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T05:02:26+00:00",
    "id": "zonaprop:60386654",
    "old_price": null,
    "photo": "",
@@ -2040,6 +4978,79 @@
    "title": "departamento en venta en palermo. le parc alcorta.",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-palermo.-le-parc-alcorta.-60386654.html",
    "zone": ""
+  },
+  {
+   "active": true,
+   "address": "Junín 800",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 68.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 183000,
+   "expensas_text": "$ 183.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60387465",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/38/74/65/720x532/2084190636.jpg",
+   "piso": 10,
+   "price": 119500,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 119500
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [],
+   "title": "Corredor Responsable: rmx 1 sas - Lucas Norman cucicba 8008 / cmcpsi 6743- Contacto: Laura",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-amb-b-norte-frente-a-subte-d-f.-medicina-60387465.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "FRENCH 2700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 63.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": 290000,
+   "expensas_text": "$ 290.000 Expensas",
+   "first_seen": "2026-10-10T04:06:21+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60393807",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/39/38/07/720x532/2084346756.jpg",
+   "piso": null,
+   "price": 140000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:06:21+00:00",
+     "price": 140000
+    }
+   ],
+   "score": 0,
+   "site": "zonaprop",
+   "tags": [
+    "para reciclar",
+    "sobre presupuesto"
+   ],
+   "title": "Excelente zona! Hermoso departamento para reciclar y tener en valor un propiedad ideal par",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-c-depencia-balcon-al-frente!-barrio-60393807.html",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
   }
  ]
 }

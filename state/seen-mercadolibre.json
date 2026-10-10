@@ -1,0 +1,122 @@
+{
+ "listings": {
+  "mercadolibre:1729567163": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "av cordoba 1831|89000|50|2",
+   "price": 89000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-1729567163-venta-de-2-ambientes-con-patio-en-barrio-norte-_JM#polycard_client=search-desktop&float_highlight=not_apply&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=25&type=item&tracking_id=8237a24c-4ad8-47f8-8600-9d1e9b5131fd&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:2000597773": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "ayacucho 800|99000|50|2",
+   "price": 99000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2000597773-en-venta-oficina-planta-baja-barrio-norte-2-ambientes-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=43&type=item&tracking_id=8237a24c-4ad8-47f8-8600-9d1e9b5131fd&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:2073922905": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "lucio mansilla 2789|84500|52|3",
+   "price": 84500,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2073922905-depto-venta-3-amb-barrio-norte-apto-credito--_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=39&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:2086301873": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "thames 2400|132900|55|3",
+   "price": 132900,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2086301873-venta-3-ambientes-luminoso-palermo-botanico-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=1&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
+   "zone": "Botánico"
+  },
+  "mercadolibre:2155184101": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "av cordoba 1332|119000|68|3",
+   "price": 119000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2155184101-deptooficina-frente-edificio-frances-apto-profesional-_JM#polycard_client=search-desktop&float_highlight=recent_publication&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=6&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:2169269663": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "ugarteche 2800|130000|55|2",
+   "price": 130000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2169269663-venta-departamento-2-ambientes-en-palermo-zona-botanico-_JM#polycard_client=search-desktop&float_highlight=recent_publication&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=1&type=item&tracking_id=1cdba83c-21d7-4f08-a886-3bd4fb307ceb&sid=search",
+   "zone": "Botánico"
+  },
+  "mercadolibre:3664142778": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "jean jaures 1100|110000|52|3",
+   "price": 110000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3664142778-departamento-de-3-ambientes-en-venta-barrio-norte-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=35&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:3740194676": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "pueyrredon 900|139000|86|3",
+   "price": 139000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3740194676-3-ambientes-con-dependencia-balcon-corrido-y-vista-abierta-barrio-norte-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=42&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:3769356270": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "price": 130000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3769356270-venta-departamento-en-recoleta-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=27&type=item&tracking_id=626a563a-1395-44df-b9bf-547ead342d7d&sid=search",
+   "zone": "Recoleta"
+  },
+  "mercadolibre:3907066208": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "pueyrredon 1362|130000|59|3",
+   "price": 130000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3907066208-venta-departamento-3-ambientes-luminoso-en-recoleta-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=17&type=item&tracking_id=77554570-4d52-4cc6-9cd9-ea4283c63828&sid=search",
+   "zone": "Recoleta"
+  },
+  "mercadolibre:3919982984": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "price": 119000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3919982984-venta-departamento-barrio-norte-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=17&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:3958039772": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "paraguay 3000|139500|57|3",
+   "price": 139500,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3958039772-departamento-3-ambientes-en-barrio-norte-al-contrafrente-en-3-piso-por-ascensor-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=23&type=item&tracking_id=77554570-4d52-4cc6-9cd9-ea4283c63828&sid=search",
+   "zone": "Recoleta"
+  },
+  "mercadolibre:3959625142": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "jose maria gutierrez 2700|136000|57|3",
+   "price": 136000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3959625142-hermoso-departamento-3-amb-en-barrio-norte-apto-credito-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=43&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:3978587040": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "cabello 3900|139000|50|3",
+   "price": 139000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3978587040-departamento-3-amb-en-palermo-botanico-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=4&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
+   "zone": "Botánico"
+  },
+  "mercadolibre:4003722674": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "armenia 2100|113000|50|3",
+   "price": 113000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-4003722674-botanico-venta-3-amb-oportunidad-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=37&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
+   "zone": "Botánico"
+  },
+  "mercadolibre:4004379934": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "aguero 1000|125000|51|1",
+   "price": 125000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-4004379934-monoambiente-divisible-en-venta-en-barrio-norte-luminoso-amenities-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=27&type=item&tracking_id=6d42f664-fe2d-4ec6-8b98-06bf446c548e&sid=search",
+   "zone": "Barrio Norte"
+  },
+  "mercadolibre:4014768174": {
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "key": "scalabrini ortiz 2300|130000|55|3",
+   "price": 130000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-4014768174-departamento-en-botanico-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=39&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
+   "zone": "Botánico"
+  }
+ },
+ "meta": {}
+}

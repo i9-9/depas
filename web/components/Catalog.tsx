@@ -2,17 +2,23 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  formatUsd,
+  TIERS,
+  dropLine,
   formatWhen,
   hasDrop,
+  inIsoWeek,
   isNew,
+  listingTier,
+  rankByScore,
   siteLabel,
   zonesOf,
   type Listing,
 } from "@/lib/listings";
+import { PricePair } from "@/components/PricePair";
+import { specsCells } from "@/components/Specs";
 import { readPrefs, toggleId, writePrefs } from "@/lib/storage";
 
-type SortKey = "new" | "price-asc" | "price-desc" | "score";
+type SortKey = "tier" | "new" | "price-asc" | "price-desc";
 
 type Filters = {
   zone: string;
@@ -41,12 +47,16 @@ const INITIAL: Filters = {
 export function Catalog({
   listings,
   lastNovelty,
+  week,
+  pickId = null,
 }: {
   listings: Listing[];
   lastNovelty: string | null;
+  week: string;
+  pickId?: string | null;
 }) {
   const [filters, setFilters] = useState<Filters>(INITIAL);
-  const [sort, setSort] = useState<SortKey>("new");
+  const [sort, setSort] = useState<SortKey>("tier");
   const [saved, setSaved] = useState<string[]>([]);
   const [discarded, setDiscarded] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
@@ -87,7 +97,7 @@ export function Catalog({
     ranked.sort((a, b) => {
       if (sort === "price-asc") return (a.price ?? 1e12) - (b.price ?? 1e12);
       if (sort === "price-desc") return (b.price ?? 0) - (a.price ?? 0);
-      if (sort === "score") return (b.score || 0) - (a.score || 0);
+      if (sort === "tier") return rankByScore(a, b);
       return Date.parse(b.first_seen || "") - Date.parse(a.first_seen || "");
     });
     return ranked;
@@ -108,114 +118,77 @@ export function Catalog({
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-20 pt-8 sm:px-6">
-      <header className="max-w-2xl">
-        <p className="text-xs font-medium uppercase tracking-[0.22em] text-muted">
-          Búsqueda privada
-        </p>
-        <h1 className="mt-2 font-display text-4xl font-medium tracking-tight text-ink sm:text-5xl">
-          Departamentos
-        </h1>
-        <p className="mt-3 text-lg leading-relaxed text-muted">
-          {activeCount} avisos activos
-          <span aria-hidden="true"> · </span>
-          última novedad: {formatWhen(lastNovelty)}
-        </p>
-        <p className="mt-2 text-sm text-muted">
-          La mediana de USD/m² compara solo contra los avisos que cumplen tus filtros.
-        </p>
-      </header>
+    <div>
+      <h1 className="sr-only">Archivo</h1>
+      <p className="idx border-b border-ink py-4 text-[13px]">
+        {activeCount} activos · {week} · {formatWhen(lastNovelty)} · {visible.length} en vista
+      </p>
 
-      <section
-        aria-label="Filtros"
-        className="mt-8 rounded-[var(--radius)] border border-line bg-elev/80 p-4 shadow-[var(--shadow)] backdrop-blur"
-      >
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <Field label="Barrio">
-            <select
-              className="input"
-              value={filters.zone}
-              onChange={(e) => set("zone", e.target.value)}
-            >
-              <option value="">Todos</option>
-              {zones.map((z) => (
-                <option key={z} value={z}>
-                  {z}
-                </option>
-              ))}
-            </select>
-          </Field>
-          <Field label="Portal">
-            <select
-              className="input"
-              value={filters.site}
-              onChange={(e) => set("site", e.target.value)}
-            >
-              <option value="">Todos</option>
-              <option value="zonaprop">Zonaprop</option>
-              <option value="argenprop">Argenprop</option>
-            </select>
-          </Field>
-          <Field label="Ambientes">
-            <select
-              className="input"
-              value={filters.ambientes}
-              onChange={(e) => set("ambientes", e.target.value)}
-            >
-              <option value="">Todos</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          </Field>
-          <Field label="Precio máximo (USD)">
-            <input
-              className="input"
-              type="number"
-              inputMode="numeric"
-              min={0}
-              placeholder="140000"
-              value={filters.maxPrice}
-              onChange={(e) => set("maxPrice", e.target.value)}
-            />
-          </Field>
-          <Field label="Expensas máximas (ARS)">
-            <input
-              className="input"
-              type="number"
-              inputMode="numeric"
-              min={0}
-              placeholder="sin tope"
-              value={filters.maxExpensas}
-              onChange={(e) => set("maxExpensas", e.target.value)}
-            />
-          </Field>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3 text-sm">
-          <Check checked={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Solo nuevos" />
-          <Check checked={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Solo baja de precio" />
-          <Check checked={filters.hideGone} onChange={(v) => set("hideGone", v)} label="Ocultar dados de baja" />
-          <Check checked={filters.onlySaved} onChange={(v) => set("onlySaved", v)} label="Guardados" />
-        </div>
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <label className="flex items-center gap-2 text-sm text-muted">
-            Orden
-            <select
-              className="input w-auto"
-              value={sort}
-              onChange={(e) => setSort(e.target.value as SortKey)}
-            >
-              <option value="new">Más nuevos</option>
-              <option value="price-asc">Precio ↑</option>
-              <option value="price-desc">Precio ↓</option>
-              <option value="score">Score</option>
-            </select>
-          </label>
-          <p className="text-sm text-muted" aria-live="polite">
-            {visible.length} resultado{visible.length === 1 ? "" : "s"}
-          </p>
-        </div>
-      </section>
+      <div className="g border-b border-ink py-4">
+        <Field label="Barrio" className="col-span-6 sm:col-span-3 lg:col-span-2">
+          <select className="input" value={filters.zone} onChange={(e) => set("zone", e.target.value)}>
+            <option value="">Todos</option>
+            {zones.map((z) => (
+              <option key={z} value={z}>
+                {z}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="Portal" className="col-span-6 sm:col-span-3 lg:col-span-2">
+          <select className="input" value={filters.site} onChange={(e) => set("site", e.target.value)}>
+            <option value="">Todos</option>
+            <option value="zonaprop">Zonaprop</option>
+            <option value="argenprop">Argenprop</option>
+            <option value="mercadolibre">Mercado Libre</option>
+          </select>
+        </Field>
+        <Field label="Amb" className="col-span-4 sm:col-span-2 lg:col-span-1">
+          <select className="input" value={filters.ambientes} onChange={(e) => set("ambientes", e.target.value)}>
+            <option value="">—</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </Field>
+        <Field label="USD máx." className="col-span-4 sm:col-span-2 lg:col-span-2">
+          <input
+            className="input"
+            type="number"
+            inputMode="numeric"
+            min={0}
+            placeholder="140000"
+            value={filters.maxPrice}
+            onChange={(e) => set("maxPrice", e.target.value)}
+          />
+        </Field>
+        <Field label="Exp. máx." className="col-span-4 sm:col-span-2 lg:col-span-2">
+          <input
+            className="input"
+            type="number"
+            inputMode="numeric"
+            min={0}
+            placeholder="—"
+            value={filters.maxExpensas}
+            onChange={(e) => set("maxExpensas", e.target.value)}
+          />
+        </Field>
+        <Field label="Orden" className="col-span-6 sm:col-span-3 lg:col-span-3">
+          <select className="input" value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>
+            <option value="tier">Tiers</option>
+            <option value="new">Más nuevos</option>
+            <option value="price-asc">Precio ↑</option>
+            <option value="price-desc">Precio ↓</option>
+          </select>
+        </Field>
+      </div>
+
+      <div className="flex flex-wrap gap-x-6 gap-y-2 border-b border-ink py-3 text-[13px]">
+        <Check checked={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
+        <Check checked={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Baja de precio" />
+        <Check checked={filters.hideGone} onChange={(v) => set("hideGone", v)} label="Ocultar bajas" />
+        <Check checked={filters.onlySaved} onChange={(v) => set("onlySaved", v)} label="Guardados" />
+      </div>
 
       {!listings.length ? (
         <Empty
@@ -223,34 +196,106 @@ export function Catalog({
           text="Cuando el buscador encuentre departamentos que pasen los filtros, van a aparecer acá."
         />
       ) : !visible.length ? (
-        <Empty
-          title="Nada con estos filtros"
-          text="Probá ampliar barrio, precio o mostrar los dados de baja."
-        />
+        <Empty title="Nada con estos filtros" text="Probá ampliar barrio, precio o mostrar los dados de baja." />
       ) : (
-        <ul className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {visible.map((item) => (
-            <li key={item.id}>
-              <Card
-                item={item}
-                saved={saved.includes(item.id)}
-                discarded={discarded.includes(item.id)}
-                onSave={() => toggleSave(item.id)}
-                onDiscard={() => toggleDiscard(item.id)}
-              />
-            </li>
-          ))}
-        </ul>
+        <Results
+          items={visible}
+          sort={sort}
+          week={week}
+          pickId={pickId}
+          saved={saved}
+          discarded={discarded}
+          onSave={toggleSave}
+          onDiscard={toggleDiscard}
+        />
       )}
     </div>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Results({
+  items,
+  sort,
+  week,
+  pickId,
+  saved,
+  discarded,
+  onSave,
+  onDiscard,
+}: {
+  items: Listing[];
+  sort: SortKey;
+  week: string;
+  pickId: string | null;
+  saved: string[];
+  discarded: string[];
+  onSave: (id: string) => void;
+  onDiscard: (id: string) => void;
+}) {
+  const ranks = new Map(items.map((item, i) => [item.id, i + 1]));
+  const groups =
+    sort === "tier"
+      ? TIERS.map((tier) => ({
+          tier,
+          rows: items.filter((item) => listingTier(item.score || 0).id === tier.id),
+        })).filter((g) => g.rows.length)
+      : [{ tier: null, rows: items }];
+
   return (
-    <label className="block text-xs font-medium uppercase tracking-[0.14em] text-muted">
-      {label}
-      <div className="mt-1.5">{children}</div>
+    <div className="mt-0">
+      {groups.map((group) => (
+        <section key={group.tier?.id || "flat"}>
+          {group.tier && (
+            <h2 className="band mt-0 flex items-center justify-between px-2 py-2 text-[13px] uppercase tracking-[0.16em]">
+              <span>{group.tier.label}</span>
+              <span className="idx">{group.rows.length}</span>
+            </h2>
+          )}
+          <div className="hidden border-b border-ink text-[11px] uppercase tracking-[0.12em] md:grid md:grid-cols-[40px_48px_minmax(0,1fr)_56px_40px_120px_88px_88px] md:gap-3 md:py-2">
+            <span>Nr</span>
+            <span />
+            <span>Dirección</span>
+            <span className="text-right">m²</span>
+            <span className="text-right">Amb</span>
+            <span>Barrio</span>
+            <span className="text-right">USD</span>
+            <span />
+          </div>
+          <ul>
+            {group.rows.map((item) => (
+              <li key={item.id} className="border-b border-ink/25">
+                <Row
+                  item={item}
+                  rank={ranks.get(item.id) || 0}
+                  week={week}
+                  isPick={item.id === pickId}
+                  saved={saved.includes(item.id)}
+                  discarded={discarded.includes(item.id)}
+                  onSave={() => onSave(item.id)}
+                  onDiscard={() => onDiscard(item.id)}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function Field({
+  label,
+  children,
+  className,
+}: {
+  label: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <label className={className}>
+      <span className="block text-[11px] uppercase tracking-[0.14em]">{label}</span>
+      {children}
     </label>
   );
 }
@@ -265,10 +310,10 @@ function Check({
   label: string;
 }) {
   return (
-    <label className="inline-flex cursor-pointer items-center gap-2 text-ink">
+    <label className="inline-flex min-h-10 cursor-pointer items-center gap-2">
       <input
         type="checkbox"
-        className="size-4 accent-[var(--accent)]"
+        className="size-4 accent-[var(--ink)]"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
       />
@@ -279,187 +324,110 @@ function Check({
 
 function Empty({ title, text }: { title: string; text: string }) {
   return (
-    <div className="mt-16 rounded-[var(--radius)] border border-dashed border-line px-6 py-16 text-center">
-      <h2 className="font-display text-2xl text-ink">{title}</h2>
-      <p className="mx-auto mt-2 max-w-md text-muted">{text}</p>
+    <div className="max-w-md py-16">
+      <h2 className="display text-[32px]">{title}</h2>
+      <p className="mt-4 text-[14px]">{text}</p>
     </div>
   );
 }
 
-function Card({
+function flags(item: Listing, week: string, isPick: boolean): string[] {
+  const out: string[] = [];
+  if (isPick) out.push("Candidato");
+  if (isNew(item)) out.push("Nuevo");
+  else if (inIsoWeek(item.first_seen, week)) out.push("Esta semana");
+  if (hasDrop(item)) out.push(dropLine(item, { short: true }) || "Bajó");
+  if (!item.active) out.push("Baja");
+  return out;
+}
+
+function Actions({
+  saved,
+  discarded,
+  onSave,
+  onDiscard,
+}: {
+  saved: boolean;
+  discarded: boolean;
+  onSave: () => void;
+  onDiscard: () => void;
+}) {
+  return (
+    <div className="flex gap-3 text-[11px] uppercase tracking-[0.12em]">
+      <button type="button" onClick={onSave} aria-pressed={saved} className="min-h-10">
+        {saved ? "Ok" : "Guardar"}
+      </button>
+      <button type="button" onClick={onDiscard} aria-pressed={discarded} className={`min-h-10 ${discarded ? "text-accent" : "text-ink/40"}`}>
+        {discarded ? "Fuera" : "Descartar"}
+      </button>
+    </div>
+  );
+}
+
+function Row({
   item,
+  rank,
+  week,
+  isPick,
   saved,
   discarded,
   onSave,
   onDiscard,
 }: {
   item: Listing;
+  rank: number;
+  week: string;
+  isPick: boolean;
   saved: boolean;
   discarded: boolean;
   onSave: () => void;
   onDiscard: () => void;
 }) {
-  const gone = !item.active;
-  const drop = hasDrop(item);
-  const fresh = isNew(item);
-  const facts = [
-    item.area != null ? `${item.area.toLocaleString("es-AR")} m²` : null,
-    item.ambientes != null ? `${item.ambientes} amb` : null,
-    item.zone || null,
-  ].filter(Boolean);
-
+  const marks = flags(item, week, isPick);
+  const cells = specsCells(item);
   return (
-    <article
-      className={`flex h-full flex-col overflow-hidden rounded-[var(--radius)] border border-line bg-elev shadow-[var(--shadow)] ${
-        gone ? "opacity-55" : ""
-      }`}
-    >
-      <div className="relative aspect-[4/3] bg-photo">
-        {item.photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={item.photo}
-            alt={item.title || item.address || "Departamento"}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <div className="flex h-full w-full flex-col justify-between p-5">
-            <p className="font-display text-5xl leading-none text-ink/20">
-              {(item.zone || item.site || "·").slice(0, 1)}
-            </p>
-            <p className="text-sm text-muted">Sin foto en el listado</p>
+    <article className={!item.active ? "opacity-35" : ""}>
+      <div className="grid grid-cols-[32px_48px_minmax(0,1fr)] items-center gap-3 py-3 md:grid-cols-[40px_48px_minmax(0,1fr)_56px_40px_120px_88px_88px]">
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hit col-span-3 grid grid-cols-subgrid items-center gap-3 md:col-span-7"
+        >
+          <p className="idx text-[12px] text-ink/50">{String(rank).padStart(2, "0")}</p>
+          <div className="size-12 bg-photo">
+            {item.photo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={item.photo} alt="" className="size-full object-cover" />
+            ) : null}
           </div>
-        )}
-        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-          {fresh && <Badge>Nuevo</Badge>}
-          {drop && <Badge tone="warn">Bajó de precio</Badge>}
-          {gone && <Badge tone="gone">Dado de baja</Badge>}
-        </div>
-      </div>
-      <div className="flex flex-1 flex-col gap-3 p-5">
-        <div>
-          <p className="font-display text-3xl tracking-tight text-ink">{formatUsd(item.price)}</p>
-          {drop && (
-            <p className="text-sm text-muted">
-              <span className="line-through">{formatUsd(item.old_price)}</span>
+          <div className="min-w-0">
+            <h3 className="name truncate text-[16px]">
+              {item.address || item.title || "Aviso sin dirección"}
+            </h3>
+            <p className="truncate text-[11px] text-ink/50">
+              {marks.length ? `${marks.join(" · ")} · ` : ""}
+              {siteLabel(item.site)}
             </p>
-          )}
-        </div>
-        <p className="text-sm text-muted">{facts.join(" · ") || "Datos incompletos"}</p>
-        <p className="text-sm text-muted">{extrasLine(item)}</p>
-        <Decision item={item} />
-        <h2 className="font-display text-xl leading-snug text-ink">
-          {item.title || item.address || "Aviso sin título"}
-        </h2>
-        {item.address && item.title && (
-          <p className="text-sm text-muted">{item.address}</p>
-        )}
-        {!!item.tags.length && (
-          <ul className="flex flex-wrap gap-1.5">
-            {item.tags.map((tag) => (
-              <li
-                key={tag}
-                className="rounded-full bg-accent-soft px-2.5 py-0.5 text-xs text-accent"
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
-        )}
-        <p className="text-xs uppercase tracking-[0.16em] text-muted">{siteLabel(item.site)}</p>
-        <div className="mt-auto flex flex-wrap gap-2 pt-2">
-          <a
-            href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center rounded-full bg-ink px-4 text-sm font-medium text-[var(--bg)]"
-          >
-            Ver aviso
-          </a>
-          <button
-            type="button"
-            onClick={onSave}
-            aria-pressed={saved}
-            className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm"
-          >
-            {saved ? "Guardado" : "Guardar"}
-          </button>
-          <button
-            type="button"
-            onClick={onDiscard}
-            aria-pressed={discarded}
-            className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm text-muted"
-          >
-            {discarded ? "Descartado" : "Descartar"}
-          </button>
+            <p className="mt-1 text-[14px] md:hidden">
+              <PricePair item={item} inline />
+              <span className="text-ink/50">
+                {" "}
+                · {cells.m2} · {cells.amb} · {cells.zone}
+              </span>
+            </p>
+          </div>
+          <p className="idx hidden text-right md:block">{cells.m2}</p>
+          <p className="idx hidden text-right md:block">{cells.amb}</p>
+          <p className="hidden truncate md:block">{cells.zone}</p>
+          <p className="idx hidden text-right md:block">
+            <PricePair item={item} inline />
+          </p>
+        </a>
+        <div className="col-span-3 md:col-span-1">
+          <Actions saved={saved} discarded={discarded} onSave={onSave} onDiscard={onDiscard} />
         </div>
       </div>
     </article>
-  );
-}
-
-function extrasLine(item: Listing): string {
-  const bits: string[] = [];
-  if (item.expensas_ars != null) {
-    bits.push(`expensas $ ${item.expensas_ars.toLocaleString("es-AR")}`);
-  } else {
-    bits.push("expensas s/d");
-  }
-  if (item.piso != null) bits.push(item.piso === 0 ? "PB" : `piso ${item.piso}`);
-  if (item.antiguedad_years != null) {
-    bits.push(item.antiguedad_years === 0 ? "a estrenar" : `${item.antiguedad_years} años`);
-  }
-  if (item.cochera === true) bits.push("cochera");
-  if (item.cochera === false) bits.push("sin cochera");
-  return bits.join(" · ");
-}
-
-function Decision({ item }: { item: Listing }) {
-  const bits: string[] = [];
-  if (item.usd_per_m2 != null) {
-    let line = `${formatUsd(item.usd_per_m2)}/m²`;
-    if (item.vs_median_pct != null && item.vs_median_n && item.zone) {
-      const sign = item.vs_median_pct > 0 ? `+${item.vs_median_pct}` : `${item.vs_median_pct}`;
-      line += ` · ${sign}% vs mediana de ${item.zone} (n=${item.vs_median_n})`;
-    }
-    bits.push(line);
-  }
-  const days = item.days_seen;
-  const drops = item.price_drops || 0;
-  const seenLine =
-    days == null
-      ? null
-      : `visto hace ${days === 0 ? "hoy" : days === 1 ? "1 día" : `${days} días`} · ${
-          drops === 0 ? "sin bajas" : drops === 1 ? "1 baja" : `${drops} bajas`
-        }`;
-  return (
-    <div className="space-y-1 text-sm text-muted">
-      {bits.map((b) => (
-        <p key={b}>{b}</p>
-      ))}
-      {seenLine && (
-        <p title="Cuándo lo vio el buscador, no la fecha de publicación del portal.">{seenLine}</p>
-      )}
-      {item.closing_ref_usd != null && (
-        <p title="No es una tasación; promedio CABA abril 2026, CEMA / RE/MAX / Reporte Inmobiliario.">
-          Referencia de cierre ≈ {formatUsd(item.closing_ref_usd)}
-          <span className="block text-xs">no es una tasación; promedio CABA</span>
-        </p>
-      )}
-    </div>
-  );
-}
-
-function Badge({
-  children,
-  tone = "ok",
-}: {
-  children: React.ReactNode;
-  tone?: "ok" | "warn" | "gone";
-}) {
-  const color =
-    tone === "warn" ? "bg-warn text-[var(--bg)]" : tone === "gone" ? "bg-gone text-[var(--bg)]" : "bg-ok text-[var(--bg)]";
-  return (
-    <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${color}`}>{children}</span>
   );
 }

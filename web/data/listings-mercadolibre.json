@@ -1,0 +1,618 @@
+{
+ "last_change": "2026-10-10T04:49:02+00:00",
+ "listings": [
+  {
+   "active": true,
+   "address": "AV CORDOBA Al 1831. Entre Av Callao Y Riobamba, Barrio Norte, Capital Federal",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:1729567163",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_624046-MLA117343209272_102026-E.webp",
+   "piso": null,
+   "price": 89000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 89000
+    }
+   ],
+   "score": 0,
+   "site": "mercadolibre",
+   "tags": [],
+   "title": "Venta De 2 Ambientes Con Patio En Barrio Norte",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-1729567163-venta-de-2-ambientes-con-patio-en-barrio-norte-_JM#polycard_client=search-desktop&float_highlight=not_apply&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=25&type=item&tracking_id=8237a24c-4ad8-47f8-8600-9d1e9b5131fd&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Ayacucho 800, Barrio Norte, Capital Federal",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:2000597773",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_715606-MLA114928544850_082026-E.webp",
+   "piso": 0,
+   "price": 99000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 99000
+    }
+   ],
+   "score": 0,
+   "site": "mercadolibre",
+   "tags": [],
+   "title": "En Venta Oficina Planta Baja Barrio Norte 2 Ambientes",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2000597773-en-venta-oficina-planta-baja-barrio-norte-2-ambientes-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=43&type=item&tracking_id=8237a24c-4ad8-47f8-8600-9d1e9b5131fd&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "LUCIO MANSILLA Al 2789. Entre Jaures, Jean Y Anchorena, Barrio Norte, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 52.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:2073922905",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_924799-MLA94356466325_102025-E.webp",
+   "piso": null,
+   "price": 84500,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 84500
+    }
+   ],
+   "score": 0,
+   "site": "mercadolibre",
+   "tags": [],
+   "title": "Depto. - Venta - 3 Amb. - Barrio Norte - Apto Credito.-",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2073922905-depto-venta-3-amb-barrio-norte-apto-credito--_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=39&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Thames Al 2400, Botánico, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:2086301873",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_712372-MLA116614419000_092026-E.webp",
+   "piso": null,
+   "price": 132900,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 132900
+    }
+   ],
+   "score": -1,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta - 3 Ambientes - Luminoso - Palermo Botanico",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2086301873-venta-3-ambientes-luminoso-palermo-botanico-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=1&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Botánico"
+  },
+  {
+   "active": true,
+   "address": "Av Cordoba 1332, Barrio Norte, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 68.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:2155184101",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_679518-MLA117213165110_102026-E.webp",
+   "piso": null,
+   "price": 119000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 119000
+    }
+   ],
+   "score": 0,
+   "site": "mercadolibre",
+   "tags": [],
+   "title": "Depto/oficina - Frente - Edificio Francés · Apto Profesional",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2155184101-deptooficina-frente-edificio-frances-apto-profesional-_JM#polycard_client=search-desktop&float_highlight=recent_publication&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=6&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Ugarteche Al 2800, Botánico, Capital Federal",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:2169269663",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_884922-MLA119039456071_102026-E.webp",
+   "piso": null,
+   "price": 130000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 130000
+    }
+   ],
+   "score": -1,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta Departamento 2 Ambientes En Palermo, Zona Botánico",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2169269663-venta-departamento-2-ambientes-en-palermo-zona-botanico-_JM#polycard_client=search-desktop&float_highlight=recent_publication&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=1&type=item&tracking_id=1cdba83c-21d7-4f08-a886-3bd4fb307ceb&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Botánico"
+  },
+  {
+   "active": true,
+   "address": "Jean Jaures 1100, Barrio Norte, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 52.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3664142778",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_834146-MLA113788864708_072026-E.webp",
+   "piso": null,
+   "price": 110000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 110000
+    }
+   ],
+   "score": 0,
+   "site": "mercadolibre",
+   "tags": [],
+   "title": "Departamento De 3 Ambientes En Venta Barrio Norte",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3664142778-departamento-de-3-ambientes-en-venta-barrio-norte-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=35&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Pueyrredon Al 900, Barrio Norte, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 86.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3740194676",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_996635-MLA114388125572_082026-E.webp",
+   "piso": null,
+   "price": 139000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 139000
+    }
+   ],
+   "score": -2,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "3 Ambientes Con Dependencia, Balcón Corrido Y Vista Abierta  Barrio Norte",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3740194676-3-ambientes-con-dependencia-balcon-corrido-y-vista-abierta-barrio-norte-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=42&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Al 1000 Venta Departamento En Recoleta, Recoleta",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": null,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3769356270",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_901154-MLA115951726085_082026-E.webp",
+   "piso": null,
+   "price": 130000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 130000
+    }
+   ],
+   "score": -1,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta Departamento En Recoleta",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3769356270-venta-departamento-en-recoleta-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=27&type=item&tracking_id=626a563a-1395-44df-b9bf-547ead342d7d&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Pueyrredón 1362, Recoleta, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 59.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3907066208",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_826559-MLA115637840088_092026-E.webp",
+   "piso": null,
+   "price": 130000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 130000
+    }
+   ],
+   "score": -1,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta Departamento 3 Ambientes Luminoso En Recoleta",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3907066208-venta-departamento-3-ambientes-luminoso-en-recoleta-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=17&type=item&tracking_id=77554570-4d52-4cc6-9cd9-ea4283c63828&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Venta Departamento Barrio Norte - Apto Profesional - A Modernizar, Barrio Norte, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3919982984",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_923439-MLA117285468503_092026-E.webp",
+   "piso": null,
+   "price": 119000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 119000
+    }
+   ],
+   "score": 0,
+   "site": "mercadolibre",
+   "tags": [],
+   "title": "Venta Departamento Barrio Norte",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3919982984-venta-departamento-barrio-norte-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=17&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Paraguay 3000, Recoleta, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3958039772",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_825156-MLA117745552367_092026-E.webp",
+   "piso": 3,
+   "price": 139500,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 139500
+    }
+   ],
+   "score": -2,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento 3 Ambientes En Barrio Norte Al Contrafrente En 3° Piso Por Ascensor",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3958039772-departamento-3-ambientes-en-barrio-norte-al-contrafrente-en-3-piso-por-ascensor-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=23&type=item&tracking_id=77554570-4d52-4cc6-9cd9-ea4283c63828&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Jose Maria Gutierrez Al 2700, Barrio Norte, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3959625142",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_824476-MLA117761105367_092026-E.webp",
+   "piso": null,
+   "price": 136000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 136000
+    }
+   ],
+   "score": -1,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Hermoso Departamento 3 Amb. En Barrio Norte - Apto Credito!!",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3959625142-hermoso-departamento-3-amb-en-barrio-norte-apto-credito-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=43&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Cabello Al 3900, Botánico, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3978587040",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_629584-MLA118017752619_092026-E.webp",
+   "piso": null,
+   "price": 139000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 139000
+    }
+   ],
+   "score": -2,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento 3 Amb En Palermo Botanico",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3978587040-departamento-3-amb-en-palermo-botanico-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=4&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Botánico"
+  },
+  {
+   "active": true,
+   "address": "Armenia 2100, Botánico, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:4003722674",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_945906-MLA116825947716_092026-E.webp",
+   "piso": null,
+   "price": 113000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 113000
+    }
+   ],
+   "score": 0,
+   "site": "mercadolibre",
+   "tags": [],
+   "title": "Botanico - Venta 3 Amb. - Oportunidad!!",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-4003722674-botanico-venta-3-amb-oportunidad-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=37&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Botánico"
+  },
+  {
+   "active": true,
+   "address": "Aguero 1000, Barrio Norte, Capital Federal",
+   "ambientes": 1,
+   "antiguedad_years": null,
+   "area": 51.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:4004379934",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_738950-MLA118388864767_092026-E.webp",
+   "piso": null,
+   "price": 125000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 125000
+    }
+   ],
+   "score": 0,
+   "site": "mercadolibre",
+   "tags": [],
+   "title": "Monoambiente Divisible En Venta En Barrio Norte, Luminoso, Amenities",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-4004379934-monoambiente-divisible-en-venta-en-barrio-norte-luminoso-amenities-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=27&type=item&tracking_id=6d42f664-fe2d-4ec6-8b98-06bf446c548e&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Scalabrini Ortiz Al 2300, Botánico, Capital Federal",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "closing_ref_usd": null,
+   "cochera": null,
+   "days_seen": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T04:49:02+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:4014768174",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_903861-MLA118520322199_092026-E.webp",
+   "piso": null,
+   "price": 130000,
+   "price_drops": null,
+   "price_history": [
+    {
+     "date": "2026-10-10T04:49:02+00:00",
+     "price": 130000
+    }
+   ],
+   "score": -1,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento En Botanico",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-4014768174-departamento-en-botanico-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=39&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
+   "usd_per_m2": null,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Botánico"
+  }
+ ]
+}

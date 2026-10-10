@@ -1,4 +1,4 @@
-"""Pruebas offline con HTML sintético que imita la estructura de Argenprop y Zonaprop."""
+"""Pruebas offline con HTML sintético que imita Argenprop, Zonaprop y Mercado Libre."""
 import json
 import tempfile
 import unittest.mock as mock
@@ -74,6 +74,39 @@ ZONAPROP = """
 </div>
 """
 
+MERCADOLIBRE = """
+<ol class="ui-search-layout">
+ <li class="ui-search-layout__item">
+  <a href="https://departamento.mercadolibre.com.ar/MLA-4032113512-en-venta-departamento-2-ambientes-con-balcon-en-recoleta-_JM">
+   En Venta Departamento 2 Ambientes Con Balcon En Recoleta
+  </a>
+  <img src="https://http2.mlstatic.com/D_NQ_NP_2X_684160-MLA117206984204_102026-E.webp">
+  US$ 110.000
+  2 ambs.
+  1 baño
+  54 m² cubiertos
+  Arenales 1800 Recoleta Caba, Recoleta, Capital Federal
+ </li>
+ <li class="ui-search-layout__item">
+  <a href="https://departamento.mercadolibre.com.ar/MLA-2154660325-de-epoca-para-reciclar-3-ambientes-recoleta-_JM">
+   De época para reciclar 3 ambientes Recoleta
+  </a>
+  US$ 121.000
+  3 ambs.
+  57 m² cubiertos
+  Juncal 2900, Recoleta, Capital Federal
+ </li>
+ <li class="ui-search-layout__item">
+  EMPRENDIMIENTO
+  <a href="https://departamento.mercadolibre.com.ar/MLA-3617154066-champ-recolett-_JM">Champ Recolett</a>
+  Desde US$ 392.060
+  3 a 5 ambs.
+  84 - 214 m² cubiertos
+  Av. Las Heras 1683, Recoleta, Capital Federal
+ </li>
+</ol>
+"""
+
 def test_argenprop():
     items = {i["id"]: i for i in s.parse_page(ARGENPROP, "argenprop", "https://www.argenprop.com/x")}
     assert len(items) == 11, items.keys()
@@ -106,14 +139,70 @@ def test_zonaprop():
     assert items["zonaprop:59844590"]["photo"].endswith("depto-59844590.jpg")
 
 
+def test_mercadolibre():
+    items = {i["id"]: i for i in s.parse_page(MERCADOLIBRE, "mercadolibre", "https://inmuebles.mercadolibre.com.ar/x")}
+    assert set(items) == {"mercadolibre:4032113512", "mercadolibre:2154660325"}, items.keys()
+    a = items["mercadolibre:4032113512"]
+    assert a["price"] == 110000 and a["area"] == 54 and a["ambientes"] == 2
+    assert a["address"].startswith("Arenales 1800")
+    assert a["photo"].endswith("102026-E.webp")
+    assert a["url"].startswith("https://departamento.mercadolibre.com.ar/MLA-4032113512")
+    b = items["mercadolibre:2154660325"]
+    assert b["price"] == 121000 and b["ambientes"] == 3
+    ok = {i["id"] for i in items.values() if s.matches(i, F)}
+    assert ok == {"mercadolibre:4032113512", "mercadolibre:2154660325"}, ok
+    src = {"name": "Recoleta 1 amb", "zone": "Recoleta", "aliases": ["recoleta"]}
+    assert s.page_matches_zone(
+        "<title>Departamentos en Venta en Recoleta, Capital Federal, 1 ambiente</title><h1>Departamentos en Venta en Recoleta, Capital Federal, 1 ambiente</h1>",
+        "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/recoleta/",
+        src,
+    )
+
+
 def test_pagination_urls():
     assert s.page_url("argenprop", "https://a/b", 2) == "https://a/b?pagina-2"
-    assert s.page_url("argenprop", "https://a/b?orden=masnuevos", 2) == "https://a/b?orden=masnuevos&pagina-2"
+    assert s.page_url("argenprop", "https://a/b?orden=masnuevos", 2) == "https://a/b?pagina-2"
+    assert s.page_url("argenprop", "https://a/b?foo=1", 1) == "https://a/b"
     assert s.page_url("zonaprop", "https://z/x-dolar.html", 3) == "https://z/x-dolar-pagina-3.html"
-    assert s.page_url("zonaprop", "https://z/x-dolar-orden-publicado-descendente.html", 2) == (
-        "https://z/x-dolar-orden-publicado-descendente-pagina-2.html"
-    )
+    assert s.page_url("zonaprop", "https://z/x-dolar.html", 5) == "https://z/x-dolar-pagina-5.html"
     assert s.page_url("zonaprop", "https://z/x-dolar.html", 1) == "https://z/x-dolar.html"
+    ml = "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/recoleta/"
+    assert s.page_url("mercadolibre", ml, 1) == ml
+    assert s.page_url("mercadolibre", ml, 2) == ml  # robots bloquea _Desde_
+
+
+def test_source_pages():
+    assert s.source_pages({"site": "zonaprop", "name": "x"}) == 3
+    assert s.source_pages({"site": "zonaprop", "name": "x", "pages": 5}) == 5
+    assert s.source_pages({"site": "argenprop", "name": "x", "pages": 3}) == 3
+    try:
+        s.source_pages({"site": "zonaprop", "name": "x", "pages": 6})
+    except ValueError as e:
+        assert "robots.txt" in str(e)
+    else:
+        raise AssertionError("zonaprop pages=6 debería rechazarse")
+    try:
+        s.source_pages({"site": "argenprop", "name": "x", "pages": 4})
+    except ValueError as e:
+        assert "robots.txt" in str(e)
+    else:
+        raise AssertionError("argenprop pages=4 debería rechazarse")
+    try:
+        s.source_pages({"site": "mercadolibre", "name": "x", "pages": 2})
+    except ValueError as e:
+        assert "robots.txt" in str(e)
+    else:
+        raise AssertionError("mercadolibre pages=2 debería rechazarse")
+    assert s.source_pages({"site": "mercadolibre", "name": "x", "pages": 1}) == 1
+    for src in CFG["sources"]:
+        n = s.source_pages(src)
+        assert 1 <= n <= s.PAGES_MAX[src["site"]]
+        assert "orden-publicado" not in src["url"]
+        assert "orden=" not in src["url"]
+        if src["site"] == "argenprop":
+            assert "?" not in src["url"]
+        if src["site"] == "mercadolibre":
+            assert "_Desde_" not in src["url"] and "_PriceRange_" not in src["url"]
 
 
 def test_formatting():
@@ -121,10 +210,25 @@ def test_formatting():
          "area": 57, "ambientes": 3, "address": "Juncal 2900", "zone": "Recoleta", "old_price": 105000,
          "tags": ["de época", "para reciclar"]}
     msg = s.fmt_item(i, "📉")
-    assert "USD 98.000" in msg and "antes USD 105.000" in msg and "57 m²" in msg
-    assert "por qué: de época · para reciclar" in msg
+    assert "USD 98.000" in msg
+    assert "Bajó de USD 105.000 a USD 98.000" in msg
+    assert "−USD 7.000" in msg and "el portal no dice cuándo" in msg
+    assert "57 m²" in msg
+    assert "A favor: es de época y está para reciclar." in msg
+    from_hist = s.prior_price({"price": 90000, "old_price": None,
+                               "price_history": [{"price": 100000}, {"price": 90000}]})
+    assert from_hist == 100000
+    dated = s.format_drop(
+        {"price": 121000, "old_price": 129000,
+         "price_history": [
+             {"date": "2026-10-08T12:00:00+00:00", "price": 129000},
+             {"date": "2026-10-10T01:00:00+00:00", "price": 121000},
+         ]},
+    )
+    assert "bajó de USD 129.000 a USD 121.000" in dated
+    assert "6%" in dated
     assert "Zonaprop: https://z/1" in msg and "<a href" not in msg
-    assert s.why_line({"tags": []}) == "por qué: cumple precio, m² y zona"
+    assert "pasa barrio, metros y balcón" in s.why_line({"tags": []})
 
 
 def test_preferences_not_exclusive():
@@ -160,6 +264,7 @@ def test_price_parsing():
     assert s.parse_price("USD 1.250.000 + expensas") == 1250000
     assert s.parse_price("Consultar precio") is None
     assert s.parse_price("Departamentos desde USD 114.000") is None
+    assert s.parse_price("Departamentos hasta USD 140.000") is None
     assert s.parse_price("Departamento USD 98.000 + $150.000 expensas") == 98000
     cheap = {"price": 1, "ambientes": 2, "area": 60}
     luxury = {"price": 1250000, "ambientes": 3, "area": 80}
@@ -259,6 +364,64 @@ def test_reject_noise():
         "zone": "Congreso",
     }
     assert s.is_rejected(en_congreso, F)
+
+    rosario = {
+        "price": 98000, "ambientes": 3, "area": 57,
+        "title": "3 amb en Barrio Norte, Rosario",
+        "address": "Pellegrini 1200, Rosario",
+        "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-barrio-norte-rosario-111.html",
+        "blurb": "",
+        "zone": "Barrio Norte",
+    }
+    echesortu = {
+        "price": 67000, "ambientes": None, "area": None,
+        "title": "venta departamento dorm. con patio echesortu",
+        "address": "",
+        "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-dorm.-con-patio-echesortu-57717195.html",
+        "blurb": "",
+        "zone": "",
+    }
+    santa_fe_av = {
+        "price": 108000, "ambientes": 3, "area": 56,
+        "title": "3 amb Recoleta sobre Av. Santa Fe",
+        "address": "Av. Santa Fe 1700, Recoleta, Capital Federal",
+        "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-recoleta-santa-fe-222.html",
+        "blurb": "",
+        "zone": "Recoleta",
+    }
+    av_gral_paz = {
+        "price": 108000, "ambientes": 3, "area": 56,
+        "title": "3 amb Recoleta cerca de Av. General Paz",
+        "address": "Juncal 2900, Recoleta",
+        "url": "https://z/recoleta-av-general-paz.html",
+        "blurb": "",
+        "zone": "Recoleta",
+    }
+    assert s.is_foreign_city(rosario, F) and s.is_rejected(rosario, F)
+    assert s.is_foreign_city(echesortu, F) and not s.in_scope(echesortu, F)
+    assert not s.is_foreign_city(santa_fe_av, F) and s.in_scope(santa_fe_av, F)
+    assert not s.is_foreign_city(av_gral_paz, F) and s.in_scope(av_gral_paz, F)
+
+
+def test_drop_out_of_scope():
+    now = "2026-10-10T12:00:00+00:00"
+    catalog = {
+        "listings": [
+            {"id": "zonaprop:ok", "zone": "Recoleta", "title": "3 amb Recoleta",
+             "address": "Juncal 2900", "url": "https://z/recoleta.html", "active": True},
+            {"id": "zonaprop:ros", "zone": "", "title": "departamento en venta granadero baigorria.",
+             "address": "", "url": "https://z/granadero-baigorria.html", "active": True},
+            {"id": "zonaprop:paso", "zone": "Barrio Norte",
+             "title": "Paso 760 y avenida Córdoba",
+             "address": "Paso 760", "url": "https://z/paso-700-semipiso.html", "active": True},
+        ]
+    }
+    gone = s.drop_out_of_scope(catalog, F, now)
+    by_id = {x["id"]: x for x in catalog["listings"]}
+    assert gone == ["zonaprop:ros"]
+    assert by_id["zonaprop:ok"]["active"] is True
+    assert by_id["zonaprop:paso"]["active"] is True
+    assert by_id["zonaprop:ros"]["active"] is False and by_id["zonaprop:ros"]["gone_at"] == now
 
 
 def test_real_zonaprop_fixture():
@@ -583,8 +746,14 @@ def test_no_write_when_nothing_changed():
         "key": "juncal 2900|98000|57|3",
     }
     s.write_json(s.seen_path("zonaprop"), {"listings": {"zonaprop:old": rec}, "meta": {}})
-    listing = s.listing_from_seen("zonaprop:old", rec, "zonaprop")
-    listing["zone"] = "Recoleta"
+    listing = {
+        **_item("zonaprop:old", url="https://z/old.html", photo=""),
+        "first_seen": rec["first_seen"],
+        "active": True,
+        "gone_at": None,
+        "old_price": None,
+        "price_history": [{"date": rec["first_seen"], "price": rec["price"]}],
+    }
     s.write_json(s.listings_path("zonaprop"), {"last_change": "x", "listings": [listing]})
     before_seen = s.seen_path("zonaprop").read_text()
     before_cat = s.listings_path("zonaprop").read_text()
@@ -596,7 +765,7 @@ def test_no_write_when_nothing_changed():
     ) as dlv:
         s.process_portal(
             "zonaprop",
-            [_item("zonaprop:old")],
+            [_item("zonaprop:old", url="https://z/old.html", photo="")],
             {"Recoleta"},
             [],
             cfg,
@@ -610,6 +779,42 @@ def test_no_write_when_nothing_changed():
     assert s.seen_path("zonaprop").read_text() == before_seen
     assert s.listings_path("zonaprop").read_text() == before_cat
     _restore_paths()
+
+
+def test_enrich_fills_photo():
+    catalog = {"listings": [_item("zonaprop:1", photo="", address="")]}
+    n = s.enrich_catalog(catalog, [_item("zonaprop:1", photo="https://img/x.jpg", address="Juncal 2900")])
+    assert n == 1
+    rec = catalog["listings"][0]
+    assert rec["photo"] == "https://img/x.jpg"
+    assert rec["address"] == "Juncal 2900"
+    assert s.enrich_catalog(catalog, [_item("zonaprop:1", photo="https://img/x.jpg", address="Juncal 2900")]) == 0
+
+
+def test_enrich_updates_stale_price():
+    now = "2026-10-10T12:00:00+00:00"
+    catalog = {"listings": [_item("zonaprop:1", price=118000, address="Juncal 2900")]}
+    catalog["listings"][0]["price_history"] = [{"date": "2026-10-09T00:00:00+00:00", "price": 118000}]
+    n = s.enrich_catalog(catalog, [_item("zonaprop:1", price=98000, address="Juncal 2900")], now)
+    assert n == 1
+    rec = catalog["listings"][0]
+    assert rec["price"] == 98000
+    assert rec["old_price"] == 118000
+    assert rec["price_history"][-1] == {"date": now, "price": 98000}
+
+
+def test_price_skips_list_cap_and_struck():
+    html = """
+    <div class="card">
+      <h2>Departamentos hasta USD 140.000</h2>
+      <div class="postingPrices-module__price"><del>USD 118.000</del> USD 98.000</div>
+      <h3>57 m² tot.3 amb.</h3>
+      <h4>Juncal 2900</h4><h4>Recoleta, Capital Federal</h4>
+      <a href="/propiedades/clasificado/veclapin-juncal-2900-60189306.html">Juncal</a>
+    </div>
+    """
+    items = {i["id"]: i for i in s.parse_page(html, "zonaprop", "https://www.zonaprop.com.ar/x.html")}
+    assert items["zonaprop:60189306"]["price"] == 98000
 
 
 def test_weekly_summary_with_and_without_snapshot():
@@ -640,6 +845,45 @@ def test_weekly_summary_with_and_without_snapshot():
     prev = {"week": "2026-W41", "zones": {"Recoleta": {"median_usd_m2": 2200}}}
     with_prev = s.format_weekly(snap, prev)
     assert "vs sem. anterior" in with_prev
+
+
+def test_verdict_and_pick():
+    cfg = {"filters": {"max_price_usd": 125000}}
+    v = s.verdict(
+        {
+            "tags": ["de época", "para reciclar", "sobre presupuesto"],
+            "price": 135000,
+            "photo": "x",
+            "expensas_ars": 80000,
+            "piso": 3,
+            "area": 60,
+        },
+        cfg,
+    )
+    assert v["text"] == (
+        "A favor: es de época y está para reciclar. "
+        "En contra: pide USD 135.000 y el gusto es USD 125.000."
+    )
+    pb = s.verdict({"tags": ["edificio flojo"], "piso": 0, "photo": "x", "expensas_ars": 1, "area": 50})
+    assert "el edificio está flojo" in pb["text"] and "es planta baja" in pb["text"]
+    pool = [_item(f"zonaprop:{i}", score=10 - i, price=100000 + i, active=True) for i in range(5)]
+    assert s.resolve_pick_id(pool, {"id": None, "manual": False}) == "zonaprop:0"
+    assert s.resolve_pick_id(pool, {"id": "zonaprop:3", "manual": True}) == "zonaprop:3"
+    assert s.resolve_pick_id(pool, {"id": "gone", "manual": True}) == "zonaprop:0"
+    marked = {**pool[0], "old_price": 110000, "_pick": True}
+    assert "candidato" in s.fmt_item(marked, "📉")
+
+
+def test_top_drop_is_loud():
+    pool = [_item(f"zonaprop:{i}", score=10 - i, price=100000 + i) for i in range(12)]
+    tops = s.top_ids(pool, 10)
+    assert len(tops) == 10 and "zonaprop:0" in tops and "zonaprop:11" not in tops
+    cfg = {"notify_loud_min_score": 2, "notify_loud_drop_pct": 5, "alert_top_n": 10}
+    drop = {**pool[0], "old_price": 110000, "price": 108000, "_top": True, "_top_n": 10}
+    msg = s.fmt_item(drop, "📉")
+    assert "Bajó de USD 110.000 a USD 108.000" in msg and "top 10" in msg
+    assert not s.is_loud({"score": 0, "price": 108000, "old_price": 110000}, cfg)  # ~1.8%
+    # la prioridad top-10 se aplica en process_portal (_silent=False), no en is_loud
 
 
 def test_notify_loud_and_silent():
@@ -743,7 +987,8 @@ def test_coverage_last_page_unseen():
     unseen = s.coverage_unseen(last, seen, F)
     assert [i["id"] for i in unseen] == ["zonaprop:fresh"]
     assert s.coverage_warning("zonaprop · Recoleta", last, seen, F, 3) == (
-        "3 páginas pueden no alcanzar para zonaprop · Recoleta"
+        "zonaprop · Recoleta: esta fuente puede tener avisos fuera de las páginas permitidas; "
+        "conviene partirla en más URLs"
     )
     assert s.coverage_unseen(last, set(), F) == []
     assert s.coverage_warning("x", last, set(), F, 3) is None

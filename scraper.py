@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Buscador de departamentos en venta (Argenprop + Zonaprop) con aviso por Telegram.
+"""Buscador de departamentos en venta (Zonaprop + Argenprop + Mercado Libre) con aviso por Telegram.
 
 Uso:
     python scraper.py                    # corrida normal (usa TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID)
     python scraper.py --dry-run          # no manda Telegram ni guarda estado, imprime en consola
     python scraper.py --only argenprop   # solo Argenprop (para cron/launchd en la Mac)
+    python scraper.py --only mercadolibre
 """
 from __future__ import annotations
 
@@ -49,6 +50,14 @@ LINK_RE = {
     "argenprop": re.compile(r"/[a-z0-9-]+-en-venta-[^?#\s]*--(\d+)(?:[?#].*)?$", re.I),
     # Zonaprop: /propiedades/clasificado/veclapin-...-59790826.html
     "zonaprop": re.compile(r"/propiedades/clasificado/[^?#\s]*?-(\d{6,10})\.html", re.I),
+    # Mercado Libre: /MLA-4032113512-en-venta-...-_JM
+    "mercadolibre": re.compile(r"/MLA-(\d{8,12})(?:-|_JM)", re.I),
+}
+
+SITE_LABELS = {
+    "argenprop": "Argenprop",
+    "zonaprop": "Zonaprop",
+    "mercadolibre": "Mercado Libre",
 }
 
 
@@ -85,7 +94,11 @@ def parse_price(text: str) -> int | None:
     if re.search(r"consultar\s+precio", text, re.I) and not re.search(r"USD\s*\d", text, re.I):
         return None
     # miles con punto (1.250.000) o al menos 4 dígitos seguidos; no "USD 1"
-    for m in re.finditer(r"(desde\s+)?USD\s*(\d{1,3}(?:\.\d{3})+|\d{4,})", text, re.I):
+    for m in re.finditer(
+        r"(desde\s+|hasta\s+)?(?:USD|US\$)\s*(\d{1,3}(?:\.\d{3})+|\d{4,})",
+        text,
+        re.I,
+    ):
         if m.group(1):
             continue
         try:
@@ -93,6 +106,21 @@ def parse_price(text: str) -> int | None:
         except ValueError:
             continue
     return None
+
+
+def price_from_card(card) -> int | None:
+    """Precio actual de la card (nodo de precio), no el tachado ni el tope del listado."""
+    if card is None:
+        return None
+    node = card.select_one(
+        '[class*="postingPrices-module__price"]:not([class*="expenses"])'
+    )
+    if node is None:
+        return None
+    clone = BeautifulSoup(str(node), "html.parser")
+    for struck in clone.find_all(["del", "s"]):
+        struck.decompose()
+    return parse_price(clone.get_text(" ", strip=True))
 
 
 def parse_expensas(text: str, card=None) -> tuple[int | None, str]:
@@ -155,7 +183,7 @@ def parse_card(site: str, text: str, card=None) -> dict:
         "piso": None,
         "cochera": None,
     }
-    out["price"] = parse_price(text)
+    out["price"] = price_from_card(card) or parse_price(text)
     exp_n, exp_t = parse_expensas(text, card)
     out["expensas_ars"] = exp_n
     out["expensas_text"] = exp_t
@@ -169,6 +197,11 @@ def parse_card(site: str, text: str, card=None) -> dict:
         if cub:
             out["area"] = to_float(cub.group(1)) + (to_float(semi.group(1)) if semi else 0)
         m = re.search(r"de\s+(\d+)\s+ambientes", text) or re.search(r"(\d+)\s*(?:ambientes|amb\.)", text, re.I)
+    elif site == "mercadolibre":
+        cub = re.search(r"([\d.,]+)\s*m²\s*cubiert", text, re.I)
+        if cub:
+            out["area"] = to_float(cub.group(1))
+        m = re.search(r"(\d+)\s*ambs?\b", text, re.I) or re.search(r"(\d+)\s*ambientes", text, re.I)
     else:
         tot = re.search(r"([\d.,]+)\s*m²\s*tot", text)
         if tot:
@@ -183,6 +216,17 @@ def parse_card(site: str, text: str, card=None) -> dict:
         m = re.search(r"dormitorios?\s+(.+?)\s+USD", text.replace("\n", " "))
         if m and len(m.group(1)) < 120:
             out["address"] = m.group(1).strip()
+    elif site == "mercadolibre":
+        m = re.search(
+            r"m² cubiertos\s+(.+?)(?:\s+Destacado|\s+PUBLICADO|$)",
+            text,
+            re.I,
+        ) or re.search(
+            r"((?:Av\.?\s+|Avenida\s+)?[A-Za-zÁÉÍÓÚÑáéíóúñ.]+\s+\d{2,5}[^,]{0,40},\s*(?:Recoleta|Barrio Norte|Botánico|Botanico|Palermo Chico))",
+            text,
+        )
+        if m and len(m.group(1)) < 120:
+            out["address"] = re.sub(r"\s+", " ", m.group(1)).strip()
     else:
         m = re.search(
             r"\n([^\n]{3,80})\n[^\n]*(?:Capital Federal|CABA|Botánico|Botanico|Recoleta|Barrio Norte|Palermo Chico|Palermo)\b",
@@ -199,6 +243,11 @@ def card_photo(card, base_url: str) -> str:
     host = f"{parts[0]}//{parts[2]}" if len(parts) > 2 else ""
     skip = ("logo", "icon", "sprite", "placeholder", "1x1", "pixel")
     candidates: list[str] = []
+    for script in card.find_all("script"):
+        blob = script.string or script.get_text() or ""
+        m = re.search(r'"image"\s*:\s*"(https://[^"]+)"', blob)
+        if m:
+            candidates.append(m.group(1))
     for img in card.find_all("img"):
         raw = img.get("src") or img.get("data-src") or img.get("data-lazy") or ""
         if not raw and img.get("srcset"):
@@ -237,6 +286,8 @@ def parse_page(html_text: str, site: str, base_url: str) -> list[dict]:
         card = card_for(a, link_re)
         sep_text = card.get_text("\n", strip=True)
         flat_text = re.sub(r"\s+", " ", sep_text)
+        if site == "mercadolibre" and re.search(r"\bEMPRENDIMIENTO\b", sep_text):
+            continue
         data = parse_card(site, sep_text if site == "zonaprop" else flat_text, card)
         if data["price"] is None:
             continue  # sin precio en USD: no se puede comparar
@@ -315,7 +366,117 @@ def apply_signals(item: dict, signals: list, filters: dict | None = None) -> dic
 
 
 def prefer(items: list[dict]) -> list[dict]:
-    return sorted(items, key=lambda x: (-x.get("score", 0), x["price"]))
+    return sorted(items, key=lambda x: (-x.get("score", 0), x["price"] if x.get("price") is not None else 10**12))
+
+
+def join_es(parts: list[str]) -> str:
+    bits = [p for p in parts if p]
+    if not bits:
+        return ""
+    if len(bits) == 1:
+        return bits[0]
+    return ", ".join(bits[:-1]) + " y " + bits[-1]
+
+
+_VERDICT_SAY = {
+    "de época": "es de época",
+    "para reciclar": "está para reciclar",
+    "edificio ok": "el edificio está en buen estado",
+    "edificio flojo": "el edificio está flojo",
+    "edificio a reciclar": "el edificio está para reciclar",
+    "planta baja": "es planta baja",
+    "sobre presupuesto": "está sobre el presupuesto",
+    "cumple barrio, metros y balcón": "pasa barrio, metros y balcón; no hay más señales",
+}
+_FALTA_SAY = {
+    "foto": "la foto",
+    "expensas": "las expensas",
+    "piso": "el piso",
+    "metros": "los metros",
+}
+
+
+def _say_hit(tag: str) -> str:
+    return _VERDICT_SAY.get(tag, tag)
+
+
+def verdict(item: dict, cfg: dict | None = None) -> dict:
+    """Frases claras para el equipo. No es un sello del portal."""
+    filters = (cfg or {}).get("filters") or {}
+    gusto = filters.get("max_price_usd") or 125000
+    tags = [t for t in (item.get("tags") or []) if t]
+    entra: list[str] = []
+    resta: list[str] = []
+    falta: list[str] = []
+    for t in tags:
+        if t == "sobre presupuesto":
+            price = item.get("price")
+            if price is not None:
+                resta.append(f"pide USD {_fmt_int(int(price))} y el gusto es USD {_fmt_int(int(gusto))}")
+            else:
+                resta.append(_say_hit(t))
+        elif t in {"edificio flojo", "edificio a reciclar"}:
+            resta.append(_say_hit(t))
+        else:
+            entra.append(_say_hit(t))
+    if item.get("piso") == 0 and "es planta baja" not in resta:
+        resta.append(_say_hit("planta baja"))
+    if not entra and not resta:
+        entra.append(_say_hit("cumple barrio, metros y balcón"))
+    if not item.get("photo"):
+        falta.append(_FALTA_SAY["foto"])
+    if item.get("expensas_ars") is None:
+        falta.append(_FALTA_SAY["expensas"])
+    if item.get("piso") is None:
+        falta.append(_FALTA_SAY["piso"])
+    if item.get("area") is None:
+        falta.append(_FALTA_SAY["metros"])
+    parts = []
+    if entra:
+        parts.append("A favor: " + join_es(entra) + ".")
+    if resta:
+        parts.append("En contra: " + join_es(resta) + ".")
+    if falta:
+        parts.append("El aviso no dice: " + join_es(falta) + ".")
+    return {"entra": entra, "resta": resta, "falta": falta, "text": " ".join(parts)}
+
+
+def empty_pick() -> dict:
+    return {"id": None, "manual": False, "note": ""}
+
+
+def load_pick() -> dict:
+    data = _read_json(pick_path(), empty_pick())
+    if not isinstance(data, dict):
+        return empty_pick()
+    return {
+        "id": data.get("id") or None,
+        "manual": bool(data.get("manual")),
+        "note": data.get("note") or "",
+    }
+
+
+def resolve_pick_id(listings: list[dict], pick: dict | None = None) -> str | None:
+    pick = pick if pick is not None else load_pick()
+    active = [i for i in listings if i.get("id") and i.get("active") is not False]
+    ids = {i["id"] for i in active}
+    if pick.get("manual") and pick.get("id") in ids:
+        return pick["id"]
+    ranked = prefer([i for i in active if i.get("price") is not None])
+    return ranked[0]["id"] if ranked else None
+
+
+def save_pick(listings: list[dict]) -> dict:
+    prev = load_pick()
+    pid = resolve_pick_id(listings, prev)
+    out = {
+        "id": pid,
+        "manual": bool(prev.get("manual") and prev.get("id") == pid),
+        "note": prev.get("note") or "",
+    }
+    if not dump_equal(out, prev):
+        write_json(pick_path(), out)
+    return out
 
 
 _STREET_NOISE = re.compile(
@@ -426,6 +587,24 @@ def _phrase_in(hay: str, phrase: str) -> bool:
     return re.search(rf"(?<![a-z0-9]){re.escape(phrase)}(?![a-z0-9])", hay) is not None
 
 
+def _city_hay(item: dict) -> str:
+    """Título + dirección + URL. No la descripción (puede mencionar otra ciudad)."""
+    slug = re.sub(r"[-_./]+", " ", item.get("url") or "")
+    return fold(f"{item.get('title') or ''} {item.get('address') or ''} {item.get('zone') or ''} {slug}")
+
+
+def is_foreign_city(item: dict, f: dict) -> bool:
+    """Otra ciudad (Rosario, etc.). 'Av. General Paz' en CABA no cuenta."""
+    hay = _city_hay(item)
+    for kw in f.get("reject_cities") or []:
+        if not _phrase_in(hay, str(kw)):
+            continue
+        if fold(kw) == "general paz" and ("av general paz" in hay or "avenida general paz" in hay):
+            continue
+        return True
+    return False
+
+
 def is_rejected(item: dict, f: dict) -> bool:
     """Pozo/cuotas sobre el texto; otros barrios solo en dirección/URL."""
     text_kws = f.get("reject_text")
@@ -433,6 +612,8 @@ def is_rejected(item: dict, f: dict) -> bool:
         text_kws = f.get("reject") or []
     hay = _haystack(item, "any")
     if any(_phrase_in(hay, kw) for kw in text_kws if str(kw).strip()):
+        return True
+    if is_foreign_city(item, f):
         return True
     loc = _location_hay(item)
     return any(_phrase_in(loc, kw) for kw in f.get("reject_barrios") or [] if str(kw).strip())
@@ -443,11 +624,18 @@ def in_allowed_area(item: dict, f: dict) -> bool:
     allowed = [fold(b) for b in f.get("allowed_barrios") or [] if str(b).strip()]
     if not allowed:
         return True
-    return any(b in _haystack(item, "any") for b in allowed)
+    hay = _haystack(item, "any")
+    zone = fold(item.get("zone") or "")
+    return any(b in hay or b in zone for b in allowed)
+
+
+def in_scope(item: dict, f: dict) -> bool:
+    """Barrio pedido de CABA, y no otra ciudad."""
+    return in_allowed_area(item, f) and not is_rejected(item, f)
 
 
 def keep_listing(item: dict, src: dict, f: dict) -> bool:
-    return keep_zone(item, src) and not is_rejected(item, f) and in_allowed_area(item, f)
+    return keep_zone(item, src) and in_scope(item, f)
 
 
 def matches(item: dict, f: dict) -> bool:
@@ -578,13 +766,48 @@ def attach_decisions(items: list[dict], extra: list[dict], cfg: dict, now: str) 
 
 # ----------------------------------------------------------------- fetching --
 
+PAGES_DEFAULT = 3
+PAGES_MAX = {"zonaprop": 5, "argenprop": 3, "mercadolibre": 1}
+
+
+def source_zone(src: dict) -> str:
+    return (src.get("zone") or src.get("name") or "").strip()
+
+
+def source_pages(src: dict, cfg: dict | None = None) -> int:
+    """Páginas de una fuente. Default 3; tope = lo que permite robots.txt del portal."""
+    _ = cfg
+    site = src.get("site") or ""
+    cap = PAGES_MAX.get(site)
+    if cap is None:
+        raise ValueError(f"portal desconocido: {site!r}")
+    raw = src.get("pages", PAGES_DEFAULT)
+    try:
+        n = int(raw)
+    except (TypeError, ValueError) as e:
+        raise ValueError(f"pages inválido para {src.get('name')}: {raw!r}") from e
+    if n < 1:
+        raise ValueError(f"pages debe ser ≥ 1 ({src.get('name')}: {n})")
+    if n > cap:
+        raise ValueError(
+            f"pages={n} supera el máximo de robots.txt para {site} ({cap})"
+        )
+    return n
+
+
 def page_url(site: str, url: str, n: int) -> str:
+    """Paginación permitida por robots.txt. Argenprop no admite combinar query params."""
+    if site == "argenprop":
+        base = url.split("?", 1)[0]
+        if n <= 1:
+            return base
+        return f"{base}?pagina-{n}"
+    if site == "mercadolibre":
+        # robots.txt Disallow: /*_Desde_  (es la paginación del listado)
+        return url
     if n == 1:
         return url
-    if site == "argenprop":
-        sep = "&" if "?" in url else "?"
-        return f"{url}{sep}pagina-{n}"
-    return url.replace(".html", f"-pagina-{n}.html")
+    return url.replace(".html", f"-pagina-{n}.html", 1)
 
 
 class Blocked(Exception):
@@ -645,7 +868,7 @@ def scrape_source(session, src: dict, cfg: dict) -> tuple[list[dict], list[dict]
     site = src["site"]
     found: dict[str, dict] = {}
     last_page_items: list[dict] = []
-    max_pages = cfg["pages"][site]
+    max_pages = source_pages(src, cfg)
     hit_cap = False
     for n in range(1, max_pages + 1):
         url = page_url(site, src["url"], n)
@@ -661,7 +884,7 @@ def scrape_source(session, src: dict, cfg: dict) -> tuple[list[dict], list[dict]
             last_page_items = []
             break
         for i in new:
-            i["zone"] = src["name"]
+            i["zone"] = source_zone(src)
             apply_signals(i, cfg.get("signals") or [], cfg.get("filters") or {})
             found[i["id"]] = i
         last_page_items = new
@@ -684,11 +907,15 @@ def coverage_unseen(last_page_items: list[dict], seen_ids: set[str], filters: di
     return [i for i in last_page_items if i["id"] not in seen_ids and matches(i, filters)]
 
 
-def coverage_warning(label: str, last_page_items: list[dict], seen_ids: set[str], filters: dict, pages: int) -> str | None:
+def coverage_warning(label: str, last_page_items: list[dict], seen_ids: set[str], filters: dict, pages: int = 0) -> str | None:
     unseen = coverage_unseen(last_page_items, seen_ids, filters)
     if not unseen:
         return None
-    return f"{pages} páginas pueden no alcanzar para {label}"
+    _ = pages
+    return (
+        f"{label}: esta fuente puede tener avisos fuera de las páginas permitidas; "
+        f"conviene partirla en más URLs"
+    )
 
 
 # ---------------------------------------------------------------- telegram --
@@ -737,6 +964,13 @@ def _tg_post(token: str, method: str, payload: dict) -> requests.Response:
     return r
 
 
+def top_ids(items: list[dict], n: int) -> set[str]:
+    """Los N primeros del ranking (score, después precio)."""
+    if n <= 0:
+        return set()
+    return {i["id"] for i in prefer(items)[:n] if i.get("id")}
+
+
 def is_loud(item: dict, cfg: dict) -> bool:
     if (item.get("score") or 0) >= cfg.get("notify_loud_min_score", 2):
         return True
@@ -775,11 +1009,80 @@ def tg_send_photo(token: str, chat_id: str, photo: str, caption: str, *, silent:
     )
 
 
-def why_line(i: dict) -> str:
-    tags = [t for t in (i.get("tags") or []) if t]
-    if tags:
-        return "por qué: " + " · ".join(html.escape(t) for t in tags)
-    return "por qué: cumple precio, m² y zona"
+def last_drop(item: dict) -> dict | None:
+    hist = [h for h in (item.get("price_history") or []) if isinstance(h, dict)]
+    last = None
+    count = 0
+    for a, b in zip(hist, hist[1:]):
+        pa, pb = a.get("price"), b.get("price")
+        if pa is None or pb is None or pb >= pa:
+            continue
+        count += 1
+        last = {"from": int(pa), "to": int(pb), "at": b.get("date") or None}
+    old, current = item.get("old_price"), item.get("price")
+    if last is None and old is not None and current is not None and old > current:
+        at = hist[-1].get("date") if hist else None
+        last = {"from": int(old), "to": int(current), "at": at}
+        count = max(count, 1)
+    if last is None:
+        return None
+    delta = last["from"] - last["to"]
+    pct = int(round(delta * 100 / last["from"])) if last["from"] else 0
+    return {**last, "delta": delta, "pct": pct, "count": count}
+
+
+def prior_price(item: dict) -> int | None:
+    d = last_drop(item)
+    return d["from"] if d else None
+
+
+def drop_when(iso: str | None, now: datetime | None = None) -> str:
+    if not iso:
+        return "en una corrida anterior"
+    try:
+        t = datetime.fromisoformat(iso[:19]).date()
+    except ValueError:
+        return "en una corrida anterior"
+    today = (now or datetime.now(timezone.utc)).date()
+    days = (today - t).days
+    if days <= 0:
+        return "hoy"
+    if days == 1:
+        return "ayer"
+    if days < 7:
+        return f"hace {days} días"
+    return f"el {t.day} {('ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic')[t.month - 1]} {t.year}"
+
+
+def format_drop(item: dict, *, short: bool = False) -> str:
+    d = last_drop(item)
+    if not d:
+        return ""
+    when = drop_when(d.get("at"))
+    src = f"USD {_fmt_int(d['from'])}"
+    dst = f"USD {_fmt_int(d['to'])}"
+    cut = f"−USD {_fmt_int(d['delta'])} · {d['pct']}%"
+    if short:
+        return f"bajó {when} de {src} a {dst} (−{d['pct']}%)"
+    times = f" {d['count']} bajas nuestras en total." if d["count"] > 1 else ""
+    if not d.get("at"):
+        return (
+            f"Bajó de {src} a {dst} ({cut}) en una corrida anterior. "
+            f"Lo vimos nosotros; el portal no dice cuándo.{times}"
+        )
+    lead = when[:1].upper() + when[1:]
+    return (
+        f"{lead} bajó de {src} a {dst} ({cut}). "
+        f"Lo vimos nosotros; el portal no dice cuándo.{times}"
+    )
+
+
+def why_line(i: dict, cfg: dict | None = None) -> str:
+    raw = i.get("verdict")
+    text = raw.get("text") if isinstance(raw, dict) else None
+    if not text:
+        text = verdict(i, cfg)["text"]
+    return html.escape(text)
 
 
 def _fmt_int(n: int) -> str:
@@ -832,16 +1135,21 @@ def decision_lines(i: dict) -> list[str]:
 def fmt_item(i: dict, tag: str = "🆕") -> str:
     area = f"{i['area']:g} m²" if i["area"] is not None else "m² s/d"
     amb = f"{i['ambientes']} amb" if i["ambientes"] is not None else "amb s/d"
-    site = "Argenprop" if i["site"] == "argenprop" else "Zonaprop"
+    site = SITE_LABELS.get(i["site"], i["site"])
     where = html.escape(i.get("address") or i["title"])
-    extra = ""
-    if i.get("old_price"):
-        extra = f" (antes USD {i['old_price']:,})".replace(",", ".")
+    marks = ""
+    if i.get("_pick"):
+        marks += " · candidato"
+    if i.get("_top"):
+        n = i.get("_top_n") or 10
+        marks += f" · top {n}"
     price = f"USD {i['price']:,}".replace(",", ".")
+    drop_txt = format_drop(i)
+    drop_line = f"\n{html.escape(drop_txt)}" if drop_txt else ""
     extras = extras_line(i)
     extra_lines = "".join(f"\n{html.escape(x)}" for x in ([extras] if extras else []) + decision_lines(i))
     return (
-        f"{tag} <b>{price}</b>{extra} · {area} · {amb}\n"
+        f"{tag} <b>{price}</b>{marks} · {area} · {amb}{drop_line}\n"
         f"📍 {html.escape(i['zone'])} — {where}"
         f"{extra_lines}\n"
         f"{why_line(i)}\n"
@@ -929,7 +1237,7 @@ def chunk_messages(blocks: list[str], limit: int = 3800) -> list[str]:
 
 # --------------------------------------------------------- state / listings --
 
-SITES = ("zonaprop", "argenprop")
+SITES = ("zonaprop", "argenprop", "mercadolibre")
 
 
 def seen_path(site: str) -> Path:
@@ -938,6 +1246,10 @@ def seen_path(site: str) -> Path:
 
 def listings_path(site: str) -> Path:
     return WEB_DATA_DIR / f"listings-{site}.json"
+
+
+def pick_path() -> Path:
+    return WEB_DATA_DIR / "pick.json"
 
 
 def empty_state() -> dict:
@@ -1156,11 +1468,78 @@ def mark_gone(
     return gone
 
 
+def drop_out_of_scope(catalog: dict, f: dict, now: str) -> list[str]:
+    """Apaga fichas viejas fuera de CABA / sin barrio (migración, SEO de otro lado)."""
+    gone: list[str] = []
+    out = []
+    for rec in catalog.get("listings") or []:
+        if rec.get("active") is not False and not in_scope(rec, f):
+            rec = {**rec, "active": False, "gone_at": rec.get("gone_at") or now}
+            if rec.get("id"):
+                gone.append(rec["id"])
+        out.append(rec)
+    catalog["listings"] = out
+    return gone
+
+
 def apply_live_to_catalog(catalog: dict, items: list[dict], now: str) -> None:
     by_id = _catalog_map(catalog)
     for i in items:
         by_id[i["id"]] = upsert_listing(by_id.get(i["id"]), i, now, active=True)
     catalog["listings"] = sorted(by_id.values(), key=lambda x: x.get("id") or "")
+
+
+_ENRICH_KEYS = (
+    "photo",
+    "address",
+    "area",
+    "ambientes",
+    "expensas_ars",
+    "expensas_text",
+    "antiguedad_years",
+    "piso",
+    "cochera",
+    "title",
+)
+
+
+def enrich_catalog(catalog: dict, items: list[dict], now: str | None = None) -> int:
+    """Completa foto, ficha y precio de avisos ya vistos. No crea altas. Devuelve cuántos cambió."""
+    by_id = _catalog_map(catalog)
+    changed = 0
+    stamp = now or datetime.now(timezone.utc).isoformat(timespec="seconds")
+    for i in items:
+        prev = by_id.get(i.get("id") or "")
+        if not prev:
+            continue
+        patch: dict = {}
+        for key in _ENRICH_KEYS:
+            new, old = i.get(key), prev.get(key)
+            if new in (None, "", []) or new == old:
+                continue
+            patch[key] = new
+        tags = i.get("tags")
+        if tags and tags != (prev.get("tags") or []):
+            patch["tags"] = tags
+        if i.get("score", 0) != (prev.get("score") or 0):
+            patch["score"] = i.get("score", 0)
+        live = i.get("price")
+        old = prev.get("price")
+        if live is not None and live != old:
+            patch["price"] = live
+            hist = list(prev.get("price_history") or [])
+            if not hist or hist[-1].get("price") != live:
+                hist.append({"date": stamp, "price": live})
+            patch["price_history"] = hist
+            if old is not None and live < old:
+                patch["old_price"] = old
+        if not patch:
+            continue
+        by_id[prev["id"]] = {**prev, **patch}
+        changed += 1
+    if changed:
+        catalog["listings"] = sorted(by_id.values(), key=lambda x: x.get("id") or "")
+    return changed
 
 
 def classify_changes(matched: list[dict], state: dict) -> tuple[list[dict], list[dict]]:
@@ -1348,6 +1727,9 @@ def process_portal(
     new_items, drops = classify_changes(matched, state)
     for d in drops:
         apply_decision(d, zone_medians(pool_for_median(matched, extra), cfg.get("median_min_n", 8)), cfg, now)
+    for i in matched + drops:
+        i["verdict"] = verdict(i, cfg)
+    pick_id = resolve_pick_id(matched + extra)
     print(
         f"[{site}] filtros: {len(matched)} · nuevos: {len(new_items)} · "
         f"bajas de precio: {len(drops)} · primera={first_run}"
@@ -1358,15 +1740,30 @@ def process_portal(
     if first_run:
         intro = (
             f"✅ Buscador activo ({site}). Cargué {len(matched)} avisos (con balcón, m², ambientes, "
-            f"hasta USD 140k). El gusto es 125k; un poco más entra pero más abajo. "
+            f"hasta USD 140k). Buscamos uno. El gusto es 125k; un poco más entra pero más abajo. "
             f"Época / reciclar / edificio pesan más que el precio. De ahora en más, solo nuevos."
         )
         show = [{**i, "_tag": "📌", "_silent": not is_loud(i, cfg)} for i in prefer(matched)[:10]]
     else:
-        show = (
-            [{**i, "_tag": "🆕", "_silent": not is_loud(i, cfg)} for i in new_items]
-            + [{**i, "_tag": "📉", "_silent": not is_loud(i, cfg)} for i in drops]
-        )
+        top_n = int(cfg.get("alert_top_n") or 0)
+        tops = top_ids(matched, top_n)
+        show = [{**i, "_tag": "🆕", "_silent": not is_loud(i, cfg)} for i in new_items]
+        for i in drops:
+            top = i["id"] in tops
+            pick = i["id"] == pick_id
+            show.append({
+                **i,
+                "_tag": "📉",
+                "_top": top,
+                "_top_n": top_n,
+                "_pick": pick,
+                "_silent": False if (top or pick) else not is_loud(i, cfg),
+            })
+    for i in show:
+        if i.get("id") == pick_id:
+            i["_pick"] = True
+            if i.get("_tag") == "📉":
+                i["_silent"] = False
 
     notify_error = bool(errors) and state["meta"].get("last_error_day") != today
     err_block = ""
@@ -1423,17 +1820,16 @@ def process_portal(
         catalog_dirty = True
     else:
         live_notify = [i for i in new_items + drops if i["id"] in mark_ids]
-        live_seen = [i for i in matched if i["id"] in state["listings"]]
-        # Enriquecer avisos ya vistos sin reescribir last_seen: solo si cambió precio (drop).
-        apply_live_to_catalog(catalog, live_notify, now)
         if live_notify:
+            apply_live_to_catalog(catalog, live_notify, now)
             catalog_dirty = True
-        # Avisos ya conocidos que siguen: actualizar ficha (foto, tags) solo si hay drop/new.
-        # Los que ya estaban no se reescriben salvo baja de precio o alta.
-        _ = live_seen
+        if enrich_catalog(catalog, matched, now):
+            catalog_dirty = True
 
-    configured = {src["name"] for src in cfg.get("sources") or [] if src.get("site") == site}
+    configured = {source_zone(src) for src in cfg.get("sources") or [] if src.get("site") == site}
     gone_ids = mark_gone(catalog, ok_zones, {i["id"] for i in matched}, now, all_zones=configured)
+    gone_ids.extend(drop_out_of_scope(catalog, cfg.get("filters") or {}, now))
+    gone_ids = list(dict.fromkeys(gone_ids))
     if gone_ids:
         catalog_dirty = True
         print(f"[{site}] dados de baja: {len(gone_ids)}")
@@ -1453,9 +1849,18 @@ def process_portal(
     if catalog_dirty:
         catalog["last_change"] = now
 
-    real_change = bool(mark_ids or gone_ids or (notify_coverage and not dry_run))
+    real_change = bool(mark_ids or gone_ids or catalog_dirty or (notify_coverage and not dry_run))
     if real_change and not dry_run:
         save_portal(site, state, catalog, prev_state, prev_catalog)
+    if not dry_run:
+        pool = list(catalog.get("listings") or [])
+        for other in SITES:
+            if other != site:
+                pool.extend(load_portal(other, persist=False)[1].get("listings") or [])
+        by_id = {i["id"]: i for i in pool if i.get("id")}
+        for i in matched:
+            by_id[i["id"]] = {**by_id.get(i["id"], {}), **i, "active": True}
+        save_pick(list(by_id.values()))
     elif notify_error and error_ok:
         # Error real avisado: no commitear seen solo por last_error_day.
         # Se reintenta el aviso al día siguiente si el error sigue; si se fue, no importa.
@@ -1465,13 +1870,65 @@ def process_portal(
     return True
 
 
+def enrich_from_portals(cfg: dict, *, only: str | None = None) -> int:
+    """Relee listados permitidos y completa foto/ficha. Sin Telegram ni dados de baja."""
+    session = requests.Session()
+    session.headers.update({"User-Agent": UA, "Accept-Language": "es-AR,es;q=0.9"})
+    sources = [x for x in cfg["sources"] if not only or x["site"] == only]
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    current: dict[str, dict[str, dict]] = {k: {} for k in SITES}
+    errors = 0
+    for src in sources:
+        site = src["site"]
+        label = f"{site} · {src['name']}"
+        try:
+            items, _ = scrape_source(session, src, cfg)
+            print(f"[ok] {label}: {len(items)} avisos")
+            for i in items:
+                current[site][i["id"]] = i
+        except (Blocked, requests.RequestException) as e:
+            errors += 1
+            print(f"[error] {label}: {e}", file=sys.stderr)
+        time.sleep(random.uniform(*cfg["delay_seconds"]))
+
+    updated = 0
+    for site in SITES:
+        if only and site != only:
+            continue
+        scraped = dedupe(list(current[site].values()))
+        if not scraped:
+            continue
+        state, catalog = load_portal(site)
+        n = enrich_catalog(catalog, scraped, now)
+        known = {r.get("id") for r in catalog.get("listings") or []}
+        fresh = [i for i in scraped if i["id"] not in known and matches(i, cfg["filters"])]
+        if fresh:
+            apply_live_to_catalog(catalog, fresh, now)
+            n += len(fresh)
+            for i in fresh:
+                state["listings"][i["id"]] = seen_rec(i, state["listings"].get(i["id"]), now)
+        if n:
+            catalog["last_change"] = now
+            write_json(listings_path(site), catalog)
+            write_json(seen_path(site), state)
+        photos = sum(1 for r in catalog.get("listings") or [] if r.get("photo"))
+        print(f"[{site}] ficha: {n} avisos · {photos} con foto")
+        updated += n
+    return 1 if errors and not updated else 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
-    ap.add_argument("--only", choices=["argenprop", "zonaprop"])
+    ap.add_argument("--enrich", action="store_true", help="Relee listados y completa fotos. Sin Telegram.")
+    ap.add_argument("--only", choices=list(SITES))
     args = ap.parse_args()
 
     cfg = json.loads(CONFIG_PATH.read_text())
+    for src in cfg.get("sources") or []:
+        source_pages(src, cfg)
+    if args.enrich:
+        return enrich_from_portals(cfg, only=args.only)
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
     if not args.dry_run and not (token and chat_id):
@@ -1486,6 +1943,7 @@ def main() -> int:
 
     errors_by_site: dict[str, list[str]] = {k: [] for k in SITES}
     ok_zones: dict[str, set[str]] = {k: set() for k in SITES}
+    failed_zones: dict[str, set[str]] = {k: set() for k in SITES}
     current: dict[str, dict[str, dict]] = {k: {} for k in SITES}
     last_pages: dict[str, list[tuple[str, list[dict]]]] = {k: [] for k in SITES}
     attempted = 0
@@ -1501,12 +1959,13 @@ def main() -> int:
         attempted += 1
         try:
             items, last_page = scrape_source(session, src, cfg)
-            ok_zones[site].add(src["name"])
+            ok_zones[site].add(source_zone(src))
             print(f"[ok] {label}: {len(items)} avisos")
             last_pages[site].append((label, last_page))
             for i in items:
                 current[site][i["id"]] = i
         except (Blocked, requests.RequestException) as e:
+            failed_zones[site].add(source_zone(src))
             msg = redact_secrets(f"{label}: {e}", token)
             errors_by_site[site].append(msg)
             print(f"[error] {msg}", file=sys.stderr)
@@ -1524,10 +1983,10 @@ def main() -> int:
         matched = dedupe([i for i in current[site].values() if matches(i, cfg["filters"])])
         state_preview, _ = load_portal(site, persist=not args.dry_run)
         seen_ids = set(state_preview.get("listings") or {})
-        max_pages = cfg["pages"].get(site, 3)
+        ok_zones[site] -= failed_zones[site]
         coverage_notes = []
         for label, last_page in last_pages[site]:
-            warn = coverage_warning(label, last_page, seen_ids, cfg["filters"], max_pages)
+            warn = coverage_warning(label, last_page, seen_ids, cfg["filters"])
             if warn:
                 print(f"[warn] {warn}", file=sys.stderr)
                 coverage_notes.append(warn)
