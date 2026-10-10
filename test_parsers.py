@@ -612,6 +612,43 @@ def test_no_write_when_nothing_changed():
     _restore_paths()
 
 
+def test_notify_loud_and_silent():
+    cfg = {"notify_loud_min_score": 2, "notify_loud_drop_pct": 5}
+    assert s.is_loud({"score": 3, "price": 100000}, cfg)
+    assert not s.is_loud({"score": 0, "price": 100000}, cfg)
+    assert s.is_loud({"score": 0, "price": 90000, "old_price": 100000}, cfg)  # 10%
+    assert not s.is_loud({"score": 0, "price": 97000, "old_price": 100000}, cfg)  # 3%
+    payloads = s.notify_payloads(
+        "",
+        [
+            {**_item("zonaprop:loud", score=3), "_silent": not s.is_loud({**_item("zonaprop:loud", score=3), **{"score": 3}}, cfg)},
+            {**_item("zonaprop:quiet", score=0), "_silent": True},
+        ],
+        "",
+    )
+    by_id = {p["item_id"]: p for p in payloads}
+    assert by_id["zonaprop:loud"]["silent"] is False
+    assert by_id["zonaprop:quiet"]["silent"] is True
+    captured = []
+
+    class Resp:
+        status_code = 200
+        def raise_for_status(self):
+            return None
+
+    def fake_post(url, json=None, timeout=None):
+        captured.append(json)
+        return Resp()
+
+    with mock.patch.object(s.requests, "post", side_effect=fake_post):
+        s.tg_send("t", "1", "hola", silent=True)
+        s.tg_send("t", "1", "hey", silent=False)
+    assert captured[0]["disable_notification"] is True
+    assert captured[1]["disable_notification"] is False
+    hb = s.notify_payloads("⏱ Corrí, sin novedades. 10 avisos activos.", [], "", intro_silent=True)
+    assert hb[0]["silent"] is True
+
+
 def test_expensas_and_extras():
     html = (Path(__file__).parent / "fixtures" / "zonaprop-botanico.html").read_text(encoding="utf-8")
     items = {i["id"]: i for i in s.parse_page(html, "zonaprop", "https://www.zonaprop.com.ar/x.html")}

@@ -44,7 +44,8 @@ La web es `noindex`. En el celular, desde Telegram, se abre la grilla de cards. 
 Editá `config.json`: `max_price_usd` (gusto), `max_price_usd_hard` (corte), `min_area_m2`, `max_ambientes`, `max_expensas_ars` (null = sin tope; sin dato de expensas el aviso entra), y la lista `sources` (una URL por portal y barrio; las URLs tienen que llegar hasta el techo duro).
 `include_unknown_area: true` te avisa también de los avisos que no publican m² (así no se te escapa ninguno).
 Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pesos. No filtran; si el portal no lo escribe en el listado, el aviso igual entra y vos lo juzgás por las fotos.
-`heartbeat: false` (default): si lo prendes, la primera corrida del día (08:17 ART) avisa por Telegram cuando no hubo novedades.
+`heartbeat: false` (default): si lo prendes, la primera corrida del día (08:17 ART / 11 UTC) avisa por Telegram, siempre silencioso, cuando no hubo novedades, con la cantidad de avisos activos.
+`notify_loud_min_score` (2) y `notify_loud_drop_pct` (5): por debajo, Telegram manda el aviso con `disable_notification` (sin sonido). Score alto o una baja de al menos ese % suenan.
 `closing_discount_pct` (5) y `closing_discount_source` alimentan la “referencia de cierre” (no es tasación; promedio CABA). La mediana de USD/m² se calcula sobre tus avisos activos del mismo barrio y solo se muestra si hay al menos `median_min_n` (8).
 
 ## Cosas a tener en cuenta

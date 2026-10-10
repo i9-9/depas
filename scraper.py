@@ -736,7 +736,17 @@ def _tg_post(token: str, method: str, payload: dict) -> requests.Response:
     return r
 
 
-def tg_send(token: str, chat_id: str, text: str) -> None:
+def is_loud(item: dict, cfg: dict) -> bool:
+    if (item.get("score") or 0) >= cfg.get("notify_loud_min_score", 2):
+        return True
+    old, new = item.get("old_price"), item.get("price")
+    pct = cfg.get("notify_loud_drop_pct", 5)
+    if old and new and old > new and pct is not None:
+        return ((old - new) * 100 / old) >= pct
+    return False
+
+
+def tg_send(token: str, chat_id: str, text: str, *, silent: bool = False) -> None:
     _tg_post(
         token,
         "sendMessage",
@@ -745,11 +755,12 @@ def tg_send(token: str, chat_id: str, text: str) -> None:
             "text": text,
             "parse_mode": "HTML",
             "disable_web_page_preview": True,
+            "disable_notification": bool(silent),
         },
     )
 
 
-def tg_send_photo(token: str, chat_id: str, photo: str, caption: str) -> None:
+def tg_send_photo(token: str, chat_id: str, photo: str, caption: str, *, silent: bool = False) -> None:
     _tg_post(
         token,
         "sendPhoto",
@@ -758,6 +769,7 @@ def tg_send_photo(token: str, chat_id: str, photo: str, caption: str) -> None:
             "photo": photo,
             "caption": caption[:1024],
             "parse_mode": "HTML",
+            "disable_notification": bool(silent),
         },
     )
 
@@ -837,11 +849,11 @@ def fmt_item(i: dict, tag: str = "🆕") -> str:
     )
 
 
-def notify_payloads(intro: str, items: list[dict], errors_block: str) -> list[dict]:
+def notify_payloads(intro: str, items: list[dict], errors_block: str, *, intro_silent: bool = False) -> list[dict]:
     """Un payload por pieza: intro/errores son texto; cada aviso puede llevar foto."""
     out: list[dict] = []
     if intro:
-        out.append({"text": intro + site_footer(), "kind": "intro"})
+        out.append({"text": intro + site_footer(), "kind": "intro", "silent": bool(intro_silent)})
     for i in items:
         out.append(
             {
@@ -849,10 +861,11 @@ def notify_payloads(intro: str, items: list[dict], errors_block: str) -> list[di
                 "photo": i.get("photo") or "",
                 "item_id": i.get("id"),
                 "kind": "item",
+                "silent": bool(i.get("_silent")),
             }
         )
     if errors_block:
-        out.append({"text": errors_block + site_footer(), "kind": "error"})
+        out.append({"text": errors_block + site_footer(), "kind": "error", "silent": False})
     return out
 
 
@@ -866,21 +879,22 @@ def deliver(token: str, chat_id: str, payloads: list[dict]) -> dict:
         kind = p.get("kind") or "text"
         item_id = p.get("item_id")
         photo = p.get("photo") or ""
+        silent = bool(p.get("silent"))
         ok = False
         try:
             if photo:
                 try:
-                    tg_send_photo(token, chat_id, photo, p["text"])
+                    tg_send_photo(token, chat_id, photo, p["text"], silent=silent)
                     ok = True
                 except requests.RequestException as e:
                     print(
                         f"[telegram] foto falló ({redact_secrets(e, token)}); mando texto",
                         file=sys.stderr,
                     )
-                    tg_send(token, chat_id, p["text"])
+                    tg_send(token, chat_id, p["text"], silent=silent)
                     ok = True
             else:
-                tg_send(token, chat_id, p["text"])
+                tg_send(token, chat_id, p["text"], silent=silent)
                 ok = True
         except Exception as e:
             print(f"[telegram] {redact_secrets(e, token)}", file=sys.stderr)
@@ -1222,9 +1236,12 @@ def process_portal(
             f"hasta USD 140k). El gusto es 125k; un poco más entra pero más abajo. "
             f"Época / reciclar / edificio pesan más que el precio. De ahora en más, solo nuevos."
         )
-        show = [{**i, "_tag": "📌"} for i in prefer(matched)[:10]]
+        show = [{**i, "_tag": "📌", "_silent": not is_loud(i, cfg)} for i in prefer(matched)[:10]]
     else:
-        show = [{**i, "_tag": "🆕"} for i in new_items] + [{**i, "_tag": "📉"} for i in drops]
+        show = (
+            [{**i, "_tag": "🆕", "_silent": not is_loud(i, cfg)} for i in new_items]
+            + [{**i, "_tag": "📉", "_silent": not is_loud(i, cfg)} for i in drops]
+        )
 
     notify_error = bool(errors) and state["meta"].get("last_error_day") != today
     err_block = ""
@@ -1246,9 +1263,9 @@ def process_portal(
     ):
         heartbeat = True
         if not intro:
-            intro = f"⏱ Corrida {site}: sin novedades."
+            intro = f"⏱ Corrí ({site}), sin novedades. {len(matched)} avisos activos."
 
-    payloads = notify_payloads(intro, show, err_block)
+    payloads = notify_payloads(intro, show, err_block, intro_silent=heartbeat)
     sent_ids: set[str] = set()
     intro_ok = True
     error_ok = True
