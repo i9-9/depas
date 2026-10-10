@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-10T04:49:02+00:00",
+ "last_change": "2026-10-10T14:42:59+00:00",
  "listings": [
   {
    "active": true,
@@ -362,7 +362,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Venta Departamento Barrio Norte - Apto Profesional - A Modernizar, Barrio Norte, Capital Federal",
    "ambientes": 3,
    "antiguedad_years": null,
@@ -373,7 +373,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "mercadolibre:3919982984",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_923439-MLA117285468503_092026-E.webp",
@@ -469,6 +469,43 @@
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Venta Depto Juncal Al 2077. Recoleta Oportunidad!!!! 56m2!!, Recoleta, Capital Federal",
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "closing_ref_usd": 121600,
+   "cochera": null,
+   "days_seen": 0,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-10T14:42:59+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:3963479454",
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_895196-MLA116317781588_092026-E.webp",
+   "piso": null,
+   "price": 128000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-10T14:42:59+00:00",
+     "price": 128000
+    }
+   ],
+   "score": -1,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Venta Depto Juncal Al 2077. Recoleta Oportunidad!!!! 56m2!!",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3963479454-venta-depto-juncal-al-2077-recoleta-oportunidad-56m2-_JM#polycard_client=search-desktop&price_drop=true&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=31&type=item&tracking_id=c7435b90-d2bf-479e-922e-ad2fb125d617&sid=search",
+   "usd_per_m2": 2327,
+   "vs_median_n": 45,
+   "vs_median_pct": 3,
+   "zone": "Recoleta"
   },
   {
    "active": true,

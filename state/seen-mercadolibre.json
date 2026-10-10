@@ -89,6 +89,13 @@
    "url": "https://departamento.mercadolibre.com.ar/MLA-3959625142-hermoso-departamento-3-amb-en-barrio-norte-apto-credito-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=43&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
    "zone": "Barrio Norte"
   },
+  "mercadolibre:3963479454": {
+   "first_seen": "2026-10-10T14:42:59+00:00",
+   "key": "venta juncal 2077|128000|55|2",
+   "price": 128000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3963479454-venta-depto-juncal-al-2077-recoleta-oportunidad-56m2-_JM#polycard_client=search-desktop&price_drop=true&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=31&type=item&tracking_id=c7435b90-d2bf-479e-922e-ad2fb125d617&sid=search",
+   "zone": "Recoleta"
+  },
   "mercadolibre:3978587040": {
    "first_seen": "2026-10-10T04:49:02+00:00",
    "key": "cabello 3900|139000|50|3",
@@ -118,5 +125,7 @@
    "zone": "Botánico"
   }
  },
- "meta": {}
+ "meta": {
+  "coverage_week": "2026-W41"
+ }
 }

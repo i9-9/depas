@@ -298,6 +298,13 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-reservado!-zona-facultad-de-medicina-3-amb-en-58790965.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:58803540": {
+   "first_seen": "2026-10-10T14:42:59+00:00",
+   "key": "fitz roy 2400|130000|52|2",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-fitz-roy-2400-8-balcon-super-luminoso-58803540.html",
+   "zone": "Barrio Norte"
+  },
   "zonaprop:58809215": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "key": null,
@@ -1071,6 +1078,13 @@
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-en-recoleta-60351140.html"
   },
+  "zonaprop:60353278": {
+   "first_seen": "2026-10-10T14:42:59+00:00",
+   "key": "laprida 1100|135000|51|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-60353278.html",
+   "zone": "Recoleta"
+  },
   "zonaprop:60358759": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "av santa fe 2600|139000|56|3",
@@ -1143,7 +1157,7 @@
   }
  },
  "meta": {
-  "last_error_day": "2026-10-10",
+  "coverage_week": "2026-W41",
   "last_run": "2026-10-10T03:03:21+00:00"
  }
 }

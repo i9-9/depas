@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-10T05:03:12+00:00",
+ "last_change": "2026-10-10T14:42:59+00:00",
  "listings": [
   {
    "active": false,
@@ -386,7 +386,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Junin al 1000",
    "ambientes": 3,
    "antiguedad_years": null,
@@ -397,7 +397,7 @@
    "expensas_ars": 190000,
    "expensas_text": "$ 190.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:56310880",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/56/31/08/80/720x532/1977616423.jpg",
@@ -1275,6 +1275,43 @@
    "zone": "Barrio Norte"
   },
   {
+   "active": true,
+   "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
+   "ambientes": 2,
+   "antiguedad_years": 45,
+   "area": 52.0,
+   "closing_ref_usd": 123500,
+   "cochera": null,
+   "days_seen": 0,
+   "expensas_ars": 152500,
+   "expensas_text": "$ 152.500 Expensas",
+   "first_seen": "2026-10-10T14:42:59+00:00",
+   "gone_at": null,
+   "id": "zonaprop:58803540",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/80/35/40/720x532/2045725507.jpg",
+   "piso": 8,
+   "price": 130000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-10T14:42:59+00:00",
+     "price": 130000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Edificio de 8 pisos de 45 años, con encargado sin vivienda (media jornada). Dos unidades p",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-fitz-roy-2400-8-balcon-super-luminoso-58803540.html",
+   "usd_per_m2": 2500,
+   "vs_median_n": 68,
+   "vs_median_pct": 18,
+   "zone": "Barrio Norte"
+  },
+  {
    "active": false,
    "address": "",
    "ambientes": null,
@@ -1729,7 +1766,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Av. Santa Fe 1700",
    "ambientes": 2,
    "antiguedad_years": null,
@@ -1740,7 +1777,7 @@
    "expensas_ars": 380000,
    "expensas_text": "$ 380.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:59404975",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/40/49/75/720x532/2079403251.jpg",
@@ -1788,7 +1825,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Talcahuano  al 1000",
    "ambientes": 3,
    "antiguedad_years": null,
@@ -1799,7 +1836,7 @@
    "expensas_ars": 173500,
    "expensas_text": "$ 173.500 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:59495259",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/49/52/59/720x532/2074522888.jpg",
@@ -2346,7 +2383,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ecuador 1066",
    "ambientes": 3,
    "antiguedad_years": 2,
@@ -2357,7 +2394,7 @@
    "expensas_ars": 180000,
    "expensas_text": "$ 180.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:59784399",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/78/43/99/720x532/2069620581.jpg",
@@ -2663,7 +2700,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Sanchez De Bustamante 800",
    "ambientes": 2,
    "antiguedad_years": null,
@@ -2674,7 +2711,7 @@
    "expensas_ars": 250000,
    "expensas_text": "$ 250.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:59880499",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/88/04/99/720x532/2071957666.jpg",
@@ -3175,7 +3212,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "1 baño",
    "ambientes": 3,
    "antiguedad_years": null,
@@ -3186,7 +3223,7 @@
    "expensas_ars": 218000,
    "expensas_text": "$ 218.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60077990",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/07/79/90/720x532/2076657138.jpg",
@@ -3272,7 +3309,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": 2,
    "antiguedad_years": null,
@@ -3283,7 +3320,7 @@
    "expensas_ars": 420000,
    "expensas_text": "$ 420.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60096367",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/09/63/67/720x532/2077076651.jpg",
@@ -3457,7 +3494,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuenaga al 600",
    "ambientes": 3,
    "antiguedad_years": null,
@@ -3468,7 +3505,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60167531",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/16/75/31/720x532/2078845539.jpg",
@@ -3689,12 +3726,12 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "ambientes": null,
    "area": null,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60196714",
    "old_price": null,
    "photo": "",
@@ -4344,7 +4381,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Austria 2400",
    "ambientes": 3,
    "antiguedad_years": null,
@@ -4355,7 +4392,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60278706",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/27/87/06/720x532/2081648528.jpg",
@@ -4519,7 +4556,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Sanchez de Bustamante 1313 \"C\"",
    "ambientes": 2,
    "antiguedad_years": null,
@@ -4530,7 +4567,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60312107",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/31/21/07/720x532/2082482439.jpg",
@@ -4593,7 +4630,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "PARAGUAY 1269",
    "ambientes": 3,
    "antiguedad_years": 50,
@@ -4604,7 +4641,7 @@
    "expensas_ars": 300000,
    "expensas_text": "$ 300.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60343683",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/36/83/720x532/2083131071.jpg",
@@ -4628,7 +4665,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "San Luis 3057",
    "ambientes": 2,
    "antiguedad_years": null,
@@ -4639,7 +4676,7 @@
    "expensas_ars": 115000,
    "expensas_text": "$ 115.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60348201",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/82/01/720x532/2083219957.jpg",
@@ -4719,6 +4756,43 @@
    ],
    "title": "Departamento muy luminoso piso 13, con excelente ventilación cruzada, donde todos los ambi",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-en-recoleta-60351140.html",
+   "zone": "Recoleta"
+  },
+  {
+   "active": true,
+   "address": "Laprida al 1100",
+   "ambientes": 3,
+   "antiguedad_years": 50,
+   "area": 51.0,
+   "closing_ref_usd": 128250,
+   "cochera": true,
+   "days_seen": 0,
+   "expensas_ars": 242000,
+   "expensas_text": "$ 242.000 Expensas",
+   "first_seen": "2026-10-10T14:42:59+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60353278",
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/35/32/78/720x532/2083392766.jpg",
+   "piso": 2,
+   "price": 135000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-10T14:42:59+00:00",
+     "price": 135000
+    }
+   ],
+   "score": -1,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Descubra este encantador departamento de tres ambientes ubicado en el corazón de Recoleta,",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-60353278.html",
+   "usd_per_m2": 2647,
+   "vs_median_n": 56,
+   "vs_median_pct": 17,
    "zone": "Recoleta"
   },
   {
