@@ -5,6 +5,9 @@ export type Spec = { label: string; value: string };
 export function specsOf(item: Listing): Spec[] {
   const rows: Spec[] = [];
   if (item.area != null) rows.push({ label: "Metros", value: `${item.area.toLocaleString("es-AR")} m²` });
+  if (item.air_usd != null) {
+    rows.push({ label: "Aire", value: `USD ${item.air_usd.toLocaleString("es-AR")}` });
+  }
   if (item.ambientes != null) rows.push({ label: "Ambientes", value: String(item.ambientes) });
   if (item.zone) rows.push({ label: "Barrio", value: item.zone });
   if (item.piso != null) rows.push({ label: "Piso", value: item.piso === 0 ? "Planta baja" : String(item.piso) });

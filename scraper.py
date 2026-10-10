@@ -365,6 +365,135 @@ def apply_signals(item: dict, signals: list, filters: dict | None = None) -> dic
     return item
 
 
+VALUE_TAGS = {
+    "metro barato": 1,
+    "metro muy barato": 2,
+    "metro caro": -1,
+    "expensas altas": -1,
+    "expensas muy altas": -2,
+}
+
+FLIP_TAGS = {
+    "aire amplio": 3,
+    "aire": 2,
+    "sin aire": -2,
+    "tesis": 2,
+    "planta baja": -1,
+}
+
+DEFAULT_EXIT_USD_M2 = {
+    "Recoleta": 2750,
+    "Barrio Norte": 2750,
+    "Botánico": 3000,
+    "Palermo Chico": 3600,
+}
+DEFAULT_RENO_USD_M2 = 250
+DEFAULT_AIR_OK_USD = 25000
+DEFAULT_AIR_WIDE_USD = 40000
+
+
+def apply_value(item: dict, cfg: dict | None = None) -> dict:
+    """Suma o resta según m² vs el barrio y expensas. Se puede correr dos veces."""
+    cfg = cfg or {}
+    tags = list(item.get("tags") or [])
+    score = item.get("score") or 0
+    kept: list[str] = []
+    for t in tags:
+        if t in VALUE_TAGS:
+            score -= VALUE_TAGS[t]
+        else:
+            kept.append(t)
+    cheap = int(cfg.get("value_cheap_pct", -8))
+    steal = int(cfg.get("value_steal_pct", -15))
+    rich = int(cfg.get("value_rich_pct", 20))
+    exp_high = int(cfg.get("expensas_high_ars", 300000))
+    exp_loud = int(cfg.get("expensas_loud_ars", 380000))
+    vs = item.get("vs_median_pct")
+    added: list[str] = []
+    if vs is not None:
+        if vs <= steal:
+            added.append("metro muy barato")
+        elif vs <= cheap:
+            added.append("metro barato")
+        elif vs >= rich:
+            added.append("metro caro")
+    exp = item.get("expensas_ars")
+    if exp is not None:
+        if exp >= exp_loud:
+            added.append("expensas muy altas")
+        elif exp >= exp_high:
+            added.append("expensas altas")
+    for t in added:
+        score += VALUE_TAGS[t]
+        kept.append(t)
+    item["score"] = score
+    item["tags"] = kept
+    return item
+
+
+def exit_usd_m2_of(zone: str, cfg: dict | None = None) -> int | None:
+    cfg = cfg or {}
+    mapping = cfg.get("exit_usd_m2") or DEFAULT_EXIT_USD_M2
+    if zone in mapping:
+        return int(mapping[zone])
+    return None
+
+
+def air_usd_of(item: dict, cfg: dict | None = None) -> int | None:
+    cfg = cfg or {}
+    price = item.get("price")
+    area = item.get("area")
+    exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg)
+    if price is None or area is None or area <= 0 or exit_m2 is None:
+        return None
+    reno = int(cfg.get("reno_usd_m2", DEFAULT_RENO_USD_M2))
+    return int(round(exit_m2 * area - price - reno * area))
+
+
+def apply_air(item: dict, cfg: dict | None = None) -> dict:
+    """Aire (salida − compra − obra), combo edificio+reciclar y PB. Se puede correr dos veces."""
+    cfg = cfg or {}
+    tags = list(item.get("tags") or [])
+    score = item.get("score") or 0
+    kept: list[str] = []
+    for t in tags:
+        if t in FLIP_TAGS:
+            score -= FLIP_TAGS[t]
+        else:
+            kept.append(t)
+    reno = int(cfg.get("reno_usd_m2", DEFAULT_RENO_USD_M2))
+    exit_m2 = exit_usd_m2_of(item.get("zone") or "", cfg)
+    air = air_usd_of(item, cfg)
+    item["air_usd"] = air
+    item["exit_usd_m2"] = exit_m2
+    item["reno_usd_m2"] = reno
+    added: list[str] = []
+    if air is not None:
+        wide = int(cfg.get("air_wide_usd", DEFAULT_AIR_WIDE_USD))
+        ok = int(cfg.get("air_ok_usd", DEFAULT_AIR_OK_USD))
+        if air >= wide:
+            added.append("aire amplio")
+        elif air >= ok:
+            added.append("aire")
+        elif air < 0:
+            added.append("sin aire")
+    if "para reciclar" in kept and "edificio ok" in kept and "tesis" not in kept:
+        added.append("tesis")
+    if item.get("piso") == 0 and "planta baja" not in kept:
+        added.append("planta baja")
+    for t in added:
+        score += FLIP_TAGS[t]
+        kept.append(t)
+    item["score"] = score
+    item["tags"] = kept
+    return item
+
+
+def keep_flip(item: dict) -> bool:
+    """Corta lo que no se da vuelta después de medianas (metro caro)."""
+    return "metro caro" not in (item.get("tags") or [])
+
+
 def prefer(items: list[dict]) -> list[dict]:
     return sorted(items, key=lambda x: (-x.get("score", 0), x["price"] if x.get("price") is not None else 10**12))
 
@@ -386,6 +515,16 @@ _VERDICT_SAY = {
     "edificio a reciclar": "el edificio está para reciclar",
     "planta baja": "es planta baja",
     "sobre presupuesto": "está sobre el presupuesto",
+    "metro barato": "el metro está barato para el barrio",
+    "metro muy barato": "el metro está muy barato para el barrio",
+    "metro caro": "el metro está caro para el barrio",
+    "expensas altas": "las expensas son altas",
+    "expensas muy altas": "las expensas son muy altas",
+    "aire": "tiene aire para darlo vuelta",
+    "aire amplio": "tiene aire amplio para darlo vuelta",
+    "sin aire": "no tiene aire para la obra",
+    "ya hecho": "ya está reciclado o a estrenar",
+    "tesis": "es el combo: buen edificio y unidad a reciclar",
     "cumple barrio, metros y balcón": "pasa barrio, metros y balcón; no hay más señales",
 }
 _FALTA_SAY = {
@@ -415,7 +554,16 @@ def verdict(item: dict, cfg: dict | None = None) -> dict:
                 resta.append(f"pide USD {_fmt_int(int(price))} y el gusto es USD {_fmt_int(int(gusto))}")
             else:
                 resta.append(_say_hit(t))
-        elif t in {"edificio flojo", "edificio a reciclar"}:
+        elif t in {
+            "edificio flojo",
+            "edificio a reciclar",
+            "metro caro",
+            "expensas altas",
+            "expensas muy altas",
+            "sin aire",
+            "ya hecho",
+            "planta baja",
+        }:
             resta.append(_say_hit(t))
         else:
             entra.append(_say_hit(t))
@@ -438,6 +586,16 @@ def verdict(item: dict, cfg: dict | None = None) -> dict:
         parts.append("En contra: " + join_es(resta) + ".")
     if falta:
         parts.append("El aviso no dice: " + join_es(falta) + ".")
+    air = item.get("air_usd")
+    exit_m2 = item.get("exit_usd_m2")
+    reno = item.get("reno_usd_m2")
+    zone = item.get("zone") or ""
+    if air is not None and exit_m2 and zone:
+        parts.append(
+            f"Salida de referencia USD {_fmt_int(int(exit_m2))}/m² en {zone}; "
+            f"obra de screening USD {_fmt_int(int(reno or DEFAULT_RENO_USD_M2))}/m²; "
+            f"aire USD {_fmt_int(int(air))}."
+        )
     return {"entra": entra, "resta": resta, "falta": falta, "text": " ".join(parts)}
 
 
@@ -506,6 +664,30 @@ def listing_key(item: dict) -> str:
     area_b = str(int(round(area))) if area is not None else "x"
     amb = item["ambientes"] if item.get("ambientes") is not None else "x"
     return f"{street}|{item['price']}|{area_b}|{amb}"
+
+
+def place_key(item: dict) -> str:
+    """Calle + m² (~5) + ambientes. Sirve para el mismo depto en otro portal."""
+    street = street_key(item.get("address") or "") or street_key(item.get("title") or "")
+    area = item.get("area")
+    amb = item.get("ambientes")
+    if not street or area is None or amb is None:
+        return ""
+    bucket = int(round(float(area) / 5.0) * 5)
+    return f"{street}|{bucket}|{int(amb)}"
+
+
+def places_from_other_portals(site: str) -> set[str]:
+    known: set[str] = set()
+    for other in SITES:
+        if other == site:
+            continue
+        rows = load_portal(other, persist=False)[1].get("listings") or []
+        for row in rows:
+            pk = place_key(row)
+            if pk:
+                known.add(pk)
+    return known
 
 
 def _richer(a: dict, b: dict) -> bool:
@@ -761,6 +943,8 @@ def attach_decisions(items: list[dict], extra: list[dict], cfg: dict, now: str) 
     medians = zone_medians(pool_for_median(items, extra), cfg.get("median_min_n", 8))
     for i in items:
         apply_decision(i, medians, cfg, now)
+        apply_value(i, cfg)
+        apply_air(i, cfg)
     return medians
 
 
@@ -972,7 +1156,7 @@ def top_ids(items: list[dict], n: int) -> set[str]:
 
 
 def is_loud(item: dict, cfg: dict) -> bool:
-    if (item.get("score") or 0) >= cfg.get("notify_loud_min_score", 2):
+    if (item.get("score") or 0) >= cfg.get("notify_loud_min_score", 3):
         return True
     old, new = item.get("old_price"), item.get("price")
     pct = cfg.get("notify_loud_drop_pct", 5)
@@ -1129,6 +1313,14 @@ def decision_lines(i: dict) -> list[str]:
     ref = i.get("closing_ref_usd")
     if ref is not None:
         lines.append(f"Referencia de cierre ≈ USD {_fmt_int(ref)} (no es tasación; promedio CABA)")
+    air = i.get("air_usd")
+    if air is not None:
+        exit_m2 = i.get("exit_usd_m2")
+        reno = i.get("reno_usd_m2")
+        bit = f"aire ≈ USD {_fmt_int(int(air))}"
+        if exit_m2 and reno:
+            bit += f" (salida USD {_fmt_int(int(exit_m2))}/m² − obra USD {_fmt_int(int(reno))}/m²)"
+        lines.append(bit)
     return lines
 
 
@@ -1424,6 +1616,9 @@ def upsert_listing(prev: dict | None, item: dict, now: str, *, active: bool = Tr
         "antiguedad_years": item.get("antiguedad_years") if item.get("antiguedad_years") is not None else prev.get("antiguedad_years"),
         "piso": item.get("piso") if item.get("piso") is not None else prev.get("piso"),
         "cochera": item.get("cochera") if item.get("cochera") is not None else prev.get("cochera"),
+        "air_usd": item.get("air_usd") if item.get("air_usd") is not None else prev.get("air_usd"),
+        "exit_usd_m2": item.get("exit_usd_m2") if item.get("exit_usd_m2") is not None else prev.get("exit_usd_m2"),
+        "reno_usd_m2": item.get("reno_usd_m2") if item.get("reno_usd_m2") is not None else prev.get("reno_usd_m2"),
     }
 
 
@@ -1438,6 +1633,9 @@ def seen_rec(item: dict, prev: dict | None, now: str) -> dict:
     k = listing_key(item)
     if k:
         rec["key"] = k
+    pk = place_key(item)
+    if pk:
+        rec["place"] = pk
     return rec
 
 
@@ -1523,6 +1721,10 @@ def enrich_catalog(catalog: dict, items: list[dict], now: str | None = None) -> 
             patch["tags"] = tags
         if i.get("score", 0) != (prev.get("score") or 0):
             patch["score"] = i.get("score", 0)
+        for key in ("air_usd", "exit_usd_m2", "reno_usd_m2"):
+            new, old = i.get(key), prev.get(key)
+            if new is not None and new != old:
+                patch[key] = new
         live = i.get("price")
         old = prev.get("price")
         if live is not None and live != old:
@@ -1723,10 +1925,24 @@ def process_portal(
         if other != site:
             extra.extend(load_portal(other, persist=False)[1].get("listings") or [])
     attach_decisions(matched, extra, cfg, now)
+    matched[:] = [i for i in matched if keep_flip(i)]
 
     new_items, drops = classify_changes(matched, state)
+    silent_dupes: list[dict] = []
+    if not first_run:
+        known = places_from_other_portals(site)
+        kept: list[dict] = []
+        for i in new_items:
+            pk = place_key(i)
+            if pk and pk in known:
+                silent_dupes.append(i)
+            else:
+                kept.append(i)
+        new_items = kept
     for d in drops:
         apply_decision(d, zone_medians(pool_for_median(matched, extra), cfg.get("median_min_n", 8)), cfg, now)
+        apply_value(d, cfg)
+        apply_air(d, cfg)
     for i in matched + drops:
         i["verdict"] = verdict(i, cfg)
     pick_id = resolve_pick_id(matched + extra)
@@ -1739,9 +1955,9 @@ def process_portal(
     show: list[dict] = []
     if first_run:
         intro = (
-            f"✅ Buscador activo ({site}). Cargué {len(matched)} avisos (con balcón, m², ambientes, "
-            f"hasta USD 140k). Buscamos uno. El gusto es 125k; un poco más entra pero más abajo. "
-            f"Época / reciclar / edificio pesan más que el precio. De ahora en más, solo nuevos."
+            f"✅ Buscador activo ({site}). Cargué {len(matched)} avisos para flip "
+            f"(buen edificio, unidad a reciclar, aire vs la salida del barrio). "
+            f"Gusto 125k, techo 140k. De ahora en más, solo nuevos."
         )
         show = [{**i, "_tag": "📌", "_silent": not is_loud(i, cfg)} for i in prefer(matched)[:10]]
     else:
@@ -1825,6 +2041,11 @@ def process_portal(
             catalog_dirty = True
         if enrich_catalog(catalog, matched, now):
             catalog_dirty = True
+        if silent_dupes:
+            apply_live_to_catalog(catalog, silent_dupes, now)
+            catalog_dirty = True
+            for i in silent_dupes:
+                state["listings"][i["id"]] = seen_rec(i, state["listings"].get(i["id"]), now)
 
     configured = {source_zone(src) for src in cfg.get("sources") or [] if src.get("site") == site}
     gone_ids = mark_gone(catalog, ok_zones, {i["id"] for i in matched}, now, all_zones=configured)

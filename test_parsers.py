@@ -114,17 +114,17 @@ def test_argenprop():
     assert a["price"] == 108000 and a["area"] == 53.5 and a["ambientes"] == 3, a
     assert a["url"] == "https://www.argenprop.com/departamento-en-venta-en-botanico-3-ambientes--19596287"
     ok = {k for k, v in items.items() if s.matches(v, F)}
-    # 50 m²+ y un poco más de 125k entran; 160k, 4 amb y sin balcón afuera
+    # 50 m²+ y un poco más de 125k entran; 160k, 4 amb, sin m², edificio a reciclar y sin balcón afuera
     assert ok == {
         "argenprop:20079141",
         "argenprop:19596287",
         "argenprop:11111111",
-        "argenprop:33333333",
         "argenprop:44444444",
-        "argenprop:55555555",
         "argenprop:77777777",
         "argenprop:99999999",
     }, ok
+    assert "argenprop:33333333" not in ok
+    assert "argenprop:55555555" not in ok
     assert "argenprop:88888888" not in ok
 
 
@@ -240,7 +240,7 @@ def test_preferences_not_exclusive():
     assert dream["score"] >= 7, dream
     flojo = items["argenprop:55555555"]
     assert "edificio flojo" in flojo["tags"] and "para reciclar" not in flojo["tags"], flojo
-    assert s.matches(flojo, F)  # sigue entrando: no es excluyente
+    assert not s.matches(flojo, F)  # edificio a reciclar corta: no se da vuelta
     plain = items["argenprop:19596287"]
     assert plain["score"] == 0 and s.matches(plain, F)
     stretch = items["argenprop:11111111"]
@@ -458,6 +458,15 @@ def test_dedupe():
     assert ids == {"zonaprop:2", "zonaprop:3", "zonaprop:4"}, ids  # 1 y 2 son el mismo depto; gana el de más score
     prev = s.find_prev(b, {"listings": {"argenprop:1": {"price": 105000, "key": s.listing_key(a)}}})
     assert prev is not None and prev["price"] == 105000
+
+
+def test_place_key_cross_portal():
+    zp = {"address": "Paso 760, Barrio Norte", "title": "Paso 760", "area": 76, "ambientes": 3, "price": 112000}
+    ml = {"address": "Paso al 760", "title": "Depto Paso 760", "area": 74, "ambientes": 3, "price": 109000}
+    other = {"address": "Paso 760, Barrio Norte", "title": "x", "area": 76, "ambientes": 2, "price": 90000}
+    assert s.place_key(zp) == s.place_key(ml) == "paso 760|75|3"
+    assert s.place_key(other) != s.place_key(zp)
+    assert s.place_key({"address": "", "title": "sin calle", "area": 50, "ambientes": 2}) == ""
 
 
 def _item(lid, **kw):
@@ -747,12 +756,16 @@ def test_no_write_when_nothing_changed():
     }
     s.write_json(s.seen_path("zonaprop"), {"listings": {"zonaprop:old": rec}, "meta": {}})
     listing = {
-        **_item("zonaprop:old", url="https://z/old.html", photo=""),
+        **_item("zonaprop:old", url="https://z/old.html", photo="", score=6,
+                tags=["de época", "aire amplio"]),
         "first_seen": rec["first_seen"],
         "active": True,
         "gone_at": None,
         "old_price": None,
         "price_history": [{"date": rec["first_seen"], "price": rec["price"]}],
+        "air_usd": 44500,
+        "exit_usd_m2": 2750,
+        "reno_usd_m2": 250,
     }
     s.write_json(s.listings_path("zonaprop"), {"last_change": "x", "listings": [listing]})
     before_seen = s.seen_path("zonaprop").read_text()
@@ -976,6 +989,110 @@ def test_median_and_decision_fields():
     msg = s.fmt_item(cheap)
     assert "USD 1.600/m²" in msg and "vs mediana de Recoleta" in msg
     assert "visto hace 9 días" in msg and "Referencia de cierre" in msg
+
+
+def test_apply_value_metro_and_expensas():
+    cheap = _item("zonaprop:v1", score=0, tags=[], vs_median_pct=-16, expensas_ars=180000)
+    s.apply_value(cheap)
+    assert cheap["score"] == 2 and "metro muy barato" in cheap["tags"]
+    s.apply_value(cheap)
+    assert cheap["score"] == 2 and cheap["tags"].count("metro muy barato") == 1
+    mid = _item("zonaprop:v2", score=0, tags=[], vs_median_pct=-9)
+    s.apply_value(mid)
+    assert mid["score"] == 1 and "metro barato" in mid["tags"]
+    rich = _item("zonaprop:v3", score=0, tags=[], vs_median_pct=22, expensas_ars=400000)
+    s.apply_value(rich)
+    assert rich["score"] == -3
+    assert "metro caro" in rich["tags"] and "expensas muy altas" in rich["tags"]
+    high = _item("zonaprop:v4", score=0, tags=[], expensas_ars=310000)
+    s.apply_value(high)
+    assert high["score"] == -1 and "expensas altas" in high["tags"]
+    v = s.verdict(rich)
+    assert any("metro está caro" in x for x in v["resta"])
+    assert any("expensas son muy altas" in x for x in v["resta"])
+    steal = _item("zonaprop:v5", score=0, tags=[], vs_median_pct=-16, price=108000)
+    epoca = _item("zonaprop:v6", score=3, tags=["de época"], vs_median_pct=0, price=132000)
+    s.apply_value(steal)
+    s.apply_value(epoca)
+    ranked = s.prefer([steal, epoca])
+    assert ranked[0]["id"] == "zonaprop:v6"  # época sigue arriba de un metro barato solo
+    assert steal["score"] == 2
+
+
+def test_flip_cuts_and_air():
+    rec = {
+        "price": 100000, "ambientes": 3, "area": 55,
+        "title": "3 amb Recoleta", "address": "Juncal 2900, Recoleta",
+        "url": "https://z/recoleta-reformar.html", "blurb": "departamento para reformar, luminoso",
+        "zone": "Recoleta",
+    }
+    s.apply_signals(rec, SIGNALS, F)
+    assert "para reciclar" in rec["tags"], rec
+
+    done = {
+        "price": 119000, "ambientes": 2, "area": 52,
+        "title": "Reciclado a nuevo en Recoleta", "address": "Arenales 1800, Recoleta",
+        "url": "https://z/recoleta-nuevo.html", "blurb": "", "zone": "Recoleta",
+    }
+    s.apply_signals(done, SIGNALS, F)
+    assert "ya hecho" in done["tags"] and "edificio ok" not in done["tags"], done
+
+    edificio = {
+        "price": 110000, "ambientes": 2, "area": 60,
+        "title": "2 amb Recoleta", "address": "Callao 1200, Recoleta",
+        "url": "https://z/recoleta-edificio.html", "blurb": "edificio reciclado, muy bueno",
+        "zone": "Recoleta",
+    }
+    s.apply_signals(edificio, SIGNALS, F)
+    assert "edificio ok" in edificio["tags"] and "ya hecho" not in edificio["tags"], edificio
+
+    paso = _item(
+        "zonaprop:paso",
+        zone="Barrio Norte",
+        price=112000,
+        area=76,
+        score=5,
+        tags=["de época", "edificio ok"],
+    )
+    s.apply_air(paso)
+    assert paso["air_usd"] == 78000, paso
+    assert "aire amplio" in paso["tags"]
+    s.apply_air(paso)
+    assert paso["score"] == 8 and paso["tags"].count("aire amplio") == 1
+
+    justo = _item("zonaprop:justo", zone="Recoleta", price=125000, area=50, score=0, tags=[])
+    s.apply_air(justo)
+    assert justo["air_usd"] == 0
+    assert "sin aire" not in justo["tags"] and "aire" not in justo["tags"]
+
+    pb = _item("zonaprop:pb", zone="", price=90000, area=60, score=0, tags=[], piso=0)
+    s.apply_air(pb)
+    assert "planta baja" in pb["tags"] and pb["score"] == -1
+    s.apply_air(pb)
+    assert pb["score"] == -1 and pb["tags"].count("planta baja") == 1
+
+    combo = _item(
+        "zonaprop:combo",
+        zone="Recoleta",
+        price=100000,
+        area=55,
+        score=4,
+        tags=["para reciclar", "edificio ok"],
+    )
+    s.apply_air(combo)
+    assert "tesis" in combo["tags"] and combo["score"] >= 6
+
+    rich = _item("zonaprop:rich", tags=["metro caro"])
+    assert not s.keep_flip(rich) and s.keep_flip(_item("zonaprop:ok", tags=[]))
+
+    v = s.verdict({
+        **paso,
+        "photo": "x",
+        "expensas_ars": 1,
+        "piso": 3,
+    })
+    assert "aire amplio" in " ".join(v["entra"]) or "aire amplio para darlo vuelta" in v["text"]
+    assert "Salida de referencia USD 2.750/m² en Barrio Norte" in v["text"]
 
 
 def test_coverage_last_page_unseen():

@@ -36,7 +36,7 @@ export function Pulse({
     return (
       <aside aria-live="polite" className="border-b border-line py-3">
         <p className="text-ink">
-          También salió{" "}
+          También vimos{" "}
           {rest.map((item, i) => (
             <span key={item.id}>
               {i > 0 ? (i === rest.length - 1 ? " y " : ", ") : ""}
@@ -56,9 +56,9 @@ export function Pulse({
   }
 
   const headline = published
-    ? ago
-      ? `Salió ${ago}`
-      : "Salió recién"
+      ? ago
+      ? `Lo vimos ${ago}`
+      : "Lo vimos recién"
     : drop
       ? `Bajó el precio un ${drop.pct}%`
       : "Bajó el precio";

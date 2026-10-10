@@ -9,7 +9,7 @@ import { resolvePick } from "@/lib/pick";
 export function generateMetadata(): Metadata {
   const pick = resolvePick(loadListings(), loadPick());
   const name = pick.listing?.address || pick.listing?.title || "El de ahora";
-  const prefix = pick.listing && isAlert(pick.listing) ? "Salió hace poco · " : "";
+  const prefix = pick.listing && isAlert(pick.listing) ? "Lo vimos hace poco · " : "";
   return { title: `${prefix}${name}` };
 }
 

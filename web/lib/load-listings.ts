@@ -4,11 +4,14 @@ import zonaprop from "../data/listings-zonaprop.json";
 import {
   CLOSING_DISCOUNT_PCT,
   MEDIAN_MIN_N,
+  applyAir,
   applyValue,
   closingRef,
   daysSeen,
   clusterListings,
+  flipKeep,
   inScope,
+  markFirstWave,
   usdPerM2,
   type CatalogFile,
   type Listing,
@@ -55,17 +58,23 @@ export function loadListings(): Listing[] {
         antiguedad_years: raw.antiguedad_years ?? null,
         piso: raw.piso ?? null,
         cochera: raw.cochera ?? null,
+        air_usd: raw.air_usd ?? null,
+        exit_usd_m2: raw.exit_usd_m2 ?? null,
+        reno_usd_m2: raw.reno_usd_m2 ?? null,
         verdict: { entra: [], resta: [], falta: [], text: "" },
         ids: [raw.id],
         mirrors: [],
+        from_first_wave: false,
       });
     }
   }
   return clusterListings(
-    withMedians(out).map((item) => {
-      const valued = applyValue(item);
-      return { ...valued, verdict: verdictOf(valued) };
-    }),
+    markFirstWave(
+      withMedians(out)
+        .map((item) => applyAir(applyValue(item)))
+        .filter(flipKeep)
+        .map((item) => ({ ...item, verdict: verdictOf(item) })),
+    ),
   );
 }
 

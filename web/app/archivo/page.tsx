@@ -10,7 +10,7 @@ export function generateMetadata(): Metadata {
   const n = hotListings(loadListings()).length;
   return {
     title: n
-      ? `${n === 1 ? "Salió uno nuevo" : `Salieron ${n} nuevos`} · todos`
+      ? `${n === 1 ? "Vimos uno nuevo" : `Vimos ${n} nuevos`} · todos`
       : "Todos los departamentos",
   };
 }

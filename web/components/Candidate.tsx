@@ -1,5 +1,5 @@
 import { isNew, publishedAgo, siteLabel, streetOf } from "@/lib/listings";
-import { medianLine, seenLine } from "@/lib/verdict";
+import { airLine, medianLine, seenLine } from "@/lib/verdict";
 import type { ResolvedPick } from "@/lib/pick";
 import { Photo } from "@/components/Photo";
 import { PricePair } from "@/components/PricePair";
@@ -29,6 +29,7 @@ export function Candidate({
 
   const median = medianLine(item);
   const seen = seenLine(item);
+  const air = airLine(item);
   const street = streetOf(item);
   const published = isNew(item) ? publishedAgo(item.first_seen) : null;
   const why =
@@ -57,7 +58,7 @@ export function Candidate({
   return (
     <article className="g mt-8 items-start">
       <header className="col-span-12 lg:col-span-5">
-        {published ? <p className="kicker text-signal">Salió {published}</p> : null}
+        {published ? <p className="kicker text-signal">Lo vimos {published}</p> : null}
         <h1 className={`display text-title ${published ? "mt-3" : ""}`}>
           {item.address || item.title || "Sin dirección"}
         </h1>
@@ -104,16 +105,17 @@ export function Candidate({
 
         <footer className="measure space-y-2 border-t border-line pt-5 text-muted">
           {median && <p>{median}</p>}
+          {air && <p>{air}</p>}
           {seen && <p>{seen}</p>}
           <details>
             <summary className="link flex min-h-11 cursor-pointer items-center text-ink">
               ¿Por qué este?
             </summary>
             <p className="mt-2 leading-relaxed text-ink">
-              Cuenta a favor si es de época, si está para reciclar o si el
-              edificio está bien. Si pide más de USD 125.000, pierde un poco,
-              pero no se descarta. El resto está en Todos, para guardar los
-              que te gusten.
+              Buscamos un flip: edificio que no haya que tocar, unidad para
+              reciclar, y precio con aire contra la salida del barrio. Lo que
+              no se arregla con obra (edificio flojo, metro caro, expensas
+              disparadas, sin metros) no entra. El resto está en Todos.
             </p>
           </details>
         </footer>

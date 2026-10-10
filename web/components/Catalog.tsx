@@ -24,7 +24,7 @@ import { PricePair } from "@/components/PricePair";
 import { specsCells } from "@/components/Specs";
 import { readPrefs, writePrefs } from "@/lib/storage";
 
-type SortKey = "tier" | "new" | "price-asc" | "price-desc" | "m2-asc" | "vs-median";
+type SortKey = "tier" | "new" | "price-asc" | "price-desc" | "m2-asc" | "vs-median" | "air";
 
 type Filters = {
   q: string;
@@ -66,7 +66,7 @@ const INITIAL: Filters = {
   belowMedian: false,
 };
 
-const SORTS: SortKey[] = ["tier", "new", "price-asc", "price-desc", "m2-asc", "vs-median"];
+const SORTS: SortKey[] = ["tier", "new", "price-asc", "price-desc", "m2-asc", "vs-median", "air"];
 
 function emptyCopy(filters: Filters): { title: string; text: string } {
   if (filters.onlyGone) {
@@ -122,6 +122,7 @@ function extraLabel(filters: Filters, sort: SortKey): string | null {
   if (sort === "price-desc") bits.push("más caro");
   if (sort === "m2-asc") bits.push("metro más barato");
   if (sort === "vs-median") bits.push("más barato que el barrio");
+  if (sort === "air") bits.push("más aire");
   return bits.length ? bits.join(" · ") : null;
 }
 
@@ -299,6 +300,7 @@ export function Catalog({
       if (sort === "price-desc") return (b.price ?? 0) - (a.price ?? 0);
       if (sort === "m2-asc") return (a.usd_per_m2 ?? 1e12) - (b.usd_per_m2 ?? 1e12);
       if (sort === "vs-median") return (a.vs_median_pct ?? 1e12) - (b.vs_median_pct ?? 1e12);
+      if (sort === "air") return (b.air_usd ?? -1e12) - (a.air_usd ?? -1e12);
       if (sort === "tier") return rankByScore(a, b);
       return Date.parse(b.first_seen || "") - Date.parse(a.first_seen || "");
     });
@@ -317,6 +319,7 @@ export function Catalog({
     });
   }
 
+  const anyNew = listings.some((item) => isNew(item));
   const seedDump =
     filters.onlyNew &&
     shown > 0 &&
@@ -376,7 +379,9 @@ export function Catalog({
               icon
             />
             <Toggle on={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Bajó el precio" />
-            <Toggle on={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
+            {anyNew ? (
+              <Toggle on={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" />
+            ) : null}
             <Toggle on={filters.onlyGone} onChange={(v) => set("onlyGone", v)} label="Ya no están" />
             {discarded.length > 0 ? (
               <Toggle
@@ -508,6 +513,7 @@ function FilterFields({
           <option value="price-desc">El más caro</option>
           <option value="m2-asc">El metro más barato</option>
           <option value="vs-median">Más barato que el barrio</option>
+          <option value="air">Más aire</option>
         </select>
       </Field>
       <div className="col-span-12 flex flex-wrap items-end gap-x-5 lg:col-span-8">
@@ -724,7 +730,7 @@ function flags(item: Listing): Flag[] {
   if (isNew(item)) {
     const ago = publishedAgo(item.first_seen);
     out.push({
-      text: ago ? `Salió ${ago}` : "Salió recién",
+      text: ago ? `Lo vimos ${ago}` : "Lo vimos recién",
       tone: isAlert(item) ? "signal" : "muted",
     });
   } else {

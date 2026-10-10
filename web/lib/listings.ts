@@ -52,9 +52,13 @@ export type Listing = {
   antiguedad_years: number | null;
   piso: number | null;
   cochera: boolean | null;
+  air_usd: number | null;
+  exit_usd_m2: number | null;
+  reno_usd_m2: number | null;
   verdict: Verdict;
   ids: string[];
   mirrors: Mirror[];
+  from_first_wave: boolean;
 };
 
 export const CLOSING_DISCOUNT_PCT = 5;
@@ -65,6 +69,23 @@ export const VALUE_STEAL_PCT = -15;
 export const VALUE_RICH_PCT = 20;
 export const EXPENSAS_HIGH_ARS = 300000;
 export const EXPENSAS_LOUD_ARS = 380000;
+export const RENO_USD_M2 = 250;
+export const AIR_OK_USD = 25000;
+export const AIR_WIDE_USD = 40000;
+export const EXIT_USD_M2: Record<string, number> = {
+  Recoleta: 2750,
+  "Barrio Norte": 2750,
+  Botánico: 3000,
+  "Palermo Chico": 3600,
+};
+
+const FLIP_TAGS: Record<string, number> = {
+  "aire amplio": 3,
+  aire: 2,
+  "sin aire": -2,
+  tesis: 2,
+  "planta baja": -1,
+};
 
 const VALUE_TAGS: Record<string, number> = {
   "metro barato": 1,
@@ -100,6 +121,61 @@ export function applyValue(item: Listing): Listing {
     kept.push(t);
   }
   return { ...item, score, tags: kept };
+}
+
+export function exitUsdM2Of(zone: string): number | null {
+  return zone in EXIT_USD_M2 ? EXIT_USD_M2[zone] : null;
+}
+
+export function airUsdOf(item: Pick<Listing, "price" | "area" | "zone">): number | null {
+  const exitM2 = exitUsdM2Of(item.zone || "");
+  if (item.price == null || item.area == null || item.area <= 0 || exitM2 == null) return null;
+  return Math.round(exitM2 * item.area - item.price - RENO_USD_M2 * item.area);
+}
+
+export function applyAir(item: Listing): Listing {
+  let score = item.score || 0;
+  const kept = (item.tags || []).filter((t) => {
+    if (t in FLIP_TAGS) {
+      score -= FLIP_TAGS[t];
+      return false;
+    }
+    return true;
+  });
+  const exitM2 = exitUsdM2Of(item.zone || "");
+  const air = airUsdOf(item);
+  const added: string[] = [];
+  if (air != null) {
+    if (air >= AIR_WIDE_USD) added.push("aire amplio");
+    else if (air >= AIR_OK_USD) added.push("aire");
+    else if (air < 0) added.push("sin aire");
+  }
+  if (kept.includes("para reciclar") && kept.includes("edificio ok") && !kept.includes("tesis")) {
+    added.push("tesis");
+  }
+  if (item.piso === 0 && !kept.includes("planta baja")) added.push("planta baja");
+  for (const t of added) {
+    score += FLIP_TAGS[t];
+    kept.push(t);
+  }
+  return {
+    ...item,
+    score,
+    tags: kept,
+    air_usd: air,
+    exit_usd_m2: exitM2,
+    reno_usd_m2: RENO_USD_M2,
+  };
+}
+
+export function flipKeep(item: Pick<Listing, "active" | "area" | "expensas_ars" | "tags">): boolean {
+  if (!item.active) return true;
+  if (item.area == null) return false;
+  if (item.expensas_ars != null && item.expensas_ars > EXPENSAS_LOUD_ARS) return false;
+  const tags = item.tags || [];
+  if (tags.includes("metro caro")) return false;
+  if (tags.includes("edificio flojo") || tags.includes("edificio a reciclar")) return false;
+  return true;
 }
 
 const ALLOWED_BARRIOS = [
@@ -231,9 +307,37 @@ export function closingRef(price: number | null, pct = CLOSING_DISCOUNT_PCT): nu
 }
 
 const FRESH_MS = 48 * 60 * 60 * 1000;
+const FIRST_WAVE_MS = 24 * 60 * 60 * 1000;
 export const LOUD_SCORE = 3;
 
+export function markFirstWave(listings: Listing[]): Listing[] {
+  const bySite = new Map<string, number[]>();
+  for (const item of listings) {
+    const t = Date.parse(item.first_seen || "");
+    if (Number.isNaN(t)) continue;
+    const arr = bySite.get(item.site) || [];
+    arr.push(t);
+    bySite.set(item.site, arr);
+  }
+  const ends = new Map<string, number>();
+  for (const [site, times] of bySite) {
+    times.sort((a, b) => a - b);
+    const start = times[0];
+    const wave = times.filter((t) => t - start <= FIRST_WAVE_MS);
+    ends.set(site, wave[wave.length - 1]);
+  }
+  return listings.map((item) => {
+    const t = Date.parse(item.first_seen || "");
+    const end = ends.get(item.site);
+    return {
+      ...item,
+      from_first_wave: end != null && !Number.isNaN(t) && t <= end,
+    };
+  });
+}
+
 export function isNew(item: Listing, now = Date.now()): boolean {
+  if (item.from_first_wave) return false;
   if (!item.first_seen || !item.active) return false;
   const t = Date.parse(item.first_seen);
   if (Number.isNaN(t)) return false;

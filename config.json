@@ -5,10 +5,10 @@
     "min_price_usd": 20000,
     "min_area_m2": 50,
     "max_ambientes": 3,
-    "include_unknown_area": true,
+    "include_unknown_area": false,
     "require_balcon": true,
     "include_unknown_balcon": true,
-    "max_expensas_ars": null,
+    "max_expensas_ars": 380000,
     "allowed_barrios": [
       "recoleta",
       "barrio norte",
@@ -22,7 +22,11 @@
       "pozo",
       "en construccion",
       "en cuotas",
-      "cuotas desde"
+      "cuotas desde",
+      "edificio a reciclar",
+      "edificio para reciclar",
+      "edificio en mal estado",
+      "edificio a demoler"
     ],
     "reject_barrios": [
       "tigre",
@@ -55,10 +59,24 @@
     ]
   },
   "heartbeat": false,
-  "notify_loud_min_score": 2,
+  "notify_loud_min_score": 3,
   "notify_loud_drop_pct": 5,
   "alert_top_n": 10,
   "median_min_n": 8,
+  "value_cheap_pct": -8,
+  "value_steal_pct": -15,
+  "value_rich_pct": 20,
+  "expensas_high_ars": 300000,
+  "expensas_loud_ars": 380000,
+  "reno_usd_m2": 250,
+  "air_ok_usd": 25000,
+  "air_wide_usd": 40000,
+  "exit_usd_m2": {
+    "Recoleta": 2750,
+    "Barrio Norte": 2750,
+    "Botánico": 3000,
+    "Palermo Chico": 3600
+  },
   "closing_discount_pct": 5,
   "closing_discount_source": "promedio CABA abril 2026, CEMA / RE/MAX / Reporte Inmobiliario",
   "signals": [
@@ -75,19 +93,28 @@
         "palacete",
         "art deco",
         "art nouveau",
-        "casa chorizo"
+        "casa chorizo",
+        "techos altos",
+        "molduras",
+        "pinotea",
+        "casona"
       ]
     },
     {
       "id": "reciclar",
       "label": "para reciclar",
       "weight": 2,
-      "where": "title",
+      "where": "any",
       "keywords": [
         "para reciclar",
         "a reciclar",
         "para reformar",
-        "a reformar"
+        "a reformar",
+        "a refaccionar",
+        "para refaccionar",
+        "para actualizar",
+        "sin actualizar",
+        "a restaurar"
       ]
     },
     {
@@ -106,6 +133,18 @@
       ]
     },
     {
+      "id": "ya_hecho",
+      "label": "ya hecho",
+      "weight": -2,
+      "where": "any",
+      "keywords": [
+        "reciclado a nuevo",
+        "a estrenar",
+        "listo para entrar",
+        "listo para vivir"
+      ]
+    },
+    {
       "id": "edificio_malo",
       "label": "edificio flojo",
       "weight": -2,
@@ -121,21 +160,32 @@
   "delay_seconds": [3, 6],
   "sources": [
     {"site": "argenprop", "name": "Recoleta", "zone": "Recoleta", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/recoleta/dolares-hasta-140000", "aliases": ["recoleta"]},
+    {"site": "argenprop", "name": "Recoleta 2 amb", "zone": "Recoleta", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/recoleta/2-ambientes/dolares-hasta-140000", "aliases": ["recoleta"]},
+    {"site": "argenprop", "name": "Recoleta 3 amb", "zone": "Recoleta", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/recoleta/3-ambientes/dolares-hasta-140000", "aliases": ["recoleta"]},
     {"site": "argenprop", "name": "Barrio Norte", "zone": "Barrio Norte", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/dolares-hasta-140000", "aliases": ["barrio norte"]},
+    {"site": "argenprop", "name": "Barrio Norte 2 amb", "zone": "Barrio Norte", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/2-ambientes/dolares-hasta-140000", "aliases": ["barrio norte"]},
+    {"site": "argenprop", "name": "Barrio Norte 3 amb", "zone": "Barrio Norte", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/barrio-norte/3-ambientes/dolares-hasta-140000", "aliases": ["barrio norte"]},
     {"site": "argenprop", "name": "Botánico", "zone": "Botánico", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/botanico/dolares-hasta-140000", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
+    {"site": "argenprop", "name": "Botánico 2 amb", "zone": "Botánico", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/botanico/2-ambientes/dolares-hasta-140000", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
     {"site": "argenprop", "name": "Palermo Chico", "zone": "Palermo Chico", "pages": 3, "url": "https://www.argenprop.com/departamentos/venta/palermo-chico/dolares-hasta-140000", "aliases": ["palermo chico"]},
     {"site": "zonaprop", "name": "Recoleta 1 amb ≤80k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-1-ambiente-menos-80000-dolar.html", "aliases": ["recoleta"]},
     {"site": "zonaprop", "name": "Recoleta 1 amb >80k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-1-ambiente-mas-80000-dolar.html", "aliases": ["recoleta"]},
     {"site": "zonaprop", "name": "Recoleta 2 amb ≤100k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-2-ambientes-menos-100000-dolar.html", "aliases": ["recoleta"]},
     {"site": "zonaprop", "name": "Recoleta 2 amb >100k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-2-ambientes-mas-100000-dolar.html", "aliases": ["recoleta"]},
-    {"site": "zonaprop", "name": "Recoleta 3 amb", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-3-ambientes-menos-140000-dolar.html", "aliases": ["recoleta"]},
+    {"site": "zonaprop", "name": "Recoleta 3 amb ≤110k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-3-ambientes-menos-110000-dolar.html", "aliases": ["recoleta"]},
+    {"site": "zonaprop", "name": "Recoleta 3 amb >110k", "zone": "Recoleta", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-recoleta-con-balcon-3-ambientes-mas-110000-dolar.html", "aliases": ["recoleta"]},
     {"site": "zonaprop", "name": "Barrio Norte 1 amb ≤110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-1-ambiente-menos-110000-dolar.html", "aliases": ["barrio norte"]},
     {"site": "zonaprop", "name": "Barrio Norte 1 amb >110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-1-ambiente-mas-110000-dolar.html", "aliases": ["barrio norte"]},
     {"site": "zonaprop", "name": "Barrio Norte 2 amb ≤110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-2-ambientes-menos-110000-dolar.html", "aliases": ["barrio norte"]},
     {"site": "zonaprop", "name": "Barrio Norte 2 amb >110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-2-ambientes-mas-110000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Barrio Norte 3 amb", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-3-ambientes-menos-140000-dolar.html", "aliases": ["barrio norte"]},
-    {"site": "zonaprop", "name": "Botánico", "zone": "Botánico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-hasta-3-ambientes-menos-140000-dolar.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
-    {"site": "zonaprop", "name": "Palermo Chico", "zone": "Palermo Chico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-hasta-3-ambientes-menos-140000-dolar.html", "aliases": ["palermo chico"]},
+    {"site": "zonaprop", "name": "Barrio Norte 3 amb ≤110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-3-ambientes-menos-110000-dolar.html", "aliases": ["barrio norte"]},
+    {"site": "zonaprop", "name": "Barrio Norte 3 amb >110k", "zone": "Barrio Norte", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-barrio-norte-con-balcon-3-ambientes-mas-110000-dolar.html", "aliases": ["barrio norte"]},
+    {"site": "zonaprop", "name": "Botánico 1 amb", "zone": "Botánico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-1-ambiente-menos-140000-dolar.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
+    {"site": "zonaprop", "name": "Botánico 2 amb", "zone": "Botánico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-2-ambientes-menos-140000-dolar.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
+    {"site": "zonaprop", "name": "Botánico 3 amb", "zone": "Botánico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-botanico-palermo-con-balcon-3-ambientes-menos-140000-dolar.html", "aliases": ["botanico", "palermo botanico", "jardin botanico"]},
+    {"site": "zonaprop", "name": "Palermo Chico 1 amb", "zone": "Palermo Chico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-1-ambiente-menos-140000-dolar.html", "aliases": ["palermo chico"]},
+    {"site": "zonaprop", "name": "Palermo Chico 2 amb", "zone": "Palermo Chico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-2-ambientes-menos-140000-dolar.html", "aliases": ["palermo chico"]},
+    {"site": "zonaprop", "name": "Palermo Chico 3 amb", "zone": "Palermo Chico", "pages": 5, "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-3-ambientes-menos-140000-dolar.html", "aliases": ["palermo chico"]},
     {"site": "mercadolibre", "name": "Recoleta 1 amb", "zone": "Recoleta", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/recoleta/", "aliases": ["recoleta"]},
     {"site": "mercadolibre", "name": "Recoleta 2 amb", "zone": "Recoleta", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/recoleta/", "aliases": ["recoleta"]},
     {"site": "mercadolibre", "name": "Recoleta 3 amb", "zone": "Recoleta", "pages": 1, "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/recoleta/", "aliases": ["recoleta"]},

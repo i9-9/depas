@@ -1,4 +1,4 @@
-import { GUSTO_USD, type Listing, type RawListing, type Verdict } from "@/lib/listings";
+import { GUSTO_USD, RENO_USD_M2, type Listing, type RawListing, type Verdict } from "@/lib/listings";
 
 const SAY: Record<string, string> = {
   "de época": "es de época",
@@ -13,6 +13,11 @@ const SAY: Record<string, string> = {
   "metro caro": "el metro está caro para el barrio",
   "expensas altas": "las expensas son altas",
   "expensas muy altas": "las expensas son muy altas",
+  aire: "tiene aire para darlo vuelta",
+  "aire amplio": "tiene aire amplio para darlo vuelta",
+  "sin aire": "no tiene aire para la obra",
+  "ya hecho": "ya está reciclado o a estrenar",
+  tesis: "es el combo: buen edificio y unidad a reciclar",
   "cumple barrio, metros y balcón": "pasa barrio, metros y balcón; no hay más señales",
 };
 
@@ -38,7 +43,9 @@ function say(tag: string): string {
   return SAY[tag] || tag;
 }
 
-export function verdictOf(item: Pick<Listing, "tags" | "price" | "photo" | "expensas_ars" | "piso" | "area"> | RawListing): Verdict {
+export function verdictOf(
+  item: Pick<Listing, "tags" | "price" | "photo" | "expensas_ars" | "piso" | "area" | "air_usd" | "exit_usd_m2" | "reno_usd_m2" | "zone"> | RawListing,
+): Verdict {
   const tags = (item.tags || []).filter(Boolean);
   const entra: string[] = [];
   const resta: string[] = [];
@@ -55,7 +62,10 @@ export function verdictOf(item: Pick<Listing, "tags" | "price" | "photo" | "expe
       t === "edificio a reciclar" ||
       t === "metro caro" ||
       t === "expensas altas" ||
-      t === "expensas muy altas"
+      t === "expensas muy altas" ||
+      t === "sin aire" ||
+      t === "ya hecho" ||
+      t === "planta baja"
     ) {
       resta.push(say(t));
     } else {
@@ -72,7 +82,17 @@ export function verdictOf(item: Pick<Listing, "tags" | "price" | "photo" | "expe
   if (entra.length) parts.push(`A favor: ${joinEs(entra)}.`);
   if (resta.length) parts.push(`En contra: ${joinEs(resta)}.`);
   if (falta.length) parts.push(`El aviso no dice: ${joinEs(falta)}.`);
+  const air = airLine(item);
+  if (air) parts.push(air);
   return { entra, resta, falta, text: parts.join(" ") };
+}
+
+export function airLine(
+  item: Pick<Listing, "air_usd" | "exit_usd_m2" | "reno_usd_m2" | "zone"> | RawListing,
+): string | null {
+  if (item.air_usd == null || item.exit_usd_m2 == null || !item.zone) return null;
+  const reno = item.reno_usd_m2 ?? RENO_USD_M2;
+  return `Salida de referencia ${fmtUsd(item.exit_usd_m2)}/m² en ${item.zone}; obra de screening ${fmtUsd(reno)}/m²; aire ${fmtUsd(item.air_usd)}.`;
 }
 
 export function medianLine(item: Listing): string | null {

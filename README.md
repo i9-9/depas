@@ -4,10 +4,10 @@ Corre en GitHub Actions (gratis), 5 veces por día, y te manda por Telegram los 
 
 Filtros actuales (`config.json`): venta · con balcón · Recoleta, Barrio Norte, Botánico, Palermo Chico · hasta 3 ambientes · mínimo 50 m² · precio entre USD 20.000 y 140.000 (gusto 125.000).
 
-Criterio (no todo es excluyente):
+Criterio (flip: buen edificio, unidad a reciclar, precio con aire):
 
-- **Corta** (si no entra, no avisa): **balcón**, ambientes, m², techo de precio, y **zona**. Tiene que nombrar Recoleta / Barrio Norte / Botánico / Palermo Chico. Se descartan pozo y cuotas (`reject_text`, sobre todo el aviso), otros barrios (`reject_barrios`: Tigre, Once, Congreso, etc., solo dirección/URL, no la descripción) y otras ciudades (`reject_cities`: Rosario, Echesortu, General Paz, etc., en título/dirección/URL). Av. Santa Fe y Av. General Paz en CABA no se tocan.
-- **Suma** (ordena y etiqueta, no descarta): de época (mejor), “para reciclar” en el título, edificio en buen estado. El precio viene después: 125k es el gusto; un poco más entra con etiqueta `sobre presupuesto` y baja un poco el ranking. Un de época a 132k sale antes que un genérico a 108k.
+- **Corta** (si no entra, no avisa): **balcón**, ambientes, **m² publicados** (sin metros no hay deal), techo de precio, expensas ≥ $380.000 si la card las trae, y **zona**. Tiene que nombrar Recoleta / Barrio Norte / Botánico / Palermo Chico. Se descartan pozo y cuotas, **edificio a reciclar / mal estado / a demoler**, otros barrios (`reject_barrios`: Tigre, Once, Congreso, etc., solo dirección/URL) y otras ciudades (`reject_cities`). Después de las medianas se corta también el **metro caro** (≥+20% vs este pool). Av. Santa Fe y Av. General Paz en CABA no se tocan.
+- **Suma** (ordena y etiqueta): de época, “para reciclar” en la card (título o texto), edificio en buen estado, **aire** (salida de referencia del barrio − precio − obra de screening USD 250/m²), y el combo edificio+unidad. Resta: unidad ya hecha / a estrenar, planta baja, metro/expensas altos, sin aire. 125k es el gusto; un poco más entra con `sobre presupuesto`. El ranking persigue aire, no avisos simpáticos. El aire es screening, no P&L.
 - **Un aviso por depto** dentro del mismo portal: si el mismo (calle + altura + precio + m²) sale en Recoleta y Barrio Norte, queda uno. Si no hay dirección con número, no se agrupa.
 
 ## Setup (una sola vez, ~15 minutos)
@@ -44,17 +44,17 @@ Para fijar el candidato a mano: `{ "id": "zonaprop:…", "manual": true, "note":
 ## Cambiar filtros
 
 Editá `config.json`: `max_price_usd` (gusto), `max_price_usd_hard` (corte), `min_area_m2`, `max_ambientes`, `max_expensas_ars` (null = sin tope; sin dato de expensas el aviso entra), y la lista `sources`. Cada fuente tiene `pages` (default 3). El tope lo marca robots.txt: Zonaprop 5, Argenprop 3, Mercado Libre 1 (`/*_Desde_` está bloqueado). El código rechaza un valor más alto. Si un barrio satura esas páginas, no se sube el tope: se parte en más URLs (ambientes o tramo de precio), cada una con su `zone` (el barrio, para medianas y dados de baja).
-`include_unknown_area: true` te avisa también de los avisos que no publican m² (así no se te escapa ninguno).
-Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pesos. No filtran; si el portal no lo escribe en el listado, el aviso igual entra y vos lo juzgás por las fotos.
+`include_unknown_area: false`: sin m² no entra. `max_expensas_ars: 380000` corta expensas disparadas; sin dato de expensas el aviso igual entra.
+Las preferencias (época, reciclar, edificio, ya hecho) están en `signals`. Reciclar mira título y texto de la card. `exit_usd_m2` / `reno_usd_m2` / `air_ok_usd` / `air_wide_usd` arman el aire (Recoleta y Barrio Norte 2750, Botánico 3000, Palermo Chico 3600; obra 250 USD/m²).
 `heartbeat: false` (default): si lo prendes, la primera corrida del día (08:17 ART / 11 UTC) avisa por Telegram, siempre silencioso, cuando no hubo novedades, con la cantidad de avisos activos.
-`notify_loud_min_score` (2) y `notify_loud_drop_pct` (5): por debajo, Telegram manda el aviso con `disable_notification` (sin sonido). Score alto o una baja de al menos ese % suenan.
+`notify_loud_min_score` (3) y `notify_loud_drop_pct` (5): por debajo, Telegram manda el aviso con `disable_notification` (sin sonido). Época u otra señal fuerte, o una baja de al menos ese %, suenan. Un metro barato solo no alcanza para pitar.
 `alert_top_n` (10): si baja el precio de uno de los N primeros del ranking (score, después precio), Telegram avisa **con sonido** y etiqueta `top 10`. `0` apaga solo esa prioridad; el resto de bajas sigue llegando.
 **“Bajó” no lo marca el portal.** Guardamos el USD de la **card del listado** (no entramos al aviso) y, en la corrida siguiente, si el número cambió, actualizamos ficha e historial. Si la card trae precio tachado o “hasta USD 140.000” del filtro, se ignora. El portal puede mostrar otro número en la ficha interna; el nuestro es el de la card.
 `closing_discount_pct` (5) y `closing_discount_source` alimentan la “referencia de cierre” (no es tasación; promedio CABA). La mediana de USD/m² se calcula sobre tus avisos activos del mismo barrio y solo se muestra si hay al menos `median_min_n` (8).
 
 ## Cosas a tener en cuenta
 
-- **Argenprop desde Actions**: AWS WAF bloquea las IPs de GitHub (405 / challenge). El workflow **salta Argenprop** (solo log, sin Telegram de error) y no toca sus archivos. Zonaprop y Mercado Libre siguen en Actions. Argenprop se corre en la Mac (abajo).
+- **Argenprop desde Actions**: no se puede. GitHub Actions sale por IPs de datacenter; Argenprop (AWS WAF) las bloquea con 405/challenge. No hay setting de Actions que cambie eso, y no usamos proxies. El workflow **salta Argenprop** y no toca sus archivos. Zonaprop y Mercado Libre siguen en Actions. Argenprop se corre en **esta Mac** (IP residencial): launchd o `./scripts/buscar-argenprop-local.sh`.
 - **Estado separado**: `state/seen-zonaprop.json` + `web/data/listings-zonaprop.json` y lo mismo para Mercado Libre los escribe Actions. `state/seen-argenprop.json` + `web/data/listings-argenprop.json` los escribe la Mac. Así no se pisan.
 - **Commit solo si cambió algo**: aviso nuevo, baja de precio, aviso dado de baja, warning de cobertura (máx. semanal) o el resumen semanal (`state/weekly.json`, los lunes). Una corrida sin novedades no genera commit.
 - **Resumen semanal**: los lunes en la primera corrida (08:17 ART) Telegram manda, silencioso, activos / nuevos / bajas / mediana USD/m² por barrio y los 3 que más bajaron. Si no hay snapshot previo, la mediana va sin variación.
@@ -67,11 +67,12 @@ Las preferencias (época, reciclar, edificio) están en `signals`: keywords y pe
 - **Sin orden por más recientes**: Zonaprop bloquea `*-orden-*` salvo `*-orden-precio-ascendente.html`. Argenprop bloquea `/*?*orden-` salvo `?orden-menorprecio`. No usamos ninguno de los dos (el de precio mezclaría el recorte y, en Argenprop, no se puede juntar con `?pagina-N`).
 - **Cobertura**: si en la última página *permitida* de una fuente todavía hay avisos que pasan filtros y nunca vimos, se loguea un warning y Telegram avisa como máximo una vez por semana (`state/*/meta.coverage_week`) con el texto «esta fuente puede tener avisos fuera de las páginas permitidas; conviene partirla en más URLs».
 - **Partir fuentes saturadas** (Zonaprop, slugs verificados en el portal; el `<title>` conservó barrio, balcón y el filtro):
-  - Recoleta: 1 amb ≤80k / 1 amb >80k / 2 amb ≤100k / 2 amb >100k / 3 amb ≤140k.
-  - Barrio Norte: 1 amb ≤110k / 1 amb >110k / 2 amb ≤110k / 2 amb >110k / 3 amb ≤140k.
-  - Botánico y Palermo Chico entran en 5 páginas con `hasta-3-ambientes-menos-140000-dolar`.
+  - Recoleta: 1 amb ≤80k / 1 amb >80k / 2 amb ≤100k / 2 amb >100k / 3 amb ≤110k / 3 amb >110k.
+  - Barrio Norte: 1 amb ≤110k / 1 amb >110k / 2 amb ≤110k / 2 amb >110k / 3 amb ≤110k / 3 amb >110k.
+  - Botánico y Palermo Chico: 1 / 2 / 3 amb, cada uno con `menos-140000` (conteos verificados entran en 5 páginas).
   - Los tramos `mas-X` no pueden llevar también `menos-140000`: esa combinación redirige y **tira el balcón**. El techo de 140k queda en `matches()`. Esos tramos altos pueden seguir saturando; el warning de cobertura lo dice.
-- **Argenprop**: una URL por barrio (`/dolares-hasta-140000`, sin orden). No se partió: esta ronda el WAF contestó 202 y no se pudo comprobar un slug por ambientes o precio.
+- **Argenprop**: URL general por barrio (`/dolares-hasta-140000`) más 2 y 3 ambientes en Recoleta, Barrio Norte y Botánico 2 amb (slugs verificados). 1 ambiente no tiene slug propio (redirige al listado general). Palermo Chico no se partió: el slug de 2 amb no devolvió título usable.
+- **Un depto, una fila**: `place_key` junta el mismo aviso entre portales (calle + m² ±5 + ambientes). En Telegram el segundo portal no vuelve a gritar. En la web se ve una fila con “también en …”.
 - **Mercado Libre**: 1 página por URL (robots bloquea `_Desde_`). Partido por barrio + 1/2/3 ambientes. Títulos verificados 2026-10-10 (`Departamentos en Venta en {barrio}, Capital Federal, N ambiente(s)`). Sin redirect. No hay filtro de precio usable (`_PriceRange_` está bloqueado). El techo de 140k queda en `matches()`. Las cards de emprendimiento (`EMPRENDIMIENTO` / `Desde US$`) se descartan. Precio en la card: `US$ 110.000`. m²: `cubiertos`.
 - **Fecha de publicación del portal**: las cards de listado de Zonaprop (fixture real) no traen “publicado hace X”. No se parsea. `días` es desde `first_seen` del buscador.
 - **Campos extra verificados**: expensas ARS en Zonaprop (`$ 350.000 Expensas` en la card). Piso/cochera solo si el texto de la card lo dice con un patrón claro (`7° piso`, `planta baja`, `cochera` / `sin cochera`). Antigüedad: `N años` o “a estrenar”.
