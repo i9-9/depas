@@ -545,7 +545,7 @@ function FilterFields({
           <option value="price-desc">El más caro</option>
           <option value="m2-asc">El metro más barato</option>
           <option value="vs-median">Más barato que el barrio</option>
-          <option value="air">Más aire</option>
+          <option value="air">El que más aire tiene</option>
         </select>
       </Field>
       <div className="col-span-12 flex flex-wrap items-end gap-x-5 lg:col-span-8">

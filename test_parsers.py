@@ -1166,8 +1166,9 @@ def test_flip_cuts_and_air():
         "expensas_ars": 1,
         "piso": 3,
     })
-    assert "aire amplio" in " ".join(v["entra"]) or "aire amplio para darlo vuelta" in v["text"]
-    assert "Salida de referencia USD 2.750/m² en Barrio Norte" in v["text"]
+    assert "bastante margen" in " ".join(v["entra"]) or "bastante margen" in v["text"]
+    assert "metro de referencia de Barrio Norte" in v["text"]
+    assert "USD 2.750" in v["text"]
 
 
 def test_coverage_last_page_unseen():

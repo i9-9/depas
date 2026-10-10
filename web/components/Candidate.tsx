@@ -113,8 +113,10 @@ export function Candidate({
             </summary>
             <p className="mt-2 leading-relaxed text-ink">
               Buscamos un flip: edificio que no haya que tocar, unidad para
-              reciclar, cuadra que pague la salida del barrio, y precio con
-              aire. Lo que no se arregla con obra (edificio flojo, metro caro,
+              reciclar, cuadra que pague, y aire. El aire es el margen que
+              quedaría si lo comprás a este precio, le hacés una obra liviana
+              y lo vendés al metro de referencia del barrio. No es un P&L.
+              Lo que no se arregla con obra (edificio flojo, metro caro,
               expensas disparadas, sin metros) no entra. Una buena unidad en
               una cuadra floja no es el elegido. El resto está en Todos.
             </p>

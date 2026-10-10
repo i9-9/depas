@@ -548,9 +548,9 @@ _VERDICT_SAY = {
     "metro caro": "el metro está caro para el barrio",
     "expensas altas": "las expensas son altas",
     "expensas muy altas": "las expensas son muy altas",
-    "aire": "tiene aire para darlo vuelta",
-    "aire amplio": "tiene aire amplio para darlo vuelta",
-    "sin aire": "no tiene aire para la obra",
+    "aire": "queda margen para comprarlo, reformarlo y venderlo",
+    "aire amplio": "queda bastante margen para comprarlo, reformarlo y venderlo",
+    "sin aire": "al precio de hoy no alcanza para la obra y la reventa",
     "ya hecho": "ya está reciclado o a estrenar",
     "tesis": "es el combo: buen edificio y unidad a reciclar",
     "zona floja": "la cuadra no paga la salida del barrio",
@@ -621,10 +621,16 @@ def verdict(item: dict, cfg: dict | None = None) -> dict:
     reno = item.get("reno_usd_m2")
     zone = item.get("zone") or ""
     if air is not None and exit_m2 and zone:
+        reno_n = int(reno or DEFAULT_RENO_USD_M2)
+        leftover = (
+            f"quedarían USD {_fmt_int(int(air))}"
+            if air >= 0
+            else f"faltarían USD {_fmt_int(int(abs(air)))}"
+        )
         parts.append(
-            f"Salida de referencia USD {_fmt_int(int(exit_m2))}/m² en {zone}; "
-            f"obra de screening USD {_fmt_int(int(reno or DEFAULT_RENO_USD_M2))}/m²; "
-            f"aire USD {_fmt_int(int(air))}."
+            f"Aire: {leftover} si lo comprás a este precio, le hacés una obra liviana "
+            f"(USD {_fmt_int(reno_n)}/m²) y lo vendés al metro de referencia de {zone} "
+            f"(USD {_fmt_int(int(exit_m2))}). No es ganancia neta: no cuenta escribanía ni el cierre real."
         )
     return {"entra": entra, "resta": resta, "falta": falta, "text": " ".join(parts)}
 

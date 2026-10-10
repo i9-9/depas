@@ -6,7 +6,10 @@ export function specsOf(item: Listing): Spec[] {
   const rows: Spec[] = [];
   if (item.area != null) rows.push({ label: "Metros", value: `${item.area.toLocaleString("es-AR")} m²` });
   if (item.air_usd != null) {
-    rows.push({ label: "Aire", value: `USD ${item.air_usd.toLocaleString("es-AR")}` });
+    rows.push({
+      label: "Aire",
+      value: `${item.air_usd >= 0 ? "" : "−"}USD ${Math.abs(item.air_usd).toLocaleString("es-AR")}`,
+    });
   }
   if (item.ambientes != null) rows.push({ label: "Ambientes", value: String(item.ambientes) });
   if (item.zone) rows.push({ label: "Barrio", value: item.zone });

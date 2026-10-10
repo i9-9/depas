@@ -13,9 +13,9 @@ const SAY: Record<string, string> = {
   "metro caro": "el metro está caro para el barrio",
   "expensas altas": "las expensas son altas",
   "expensas muy altas": "las expensas son muy altas",
-  aire: "tiene aire para darlo vuelta",
-  "aire amplio": "tiene aire amplio para darlo vuelta",
-  "sin aire": "no tiene aire para la obra",
+  aire: "queda margen para comprarlo, reformarlo y venderlo",
+  "aire amplio": "queda bastante margen para comprarlo, reformarlo y venderlo",
+  "sin aire": "al precio de hoy no alcanza para la obra y la reventa",
   "ya hecho": "ya está reciclado o a estrenar",
   tesis: "es el combo: buen edificio y unidad a reciclar",
   "zona floja": "la cuadra no paga la salida del barrio",
@@ -94,7 +94,15 @@ export function airLine(
 ): string | null {
   if (item.air_usd == null || item.exit_usd_m2 == null || !item.zone) return null;
   const reno = item.reno_usd_m2 ?? RENO_USD_M2;
-  return `Salida de referencia ${fmtUsd(item.exit_usd_m2)}/m² en ${item.zone}; obra de screening ${fmtUsd(reno)}/m²; aire ${fmtUsd(item.air_usd)}.`;
+  const leftover =
+    item.air_usd >= 0
+      ? `quedarían ${fmtUsd(item.air_usd)}`
+      : `faltarían ${fmtUsd(Math.abs(item.air_usd))}`;
+  return (
+    `Aire: ${leftover} si lo comprás a este precio, le hacés una obra liviana ` +
+    `(${fmtUsd(reno)}/m²) y lo vendés al metro de referencia de ${item.zone} ` +
+    `(${fmtUsd(item.exit_usd_m2)}). No es ganancia neta: no cuenta escribanía ni el cierre real.`
+  );
 }
 
 export function medianLine(item: Listing): string | null {
