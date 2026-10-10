@@ -1,5 +1,11 @@
 {
  "listings": {
+  "zonaprop:47694195": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 110000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dpto-3-ambientes-contrafrente-excelente-ubicacion-47694195.html"
+  },
   "zonaprop:50396868": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "last_seen": "2026-10-10T01:31:10+00:00",
@@ -50,7 +56,7 @@
   },
   "zonaprop:56662315": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 115000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-dorm.-en-venta-en-barrio-norte.-muy-56662315.html"
   },
@@ -62,13 +68,13 @@
   },
   "zonaprop:57384223": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 105000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-mono-con-balcon-amenities-y-seguridad-en-palermo-chico-57384223.html"
   },
   "zonaprop:57416646": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 129000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-divino-2-amb-en-barrio-norte-con-balcon-y-terraza-57416646.html"
   },
@@ -80,7 +86,7 @@
   },
   "zonaprop:57815465": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-barrio-norte-con-balcon-reciclado-a-57815465.html"
   },
@@ -108,6 +114,12 @@
    "price": 132800,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-permuta-departamento-2-dorm.-con-amenities-58476283.html"
   },
+  "zonaprop:58587120": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-tipo-loft-divisible-a-estrenar-en-58587120.html"
+  },
   "zonaprop:58602114": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "last_seen": "2026-10-10T01:31:10+00:00",
@@ -116,7 +128,7 @@
   },
   "zonaprop:58653601": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 129000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-retiro-58653601.html"
   },
@@ -134,7 +146,7 @@
   },
   "zonaprop:58788346": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 132000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-2-amb-con-balcon-aterrazado-palermo-58788346.html"
   },
@@ -146,19 +158,19 @@
   },
   "zonaprop:58950172": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-apto-profesional-58950172.html"
   },
   "zonaprop:58992764": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 125000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-en-venta-barrio-norte-2-amb-al-frente-con-balcon-58992764.html"
   },
   "zonaprop:59050824": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 138000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-barrio-norte-59050824.html"
   },
@@ -182,9 +194,15 @@
   },
   "zonaprop:59353042": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 128000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-56-27-m-sup2--gran-monoambiente-divisible-pueyrredon-59353042.html"
+  },
+  "zonaprop:59388214": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-en-palermo-59388214.html"
   },
   "zonaprop:59486370": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -200,7 +218,7 @@
   },
   "zonaprop:59566683": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-a-estrenar-full-amenities-av-corrientes-1900-59566683.html"
   },
@@ -212,25 +230,31 @@
   },
   "zonaprop:59574708": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 138500,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-uriburu-y-juncal-59574708.html"
   },
   "zonaprop:59582893": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 139500,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-2-ambientes-parrilla-y-terraza-cochera-59582893.html"
   },
+  "zonaprop:59618004": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-pisito-frances-san-martin-y-m.-t-de-alvear-59618004.html"
+  },
   "zonaprop:59622727": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 122000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-en-palermo-chico-59622727.html"
   },
   "zonaprop:59630154": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-c-dep-en-pueyrredon-al-1000-impecable-balcon-apto-59630154.html"
   },
@@ -240,21 +264,39 @@
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-a-la-venta-en-mantra-catamarca-2-dorm.-59643349.html"
   },
+  "zonaprop:59664607": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-amb-con-patio-apto-profesional-59664607.html"
+  },
+  "zonaprop:59717289": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-1-dormitorio-1-bano-recoleta-59717289.html"
+  },
+  "zonaprop:59771456": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 118000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-c-balcon-amoblado-once-59771456.html"
+  },
   "zonaprop:59807839": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 139000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-dependencia-balcon-corrido-y-vista-59807839.html"
   },
   "zonaprop:59914111": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-2-ambientes-palermo-chico-59914111.html"
   },
   "zonaprop:59950051": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 128000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-recoleta-3-amb.-c-balcon-al-59950051.html"
   },
@@ -266,7 +308,7 @@
   },
   "zonaprop:60057359": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-palermo-chico!-60057359.html"
   },
@@ -278,13 +320,13 @@
   },
   "zonaprop:60067830": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-ambientes-con-dependencia-o-60067830.html"
   },
   "zonaprop:60095623": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 109000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-2-ambientes-con-escritorio-barrio-norte-60095623.html"
   },
@@ -294,6 +336,12 @@
    "price": 104900,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-en-venta-tres-ambientes-a-la-calle-con-balcon-centro-60117268.html"
   },
+  "zonaprop:60118859": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 138500,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-piso-alto-uriburu-y-60118859.html"
+  },
   "zonaprop:60133606": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "last_seen": "2026-10-10T01:31:10+00:00",
@@ -302,37 +350,43 @@
   },
   "zonaprop:60174112": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 117000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semipiso-de-3-ambientes-con-balcon-al-frente-barrio-60174112.html"
   },
+  "zonaprop:60183974": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-balcon-aterrazado-60183974.html"
+  },
   "zonaprop:60196714": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dpto-3-ambientes-en-barrio-norte-silencioso-y-luz-60196714.html"
   },
   "zonaprop:60196715": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dpto-3-ambientes-en-barrio-norte-silencioso-y-luz-60196715.html"
   },
   "zonaprop:60202639": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-austria-y-juncal-60202639.html"
   },
   "zonaprop:60206397": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 125000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-barrio-norte-60206397.html"
   },
   "zonaprop:60209466": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-av-cervino-y-av-scalabrini-ortiz-palermo-60209466.html"
   },
@@ -354,6 +408,12 @@
    "price": 106700,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dos-amb-a-estrenar-con-parrilla-60249285.html"
   },
+  "zonaprop:60262671": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 110000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-racionalista-con-balcon-en-recoleta.-60262671.html"
+  },
   "zonaprop:60265084": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "last_seen": "2026-10-10T01:31:10+00:00",
@@ -362,7 +422,7 @@
   },
   "zonaprop:60266140": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 125000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-monoambiente-divisible-en-venta-en-barrio-norte-60266140.html"
   },
@@ -380,7 +440,7 @@
   },
   "zonaprop:60283321": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 115000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-barrio-norte-2-ambientes-60283321.html"
   },
@@ -392,21 +452,27 @@
   },
   "zonaprop:60293202": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 129900,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-60293202.html"
   },
   "zonaprop:60349574": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-en-venta-barrio-norte-recoleta-piso-11-con-balcon-60349574.html"
   },
   "zonaprop:60351140": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "last_seen": "2026-10-10T01:31:10+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-en-recoleta-60351140.html"
+  },
+  "zonaprop:60378433": {
+   "first_seen": "2026-10-10T01:45:22+00:00",
+   "last_seen": "2026-10-10T01:45:22+00:00",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-botanico-60378433.html"
   },
   "zonaprop:60380185": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -423,6 +489,6 @@
  },
  "meta": {
   "last_error_day": "2026-10-10",
-  "last_run": "2026-10-10T01:31:10+00:00"
+  "last_run": "2026-10-10T01:45:22+00:00"
  }
 }
