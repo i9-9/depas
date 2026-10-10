@@ -1,15 +1,17 @@
 {
- "last_change": "2026-10-10T14:42:59+00:00",
+ "last_change": "2026-10-10T20:41:24+00:00",
  "listings": [
   {
    "active": true,
    "address": "AV CORDOBA Al 1831. Entre Av Callao Y Riobamba, Barrio Norte, Capital Federal",
+   "air_usd": 36000,
    "ambientes": 2,
    "antiguedad_years": null,
    "area": 50.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -26,9 +28,13 @@
      "price": 89000
     }
    ],
-   "score": 0,
+   "reno_usd_m2": 250,
+   "score": 3,
    "site": "mercadolibre",
-   "tags": [],
+   "tags": [
+    "metro barato",
+    "aire"
+   ],
    "title": "Venta De 2 Ambientes Con Patio En Barrio Norte",
    "url": "https://departamento.mercadolibre.com.ar/MLA-1729567163-venta-de-2-ambientes-con-patio-en-barrio-norte-_JM#polycard_client=search-desktop&float_highlight=not_apply&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=25&type=item&tracking_id=8237a24c-4ad8-47f8-8600-9d1e9b5131fd&sid=search",
    "usd_per_m2": null,
@@ -39,12 +45,14 @@
   {
    "active": true,
    "address": "Ayacucho 800, Barrio Norte, Capital Federal",
+   "air_usd": 26000,
    "ambientes": 2,
    "antiguedad_years": null,
    "area": 50.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -61,9 +69,13 @@
      "price": 99000
     }
    ],
-   "score": 0,
+   "reno_usd_m2": 250,
+   "score": 1,
    "site": "mercadolibre",
-   "tags": [],
+   "tags": [
+    "aire",
+    "planta baja"
+   ],
    "title": "En Venta Oficina Planta Baja Barrio Norte 2 Ambientes",
    "url": "https://departamento.mercadolibre.com.ar/MLA-2000597773-en-venta-oficina-planta-baja-barrio-norte-2-ambientes-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=43&type=item&tracking_id=8237a24c-4ad8-47f8-8600-9d1e9b5131fd&sid=search",
    "usd_per_m2": null,
@@ -74,12 +86,14 @@
   {
    "active": true,
    "address": "LUCIO MANSILLA Al 2789. Entre Jaures, Jean Y Anchorena, Barrio Norte, Capital Federal",
+   "air_usd": 45500,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 52.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -96,9 +110,13 @@
      "price": 84500
     }
    ],
-   "score": 0,
+   "reno_usd_m2": 250,
+   "score": 5,
    "site": "mercadolibre",
-   "tags": [],
+   "tags": [
+    "metro muy barato",
+    "aire amplio"
+   ],
    "title": "Depto. - Venta - 3 Amb. - Barrio Norte - Apto Credito.-",
    "url": "https://departamento.mercadolibre.com.ar/MLA-2073922905-depto-venta-3-amb-barrio-norte-apto-credito--_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=39&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
    "usd_per_m2": null,
@@ -109,12 +127,14 @@
   {
    "active": true,
    "address": "Thames Al 2400, Botánico, Capital Federal",
+   "air_usd": 18350,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 55.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 3000,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -131,6 +151,7 @@
      "price": 132900
     }
    ],
+   "reno_usd_m2": 250,
    "score": -1,
    "site": "mercadolibre",
    "tags": [
@@ -146,12 +167,14 @@
   {
    "active": true,
    "address": "Av Cordoba 1332, Barrio Norte, Capital Federal",
+   "air_usd": 51000,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 68.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -168,9 +191,13 @@
      "price": 119000
     }
    ],
-   "score": 0,
+   "reno_usd_m2": 250,
+   "score": 5,
    "site": "mercadolibre",
-   "tags": [],
+   "tags": [
+    "metro muy barato",
+    "aire amplio"
+   ],
    "title": "Depto/oficina - Frente - Edificio Francés · Apto Profesional",
    "url": "https://departamento.mercadolibre.com.ar/MLA-2155184101-deptooficina-frente-edificio-frances-apto-profesional-_JM#polycard_client=search-desktop&float_highlight=recent_publication&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=6&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
    "usd_per_m2": null,
@@ -181,12 +208,14 @@
   {
    "active": true,
    "address": "Ugarteche Al 2800, Botánico, Capital Federal",
+   "air_usd": 21250,
    "ambientes": 2,
    "antiguedad_years": null,
    "area": 55.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 3000,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -203,6 +232,7 @@
      "price": 130000
     }
    ],
+   "reno_usd_m2": 250,
    "score": -1,
    "site": "mercadolibre",
    "tags": [
@@ -218,12 +248,14 @@
   {
    "active": true,
    "address": "Jean Jaures 1100, Barrio Norte, Capital Federal",
+   "air_usd": 20000,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 52.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -240,6 +272,7 @@
      "price": 110000
     }
    ],
+   "reno_usd_m2": 250,
    "score": 0,
    "site": "mercadolibre",
    "tags": [],
@@ -253,12 +286,14 @@
   {
    "active": true,
    "address": "Pueyrredon Al 900, Barrio Norte, Capital Federal",
+   "air_usd": 76000,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 86.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -275,10 +310,13 @@
      "price": 139000
     }
    ],
-   "score": -2,
+   "reno_usd_m2": 250,
+   "score": 3,
    "site": "mercadolibre",
    "tags": [
-    "sobre presupuesto"
+    "sobre presupuesto",
+    "metro muy barato",
+    "aire amplio"
    ],
    "title": "3 Ambientes Con Dependencia, Balcón Corrido Y Vista Abierta  Barrio Norte",
    "url": "https://departamento.mercadolibre.com.ar/MLA-3740194676-3-ambientes-con-dependencia-balcon-corrido-y-vista-abierta-barrio-norte-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=42&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
@@ -288,7 +326,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Al 1000 Venta Departamento En Recoleta, Recoleta",
    "ambientes": 2,
    "antiguedad_years": null,
@@ -299,7 +337,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-10T20:41:24+00:00",
    "id": "mercadolibre:3769356270",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_901154-MLA115951726085_082026-E.webp",
@@ -327,12 +365,14 @@
   {
    "active": true,
    "address": "Pueyrredón 1362, Recoleta, Capital Federal",
+   "air_usd": 17500,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 59.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -349,6 +389,7 @@
      "price": 130000
     }
    ],
+   "reno_usd_m2": 250,
    "score": -1,
    "site": "mercadolibre",
    "tags": [
@@ -399,12 +440,14 @@
   {
    "active": true,
    "address": "Paraguay 3000, Recoleta, Capital Federal",
+   "air_usd": 3000,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 57.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -421,6 +464,7 @@
      "price": 139500
     }
    ],
+   "reno_usd_m2": 250,
    "score": -2,
    "site": "mercadolibre",
    "tags": [
@@ -436,12 +480,14 @@
   {
    "active": true,
    "address": "Jose Maria Gutierrez Al 2700, Barrio Norte, Capital Federal",
+   "air_usd": 6500,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 57.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -458,6 +504,7 @@
      "price": 136000
     }
    ],
+   "reno_usd_m2": 250,
    "score": -1,
    "site": "mercadolibre",
    "tags": [
@@ -473,12 +520,14 @@
   {
    "active": true,
    "address": "Venta Depto Juncal Al 2077. Recoleta Oportunidad!!!! 56m2!!, Recoleta, Capital Federal",
+   "air_usd": 9500,
    "ambientes": 2,
    "antiguedad_years": null,
    "area": 55.0,
    "closing_ref_usd": 121600,
    "cochera": null,
    "days_seen": 0,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T14:42:59+00:00",
@@ -495,6 +544,7 @@
      "price": 128000
     }
    ],
+   "reno_usd_m2": 250,
    "score": -1,
    "site": "mercadolibre",
    "tags": [
@@ -510,12 +560,14 @@
   {
    "active": true,
    "address": "Cabello Al 3900, Botánico, Capital Federal",
+   "air_usd": -1500,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 50.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 3000,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -532,10 +584,12 @@
      "price": 139000
     }
    ],
-   "score": -2,
+   "reno_usd_m2": 250,
+   "score": -4,
    "site": "mercadolibre",
    "tags": [
-    "sobre presupuesto"
+    "sobre presupuesto",
+    "sin aire"
    ],
    "title": "Departamento 3 Amb En Palermo Botanico",
    "url": "https://departamento.mercadolibre.com.ar/MLA-3978587040-departamento-3-amb-en-palermo-botanico-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=4&type=item&tracking_id=27ad8096-b685-4c03-b1be-c7fe14aa385d&sid=search",
@@ -547,12 +601,14 @@
   {
    "active": true,
    "address": "Armenia 2100, Botánico, Capital Federal",
+   "air_usd": 24500,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 50.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 3000,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -569,6 +625,7 @@
      "price": 113000
     }
    ],
+   "reno_usd_m2": 250,
    "score": 0,
    "site": "mercadolibre",
    "tags": [],
@@ -582,12 +639,14 @@
   {
    "active": true,
    "address": "Aguero 1000, Barrio Norte, Capital Federal",
+   "air_usd": 2500,
    "ambientes": 1,
    "antiguedad_years": null,
    "area": 51.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -604,6 +663,7 @@
      "price": 125000
     }
    ],
+   "reno_usd_m2": 250,
    "score": 0,
    "site": "mercadolibre",
    "tags": [],
@@ -617,12 +677,14 @@
   {
    "active": true,
    "address": "Scalabrini Ortiz Al 2300, Botánico, Capital Federal",
+   "air_usd": 21250,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 55.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "exit_usd_m2": 3000,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
@@ -639,6 +701,7 @@
      "price": 130000
     }
    ],
+   "reno_usd_m2": 250,
    "score": -1,
    "site": "mercadolibre",
    "tags": [
