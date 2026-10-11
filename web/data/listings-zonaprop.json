@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-11T16:46:08+00:00",
+ "last_change": "2026-10-11T21:05:45+00:00",
  "listings": [
   {
    "active": false,
@@ -3322,17 +3322,24 @@
   {
    "active": false,
    "address": "Larrea 832",
+   "air_usd": 76125,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 91.0,
+   "area_total": 91.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "decision": "comprar",
+   "exit_usd_m2": 2750,
    "expensas_ars": 350000,
    "expensas_text": "$ 350.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": "2026-10-10T20:41:24+00:00",
    "id": "zonaprop:60051769",
+   "max_offer_usd": 161079,
+   "neto_base_usd": 55249,
+   "neto_hard_usd": 22765,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/05/17/69/720x532/2077173212.jpg",
    "piso": null,
@@ -3344,10 +3351,16 @@
      "price": 140000
     }
    ],
-   "score": -2,
+   "reno_usd_m2": 375,
+   "score": 2,
+   "seventy_offer_usd": 141050,
    "site": "zonaprop",
    "tags": [
-    "sobre presupuesto"
+    "m² sin verificar",
+    "sobre presupuesto",
+    "metro muy barato",
+    "expensas altas",
+    "aire amplio"
    ],
    "title": "Excelente depto de tres ambientes al frente con balcon, muy luminoso Y soleado, reciclado,",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-larrea-y-paraguay-tres-ambientes-con-dependencia-al-60051769.html",
