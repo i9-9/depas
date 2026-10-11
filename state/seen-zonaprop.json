@@ -1162,6 +1162,14 @@
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-c-depencia-balcon-al-frente!-barrio-60393807.html",
    "zone": "Barrio Norte"
+  },
+  "zonaprop:60409929": {
+   "first_seen": "2026-10-11T01:58:51+00:00",
+   "key": "pena 2700|120000|65|2",
+   "place": "pena 2700|65|2",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-o-3-ambientes-balcon-patio-60409929.html",
+   "zone": "Recoleta"
   }
  },
  "meta": {

@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-10T20:41:24+00:00",
+ "last_change": "2026-10-11T01:58:51+00:00",
  "listings": [
   {
    "active": false,
@@ -28,7 +28,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Viamonte y Rodriguez Peña - Unidad 103",
    "air_usd": 28500,
    "ambientes": 1,
@@ -41,7 +41,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:49469771",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/49/46/97/71/720x532/2029738990.jpg",
@@ -93,7 +93,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuénaga 700",
    "air_usd": 110000,
    "ambientes": 3,
@@ -106,7 +106,7 @@
    "expensas_ars": 336000,
    "expensas_text": "$ 336.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:50871263",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/50/87/12/63/720x532/1846874831.jpg",
@@ -153,7 +153,9 @@
    ],
    "score": 0,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "barrio del aviso no coincide"
+   ],
    "title": "departamento tigre residencial",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-tigre-residencial-52875518.html",
    "zone": ""
@@ -177,7 +179,9 @@
    ],
    "score": 0,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "barrio del aviso no coincide"
+   ],
    "title": "hermoso ambientes pasante al frente en congreso",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-hermoso-2-ambientes-pasante-al-frente-en-congreso-53065846.html",
    "zone": ""
@@ -201,13 +205,15 @@
    ],
    "score": 0,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "barrio del aviso no coincide"
+   ],
    "title": "venta departamento dorm. y banos abasto",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-dorm.-y-2-banos-abasto-53716444.html",
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "San Luis 3376",
    "air_usd": 17000,
    "ambientes": 3,
@@ -220,7 +226,7 @@
    "expensas_ars": 175000,
    "expensas_text": "$ 175.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:54370476",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/54/37/04/76/720x532/2075410286.jpg",
@@ -245,7 +251,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Cabrera",
    "air_usd": 20000,
    "ambientes": 1,
@@ -258,7 +264,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:54766947",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/54/76/69/47/720x532/1939944243.jpg",
@@ -285,19 +291,24 @@
   {
    "active": true,
    "address": "Azcuénaga al 700",
-   "air_usd": 22500,
+   "air_usd": 15375,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 57.0,
+   "area_total": 57.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": null,
    "id": "zonaprop:55263580",
+   "max_offer_usd": 101216,
+   "neto_base_usd": 914,
+   "neto_hard_usd": -20287,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/55/26/35/80/720x532/1952294644.jpg",
    "piso": null,
@@ -309,10 +320,13 @@
      "price": 120000
     }
    ],
-   "reno_usd_m2": 250,
+   "reno_usd_m2": 375,
    "score": 0,
+   "seventy_offer_usd": 88350,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "m² sin verificar"
+   ],
    "title": "Excelente departamento de 3 ambientes reciclado, con balcón al frente y patio, ubicado en ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-55263580.html",
    "usd_per_m2": null,
@@ -345,7 +359,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Talcahuano 900",
    "air_usd": 262000,
    "ambientes": 2,
@@ -358,7 +372,7 @@
    "expensas_ars": 232000,
    "expensas_text": "$ 232.000 Expensas",
    "first_seen": "2026-10-10T20:41:24+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:55826316",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/55/82/63/16/720x532/2078190511.jpg",
@@ -509,7 +523,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "ECUADOR",
    "air_usd": 72600,
    "ambientes": 3,
@@ -522,7 +536,7 @@
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:56580351",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/56/58/03/51/720x532/1984525360.jpg",
@@ -568,13 +582,15 @@
    ],
    "score": 0,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "barrio del aviso no coincide"
+   ],
    "title": "venta liniers tres ambientes a estrenar balcon",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-liniers-tres-ambientes-a-estrenar-balcon-56620198.html",
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Junin al 700",
    "air_usd": 50000,
    "ambientes": 3,
@@ -583,7 +599,7 @@
    "expensas_ars": 210000,
    "expensas_text": "$ 210.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:56662315",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/56/66/23/15/720x532/1986746001.jpg",
@@ -690,7 +706,7 @@
    "zone": "Palermo Chico"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paraguay 2500",
    "air_usd": 42000,
    "ambientes": 3,
@@ -703,7 +719,7 @@
    "expensas_ars": 190000,
    "expensas_text": "$ 190.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:57386664",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/38/66/64/720x532/2006935986.jpg",
@@ -733,15 +749,20 @@
   {
    "active": true,
    "address": "French",
-   "air_usd": 33500,
+   "air_usd": 25375,
    "ambientes": 2,
    "area": 65.0,
+   "area_total": 65.0,
+   "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:57416646",
+   "max_offer_usd": 115760,
+   "neto_base_usd": 9520,
+   "neto_hard_usd": -14299,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/41/66/46/720x532/2007681220.jpg",
    "price": 129000,
@@ -751,16 +772,19 @@
      "price": 129000
     }
    ],
-   "reno_usd_m2": 250,
-   "score": 1,
+   "reno_usd_m2": 375,
+   "score": 2,
+   "seventy_offer_usd": 100750,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto",
+    "metro barato",
     "aire"
    ],
    "title": "Divino 2 amb en barrio norte con balcon Y terraza propia. Mucho sol. Departamento al frent",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-divino-2-amb-en-barrio-norte-con-balcon-y-terraza-57416646.html",
-   "zone": "Barrio Norte"
+   "zone": "Recoleta"
   },
   {
    "active": false,
@@ -824,7 +848,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Larrea al 800",
    "air_usd": 15000,
    "ambientes": 3,
@@ -833,7 +857,7 @@
    "expensas_ars": 185000,
    "expensas_text": "$ 185.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:57815465",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/81/54/65/720x532/2035129318.jpg",
@@ -880,7 +904,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Juncal",
    "air_usd": -4000,
    "ambientes": 1,
@@ -893,7 +917,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:57950626",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/57/95/06/26/720x532/2079016768.jpg",
@@ -946,7 +970,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuenaga 700",
    "air_usd": 94500,
    "ambientes": 3,
@@ -959,7 +983,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:58108817",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/10/88/17/720x532/2025766789.jpg",
@@ -1348,7 +1372,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "TUCUMAN 2156",
    "air_usd": 98000,
    "ambientes": 3,
@@ -1361,7 +1385,7 @@
    "expensas_ars": 250000,
    "expensas_text": "$ 250.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:58790965",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/79/09/65/720x532/2044514291.jpg",
@@ -1390,7 +1414,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "air_usd": 0,
    "ambientes": 2,
@@ -1403,7 +1427,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:58803540",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/80/35/40/720x532/2045725507.jpg",
@@ -1558,7 +1582,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ayacucho 1000",
    "air_usd": 40000,
    "ambientes": 2,
@@ -1567,7 +1591,7 @@
    "expensas_ars": 187000,
    "expensas_text": "$ 187.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:58992764",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/99/27/64/720x532/2068617878.jpg",
@@ -1627,7 +1651,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "AV. Cordoba  al 1800",
    "air_usd": 19500,
    "ambientes": 3,
@@ -1637,7 +1661,7 @@
    "expensas_ars": 180000,
    "expensas_text": "$ 180.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59050824",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/05/08/24/720x532/2051199050.jpg",
@@ -1684,7 +1708,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paraguay  al 1200",
    "air_usd": 20000,
    "ambientes": 3,
@@ -1697,7 +1721,7 @@
    "expensas_ars": 243122,
    "expensas_text": "$ 243.122 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59214423",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/21/44/23/720x532/2055434626.jpg",
@@ -1844,7 +1868,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Pueyrredon  al 1200",
    "air_usd": 12000,
    "ambientes": 2,
@@ -1853,7 +1877,7 @@
    "expensas_ars": 200000,
    "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59353042",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/35/30/42/720x532/2059102029.jpg",
@@ -1876,7 +1900,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Scalabrini Ortiz  al 2600 Beruti y Arneales.",
    "air_usd": 43750,
    "ambientes": 2,
@@ -1885,7 +1909,7 @@
    "expensas_ars": 260000,
    "expensas_text": "$ 260.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59388214",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/38/82/14/720x532/2059980098.jpg",
@@ -2028,7 +2052,9 @@
    ],
    "score": 0,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "barrio del aviso no coincide"
+   ],
    "title": "departamento en venta en valentin alsina lanus g. b.",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-valentin-alsina-lanus-g.-b.-59549774.html",
    "zone": ""
@@ -2284,7 +2310,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Salguero 3078 Piso 5 Departamento B",
    "air_usd": 58900,
    "ambientes": 3,
@@ -2294,7 +2320,7 @@
    "expensas_ars": 180000,
    "expensas_text": "$ 180.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59622727",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/62/27/27/720x532/2081333452.jpg",
@@ -2349,7 +2375,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Tucumán 1900",
    "air_usd": 65100,
    "ambientes": 2,
@@ -2362,7 +2388,7 @@
    "expensas_ars": 140000,
    "expensas_text": "$ 140.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59633620",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/63/36/20/720x532/2065945516.jpg",
@@ -2390,7 +2416,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Santa fe al 2700",
    "air_usd": 17500,
    "ambientes": 3,
@@ -2403,7 +2429,7 @@
    "expensas_ars": 150000,
    "expensas_text": "$ 150.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59640123",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/64/01/23/720x532/2066112577.jpg",
@@ -2484,7 +2510,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Santa Fe & Avenida Callao",
    "air_usd": 74000,
    "ambientes": 2,
@@ -2497,7 +2523,7 @@
    "expensas_ars": 1,
    "expensas_text": "$ 1 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59692379",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/69/23/79/720x532/2067380823.jpg",
@@ -2525,7 +2551,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Suipacha e/ Avenida Córdoba y Paraguay",
    "air_usd": 17500,
    "ambientes": 2,
@@ -2534,7 +2560,7 @@
    "expensas_ars": 85000,
    "expensas_text": "$ 85.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59717289",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/71/72/89/720x532/2067988737.jpg",
@@ -2574,7 +2600,9 @@
    ],
    "score": 0,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "barrio del aviso no coincide"
+   ],
    "title": "venta ambientes c balcon amoblado once",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-c-balcon-amoblado-once-59771456.html",
    "zone": ""
@@ -2619,19 +2647,24 @@
   {
    "active": true,
    "address": "Rodriguez Peña  al 1500",
-   "air_usd": -4500,
+   "air_usd": -11125,
    "ambientes": 2,
    "antiguedad_years": null,
    "area": 53.0,
+   "area_total": 53.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 165000,
    "expensas_text": "$ 165.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": null,
    "id": "zonaprop:59785223",
+   "max_offer_usd": 94025,
+   "neto_base_usd": -25905,
+   "neto_hard_usd": -46412,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/78/52/23/720x532/2069624463.jpg",
    "piso": null,
@@ -2643,10 +2676,12 @@
      "price": 137000
     }
    ],
-   "reno_usd_m2": 250,
+   "reno_usd_m2": 375,
    "score": -4,
+   "seventy_offer_usd": 82150,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto",
     "sin aire"
    ],
@@ -2697,15 +2732,22 @@
   {
    "active": true,
    "address": "Pueyrredon al 900",
-   "air_usd": 88500,
+   "air_usd": 2075,
    "ambientes": 3,
-   "area": 91.0,
+   "area": 59.4,
+   "area_covered": 43.0,
+   "area_semi": 10.0,
+   "area_total": 91.0,
+   "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 280000,
    "expensas_text": "$ 280.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:59807839",
+   "max_offer_usd": 104865,
+   "neto_base_usd": -14133,
+   "neto_hard_usd": -36866,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/80/78/39/720x532/2070197304.jpg",
    "piso": 13,
@@ -2716,17 +2758,16 @@
      "price": 139000
     }
    ],
-   "reno_usd_m2": 250,
-   "score": 3,
+   "reno_usd_m2": 375,
+   "score": -2,
+   "seventy_offer_usd": 92070,
    "site": "zonaprop",
    "tags": [
-    "sobre presupuesto",
-    "metro muy barato",
-    "aire amplio"
+    "sobre presupuesto"
    ],
    "title": "Excelente 3 ambientes con dependencia, balcón corrido y vista abierta – Barrio NorteUbicad",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-dependencia-balcon-corrido-y-vista-59807839.html",
-   "zone": ""
+   "zone": "Barrio Norte"
   },
   {
    "active": false,
@@ -3018,15 +3059,20 @@
   {
    "active": true,
    "address": "Cabello al 3100",
-   "air_usd": 54250,
+   "air_usd": 47375,
    "ambientes": 2,
    "area": 55.0,
+   "area_total": 55.0,
+   "decision": "negociar",
    "exit_usd_m2": 3600,
    "expensas_ars": 130000,
    "expensas_text": "$ 130.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:59914111",
+   "max_offer_usd": 136900,
+   "neto_base_usd": 30469,
+   "neto_hard_usd": 7452,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/91/41/11/720x532/2072724512.jpg",
    "price": 130000,
@@ -3036,10 +3082,12 @@
      "price": 130000
     }
    ],
-   "reno_usd_m2": 250,
+   "reno_usd_m2": 375,
    "score": 2,
+   "seventy_offer_usd": 117975,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto",
     "aire amplio"
    ],
@@ -3120,7 +3168,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Beruti  2300",
    "air_usd": 9500,
    "ambientes": 3,
@@ -3129,7 +3177,7 @@
    "expensas_ars": 162000,
    "expensas_text": "$ 162.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:59950051",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/95/00/51/720x532/2084233391.jpg",
@@ -3310,7 +3358,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Av. Las Heras 3100. Entre Coronel diaz",
    "air_usd": 70950,
    "ambientes": 3,
@@ -3319,7 +3367,7 @@
    "expensas_ars": 300000,
    "expensas_text": "$ 300.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60057359",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/05/73/59/720x532/2076164761.jpg",
@@ -3342,7 +3390,7 @@
    "zone": "Palermo Chico"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ecuador  N°1066 -piso  2",
    "air_usd": 9500,
    "ambientes": 3,
@@ -3355,7 +3403,7 @@
    "expensas_ars": 108700,
    "expensas_text": "$ 108.700 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60062899",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/06/28/99/720x532/2079321626.jpg",
@@ -3406,7 +3454,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Larrea  al 1400",
    "air_usd": 0,
    "ambientes": 2,
@@ -3415,7 +3463,7 @@
    "expensas_ars": 370000,
    "expensas_text": "$ 370.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60067830",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/06/78/30/720x532/2076413777.jpg",
@@ -3508,7 +3556,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Arenales al 3000",
    "air_usd": 18500,
    "ambientes": 2,
@@ -3518,7 +3566,7 @@
    "expensas_ars": 170000,
    "expensas_text": "$ 170.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60095623",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/09/56/23/720x532/2077060285.jpg",
@@ -3795,7 +3843,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Charcas al 2800",
    "air_usd": 52500,
    "ambientes": 2,
@@ -3808,7 +3856,7 @@
    "expensas_ars": 257000,
    "expensas_text": "$ 257.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60176760",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/17/67/60/720x532/2079067742.jpg",
@@ -3938,7 +3986,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Arenales 1100",
    "air_usd": 51000,
    "ambientes": 3,
@@ -3951,7 +3999,7 @@
    "expensas_ars": 370000,
    "expensas_text": "$ 370.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60190355",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/19/03/55/720x532/2079400903.jpg",
@@ -4004,7 +4052,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "General Lucio Norberto Mansilla 2800",
    "air_usd": -10000,
    "ambientes": 3,
@@ -4013,7 +4061,7 @@
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60196715",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/19/67/15/720x532/2079586633.jpg",
@@ -4101,7 +4149,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Pueyrredon al 1100",
    "air_usd": 22500,
    "ambientes": 3,
@@ -4109,7 +4157,7 @@
    "area": 59.0,
    "exit_usd_m2": 2750,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60206397",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/20/63/97/720x532/2079831224.jpg",
@@ -4129,7 +4177,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Cabello al 3900",
    "air_usd": 4000,
    "ambientes": 3,
@@ -4138,7 +4186,7 @@
    "expensas_ars": 220000,
    "expensas_text": "$ 220.000 Expensas",
    "first_seen": "2026-10-10T01:53:23+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60206711",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/20/67/11/720x532/2079839686.jpg",
@@ -4189,7 +4237,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "José A. Cabrera 3275",
    "air_usd": 58000,
    "ambientes": 2,
@@ -4202,7 +4250,7 @@
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60213881",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/21/38/81/720x532/2080947934.jpg",
@@ -4248,7 +4296,9 @@
    ],
    "score": 0,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "barrio del aviso no coincide"
+   ],
    "title": "impecable ambientes m sup2 doble balcon lanus",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-impecable-3-ambientes-73-m-sup2--doble-balcon-lanus-60216384.html",
    "zone": ""
@@ -4343,7 +4393,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paso 760",
    "air_usd": 78000,
    "ambientes": 3,
@@ -4356,7 +4406,7 @@
    "expensas_ars": 230000,
    "expensas_text": "$ 230.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60245847",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/24/58/47/720x532/2080844909.jpg",
@@ -4447,7 +4497,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Rodríguez Peña 600",
    "air_usd": 67500,
    "ambientes": 3,
@@ -4456,7 +4506,7 @@
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60262671",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/26/26/71/720x532/2081254121.jpg",
@@ -4503,14 +4553,14 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Aguero 1000",
    "air_usd": 12500,
    "ambientes": 1,
    "area": 55.0,
    "exit_usd_m2": 2750,
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60266140",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/26/61/40/720x532/2081339050.jpg",
@@ -4591,7 +4641,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paraguay 1100",
    "air_usd": 4000,
    "ambientes": 3,
@@ -4604,7 +4654,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60273748",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/27/37/48/720x532/2081724866.jpg",
@@ -4729,7 +4779,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ecuador al 1300",
    "air_usd": 10000,
    "ambientes": 2,
@@ -4738,7 +4788,7 @@
    "expensas_ars": 266000,
    "expensas_text": "$ 266.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60283321",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/28/33/21/720x532/2081761997.jpg",
@@ -4782,7 +4832,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paraguay al 2600",
    "air_usd": 5100,
    "ambientes": 3,
@@ -4791,7 +4841,7 @@
    "expensas_ars": 200000,
    "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60293202",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/29/32/02/720x532/2082016846.jpg",
@@ -4814,7 +4864,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Aguero y Av. Cordoba Monoambiente en Venta 55 m²",
    "air_usd": 18500,
    "ambientes": 1,
@@ -4827,7 +4877,7 @@
    "expensas_ars": 210000,
    "expensas_text": "$ 210.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "zonaprop:60306979",
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/30/69/79/720x532/2082357815.jpg",
@@ -4969,19 +5019,24 @@
   {
    "active": false,
    "address": "San Luis 3057",
-   "air_usd": 20000,
+   "air_usd": 13000,
    "ambientes": 2,
    "antiguedad_years": null,
    "area": 56.0,
+   "area_total": 56.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 115000,
    "expensas_text": "$ 115.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": "2026-10-10T14:42:59+00:00",
    "id": "zonaprop:60348201",
+   "max_offer_usd": 99669,
+   "neto_base_usd": -1148,
+   "neto_hard_usd": -21958,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/82/01/720x532/2083219957.jpg",
    "piso": null,
@@ -4993,10 +5048,13 @@
      "price": 120000
     }
    ],
-   "reno_usd_m2": 250,
+   "reno_usd_m2": 375,
    "score": 0,
+   "seventy_offer_usd": 86800,
    "site": "zonaprop",
-   "tags": [],
+   "tags": [
+    "m² sin verificar"
+   ],
    "title": "Departamento de dos ambientes y medio, muy luminoso, con balcón corrido al frente y excele",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-dos-ambientes-y-medio-con-doble-60348201.html",
    "usd_per_m2": null,
@@ -5037,15 +5095,20 @@
   {
    "active": true,
    "address": "Peña al 2400",
-   "air_usd": 7500,
+   "air_usd": 625,
    "ambientes": 2,
    "area": 55.0,
+   "area_total": 55.0,
+   "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
    "gone_at": null,
    "id": "zonaprop:60351140",
+   "max_offer_usd": 97201,
+   "neto_base_usd": -14373,
+   "neto_hard_usd": -35422,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/35/11/40/720x532/2083286152.jpg",
    "piso": 13,
@@ -5056,10 +5119,12 @@
      "price": 130000
     }
    ],
-   "reno_usd_m2": 250,
+   "reno_usd_m2": 375,
    "score": -1,
+   "seventy_offer_usd": 85250,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto"
    ],
    "title": "Departamento muy luminoso piso 13, con excelente ventilación cruzada, donde todos los ambi",
@@ -5253,15 +5318,20 @@
   {
    "active": true,
    "address": "Scalabrini Ortiz  al 2300",
-   "air_usd": 21250,
+   "air_usd": 14375,
    "ambientes": 3,
    "area": 55.0,
+   "area_total": 55.0,
+   "decision": "descartar",
    "exit_usd_m2": 3000,
    "expensas_ars": 260000,
    "expensas_text": "$ 260.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
    "gone_at": null,
    "id": "zonaprop:60378433",
+   "max_offer_usd": 108594,
+   "neto_base_usd": -1388,
+   "neto_hard_usd": -23118,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/37/84/33/720x532/2083973278.jpg",
    "price": 130000,
@@ -5271,10 +5341,12 @@
      "price": 130000
     }
    ],
-   "reno_usd_m2": 250,
+   "reno_usd_m2": 375,
    "score": -1,
+   "seventy_offer_usd": 94875,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto"
    ],
    "title": "3 ambientes con balcón en excelente ubicación – palermoexcelente departamento de 3 ambient",
@@ -5436,6 +5508,63 @@
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "Peña 2700",
+   "address_unverified": false,
+   "air_usd": 34375,
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 65.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 65.0,
+   "breakeven_exit_usd_m2": 2841,
+   "closing_ref_usd": 115320,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": "vigilar",
+   "exit_usd_m2": 2750,
+   "expensas_ars": 250000,
+   "expensas_text": "$ 250.000 Expensas",
+   "first_seen": "2026-10-11T01:58:51+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60409929",
+   "max_offer_usd": 115056,
+   "neto_base_usd": 18463,
+   "neto_hard_usd": -5339,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/40/99/29/720x532/2084759511.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-11T01:58:51+00:00",
+     "price": 120000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": 0.122,
+   "roi_hard": -0.032,
+   "score": 6,
+   "seventy_offer_usd": 100750,
+   "site": "zonaprop",
+   "tags": [
+    "para reciclar",
+    "m² sin verificar",
+    "metro muy barato",
+    "aire"
+   ],
+   "title": "Departamento en venta en excelente ubicación, Peña y Austria, de 65 mts totales, se trata ",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-o-3-ambientes-balcon-patio-60409929.html",
+   "usd_per_m2": 1846,
+   "vs_median_n": 15,
+   "vs_median_pct": -17,
+   "zone": "Recoleta",
+   "zone_unverified": false
   }
  ]
 }

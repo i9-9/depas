@@ -1,8 +1,8 @@
 {
- "last_change": "2026-10-10T20:41:24+00:00",
+ "last_change": "2026-10-11T01:58:51+00:00",
  "listings": [
   {
-   "active": true,
+   "active": false,
    "address": "AV CORDOBA Al 1831. Entre Av Callao Y Riobamba, Barrio Norte, Capital Federal",
    "air_usd": 36000,
    "ambientes": 2,
@@ -15,7 +15,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:1729567163",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_624046-MLA117343209272_102026-E.webp",
@@ -43,7 +43,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ayacucho 800, Barrio Norte, Capital Federal",
    "air_usd": 26000,
    "ambientes": 2,
@@ -56,7 +56,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:2000597773",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_715606-MLA114928544850_082026-E.webp",
@@ -84,7 +84,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "LUCIO MANSILLA Al 2789. Entre Jaures, Jean Y Anchorena, Barrio Norte, Capital Federal",
    "air_usd": 45500,
    "ambientes": 3,
@@ -97,7 +97,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:2073922905",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_924799-MLA94356466325_102025-E.webp",
@@ -125,7 +125,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Thames Al 2400, Botánico, Capital Federal",
    "air_usd": 18350,
    "ambientes": 3,
@@ -138,7 +138,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:2086301873",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_712372-MLA116614419000_092026-E.webp",
@@ -165,7 +165,7 @@
    "zone": "Botánico"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Av Cordoba 1332, Barrio Norte, Capital Federal",
    "air_usd": 51000,
    "ambientes": 3,
@@ -178,7 +178,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:2155184101",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_679518-MLA117213165110_102026-E.webp",
@@ -206,7 +206,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ugarteche Al 2800, Botánico, Capital Federal",
    "air_usd": 21250,
    "ambientes": 2,
@@ -219,7 +219,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:2169269663",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_884922-MLA119039456071_102026-E.webp",
@@ -246,7 +246,7 @@
    "zone": "Botánico"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Jean Jaures 1100, Barrio Norte, Capital Federal",
    "air_usd": 20000,
    "ambientes": 3,
@@ -259,7 +259,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:3664142778",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_834146-MLA113788864708_072026-E.webp",
@@ -286,19 +286,24 @@
   {
    "active": true,
    "address": "Pueyrredon Al 900, Barrio Norte, Capital Federal",
-   "air_usd": 76000,
+   "air_usd": 65250,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 86.0,
+   "area_covered": 86.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "decision": "comprar",
    "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
    "gone_at": null,
    "id": "mercadolibre:3740194676",
+   "max_offer_usd": 154018,
+   "neto_base_usd": 46475,
+   "neto_hard_usd": 16220,
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_996635-MLA114388125572_082026-E.webp",
    "piso": null,
@@ -310,8 +315,9 @@
      "price": 139000
     }
    ],
-   "reno_usd_m2": 250,
+   "reno_usd_m2": 375,
    "score": 3,
+   "seventy_offer_usd": 133300,
    "site": "mercadolibre",
    "tags": [
     "sobre presupuesto",
@@ -363,7 +369,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Pueyrredón 1362, Recoleta, Capital Federal",
    "air_usd": 17500,
    "ambientes": 3,
@@ -376,7 +382,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:3907066208",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_826559-MLA115637840088_092026-E.webp",
@@ -438,7 +444,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paraguay 3000, Recoleta, Capital Federal",
    "air_usd": 3000,
    "ambientes": 3,
@@ -451,7 +457,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:3958039772",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_825156-MLA117745552367_092026-E.webp",
@@ -478,7 +484,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Jose Maria Gutierrez Al 2700, Barrio Norte, Capital Federal",
    "air_usd": 6500,
    "ambientes": 3,
@@ -491,7 +497,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:3959625142",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_824476-MLA117761105367_092026-E.webp",
@@ -518,7 +524,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Venta Depto Juncal Al 2077. Recoleta Oportunidad!!!! 56m2!!, Recoleta, Capital Federal",
    "air_usd": 9500,
    "ambientes": 2,
@@ -531,7 +537,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:3963479454",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_895196-MLA116317781588_092026-E.webp",
@@ -558,7 +564,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Cabello Al 3900, Botánico, Capital Federal",
    "air_usd": -1500,
    "ambientes": 3,
@@ -571,7 +577,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:3978587040",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_629584-MLA118017752619_092026-E.webp",
@@ -599,7 +605,7 @@
    "zone": "Botánico"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Armenia 2100, Botánico, Capital Federal",
    "air_usd": 24500,
    "ambientes": 3,
@@ -612,7 +618,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:4003722674",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_945906-MLA116825947716_092026-E.webp",
@@ -637,7 +643,7 @@
    "zone": "Botánico"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Aguero 1000, Barrio Norte, Capital Federal",
    "air_usd": 2500,
    "ambientes": 1,
@@ -650,7 +656,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:4004379934",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_738950-MLA118388864767_092026-E.webp",
@@ -675,7 +681,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Scalabrini Ortiz Al 2300, Botánico, Capital Federal",
    "air_usd": 21250,
    "ambientes": 3,
@@ -688,7 +694,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-11T01:58:51+00:00",
    "id": "mercadolibre:4014768174",
    "old_price": null,
    "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_903861-MLA118520322199_092026-E.webp",
