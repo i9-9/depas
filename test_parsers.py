@@ -24,13 +24,13 @@ ARGENPROP = """
    Avenida Santa Fe 2800, Piso 8, Botánico USD 108.000 + $300.000 expensas - 53,5 m² cubie. - 2 dorm. - 3 ambientes
  </a></div>
  <div class="item"><a href="/departamento-en-venta-en-recoleta-3-ambientes--11111111">
-   - Depto un poco más - Departamento en Venta de 3 ambientes Recoleta USD 132.000 - 80 m² cubie. - 3 ambientes
+   - Depto un poco más con balcón luminoso - Departamento en Venta de 3 ambientes Recoleta USD 132.000 - 80 m² cubie. - 3 ambientes
  </a></div>
  <div class="item"><a href="/departamento-en-venta-en-recoleta-3-ambientes--66666666">
    - Depto carísimo - Departamento en Venta de 3 ambientes Recoleta USD 160.000 - 80 m² cubie. - 3 ambientes
  </a></div>
  <div class="item"><a href="/departamento-de-epoca-en-venta-en-recoleta-3-ambientes--77777777">
-   - De época - Departamento en Venta de 3 ambientes Recoleta USD 132.000 - 58 m² cubie. - 3 ambientes
+   - De época con balcón luminoso - Departamento en Venta de 3 ambientes Recoleta USD 132.000 - 58 m² cubie. - 3 ambientes
  </a></div>
  <div class="item"><a href="/departamento-en-venta-en-recoleta-4-ambientes--22222222">
    - Cuatro amb - Departamento en Venta de 4 ambientes Recoleta USD 120.000 - 90 m² cubie. - 4 ambientes
@@ -47,10 +47,10 @@ ARGENPROP = """
    - Edificio a reciclar - Departamento en Venta de 3 ambientes Recoleta USD 95.000 - 60 m² cubie. - 3 ambientes
  </a></div>
  <div class="item"><a href="/departamento-en-venta-en-recoleta-3-ambientes--88888888">
-   - Sin balcón - Departamento en Venta de 3 ambientes Recoleta USD 110.000 - 60 m² cubie. - 3 ambientes
+   - Sin balcón luminoso - Departamento en Venta de 3 ambientes Recoleta USD 125.000 - 60 m² cubie. - 3 ambientes
  </a></div>
  <div class="item"><a href="/departamento-con-balcon-en-venta-en-recoleta-3-ambientes--99999999">
-   - Con balcón - Departamento en Venta de 3 ambientes Recoleta USD 112.000 - 61 m² cubie. - 3 ambientes
+   - Con balcón luminoso - Departamento en Venta de 3 ambientes Recoleta USD 112.000 - 61 m² cubie. - 3 ambientes
  </a></div>
 </div>
 """
@@ -58,9 +58,9 @@ ARGENPROP = """
 ZONAPROP = """
 <div id="list">
  <div data-id="59844590" class="card">
-   <img src="https://img.zonapropcdn.com/avisos/1/logo.png"><img src="https://img.zonapropcdn.com/avisos/1/depto-59844590.jpg"><h2>USD 115.000</h2><h3>50 m² tot.2 amb.1 dorm.1 baño</h3>
+   <img src="https://img.zonapropcdn.com/avisos/1/logo.png"><img src="https://img.zonapropcdn.com/avisos/1/depto-59844590.jpg">   <h2>USD 125.000</h2><h3>50 m² tot.2 amb.1 dorm.1 baño</h3>
    <h4>AV Cordoba al 1800</h4><h4>Recoleta, Capital Federal</h4>
-   <h2><a href="/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-recoleta.-59844590.html?n_src=Listado">Hermoso depto</a></h2>
+   <h2><a href="/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-recoleta-balcon-luminoso.-59844590.html?n_src=Listado">Hermoso depto con balcón luminoso</a></h2>
  </div>
  <div data-id="60189306" class="card">
    <h2>USD 98.000</h2><h3>57 m² tot.3 amb.2 dorm.1 baño</h3>
@@ -88,8 +88,8 @@ MERCADOLIBRE = """
   Arenales 1800 Recoleta Caba, Recoleta, Capital Federal
  </li>
  <li class="ui-search-layout__item">
-  <a href="https://departamento.mercadolibre.com.ar/MLA-2154660325-de-epoca-para-reciclar-3-ambientes-recoleta-_JM">
-   De época para reciclar 3 ambientes Recoleta
+  <a href="https://departamento.mercadolibre.com.ar/MLA-2154660325-de-epoca-para-reciclar-3-ambientes-recoleta-balcon-luminoso-_JM">
+   De época para reciclar 3 ambientes Recoleta con balcón luminoso
   </a>
   US$ 121.000
   3 ambs.
@@ -114,14 +114,10 @@ def test_argenprop():
     assert a["price"] == 108000 and a["area"] == 53.5 and a["ambientes"] == 3, a
     assert a["url"] == "https://www.argenprop.com/departamento-en-venta-en-botanico-3-ambientes--19596287"
     ok = {k for k, v in items.items() if s.matches(v, F)}
-    # 50 m²+ y un poco más de 125k entran; 160k, 4 amb, sin m², edificio a reciclar y sin balcón afuera
+    # piso 120k + balcón + luz; 160k, 4 amb, sin m², edificio a reciclar y sin balcón afuera
     assert ok == {
-        "argenprop:20079141",
-        "argenprop:19596287",
         "argenprop:11111111",
-        "argenprop:44444444",
         "argenprop:77777777",
-        "argenprop:99999999",
     }, ok
     assert "argenprop:33333333" not in ok
     assert "argenprop:55555555" not in ok
@@ -135,7 +131,7 @@ def test_zonaprop():
     assert b["price"] == 98000 and b["area"] == 57 and b["ambientes"] == 3, b
     assert b["address"] == "Juncal 2900", b
     ok = {k for k, v in items.items() if s.matches(v, F)}
-    assert ok == {"zonaprop:59844590", "zonaprop:60189306"}, ok  # 50 m² ahora entra
+    assert ok == {"zonaprop:59844590"}, ok  # 98k queda afuera; 125k con balcón y luz entra
     assert items["zonaprop:59844590"]["photo"].endswith("depto-59844590.jpg")
 
 
@@ -150,7 +146,7 @@ def test_mercadolibre():
     b = items["mercadolibre:2154660325"]
     assert b["price"] == 121000 and b["ambientes"] == 3
     ok = {i["id"] for i in items.values() if s.matches(i, F)}
-    assert ok == {"mercadolibre:4032113512", "mercadolibre:2154660325"}, ok
+    assert ok == {"mercadolibre:2154660325"}, ok  # 110k queda afuera; 121k con balcón y luz entra
     src = {"name": "Recoleta 1 amb", "zone": "Recoleta", "aliases": ["recoleta"]}
     assert s.page_matches_zone(
         "<title>Departamentos en Venta en Recoleta, Capital Federal, 1 ambiente</title><h1>Departamentos en Venta en Recoleta, Capital Federal, 1 ambiente</h1>",
@@ -242,12 +238,13 @@ def test_preferences_not_exclusive():
     assert "edificio flojo" in flojo["tags"] and "para reciclar" not in flojo["tags"], flojo
     assert not s.matches(flojo, F)  # edificio a reciclar corta: no se da vuelta
     plain = items["argenprop:19596287"]
-    assert plain["score"] == 0 and s.matches(plain, F)
+    assert plain["score"] == 0 and not s.matches(plain, F)  # 108k: el piso de 120k corta
     stretch = items["argenprop:11111111"]
     assert s.matches(stretch, F) and "sobre presupuesto" in stretch["tags"] and stretch["score"] < 0
     assert not s.matches(items["argenprop:66666666"], F)  # 160k sí corta
     assert not s.matches(items["argenprop:88888888"], F)  # sin balcón corta
-    assert s.matches(items["argenprop:99999999"], F) and s.has_balcon(items["argenprop:99999999"]) is True
+    assert not s.matches(items["argenprop:99999999"], F)  # 112k: el piso de 120k corta
+    assert s.has_balcon(items["argenprop:99999999"]) is True
     epoca_cara = items["argenprop:77777777"]
     assert "de época" in epoca_cara["tags"] and "sobre presupuesto" in epoca_cara["tags"]
     ranked = s.prefer([epoca_cara, plain, stretch])
@@ -268,8 +265,12 @@ def test_price_parsing():
     assert s.parse_price("Departamento USD 98.000 + $150.000 expensas") == 98000
     cheap = {"price": 1, "ambientes": 2, "area": 60}
     luxury = {"price": 1250000, "ambientes": 3, "area": 80}
-    ok = {"price": 98000, "ambientes": 3, "area": 57, "address": "Juncal 2900, Recoleta", "title": "", "url": ""}
-    assert not s.matches(cheap, F) and not s.matches(luxury, F) and s.matches(ok, F)
+    bajo = {"price": 98000, "ambientes": 3, "area": 57, "address": "Juncal 2900, Recoleta",
+            "title": "3 amb con balcón luminoso", "url": ""}
+    ok = {"price": 125000, "ambientes": 3, "area": 57, "address": "Juncal 2900, Recoleta",
+          "title": "3 amb con balcón luminoso", "url": ""}
+    assert not s.matches(cheap, F) and not s.matches(luxury, F)
+    assert not s.matches(bajo, F) and s.matches(ok, F)
 
     html = """
     <div class="card">
@@ -334,7 +335,7 @@ def test_reject_noise():
              "address": "Tigre", "url": "https://z/tigre-residencial-1.html", "blurb": ""}
     pozo = {"price": 98000, "ambientes": 2, "area": 55, "title": "Departamento en pozo",
             "address": "Recoleta, Capital Federal", "url": "https://z/en-pozo-2.html", "blurb": ""}
-    rec = {"price": 98000, "ambientes": 3, "area": 57, "title": "3 amb Recoleta",
+    rec = {"price": 125000, "ambientes": 3, "area": 57, "title": "3 amb Recoleta con balcón luminoso",
            "address": "Juncal 2900, Recoleta, Capital Federal", "url": "https://z/recoleta-3.html", "blurb": ""}
     assert s.is_rejected(tigre, F) and not s.in_allowed_area(tigre, F)
     assert s.is_rejected(pozo, F) and s.in_allowed_area(pozo, F)
@@ -347,8 +348,8 @@ def test_reject_noise():
         src, F,
     )
     pasos = {
-        "price": 98000, "ambientes": 3, "area": 57,
-        "title": "3 amb Recoleta a pasos de Congreso",
+        "price": 125000, "ambientes": 3, "area": 57,
+        "title": "3 amb Recoleta con balcón a pasos de Congreso",
         "address": "Juncal 2900, Recoleta, Capital Federal",
         "url": "https://z/recoleta-juncal.html",
         "blurb": "Luminoso, a pasos de Congreso y el Congreso de la Nación.",
@@ -538,6 +539,35 @@ def test_place_key_cross_portal():
     assert s.place_key(zp) == s.place_key(ml) == "paso 760|75|3"
     assert s.place_key(other) != s.place_key(zp)
     assert s.place_key({"address": "", "title": "sin calle", "area": 50, "ambientes": 2}) == ""
+    assert s.same_place(zp, ml) and not s.same_place(zp, other)
+    # cubo de 5 m² parte 91 vs 86; same_place los junta (ZP tot. vs ML cubiertos)
+    pue_zp = {"address": "Pueyrredon al 900", "title": "3 amb", "area": 91, "ambientes": 3, "price": 139000}
+    pue_ml = {"address": "Pueyrredon Al 900, Barrio Norte", "title": "3 amb", "area": 86, "ambientes": 3, "price": 139000}
+    assert s.place_key(pue_zp) != s.place_key(pue_ml)
+    assert s.same_place(pue_zp, pue_ml)
+    agu_zp = {"address": "Aguero 1000", "title": "1 amb", "area": 55, "ambientes": 1, "price": 125000}
+    agu_ml = {"address": "Aguero 1000, Barrio Norte", "title": "1 amb", "area": 51, "ambientes": 1, "price": 125000}
+    assert s.same_place(agu_zp, agu_ml)
+    # misma cuadra redondeada, otro depto
+    az1 = {"address": "Azcuénaga 700", "title": "x", "area": 80, "ambientes": 3, "price": 90000}
+    az2 = {"address": "Azcuenaga 700", "title": "y", "area": 73, "ambientes": 3, "price": 88000}
+    assert not s.same_place(az1, az2)
+
+
+def test_hard_cuts_are_exclusive():
+    base = {
+        "price": 125000, "ambientes": 3, "area": 57,
+        "title": "3 amb Recoleta con balcón luminoso",
+        "address": "Juncal 2900, Recoleta", "url": "https://z/ok.html", "blurb": "",
+    }
+    assert s.matches(base, F)
+    assert not s.matches({**base, "price": 119000}, F)
+    assert not s.matches({**base, "title": "3 amb Recoleta luminoso", "url": "https://z/sin-balcon.html"}, F)
+    assert not s.matches({**base, "title": "3 amb Recoleta con balcón", "url": "https://z/sin-luz.html"}, F)
+    assert not s.matches({**base, "title": "3 amb oscuro con balcón", "url": "https://z/oscuro.html"}, F)
+    assert s.has_light(base) is True
+    assert s.has_light({**base, "title": "depto interno con balcón", "blurb": "departamento interno"}) is False
+    assert s.has_light({**base, "title": "3 amb al frente con balcón", "url": "https://z/frente.html"}) is True
 
 
 def _item(lid, **kw):
@@ -706,6 +736,68 @@ def test_telegram_partial_failure_does_not_mark_seen():
     assert "zonaprop:old" in state["listings"]
     assert all(x["id"] != "zonaprop:new" for x in catalog["listings"])
     _restore_paths()
+
+
+def test_listing_html_ok_ignores_waf_preconnect():
+    challenge = "<html><head><link href='//ed6ad91cf943.edge.sdk.awswaf.com'></head><body>Just a moment</body></html>"
+    listing = (
+        "<html><head><link href='//ed6ad91cf943.edge.sdk.awswaf.com'></head>"
+        "<body>USD 118.000 42 m² cubie. "
+        "<a href='/departamento-en-venta-en-recoleta-3-ambientes--19596287'>x</a>"
+        "</body></html>"
+    )
+    assert s.html_is_blocked(challenge)
+    assert not s.html_is_blocked(listing)
+    assert s.listing_html_ok(listing)
+    assert not s.listing_html_ok(challenge)
+
+
+def test_prioritize_argenprop_generals_first():
+    raw = [
+        {"site": "argenprop", "name": "Recoleta 2 amb"},
+        {"site": "argenprop", "name": "Botánico"},
+        {"site": "zonaprop", "name": "Recoleta"},
+        {"site": "argenprop", "name": "Recoleta"},
+    ]
+    names = [x["name"] for x in s.prioritize_sources(raw)]
+    assert names == ["Botánico", "Recoleta", "Recoleta 2 amb", "Recoleta"]
+
+
+def test_argenprop_chrome_stays_on_page1():
+    urls: list[str] = []
+
+    class FakeChrome:
+        def fetch(self, url):
+            urls.append(url)
+            return (
+                "<html><title>Recoleta</title><body>"
+                "<a href='/departamento-en-venta-en-recoleta-3-ambientes--19596287'>"
+                "Depto Recoleta USD 108.000 53 m² cubie. 3 ambientes balcón"
+                "</a></body></html>"
+            ), url
+
+    src = {
+        "site": "argenprop",
+        "name": "Recoleta",
+        "zone": "Recoleta",
+        "pages": 3,
+        "url": "https://www.argenprop.com/departamentos/venta/recoleta/dolares-hasta-140000",
+        "aliases": ["recoleta"],
+    }
+    with mock.patch.object(s.time, "sleep"):
+        items, _last = s.scrape_source(None, src, CFG, browser=FakeChrome())
+    assert urls == [src["url"]]
+    assert any(i["id"] == "argenprop:19596287" for i in items)
+
+
+def test_argenprop_uses_browser_when_given():
+    class FakeChrome:
+        def fetch(self, url):
+            return "<html>cubie. ok</html>", url
+
+    html, final = s.fetch(mock.Mock(), "https://www.argenprop.com/x", site="argenprop", browser=FakeChrome())
+    assert "cubie" in html
+    assert final.endswith("/x")
 
 
 def test_redact_token_and_fetch_retry():
@@ -1022,7 +1114,8 @@ def test_expensas_and_extras():
     assert s.parse_antiguedad("departamento A estrenar, impecable") == 0
     f = dict(F)
     f["max_expensas_ars"] = 200000
-    high = {"price": 98000, "ambientes": 3, "area": 57, "title": "x", "address": "Juncal 2900, Recoleta",
+    high = {"price": 125000, "ambientes": 3, "area": 57, "title": "3 amb con balcón luminoso",
+            "address": "Juncal 2900, Recoleta",
             "url": "https://z/rec.html", "blurb": "", "expensas_ars": 350000}
     unknown = {**high, "expensas_ars": None}
     low = {**high, "expensas_ars": 110000}
@@ -1190,8 +1283,14 @@ def test_flip_cuts_and_air():
 def test_coverage_last_page_unseen():
     seen = {"zonaprop:old"}
     last = [
-        _item("zonaprop:old"),
-        _item("zonaprop:fresh", url="https://z/fresh.html", address="Arenales 1200, Recoleta"),
+        _item("zonaprop:old", price=125000, title="3 amb Recoleta con balcón luminoso"),
+        _item(
+            "zonaprop:fresh",
+            price=125000,
+            title="3 amb Recoleta con balcón luminoso",
+            url="https://z/fresh.html",
+            address="Arenales 1200, Recoleta",
+        ),
     ]
     unseen = s.coverage_unseen(last, seen, F)
     assert [i["id"] for i in unseen] == ["zonaprop:fresh"]
@@ -1314,6 +1413,11 @@ def test_areas_weights_expensas_signals_and_offer():
         "weak_streets",
         "exit_usd_m2",
         "min_area_m2",
+        "min_price_usd",
+        "require_balcon",
+        "include_unknown_balcon",
+        "require_light",
+        "include_unknown_light",
     ):
         assert web[key] == cfg[key], key
 

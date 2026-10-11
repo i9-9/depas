@@ -51,5 +51,10 @@
   "decision_buy_pct": 92,
   "decision_watch_pct": 108,
   "gusto_usd": 125000,
-  "min_area_m2": 50
+  "min_area_m2": 50,
+  "min_price_usd": 120000,
+  "require_balcon": true,
+  "include_unknown_balcon": false,
+  "require_light": true,
+  "include_unknown_light": false
 }

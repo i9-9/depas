@@ -1,4 +1,105 @@
 {
- "listings": {},
- "meta": {}
+ "listings": {
+  "argenprop:17505092": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 110|55|3",
+   "price": 99000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--17505092",
+   "zone": "Recoleta"
+  },
+  "argenprop:17726324": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 140|65|3",
+   "price": 139000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--17726324",
+   "zone": "Recoleta"
+  },
+  "argenprop:18010334": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 900|55|3",
+   "price": 130000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--18010334",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:18428196": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 400|65|3",
+   "price": 125000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--18428196",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:18882199": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 175|55|3",
+   "price": 127000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--18882199",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:18997022": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 2000|70|3",
+   "price": 139000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--18997022",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:19148041": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 100|70|3",
+   "price": 120000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--19148041",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:19533107": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 4000|65|3",
+   "price": 130000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--19533107",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:19740610": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 25|75|3",
+   "price": 138900,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--19740610",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:19836772": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 10000|50|2",
+   "price": 128000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-2-ambientes--19836772",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:20032069": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 3225|60|3",
+   "price": 130000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--20032069",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:20169460": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 190|60|3",
+   "price": 140000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--20169460",
+   "zone": "Recoleta"
+  },
+  "argenprop:20252327": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 101|50|3",
+   "price": 119000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--20252327",
+   "zone": "Barrio Norte"
+  },
+  "argenprop:20608965": {
+   "first_seen": "2026-10-10T22:00:06+00:00",
+   "place": "visto 200|55|3",
+   "price": 117000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--20608965",
+   "zone": "Recoleta"
+  }
+ },
+ "meta": {
+  "last_error_day": "2026-10-10"
+ }
 }

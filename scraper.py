@@ -64,6 +64,7 @@ BLOCK_MARKERS = (
     "awswaf",
     "access denied",
     "captcha",
+    "the request could not be satisfied",
 )
 
 LINK_RE = {
@@ -1264,7 +1265,7 @@ def listing_key(item: dict) -> str:
 
 
 def place_key(item: dict) -> str:
-    """Calle + m² (~5) + ambientes. Sirve para el mismo depto en otro portal."""
+    """Calle + m² (~5) + ambientes. Clave gruesa; el match real es same_place()."""
     street = street_key(item.get("address") or "") or street_key(item.get("title") or "")
     area = item.get("area")
     amb = item.get("ambientes")
@@ -1274,17 +1275,35 @@ def place_key(item: dict) -> str:
     return f"{street}|{bucket}|{int(amb)}"
 
 
-def places_from_other_portals(site: str) -> set[str]:
-    known: set[str] = set()
+PLACE_AREA_TOL = 5
+PLACE_AREA_SAME_PRICE_TOL = 15
+
+
+def same_place(a: dict, b: dict) -> bool:
+    """Mismo depto en otro portal. ±5 m², o ±15 si el precio coincide (tot. vs cubiertos)."""
+    street_a = street_key(a.get("address") or "") or street_key(a.get("title") or "")
+    street_b = street_key(b.get("address") or "") or street_key(b.get("title") or "")
+    if not street_a or street_a != street_b:
+        return False
+    if a.get("ambientes") is None or b.get("ambientes") is None:
+        return False
+    if int(a["ambientes"]) != int(b["ambientes"]):
+        return False
+    if a.get("area") is None or b.get("area") is None:
+        return False
+    delta = abs(float(a["area"]) - float(b["area"]))
+    if delta <= PLACE_AREA_TOL:
+        return True
+    return a.get("price") is not None and a.get("price") == b.get("price") and delta <= PLACE_AREA_SAME_PRICE_TOL
+
+
+def listings_from_other_portals(site: str) -> list[dict]:
+    rows: list[dict] = []
     for other in SITES:
         if other == site:
             continue
-        rows = load_portal(other, persist=False)[1].get("listings") or []
-        for row in rows:
-            pk = place_key(row)
-            if pk:
-                known.add(pk)
-    return known
+        rows.extend(load_portal(other, persist=False)[1].get("listings") or [])
+    return rows
 
 
 def _richer(a: dict, b: dict) -> bool:
@@ -1327,6 +1346,20 @@ def has_balcon(item: dict) -> bool | None:
     if "sin balcon" in hay or "sin balcones" in hay:
         return False
     if "balcon" in hay or "balcones" in hay:
+        return True
+    return None
+
+
+def has_light(item: dict) -> bool | None:
+    """True / False si la card habla de luz; None si no se puede saber."""
+    hay = _haystack(item, "any")
+    if re.search(r"poca luz|sin luz|poco luminoso|\boscur", hay):
+        return False
+    if re.search(r"\b(depto|departamento|unidad)\s+intern[oa]s?\b", hay):
+        return False
+    if re.search(r"luminos|luz natural|mucha luz|todo luz|llena de luz|solead|vista abierta|vista panoram", hay):
+        return True
+    if re.search(r"\bal frente\b", hay) and "frente a" not in hay:
         return True
     return None
 
@@ -1431,6 +1464,12 @@ def matches(item: dict, f: dict) -> bool:
         if bal is False:
             return False
         if bal is None and not f.get("include_unknown_balcon", True):
+            return False
+    if f.get("require_light"):
+        light = has_light(item)
+        if light is False:
+            return False
+        if light is None and not f.get("include_unknown_light", True):
             return False
     max_e = f.get("max_expensas_ars")
     if max_e is not None and item.get("expensas_ars") is not None and item["expensas_ars"] > max_e:
@@ -1601,6 +1640,123 @@ class Blocked(Exception):
     pass
 
 
+def listing_html_ok(html: str) -> bool:
+    """True si el HTML ya es un listado (no el interstitial del WAF)."""
+    text = html or ""
+    if "m²" in text or "cubie" in text.lower():
+        return True
+    return bool(LINK_RE["argenprop"].search(text))
+
+
+def html_is_blocked(html: str) -> bool:
+    if listing_html_ok(html):
+        return False
+    head = (html or "")[:4000].lower()
+    return any(k in head for k in BLOCK_MARKERS)
+
+
+class ChromeListings:
+    """Chrome instalado (con ventana, fuera de pantalla). Headless lo bloquea CloudFront.
+
+    Un contexto nuevo por URL: reutilizar cookies/página dispara Human Verification
+    en el segundo listado.
+    """
+
+    def __init__(self) -> None:
+        self._pw = None
+        self._browser = None
+
+    def start(self) -> None:
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError as e:
+            raise Blocked("falta playwright (pip install playwright)") from e
+        self._pw = sync_playwright().start()
+        try:
+            self._browser = self._pw.chromium.launch(
+                channel="chrome",
+                headless=False,
+                args=["--window-position=-2400,0", "--window-size=1280,800"],
+            )
+        except Exception as e:
+            self.close()
+            raise Blocked(f"no pude abrir Google Chrome: {e}") from e
+
+    def fetch(self, url: str) -> tuple[str, str]:
+        if self._browser is None:
+            raise Blocked("Chrome no está abierto")
+        ctx = self._browser.new_context(
+            locale="es-AR",
+            viewport={"width": 1280, "height": 800},
+        )
+        page = ctx.new_page()
+        try:
+            return self._fetch_page(page, url)
+        except Blocked:
+            raise
+        except Exception as e:
+            raise Blocked(f"Chrome: {e}") from e
+        finally:
+            try:
+                ctx.close()
+            except Exception:
+                pass
+
+    def _fetch_page(self, page, url: str) -> tuple[str, str]:
+        resp = page.goto(url, wait_until="domcontentloaded", timeout=45000)
+        html = self._page_html(page)
+        final = page.url
+        status = resp.status if resp else 0
+        deadline = time.time() + 40
+        while time.time() < deadline and not listing_html_ok(html):
+            time.sleep(1.5)
+            html = self._page_html(page)
+            final = page.url
+        if rurl_changed(url, final):
+            print(f"[fetch] redirect {url} → {final}", file=sys.stderr)
+        if listing_html_ok(html):
+            return html, final
+        _log_fetch_failure_raw(url, final, status, html)
+        raise Blocked(f"HTTP {status or '?'} (WAF / sin listado)")
+
+    def _page_html(self, page) -> str:
+        for _ in range(8):
+            try:
+                return page.content()
+            except Exception as e:
+                if "navigating" not in str(e).lower():
+                    raise
+                time.sleep(0.4)
+        return page.content()
+
+    def close(self) -> None:
+        if self._browser is not None:
+            try:
+                self._browser.close()
+            except Exception:
+                pass
+        if self._pw is not None:
+            try:
+                self._pw.stop()
+            except Exception:
+                pass
+        self._browser = self._pw = None
+
+
+def rurl_changed(url: str, final: str) -> bool:
+    return final.split("?")[0].rstrip("/") != url.split("?")[0].rstrip("/")
+
+
+def _log_fetch_failure_raw(url: str, final: str, status: int, html: str) -> None:
+    body = re.sub(r"\s+", " ", (html or "")[:300])
+    print(
+        f"[fetch] FAIL {status} {url}\n"
+        f"  final={final}\n"
+        f"  body: {body}",
+        file=sys.stderr,
+    )
+
+
 def _log_fetch_failure(url: str, r: requests.Response) -> None:
     keys = (
         "server",
@@ -1620,9 +1776,18 @@ def _log_fetch_failure(url: str, r: requests.Response) -> None:
     )
 
 
-def fetch(session: requests.Session, url: str, *, _retried: bool = False) -> tuple[str, str]:
+def fetch(
+    session: requests.Session,
+    url: str,
+    *,
+    site: str | None = None,
+    browser: ChromeListings | None = None,
+    _retried: bool = False,
+) -> tuple[str, str]:
+    if site == "argenprop" and browser is not None:
+        return browser.fetch(url)
     r = session.get(url, timeout=30)
-    if r.url.split("?")[0].rstrip("/") != url.split("?")[0].rstrip("/"):
+    if rurl_changed(url, r.url):
         print(f"[fetch] redirect {url} → {r.url}", file=sys.stderr)
     waf = (r.headers.get("x-amzn-waf-action") or "").lower()
     if r.status_code == 202 or waf in ("challenge", "block"):
@@ -1633,7 +1798,7 @@ def fetch(session: requests.Session, url: str, *, _retried: bool = False) -> tup
         wait = random.uniform(20, 30)
         print(f"[fetch] {r.status_code} {url}; reintento en {wait:.0f}s", file=sys.stderr)
         time.sleep(wait)
-        return fetch(session, url, _retried=True)
+        return fetch(session, url, site=site, browser=browser, _retried=True)
     if r.status_code in (403, 405, 429, 503):
         _log_fetch_failure(url, r)
         raise Blocked(f"HTTP {r.status_code} (posible bloqueo anti-bot)")
@@ -1643,23 +1808,39 @@ def fetch(session: requests.Session, url: str, *, _retried: bool = False) -> tup
     if r.status_code >= 400:
         _log_fetch_failure(url, r)
         r.raise_for_status()
-    head = r.text[:4000].lower()
-    if any(k in head for k in BLOCK_MARKERS) and "m²" not in r.text:
+    if html_is_blocked(r.text):
         _log_fetch_failure(url, r)
         raise Blocked("página de desafío anti-bot")
     return r.text, r.url
 
 
-def scrape_source(session, src: dict, cfg: dict) -> tuple[list[dict], list[dict]]:
+def scrape_source(session, src: dict, cfg: dict, browser: ChromeListings | None = None) -> tuple[list[dict], list[dict]]:
     """Devuelve (avisos, última página si se llegó al tope de páginas)."""
     site = src["site"]
     found: dict[str, dict] = {}
     last_page_items: list[dict] = []
     max_pages = source_pages(src, cfg)
+    if site == "argenprop" and browser is not None and max_pages > 1:
+        print(
+            f"[fetch] {src.get('name')}: solo página 1 (?pagina-N dispara el WAF)",
+            file=sys.stderr,
+        )
+        max_pages = 1
     hit_cap = False
     for n in range(1, max_pages + 1):
         url = page_url(site, src["url"], n)
-        html_text, final_url = fetch(session, url)
+        try:
+            html_text, final_url = fetch(session, url, site=site, browser=browser)
+        except Blocked as e:
+            if n == 1:
+                raise
+            print(
+                f"[fetch] {src.get('name')} página {n}: {e}; me quedo con {len(found)} avisos",
+                file=sys.stderr,
+            )
+            hit_cap = False
+            last_page_items = []
+            break
         if n == 1 and not page_matches_zone(html_text, final_url, src):
             raise Blocked(f"slug inválido: redirigió fuera de {src['name']} → {final_url}")
         items = [i for i in parse_page(html_text, site, url) if keep_listing(i, src, cfg.get("filters") or {})]
@@ -2562,11 +2743,10 @@ def process_portal(
     new_items, drops = classify_changes(matched, state)
     silent_dupes: list[dict] = []
     if not first_run:
-        known = places_from_other_portals(site)
+        known = listings_from_other_portals(site)
         kept: list[dict] = []
         for i in new_items:
-            pk = place_key(i)
-            if pk and pk in known:
+            if any(same_place(i, row) for row in known):
                 silent_dupes.append(i)
             else:
                 kept.append(i)
@@ -2723,19 +2903,50 @@ def process_portal(
     return True
 
 
+def prioritize_sources(sources: list[dict]) -> list[dict]:
+    """Argenprop: primero el listado general de cada barrio (el WAF corta a la 5ª URL)."""
+    ap = [x for x in sources if x.get("site") == "argenprop"]
+    rest = [x for x in sources if x.get("site") != "argenprop"]
+    general = [x for x in ap if "amb" not in (x.get("name") or "").lower()]
+    split = [x for x in ap if "amb" in (x.get("name") or "").lower()]
+    return general + split + rest
+
+
+def _start_argenprop_browser(sources: list[dict], *, in_actions: bool = False) -> ChromeListings | None:
+    if in_actions or not any(x.get("site") == "argenprop" for x in sources):
+        return None
+    browser = ChromeListings()
+    try:
+        browser.start()
+    except Blocked as e:
+        print(f"[error] Argenprop / Chrome: {e}", file=sys.stderr)
+        return None
+    print("[fetch] Argenprop via Google Chrome", file=sys.stderr)
+    return browser
+
+
 def enrich_from_portals(cfg: dict, *, only: str | None = None) -> int:
     """Relee listados permitidos y completa foto/ficha. Sin Telegram ni dados de baja."""
     session = requests.Session()
     session.headers.update({"User-Agent": UA, "Accept-Language": "es-AR,es;q=0.9"})
-    sources = [x for x in cfg["sources"] if not only or x["site"] == only]
+    sources = prioritize_sources([x for x in cfg["sources"] if not only or x["site"] == only])
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     current: dict[str, dict[str, dict]] = {k: {} for k in SITES}
     errors = 0
+    browser = _start_argenprop_browser(sources)
+    try:
+        return _enrich_from_portals_run(cfg, only, session, sources, now, current, errors, browser)
+    finally:
+        if browser:
+            browser.close()
+
+
+def _enrich_from_portals_run(cfg, only, session, sources, now, current, errors, browser):
     for src in sources:
         site = src["site"]
         label = f"{site} · {src['name']}"
         try:
-            items, _ = scrape_source(session, src, cfg)
+            items, _ = scrape_source(session, src, cfg, browser=browser)
             print(f"[ok] {label}: {len(items)} avisos")
             for i in items:
                 current[site][i["id"]] = i
@@ -2792,7 +3003,9 @@ def main() -> int:
     session.headers.update({"User-Agent": UA, "Accept-Language": "es-AR,es;q=0.9"})
 
     in_actions = os.environ.get("GITHUB_ACTIONS", "").lower() == "true"
-    sources = [x for x in cfg["sources"] if not args.only or x["site"] == args.only]
+    sources = prioritize_sources(
+        [x for x in cfg["sources"] if not args.only or x["site"] == args.only]
+    )
 
     errors_by_site: dict[str, list[str]] = {k: [] for k in SITES}
     ok_zones: dict[str, set[str]] = {k: set() for k in SITES}
@@ -2801,85 +3014,95 @@ def main() -> int:
     last_pages: dict[str, list[tuple[str, list[dict]]]] = {k: [] for k in SITES}
     attempted = 0
     skipped_argenprop = False
+    browser = _start_argenprop_browser(sources, in_actions=in_actions)
 
-    for src in sources:
-        site = src["site"]
-        label = f"{site} · {src['name']}"
-        if in_actions and site == "argenprop":
-            skipped_argenprop = True
-            print(f"[skip] {label}: bloqueado desde Actions (sin aviso Telegram)", file=sys.stderr)
-            continue
-        attempted += 1
-        try:
-            items, last_page = scrape_source(session, src, cfg)
-            ok_zones[site].add(source_zone(src))
-            print(f"[ok] {label}: {len(items)} avisos")
-            last_pages[site].append((label, last_page))
-            for i in items:
-                current[site][i["id"]] = i
-        except (Blocked, requests.RequestException) as e:
-            failed_zones[site].add(source_zone(src))
-            msg = redact_secrets(f"{label}: {e}", token)
-            errors_by_site[site].append(msg)
-            print(f"[error] {msg}", file=sys.stderr)
-        time.sleep(random.uniform(*cfg["delay_seconds"]))
+    try:
+        for src in sources:
+            site = src["site"]
+            label = f"{site} · {src['name']}"
+            if in_actions and site == "argenprop":
+                skipped_argenprop = True
+                print(f"[skip] {label}: bloqueado desde Actions (sin aviso Telegram)", file=sys.stderr)
+                continue
+            attempted += 1
+            try:
+                items, last_page = scrape_source(session, src, cfg, browser=browser)
+                ok_zones[site].add(source_zone(src))
+                print(f"[ok] {label}: {len(items)} avisos", flush=True)
+                last_pages[site].append((label, last_page))
+                for i in items:
+                    current[site][i["id"]] = i
+            except (Blocked, requests.RequestException) as e:
+                failed_zones[site].add(source_zone(src))
+                msg = redact_secrets(f"{label}: {e}", token)
+                errors_by_site[site].append(msg)
+                print(f"[error] {msg}", file=sys.stderr)
+                if site == "argenprop" and browser is not None:
+                    wait = random.uniform(20, 30)
+                    print(f"[fetch] WAF; pausa {wait:.0f}s", file=sys.stderr)
+                    time.sleep(wait)
+                    continue
+            time.sleep(random.uniform(*cfg["delay_seconds"]))
 
-    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    any_ok = False
+        now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        any_ok = False
 
-    for site in SITES:
-        if args.only and site != args.only:
-            continue
-        if in_actions and site == "argenprop":
-            continue
-        matched = dedupe([i for i in current[site].values() if matches(i, cfg["filters"])])
-        state_preview, _ = load_portal(site, persist=not args.dry_run)
-        seen_ids = set(state_preview.get("listings") or {})
-        ok_zones[site] -= failed_zones[site]
-        coverage_notes = []
-        for label, last_page in last_pages[site]:
-            warn = coverage_warning(label, last_page, seen_ids, cfg["filters"])
-            if warn:
-                print(f"[warn] {warn}", file=sys.stderr)
-                coverage_notes.append(warn)
-        if process_portal(
-            site,
-            matched,
-            ok_zones[site],
-            errors_by_site[site],
+        for site in SITES:
+            if args.only and site != args.only:
+                continue
+            if in_actions and site == "argenprop":
+                continue
+            matched = dedupe([i for i in current[site].values() if matches(i, cfg["filters"])])
+            state_preview, _ = load_portal(site, persist=not args.dry_run)
+            seen_ids = set(state_preview.get("listings") or {})
+            ok_zones[site] -= failed_zones[site]
+            coverage_notes = []
+            for label, last_page in last_pages[site]:
+                warn = coverage_warning(label, last_page, seen_ids, cfg["filters"])
+                if warn:
+                    print(f"[warn] {warn}", file=sys.stderr)
+                    coverage_notes.append(warn)
+            if process_portal(
+                site,
+                matched,
+                ok_zones[site],
+                errors_by_site[site],
+                cfg,
+                dry_run=args.dry_run,
+                token=token,
+                chat_id=chat_id,
+                now=now,
+                today=today,
+                coverage_notes=coverage_notes,
+            ):
+                any_ok = True
+
+        maybe_weekly_summary(
             cfg,
             dry_run=args.dry_run,
             token=token,
             chat_id=chat_id,
             now=now,
             today=today,
-            coverage_notes=coverage_notes,
-        ):
-            any_ok = True
+            persist=not args.dry_run,
+        )
 
-    maybe_weekly_summary(
-        cfg,
-        dry_run=args.dry_run,
-        token=token,
-        chat_id=chat_id,
-        now=now,
-        today=today,
-        persist=not args.dry_run,
-    )
+        if skipped_argenprop:
+            print("[skip] Argenprop no corre en Actions; no se toca su estado", file=sys.stderr)
 
-    if skipped_argenprop:
-        print("[skip] Argenprop no corre en Actions; no se toca su estado", file=sys.stderr)
-
-    if any_ok:
-        return 0
-    if skipped_argenprop and not args.only and not attempted:
-        return 0
-    if skipped_argenprop and args.only == "zonaprop":
-        return 0
-    if skipped_argenprop and not any(errors_by_site[s] for s in SITES):
-        return 0
-    return 1
+        if any_ok:
+            return 0
+        if skipped_argenprop and not args.only and not attempted:
+            return 0
+        if skipped_argenprop and args.only == "zonaprop":
+            return 0
+        if skipped_argenprop and not any(errors_by_site[s] for s in SITES):
+            return 0
+        return 1
+    finally:
+        if browser:
+            browser.close()
 
 
 if __name__ == "__main__":

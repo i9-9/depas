@@ -108,6 +108,11 @@ export const SOURCE_STALE_HOURS = scoring.source_stale_hours;
 export const NETO_HARD_MEJOR_USD = scoring.neto_hard_mejor_usd;
 export const NETO_HARD_BIEN_USD = scoring.neto_hard_bien_usd;
 export const NETO_HARD_OK_USD = scoring.neto_hard_ok_usd;
+export const MIN_PRICE_USD = scoring.min_price_usd;
+export const REQUIRE_BALCON = scoring.require_balcon;
+export const INCLUDE_UNKNOWN_BALCON = scoring.include_unknown_balcon;
+export const REQUIRE_LIGHT = scoring.require_light;
+export const INCLUDE_UNKNOWN_LIGHT = scoring.include_unknown_light;
 
 type WeakRule = { street: string; min?: number; max?: number };
 export const WEAK_STREETS: WeakRule[] = (scoring.weak_streets || []).map((x: string | WeakRule) =>
@@ -360,18 +365,55 @@ export function applyAir(item: Listing): Listing {
   });
 }
 
+function cardHay(item: Pick<Listing, "title" | "address" | "url"> | Pick<RawListing, "title" | "address" | "url">): string {
+  const slug = (item.url || "").replace(/[-_./]+/g, " ");
+  return fold(`${item.title || ""} ${slug} ${item.address || ""}`);
+}
+
+export function hasBalcon(item: Pick<Listing, "title" | "address" | "url">): boolean | null {
+  const hay = cardHay(item);
+  if (hay.includes("sin balcon") || hay.includes("sin balcones")) return false;
+  if (hay.includes("balcon") || hay.includes("balcones")) return true;
+  return null;
+}
+
+export function hasLight(item: Pick<Listing, "title" | "address" | "url">): boolean | null {
+  const hay = cardHay(item);
+  if (/poca luz|sin luz|poco luminoso|\boscur/.test(hay)) return false;
+  if (/\b(depto|departamento|unidad)\s+intern[oa]s?\b/.test(hay)) return false;
+  if (/luminos|luz natural|mucha luz|todo luz|llena de luz|solead|vista abierta|vista panoram/.test(hay)) {
+    return true;
+  }
+  if (/\bal frente\b/.test(hay) && !hay.includes("frente a")) return true;
+  return null;
+}
+
 export function flipKeep(
-  item: Pick<Listing, "active" | "area" | "expensas_ars" | "tags" | "zone_unverified">,
+  item: Pick<
+    Listing,
+    "active" | "area" | "price" | "expensas_ars" | "tags" | "zone_unverified" | "title" | "address" | "url"
+  >,
 ): boolean {
   if (!item.active) return true;
   if (item.area == null) return false;
   if (item.area < scoring.min_area_m2) return false;
+  if (item.price == null || item.price < MIN_PRICE_USD) return false;
   if (item.expensas_ars != null && item.expensas_ars > EXPENSAS_LOUD_ARS) return false;
   const tags = item.tags || [];
   if (tags.includes("metro caro")) return false;
   if (tags.includes("edificio flojo") || tags.includes("edificio a reciclar")) return false;
   if (tags.includes("zona floja") || tags.includes("barrio del aviso no coincide")) return false;
   if (item.zone_unverified) return false;
+  if (REQUIRE_BALCON) {
+    const bal = hasBalcon(item);
+    if (bal === false) return false;
+    if (bal == null && !INCLUDE_UNKNOWN_BALCON) return false;
+  }
+  if (REQUIRE_LIGHT) {
+    const light = hasLight(item);
+    if (light === false) return false;
+    if (light == null && !INCLUDE_UNKNOWN_LIGHT) return false;
+  }
   return true;
 }
 
@@ -614,44 +656,88 @@ export function parseStreetNum(item: Pick<RawListing, "address" | "title">): [st
   return parsed;
 }
 
-export function placeKey(item: Pick<Listing, "address" | "title" | "area" | "ambientes">): string {
-  const street = streetKey(item.address || "") || streetKey(item.title || "");
+const PLACE_AREA_TOL = 5;
+const PLACE_AREA_SAME_PRICE_TOL = 15;
+
+type Placeable = Pick<Listing, "address" | "title" | "area" | "ambientes" | "price">;
+
+export function placeStreet(item: Placeable): string {
+  return streetKey(item.address || "") || streetKey(item.title || "");
+}
+
+export function placeKey(item: Placeable): string {
+  const street = placeStreet(item);
   if (!street || item.area == null || item.ambientes == null) return "";
   const bucket = Math.round(item.area / 5) * 5;
   return `${street}|${bucket}|${item.ambientes}`;
 }
 
+export function samePlace(a: Placeable, b: Placeable): boolean {
+  const street = placeStreet(a);
+  if (!street || street !== placeStreet(b)) return false;
+  if (a.ambientes == null || b.ambientes == null || a.ambientes !== b.ambientes) return false;
+  if (a.area == null || b.area == null) return false;
+  const delta = Math.abs(a.area - b.area);
+  if (delta <= PLACE_AREA_TOL) return true;
+  return a.price != null && a.price === b.price && delta <= PLACE_AREA_SAME_PRICE_TOL;
+}
+
+function mergeCluster(arr: Listing[]): Listing {
+  const ranked = [...arr].sort((a, b) => {
+    if (a.active !== b.active) return a.active ? -1 : 1;
+    if (Boolean(a.photo) !== Boolean(b.photo)) return a.photo ? -1 : 1;
+    return rankByScore(a, b);
+  });
+  const primary = ranked[0];
+  return {
+    ...primary,
+    ids: arr.map((x) => x.id),
+    mirrors: ranked.slice(1).map((x) => ({
+      id: x.id,
+      site: x.site,
+      url: x.url,
+      price: x.price,
+    })),
+  };
+}
+
 export function clusterListings(items: Listing[]): Listing[] {
-  const groups = new Map<string, Listing[]>();
   const leftover: Listing[] = [];
+  const byBlock = new Map<string, Listing[]>();
   for (const item of items) {
-    const key = placeKey(item);
-    if (!key) {
+    const street = placeStreet(item);
+    if (!street || item.area == null || item.ambientes == null) {
       leftover.push({ ...item, ids: item.ids?.length ? item.ids : [item.id], mirrors: item.mirrors || [] });
       continue;
     }
-    const arr = groups.get(key) || [];
+    const block = `${street}|${item.ambientes}`;
+    const arr = byBlock.get(block) || [];
     arr.push(item);
-    groups.set(key, arr);
+    byBlock.set(block, arr);
   }
   const clustered: Listing[] = [];
-  for (const arr of groups.values()) {
-    const ranked = [...arr].sort((a, b) => {
-      if (a.active !== b.active) return a.active ? -1 : 1;
-      if (Boolean(a.photo) !== Boolean(b.photo)) return a.photo ? -1 : 1;
-      return rankByScore(a, b);
-    });
-    const primary = ranked[0];
-    clustered.push({
-      ...primary,
-      ids: arr.map((x) => x.id),
-      mirrors: ranked.slice(1).map((x) => ({
-        id: x.id,
-        site: x.site,
-        url: x.url,
-        price: x.price,
-      })),
-    });
+  for (const pool of byBlock.values()) {
+    const parent = pool.map((_, i) => i);
+    const find = (i: number): number => {
+      while (parent[i] !== i) {
+        parent[i] = parent[parent[i]];
+        i = parent[i];
+      }
+      return i;
+    };
+    for (let i = 0; i < pool.length; i++) {
+      for (let j = i + 1; j < pool.length; j++) {
+        if (samePlace(pool[i], pool[j])) parent[find(j)] = find(i);
+      }
+    }
+    const groups = new Map<number, Listing[]>();
+    for (let i = 0; i < pool.length; i++) {
+      const root = find(i);
+      const arr = groups.get(root) || [];
+      arr.push(pool[i]);
+      groups.set(root, arr);
+    }
+    for (const arr of groups.values()) clustered.push(mergeCluster(arr));
   }
   return [...clustered, ...leftover];
 }
