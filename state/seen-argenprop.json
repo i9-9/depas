@@ -1,5 +1,12 @@
 {
  "listings": {
+  "argenprop:10280375": {
+   "first_seen": "2026-10-11T11:54:44+00:00",
+   "place": "visto 50|80|3",
+   "price": 132000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--10280375",
+   "zone": "Barrio Norte"
+  },
   "argenprop:17505092": {
    "first_seen": "2026-10-10T22:00:06+00:00",
    "place": "visto 110|55|3",
@@ -84,6 +91,13 @@
    "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--20169460",
    "zone": "Recoleta"
   },
+  "argenprop:20181024": {
+   "first_seen": "2026-10-11T11:54:44+00:00",
+   "place": "visto 301|85|3",
+   "price": 139000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--20181024",
+   "zone": "Barrio Norte"
+  },
   "argenprop:20252327": {
    "first_seen": "2026-10-10T22:00:06+00:00",
    "place": "visto 101|50|3",
@@ -100,6 +114,6 @@
   }
  },
  "meta": {
-  "last_error_day": "2026-10-10"
+  "coverage_week": "2026-W41"
  }
 }

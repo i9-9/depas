@@ -1,0 +1,42 @@
+{
+ "saved_at": "2026-10-12T11:24:30+00:00",
+ "top_drops": [],
+ "week": "2026-W42",
+ "zones": {
+  "Barrio Norte": {
+   "active": 7,
+   "drops": 0,
+   "median_usd_m2": 2044,
+   "n": 7,
+   "new": 0
+  },
+  "Botánico": {
+   "active": 1,
+   "drops": 0,
+   "median_usd_m2": 2364,
+   "n": 1,
+   "new": 0
+  },
+  "Palermo Chico": {
+   "active": 1,
+   "drops": 0,
+   "median_usd_m2": 2364,
+   "n": 1,
+   "new": 0
+  },
+  "Recoleta": {
+   "active": 4,
+   "drops": 0,
+   "median_usd_m2": 2174,
+   "n": 4,
+   "new": 0
+  },
+  "s/d": {
+   "active": 0,
+   "drops": 0,
+   "median_usd_m2": null,
+   "n": 0,
+   "new": 0
+  }
+ }
+}
