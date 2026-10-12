@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-11T21:05:45+00:00",
+ "last_change": "2026-10-12T20:24:54+00:00",
  "listings": [
   {
    "active": false,
@@ -289,7 +289,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuénaga al 700",
    "air_usd": 15375,
    "ambientes": 3,
@@ -304,7 +304,7 @@
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-12T20:24:54+00:00",
    "id": "zonaprop:55263580",
    "max_offer_usd": 101216,
    "neto_base_usd": 914,
@@ -3752,17 +3752,24 @@
   {
    "active": false,
    "address": "Paraguay 2617",
+   "air_usd": 18000,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 64.0,
+   "area_total": 64.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "decision": "descartar",
+   "exit_usd_m2": 2750,
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": "2026-10-10T20:41:24+00:00",
    "id": "zonaprop:60138686",
+   "max_offer_usd": 113157,
+   "neto_base_usd": 1448,
+   "neto_hard_usd": -22510,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/13/86/86/720x532/2078282628.jpg",
    "piso": 5,
@@ -3774,9 +3781,12 @@
      "price": 134000
     }
    ],
+   "reno_usd_m2": 375,
    "score": -1,
+   "seventy_offer_usd": 99200,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto"
    ],
    "title": "Tres ambientes al frente con balcón corrido en Recoleta. Paraguay 2617, entre Jean Jaurès ",
