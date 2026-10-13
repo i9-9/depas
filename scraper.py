@@ -1227,7 +1227,36 @@ def classify_zone(item: dict, f: dict | None = None) -> str | None:
     return rule.get("zone") or ""
 
 
+def in_recoleta_strip(item: dict, f: dict | None = None) -> bool:
+    """Franja de Recoleta (`recoleta_strip` en filters): calle + altura dentro de algún rango.
+
+    Sin franja configurada no recorta nada. Sin calle + altura, no entra.
+    """
+    rules = (f or {}).get("recoleta_strip") or []
+    if not rules:
+        return True
+    name, num = parse_street(item.get("address") or "", f)
+    if not name or num is None:
+        name, num = parse_street(item.get("title") or "", f)
+    if not name or num is None:
+        return False
+    return any(_rule_hits(r, name, num) for r in rules)
+
+
 def apply_zone(item: dict, f: dict, src: dict | None = None) -> bool:
+    """Zona por calle + altura; Recoleta además tiene que caer en la franja."""
+    ok = _apply_zone(item, f, src)
+    recoleta = item.get("zone") == "Recoleta" or (
+        not item.get("zone") and "recoleta" in _haystack(item, "any")
+    )
+    if ok and recoleta and not in_recoleta_strip(item, f):
+        item["zone"] = ""
+        item["zone_unverified"] = False
+        return False
+    return ok
+
+
+def _apply_zone(item: dict, f: dict, src: dict | None = None) -> bool:
     """Escribe item['zone']. False si la calle está fuera de los 4 barrios."""
     z = classify_zone(item, f)
     name, num = parse_street(item.get("address") or "", f)

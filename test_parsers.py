@@ -1422,6 +1422,43 @@ def test_areas_weights_expensas_signals_and_offer():
         assert web[key] == cfg[key], key
 
 
+def test_recoleta_strip_mechanism():
+    """Mecanismo de la franja con rangos de PRUEBA (no son los reales de config.json)."""
+    f = {
+        "street_zones": [
+            {"street": "juncal", "min": 1500, "max": 3199, "zone": "Recoleta"},
+            {"street": "guemes", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
+            {"street": "guemes", "min": 3200, "max": 3699, "zone": "Recoleta"},
+            {"street": "las heras", "min": 1500, "max": 3199, "zone": "Recoleta"},
+        ],
+        "recoleta_strip": [{"street": "guemes", "min": 3200, "max": 3299},
+                           {"street": "las heras", "min": 2000, "max": 2599}],
+        "allowed_barrios": ["recoleta", "barrio norte"],
+    }
+    def item(addr, claim="Recoleta"):
+        return {"title": "Depto", "address": f"{addr}, {claim}, Capital Federal", "url": "https://z/x.html", "blurb": ""}
+    dentro = item("Güemes 3250")
+    assert s.apply_zone(dentro, f) and dentro["zone"] == "Recoleta"
+    fuera = item("Güemes 3500")                     # Recoleta por calle, fuera de la franja
+    assert not s.apply_zone(fuera, f) and fuera["zone"] == ""
+    bn_claim = item("Güemes 3500", "Barrio Norte")  # la card dice Barrio Norte, la cuadra es Recoleta fuera de franja
+    assert not s.apply_zone(bn_claim, f)
+    sin_altura = item("Güemes", "Recoleta")
+    assert not s.apply_zone(sin_altura, f)
+    bn_real = item("Güemes 2000", "Barrio Norte")   # Barrio Norte por calle: no se toca
+    assert s.apply_zone(bn_real, f) and bn_real["zone"] == "Barrio Norte"
+    # sin franja configurada no recorta
+    f2 = {k: v for k, v in f.items() if k != "recoleta_strip"}
+    assert s.apply_zone(item("Güemes 3500"), f2)
+
+
+def test_recoleta_strip_config_not_closed():
+    """config.json: la franja real queda sin cerrar hasta confirmar alturas (ver README)."""
+    cfg = json.loads(Path("config.json").read_text(encoding="utf-8"))
+    assert not cfg["filters"].get("recoleta_strip")
+    assert "palermo hollywood" in cfg["filters"]["reject_barrios"]  # slugs sin verificar: zonas nuevas aún no entran
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

@@ -2,7 +2,7 @@
 
 Corre en GitHub Actions (gratis), 5 veces por día, y te manda por Telegram los avisos **nuevos** (y las bajas de precio) que cumplan tus filtros. Cada aviso dice *por qué* entró y, si la card trae foto, la manda. Los mismos avisos se publican en una web estática (Vercel, plan gratis) que se actualiza cuando el Action commitea datos nuevos.
 
-Filtros actuales (`config.json`): venta · con balcón · buena luz · Recoleta, Barrio Norte, Botánico, Palermo Chico · hasta 3 ambientes · mínimo 50 m² · precio entre USD 120.000 y 140.000 (gusto 125.000). Todos excluyentes: si la card no lo dice, no entra.
+Filtros actuales (`config.json`): venta · con balcón · buena luz · Recoleta (franja pendiente, ver «Pendiente»), Barrio Norte, Botánico, Palermo Chico · hasta 3 ambientes · mínimo 50 m² · precio entre USD 120.000 y 140.000 (gusto 125.000). Todos excluyentes: si la card no lo dice, no entra.
 
 Criterio (flip: buen edificio, unidad a reciclar, plata neta):
 
@@ -86,6 +86,9 @@ Las preferencias (época, reciclar, edificio, ya hecho, ocupado) están en `sign
 - Alternativa sin código: ambos portales tienen "Crear alerta" por email con tus filtros; sirve de respaldo.
 
 ## Pendiente / no verificado
+
+- **Franja de Recoleta (mecanismo hecho, rangos sin cerrar)**: `filters.recoleta_strip` en `config.json` es una lista de `{street, min, max}` (calle + altura, mismo formato que `street_zones`). Si está vacía no recorta nada (hoy está vacía). Cuando tiene rangos, un aviso de Recoleta —o cuya card nombre Recoleta sin calle resuelta— entra solo si su calle + altura cae en alguno; sin calle + altura, no entra. Aplica aunque la card diga «Barrio Norte» si la cuadra real resuelve a Recoleta por `street_zones`. Barrio Norte, Botánico y Palermo Chico no se tocan. Límites pedidos: Norte Av. Las Heras, Sur Av. Arenales, Este Parque Vicente López y Planes, Oeste Av. Coronel Díaz. Faltan las alturas verificadas (los portales dieron 403 desde este entorno), sobre todo el borde del parque; no se inventaron.
+- **Palermo Hollywood y Palermo Nuevo**: slugs de Zonaprop, Argenprop y Mercado Libre sin verificar (no hay `<title>`/`<h1>` comprobado), así que no hay fuentes nuevas y siguen en `reject_barrios`. Metro fijo de salida (`exit_usd_m2`): sin dato verificado, queda sin definir.
 
 - **Fecha de publicación del portal**: las cards de listado de Zonaprop no la muestran; no se parsea.
 - **Argenprop, fixture fresco**: esta ronda el WAF contestó 202 y no se pudo guardar HTML nuevo. Expensas/`N años` se parsean con el formato ya visto en cards (y en el HTML sintético de tests). Conviene bajar un listado desde la Mac y dejarlo en `fixtures/`.
