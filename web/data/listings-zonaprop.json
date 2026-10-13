@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-12T20:24:54+00:00",
+ "last_change": "2026-10-13T02:10:44+00:00",
  "listings": [
   {
    "active": false,
@@ -2983,17 +2983,24 @@
   {
    "active": false,
    "address": "Paraguay 2386",
+   "air_usd": 3500,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 60.0,
+   "area_total": 60.0,
    "closing_ref_usd": null,
    "cochera": null,
    "days_seen": null,
+   "decision": "descartar",
+   "exit_usd_m2": 2750,
    "expensas_ars": 132000,
    "expensas_text": "$ 132.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
    "gone_at": "2026-10-10T20:41:24+00:00",
    "id": "zonaprop:59883738",
+   "max_offer_usd": 106740,
+   "neto_base_usd": -12214,
+   "neto_hard_usd": -34840,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/88/37/38/720x532/2072005536.jpg",
    "piso": null,
@@ -3005,9 +3012,12 @@
      "price": 139000
     }
    ],
+   "reno_usd_m2": 375,
    "score": -2,
+   "seventy_offer_usd": 93000,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto"
    ],
    "title": "Deparatamento de 3 Ambientes Excelente Ubicacion!! El departamento esta compuesto por un L",
