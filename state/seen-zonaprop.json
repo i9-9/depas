@@ -1170,6 +1170,14 @@
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-o-3-ambientes-balcon-patio-60409929.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:60425458": {
+   "first_seen": "2026-10-13T18:24:03+00:00",
+   "key": "french 2900|135000|53|2",
+   "place": "french 2900|55|2",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-piso-alto-con-balcon-en-60425458.html",
+   "zone": "Recoleta"
   }
  },
  "meta": {

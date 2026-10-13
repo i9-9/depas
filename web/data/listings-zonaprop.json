@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-13T02:10:44+00:00",
+ "last_change": "2026-10-13T18:24:03+00:00",
  "listings": [
   {
    "active": false,
@@ -2644,7 +2644,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Rodriguez Peña  al 1500",
    "air_usd": -11125,
    "ambientes": 2,
@@ -2659,7 +2659,7 @@
    "expensas_ars": 165000,
    "expensas_text": "$ 165.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-13T18:24:03+00:00",
    "id": "zonaprop:59785223",
    "max_offer_usd": 94025,
    "neto_base_usd": -25905,
@@ -5615,6 +5615,62 @@
    "usd_per_m2": 1846,
    "vs_median_n": 15,
    "vs_median_pct": -17,
+   "zone": "Recoleta",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "French al 2900",
+   "address_unverified": false,
+   "air_usd": -9125,
+   "ambientes": 2,
+   "antiguedad_years": 10,
+   "area": 53.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 53.0,
+   "breakeven_exit_usd_m2": 3669,
+   "closing_ref_usd": 129735,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": "descartar",
+   "exit_usd_m2": 2750,
+   "expensas_ars": 120000,
+   "expensas_text": "$ 120.000 Expensas",
+   "first_seen": "2026-10-13T18:24:03+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60425458",
+   "max_offer_usd": 94269,
+   "neto_base_usd": -23630,
+   "neto_hard_usd": -43989,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/42/54/58/720x532/2085144136.jpg",
+   "piso": 10,
+   "price": 135000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-13T18:24:03+00:00",
+     "price": 135000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": -0.1458,
+   "roi_hard": -0.2504,
+   "score": -3,
+   "seventy_offer_usd": 82150,
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar",
+    "sobre presupuesto",
+    "sin aire"
+   ],
+   "title": "Excelente departamento de 2 ambientes en Recoleta, límite con PalermoSe trata de un piso 1",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-piso-alto-con-balcon-en-60425458.html",
+   "usd_per_m2": 2547,
+   "vs_median_n": null,
+   "vs_median_pct": null,
    "zone": "Recoleta",
    "zone_unverified": false
   }
