@@ -26,7 +26,7 @@ Criterio (flip: buen edificio, unidad a reciclar, plata neta):
 5. **Primera corrida**: pestaña Actions → "Buscar departamentos" → Run workflow.
    Te llega un resumen con los avisos actuales de ese portal (los marca como vistos) y de ahí en más solo los nuevos.
 
-Horarios (hora Argentina): 08:17, 11:17, 14:17, 17:17, 20:17. Se cambian en `.github/workflows/buscar.yml` (el cron está en UTC).
+Horarios (hora Argentina): 08:17, 11:17, 14:17, 17:17, 20:17. Se cambian en `.github/workflows/buscar.yml`.
 
 ## Web en Vercel (plan gratis, repo privado)
 
@@ -66,7 +66,7 @@ Las preferencias (época, reciclar, edificio, ya hecho, ocupado) están en `sign
 - **Páginas = robots.txt**, no un número arbitrario (confirmado 2026-10-10):
   - Zonaprop: `Allow: /*pagina-2.html$` … `pagina-5.html$`, después `Disallow: /*pagina-*.html`. Tope 5.
   - Argenprop: `Allow: /*?pagina-1$` … `pagina-3$`, después `Disallow: /*?pagina-`. Tope 3. También `Disallow: /*?*&*`: no se pueden combinar query params (`?orden-…&pagina-2` está bloqueado). La paginación se arma como `?pagina-N` sobre la URL sin query.
-  - Mercado Libre (inmuebles): el listado de categoría está permitido. `Disallow: /*_Desde_` (paginación), `/*_PriceRange_` / `/*_PriceMin_` / `/*_PriceMax_`. Tope 1 página por URL. La cobertura se parte por barrio + ambientes (slugs verificados en el `<title>`/`<h1>`). No se usa `_Desde_`. El precio tope queda en `matches()`.
+  - Mercado Libre (inmuebles): el listado de categoría está permitido. `Disallow: /*_Desde_` (paginación), `/*_PriceRange_` / `/*_PriceMin_` / `/*_PriceMax_`. Tope 1 página por URL. La cobertura se parte por barrio + 1/2/3 ambientes y, en 2/3 ambientes, también por 1 y 2 dormitorios (slugs verificados en el `<title>`/`<h1>`). No se usa `_Desde_`. El precio tope queda en `matches()`.
 - **Sin orden por más recientes**: Zonaprop bloquea `*-orden-*` salvo `*-orden-precio-ascendente.html`. Argenprop bloquea `/*?*orden-` salvo `?orden-menorprecio`. No usamos ninguno de los dos (el de precio mezclaría el recorte y, en Argenprop, no se puede juntar con `?pagina-N`).
 - **Cobertura**: si en la última página *permitida* de una fuente todavía hay avisos que pasan filtros y nunca vimos, se loguea un warning y Telegram avisa como máximo una vez por semana (`state/*/meta.coverage_week`) con el texto «esta fuente puede tener avisos fuera de las páginas permitidas; conviene partirla en más URLs».
 - **Partir fuentes saturadas** (Zonaprop, slugs verificados en el portal; el `<title>` conservó barrio, balcón y el filtro):
@@ -75,8 +75,8 @@ Las preferencias (época, reciclar, edificio, ya hecho, ocupado) están en `sign
   - Botánico y Palermo Chico: 1 / 2 / 3 amb, cada uno con `menos-140000` (conteos verificados entran en 5 páginas).
   - Los tramos `mas-X` no pueden llevar también `menos-140000`: esa combinación redirige y **tira el balcón**. El techo de 140k queda en `matches()`. Esos tramos altos pueden seguir saturando; el warning de cobertura lo dice.
 - **Argenprop**: URL general por barrio (`/dolares-hasta-140000`) más 2 y 3 ambientes en Recoleta, Barrio Norte y Botánico 2 amb (slugs verificados). 1 ambiente no tiene slug propio (redirige al listado general). Palermo Chico no se partió: el slug de 2 amb no devolvió título usable. En Chrome solo se pide la página 1 de cada URL: `?pagina-2` dispara Human Verification y quema la sesión.
-- **Un depto, una fila**: `same_place` junta el mismo aviso entre portales (calle + ambientes + m² ±5, o ±15 si el precio es el mismo: Zonaprop a menudo tot. vs Mercado Libre cubiertos). En Telegram el segundo portal no vuelve a gritar. En la web se ve una fila con “también en …”.
-- **Mercado Libre**: 1 página por URL (robots bloquea `_Desde_`). Partido por barrio + 1/2/3 ambientes. Títulos verificados 2026-10-10 (`Departamentos en Venta en {barrio}, Capital Federal, N ambiente(s)`). Sin redirect. No hay filtro de precio usable (`_PriceRange_` está bloqueado). El techo de 140k queda en `matches()`. Las cards de emprendimiento (`EMPRENDIMIENTO` / `Desde US$`) se descartan. Precio en la card: `US$ 110.000`. m²: `cubiertos`.
+- **Un depto, una fila**: `same_place` junta el mismo aviso entre portales (calle + ambientes + m² ±5, o el mismo precio: Zonaprop a menudo tot. vs Mercado Libre cubiertos). En Telegram el segundo portal no vuelve a gritar. En la web se ve una fila con “también en …”.
+- **Mercado Libre**: 1 página por URL (robots bloquea `_Desde_`). Partido por barrio + 1/2/3 ambientes, y 2/3 ambientes también × 1/2 dormitorios (el ranking de la página 1 cambia). Títulos verificados 2026-10-10 y 2026-10-14 (`Departamentos en Venta en {barrio}, Capital Federal, N ambiente(s)[, M dormitorio(s)]`). Sin redirect. No hay filtro de precio usable (`_PriceRange_` está bloqueado). El techo de 140k queda en `matches()`. Las cards de emprendimiento (`EMPRENDIMIENTO` / `Desde US$`) se descartan. Precio en la card: `US$ 110.000`. m²: `cubiertos`. Un split vacío (`ui-search-rescue__title`) no tira el barrio.
 - **Fecha de publicación del portal**: las cards de listado de Zonaprop (fixture real) no traen “publicado hace X”. No se parsea. `días` es desde `first_seen` del buscador.
 - **Campos extra verificados**: expensas ARS en Zonaprop (`$ 350.000 Expensas` en la card). Piso/cochera solo si el texto de la card lo dice con un patrón claro (`7° piso`, `planta baja`, `cochera` / `sin cochera`). Antigüedad: `N años` o “a estrenar”.
 - **Argenprop HTML de esta ronda**: WAF (202) desde este entorno; no se guardó fixture nuevo. El parseo de expensas/`N años` usa el mismo formato que el HTML sintético de tests (copiado de cards reales en la primera versión). Pendiente: bajar un fixture fresco desde la Mac.
@@ -132,11 +132,11 @@ Una vez:
 6. `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.search-amb.argenprop.plist`
    Si ya lo tenías: `launchctl bootout gui/$(id -u)/com.search-amb.argenprop` y después `bootstrap` de nuevo.
 
-La Mac tiene que estar encendida, y git tiene que poder pushear solo (llave SSH o `gh auth`). Horarios: 8:20, 11:20, 14:20, 17:20, 20:20. Log: `~/Library/Logs/search-amb/argenprop-local.log`. El wrapper vive fuera de `Documents`: launchd no puede abrir stdout ahí (EX_CONFIG 78) ni ejecutar scripts de esa carpeta (exit 126).
+La Mac tiene que estar encendida, y git tiene que poder pushear solo (llave SSH o `gh auth`). Horarios: 8:20, 11:20, 14:20, 17:20, 20:20. Log: `~/Library/Logs/search-amb/argenprop-local.log`. El wrapper vive en `~/Library/Application Support/search-amb/` (launchd no corre bien scripts desde Dropbox/Documents). El `ROOT` del wrapper tiene que ser **esta** carpeta del repo.
 
 ```bash
 ./scripts/buscar-argenprop-local.sh           # scrape + sync
 ./scripts/buscar-argenprop-local.sh --no-sync # solo scrape
 ```
 
-Cron equivalente: `20 8,11,14,17,20 * * * /Users/ivan/Documents/Codigo/search_amb/scripts/buscar-argenprop-local.sh`
+Cron equivalente: `20 8,11,14,17,20 * * * /Users/wohl5/Dropbox/USUARIOS/IVAN/CURSOR/GIF_MAKER/depas/scripts/buscar-argenprop-local.sh`

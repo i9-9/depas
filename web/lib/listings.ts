@@ -110,9 +110,7 @@ export const NETO_HARD_BIEN_USD = scoring.neto_hard_bien_usd;
 export const NETO_HARD_OK_USD = scoring.neto_hard_ok_usd;
 export const MIN_PRICE_USD = scoring.min_price_usd;
 export const REQUIRE_BALCON = scoring.require_balcon;
-export const INCLUDE_UNKNOWN_BALCON = scoring.include_unknown_balcon;
 export const REQUIRE_LIGHT = scoring.require_light;
-export const INCLUDE_UNKNOWN_LIGHT = scoring.include_unknown_light;
 
 type WeakRule = { street: string; min?: number; max?: number };
 export const WEAK_STREETS: WeakRule[] = (scoring.weak_streets || []).map((x: string | WeakRule) =>
@@ -167,6 +165,8 @@ export function applyValue(item: Listing): Listing {
 }
 
 export function streetNameOf(item: Pick<Listing, "address" | "title">): string {
+  const [name] = parseStreetNum(item);
+  if (name) return name;
   const key = streetKey(item.address || "") || streetKey(item.title || "");
   return key.replace(/\s+\d+$/, "").trim();
 }
@@ -404,16 +404,10 @@ export function flipKeep(
   if (tags.includes("edificio flojo") || tags.includes("edificio a reciclar")) return false;
   if (tags.includes("zona floja") || tags.includes("barrio del aviso no coincide")) return false;
   if (item.zone_unverified) return false;
-  if (REQUIRE_BALCON) {
-    const bal = hasBalcon(item);
-    if (bal === false) return false;
-    if (bal == null && !INCLUDE_UNKNOWN_BALCON) return false;
-  }
-  if (REQUIRE_LIGHT) {
-    const light = hasLight(item);
-    if (light === false) return false;
-    if (light == null && !INCLUDE_UNKNOWN_LIGHT) return false;
-  }
+  // Balcón y luz ya los cortó el scraper con el texto de la card. El JSON no
+  // guarda ese blurb: reparsear título/URL tira avisos que sí habían pasado.
+  if (REQUIRE_BALCON && hasBalcon(item) === false) return false;
+  if (REQUIRE_LIGHT && hasLight(item) === false) return false;
   return true;
 }
 
@@ -460,12 +454,21 @@ export function fold(s: string): string {
 }
 
 const STREET_NOISE =
-  /\b(recoleta|barrio norte|botanico|palermo chico|palermo|capital federal|caba|argentina|departamento|depto|ambientes|amb)\b/g;
+  /\b(recoleta|barrio norte|botanico|palermo chico|palermo|capital federal|caba|argentina|departamento|depto|ambientes|amb|visto|fotos?)\b/g;
+
+function stripListChrome(t: string): string {
+  t = t.replace(/ver\s+m[aá]s\s+fotos?/gi, " ");
+  t = t.replace(/\b(visto|fotos?)\s+\d[\d.]*\b/gi, " ");
+  t = t.replace(/\b\d+\s*\/\s*\d+\b/g, " ");
+  t = t.replace(/(?:^|\s)\+\s*\d+(?=\s|$)/g, " ");
+  return t;
+}
 
 export function streetKey(address: string): string {
   let t = fold(address || "");
   t = t.replace(/avenida/g, "av").replace(/av\./g, "av ");
   t = t.replace(/(\d)\.(\d{3})\b/g, "$1$2");
+  t = stripListChrome(t);
   t = t.replace(/\bal\s+/g, " ");
   t = t.replace(STREET_NOISE, " ");
   t = t.replace(/[^a-z0-9\s]/g, " ");
@@ -526,6 +529,7 @@ function cleanStreetText(text: string): string {
   let t = fold(text || "");
   t = t.replace(/avenida/g, " ").replace(/av\./g, " ");
   t = t.replace(/(\d)\.(\d{3})\b/g, "$1$2");
+  t = stripListChrome(t);
   t = t.replace(/\bal\s+/g, " ");
   t = t.replace(STREET_NOISE, " ");
   t = t.replace(/[^a-z0-9\s]/g, " ");
@@ -657,11 +661,12 @@ export function parseStreetNum(item: Pick<RawListing, "address" | "title">): [st
 }
 
 const PLACE_AREA_TOL = 5;
-const PLACE_AREA_SAME_PRICE_TOL = 15;
 
 type Placeable = Pick<Listing, "address" | "title" | "area" | "ambientes" | "price">;
 
 export function placeStreet(item: Placeable): string {
+  const [name, num] = parseStreetNum(item);
+  if (name && num != null) return `${name} ${num}`;
   return streetKey(item.address || "") || streetKey(item.title || "");
 }
 
@@ -679,12 +684,22 @@ export function samePlace(a: Placeable, b: Placeable): boolean {
   if (a.area == null || b.area == null) return false;
   const delta = Math.abs(a.area - b.area);
   if (delta <= PLACE_AREA_TOL) return true;
-  return a.price != null && a.price === b.price && delta <= PLACE_AREA_SAME_PRICE_TOL;
+  return a.price != null && a.price === b.price;
+}
+
+function hasAreaBreakdown(item: Listing): boolean {
+  return item.area_covered != null && (item.area_total != null || item.area_semi != null);
 }
 
 function mergeCluster(arr: Listing[]): Listing {
   const ranked = [...arr].sort((a, b) => {
     if (a.active !== b.active) return a.active ? -1 : 1;
+    const ba = Number(hasAreaBreakdown(a));
+    const bb = Number(hasAreaBreakdown(b));
+    if (bb !== ba) return bb - ba;
+    const ca = Number(a.area_covered != null);
+    const cb = Number(b.area_covered != null);
+    if (cb !== ca) return cb - ca;
     if (Boolean(a.photo) !== Boolean(b.photo)) return a.photo ? -1 : 1;
     return rankByScore(a, b);
   });

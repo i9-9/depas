@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-13T18:24:03+00:00",
+ "last_change": "2026-10-14T21:27:49+00:00",
  "listings": [
   {
    "active": false,
@@ -289,22 +289,26 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Azcuénaga al 700",
+   "address_unverified": false,
    "air_usd": 15375,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 57.0,
+   "area_covered": null,
+   "area_semi": null,
    "area_total": 57.0,
-   "closing_ref_usd": null,
+   "breakeven_exit_usd_m2": 3144,
+   "closing_ref_usd": 115320,
    "cochera": null,
-   "days_seen": null,
+   "days_seen": 4,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-12T20:24:54+00:00",
+   "gone_at": null,
    "id": "zonaprop:55263580",
    "max_offer_usd": 101216,
    "neto_base_usd": 914,
@@ -313,14 +317,17 @@
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/55/26/35/80/720x532/1952294644.jpg",
    "piso": null,
    "price": 120000,
-   "price_drops": null,
+   "price_drops": 0,
    "price_history": [
     {
      "date": "2026-10-10T04:06:21+00:00",
      "price": 120000
     }
    ],
+   "price_source": "card",
    "reno_usd_m2": 375,
+   "roi_base": 0.0062,
+   "roi_hard": -0.1253,
    "score": 0,
    "seventy_offer_usd": 88350,
    "site": "zonaprop",
@@ -329,10 +336,11 @@
    ],
    "title": "Excelente departamento de 3 ambientes reciclado, con balcón al frente y patio, ubicado en ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-55263580.html",
-   "usd_per_m2": null,
-   "vs_median_n": null,
-   "vs_median_pct": null,
-   "zone": "Barrio Norte"
+   "usd_per_m2": 2105,
+   "vs_median_n": 10,
+   "vs_median_pct": 1,
+   "zone": "Barrio Norte",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -5060,22 +5068,26 @@
    "zone": "Recoleta"
   },
   {
-   "active": false,
+   "active": true,
    "address": "San Luis 3057",
+   "address_unverified": false,
    "air_usd": 13000,
    "ambientes": 2,
    "antiguedad_years": null,
    "area": 56.0,
+   "area_covered": null,
+   "area_semi": null,
    "area_total": 56.0,
-   "closing_ref_usd": null,
+   "breakeven_exit_usd_m2": 3184,
+   "closing_ref_usd": 115320,
    "cochera": null,
-   "days_seen": null,
+   "days_seen": 4,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 115000,
    "expensas_text": "$ 115.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-10T14:42:59+00:00",
+   "gone_at": null,
    "id": "zonaprop:60348201",
    "max_offer_usd": 99669,
    "neto_base_usd": -1148,
@@ -5084,14 +5096,17 @@
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/82/01/720x532/2083219957.jpg",
    "piso": null,
    "price": 120000,
-   "price_drops": null,
+   "price_drops": 0,
    "price_history": [
     {
      "date": "2026-10-10T04:06:21+00:00",
      "price": 120000
     }
    ],
+   "price_source": "card",
    "reno_usd_m2": 375,
+   "roi_base": -0.0078,
+   "roi_hard": -0.1363,
    "score": 0,
    "seventy_offer_usd": 86800,
    "site": "zonaprop",
@@ -5100,10 +5115,11 @@
    ],
    "title": "Departamento de dos ambientes y medio, muy luminoso, con balcón corrido al frente y excele",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-dos-ambientes-y-medio-con-doble-60348201.html",
-   "usd_per_m2": null,
-   "vs_median_n": null,
-   "vs_median_pct": null,
-   "zone": "Barrio Norte"
+   "usd_per_m2": 2143,
+   "vs_median_n": 10,
+   "vs_median_pct": 3,
+   "zone": "Barrio Norte",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -5136,7 +5152,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Peña al 2400",
    "air_usd": 625,
    "ambientes": 2,
@@ -5147,7 +5163,7 @@
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-14T21:27:49+00:00",
    "id": "zonaprop:60351140",
    "max_offer_usd": 97201,
    "neto_base_usd": -14373,

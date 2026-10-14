@@ -205,18 +205,12 @@
       "max": 1499,
       "out": true
     },
-    {
-      "street": "santa fe",
-      "min": 1500,
-      "max": 3199,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "santa fe",
-      "min": 3200,
-      "max": 3499,
-      "zone": "Recoleta"
-    },
+      {
+        "street": "santa fe",
+        "min": 1500,
+        "max": 3499,
+        "zone": "Barrio Norte"
+      },
     {
       "street": "santa fe",
       "min": 3500,
@@ -747,10 +741,10 @@
       "zone": "Barrio Norte"
     },
     {
-      "street": "coronel diaz",
-      "min": 1000,
-      "max": 1899,
-      "zone": "Recoleta"
+        "street": "coronel diaz",
+        "min": 1000,
+        "max": 1899,
+        "zone": "Barrio Norte"
     },
     {
       "street": "coronel diaz",

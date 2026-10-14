@@ -1,9 +1,9 @@
 {
- "last_change": "2026-10-11T17:53:16+00:00",
+ "last_change": "2026-10-14T21:27:49+00:00",
  "listings": [
   {
    "active": true,
-   "address": "",
+   "address": "Avenida Córdoba 2400, Piso 5°",
    "address_unverified": false,
    "air_usd": 58000,
    "ambientes": 3,
@@ -27,7 +27,7 @@
    "neto_base_usd": 39738,
    "neto_hard_usd": 11181,
    "old_price": null,
-   "photo": "https://www.argenprop.com/static-content/57308201/50eab1c0-14b6-4c5d-8e0a-a4acc6dcefa5_u_small.jpg",
+   "photo": "https://www.argenprop.com/static-content/57308201/7d2c38e4-9b84-4e73-94b9-bcdc084a1c55_u_small.jpg",
    "piso": 5,
    "price": 132000,
    "price_drops": 0,
@@ -41,14 +41,15 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2348,
    "roi_hard": 0.0596,
-   "score": 2,
+   "score": 4,
    "seventy_offer_usd": 124000,
    "site": "argenprop",
    "tags": [
     "sobre presupuesto",
+    "metro muy barato",
     "aire amplio"
    ],
-   "title": "+ 13 Ver más fotos 1 /21 Visto 50 Avenida Córdoba 2400, Piso 5°, Barrio Norte USD 132.000 ",
+   "title": "Avenida Córdoba 2400, Piso 5°, Barrio Norte",
    "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--10280375",
    "usd_per_m2": 1650,
    "vs_median_n": 15,
@@ -332,7 +333,7 @@
   },
   {
    "active": true,
-   "address": "",
+   "address": "General Lucio Norberto Mansilla 2600",
    "address_unverified": false,
    "air_usd": 22500,
    "ambientes": 3,
@@ -376,7 +377,7 @@
    "tags": [
     "sobre presupuesto"
    ],
-   "title": "+ 14 Ver más fotos 1 /22 Visto 2.000 General Lucio Norberto Mansilla 2600, Barrio Norte US",
+   "title": "General Lucio Norberto Mansilla 2600, Barrio Norte US",
    "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--18997022",
    "usd_per_m2": 2044,
    "vs_median_n": 50,
@@ -443,7 +444,7 @@
   },
   {
    "active": true,
-   "address": "",
+   "address": "General Lucio Norberto Mansilla 2500",
    "address_unverified": false,
    "air_usd": 19625,
    "ambientes": 3,
@@ -487,7 +488,7 @@
    "tags": [
     "sobre presupuesto"
    ],
-   "title": "+ 12 Ver más fotos 1 /20 Visto 4.000 General Lucio Norberto Mansilla 2500, Recoleta USD 13",
+   "title": "General Lucio Norberto Mansilla 2500, Recoleta",
    "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--19533107",
    "usd_per_m2": 2063,
    "vs_median_n": 50,
@@ -720,7 +721,7 @@
   },
   {
    "active": true,
-   "address": "",
+   "address": "Avenida Pueyrredón 900",
    "address_unverified": false,
    "air_usd": 65250,
    "ambientes": 3,
@@ -758,14 +759,15 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2531,
    "roi_hard": 0.0733,
-   "score": 1,
+   "score": 3,
    "seventy_offer_usd": 133300,
    "site": "argenprop",
    "tags": [
     "sobre presupuesto",
+    "metro muy barato",
     "aire amplio"
    ],
-   "title": "+ 19 Ver más fotos 1 /27 Visto 301 Avenida Pueyrredón 900, Barrio Norte USD 139.000 + $280",
+   "title": "Avenida Pueyrredón 900, Barrio Norte",
    "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--20181024",
    "usd_per_m2": 1616,
    "vs_median_n": 15,

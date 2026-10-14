@@ -4,6 +4,7 @@
 Uso:
     python scraper.py                    # corrida normal (usa TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID)
     python scraper.py --dry-run          # no manda Telegram ni guarda estado, imprime en consola
+    python scraper.py --no-notify        # guarda archivos; no manda Telegram
     python scraper.py --only argenprop   # solo Argenprop (para cron/launchd en la Mac)
     python scraper.py --only mercadolibre
 """
@@ -290,6 +291,45 @@ def _zonaprop_address(text: str) -> str:
     return ""
 
 
+def _argenprop_address(text: str) -> str:
+    """Calle + altura. Ignora el chrome de galería (Ver más fotos / Visto N)."""
+    t = _strip_list_chrome(re.sub(r"\s+", " ", text or ""))
+    t = re.sub(r"^\s*\+\s*\d+\s*", "", t).strip(" -")
+    head = re.split(r"\bUSD\b|\bUS\$", t, maxsplit=1, flags=re.I)[0]
+    m = re.search(r"dormitorios?\s+(.+)$", head, re.I)
+    if m:
+        addr = m.group(1).strip(" -,")
+        if 8 <= len(addr) < 120 and not re.search(r"ver\s+m[aá]s|\bvisto\b|\bfotos?\b", addr, re.I):
+            return addr
+    m = re.search(
+        r"((?:Av(?:enida|\.)?\s+|Avenida\s+|General\s+|Gral\.?\s+)?"
+        r"[A-Za-zÁÉÍÓÚÑáéíóúñ.][A-Za-zÁÉÍÓÚÑáéíóúñ.]*"
+        r"(?:\s+[A-Za-zÁÉÍÓÚÑáéíóúñ.]+){0,4}"
+        r"\s+\d{2,5}"
+        r"(?:,\s*Piso\s+\d+[°º]?)?)",
+        head,
+        re.I,
+    )
+    if not m:
+        return ""
+    addr = re.sub(r"\s+", " ", m.group(1)).strip(" -,")
+    if re.search(r"ver\s+m[aá]s|\bvisto\b", addr, re.I):
+        return ""
+    return addr[:120]
+
+
+def _argenprop_title(link_text: str, address: str) -> str:
+    """Título usable: sin 'Ver más fotos' ni el contador de la card."""
+    t = _strip_list_chrome(re.sub(r"\s+", " ", link_text or "")).strip(" -")
+    t = re.sub(r"^\s*\+\s*\d+\s*", "", t).strip(" -")
+    m = re.match(r"(.+?)\s+USD\b", t, re.I)
+    if m:
+        t = m.group(1).strip(" -,")
+    if re.search(r"ver\s+m[aá]s|\bvisto\s+\d|\bfotos?\s+\d", t, re.I):
+        t = ""
+    return (t or address)[:90]
+
+
 def parse_card(site: str, text: str, card=None) -> dict:
     out = {
         "price": None,
@@ -328,9 +368,7 @@ def parse_card(site: str, text: str, card=None) -> dict:
         out["ambientes"] = 1
 
     if site == "argenprop":
-        m = re.search(r"dormitorios?\s+(.+?)\s+USD", text.replace("\n", " "))
-        if m and len(m.group(1)) < 120:
-            out["address"] = m.group(1).strip()
+        out["address"] = _argenprop_address(text)
     elif site == "mercadolibre":
         m = re.search(
             r"m² cubiertos\s+(.+?)(?:\s+Destacado|\s+PUBLICADO|$)",
@@ -402,8 +440,10 @@ def parse_page(html_text: str, site: str, base_url: str) -> list[dict]:
         if data["price"] is None:
             continue  # sin precio en USD: no se puede comparar
         url = href if href.startswith("http") else base_url.split("/", 3)[0] + "//" + base_url.split("/")[2] + href
-        url = url.split("?")[0]
+        url = url.split("?")[0].split("#")[0]
         title = re.sub(r"^[-\s]+", "", a.get_text(" ", strip=True))[:90]
+        if site == "argenprop":
+            title = _argenprop_title(title, data.get("address") or "") or title
         item = {
             "id": lid,
             "site": site,
@@ -1008,8 +1048,17 @@ def save_pick(listings: list[dict]) -> dict:
 
 _STREET_NOISE = re.compile(
     r"\b(recoleta|barrio norte|botanico|palermo chico|palermo|capital federal|caba|"
-    r"argentina|departamento|depto|ambientes|amb)\b"
+    r"argentina|departamento|depto|ambientes|amb|visto|fotos?)\b"
 )
+
+
+def _strip_list_chrome(t: str) -> str:
+    """Argenprop mete 'Ver más fotos 1 /27' y 'Visto 50/301' delante de la calle."""
+    t = re.sub(r"ver\s+m[aá]s\s+fotos?", " ", t, flags=re.I)
+    t = re.sub(r"\b(visto|fotos?)\s+\d[\d.]*\b", " ", t, flags=re.I)
+    t = re.sub(r"\b\d+\s*/\s*\d+\b", " ", t)
+    t = re.sub(r"(?:(?<=^)|(?<=\s))\+\s*\d+(?=\s|$)", " ", t)
+    return t
 
 
 def street_key(address: str) -> str:
@@ -1017,6 +1066,7 @@ def street_key(address: str) -> str:
     t = fold(address or "")
     t = t.replace("avenida", "av").replace("av.", "av ")
     t = re.sub(r"(\d)\.(\d{3})\b", r"\1\2", t)
+    t = _strip_list_chrome(t)
     t = re.sub(r"\bal\s+", " ", t)
     t = _STREET_NOISE.sub(" ", t)
     t = re.sub(r"[^a-z0-9\s]", " ", t)
@@ -1077,6 +1127,7 @@ def _clean_street_text(text: str) -> str:
     t = fold(text or "")
     t = t.replace("avenida", " ").replace("av.", " ")
     t = re.sub(r"(\d)\.(\d{3})\b", r"\1\2", t)
+    t = _strip_list_chrome(t)
     t = re.sub(r"\bal\s+", " ", t)
     t = _STREET_NOISE.sub(" ", t)
     t = re.sub(r"[^a-z0-9\s]", " ", t)
@@ -1130,6 +1181,15 @@ def parse_street(text: str, f: dict | None = None) -> tuple[str, int | None]:
     if m:
         return norm_street(m.group(1)), int(m.group(2))
     return norm_street(t), None
+
+
+def place_street(item: dict, f: dict | None = None) -> str:
+    """Calle + altura canónica. Recupera la calle aunque el título tenga 'Visto N'."""
+    for text in (item.get("address") or "", item.get("title") or ""):
+        name, num = parse_street(text, f)
+        if name and num is not None:
+            return f"{name} {num}"
+    return street_key(item.get("address") or "") or street_key(item.get("title") or "")
 
 
 def mark_address_conflict(item: dict, f: dict | None = None) -> dict:
@@ -1284,7 +1344,7 @@ def _apply_zone(item: dict, f: dict, src: dict | None = None) -> bool:
 
 
 def listing_key(item: dict) -> str:
-    street = street_key(item.get("address") or "")
+    street = place_street(item)
     if not street or item.get("price") is None:
         return ""
     area = item.get("area")
@@ -1295,7 +1355,7 @@ def listing_key(item: dict) -> str:
 
 def place_key(item: dict) -> str:
     """Calle + m² (~5) + ambientes. Clave gruesa; el match real es same_place()."""
-    street = street_key(item.get("address") or "") or street_key(item.get("title") or "")
+    street = place_street(item)
     area = item.get("area")
     amb = item.get("ambientes")
     if not street or area is None or amb is None:
@@ -1305,13 +1365,12 @@ def place_key(item: dict) -> str:
 
 
 PLACE_AREA_TOL = 5
-PLACE_AREA_SAME_PRICE_TOL = 15
 
 
 def same_place(a: dict, b: dict) -> bool:
-    """Mismo depto en otro portal. ±5 m², o ±15 si el precio coincide (tot. vs cubiertos)."""
-    street_a = street_key(a.get("address") or "") or street_key(a.get("title") or "")
-    street_b = street_key(b.get("address") or "") or street_key(b.get("title") or "")
+    """Mismo depto en otro portal. ±5 m², o mismo precio (tot. vs cubiertos)."""
+    street_a = place_street(a)
+    street_b = place_street(b)
     if not street_a or street_a != street_b:
         return False
     if a.get("ambientes") is None or b.get("ambientes") is None:
@@ -1323,7 +1382,7 @@ def same_place(a: dict, b: dict) -> bool:
     delta = abs(float(a["area"]) - float(b["area"]))
     if delta <= PLACE_AREA_TOL:
         return True
-    return a.get("price") is not None and a.get("price") == b.get("price") and delta <= PLACE_AREA_SAME_PRICE_TOL
+    return a.get("price") is not None and a.get("price") == b.get("price")
 
 
 def listings_from_other_portals(site: str) -> list[dict]:
@@ -1409,6 +1468,19 @@ def page_matches_zone(html_text: str, final_url: str, src: dict) -> bool:
         return False
     hay = fold(f"{final_url} {title} {h1t}")
     return any(a in hay for a in zone_aliases(src))
+
+
+_ML_EMPTY = re.compile(
+    r"ui-search-rescue__title|no encontramos resultados para tu b[uú]squeda",
+    re.I,
+)
+
+
+def page_is_empty_results(html_text: str, site: str) -> bool:
+    """Listado válido sin cards (split de dormitorios vacío en Mercado Libre)."""
+    if site != "mercadolibre":
+        return False
+    return bool(_ML_EMPTY.search(html_text or ""))
 
 
 def keep_zone(item: dict, src: dict) -> bool:
@@ -1872,9 +1944,18 @@ def scrape_source(session, src: dict, cfg: dict, browser: ChromeListings | None 
             break
         if n == 1 and not page_matches_zone(html_text, final_url, src):
             raise Blocked(f"slug inválido: redirigió fuera de {src['name']} → {final_url}")
-        items = [i for i in parse_page(html_text, site, url) if keep_listing(i, src, cfg.get("filters") or {})]
+        raw = parse_page(html_text, site, url)
+        if page_is_empty_results(html_text, site):
+            last_page_items = []
+            hit_cap = False
+            break
+        items = [i for i in raw if keep_listing(i, src, cfg.get("filters") or {})]
         new = [i for i in items if i["id"] not in found]
         if n == 1 and not items:
+            if raw:
+                last_page_items = []
+                hit_cap = False
+                break
             raise Blocked("0 avisos de la zona en la página 1 (¿cambió el HTML o el slug?)")
         if not new:
             hit_cap = False
@@ -2887,6 +2968,13 @@ def process_portal(
             catalog_dirty = True
             for i in silent_dupes:
                 state["listings"][i["id"]] = seen_rec(i, state["listings"].get(i["id"]), now)
+        by_cat = _catalog_map(catalog)
+        revived = [i for i in matched if (by_cat.get(i["id"]) or {}).get("active") is False]
+        if revived:
+            apply_live_to_catalog(catalog, revived, now)
+            catalog_dirty = True
+            for i in revived:
+                state["listings"][i["id"]] = seen_rec(i, state["listings"].get(i["id"]), now)
 
     configured = {source_zone(src) for src in cfg.get("sources") or [] if src.get("site") == site}
     gone_ids = mark_gone(catalog, ok_zones, {i["id"] for i in matched}, now, all_zones=configured)
@@ -3013,6 +3101,7 @@ def _enrich_from_portals_run(cfg, only, session, sources, now, current, errors, 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--no-notify", action="store_true", help="Guarda archivos; no manda Telegram.")
     ap.add_argument("--enrich", action="store_true", help="Relee listados y completa fotos. Sin Telegram.")
     ap.add_argument("--only", choices=list(SITES))
     args = ap.parse_args()
@@ -3024,7 +3113,9 @@ def main() -> int:
         return enrich_from_portals(cfg, only=args.only)
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
-    if not args.dry_run and not (token and chat_id):
+    if args.no_notify:
+        token, chat_id = "", ""
+    if not args.dry_run and not args.no_notify and not (token and chat_id):
         print("Faltan TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID", file=sys.stderr)
         return 2
 

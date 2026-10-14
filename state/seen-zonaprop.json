@@ -65,6 +65,7 @@
   "zonaprop:55263580": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "azcuenaga 700|120000|57|3",
+   "place": "azcuenaga 700|55|3",
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-55263580.html",
    "zone": "Barrio Norte"
@@ -1068,6 +1069,7 @@
   "zonaprop:60348201": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "san luis 3057|120000|56|2",
+   "place": "san luis 3057|55|2",
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-dos-ambientes-y-medio-con-doble-60348201.html",
    "zone": "Barrio Norte"
