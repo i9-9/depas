@@ -795,8 +795,9 @@
   },
   "zonaprop:60138686": {
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "key": "paraguay 2617|134000|64|3",
-   "price": 134000,
+   "key": "paraguay 2617|130000|64|3",
+   "place": "paraguay 2617|65|3",
+   "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dto-3-amb-al-frente-con-balcon-60138686.html",
    "zone": "Barrio Norte"
   },

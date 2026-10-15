@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-15T01:36:55+00:00",
+ "last_change": "2026-10-15T15:45:29+00:00",
  "listings": [
   {
    "active": false,
@@ -3768,38 +3768,49 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Paraguay 2617",
-   "air_usd": 18000,
+   "address_unverified": false,
+   "air_usd": 22000,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 64.0,
+   "area_covered": null,
+   "area_semi": null,
    "area_total": 64.0,
-   "closing_ref_usd": null,
+   "breakeven_exit_usd_m2": 3065,
+   "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": null,
+   "days_seen": 5,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-10T20:41:24+00:00",
+   "gone_at": null,
    "id": "zonaprop:60138686",
    "max_offer_usd": 113157,
-   "neto_base_usd": 1448,
-   "neto_hard_usd": -22510,
-   "old_price": null,
+   "neto_base_usd": 5648,
+   "neto_hard_usd": -18190,
+   "old_price": 134000,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/13/86/86/720x532/2078282628.jpg",
    "piso": 5,
-   "price": 134000,
-   "price_drops": null,
+   "price": 130000,
+   "price_drops": 1,
    "price_history": [
     {
      "date": "2026-10-10T04:06:21+00:00",
      "price": 134000
+    },
+    {
+     "date": "2026-10-15T15:45:29+00:00",
+     "price": 130000
     }
    ],
+   "price_source": "card",
    "reno_usd_m2": 375,
+   "roi_base": 0.035,
+   "roi_hard": -0.1027,
    "score": -1,
    "seventy_offer_usd": 99200,
    "site": "zonaprop",
@@ -3809,10 +3820,11 @@
    ],
    "title": "Tres ambientes al frente con balcón corrido en Recoleta. Paraguay 2617, entre Jean Jaurès ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dto-3-amb-al-frente-con-balcon-60138686.html",
-   "usd_per_m2": null,
-   "vs_median_n": null,
-   "vs_median_pct": null,
-   "zone": "Barrio Norte"
+   "usd_per_m2": 2031,
+   "vs_median_n": 10,
+   "vs_median_pct": -1,
+   "zone": "Barrio Norte",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -4405,7 +4417,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuénaga 1000",
    "address_unverified": false,
    "air_usd": -6000,
@@ -4424,7 +4436,7 @@
    "expensas_ars": 38000,
    "expensas_text": "$ 38.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-15T15:45:29+00:00",
    "id": "zonaprop:60233554",
    "max_offer_usd": 100085,
    "neto_base_usd": -20798,
@@ -5084,7 +5096,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "San Luis 3057",
    "address_unverified": false,
    "air_usd": 13000,
@@ -5103,7 +5115,7 @@
    "expensas_ars": 115000,
    "expensas_text": "$ 115.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-15T15:45:29+00:00",
    "id": "zonaprop:60348201",
    "max_offer_usd": 99669,
    "neto_base_usd": -1148,
@@ -5563,7 +5575,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "FRENCH 2700",
    "address_unverified": false,
    "air_usd": 125,
@@ -5582,7 +5594,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-15T15:45:29+00:00",
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -16117,
