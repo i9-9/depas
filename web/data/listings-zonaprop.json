@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-15T15:45:29+00:00",
+ "last_change": "2026-10-15T20:30:25+00:00",
  "listings": [
   {
    "active": false,
@@ -5630,7 +5630,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Peña 2700",
    "address_unverified": false,
    "air_usd": 34375,
@@ -5649,7 +5649,7 @@
    "expensas_ars": 250000,
    "expensas_text": "$ 250.000 Expensas",
    "first_seen": "2026-10-11T01:58:51+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-15T20:30:25+00:00",
    "id": "zonaprop:60409929",
    "max_offer_usd": 115056,
    "neto_base_usd": 18463,
