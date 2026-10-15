@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-14T21:27:49+00:00",
+ "last_change": "2026-10-15T01:36:55+00:00",
  "listings": [
   {
    "active": false,
@@ -4405,33 +4405,45 @@
    "zone": "Recoleta"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Azcuénaga 1000",
+   "address_unverified": false,
    "air_usd": -6000,
    "ambientes": 3,
+   "antiguedad_years": null,
    "area": 56.0,
    "area_covered": 56.0,
+   "area_semi": null,
    "area_total": 58.0,
+   "breakeven_exit_usd_m2": 3581,
+   "closing_ref_usd": 133579,
+   "cochera": null,
+   "days_seen": 5,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 38000,
    "expensas_text": "$ 38.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
-   "gone_at": "2026-10-10T20:41:24+00:00",
+   "gone_at": null,
    "id": "zonaprop:60233554",
    "max_offer_usd": 100085,
    "neto_base_usd": -20798,
    "neto_hard_usd": -42028,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/23/35/54/720x532/2080512044.jpg",
+   "piso": null,
    "price": 139000,
+   "price_drops": 0,
    "price_history": [
     {
      "date": "2026-10-10T01:58:26+00:00",
      "price": 139000
     }
    ],
+   "price_source": "card",
    "reno_usd_m2": 375,
+   "roi_base": -0.1245,
+   "roi_hard": -0.232,
    "score": -4,
    "seventy_offer_usd": 86800,
    "site": "zonaprop",
@@ -4441,7 +4453,11 @@
    ],
    "title": "Corredor Responsable: uno bienes raices S. R. L. - nicolás sundblad cpi 7144 / csi 5821- C",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-ambientes-recoleta-c-balcon-luminoso-60233554.html",
-   "zone": "Barrio Norte"
+   "usd_per_m2": 2482,
+   "vs_median_n": 11,
+   "vs_median_pct": 18,
+   "zone": "Barrio Norte",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -5152,18 +5168,26 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Peña al 2400",
+   "address_unverified": false,
    "air_usd": 625,
    "ambientes": 2,
+   "antiguedad_years": null,
    "area": 55.0,
+   "area_covered": null,
+   "area_semi": null,
    "area_total": 55.0,
+   "breakeven_exit_usd_m2": 3463,
+   "closing_ref_usd": 124930,
+   "cochera": null,
+   "days_seen": 5,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": "2026-10-14T21:27:49+00:00",
+   "gone_at": null,
    "id": "zonaprop:60351140",
    "max_offer_usd": 97201,
    "neto_base_usd": -14373,
@@ -5172,13 +5196,17 @@
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/35/11/40/720x532/2083286152.jpg",
    "piso": 13,
    "price": 130000,
+   "price_drops": 0,
    "price_history": [
     {
      "date": "2026-10-10T01:31:10+00:00",
      "price": 130000
     }
    ],
+   "price_source": "card",
    "reno_usd_m2": 375,
+   "roi_base": -0.0909,
+   "roi_hard": -0.2059,
    "score": -1,
    "seventy_offer_usd": 85250,
    "site": "zonaprop",
@@ -5188,7 +5216,11 @@
    ],
    "title": "Departamento muy luminoso piso 13, con excelente ventilación cruzada, donde todos los ambi",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-en-recoleta-60351140.html",
-   "zone": "Recoleta"
+   "usd_per_m2": 2364,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Recoleta",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -5531,23 +5563,26 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "FRENCH 2700",
+   "address_unverified": false,
    "air_usd": 125,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 59.0,
    "area_covered": 59.0,
+   "area_semi": null,
    "area_total": 63.0,
-   "closing_ref_usd": null,
+   "breakeven_exit_usd_m2": 3478,
+   "closing_ref_usd": 134540,
    "cochera": null,
-   "days_seen": null,
+   "days_seen": 5,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-10T20:41:24+00:00",
+   "gone_at": null,
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -16117,
@@ -5556,14 +5591,17 @@
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/39/38/07/720x532/2084346756.jpg",
    "piso": null,
    "price": 140000,
-   "price_drops": null,
+   "price_drops": 0,
    "price_history": [
     {
      "date": "2026-10-10T04:06:21+00:00",
      "price": 140000
     }
    ],
+   "price_source": "card",
    "reno_usd_m2": 375,
+   "roi_base": -0.0947,
+   "roi_hard": -0.2092,
    "score": 0,
    "seventy_offer_usd": 91450,
    "site": "zonaprop",
@@ -5573,10 +5611,11 @@
    ],
    "title": "Excelente zona! Hermoso departamento para reciclar y tener en valor un propiedad ideal par",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-c-depencia-balcon-al-frente!-barrio-60393807.html",
-   "usd_per_m2": null,
+   "usd_per_m2": 2373,
    "vs_median_n": null,
    "vs_median_pct": null,
-   "zone": "Recoleta"
+   "zone": "Recoleta",
+   "zone_unverified": false
   },
   {
    "active": true,

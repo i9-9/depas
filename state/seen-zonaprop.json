@@ -928,10 +928,11 @@
   },
   "zonaprop:60233554": {
    "first_seen": "2026-10-10T01:58:26+00:00",
-   "key": "azcuenaga 1000|139000|58|3",
-   "last_seen": "2026-10-10T03:03:21+00:00",
+   "key": "azcuenaga 1000|139000|56|3",
+   "place": "azcuenaga 1000|55|3",
    "price": 139000,
-   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-ambientes-recoleta-c-balcon-luminoso-60233554.html"
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-ambientes-recoleta-c-balcon-luminoso-60233554.html",
+   "zone": "Barrio Norte"
   },
   "zonaprop:60245847": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -1084,9 +1085,10 @@
   "zonaprop:60351140": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "key": "pena 2400|130000|55|2",
-   "last_seen": "2026-10-10T03:03:21+00:00",
+   "place": "pena 2400|55|2",
    "price": 130000,
-   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-en-recoleta-60351140.html"
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-en-recoleta-60351140.html",
+   "zone": "Recoleta"
   },
   "zonaprop:60353278": {
    "first_seen": "2026-10-10T14:42:59+00:00",
@@ -1160,10 +1162,11 @@
   },
   "zonaprop:60393807": {
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "key": "french 2700|140000|63|3",
+   "key": "french 2700|140000|59|3",
+   "place": "french 2700|60|3",
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-c-depencia-balcon-al-frente!-barrio-60393807.html",
-   "zone": "Barrio Norte"
+   "zone": "Recoleta"
   },
   "zonaprop:60409929": {
    "first_seen": "2026-10-11T01:58:51+00:00",
