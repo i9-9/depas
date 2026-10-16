@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-15T20:30:25+00:00",
+ "last_change": "2026-10-16T01:29:14+00:00",
  "listings": [
   {
    "active": false,
@@ -3768,7 +3768,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paraguay 2617",
    "address_unverified": false,
    "air_usd": 22000,
@@ -3787,7 +3787,7 @@
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-16T01:29:14+00:00",
    "id": "zonaprop:60138686",
    "max_offer_usd": 113157,
    "neto_base_usd": 5648,
@@ -5630,7 +5630,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Peña 2700",
    "address_unverified": false,
    "air_usd": 34375,
@@ -5643,13 +5643,13 @@
    "breakeven_exit_usd_m2": 2841,
    "closing_ref_usd": 115320,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 5,
    "decision": "vigilar",
    "exit_usd_m2": 2750,
    "expensas_ars": 250000,
    "expensas_text": "$ 250.000 Expensas",
    "first_seen": "2026-10-11T01:58:51+00:00",
-   "gone_at": "2026-10-15T20:30:25+00:00",
+   "gone_at": null,
    "id": "zonaprop:60409929",
    "max_offer_usd": 115056,
    "neto_base_usd": 18463,
@@ -5739,6 +5739,61 @@
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Recoleta",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Laprida al 1100",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": 50,
+   "area": 51.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 51.0,
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 115320,
+   "cochera": true,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": 2750,
+   "expensas_ars": 242000,
+   "expensas_text": "$ 242.000 Expensas",
+   "first_seen": "2026-10-16T01:29:14+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60447256",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/44/72/56/720x532/2085708348.jpg",
+   "piso": 2,
+   "price": 120000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-16T01:29:14+00:00",
+     "price": 120000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": 0,
+   "seventy_offer_usd": 79050,
+   "site": "zonaprop",
+   "tags": [
+    "incluye cochera",
+    "m² sin verificar"
+   ],
+   "title": "Descubra este encantador departamento de tres ambientes ubicado en el corazón de Recoleta,",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-recoleta-60447256.html",
+   "usd_per_m2": 2353,
+   "vs_median_n": 10,
+   "vs_median_pct": 15,
+   "zone": "Barrio Norte",
    "zone_unverified": false
   }
  ]

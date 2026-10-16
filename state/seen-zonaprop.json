@@ -1184,6 +1184,14 @@
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-piso-alto-con-balcon-en-60425458.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:60447256": {
+   "first_seen": "2026-10-16T01:29:14+00:00",
+   "key": "laprida 1100|120000|51|3",
+   "place": "laprida 1100|50|3",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-recoleta-60447256.html",
+   "zone": "Barrio Norte"
   }
  },
  "meta": {
