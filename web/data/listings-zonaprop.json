@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-16T15:32:44+00:00",
+ "last_change": "2026-10-16T20:07:08+00:00",
  "listings": [
   {
    "active": false,
@@ -289,7 +289,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Azcuénaga al 700",
    "address_unverified": false,
    "air_usd": 15375,
@@ -302,13 +302,13 @@
    "breakeven_exit_usd_m2": 3144,
    "closing_ref_usd": 115320,
    "cochera": null,
-   "days_seen": 4,
+   "days_seen": 6,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-16T15:32:44+00:00",
+   "gone_at": null,
    "id": "zonaprop:55263580",
    "max_offer_usd": 101216,
    "neto_base_usd": 914,
@@ -337,8 +337,8 @@
    "title": "Excelente departamento de 3 ambientes reciclado, con balcón al frente y patio, ubicado en ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-55263580.html",
    "usd_per_m2": 2105,
-   "vs_median_n": 10,
-   "vs_median_pct": 1,
+   "vs_median_n": 11,
+   "vs_median_pct": 2,
    "zone": "Barrio Norte",
    "zone_unverified": false
   },
@@ -3338,22 +3338,26 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Larrea 832",
+   "address_unverified": false,
    "air_usd": 76125,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 91.0,
+   "area_covered": null,
+   "area_semi": null,
    "area_total": 91.0,
-   "closing_ref_usd": null,
+   "breakeven_exit_usd_m2": 2473,
+   "closing_ref_usd": 134540,
    "cochera": null,
-   "days_seen": null,
+   "days_seen": 6,
    "decision": "comprar",
    "exit_usd_m2": 2750,
    "expensas_ars": 350000,
    "expensas_text": "$ 350.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-10T20:41:24+00:00",
+   "gone_at": null,
    "id": "zonaprop:60051769",
    "max_offer_usd": 161079,
    "neto_base_usd": 55249,
@@ -3362,14 +3366,17 @@
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/05/17/69/720x532/2077173212.jpg",
    "piso": null,
    "price": 140000,
-   "price_drops": null,
+   "price_drops": 0,
    "price_history": [
     {
      "date": "2026-10-10T04:06:21+00:00",
      "price": 140000
     }
    ],
+   "price_source": "card",
    "reno_usd_m2": 375,
+   "roi_base": 0.3028,
+   "roi_hard": 0.112,
    "score": 2,
    "seventy_offer_usd": 141050,
    "site": "zonaprop",
@@ -3382,10 +3389,11 @@
    ],
    "title": "Excelente depto de tres ambientes al frente con balcon, muy luminoso Y soleado, reciclado,",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-larrea-y-paraguay-tres-ambientes-con-dependencia-al-60051769.html",
-   "usd_per_m2": null,
-   "vs_median_n": null,
-   "vs_median_pct": null,
-   "zone": "Barrio Norte"
+   "usd_per_m2": 1538,
+   "vs_median_n": 11,
+   "vs_median_pct": -25,
+   "zone": "Barrio Norte",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -4417,7 +4425,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuénaga 1000",
    "address_unverified": false,
    "air_usd": -6000,
@@ -4436,7 +4444,7 @@
    "expensas_ars": 38000,
    "expensas_text": "$ 38.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-16T20:07:08+00:00",
    "id": "zonaprop:60233554",
    "max_offer_usd": 100085,
    "neto_base_usd": -20798,
@@ -5419,7 +5427,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Scalabrini Ortiz  al 2300",
    "air_usd": 14375,
    "ambientes": 3,
@@ -5430,7 +5438,7 @@
    "expensas_ars": 260000,
    "expensas_text": "$ 260.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-16T20:07:08+00:00",
    "id": "zonaprop:60378433",
    "max_offer_usd": 108594,
    "neto_base_usd": -1388,
@@ -5686,7 +5694,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "French al 2900",
    "address_unverified": false,
    "air_usd": -9125,
@@ -5699,13 +5707,13 @@
    "breakeven_exit_usd_m2": 3669,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 3,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-13T18:24:03+00:00",
-   "gone_at": "2026-10-16T15:32:44+00:00",
+   "gone_at": null,
    "id": "zonaprop:60425458",
    "max_offer_usd": 94269,
    "neto_base_usd": -23630,
