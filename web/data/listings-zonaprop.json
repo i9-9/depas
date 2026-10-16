@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-16T01:29:14+00:00",
+ "last_change": "2026-10-16T15:32:44+00:00",
  "listings": [
   {
    "active": false,
@@ -289,7 +289,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuénaga al 700",
    "address_unverified": false,
    "air_usd": 15375,
@@ -308,7 +308,7 @@
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-16T15:32:44+00:00",
    "id": "zonaprop:55263580",
    "max_offer_usd": 101216,
    "neto_base_usd": 914,
@@ -4417,7 +4417,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Azcuénaga 1000",
    "address_unverified": false,
    "air_usd": -6000,
@@ -4430,13 +4430,13 @@
    "breakeven_exit_usd_m2": 3581,
    "closing_ref_usd": 133579,
    "cochera": null,
-   "days_seen": 5,
+   "days_seen": 6,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 38000,
    "expensas_text": "$ 38.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
-   "gone_at": "2026-10-15T15:45:29+00:00",
+   "gone_at": null,
    "id": "zonaprop:60233554",
    "max_offer_usd": 100085,
    "neto_base_usd": -20798,
@@ -4466,8 +4466,8 @@
    "title": "Corredor Responsable: uno bienes raices S. R. L. - nicolás sundblad cpi 7144 / csi 5821- C",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-ambientes-recoleta-c-balcon-luminoso-60233554.html",
    "usd_per_m2": 2482,
-   "vs_median_n": 11,
-   "vs_median_pct": 18,
+   "vs_median_n": 10,
+   "vs_median_pct": 19,
    "zone": "Barrio Norte",
    "zone_unverified": false
   },
@@ -5686,7 +5686,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "French al 2900",
    "address_unverified": false,
    "air_usd": -9125,
@@ -5705,7 +5705,7 @@
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-13T18:24:03+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-16T15:32:44+00:00",
    "id": "zonaprop:60425458",
    "max_offer_usd": 94269,
    "neto_base_usd": -23630,
