@@ -1,8 +1,8 @@
 {
- "last_change": "2026-10-17T16:19:41+00:00",
+ "last_change": "2026-10-17T20:23:40+00:00",
  "listings": [
   {
-   "active": true,
+   "active": false,
    "address": "",
    "address_unverified": false,
    "air_usd": 58000,
@@ -22,7 +22,7 @@
    "expensas_ars": 170000,
    "expensas_text": "$170.000 expensas",
    "first_seen": "2026-10-11T11:54:44+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-17T20:23:40+00:00",
    "id": "argenprop:10280375",
    "max_offer_usd": 142353,
    "neto_base_usd": 39738,
@@ -333,7 +333,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "address_unverified": false,
    "air_usd": 22500,
@@ -353,7 +353,7 @@
    "expensas_ars": 250000,
    "expensas_text": "$250.000 expensas",
    "first_seen": "2026-10-10T22:00:06+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-17T20:23:40+00:00",
    "id": "argenprop:18997022",
    "max_offer_usd": 120429,
    "neto_base_usd": 5226,
@@ -445,7 +445,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "address_unverified": false,
    "air_usd": 19625,
@@ -465,7 +465,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T22:00:06+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-17T20:23:40+00:00",
    "id": "argenprop:19533107",
    "max_offer_usd": 112827,
    "neto_base_usd": 4462,
@@ -723,7 +723,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "address_unverified": false,
    "air_usd": 65250,
@@ -743,7 +743,7 @@
    "expensas_ars": 280000,
    "expensas_text": "$280.000 expensas",
    "first_seen": "2026-10-11T11:54:44+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-17T20:23:40+00:00",
    "id": "argenprop:20181024",
    "max_offer_usd": 152503,
    "neto_base_usd": 45384,
