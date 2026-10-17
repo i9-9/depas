@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-16T23:24:29+00:00",
+ "last_change": "2026-10-17T14:17:13+00:00",
  "listings": [
   {
    "active": true,
@@ -825,6 +825,61 @@
    "vs_median_n": 50,
    "vs_median_pct": 9,
    "zone": "Barrio Norte",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "",
+   "address_unverified": false,
+   "air_usd": 14375,
+   "ambientes": 3,
+   "antiguedad_years": 36,
+   "area": 55.0,
+   "area_covered": 55.0,
+   "area_semi": null,
+   "area_total": null,
+   "blurb": "+ 6 Ver más fotos 1 /14 Visto 0 Avenida Raúl Scalabrini Ortiz 2300, Botánico USD 130.000 + $260.000 expensas 55 m² cubie. 2 dorm. 36 años 1 baño 3 ambientes Departamento en botanico 3 ambientes con balcón en excelente ubicación palermo excelente departamento de 3 ambientes ubicado sobre av. Raúl scalabrini ortiz al 2300, palermo, en una zona estratégica, a metros de av. Santa fe y con excelente conectividad. La propiedad se encuentra en muy buen estado, es luminosa y funcional, y cuenta con balc",
+   "breakeven_exit_usd_m2": 3465,
+   "closing_ref_usd": 124930,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": "descartar",
+   "exit_usd_m2": 3000,
+   "expensas_ars": 260000,
+   "expensas_text": "$260.000 expensas",
+   "first_seen": "2026-10-17T14:17:13+00:00",
+   "gone_at": null,
+   "id": "argenprop:20583095",
+   "max_offer_usd": 108594,
+   "neto_base_usd": -1388,
+   "neto_hard_usd": -23118,
+   "old_price": null,
+   "photo": "https://www.argenprop.com/static-content/59038502/ee2308f6-1a2b-45f3-b4dc-9181d379bf9f_u_small.jpg",
+   "piso": null,
+   "price": 130000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-17T14:17:13+00:00",
+     "price": 130000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": -0.0088,
+   "roi_hard": -0.1343,
+   "score": -1,
+   "seventy_offer_usd": 94875,
+   "site": "argenprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "+ 6 Ver más fotos 1 /14 Visto 0 Avenida Raúl Scalabrini Ortiz 2300, Botánico USD 130.000 +",
+   "url": "https://www.argenprop.com/departamento-en-venta-en-botanico-3-ambientes--20583095",
+   "usd_per_m2": 2364,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Botánico",
    "zone_unverified": false
   },
   {
