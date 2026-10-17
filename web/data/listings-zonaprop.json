@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-16T23:00:38+00:00",
+ "last_change": "2026-10-17T01:27:52+00:00",
  "listings": [
   {
    "active": false,
@@ -289,7 +289,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Azcuénaga al 700",
    "address_unverified": false,
    "air_usd": 15375,
@@ -302,13 +302,13 @@
    "breakeven_exit_usd_m2": 3144,
    "closing_ref_usd": 115320,
    "cochera": null,
-   "days_seen": 6,
+   "days_seen": 7,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-16T23:00:38+00:00",
+   "gone_at": null,
    "id": "zonaprop:55263580",
    "max_offer_usd": 101216,
    "neto_base_usd": 914,
@@ -337,8 +337,8 @@
    "title": "Excelente departamento de 3 ambientes reciclado, con balcón al frente y patio, ubicado en ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-55263580.html",
    "usd_per_m2": 2105,
-   "vs_median_n": 11,
-   "vs_median_pct": 2,
+   "vs_median_n": 12,
+   "vs_median_pct": 1,
    "zone": "Barrio Norte",
    "zone_unverified": false
   },
@@ -2989,7 +2989,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paraguay 2386",
    "address_unverified": true,
    "air_usd": 3500,
@@ -3008,7 +3008,7 @@
    "expensas_ars": 132000,
    "expensas_text": "$ 132.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-17T01:27:52+00:00",
    "id": "zonaprop:59883738",
    "max_offer_usd": 106740,
    "neto_base_usd": -12214,
@@ -3784,7 +3784,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Paraguay 2617",
    "address_unverified": false,
    "air_usd": 22000,
@@ -3797,13 +3797,13 @@
    "breakeven_exit_usd_m2": 3065,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 5,
+   "days_seen": 7,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-16T01:29:14+00:00",
+   "gone_at": null,
    "id": "zonaprop:60138686",
    "max_offer_usd": 113157,
    "neto_base_usd": 5648,
@@ -3837,8 +3837,8 @@
    "title": "Tres ambientes al frente con balcón corrido en Recoleta. Paraguay 2617, entre Jean Jaurès ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dto-3-amb-al-frente-con-balcon-60138686.html",
    "usd_per_m2": 2031,
-   "vs_median_n": 10,
-   "vs_median_pct": -1,
+   "vs_median_n": 12,
+   "vs_median_pct": -3,
    "zone": "Barrio Norte",
    "zone_unverified": false
   },
@@ -4433,7 +4433,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Azcuénaga 1000",
    "address_unverified": false,
    "air_usd": -6000,
@@ -4446,13 +4446,13 @@
    "breakeven_exit_usd_m2": 3581,
    "closing_ref_usd": 133579,
    "cochera": null,
-   "days_seen": 6,
+   "days_seen": 7,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 38000,
    "expensas_text": "$ 38.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
-   "gone_at": "2026-10-16T20:07:08+00:00",
+   "gone_at": null,
    "id": "zonaprop:60233554",
    "max_offer_usd": 100085,
    "neto_base_usd": -20798,
@@ -4482,7 +4482,7 @@
    "title": "Corredor Responsable: uno bienes raices S. R. L. - nicolás sundblad cpi 7144 / csi 5821- C",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-ambientes-recoleta-c-balcon-luminoso-60233554.html",
    "usd_per_m2": 2482,
-   "vs_median_n": 10,
+   "vs_median_n": 12,
    "vs_median_pct": 19,
    "zone": "Barrio Norte",
    "zone_unverified": false
