@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-17T14:17:13+00:00",
+ "last_change": "2026-10-17T16:19:41+00:00",
  "listings": [
   {
    "active": true,
@@ -12,6 +12,7 @@
    "area_covered": 80.0,
    "area_semi": null,
    "area_total": null,
+   "blurb": "+ 14 Ver más fotos 1 /22 Visto 300 Avenida Córdoba 2400, Piso 5°, Barrio Norte USD 132.000 + $170.000 expensas 80 m² cubie. 2 dorm. 70 años 1 baño 3 ambientes Piso de 3 ambientes con dependencia en venta, barrio norte Piso de 3 ambientes c/dependencia en venta, sobre la av.Córdoba al 2400, entre la calle azcuenaga y larrea, barrio norte. Entrada independiente de doble circulación, piso de 80m2 aprox al frente con balcón. Living comedor de 7x4, cocina de 2.50x2x2 con salida a balcón al contrafren",
    "breakeven_exit_usd_m2": 2595,
    "closing_ref_usd": 126852,
    "cochera": null,
@@ -41,11 +42,12 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2348,
    "roi_hard": 0.0596,
-   "score": 2,
+   "score": 4,
    "seventy_offer_usd": 124000,
    "site": "argenprop",
    "tags": [
     "sobre presupuesto",
+    "metro muy barato",
     "aire amplio"
    ],
    "title": "+ 14 Ver más fotos 1 /22 Visto 300 Avenida Córdoba 2400, Piso 5°, Barrio Norte USD 132.000",
@@ -731,6 +733,7 @@
    "area_covered": 86.0,
    "area_semi": null,
    "area_total": null,
+   "blurb": "+ 19 Ver más fotos 1 /27 Visto 301 Avenida Pueyrredón 900, Barrio Norte USD 139.000 + $280.000 expensas 86 m² cubie. 3 dorm. 55 años 2 baños 3 ambientes 3 ambientes con dependencia, balcón corrido y vista abierta – barrio norte Excelente 3 ambientes con dependencia, balcón corrido y vista abierta barrio norte ubicado sobre av. Pueyrredón, a metros de av. Córdoba, este amplio departamento se encuentra en un piso 13 al contrafrente, ofreciendo una excelente luminosidad natural, vista abierta y un ",
    "breakeven_exit_usd_m2": 2562,
    "closing_ref_usd": 133579,
    "cochera": null,
@@ -760,11 +763,12 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2531,
    "roi_hard": 0.0733,
-   "score": 1,
+   "score": 3,
    "seventy_offer_usd": 133300,
    "site": "argenprop",
    "tags": [
     "sobre presupuesto",
+    "metro muy barato",
     "aire amplio"
    ],
    "title": "+ 19 Ver más fotos 1 /27 Visto 301 Avenida Pueyrredón 900, Barrio Norte USD 139.000 + $280",
@@ -828,7 +832,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "",
    "address_unverified": false,
    "air_usd": 14375,
@@ -848,7 +852,7 @@
    "expensas_ars": 260000,
    "expensas_text": "$260.000 expensas",
    "first_seen": "2026-10-17T14:17:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-17T16:19:41+00:00",
    "id": "argenprop:20583095",
    "max_offer_usd": 108594,
    "neto_base_usd": -1388,
