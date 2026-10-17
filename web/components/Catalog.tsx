@@ -254,10 +254,12 @@ function passesFilters(
 
 export function Catalog({
   listings,
+  near = [],
   lastNovelty,
   pickId = null,
 }: {
   listings: Listing[];
+  near?: Listing[];
   lastNovelty: string | null;
   pickId?: string | null;
 }) {
@@ -302,7 +304,7 @@ export function Catalog({
       if (x.site) seen.add(x.site);
       for (const m of x.mirrors || []) seen.add(m.site);
     }
-    return (["zonaprop", "argenprop", "mercadolibre"] as const).filter((s) => seen.has(s));
+    return (["zonaprop", "argenprop", "mercadolibre", "cabaprop"] as const).filter((s) => seen.has(s));
   }, [listings]);
   const pick = pickId
     ? listings.find((x) => x.id === pickId || x.ids.includes(pickId)) ?? null
@@ -329,14 +331,29 @@ export function Catalog({
 
   const shown = visible.length + (pickShown ? 1 : 0);
   const extras = extraLabel(filters, sort);
+  const specialView =
+    filters.onlyNew || filters.onlyDrop || filters.onlyGone || filters.onlySaved || filters.onlyDiscarded;
+  const nearShown = useMemo(() => {
+    if (!ready || specialView) return [];
+    const relaxed = {
+      ...filters,
+      onlyNew: false,
+      onlyDrop: false,
+      onlyGone: false,
+      onlySaved: false,
+      onlyDiscarded: false,
+    };
+    return near.filter((item) => !isMarked(item, discarded) && passesFilters(item, relaxed, saved, discarded));
+  }, [near, filters, saved, discarded, ready, specialView]);
 
   useEffect(() => {
     if (!ready || !openId) return;
     const still =
       (pickShown && pick && isOpen(pick, openId)) ||
-      visible.some((item) => isOpen(item, openId));
+      visible.some((item) => isOpen(item, openId)) ||
+      nearShown.some((item) => isOpen(item, openId));
     if (!still) setOpenId(null);
-  }, [ready, openId, visible, pick, pickShown]);
+  }, [ready, openId, visible, nearShown, pick, pickShown]);
 
   function set<K extends keyof Filters>(key: K, value: Filters[K]) {
     setFilters((f) => {
@@ -471,6 +488,34 @@ export function Catalog({
           onDiscard={toggleDiscard}
         />
       )}
+
+      {nearShown.length > 0 ? (
+        <section className="card mt-10 overflow-hidden">
+          <h2 className="band flex items-center justify-between px-3 py-2.5">
+            <span>En zona, no entran</span>
+            <span className="text-muted">{nearShown.length}</span>
+          </h2>
+          <p className="border-b border-line px-3 py-2 text-[0.8125rem] leading-snug text-muted">
+            Están al norte de Santa Fe. Les falta otra cosa para la lista de arriba.
+          </p>
+          <ul>
+            {nearShown.map((item) => (
+              <li key={item.id} className="border-b border-line last:border-b-0">
+                <Row
+                  item={item}
+                  rank={0}
+                  open={isOpen(item, openId)}
+                  saved={isMarked(item, saved)}
+                  discarded={isMarked(item, discarded)}
+                  onToggle={() => setOpenId(isOpen(item, openId) ? null : item.id)}
+                  onSave={() => toggleSave(item.id)}
+                  onDiscard={() => toggleDiscard(item.id)}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </div>
   );
 }
@@ -864,7 +909,10 @@ function Row({
         : ""}
     </>
   );
-  const teaser = !open && (why.entra || why.resta) && (
+  const gapLine = (item.gaps || []).join(", ");
+  const teaser = gapLine ? (
+    <p className="mt-1 text-[0.8125rem] leading-snug text-muted">No entra: {gapLine}</p>
+  ) : !open && (why.entra || why.resta) && (
     <p className="mt-1 text-[0.8125rem] leading-snug md:truncate">
       {why.entra ? <span className="text-ink">{why.entra}</span> : null}
       {why.entra && why.resta ? ". " : null}
@@ -906,7 +954,7 @@ function Row({
           onClick={onToggle}
           className="hit col-span-3 grid grid-cols-subgrid items-center text-left md:col-span-8"
         >
-          <p className="idx text-[0.75rem] text-muted">{String(rank).padStart(2, "0")}</p>
+          <p className="idx text-[0.75rem] text-muted">{rank > 0 ? String(rank).padStart(2, "0") : ""}</p>
           <Photo src={item.photo} alt={street} className="size-12" />
           <div className="min-w-0">
             <h3 className={`name truncate text-[0.9375rem] leading-snug ${gone ? "text-muted" : "text-title"}`}>{street}</h3>

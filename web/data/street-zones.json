@@ -170,34 +170,10 @@
     },
     {
       "street": "cordoba",
-      "max": 1499,
-      "out": true
-    },
-    {
-      "street": "cordoba",
-      "min": 1500,
-      "max": 3199,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "cordoba",
-      "min": 3200,
       "out": true
     },
     {
       "street": "paraguay",
-      "max": 1499,
-      "out": true
-    },
-    {
-      "street": "paraguay",
-      "min": 1500,
-      "max": 3199,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "paraguay",
-      "min": 3200,
       "out": true
     },
     {
@@ -280,19 +256,6 @@
     },
     {
       "street": "mansilla",
-      "min": 1500,
-      "max": 3199,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "mansilla",
-      "min": 3200,
-      "max": 3499,
-      "zone": "Recoleta"
-    },
-    {
-      "street": "mansilla",
-      "min": 3500,
       "out": true
     },
     {
@@ -424,7 +387,12 @@
     },
     {
       "street": "scalabrini ortiz",
-      "min": 1800,
+      "max": 2499,
+      "out": true
+    },
+    {
+      "street": "scalabrini ortiz",
+      "min": 2500,
       "max": 2899,
       "zone": "Botánico"
     },
@@ -483,6 +451,10 @@
       "zone": "Recoleta"
     },
     {
+      "street": "marcelo t de alvear",
+      "out": true
+    },
+    {
       "street": "alvear",
       "max": 1499,
       "out": true
@@ -500,12 +472,12 @@
     },
     {
       "street": "callao",
-      "max": 699,
+      "max": 1099,
       "out": true
     },
     {
       "street": "callao",
-      "min": 700,
+      "min": 1100,
       "max": 1399,
       "zone": "Barrio Norte"
     },
@@ -516,12 +488,12 @@
     },
     {
       "street": "ayacucho",
-      "max": 699,
+      "max": 1099,
       "out": true
     },
     {
       "street": "ayacucho",
-      "min": 700,
+      "min": 1100,
       "max": 1399,
       "zone": "Barrio Norte"
     },
@@ -532,12 +504,12 @@
     },
     {
       "street": "junin",
-      "max": 699,
+      "max": 1099,
       "out": true
     },
     {
       "street": "junin",
-      "min": 700,
+      "min": 1100,
       "max": 1399,
       "zone": "Barrio Norte"
     },
@@ -548,12 +520,12 @@
     },
     {
       "street": "uriburu",
-      "max": 699,
+      "max": 1099,
       "out": true
     },
     {
       "street": "uriburu",
-      "min": 700,
+      "min": 1100,
       "max": 1399,
       "zone": "Barrio Norte"
     },
@@ -564,12 +536,12 @@
     },
     {
       "street": "azcuenaga",
-      "max": 699,
+      "max": 1099,
       "out": true
     },
     {
       "street": "azcuenaga",
-      "min": 700,
+      "min": 1100,
       "max": 1399,
       "zone": "Barrio Norte"
     },
@@ -580,12 +552,12 @@
     },
     {
       "street": "larrea",
-      "max": 699,
+      "max": 1099,
       "out": true
     },
     {
       "street": "larrea",
-      "min": 700,
+      "min": 1100,
       "max": 1399,
       "zone": "Barrio Norte"
     },
@@ -596,14 +568,8 @@
     },
     {
       "street": "pueyrredon",
-      "max": 699,
-      "out": true
-    },
-    {
-      "street": "pueyrredon",
-      "min": 700,
       "max": 1399,
-      "zone": "Barrio Norte"
+      "out": true
     },
     {
       "street": "pueyrredon",
@@ -612,12 +578,12 @@
     },
     {
       "street": "rodriguez pena",
-      "max": 699,
+      "max": 1099,
       "out": true
     },
     {
       "street": "rodriguez pena",
-      "min": 700,
+      "min": 1100,
       "max": 1399,
       "zone": "Barrio Norte"
     },
@@ -628,36 +594,21 @@
     },
     {
       "street": "jean jaures",
-      "max": 699,
-      "out": true
-    },
-    {
-      "street": "jean jaures",
-      "min": 700,
-      "max": 1399,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "anchorena",
-      "max": 699,
       "out": true
     },
     {
       "street": "anchorena",
-      "min": 700,
       "max": 1399,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "ecuador",
-      "max": 699,
       "out": true
     },
     {
+      "street": "anchorena",
+      "min": 1400
+    },
+    {
       "street": "ecuador",
-      "min": 700,
       "max": 1399,
-      "zone": "Barrio Norte"
+      "out": true
     },
     {
       "street": "ecuador",
@@ -666,67 +617,47 @@
     },
     {
       "street": "aguero",
-      "max": 699,
+      "max": 1599,
       "out": true
     },
     {
       "street": "aguero",
-      "min": 700,
-      "max": 1399,
-      "zone": "Barrio Norte"
+      "min": 1600
     },
     {
       "street": "laprida",
-      "max": 699,
+      "max": 1399,
       "out": true
     },
     {
       "street": "laprida",
-      "min": 700,
-      "max": 1399,
-      "zone": "Barrio Norte"
+      "min": 1400
     },
     {
       "street": "paso",
-      "max": 699,
-      "out": true
-    },
-    {
-      "street": "paso",
-      "min": 700,
-      "max": 1399,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "gallo",
-      "max": 699,
       "out": true
     },
     {
       "street": "gallo",
-      "min": 700,
-      "max": 1399,
-      "zone": "Barrio Norte"
+      "max": 1699,
+      "out": true
+    },
+    {
+      "street": "gallo",
+      "min": 1700
     },
     {
       "street": "san luis",
-      "min": 1800,
-      "max": 3199,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "san luis",
-      "min": 3200,
       "out": true
     },
     {
       "street": "riobamba",
-      "max": 699,
+      "max": 1099,
       "out": true
     },
     {
       "street": "riobamba",
-      "min": 700,
+      "min": 1100,
       "max": 1399,
       "zone": "Barrio Norte"
     },
@@ -737,20 +668,12 @@
     },
     {
       "street": "mario bravo",
-      "max": 699,
       "out": true
-    },
-    {
-      "street": "mario bravo",
-      "min": 700,
-      "max": 1399,
-      "zone": "Barrio Norte"
     },
     {
       "street": "coronel diaz",
-      "min": 1000,
       "max": 1899,
-      "zone": "Recoleta"
+      "out": true
     },
     {
       "street": "coronel diaz",
@@ -760,23 +683,22 @@
     },
     {
       "street": "billinghurst",
-      "max": 699,
+      "max": 1799,
       "out": true
     },
     {
       "street": "billinghurst",
-      "min": 700,
-      "max": 1399,
-      "zone": "Barrio Norte"
-    },
-    {
-      "street": "billinghurst",
-      "min": 1400,
+      "min": 1800,
       "zone": "Recoleta"
     },
     {
       "street": "austria",
-      "min": 1600,
+      "max": 1799,
+      "out": true
+    },
+    {
+      "street": "austria",
+      "min": 1800,
       "max": 2899,
       "zone": "Recoleta"
     },

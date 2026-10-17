@@ -1,6 +1,8 @@
 import argenprop from "../data/listings-argenprop.json";
+import cabaprop from "../data/listings-cabaprop.json";
 import mercadolibre from "../data/listings-mercadolibre.json";
 import zonaprop from "../data/listings-zonaprop.json";
+import argenpropRun from "../data/run-argenprop.json";
 import {
   CLOSING_DISCOUNT_PCT,
   EXPENSAS_MIN_VALID_ARS,
@@ -13,6 +15,7 @@ import {
   clusterListings,
   dealArea,
   flipKeep,
+  gapReasons,
   classifyZone,
   fold,
   inScope,
@@ -29,6 +32,7 @@ const FILES: { site: string; file: CatalogFile }[] = [
   { site: "zonaprop", file: zonaprop as CatalogFile },
   { site: "argenprop", file: argenprop as CatalogFile },
   { site: "mercadolibre", file: mercadolibre as CatalogFile },
+  { site: "cabaprop", file: cabaprop as CatalogFile },
 ];
 
 export type SourceGap = {
@@ -37,18 +41,44 @@ export type SourceGap = {
   last_change: string | null;
 };
 
+export type PortalRun = {
+  site: string;
+  ran_at: string | null;
+  ok: { name: string; n: number }[];
+  errors: string[];
+  matched: number;
+  new: number;
+  drops: number;
+  lines: string[];
+};
+
+export function loadArgenpropRun(): PortalRun | null {
+  const run = argenpropRun as PortalRun;
+  if (!run?.ran_at) return null;
+  return run;
+}
+
+function sourceFreshness(site: string, file: CatalogFile): string | null {
+  if (site === "argenprop") {
+    const run = loadArgenpropRun();
+    if (run?.ran_at) return run.ran_at;
+  }
+  return file.last_change || null;
+}
+
 export function sourceGaps(now = Date.now()): SourceGap[] {
   const staleMs = SOURCE_STALE_HOURS * 3600 * 1000;
   const out: SourceGap[] = [];
   for (const { site, file } of FILES) {
     const n = (file.listings || []).filter((x) => x.active !== false).length;
+    const freshness = sourceFreshness(site, file);
     if (!n) {
-      out.push({ site, reason: "empty", last_change: file.last_change || null });
+      out.push({ site, reason: "empty", last_change: freshness });
       continue;
     }
-    const t = file.last_change ? Date.parse(file.last_change) : NaN;
+    const t = freshness ? Date.parse(freshness) : NaN;
     if (!Number.isNaN(t) && now - t > staleMs) {
-      out.push({ site, reason: "stale", last_change: file.last_change || null });
+      out.push({ site, reason: "stale", last_change: freshness });
     }
   }
   return out;
@@ -76,7 +106,7 @@ function withFlags(raw: Listing): Listing {
   };
 }
 
-export function loadListings(): Listing[] {
+function scoredListings(): Listing[] {
   const out: Listing[] = [];
   for (const { file } of FILES) {
     for (const raw of file.listings || []) {
@@ -91,6 +121,7 @@ export function loadListings(): Listing[] {
           site: raw.site || raw.id.split(":")[0],
           url: raw.url || "",
           title: raw.title || "",
+          blurb: raw.blurb || "",
           address: raw.address || "",
           zone,
           price: raw.price ?? null,
@@ -140,14 +171,27 @@ export function loadListings(): Listing[] {
       );
     }
   }
+  return markFirstWave(withMedians(out).map((item) => applyAir(applyValue(item))));
+}
+
+export function loadListings(): Listing[] {
   return clusterListings(
-    markFirstWave(
-      withMedians(out)
-        .map((item) => applyAir(applyValue(item)))
-        .filter((item) => flipKeep({ ...item, area: dealArea(item) }))
-        .map((item) => ({ ...item, verdict: verdictOf(item) })),
-    ),
+    scoredListings()
+      .filter((item) => flipKeep({ ...item, area: dealArea(item) }))
+      .map((item) => ({ ...item, verdict: verdictOf(item) })),
   );
+}
+
+/** En zona y activos, pero se caen por balcón, luz, metros, precio u otra cosa. */
+export function loadNearListings(): Listing[] {
+  const keep = new Set(loadListings().flatMap((item) => item.ids));
+  const near = scoredListings()
+    .filter((item) => item.active && item.zone && !item.zone_unverified && !keep.has(item.id))
+    .map((item) => ({ ...item, gaps: gapReasons({ ...item, area: dealArea(item) }) }))
+    .filter((item) => (item.gaps || []).length > 0)
+    .map((item) => ({ ...item, verdict: verdictOf(item) }));
+  near.sort((a, b) => (a.price ?? 1e12) - (b.price ?? 1e12));
+  return clusterListings(near);
 }
 
 function withMedians(listings: Listing[]): Listing[] {

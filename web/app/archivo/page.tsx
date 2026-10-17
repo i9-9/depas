@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Catalog } from "@/components/Catalog";
 import { SiteChrome } from "@/components/SiteChrome";
 import { hotListings } from "@/lib/listings";
-import { lastNovelty, loadListings } from "@/lib/load-listings";
+import { lastNovelty, loadListings, loadNearListings } from "@/lib/load-listings";
 import { loadPick } from "@/lib/load-pick";
 import { resolvePick } from "@/lib/pick";
 
@@ -26,6 +26,7 @@ export default function ArchivoPage() {
     >
       <Catalog
         listings={listings}
+        near={loadNearListings()}
         lastNovelty={lastNovelty(listings)}
         pickId={pick.listing?.id ?? null}
       />

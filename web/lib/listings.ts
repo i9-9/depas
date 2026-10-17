@@ -42,6 +42,7 @@ export type Listing = {
   site: "zonaprop" | "argenprop" | string;
   url: string;
   title: string;
+  blurb?: string;
   address: string;
   zone: string;
   price: number | null;
@@ -87,6 +88,7 @@ export type Listing = {
   ids: string[];
   mirrors: Mirror[];
   from_first_wave: boolean;
+  gaps?: string[];
 };
 
 export const CLOSING_DISCOUNT_PCT = scoring.closing_discount_pct;
@@ -365,19 +367,21 @@ export function applyAir(item: Listing): Listing {
   });
 }
 
-function cardHay(item: Pick<Listing, "title" | "address" | "url"> | Pick<RawListing, "title" | "address" | "url">): string {
+function cardHay(
+  item: Pick<Listing, "title" | "address" | "url" | "blurb"> | Pick<RawListing, "title" | "address" | "url" | "blurb">,
+): string {
   const slug = (item.url || "").replace(/[-_./]+/g, " ");
-  return fold(`${item.title || ""} ${slug} ${item.address || ""}`);
+  return fold(`${item.title || ""} ${slug} ${item.address || ""} ${item.blurb || ""}`);
 }
 
-export function hasBalcon(item: Pick<Listing, "title" | "address" | "url">): boolean | null {
+export function hasBalcon(item: Pick<Listing, "title" | "address" | "url" | "blurb">): boolean | null {
   const hay = cardHay(item);
   if (hay.includes("sin balcon") || hay.includes("sin balcones")) return false;
   if (hay.includes("balcon") || hay.includes("balcones")) return true;
   return null;
 }
 
-export function hasLight(item: Pick<Listing, "title" | "address" | "url">): boolean | null {
+export function hasLight(item: Pick<Listing, "title" | "address" | "url" | "blurb">): boolean | null {
   const hay = cardHay(item);
   if (/poca luz|sin luz|poco luminoso|\boscur/.test(hay)) return false;
   if (/\b(depto|departamento|unidad)\s+intern[oa]s?\b/.test(hay)) return false;
@@ -388,33 +392,45 @@ export function hasLight(item: Pick<Listing, "title" | "address" | "url">): bool
   return null;
 }
 
-export function flipKeep(
+export function gapReasons(
   item: Pick<
     Listing,
-    "active" | "area" | "price" | "expensas_ars" | "tags" | "zone_unverified" | "title" | "address" | "url"
+    "area" | "price" | "expensas_ars" | "tags" | "zone_unverified" | "title" | "address" | "url" | "blurb"
   >,
-): boolean {
-  if (!item.active) return true;
-  if (item.area == null) return false;
-  if (item.area < scoring.min_area_m2) return false;
-  if (item.price == null || item.price < MIN_PRICE_USD) return false;
-  if (item.expensas_ars != null && item.expensas_ars > EXPENSAS_LOUD_ARS) return false;
+): string[] {
+  const gaps: string[] = [];
+  if (item.area == null) gaps.push("sin metros");
+  else if (item.area < scoring.min_area_m2) gaps.push(`menos de ${scoring.min_area_m2} m²`);
+  if (item.price == null) gaps.push("sin precio");
+  else if (item.price < MIN_PRICE_USD) gaps.push("bajo el piso de precio");
+  if (item.expensas_ars != null && item.expensas_ars > EXPENSAS_LOUD_ARS) gaps.push("expensas altas");
   const tags = item.tags || [];
-  if (tags.includes("metro caro")) return false;
-  if (tags.includes("edificio flojo") || tags.includes("edificio a reciclar")) return false;
-  if (tags.includes("zona floja") || tags.includes("barrio del aviso no coincide")) return false;
-  if (item.zone_unverified) return false;
+  if (tags.includes("metro caro")) gaps.push("metro caro");
+  if (tags.includes("edificio flojo") || tags.includes("edificio a reciclar")) gaps.push("edificio en mal estado");
+  if (tags.includes("zona floja")) gaps.push("calle floja");
+  if (tags.includes("barrio del aviso no coincide")) gaps.push("el barrio del aviso no cierra");
+  if (item.zone_unverified) gaps.push("la calle no cierra");
   if (REQUIRE_BALCON) {
     const bal = hasBalcon(item);
-    if (bal === false) return false;
-    if (bal == null && !INCLUDE_UNKNOWN_BALCON) return false;
+    if (bal === false) gaps.push("sin balcón");
+    else if (bal == null && !INCLUDE_UNKNOWN_BALCON) gaps.push("no nombra el balcón");
   }
   if (REQUIRE_LIGHT) {
     const light = hasLight(item);
-    if (light === false) return false;
-    if (light == null && !INCLUDE_UNKNOWN_LIGHT) return false;
+    if (light === false) gaps.push("sin luz");
+    else if (light == null && !INCLUDE_UNKNOWN_LIGHT) gaps.push("no nombra la luz");
   }
-  return true;
+  return gaps;
+}
+
+export function flipKeep(
+  item: Pick<
+    Listing,
+    "active" | "area" | "price" | "expensas_ars" | "tags" | "zone_unverified" | "title" | "address" | "url" | "blurb"
+  >,
+): boolean {
+  if (!item.active) return true;
+  return gapReasons(item).length === 0;
 }
 
 export function markClaimedBarrio(
@@ -475,7 +491,8 @@ export function streetKey(address: string): string {
 }
 
 const STREET_ALIASES: [string, string][] = [
-  ["marcelo torcuato de alvear", "alvear"],
+  ["marcelo torcuato de alvear", "marcelo t de alvear"],
+  ["marcelo t de alvear", "marcelo t de alvear"],
   ["general lucio norberto mansilla", "mansilla"],
   ["lucio mansilla", "mansilla"],
   ["jose antonio cabrera", "cabrera"],
@@ -1014,6 +1031,7 @@ function clipWords(s: string, max: number): string {
 export function streetOf(item: Pick<Listing, "address" | "title">): string {
   const fromAddr = streetCore(item.address || "");
   if (looksLikeStreet(fromAddr)) return fromAddr;
+  if (fromAddr && STREET_ZONES.some((r) => sameStreet(r, normStreet(fromAddr)))) return fromAddr;
   const fromTitle = streetCore(item.title || "");
   if (looksLikeStreet(fromTitle)) return fromTitle;
   const cross = intersectionOf(item.address || "") || intersectionOf(item.title || "");
@@ -1039,6 +1057,7 @@ export function siteLabel(site: string): string {
   if (site === "argenprop") return "Argenprop";
   if (site === "zonaprop") return "Zonaprop";
   if (site === "mercadolibre") return "Mercado Libre";
+  if (site === "cabaprop") return "Cabaprop";
   return site;
 }
 
