@@ -5,7 +5,7 @@ set -euo pipefail
 
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:${PATH:-}"
 
-ROOT="/Users/ivan/Documents/Codigo/search_amb"
+ROOT="/Users/wohl5/Dropbox/USUARIOS/IVAN/CURSOR/GIF_MAKER/depas"
 LOG_DIR="${HOME}/Library/Logs/search-amb"
 mkdir -p "$LOG_DIR"
 LOG="$LOG_DIR/argenprop-local.log"
@@ -14,6 +14,18 @@ cd "$ROOT"
 SYNC=1
 if [[ "${1:-}" == "--no-sync" ]] || [[ "${SYNC_GIT:-1}" == "0" ]]; then
   SYNC=0
+fi
+
+if [[ -f "$ROOT/.env" ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$ROOT/.env"
+  set +a
+fi
+
+if [[ -z "${TELEGRAM_BOT_TOKEN:-}" || -z "${TELEGRAM_CHAT_ID:-}" ]]; then
+  echo "Falta $ROOT/.env con TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID" >&2
+  exit 2
 fi
 
 if [[ -x "$ROOT/.venv/bin/python" ]]; then

@@ -7,7 +7,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/ivan/Library/Application Support/search-amb/run-argenprop.sh</string>
+    <string>/Users/wohl5/Library/Application Support/search-amb/run-argenprop.sh</string>
   </array>
   <key>EnvironmentVariables</key>
   <dict>
@@ -23,8 +23,8 @@
     <dict><key>Hour</key><integer>20</integer><key>Minute</key><integer>20</integer></dict>
   </array>
   <key>StandardOutPath</key>
-  <string>/Users/ivan/Library/Logs/search-amb/argenprop-local.log</string>
+  <string>/Users/wohl5/Library/Logs/search-amb/argenprop-local.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/ivan/Library/Logs/search-amb/argenprop-local.log</string>
+  <string>/Users/wohl5/Library/Logs/search-amb/argenprop-local.log</string>
 </dict>
 </plist>

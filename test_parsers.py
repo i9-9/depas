@@ -153,6 +153,13 @@ def test_mercadolibre():
         "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/recoleta/",
         src,
     )
+    src_dorm = {"name": "Recoleta 3 amb 1 dorm", "zone": "Recoleta", "aliases": ["recoleta"]}
+    assert s.page_matches_zone(
+        "<title>Departamentos en Venta en Recoleta, Capital Federal, 3 ambientes, 1 dormitorio</title>"
+        "<h1>Departamentos en Venta en Recoleta, Capital Federal, 3 ambientes, 1 dormitorio</h1>",
+        "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/recoleta/",
+        src_dorm,
+    )
 
 
 def test_pagination_urls():
@@ -199,6 +206,21 @@ def test_source_pages():
             assert "?" not in src["url"]
         if src["site"] == "mercadolibre":
             assert "_Desde_" not in src["url"] and "_PriceRange_" not in src["url"]
+            assert "_NoIndex_" not in src["url"] and "#" not in src["url"]
+    ml = [src for src in CFG["sources"] if src["site"] == "mercadolibre"]
+    assert len(ml) == 28, len(ml)
+    from collections import defaultdict
+    by_zone: dict[str, list[str]] = defaultdict(list)
+    for src in ml:
+        by_zone[src["zone"]].append(src["url"])
+    for zone, urls in by_zone.items():
+        joined = " ".join(urls)
+        assert "/1-ambiente/" in joined, zone
+        assert "/2-ambientes/" in joined and "/3-ambientes/" in joined, zone
+        assert "/1-dormitorio/2-ambientes/" in joined, zone
+        assert "/2-dormitorios/2-ambientes/" in joined, zone
+        assert "/1-dormitorio/3-ambientes/" in joined, zone
+        assert "/2-dormitorios/3-ambientes/" in joined, zone
 
 
 def test_formatting():
@@ -500,7 +522,18 @@ def test_street_zones():
     assert z("Salguero 3078") == "Palermo Chico"
     assert z("Scalabrini Ortiz al 2300") == "Botánico"
     assert z("Santa Fe 3800") == "Botánico"
+    assert z("Santa Fe 1700") == "Barrio Norte"
+    assert z("Santa Fe 3300") == "Barrio Norte"
+    assert z("Av. Santa Fe 3200") == "Barrio Norte"
+    assert z("Av. Coronel Díaz 1500") == "Barrio Norte"
     assert z("Charcas 3245") == "Recoleta"
+    south_of_santa_fe = {
+        "santa fe", "paraguay", "cordoba", "san luis", "corrientes", "sarmiento",
+        "tucuman", "viamonte", "lavalle",
+    }
+    for rule in f["street_zones"]:
+        if rule.get("zone") == "Recoleta":
+            assert s.fold(rule.get("street") or "") not in south_of_santa_fe, rule
 
     src = {"name": "Recoleta", "zone": "Recoleta", "aliases": ["recoleta"]}
     assert z("Ecuador 400") is None
@@ -522,6 +555,18 @@ def test_street_zones():
     s.mark_claimed_barrio(pasos, f)
     assert "barrio del aviso no coincide" not in pasos["tags"]
     assert not s.keep_flip(_item("zonaprop:floja", tags=["zona floja"]))
+    # El scraper corta balcón/luz con el blurb de la card. keep_flip (y la web)
+    # no lo vuelven a exigir en el título: Argenprop a menudo no lo nombra ahí.
+    sin_mencionar = _item(
+        "argenprop:10280375",
+        title="Avenida Córdoba 2400, Piso 5°, Barrio Norte",
+        address="",
+        tags=[],
+        price=132000,
+        area=80,
+    )
+    assert s.has_balcon(sin_mencionar) is None and s.has_light(sin_mencionar) is None
+    assert s.keep_flip(sin_mencionar)
 
     web = json.loads((Path(__file__).parent / "web" / "data" / "street-zones.json").read_text())
     assert web["street_zones"] == f["street_zones"]
@@ -552,6 +597,56 @@ def test_place_key_cross_portal():
     az1 = {"address": "Azcuénaga 700", "title": "x", "area": 80, "ambientes": 3, "price": 90000}
     az2 = {"address": "Azcuenaga 700", "title": "y", "area": 73, "ambientes": 3, "price": 88000}
     assert not s.same_place(az1, az2)
+    # tot. 59 vs cubiertos 86, mismo precio / misma calle: un depto, no dos
+    pue_tot = {"address": "Pueyrredon al 900", "title": "3 amb", "area": 59.4, "ambientes": 3, "price": 139000}
+    assert s.same_place(pue_tot, pue_ml)
+    # Argenprop pone "Visto 50/301" en el título y no se puede tomar como calle
+    visto = {
+        "address": "",
+        "title": "Visto 50/301 Avenida Pueyrredón 900",
+        "area": 60,
+        "ambientes": 3,
+        "price": 139000,
+    }
+    assert s.place_street(visto) == "pueyrredon 900"
+    assert s.same_place(visto, pue_ml)
+    chrome = {
+        "address": "",
+        "title": "+ 19 Ver más fotos 1 /27 Visto 301 Avenida Pueyrredón 900, Barrio Norte USD 139.000",
+        "area": 86,
+        "ambientes": 3,
+        "price": 139000,
+    }
+    assert s.street_key(chrome["title"]) == "av pueyrredon 900"
+    assert s.place_street(chrome) == "pueyrredon 900"
+    assert s.same_place(chrome, pue_ml)
+    assert s.same_place(chrome, pue_tot)
+
+
+def test_argenprop_strips_gallery_chrome():
+    html = """
+<div class="listing">
+ <div class="item"><a href="/departamento-en-venta-en-barrio-norte-3-ambientes--20181024">
+   + 19 Ver más fotos 1 /27 Visto 301 Avenida Pueyrredón 900, Barrio Norte USD 139.000 + $280.000 expensas
+   - 86 m² cubie. - 2 dorm. - 3 ambientes - Piso 13° - 55 años
+ </a></div>
+ <div class="item"><a href="/departamento-en-venta-en-barrio-norte-3-ambientes--10280375">
+   + 13 Ver más fotos 1 /21 Visto 50 Avenida Córdoba 2400, Piso 5°, Barrio Norte USD 132.000
+   - 80 m² cubie. - 3 ambientes
+ </a></div>
+</div>
+"""
+    items = {i["id"]: i for i in s.parse_page(html, "argenprop", "https://www.argenprop.com/x")}
+    a = items["argenprop:20181024"]
+    assert "Pueyrredón 900" in a["address"] or "Pueyrredon 900" in a["address"], a["address"]
+    assert "ver más" not in a["title"].lower() and "visto" not in a["title"].lower(), a["title"]
+    assert a["price"] == 139000 and a["area"] == 86 and a["ambientes"] == 3
+    assert a["piso"] == 13
+    assert s.place_street(a) == "pueyrredon 900"
+    b = items["argenprop:10280375"]
+    assert "Córdoba 2400" in b["address"] or "Cordoba 2400" in b["address"], b["address"]
+    assert b["piso"] == 5
+    assert s.place_street(b) == "cordoba 2400"
 
 
 def test_hard_cuts_are_exclusive():
@@ -790,6 +885,34 @@ def test_argenprop_chrome_stays_on_page1():
     assert any(i["id"] == "argenprop:19596287" for i in items)
 
 
+def test_ml_empty_split_is_ok():
+    html = (
+        "<html><title>Departamentos en Venta en Botánico, Capital Federal, 3 ambientes, 1 dormitorio</title>"
+        "<h1>Departamentos en Venta en Botánico, Capital Federal, 3 ambientes, 1 dormitorio</h1>"
+        '<h3 class="ui-search-rescue__title">No encontramos resultados para tu búsqueda</h3></html>'
+    )
+    src = {
+        "site": "mercadolibre",
+        "name": "Botánico 3 amb 1 dorm",
+        "zone": "Botánico",
+        "pages": 1,
+        "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/botanico/",
+        "aliases": ["botanico", "palermo botanico", "jardin botanico"],
+    }
+    assert s.page_is_empty_results(html, "mercadolibre")
+    modal = (
+        '<html><title>Departamentos en Venta en Barrio Norte, Capital Federal, 3 ambientes</title>'
+        '<h1>Departamentos en Venta en Barrio Norte, Capital Federal, 3 ambientes</h1>'
+        '{"modal_not_found_message":"No encontramos resultados que coincidan con su búsqueda"}'
+        '<a href="https://departamento.mercadolibre.com.ar/MLA-3740194676-x-_JM">x</a></html>'
+    )
+    assert not s.page_is_empty_results(modal, "mercadolibre")
+    with mock.patch.object(s, "fetch", return_value=(html, src["url"])):
+        with mock.patch.object(s.time, "sleep"):
+            items, last = s.scrape_source(None, src, CFG)
+    assert items == [] and last == []
+
+
 def test_argenprop_uses_browser_when_given():
     class FakeChrome:
         def fetch(self, url):
@@ -905,6 +1028,65 @@ def test_first_run_is_per_portal():
     assert "argenprop:9" in ap2["listings"]
     assert any(x["id"] == "argenprop:9" for x in ap_cat["listings"])
     _restore_paths()
+
+
+def test_revive_gone_listing_when_live_again():
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    try:
+        live = _item("zonaprop:old", url="https://z/old.html", photo="https://img/x.jpg")
+        s.write_json(
+            s.seen_path("zonaprop"),
+            {
+                "listings": {
+                    "zonaprop:old": {
+                        "price": live["price"],
+                        "url": live["url"],
+                        "first_seen": "2026-01-01T00:00:00+00:00",
+                    }
+                },
+                "meta": {},
+            },
+        )
+        s.write_json(
+            s.listings_path("zonaprop"),
+            {
+                "last_change": "x",
+                "listings": [
+                    {
+                        **live,
+                        "active": False,
+                        "gone_at": "2026-10-14T00:00:00+00:00",
+                        "first_seen": "2026-01-01T00:00:00+00:00",
+                        "price_history": [],
+                    }
+                ],
+            },
+        )
+        cfg = {"heartbeat": False, "sources": [{"site": "zonaprop", "name": "Recoleta"}]}
+        with mock.patch.object(
+            s,
+            "deliver",
+            return_value={"sent_ids": [], "failed_ids": [], "intro_ok": True, "error_ok": True},
+        ):
+            s.process_portal(
+                "zonaprop",
+                [live],
+                {"Recoleta"},
+                [],
+                cfg,
+                dry_run=False,
+                token="t",
+                chat_id="1",
+                now="2026-10-14T12:00:00+00:00",
+                today="2026-10-14",
+            )
+        _, cat = s.load_portal("zonaprop", persist=False)
+        rec = next(x for x in cat["listings"] if x["id"] == "zonaprop:old")
+        assert rec["active"] is True
+        assert rec.get("gone_at") is None
+    finally:
+        _restore_paths()
 
 
 def test_no_write_when_nothing_changed():
@@ -1420,6 +1602,43 @@ def test_areas_weights_expensas_signals_and_offer():
         "include_unknown_light",
     ):
         assert web[key] == cfg[key], key
+
+
+def test_recoleta_strip_mechanism():
+    """Mecanismo de la franja con rangos de PRUEBA (no son los reales de config.json)."""
+    f = {
+        "street_zones": [
+            {"street": "juncal", "min": 1500, "max": 3199, "zone": "Recoleta"},
+            {"street": "guemes", "min": 1500, "max": 3199, "zone": "Barrio Norte"},
+            {"street": "guemes", "min": 3200, "max": 3699, "zone": "Recoleta"},
+            {"street": "las heras", "min": 1500, "max": 3199, "zone": "Recoleta"},
+        ],
+        "recoleta_strip": [{"street": "guemes", "min": 3200, "max": 3299},
+                           {"street": "las heras", "min": 2000, "max": 2599}],
+        "allowed_barrios": ["recoleta", "barrio norte"],
+    }
+    def item(addr, claim="Recoleta"):
+        return {"title": "Depto", "address": f"{addr}, {claim}, Capital Federal", "url": "https://z/x.html", "blurb": ""}
+    dentro = item("Güemes 3250")
+    assert s.apply_zone(dentro, f) and dentro["zone"] == "Recoleta"
+    fuera = item("Güemes 3500")                     # Recoleta por calle, fuera de la franja
+    assert not s.apply_zone(fuera, f) and fuera["zone"] == ""
+    bn_claim = item("Güemes 3500", "Barrio Norte")  # la card dice Barrio Norte, la cuadra es Recoleta fuera de franja
+    assert not s.apply_zone(bn_claim, f)
+    sin_altura = item("Güemes", "Recoleta")
+    assert not s.apply_zone(sin_altura, f)
+    bn_real = item("Güemes 2000", "Barrio Norte")   # Barrio Norte por calle: no se toca
+    assert s.apply_zone(bn_real, f) and bn_real["zone"] == "Barrio Norte"
+    # sin franja configurada no recorta
+    f2 = {k: v for k, v in f.items() if k != "recoleta_strip"}
+    assert s.apply_zone(item("Güemes 3500"), f2)
+
+
+def test_recoleta_strip_config_not_closed():
+    """config.json: la franja real queda sin cerrar hasta confirmar alturas (ver README)."""
+    cfg = json.loads(Path("config.json").read_text(encoding="utf-8"))
+    assert not cfg["filters"].get("recoleta_strip")
+    assert "palermo hollywood" in cfg["filters"]["reject_barrios"]  # slugs sin verificar: zonas nuevas aún no entran
 
 
 if __name__ == "__main__":

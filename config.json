@@ -267,14 +267,8 @@
       {
         "street": "santa fe",
         "min": 1500,
-        "max": 3199,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "santa fe",
-        "min": 3200,
         "max": 3499,
-        "zone": "Recoleta"
+        "zone": "Barrio Norte"
       },
       {
         "street": "santa fe",
@@ -809,7 +803,7 @@
         "street": "coronel diaz",
         "min": 1000,
         "max": 1899,
-        "zone": "Recoleta"
+        "zone": "Barrio Norte"
       },
       {
         "street": "coronel diaz",
@@ -1299,10 +1293,50 @@
     },
     {
       "site": "mercadolibre",
+      "name": "Recoleta 2 amb 1 dorm",
+      "zone": "Recoleta",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/recoleta/",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Recoleta 2 amb 2 dorm",
+      "zone": "Recoleta",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/recoleta/",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "mercadolibre",
       "name": "Recoleta 3 amb",
       "zone": "Recoleta",
       "pages": 1,
       "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/recoleta/",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Recoleta 3 amb 1 dorm",
+      "zone": "Recoleta",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/recoleta/",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Recoleta 3 amb 2 dorm",
+      "zone": "Recoleta",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/recoleta/",
       "aliases": [
         "recoleta"
       ]
@@ -1329,10 +1363,50 @@
     },
     {
       "site": "mercadolibre",
+      "name": "Barrio Norte 2 amb 1 dorm",
+      "zone": "Barrio Norte",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/barrio-norte/",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Barrio Norte 2 amb 2 dorm",
+      "zone": "Barrio Norte",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/barrio-norte/",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "mercadolibre",
       "name": "Barrio Norte 3 amb",
       "zone": "Barrio Norte",
       "pages": 1,
       "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/barrio-norte/",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Barrio Norte 3 amb 1 dorm",
+      "zone": "Barrio Norte",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/barrio-norte/",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Barrio Norte 3 amb 2 dorm",
+      "zone": "Barrio Norte",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/barrio-norte/",
       "aliases": [
         "barrio norte"
       ]
@@ -1363,10 +1437,58 @@
     },
     {
       "site": "mercadolibre",
+      "name": "Botánico 2 amb 1 dorm",
+      "zone": "Botánico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/botanico/",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Botánico 2 amb 2 dorm",
+      "zone": "Botánico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/botanico/",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
       "name": "Botánico 3 amb",
       "zone": "Botánico",
       "pages": 1,
       "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/botanico/",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Botánico 3 amb 1 dorm",
+      "zone": "Botánico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/botanico/",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Botánico 3 amb 2 dorm",
+      "zone": "Botánico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/botanico/",
       "aliases": [
         "botanico",
         "palermo botanico",
@@ -1395,10 +1517,50 @@
     },
     {
       "site": "mercadolibre",
+      "name": "Palermo Chico 2 amb 1 dorm",
+      "zone": "Palermo Chico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/palermo-chico/",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Chico 2 amb 2 dorm",
+      "zone": "Palermo Chico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/palermo-chico/",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
       "name": "Palermo Chico 3 amb",
       "zone": "Palermo Chico",
       "pages": 1,
       "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/palermo-chico/",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Chico 3 amb 1 dorm",
+      "zone": "Palermo Chico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/palermo-chico/",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Chico 3 amb 2 dorm",
+      "zone": "Palermo Chico",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/palermo-chico/",
       "aliases": [
         "palermo chico"
       ]
