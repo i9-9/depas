@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-17T14:22:34+00:00",
+ "last_change": "2026-10-17T17:18:22+00:00",
  "listings": [
   {
    "active": false,
@@ -2989,7 +2989,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Paraguay 2386",
    "address_unverified": true,
    "air_usd": 3500,
@@ -3002,13 +3002,13 @@
    "breakeven_exit_usd_m2": 3393,
    "closing_ref_usd": 133579,
    "cochera": null,
-   "days_seen": 6,
+   "days_seen": 7,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 132000,
    "expensas_text": "$ 132.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-17T01:27:52+00:00",
+   "gone_at": null,
    "id": "zonaprop:59883738",
    "max_offer_usd": 106740,
    "neto_base_usd": -12214,
@@ -3038,8 +3038,8 @@
    "title": "Deparatamento de 3 Ambientes Excelente Ubicacion!! El departamento esta compuesto por un L",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-paraguay-2300-muy-buen-depto-3-amb-barrio-norte-59883738.html",
    "usd_per_m2": 2317,
-   "vs_median_n": 11,
-   "vs_median_pct": 12,
+   "vs_median_n": 10,
+   "vs_median_pct": 11,
    "zone": "Barrio Norte",
    "zone_unverified": false
   },
