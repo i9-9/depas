@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-17T01:27:52+00:00",
+ "last_change": "2026-10-17T14:22:34+00:00",
  "listings": [
   {
    "active": false,
@@ -3784,7 +3784,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Paraguay 2617",
    "address_unverified": false,
    "air_usd": 22000,
@@ -3803,7 +3803,7 @@
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-17T14:22:34+00:00",
    "id": "zonaprop:60138686",
    "max_offer_usd": 113157,
    "neto_base_usd": 5648,
@@ -4433,7 +4433,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuénaga 1000",
    "address_unverified": false,
    "air_usd": -6000,
@@ -4452,7 +4452,7 @@
    "expensas_ars": 38000,
    "expensas_text": "$ 38.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-17T14:22:34+00:00",
    "id": "zonaprop:60233554",
    "max_offer_usd": 100085,
    "neto_base_usd": -20798,
