@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-18T01:10:39+00:00",
+ "last_change": "2026-10-18T14:44:07+00:00",
  "listings": [
   {
    "active": false,
@@ -328,11 +328,12 @@
    "reno_usd_m2": 375,
    "roi_base": 0.0062,
    "roi_hard": -0.1253,
-   "score": 0,
+   "score": 1,
    "seventy_offer_usd": 88350,
    "site": "zonaprop",
    "tags": [
-    "m² sin verificar"
+    "m² sin verificar",
+    "metro barato"
    ],
    "title": "Excelente departamento de 3 ambientes reciclado, con balcón al frente y patio, ubicado en ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-barrio-norte-55263580.html",
@@ -2162,28 +2163,64 @@
    "zone": ""
   },
   {
-   "active": false,
-   "address": "",
-   "ambientes": null,
-   "area": null,
+   "active": true,
+   "address": "Uriburu  al 1200",
+   "address_unverified": false,
+   "air_usd": -11500,
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 52.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 52.0,
+   "breakeven_exit_usd_m2": 3735,
+   "closing_ref_usd": 129735,
+   "cochera": null,
+   "days_seen": 8,
+   "decision": "descartar",
+   "exit_usd_m2": 2750,
+   "expensas_ars": 179000,
+   "expensas_text": "$ 179.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": "2026-10-10T05:02:26+00:00",
+   "gone_at": null,
    "id": "zonaprop:59574708",
-   "old_price": null,
-   "photo": "",
-   "price": 138500,
+   "max_offer_usd": 92159,
+   "neto_base_usd": -26097,
+   "neto_hard_usd": -46268,
+   "old_price": 138500,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/57/47/08/720x532/2064521219.jpg",
+   "piso": null,
+   "price": 135000,
+   "price_drops": 1,
    "price_history": [
     {
      "date": "2026-10-10T01:31:10+00:00",
      "price": 138500
+    },
+    {
+     "date": "2026-10-18T14:44:07+00:00",
+     "price": 135000
     }
    ],
-   "score": 0,
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": -0.1611,
+   "roi_hard": -0.2637,
+   "score": -3,
+   "seventy_offer_usd": 80600,
    "site": "zonaprop",
-   "tags": [],
-   "title": "venta departamento ambientes uriburu y juncal",
+   "tags": [
+    "m² sin verificar",
+    "sobre presupuesto",
+    "sin aire"
+   ],
+   "title": "Salaya Romera Propiedades ofrece a la Venta Departamento de 2 ambientes en piso alto al fr",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-uriburu-y-juncal-59574708.html",
-   "zone": ""
+   "usd_per_m2": 2596,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -2989,7 +3026,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Paraguay 2386",
    "address_unverified": true,
    "air_usd": 3500,
@@ -3002,13 +3039,13 @@
    "breakeven_exit_usd_m2": 3393,
    "closing_ref_usd": 133579,
    "cochera": null,
-   "days_seen": 7,
+   "days_seen": 8,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 132000,
    "expensas_text": "$ 132.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-17T19:32:46+00:00",
+   "gone_at": null,
    "id": "zonaprop:59883738",
    "max_offer_usd": 106740,
    "neto_base_usd": -12214,
@@ -3038,8 +3075,8 @@
    "title": "Deparatamento de 3 Ambientes Excelente Ubicacion!! El departamento esta compuesto por un L",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-paraguay-2300-muy-buen-depto-3-amb-barrio-norte-59883738.html",
    "usd_per_m2": 2317,
-   "vs_median_n": 10,
-   "vs_median_pct": 11,
+   "vs_median_n": 8,
+   "vs_median_pct": -1,
    "zone": "Barrio Norte",
    "zone_unverified": false
   },
@@ -3693,7 +3730,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -3712,7 +3749,7 @@
    "expensas_ars": 179000,
    "expensas_text": "$ 179.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-18T14:44:07+00:00",
    "id": "zonaprop:60118859",
    "max_offer_usd": 92159,
    "neto_base_usd": -26097,
@@ -4461,7 +4498,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuénaga 1000",
    "address_unverified": false,
    "air_usd": -6000,
@@ -4480,7 +4517,7 @@
    "expensas_ars": 38000,
    "expensas_text": "$ 38.000 Expensas",
    "first_seen": "2026-10-10T01:58:26+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-18T14:44:07+00:00",
    "id": "zonaprop:60233554",
    "max_offer_usd": 100085,
    "neto_base_usd": -20798,

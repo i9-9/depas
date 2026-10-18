@@ -470,10 +470,11 @@
   },
   "zonaprop:59574708": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "key": null,
-   "price": 138500,
+   "key": "uriburu 1200|135000|52|2",
+   "place": "uriburu 1200|50|2",
+   "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-uriburu-y-juncal-59574708.html",
-   "zone": ""
+   "zone": "Barrio Norte"
   },
   "zonaprop:59582893": {
    "first_seen": "2026-10-10T01:31:10+00:00",
