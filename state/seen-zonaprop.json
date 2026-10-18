@@ -776,10 +776,11 @@
   },
   "zonaprop:60118859": {
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "key": "uriburu 1200|138500|52|2",
-   "last_seen": "2026-10-10T03:03:21+00:00",
-   "price": 138500,
-   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-piso-alto-uriburu-y-60118859.html"
+   "key": "uriburu 1200|135000|52|2",
+   "place": "uriburu 1200|50|2",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-piso-alto-uriburu-y-60118859.html",
+   "zone": "Barrio Norte"
   },
   "zonaprop:60133606": {
    "first_seen": "2026-10-10T01:31:10+00:00",

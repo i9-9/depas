@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-17T22:26:59+00:00",
+ "last_change": "2026-10-18T01:10:39+00:00",
  "listings": [
   {
    "active": false,
@@ -3693,36 +3693,64 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Uriburu  al 1200",
-   "air_usd": -8500,
+   "address_unverified": false,
+   "air_usd": -11500,
    "ambientes": 2,
+   "antiguedad_years": null,
    "area": 52.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 52.0,
+   "breakeven_exit_usd_m2": 3735,
+   "closing_ref_usd": 129735,
+   "cochera": null,
+   "days_seen": 8,
+   "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 179000,
    "expensas_text": "$ 179.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": "2026-10-10T05:02:26+00:00",
+   "gone_at": null,
    "id": "zonaprop:60118859",
-   "old_price": null,
+   "max_offer_usd": 92159,
+   "neto_base_usd": -26097,
+   "neto_hard_usd": -46268,
+   "old_price": 138500,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/11/88/59/720x532/2077633331.jpg",
-   "price": 138500,
+   "piso": null,
+   "price": 135000,
+   "price_drops": 1,
    "price_history": [
     {
      "date": "2026-10-10T01:45:22+00:00",
      "price": 138500
+    },
+    {
+     "date": "2026-10-18T01:10:39+00:00",
+     "price": 135000
     }
    ],
-   "reno_usd_m2": 250,
-   "score": -4,
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": -0.1611,
+   "roi_hard": -0.2637,
+   "score": -3,
+   "seventy_offer_usd": 80600,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto",
     "sin aire"
    ],
    "title": "Salaya Romera Propiedades ofrece a la Venta Departamento de 2 ambientes en piso alto al fr",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-piso-alto-uriburu-y-60118859.html",
-   "zone": ""
+   "usd_per_m2": 2596,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -5646,7 +5674,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Peña 2700",
    "address_unverified": false,
    "air_usd": 34375,
@@ -5659,13 +5687,13 @@
    "breakeven_exit_usd_m2": 2841,
    "closing_ref_usd": 115320,
    "cochera": null,
-   "days_seen": 5,
+   "days_seen": 7,
    "decision": "vigilar",
    "exit_usd_m2": 2750,
    "expensas_ars": 250000,
    "expensas_text": "$ 250.000 Expensas",
    "first_seen": "2026-10-11T01:58:51+00:00",
-   "gone_at": "2026-10-17T22:26:59+00:00",
+   "gone_at": null,
    "id": "zonaprop:60409929",
    "max_offer_usd": 115056,
    "neto_base_usd": 18463,
