@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-18T01:10:39+00:00",
+ "last_change": "2026-10-19T13:54:50+00:00",
  "listings": [
   {
    "active": false,
@@ -284,7 +284,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Pueyrredon Al 900, Barrio Norte, Capital Federal",
    "address_unverified": null,
    "air_usd": 65250,
@@ -303,7 +303,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-19T13:54:50+00:00",
    "id": "mercadolibre:3740194676",
    "max_offer_usd": 154018,
    "neto_base_usd": 46475,
@@ -323,11 +323,12 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2608,
    "roi_hard": 0.0822,
-   "score": 1,
+   "score": 3,
    "seventy_offer_usd": 133300,
    "site": "mercadolibre",
    "tags": [
     "sobre presupuesto",
+    "metro muy barato",
     "aire amplio"
    ],
    "title": "3 Ambientes Con Dependencia, Balcón Corrido Y Vista Abierta  Barrio Norte",

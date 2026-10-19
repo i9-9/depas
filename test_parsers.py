@@ -172,6 +172,9 @@ def test_pagination_urls():
     ml = "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/recoleta/"
     assert s.page_url("mercadolibre", ml, 1) == ml
     assert s.page_url("mercadolibre", ml, 2) == ml  # robots bloquea _Desde_
+    caba = "https://cabaprop.com.ar/propiedades/comprar-departamento-recoleta-dolares_desde_120000_hasta_140000-ambientes_1"
+    assert s.page_url("cabaprop", caba, 1) == caba
+    assert s.page_url("cabaprop", caba + "?pagina=1", 2) == caba + "?pagina=2"
 
 
 def test_source_pages():
@@ -197,6 +200,13 @@ def test_source_pages():
     else:
         raise AssertionError("mercadolibre pages=2 debería rechazarse")
     assert s.source_pages({"site": "mercadolibre", "name": "x", "pages": 1}) == 1
+    assert s.source_pages({"site": "cabaprop", "name": "x", "pages": 5}) == 5
+    try:
+        s.source_pages({"site": "cabaprop", "name": "x", "pages": 6})
+    except ValueError as e:
+        assert "Cabaprop" in str(e)
+    else:
+        raise AssertionError("cabaprop pages=6 debería rechazarse")
     for src in CFG["sources"]:
         n = s.source_pages(src)
         assert 1 <= n <= s.PAGES_MAX[src["site"]]
@@ -208,7 +218,7 @@ def test_source_pages():
             assert "_Desde_" not in src["url"] and "_PriceRange_" not in src["url"]
             assert "_NoIndex_" not in src["url"] and "#" not in src["url"]
     ml = [src for src in CFG["sources"] if src["site"] == "mercadolibre"]
-    assert len(ml) == 28, len(ml)
+    assert len(ml) == 35, len(ml)
     from collections import defaultdict
     by_zone: dict[str, list[str]] = defaultdict(list)
     for src in ml:
@@ -430,20 +440,20 @@ def test_drop_out_of_scope():
     now = "2026-10-10T12:00:00+00:00"
     catalog = {
         "listings": [
-            {"id": "zonaprop:ok", "zone": "Recoleta", "title": "3 amb Recoleta",
-             "address": "Juncal 2900", "url": "https://z/recoleta.html", "active": True},
+            {"id": "zonaprop:ok", "zone": "Recoleta", "title": "3 amb Recoleta y avenida Córdoba",
+             "address": "French 2668", "url": "https://z/recoleta.html", "active": True},
             {"id": "zonaprop:ros", "zone": "", "title": "departamento en venta granadero baigorria.",
              "address": "", "url": "https://z/granadero-baigorria.html", "active": True},
-            {"id": "zonaprop:paso", "zone": "Barrio Norte",
+            {"id": "zonaprop:sur", "zone": "Barrio Norte",
              "title": "Paso 760 y avenida Córdoba",
              "address": "Paso 760", "url": "https://z/paso-700-semipiso.html", "active": True},
         ]
     }
     gone = s.drop_out_of_scope(catalog, F, now)
     by_id = {x["id"]: x for x in catalog["listings"]}
-    assert gone == ["zonaprop:ros"]
+    assert gone == ["zonaprop:ros", "zonaprop:sur"]
     assert by_id["zonaprop:ok"]["active"] is True
-    assert by_id["zonaprop:paso"]["active"] is True
+    assert by_id["zonaprop:sur"]["active"] is False
     assert by_id["zonaprop:ros"]["active"] is False and by_id["zonaprop:ros"]["gone_at"] == now
 
 
@@ -488,7 +498,14 @@ def test_street_zones():
     def z(address, title=""):
         return s.classify_zone({"address": address, "title": title}, f)
 
-    assert z("Fitz Roy al 2400") is None
+    assert z("Fitz Roy al 2400") == "Palermo Hollywood"
+    assert z("Fitz Roy 800") is None
+    assert z("Fitz Roy 3000") is None
+    assert z("Honduras 5800") == "Palermo Hollywood"
+    assert z("Honduras 4300") is None
+    assert z("Bonpland 1800") == "Palermo Hollywood"
+    assert z("Dorrego 2000") == "Palermo Hollywood"
+    assert z("Dorrego 1000") is None
     assert z("Thames Al 2400, Botánico") is None
     assert z("Armenia 2100, Botánico") is None
     assert z("José A. Cabrera 3275") is None
@@ -496,10 +513,11 @@ def test_street_zones():
     assert z("Tucumán 1900") is None
     assert z("Sarmiento 1400") is None
     assert z("Av. Cordoba al 1332") is None
-    assert z("Av. Cordoba al 1500") == "Barrio Norte"
+    assert z("Av. Cordoba al 1500") is None
     assert z("CORDOBA 3300") is None
     assert z("Montevideo al 600") is None
     assert z("Marcelo Torcuato de Alvear 900") is None
+    assert z("Marcelo Torcuato de Alvear 1800") is None
     assert z("Suipacha e/ Avenida Córdoba y Paraguay", "Suipacha") is None
     assert z("Viamonte y Rodriguez Peña - Unidad 103") is None
     assert z("San Luis 3376") is None
@@ -507,9 +525,13 @@ def test_street_zones():
     assert z("Paraguay 1200") is None
     assert z("Arenales 1100") is None
 
-    assert z("Paso 760") == "Barrio Norte"
-    assert z("Av. Córdoba 1800") == "Barrio Norte"
-    assert z("Paraguay 1878") == "Barrio Norte"
+    assert z("Paso 760") is None
+    assert z("Av. Córdoba 1800") is None
+    assert z("Paraguay 1878") is None
+    assert z("Mansilla 2600") is None
+    assert z("Azcuénaga 700") is None
+    assert z("Pueyrredon al 900") is None
+    assert z("Pueyrredón 1362") is None
     assert z("French 2668") == "Recoleta"
     assert z("French") == "Recoleta"
     assert z("Juncal Al 2077") == "Recoleta"
@@ -520,12 +542,15 @@ def test_street_zones():
     assert z("Cabello al 3900") == "Botánico"
     assert z("Cabello 3200") == "Palermo Chico"
     assert z("Salguero 3078") == "Palermo Chico"
-    assert z("Scalabrini Ortiz al 2300") == "Botánico"
+    assert z("Scalabrini Ortiz al 2300") is None
+    assert z("Scalabrini Ortiz al 2600") == "Botánico"
+    assert z("Santa Fe 1800") == "Barrio Norte"
     assert z("Santa Fe 3800") == "Botánico"
     assert z("Santa Fe 1700") == "Barrio Norte"
     assert z("Santa Fe 3300") == "Barrio Norte"
     assert z("Av. Santa Fe 3200") == "Barrio Norte"
-    assert z("Av. Coronel Díaz 1500") == "Barrio Norte"
+    assert z("Av. Coronel Díaz 1500") is None
+    assert z("Av. Coronel Díaz 2000") == "Palermo Chico"
     assert z("Charcas 3245") == "Recoleta"
     south_of_santa_fe = {
         "santa fe", "paraguay", "cordoba", "san luis", "corrientes", "sarmiento",
@@ -537,8 +562,14 @@ def test_street_zones():
 
     src = {"name": "Recoleta", "zone": "Recoleta", "aliases": ["recoleta"]}
     assert z("Ecuador 400") is None
-    assert z("Ecuador 900") == "Barrio Norte"
+    assert z("Ecuador 900") is None
+    assert z("Ecuador 1400") == "Recoleta"
     assert z("Ecuador 1500") == "Recoleta"
+    assert z("Callao 1000") is None
+    assert z("Callao 1100") == "Barrio Norte"
+    assert z("Azcuénaga 1200") == "Barrio Norte"
+    assert z("Pueyrredón 1400") == "Recoleta"
+    assert z("Alvear 1800") == "Barrio Norte"
     assert z("French 100") is None
     assert z("Mansilla 800") is None
     assert z("Paso 400") is None
@@ -572,7 +603,7 @@ def test_street_zones():
     assert web["street_zones"] == f["street_zones"]
     assert web["reject_barrios"] == f["reject_barrios"]
 
-    bad = {"address": "Fitz Roy al 2400", "title": "Depto Recoleta", "url": "https://z/recoleta-1.html",
+    bad = {"address": "Fitz Roy 800", "title": "Depto Recoleta", "url": "https://z/recoleta-1.html",
            "price": 98000, "area": 55, "ambientes": 2, "blurb": ""}
     assert not s.keep_listing(bad, src, f)
 
@@ -856,6 +887,16 @@ def test_prioritize_argenprop_generals_first():
     ]
     names = [x["name"] for x in s.prioritize_sources(raw)]
     assert names == ["Botánico", "Recoleta", "Recoleta 2 amb", "Recoleta"]
+
+
+def test_playwright_chrome_pid_ignores_user_chrome():
+    sample = """
+  100 /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+  200 /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --user-data-dir=/tmp/playwright_chromiumdev_profile-abc
+  201 /Applications/Google Chrome.app/Contents/MacOS/Google Chrome Helper --type=gpu-process --user-data-dir=/tmp/playwright_chromiumdev_profile-abc
+  202 /Applications/Google Chrome.app/Contents/Frameworks/chrome_crashpad_handler --user-data-dir=/tmp/playwright_chromiumdev_profile-abc
+"""
+    assert s.playwright_chrome_pids(sample) == [200]
 
 
 def test_argenprop_chrome_stays_on_page1():
@@ -1238,6 +1279,134 @@ def test_top_drop_is_loud():
     assert "Bajó de USD 110.000 a USD 108.000" in msg and "top 10" in msg
     assert not s.is_loud({"score": 0, "price": 108000, "old_price": 110000}, cfg)  # ~1.8%
     # la prioridad top-10 se aplica en process_portal (_silent=False), no en is_loud
+
+
+def test_run_report_goes_to_web_data():
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    report = s.build_run_report(
+        "argenprop",
+        now="2026-10-12T23:20:00+00:00",
+        ok=[{"name": "Recoleta", "n": 18}],
+        errors=["argenprop · Barrio Norte 3 amb: HTTP 202 (WAF / sin listado)"],
+        matched=2,
+        new=0,
+        drops=0,
+        lines=["[ok] argenprop · Recoleta: 18 avisos", "[argenprop] filtros: 2 · nuevos: 0 · bajas de precio: 0"],
+    )
+    s.write_run_report("argenprop", report, persist=False)
+    assert not s.run_report_path("argenprop").exists()
+    s.write_run_report("argenprop", report, persist=True)
+    saved = json.loads(s.run_report_path("argenprop").read_text())
+    assert saved["ran_at"] == "2026-10-12T23:20:00+00:00"
+    assert saved["matched"] == 2
+    assert saved["errors"][0].startswith("argenprop · Barrio Norte 3 amb")
+    assert "[ok] argenprop · Recoleta: 18 avisos" in saved["lines"]
+    _restore_paths()
+
+
+def test_argenprop_waf_stays_off_telegram():
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    s.write_json(s.seen_path("argenprop"), s.empty_state())
+    s.write_json(s.listings_path("argenprop"), s.empty_catalog())
+    cfg = {
+        "heartbeat": False,
+        "notify_fetch_errors": {"argenprop": False, "zonaprop": True},
+        "sources": [{"site": "argenprop", "name": "Recoleta"}],
+    }
+    waf = ["argenprop · Barrio Norte 3 amb: HTTP 202 (WAF / sin listado)"]
+    with mock.patch.object(s, "deliver") as d:
+        ok = s.process_portal(
+            "argenprop",
+            [],
+            set(),
+            waf,
+            cfg,
+            dry_run=False,
+            token="t",
+            chat_id="1",
+            now="2026-10-12T20:20:00+00:00",
+            today="2026-10-12",
+        )
+    assert ok["ok"] is False
+    d.assert_not_called()
+    rec = {
+        "price": 132000,
+        "url": "https://www.argenprop.com/x--1",
+        "first_seen": "2026-10-11T00:00:00+00:00",
+        "zone": "Recoleta",
+    }
+    live = _item("argenprop:1", site="argenprop", zone="Recoleta", price=132000, url=rec["url"])
+    s.apply_air(live)
+    s.write_json(s.seen_path("argenprop"), {"listings": {"argenprop:1": rec}, "meta": {}})
+    s.write_json(
+        s.listings_path("argenprop"),
+        {
+            "last_change": rec["first_seen"],
+            "listings": [{**live, "first_seen": rec["first_seen"], "active": True, "gone_at": None}],
+        },
+    )
+    with mock.patch.object(
+        s,
+        "deliver",
+        return_value={"sent_ids": [], "failed_ids": [], "intro_ok": True, "error_ok": True},
+    ) as d2:
+        s.process_portal(
+            "argenprop",
+            [live],
+            {"Recoleta"},
+            waf,
+            cfg,
+            dry_run=False,
+            token="t",
+            chat_id="1",
+            now="2026-10-12T20:20:00+00:00",
+            today="2026-10-12",
+            coverage_notes=["argenprop · Recoleta: última página con avisos nuevos"],
+        )
+    texts = []
+    for call in d2.call_args_list:
+        for p in call[0][2]:
+            texts.append(p.get("text") or "")
+    assert not any("Problemas" in t or "Cobertura" in t for t in texts)
+    assert s.wants_fetch_error_alert("argenprop", cfg) is False
+    assert s.wants_fetch_error_alert("zonaprop", cfg) is True
+    _restore_paths()
+
+
+def test_zonaprop_fetch_errors_still_telegram():
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    s.write_json(s.seen_path("zonaprop"), s.empty_state())
+    s.write_json(s.listings_path("zonaprop"), s.empty_catalog())
+    cfg = {
+        "heartbeat": False,
+        "notify_fetch_errors": {"argenprop": False, "zonaprop": True},
+        "sources": [{"site": "zonaprop", "name": "Recoleta"}],
+    }
+    with mock.patch.object(
+        s,
+        "deliver",
+        return_value={"sent_ids": [], "failed_ids": [], "intro_ok": True, "error_ok": True},
+    ) as d:
+        ok = s.process_portal(
+            "zonaprop",
+            [],
+            set(),
+            ["zonaprop · Recoleta: HTTP 403"],
+            cfg,
+            dry_run=False,
+            token="t",
+            chat_id="1",
+            now="2026-10-12T20:20:00+00:00",
+            today="2026-10-12",
+        )
+    assert ok["ok"] is False
+    d.assert_called_once()
+    payloads = d.call_args[0][2]
+    assert any("Problemas en esta corrida" in (p.get("text") or "") for p in payloads)
+    _restore_paths()
 
 
 def test_notify_loud_and_silent():
@@ -1638,7 +1807,93 @@ def test_recoleta_strip_config_not_closed():
     """config.json: la franja real queda sin cerrar hasta confirmar alturas (ver README)."""
     cfg = json.loads(Path("config.json").read_text(encoding="utf-8"))
     assert not cfg["filters"].get("recoleta_strip")
-    assert "palermo hollywood" in cfg["filters"]["reject_barrios"]  # slugs sin verificar: zonas nuevas aún no entran
+    assert "palermo hollywood" in cfg["filters"]["allowed_barrios"]
+    assert "palermo hollywood" not in cfg["filters"]["reject_barrios"]
+    assert "Palermo Hollywood" not in cfg["exit_usd_m2"]  # sin dato verificado; no se inventa
+
+
+def test_cabaprop():
+    url = (
+        "https://cabaprop.com.ar/propiedades/comprar-departamento-recoleta-"
+        "dolares_desde_120000_hasta_140000-ambientes_2_3"
+    )
+    body = s.cabaprop_body(url)
+    assert body["operationType"] == 1
+    assert body["propertyTypes"] == [1]
+    assert body["barrios"] == [88]
+    assert body["ambiences"] == [2, 3]
+    assert body["price"] == {"currency": "USD", "min": 120000, "max": 140000, "tag": "dolares"}
+    bn = (
+        "https://cabaprop.com.ar/propiedades/comprar-departamento-barrio_norte-"
+        "barrio_norte_la_isla-barrio_norte_parque_las_heras-barrio_norte_recoleta-"
+        "dolares_desde_120000_hasta_140000-ambientes_1"
+    )
+    assert s.cabaprop_body(bn)["barrios"] == [10, 11, 12, 13]
+    hw = (
+        "https://cabaprop.com.ar/propiedades/comprar-departamento-palermo_hollywood-"
+        "dolares_desde_120000_hasta_140000-ambientes_1_2_3"
+    )
+    assert s.cabaprop_body(hw)["barrios"] == [51]
+    try:
+        s.cabaprop_body("https://cabaprop.com.ar/propiedades/comprar-departamento-tigre-dolares_desde_1_hasta_2")
+    except ValueError as e:
+        assert "tigre" in str(e)
+    else:
+        raise AssertionError("un barrio desconocido tiene que fallar")
+
+    row = {
+        "_id": "674f520afef2f0d656660051",
+        "title": "Venta Departamento 3 ambientes Recoleta",
+        "status": "published",
+        "operation_type": 1,
+        "price": {"currency": 1, "total": 132000, "expenses": 180000, "expensesCurrency": 2},
+        "surface": {"totalSurface": 70, "coveredSurface": 62, "uncoveredSurface": 8, "semiCoveredSurface": None},
+        "location": {"street": "French", "number": 2500, "barrios": [88]},
+        "characteristics": {
+            "ambience": 3,
+            "balcony": {"active": True, "type": 1},
+            "garages": {"active": False, "quantity": 0},
+        },
+        "antiquity": {"type": 2, "years": 40},
+        "description": "Luminoso al frente. Piso: 6. De época, para reciclar.",
+        "images": [{"url": "https://cabaprop.com.ar/img/a.jpg?size=s"}],
+        "owner": {"name": "No Guardar", "phoneNumber": "111", "email": "secret@example.com"},
+    }
+    item = s.parse_cabaprop([row])[0]
+    blob = json.dumps(item)
+    assert "secret@example.com" not in blob and "No Guardar" not in blob
+    assert item["id"] == "cabaprop:674f520afef2f0d656660051"
+    assert item["price"] == 132000
+    assert item["address"] == "French 2500"
+    assert item["ambientes"] == 3
+    assert item["area_covered"] == 62
+    assert item["area"] == 64.4  # 62 cubiertos + 8 descubiertos al 30%
+    assert item["expensas_ars"] == 180000
+    assert item["piso"] == 6
+    assert item["antiguedad_years"] == 40
+    assert item["cochera"] is False
+    assert item["photo"] == "https://cabaprop.com.ar/img/a.jpg"
+    assert item["url"].startswith("https://cabaprop.com.ar/propiedad/674f520afef2f0d656660051/")
+    s.apply_zone(item, F, {"zone": "Recoleta", "name": "Recoleta", "aliases": ["recoleta"]})
+    s.apply_signals(item, SIGNALS, F)
+    assert item["zone"] == "Recoleta"
+    assert s.matches(item, F)
+    assert "de época" in item["tags"] and "para reciclar" in item["tags"]
+
+    al = s.cabaprop_address({"street": "Azcuénaga al", "number": 700})
+    assert al == "Azcuénaga 700", al
+    assert s.cabaprop_address({"street": "Azcuénaga al 700", "number": ""}) == "Azcuénaga 700"
+    ranged = dict(item)
+    ranged["address"] = al
+    s.apply_zone(ranged, F, {"zone": "Barrio Norte", "name": "Barrio Norte", "aliases": ["barrio norte"]})
+    assert ranged["zone"] == ""
+
+    dark = s.parse_cabaprop([{**row, "_id": "abc", "characteristics": {**row["characteristics"], "balcony": {"active": False}}}])[0]
+    assert s.has_balcon(dark) is False
+    assert not s.matches(dark, F)
+
+    pozo = s.parse_cabaprop([{**row, "_id": "pozo", "antiquity": {"type": 3, "years": 0}, "description": "Luminoso."}])[0]
+    assert s.is_rejected(pozo, F)
 
 
 if __name__ == "__main__":

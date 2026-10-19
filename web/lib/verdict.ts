@@ -141,6 +141,25 @@ const DECISION: Record<string, string> = {
   descartar: "Descartar",
 };
 
+export function decisionLabel(decision: Listing["decision"]): string | null {
+  if (!decision) return null;
+  return DECISION[decision] ?? null;
+}
+
+export function decisionCopy(
+  item: Pick<Listing, "decision" | "price" | "max_offer_usd">,
+): { label: string; line: string } | null {
+  const label = decisionLabel(item.decision);
+  if (!label) return null;
+  if (item.max_offer_usd == null || item.price == null) return { label, line: "" };
+  const gap = item.max_offer_usd - item.price;
+  const max = fmtUsd(item.max_offer_usd);
+  const room = fmtUsd(Math.abs(gap));
+  if (gap > 0) return { label, line: `Oferta máxima ${max}. Cabe, con ${room} de margen.` };
+  if (gap === 0) return { label, line: `Oferta máxima ${max}. Está justo en el tope.` };
+  return { label, line: `Oferta máxima ${max}. Se pasa por ${room}.` };
+}
+
 export function offerLine(item: Listing): string | null {
   if (item.max_offer_usd == null) return null;
   let text = `Oferta máxima ${fmtUsd(item.max_offer_usd)}.`;

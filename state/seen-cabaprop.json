@@ -1,0 +1,61 @@
+{
+ "listings": {
+  "cabaprop:698a123676238456d4a86bff": {
+   "first_seen": "2026-10-16T20:44:25+00:00",
+   "key": "general lucio norberto mansilla 2600|139000|68|3",
+   "place": "general lucio norberto mansilla 2600|70|3",
+   "price": 139000,
+   "url": "https://cabaprop.com.ar/propiedad/698a123676238456d4a86bff/espectacular-3-ambientes-con-patio-y-balcon-al-frente",
+   "zone": "Barrio Norte"
+  },
+  "cabaprop:69c6e4418b586865d2bbc0b9": {
+   "first_seen": "2026-10-16T20:44:25+00:00",
+   "key": "av cordoba 2745|125000|70|3",
+   "place": "av cordoba 2745|70|3",
+   "price": 125000,
+   "url": "https://cabaprop.com.ar/propiedad/69c6e4418b586865d2bbc0b9/cordoba-y-ecuador-3-amb-con-dep-anexable-a-refaccionar-la-mejor-orientacion-y-luz",
+   "zone": "Barrio Norte"
+  },
+  "cabaprop:69fd555667d04ff04fbe81eb": {
+   "first_seen": "2026-10-16T20:44:25+00:00",
+   "key": "av cordoba 1837|138000|60|3",
+   "place": "av cordoba 1837|60|3",
+   "price": 138000,
+   "url": "https://cabaprop.com.ar/propiedad/69fd555667d04ff04fbe81eb/departamento-3-ambientes-recoleta",
+   "zone": "Barrio Norte"
+  },
+  "cabaprop:6aacc77e3e6a16a1805ef182": {
+   "first_seen": "2026-10-16T20:44:25+00:00",
+   "key": "french 2668|130000|52|3",
+   "place": "french 2668|50|3",
+   "price": 130000,
+   "url": "https://cabaprop.com.ar/propiedad/6aacc77e3e6a16a1805ef182/departamento-3-ambientes-con-balcon-al-frente-con-lavadero",
+   "zone": "Recoleta"
+  },
+  "cabaprop:6abb2c013e6a16a18082e95e": {
+   "first_seen": "2026-10-16T20:44:25+00:00",
+   "key": "azcuenaga 700|120000|51|3",
+   "place": "azcuenaga 700|50|3",
+   "price": 120000,
+   "url": "https://cabaprop.com.ar/propiedad/6abb2c013e6a16a18082e95e/departamento-barrio-norte",
+   "zone": "Barrio Norte"
+  },
+  "cabaprop:6ac073773e6a16a180924b4f": {
+   "first_seen": "2026-10-16T20:44:25+00:00",
+   "key": "general lucio norberto mansilla 2500|130000|63|3",
+   "place": "general lucio norberto mansilla 2500|65|3",
+   "price": 130000,
+   "url": "https://cabaprop.com.ar/propiedad/6ac073773e6a16a180924b4f/departamento-3-amb-c-balcon-al-frente-recoleta-apto-profesional-apto-credito",
+   "zone": "Barrio Norte"
+  },
+  "cabaprop:6ac6ac59e1793443d22ce180": {
+   "first_seen": "2026-10-16T20:44:25+00:00",
+   "key": "french 2700|140000|60|3",
+   "place": "french 2700|60|3",
+   "price": 140000,
+   "url": "https://cabaprop.com.ar/propiedad/6ac6ac59e1793443d22ce180/3-ambientes-c-depencia-balcon-al-frente-barrio-norte",
+   "zone": "Recoleta"
+  }
+ },
+ "meta": {}
+}

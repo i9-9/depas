@@ -22,7 +22,9 @@
     },
     {
       "street": "fitz roy",
-      "out": true
+      "min": 1301,
+      "max": 2500,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "thames",
@@ -38,19 +40,27 @@
     },
     {
       "street": "honduras",
-      "out": true
+      "min": 5452,
+      "max": 6100,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "costa rica",
-      "out": true
+      "min": 5401,
+      "max": 6100,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "nicaragua",
-      "out": true
+      "min": 5401,
+      "max": 6100,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "el salvador",
-      "out": true
+      "min": 5401,
+      "max": 6086,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "borges",
@@ -58,23 +68,33 @@
     },
     {
       "street": "godoy cruz",
-      "out": true
+      "min": 1401,
+      "max": 2700,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "carranza",
-      "out": true
+      "min": 1301,
+      "max": 2400,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "bonpland",
-      "out": true
+      "min": 1301,
+      "max": 2500,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "dorrego",
-      "out": true
+      "min": 1501,
+      "max": 2530,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "arevalo",
-      "out": true
+      "min": 1301,
+      "max": 2400,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "suipacha",
@@ -138,15 +158,21 @@
     },
     {
       "street": "soler",
-      "out": true
+      "min": 5401,
+      "max": 6100,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "humboldt",
-      "out": true
+      "min": 1301,
+      "max": 2500,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "guatemala",
-      "out": true
+      "min": 5401,
+      "max": 6100,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "malabia",
@@ -166,7 +192,9 @@
     },
     {
       "street": "cabrera",
-      "out": true
+      "min": 5471,
+      "max": 6100,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "cordoba",
@@ -174,19 +202,21 @@
     },
     {
       "street": "paraguay",
-      "out": true
+      "min": 5001,
+      "max": 5700,
+      "zone": "Palermo Hollywood"
     },
     {
       "street": "santa fe",
       "max": 1499,
       "out": true
     },
-      {
-        "street": "santa fe",
-        "min": 1500,
-        "max": 3499,
-        "zone": "Barrio Norte"
-      },
+    {
+      "street": "santa fe",
+      "min": 1500,
+      "max": 3499,
+      "zone": "Barrio Norte"
+    },
     {
       "street": "santa fe",
       "min": 3500,
@@ -726,7 +756,6 @@
     "san nicolas",
     "balvanera",
     "palermo soho",
-    "palermo hollywood",
     "palermo viejo",
     "palermo nuevo",
     "las canitas",

@@ -1,67 +1,87 @@
 import { EXPENSAS_MIN_VALID_ARS, type Listing } from "@/lib/listings";
 
-export type Spec = { label: string; value: string };
+export type Fact = {
+  label: string;
+  value: string;
+  hint?: string;
+  tone?: "signal" | "title";
+};
 
-export function specsOf(item: Listing): Spec[] {
-  const rows: Spec[] = [];
-  if (item.area != null) {
-    const bits = [`${item.area.toLocaleString("es-AR")} m²`];
-    if (item.area_covered != null && item.area_total != null && item.area_covered !== item.area_total) {
-      bits.push(`(${item.area_covered.toLocaleString("es-AR")} cub. / ${item.area_total.toLocaleString("es-AR")} tot.)`);
-    }
-    rows.push({ label: "Metros", value: bits.join(" ") });
+function signed(n: number): string {
+  const body = Math.abs(n).toLocaleString("es-AR");
+  return n < 0 ? `−${body}` : `+${body}`;
+}
+
+export function placeFacts(item: Listing): Fact[] {
+  let metersHint: string | undefined;
+  if (item.area_covered != null && item.area_total != null && item.area_covered !== item.area_total) {
+    metersHint = `${item.area_covered.toLocaleString("es-AR")} cub. · ${item.area_total.toLocaleString("es-AR")} tot.`;
+  } else if ((item.tags || []).includes("m² sin verificar")) {
+    metersHint = "sin cubiertos";
   }
-  if (item.neto_hard_usd != null) {
-    const n = item.neto_hard_usd;
-    rows.push({
+  const pct = item.vs_median_pct;
+  const suspect = (item.tags || []).includes("metro sospechoso");
+  let vs = "—";
+  let vsHint: string | undefined;
+  let vsTone: Fact["tone"] = "title";
+  if (pct != null) {
+    vs = pct === 0 ? "0%" : `${pct < 0 ? "−" : "+"}${Math.abs(pct)}%`;
+    vsHint = pct < 0 ? "más barato" : pct > 0 ? "más caro" : "igual";
+    if (pct < 0 && !suspect) vsTone = "signal";
+  }
+  return [
+    {
+      label: "Metros",
+      value: item.area != null ? `${item.area.toLocaleString("es-AR")} m²` : "—",
+      hint: metersHint,
+    },
+    { label: "Ambientes", value: item.ambientes != null ? String(item.ambientes) : "—" },
+    {
+      label: "El m²",
+      value: item.usd_per_m2 != null ? item.usd_per_m2.toLocaleString("es-AR") : "—",
+      hint: item.usd_per_m2 != null ? "USD" : undefined,
+    },
+    { label: "Vs. el barrio", value: vs, hint: vsHint, tone: vs === "—" ? undefined : vsTone },
+  ];
+}
+
+export function dealFacts(item: Listing): Fact[] {
+  const parked = (item.tags || []).includes("incluye cochera") ? "incluye cochera" : undefined;
+  const rows: Fact[] = [
+    {
       label: "Neto duro",
-      value: `${n >= 0 ? "" : "−"}USD ${Math.abs(n).toLocaleString("es-AR")}`,
-    });
-  }
-  if (item.max_offer_usd != null) {
-    rows.push({ label: "Oferta máx.", value: `USD ${item.max_offer_usd.toLocaleString("es-AR")}` });
-  }
-  if (item.air_usd != null) {
-    rows.push({
+      value: item.neto_hard_usd != null ? signed(item.neto_hard_usd) : "—",
+      hint: item.neto_hard_usd != null ? "USD" : parked,
+      tone: item.neto_hard_usd != null && item.neto_hard_usd >= 0 ? "signal" : "title",
+    },
+    {
       label: "Aire",
-      value: `${item.air_usd >= 0 ? "" : "−"}USD ${Math.abs(item.air_usd).toLocaleString("es-AR")}`,
-    });
-  }
-  if (item.ambientes != null) rows.push({ label: "Ambientes", value: String(item.ambientes) });
-  if (item.zone) rows.push({ label: "Barrio", value: item.zone });
-  if (item.piso != null) rows.push({ label: "Piso", value: item.piso === 0 ? "Planta baja" : String(item.piso) });
-  if (item.expensas_ars != null && item.expensas_ars >= EXPENSAS_MIN_VALID_ARS) {
-    rows.push({ label: "Expensas", value: `$${item.expensas_ars.toLocaleString("es-AR")}` });
-  }
+      value: item.air_usd != null ? signed(item.air_usd) : "—",
+      hint: item.air_usd != null ? "USD" : parked,
+      tone: item.air_usd != null && item.air_usd >= 0 ? "signal" : "title",
+    },
+    {
+      label: "Expensas",
+      value:
+        item.expensas_ars != null && item.expensas_ars >= EXPENSAS_MIN_VALID_ARS
+          ? `$${item.expensas_ars.toLocaleString("es-AR")}`
+          : "—",
+    },
+    {
+      label: "Piso",
+      value: item.piso == null ? "—" : item.piso === 0 ? "Planta baja" : String(item.piso),
+    },
+  ];
   if (item.antiguedad_years != null) {
     rows.push({
       label: "Antigüedad",
       value: item.antiguedad_years === 0 ? "A estrenar" : `${item.antiguedad_years} años`,
     });
   }
-  if (item.cochera === true) rows.push({ label: "Cochera", value: "Sí" });
-  if (item.cochera === false) rows.push({ label: "Cochera", value: "No" });
-  return rows;
-}
-
-export function Specs({ item }: { item: Listing }) {
-  const rows = specsOf(item);
-  if (!rows.length) {
-    return <p className="text-ink">El aviso no dice metros, ambientes ni barrio.</p>;
+  if (item.cochera != null) {
+    rows.push({ label: "Cochera", value: item.cochera ? "Sí" : "No" });
   }
-  return (
-    <dl className="border-y border-line">
-      {rows.map((row) => (
-        <div
-          key={row.label}
-          className="flex items-baseline justify-between gap-6 border-b border-line py-3 last:border-b-0"
-        >
-          <dt className="text-muted">{row.label}</dt>
-          <dd className="idx text-right text-title">{row.value}</dd>
-        </div>
-      ))}
-    </dl>
-  );
+  return rows;
 }
 
 export function specsCells(item: Listing): { m2: string; amb: string; zone: string } {
@@ -72,8 +92,3 @@ export function specsCells(item: Listing): { m2: string; amb: string; zone: stri
   };
 }
 
-const ROW_SPECS = new Set(["Metros", "Ambientes", "Barrio"]);
-
-export function extraSpecsOf(item: Listing): Spec[] {
-  return specsOf(item).filter((row) => !ROW_SPECS.has(row.label));
-}

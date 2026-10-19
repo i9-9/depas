@@ -21,11 +21,10 @@ import {
 import { FavoriteButton, StarIcon } from "@/components/FavoriteMark";
 import { Photo } from "@/components/Photo";
 import { PricePair } from "@/components/PricePair";
-import { extraSpecsOf, specsCells } from "@/components/Specs";
-import { Verdict } from "@/components/Verdict";
-import { VisitPad } from "@/components/VisitPad";
+import { Ficha } from "@/components/Ficha";
+import { specsCells } from "@/components/Specs";
 import { readPrefs, writePrefs } from "@/lib/storage";
-import { airLine, joinEs, medianLine, netLine, offerLine, priceLine, seenLine } from "@/lib/verdict";
+import { decisionLabel, joinEs } from "@/lib/verdict";
 
 type SortKey = "tier" | "new" | "price-asc" | "price-desc" | "m2-asc" | "vs-median" | "air";
 
@@ -894,8 +893,23 @@ function Row({
   const tip = item.title && item.title !== street ? item.title : undefined;
   const gone = !item.active && !pinned;
   const why = whyTeaser(item);
+  const decision = decisionLabel(item.decision);
   const meta = (
     <>
+      {decision ? (
+        <span
+          className={
+            item.decision === "comprar"
+              ? "text-signal"
+              : item.decision === "descartar"
+                ? "text-muted"
+                : "text-title"
+          }
+        >
+          {decision}
+        </span>
+      ) : null}
+      {decision ? " · " : ""}
       {marks.map((mark, i) => (
         <span key={`${mark.text}-${i}`}>
           {i > 0 ? " · " : ""}
@@ -981,88 +995,17 @@ function Row({
 }
 
 function RowDetail({ item }: { item: Listing }) {
-  const extra = extraSpecsOf(item);
-  const median = medianLine(item);
-  const air = airLine(item);
-  const seen = seenLine(item);
-  const title = item.title && item.title !== streetOf(item) ? item.title : null;
+  const street = streetOf(item);
   const photo = item.photo ? (
-    <Photo src={item.photo} alt={streetOf(item)} className="aspect-[4/3] max-h-52 w-full md:max-h-none" />
+    <Photo src={item.photo} alt={street} className="aspect-[4/3] w-full" />
   ) : (
-    <p className="flex aspect-[4/3] max-h-52 items-end bg-photo p-3 text-muted md:max-h-none">
-      Este aviso no trae foto
-    </p>
-  );
-  const links = (
-    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-      <a
-        href={item.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn-solid"
-      >
-        Abrir el aviso en {siteLabel(item.site)}
-      </a>
-      {item.mirrors.map((m) => (
-        <a
-          key={m.id}
-          href={m.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-ghost"
-        >
-          También en {siteLabel(m.site)}
-          {m.price != null ? ` · USD ${m.price.toLocaleString("es-AR")}` : ""}
-        </a>
-      ))}
-    </div>
-  );
-  const copy = (
-    <div className="min-w-0 space-y-4">
-      {title ? <p className="text-ink">{title}</p> : null}
-      {item.decision ? (
-        <p className="text-title">
-          {item.decision === "comprar"
-            ? "Comprar"
-            : item.decision === "negociar"
-              ? "Negociar"
-              : item.decision === "vigilar"
-                ? "Vigilar"
-                : "Descartar"}
-          {item.max_offer_usd != null
-            ? ` · oferta máx. USD ${item.max_offer_usd.toLocaleString("es-AR")}`
-            : ""}
-        </p>
-      ) : null}
-      <Verdict data={item.verdict} stacked />
-      {extra.length ? (
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3">
-          {extra.map((row) => (
-            <div key={row.label}>
-              <dt className="kicker text-muted">{row.label}</dt>
-              <dd className="idx text-title">{row.value}</dd>
-            </div>
-          ))}
-        </dl>
-      ) : null}
-      <div className="measure space-y-1 text-muted">
-        {median ? <p>{median}</p> : null}
-        {air ? <p>{air}</p> : null}
-        {netLine(item) ? <p>{netLine(item)}</p> : null}
-        {offerLine(item) ? <p>{offerLine(item)}</p> : null}
-        <p>{priceLine(item)}</p>
-        {seen ? <p>{seen}</p> : null}
-      </div>
-      <VisitPad id={item.id} />
-      {links}
-    </div>
+    <p className="flex aspect-[4/3] items-end bg-photo p-3 text-muted">Este aviso no trae foto</p>
   );
   return (
-    <div className="space-y-5 border-t border-line px-3 py-5">
-      <div className="grid gap-5 md:grid-cols-[minmax(0,16rem)_minmax(0,1fr)]">
-        <div className="hidden md:block">{photo}</div>
-        {copy}
-        <div className="md:hidden">{photo}</div>
+    <div className="border-t border-line px-3 py-5">
+      <div className="grid items-start gap-5 md:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
+        <div className="bg-photo">{photo}</div>
+        <Ficha item={item} variant="sheet" />
       </div>
     </div>
   );

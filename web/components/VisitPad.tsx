@@ -30,12 +30,12 @@ export function VisitPad({ id }: { id: string }) {
     <div>
       <p className="text-title">Esta visita</p>
       <p className="mt-1 text-muted">Queda en este dispositivo, no se comparte.</p>
-      <div className="mt-3 flex flex-wrap gap-2">
+      <div className="seg mt-3" role="group" aria-label="Estado de la visita">
         {STATUSES.map((s) => (
           <button
             key={s.id}
             type="button"
-            className={visit.status === s.id ? "btn-solid" : "btn-ghost"}
+            aria-pressed={visit.status === s.id}
             onClick={() => save({ ...visit, status: s.id, at: new Date().toISOString() })}
           >
             {s.label}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Buscador de departamentos en venta (Zonaprop + Argenprop + Mercado Libre) con aviso por Telegram.
+"""Buscador de departamentos en venta (Zonaprop + Argenprop + Mercado Libre + Cabaprop) con aviso por Telegram.
 
 Uso:
     python scraper.py                    # corrida normal (usa TELEGRAM_BOT_TOKEN y TELEGRAM_CHAT_ID)
@@ -16,11 +16,13 @@ import json
 import os
 import random
 import re
+import subprocess
 import sys
 import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -81,7 +83,25 @@ SITE_LABELS = {
     "argenprop": "Argenprop",
     "zonaprop": "Zonaprop",
     "mercadolibre": "Mercado Libre",
+    "cabaprop": "Cabaprop",
 }
+
+# Ids de /utils/barrios-flat. El slug del sitio es el label sin tildes, espacios → _.
+CABAPROP_BARRIOS = {
+    "recoleta": 88,
+    "barrio_norte": 10,
+    "barrio_norte_la_isla": 11,
+    "barrio_norte_parque_las_heras": 12,
+    "barrio_norte_recoleta": 13,
+    "palermo_botanico": 48,
+    "palermo_chico": 50,
+    "palermo_hollywood": 51,
+}
+CABAPROP_API = "https://cabaprop.com.ar/api/v1/properties/find-properties"
+CABAPROP_PAGE_SIZE = 12  # el listado del sitio pide limit=12
+# price.currency 1 = USD; expensesCurrency 2 = ARS (visto en la respuesta del buscador).
+CABAPROP_USD = 1
+CABAPROP_ARS = 2
 
 
 # ----------------------------------------------------------------- parsing --
@@ -178,8 +198,10 @@ def parse_piso(text: str) -> int | None:
     t = text or ""
     if re.search(r"\bplanta baja\b", t, re.I):
         return 0
-    m = re.search(r"(\d{1,2})\s*°\s*piso\b", t, re.I) or re.search(
-        r"\bpiso\s+(\d{1,2})\b", t, re.I
+    m = (
+        re.search(r"(\d{1,2})\s*°\s*piso\b", t, re.I)
+        or re.search(r"\bpiso\s*:\s*(\d{1,2})\b", t, re.I)
+        or re.search(r"\bpiso\s+(\d{1,2})\b", t, re.I)
     )
     if m:
         n = int(m.group(1))
@@ -375,7 +397,7 @@ def parse_card(site: str, text: str, card=None) -> dict:
             text,
             re.I,
         ) or re.search(
-            r"((?:Av\.?\s+|Avenida\s+)?[A-Za-zÁÉÍÓÚÑáéíóúñ.]+\s+\d{2,5}[^,]{0,40},\s*(?:Recoleta|Barrio Norte|Botánico|Botanico|Palermo Chico))",
+            r"((?:Av\.?\s+|Avenida\s+)?[A-Za-zÁÉÍÓÚÑáéíóúñ.]+\s+\d{2,5}[^,]{0,40},\s*(?:Recoleta|Barrio Norte|Botánico|Botanico|Palermo Hollywood|Palermo Chico))",
             text,
         )
         if m and len(m.group(1)) < 120:
@@ -456,6 +478,214 @@ def parse_page(html_text: str, site: str, base_url: str) -> list[dict]:
         item.update(parse_areas(site, f"{title}\n{sep_text if site == 'zonaprop' else flat_text}"))
         listings[lid] = item
     return list(listings.values())
+
+
+def _caba_num(value) -> float | None:
+    if value is None or value == "":
+        return None
+    try:
+        n = float(value)
+    except (TypeError, ValueError):
+        return None
+    return n if n > 0 else None
+
+
+def cabaprop_listing_url(pid: str, title: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", fold(title)).strip("-") or "aviso"
+    return f"https://cabaprop.com.ar/propiedad/{pid}/{slug}"
+
+
+def cabaprop_address(loc: dict) -> str:
+    """Calle + altura. Cabaprop parte 'Azcuénaga al' y el 700 en campos distintos."""
+    raw = (loc.get("street") or "").strip()
+    inline = re.search(r"\s+al\s+(\d{2,5})\b", raw, re.I)
+    street = re.sub(r"\s+al(?:\s+\d.*)?$", "", raw, flags=re.I).strip(" ,")
+    num = _caba_num(loc.get("number"))
+    if num is None and inline:
+        num = float(inline.group(1))
+    if num is not None:
+        n = str(int(num))
+        if not re.search(rf"\b{re.escape(n)}\b", street):
+            street = f"{street} {n}".strip()
+    return street
+
+
+def parse_cabaprop(rows: list) -> list[dict]:
+    """Avisos del POST /properties/find-properties. No guarda dueño, teléfono ni email."""
+    listings: dict[str, dict] = {}
+    for raw in rows or []:
+        if not isinstance(raw, dict):
+            continue
+        if raw.get("deleted_at") or (raw.get("status") and raw.get("status") != "published"):
+            continue
+        if raw.get("operation_type") not in (None, 1):
+            continue
+        pid = str(raw.get("_id") or "").strip()
+        if not pid:
+            continue
+        price = raw.get("price") or {}
+        if price.get("currency") != CABAPROP_USD:
+            continue
+        try:
+            usd = int(price.get("total"))
+        except (TypeError, ValueError):
+            continue
+        if usd < 1000:
+            continue
+        loc = raw.get("location") or {}
+        chars = raw.get("characteristics") or {}
+        surface = raw.get("surface") or {}
+        covered = _caba_num(surface.get("coveredSurface"))
+        semi = _caba_num(surface.get("semiCoveredSurface"))
+        total = _caba_num(surface.get("totalSurface"))
+        uncovered = _caba_num(surface.get("uncoveredSurface"))
+        if semi is None and uncovered is not None and covered is not None and total is not None:
+            semi = 0.0
+        bal = chars.get("balcony") if isinstance(chars.get("balcony"), dict) else None
+        gar = chars.get("garages") if isinstance(chars.get("garages"), dict) else None
+        anti = raw.get("antiquity") if isinstance(raw.get("antiquity"), dict) else {}
+        title = re.sub(r"\s+", " ", raw.get("title") or "").strip()
+        address = cabaprop_address(loc)
+        desc = re.sub(r"\s+", " ", raw.get("description") or "").strip()
+        bits = [title, address]
+        if bal is not None:
+            bits.append("con balcón" if bal.get("active") else "sin balcón")
+        if gar is not None:
+            bits.append("cochera" if gar.get("active") else "sin cochera")
+        years = None
+        if anti.get("type") == 1:
+            years = 0
+            bits.append("a estrenar")
+        elif anti.get("type") == 3:
+            bits.append("en construcción")
+        elif anti.get("type") == 2:
+            try:
+                y = int(anti.get("years"))
+            except (TypeError, ValueError):
+                y = None
+            if y is not None and 0 < y <= 200:
+                years = y
+                bits.append(f"{y} años")
+        vista = (raw.get("extras") or {}).get("vista") if isinstance(raw.get("extras"), dict) else None
+        if isinstance(vista, dict) and vista.get("abierta"):
+            bits.append("vista abierta")
+        if desc:
+            bits.append(desc[:400])
+        text = re.sub(r"\s+", " ", " ".join(b for b in bits if b)).strip()
+        amb = chars.get("ambience")
+        try:
+            amb_n = int(amb) if amb is not None else None
+        except (TypeError, ValueError):
+            amb_n = None
+        if amb_n is None and re.search(r"monoambiente", text, re.I):
+            amb_n = 1
+        expensas = None
+        if price.get("expensesCurrency") == CABAPROP_ARS:
+            try:
+                exp_n = int(price.get("expenses") or 0)
+            except (TypeError, ValueError):
+                exp_n = 0
+            if exp_n >= EXPENSAS_MIN_VALID_ARS:
+                expensas = exp_n
+        photo = ""
+        for img in raw.get("images") or []:
+            src = (img or {}).get("url") or ""
+            if src.startswith("http") and "sin-imagen" not in src:
+                photo = src.split("?")[0]
+                break
+        item = {
+            "id": f"cabaprop:{pid}",
+            "site": "cabaprop",
+            "url": cabaprop_listing_url(pid, title),
+            "title": title[:90],
+            "blurb": text[:500],
+            "photo": photo,
+            "price": usd,
+            "area": weighted_area(covered, semi, total),
+            "area_total": total,
+            "area_covered": covered,
+            "area_semi": semi,
+            "ambientes": amb_n,
+            "address": address,
+            "expensas_ars": expensas,
+            "expensas_text": f"$ {expensas:,} expensas".replace(",", ".") if expensas else "",
+            "antiguedad_years": years,
+            "piso": parse_piso(text),
+            "cochera": (True if gar.get("active") else False) if gar is not None else None,
+            "price_source": "card",
+        }
+        listings[item["id"]] = item
+    return list(listings.values())
+
+
+def _caba_price(token: str) -> dict:
+    tag = "dolares" if token.startswith("dolares") else "pesos"
+    if tag != "dolares":
+        raise ValueError("Cabaprop: el buscador es en USD")
+    parts = token.split("_")
+    lo = hi = 0
+    if "desde" in parts:
+        lo = int(parts[parts.index("desde") + 1])
+    if "hasta" in parts:
+        hi = int(parts[parts.index("hasta") + 1])
+    return {"currency": "USD", "min": lo, "max": hi, "tag": "dolares"}
+
+
+def cabaprop_body(url: str) -> dict:
+    """Arma el POST a partir del path público /propiedades/comprar-…"""
+    slug = url.split("?", 1)[0].rstrip("/").split("/propiedades/", 1)[-1]
+    tokens = [t for t in slug.split("-") if t]
+    if not tokens:
+        raise ValueError("URL de Cabaprop sin filtros")
+    op = None
+    types: list[int] = []
+    barrios: list[int] = []
+    price = {"currency": "USD", "min": 0, "max": 0, "tag": "dolares"}
+    ambiences: list[int] = []
+    for tok in tokens:
+        if tok in ("comprar", "alquilar", "temporario"):
+            op = {"comprar": 1, "alquilar": 2, "temporario": 3}[tok]
+            continue
+        if tok == "departamento":
+            types.append(1)
+            continue
+        if tok.startswith("dolares") or tok.startswith("pesos"):
+            price = _caba_price(tok)
+            continue
+        if tok.startswith("superficie"):
+            continue
+        if tok.startswith("ambientes"):
+            ambiences = [int(x) for x in tok.split("_")[1:] if x.isdigit()]
+            continue
+        if tok in CABAPROP_BARRIOS:
+            barrios.append(CABAPROP_BARRIOS[tok])
+            continue
+        raise ValueError(f"no entiendo el tramo de Cabaprop: {tok}")
+    if op != 1:
+        raise ValueError("Cabaprop: solo compra")
+    if types != [1]:
+        raise ValueError("Cabaprop: solo departamentos")
+    if not barrios:
+        raise ValueError("Cabaprop: falta el barrio")
+    return {
+        "operationType": 1,
+        "propertyTypes": [1],
+        "barrios": barrios,
+        "price": price,
+        "surface": {"tag": "superficieTotal", "type": "totalSurface", "min": "", "max": ""},
+        "ambiences": ambiences,
+        "bedrooms": [],
+        "characteristics": [],
+        "bathrooms": 0,
+        "garages": 0,
+        "extras": [],
+        "antiquity": "",
+    }
+
+
+def cabaprop_url_in_zone(src: dict) -> bool:
+    path = fold(src.get("url") or "").replace("_", " ")
+    return any(a in path for a in zone_aliases(src))
 
 
 # --------------------------------------------------------------- filtering --
@@ -1076,7 +1306,8 @@ def street_key(address: str) -> str:
 
 
 _STREET_ALIASES = (
-    ("marcelo torcuato de alvear", "alvear"),
+    ("marcelo torcuato de alvear", "marcelo t de alvear"),
+    ("marcelo t de alvear", "marcelo t de alvear"),
     ("general lucio norberto mansilla", "mansilla"),
     ("lucio mansilla", "mansilla"),
     ("jose antonio cabrera", "cabrera"),
@@ -1317,7 +1548,7 @@ def apply_zone(item: dict, f: dict, src: dict | None = None) -> bool:
 
 
 def _apply_zone(item: dict, f: dict, src: dict | None = None) -> bool:
-    """Escribe item['zone']. False si la calle está fuera de los 4 barrios."""
+    """Escribe item['zone']. False si la calle está fuera de los barrios pedidos."""
     z = classify_zone(item, f)
     name, num = parse_street(item.get("address") or "", f)
     if not name:
@@ -1533,7 +1764,7 @@ def is_rejected(item: dict, f: dict) -> bool:
 
 
 def in_allowed_area(item: dict, f: dict) -> bool:
-    """Tiene que nombrar uno de los 4 barrios (todos CABA)."""
+    """Tiene que nombrar uno de los barrios pedidos (todos CABA)."""
     allowed = [fold(b) for b in f.get("allowed_barrios") or [] if str(b).strip()]
     if not allowed:
         return True
@@ -1694,7 +1925,7 @@ def attach_decisions(items: list[dict], extra: list[dict], cfg: dict, now: str) 
 # ----------------------------------------------------------------- fetching --
 
 PAGES_DEFAULT = 3
-PAGES_MAX = {"zonaprop": 5, "argenprop": 3, "mercadolibre": 1}
+PAGES_MAX = {"zonaprop": 5, "argenprop": 3, "mercadolibre": 1, "cabaprop": 5}
 
 
 def source_zone(src: dict) -> str:
@@ -1716,6 +1947,10 @@ def source_pages(src: dict, cfg: dict | None = None) -> int:
     if n < 1:
         raise ValueError(f"pages debe ser ≥ 1 ({src.get('name')}: {n})")
     if n > cap:
+        if site == "cabaprop":
+            raise ValueError(
+                f"pages={n} supera el tope de Cabaprop ({cap} páginas de {CABAPROP_PAGE_SIZE})"
+            )
         raise ValueError(
             f"pages={n} supera el máximo de robots.txt para {site} ({cap})"
         )
@@ -1732,6 +1967,12 @@ def page_url(site: str, url: str, n: int) -> str:
     if site == "mercadolibre":
         # robots.txt Disallow: /*_Desde_  (es la paginación del listado)
         return url
+    if site == "cabaprop":
+        # El sitio pagina con ?pagina=N. robots.txt no lo bloquea.
+        base = url.split("?", 1)[0]
+        if n <= 1:
+            return base
+        return f"{base}?pagina={n}"
     if n == 1:
         return url
     return url.replace(".html", f"-pagina-{n}.html", 1)
@@ -1756,16 +1997,54 @@ def html_is_blocked(html: str) -> bool:
     return any(k in head for k in BLOCK_MARKERS)
 
 
+def playwright_chrome_pids(ps_output: str) -> list[int]:
+    """PIDs del Chrome que abrió Playwright. No incluye el Chrome del usuario."""
+    pids: list[int] = []
+    for line in ps_output.splitlines():
+        if "playwright_chromiumdev_profile" not in line:
+            continue
+        if "--type=" in line or "Helper" in line or "crashpad" in line:
+            continue
+        pid_text, _, _cmd = line.strip().partition(" ")
+        try:
+            pids.append(int(pid_text))
+        except ValueError:
+            continue
+    return pids
+
+
+def hide_mac_process(pid: int) -> bool:
+    """Oculta ese proceso sin tocar otras ventanas de Chrome. No cambia el foco del usuario."""
+    script = (
+        'tell application "System Events"\n'
+        f"  repeat with p in (every process whose unix id is {int(pid)})\n"
+        "    set visible of p to false\n"
+        "    set frontmost of p to false\n"
+        "  end repeat\n"
+        "end tell"
+    )
+    result = subprocess.run(
+        ["osascript", "-e", script],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode == 0
+
+
 class ChromeListings:
-    """Chrome instalado (con ventana, fuera de pantalla). Headless lo bloquea CloudFront.
+    """Chrome instalado, con la ventana oculta. Headless lo bloquea CloudFront.
 
     Un contexto nuevo por URL: reutilizar cookies/página dispara Human Verification
-    en el segundo listado.
+    en el segundo listado. En macOS se oculta solo el proceso de esta corrida.
     """
 
     def __init__(self) -> None:
         self._pw = None
         self._browser = None
+        self._pid: int | None = None
+        self._before_pids: set[int] = set()
+        self._hide_warned = False
 
     def start(self) -> None:
         try:
@@ -1773,15 +2052,23 @@ class ChromeListings:
         except ImportError as e:
             raise Blocked("falta playwright (pip install playwright)") from e
         self._pw = sync_playwright().start()
+        self._before_pids = set(playwright_chrome_pids(_chrome_ps()))
         try:
             self._browser = self._pw.chromium.launch(
                 channel="chrome",
                 headless=False,
-                args=["--window-position=-2400,0", "--window-size=1280,800"],
+                args=[
+                    "--window-size=1280,800",
+                    "--no-first-run",
+                    "--no-default-browser-check",
+                    "--disable-session-crashed-bubble",
+                    "--disable-features=CalculateNativeWinOcclusion",
+                ],
             )
         except Exception as e:
             self.close()
             raise Blocked(f"no pude abrir Google Chrome: {e}") from e
+        self._bury()
 
     def fetch(self, url: str) -> tuple[str, str]:
         if self._browser is None:
@@ -1791,6 +2078,7 @@ class ChromeListings:
             viewport={"width": 1280, "height": 800},
         )
         page = ctx.new_page()
+        self._bury(tries=4)
         try:
             return self._fetch_page(page, url)
         except Blocked:
@@ -1842,6 +2130,46 @@ class ChromeListings:
             except Exception:
                 pass
         self._browser = self._pw = None
+
+    def _claim_pid(self) -> None:
+        deadline = time.time() + 2
+        while time.time() < deadline and self._pid is None:
+            found = [
+                pid
+                for pid in playwright_chrome_pids(_chrome_ps())
+                if pid not in self._before_pids
+            ]
+            if found:
+                self._pid = found[0]
+                return
+            time.sleep(0.05)
+
+    def _bury(self, tries: int = 12) -> None:
+        """La ventana aparece un instante después del launch. Se oculta y no se vuelve a tocar."""
+        if sys.platform != "darwin":
+            return
+        if self._pid is None:
+            self._claim_pid()
+        hidden = 0
+        for _ in range(tries):
+            if self._pid is None:
+                time.sleep(0.05)
+                continue
+            if hide_mac_process(self._pid):
+                hidden += 1
+                if hidden >= 2:
+                    return
+            time.sleep(0.05)
+        if hidden == 0 and self._pid is not None and not self._hide_warned:
+            self._hide_warned = True
+            print("[fetch] no pude ocultar la ventana de Chrome", file=sys.stderr)
+
+
+def _chrome_ps() -> str:
+    try:
+        return subprocess.check_output(["ps", "-ax", "-o", "pid=,command="], text=True)
+    except Exception:
+        return ""
 
 
 def rurl_changed(url: str, final: str) -> bool:
@@ -1915,6 +2243,46 @@ def fetch(
     return r.text, r.url
 
 
+def fetch_cabaprop(session: requests.Session, url: str, *, _retried: bool = False) -> tuple[list[dict], int, int]:
+    """POST al buscador público. offset es la página (0 = primera), no un salto de filas."""
+    try:
+        body = cabaprop_body(url)
+    except ValueError as e:
+        raise Blocked(str(e)) from e
+    page = 1
+    raw_page = (parse_qs(urlparse(url).query).get("pagina") or ["1"])[0]
+    try:
+        page = int(raw_page)
+    except ValueError as e:
+        raise Blocked(f"pagina inválida: {raw_page}") from e
+    if page < 1:
+        raise Blocked(f"pagina inválida: {page}")
+    api = (
+        f"{CABAPROP_API}?offset={page - 1}&limit={CABAPROP_PAGE_SIZE}"
+        "&orderBy=created_at&sort=desc"
+    )
+    r = session.post(api, json=body, timeout=30, headers={"Accept": "application/json"})
+    if r.status_code in (403, 429, 503) and not _retried:
+        wait = random.uniform(20, 30)
+        print(f"[fetch] {r.status_code} {url}; reintento en {wait:.0f}s", file=sys.stderr)
+        time.sleep(wait)
+        return fetch_cabaprop(session, url, _retried=True)
+    if r.status_code >= 400:
+        _log_fetch_failure(url, r)
+        raise Blocked(f"HTTP {r.status_code} (Cabaprop)")
+    try:
+        data = r.json()
+    except ValueError as e:
+        _log_fetch_failure(url, r)
+        raise Blocked("Cabaprop no devolvió JSON") from e
+    rows = data.get("result") or []
+    try:
+        total = int(data.get("allPropertiesLength") or 0)
+    except (TypeError, ValueError):
+        total = len(rows)
+    return parse_cabaprop(rows), len(rows), total
+
+
 def scrape_source(session, src: dict, cfg: dict, browser: ChromeListings | None = None) -> tuple[list[dict], list[dict]]:
     """Devuelve (avisos, última página si se llegó al tope de páginas)."""
     site = src["site"]
@@ -1928,10 +2296,19 @@ def scrape_source(session, src: dict, cfg: dict, browser: ChromeListings | None 
         )
         max_pages = 1
     hit_cap = False
+    filters = cfg.get("filters") or {}
     for n in range(1, max_pages + 1):
         url = page_url(site, src["url"], n)
+        raw_count = 0
+        total = None
         try:
-            html_text, final_url = fetch(session, url, site=site, browser=browser)
+            if site == "cabaprop":
+                parsed, raw_count, total = fetch_cabaprop(session, url)
+            else:
+                html_text, final_url = fetch(session, url, site=site, browser=browser)
+                if n == 1 and not page_matches_zone(html_text, final_url, src):
+                    raise Blocked(f"slug inválido: redirigió fuera de {src['name']} → {final_url}")
+                parsed = parse_page(html_text, site, url)
         except Blocked as e:
             if n == 1:
                 raise
@@ -1942,31 +2319,44 @@ def scrape_source(session, src: dict, cfg: dict, browser: ChromeListings | None 
             hit_cap = False
             last_page_items = []
             break
-        if n == 1 and not page_matches_zone(html_text, final_url, src):
-            raise Blocked(f"slug inválido: redirigió fuera de {src['name']} → {final_url}")
-        raw = parse_page(html_text, site, url)
-        if page_is_empty_results(html_text, site):
+        if site != "cabaprop" and page_is_empty_results(html_text, site):
             last_page_items = []
             hit_cap = False
             break
-        items = [i for i in raw if keep_listing(i, src, cfg.get("filters") or {})]
+        if site == "cabaprop" and n == 1 and not cabaprop_url_in_zone(src):
+            raise Blocked(f"slug inválido: la URL no nombra {src['name']}")
+        items = [i for i in parsed if keep_listing(i, src, filters)]
         new = [i for i in items if i["id"] not in found]
         if n == 1 and not items:
-            if raw:
+            if (site == "cabaprop" and raw_count) or parsed:
                 last_page_items = []
                 hit_cap = False
                 break
             raise Blocked("0 avisos de la zona en la página 1 (¿cambió el HTML o el slug?)")
         if not new:
-            hit_cap = False
+            full = site == "cabaprop" and raw_count >= CABAPROP_PAGE_SIZE and n < max_pages
+            if full:
+                time.sleep(random.uniform(*cfg["delay_seconds"]))
+                continue
+            more = (
+                site == "cabaprop"
+                and total is not None
+                and total > n * CABAPROP_PAGE_SIZE
+                and n == max_pages
+            )
+            hit_cap = more
             last_page_items = []
             break
         for i in new:
-            apply_zone(i, cfg.get("filters") or {}, src)
-            apply_signals(i, cfg.get("signals") or [], cfg.get("filters") or {})
+            apply_zone(i, filters, src)
+            apply_signals(i, cfg.get("signals") or [], filters)
             found[i["id"]] = i
         last_page_items = new
-        hit_cap = n == max_pages
+        more = site == "cabaprop" and total is not None and total > max_pages * CABAPROP_PAGE_SIZE
+        hit_cap = n == max_pages and (site != "cabaprop" or more)
+        if site == "cabaprop" and raw_count < CABAPROP_PAGE_SIZE:
+            hit_cap = False
+            break
         time.sleep(random.uniform(*cfg["delay_seconds"]))
     return list(found.values()), last_page_items if hit_cap else []
 
@@ -2323,7 +2713,7 @@ def chunk_messages(blocks: list[str], limit: int = 3800) -> list[str]:
 
 # --------------------------------------------------------- state / listings --
 
-SITES = ("zonaprop", "argenprop", "mercadolibre")
+SITES = ("zonaprop", "argenprop", "mercadolibre", "cabaprop")
 
 
 def seen_path(site: str) -> Path:
@@ -2334,8 +2724,41 @@ def listings_path(site: str) -> Path:
     return WEB_DATA_DIR / f"listings-{site}.json"
 
 
+def run_report_path(site: str) -> Path:
+    return WEB_DATA_DIR / f"run-{site}.json"
+
+
 def pick_path() -> Path:
     return WEB_DATA_DIR / "pick.json"
+
+
+def build_run_report(
+    site: str,
+    *,
+    now: str,
+    ok: list[dict],
+    errors: list[str],
+    matched: int,
+    new: int,
+    drops: int,
+    lines: list[str],
+) -> dict:
+    return {
+        "drops": drops,
+        "errors": list(errors),
+        "lines": list(lines),
+        "matched": matched,
+        "new": new,
+        "ok": ok,
+        "ran_at": now,
+        "site": site,
+    }
+
+
+def write_run_report(site: str, report: dict, *, persist: bool) -> None:
+    if not persist:
+        return
+    write_json(run_report_path(site), report)
 
 
 def empty_state() -> dict:
@@ -2400,6 +2823,7 @@ def infer_zone(url: str, explicit: str = "") -> str:
         return explicit
     u = fold(url or "")
     mapping = (
+        ("Palermo Hollywood", ("palermo-hollywood", "palermo hollywood")),
         ("Palermo Chico", ("palermo-chico", "palermo chico")),
         ("Barrio Norte", ("barrio-norte", "barrio norte")),
         ("Botánico", ("botanico", "botánico")),
@@ -2486,6 +2910,7 @@ def upsert_listing(prev: dict | None, item: dict, now: str, *, active: bool = Tr
         "site": item.get("site") or prev.get("site"),
         "url": item.get("url") or prev.get("url") or "",
         "title": item.get("title") or prev.get("title") or "",
+        "blurb": item.get("blurb") if item.get("blurb") is not None else (prev.get("blurb") or ""),
         "address": item.get("address") or prev.get("address") or "",
         "zone": item.get("zone") or prev.get("zone") or "",
         "price": price,
@@ -2609,6 +3034,7 @@ _ENRICH_KEYS = (
     "cochera",
     "title",
     "zone",
+    "blurb",
 )
 
 
@@ -2807,6 +3233,14 @@ def should_send_coverage(state: dict, today: str) -> bool:
     return last != iso_week(today)
 
 
+def wants_fetch_error_alert(site: str, cfg: dict | None = None) -> bool:
+    """Telegram de WAF/cobertura. Argenprop lo dispara casi todas las corridas; va al log."""
+    flags = (cfg or {}).get("notify_fetch_errors")
+    if isinstance(flags, dict) and site in flags:
+        return bool(flags[site])
+    return site != "argenprop"
+
+
 def process_portal(
     site: str,
     matched: list[dict],
@@ -2820,18 +3254,20 @@ def process_portal(
     now: str,
     today: str,
     coverage_notes: list[str] | None = None,
-) -> bool:
-    """Actualiza un portal. Devuelve True si hubo fuentes OK de ese portal."""
+) -> dict:
+    """Actualiza un portal. Devuelve {ok, matched, new, drops}."""
+    alert_errors = errors if wants_fetch_error_alert(site, cfg) else []
+    alert_coverage = list(coverage_notes or []) if wants_fetch_error_alert(site, cfg) else []
     if not ok_zones:
-        if errors:
-            err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in errors)
+        if alert_errors:
+            err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in alert_errors)
             payloads = notify_payloads("", [], err_block)
             if dry_run:
                 for p in payloads:
                     print("-----\n" + p["text"])
             elif token and chat_id:
                 deliver(token, chat_id, payloads)
-        return False
+        return {"ok": False, "matched": 0, "new": 0, "drops": 0}
 
     state, catalog = load_portal(site, persist=not dry_run)
     prev_state = json.loads(json.dumps(state))
@@ -2903,11 +3339,11 @@ def process_portal(
             if i.get("_tag") == "📉":
                 i["_silent"] = False
 
-    notify_error = bool(errors) and state["meta"].get("last_error_day") != today
+    notify_error = bool(alert_errors) and state["meta"].get("last_error_day") != today
     err_block = ""
     if notify_error:
-        err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in errors)
-    notes = [n for n in (coverage_notes or []) if n]
+        err_block = "⚠️ Problemas en esta corrida:\n" + "\n".join(f"• {html.escape(e)}" for e in alert_errors)
+    notes = [n for n in alert_coverage if n]
     notify_coverage = bool(notes) and should_send_coverage(state, today)
     if notify_coverage:
         extra = "⚠️ Cobertura:\n" + "\n".join(f"• {html.escape(n)}" for n in notes)
@@ -2934,7 +3370,7 @@ def process_portal(
         for p in payloads:
             extra = f"\n🖼 {p['photo']}" if p.get("photo") else ""
             print("-----\n" + p["text"] + extra)
-        return True
+        return {"ok": True, "matched": len(matched), "new": len(new_items), "drops": len(drops)}
 
     if payloads:
         result = deliver(token, chat_id, payloads)
@@ -3017,7 +3453,7 @@ def process_portal(
         pass
 
     _ = heartbeat
-    return True
+    return {"ok": True, "matched": len(matched), "new": len(new_items), "drops": len(drops)}
 
 
 def prioritize_sources(sources: list[dict]) -> list[dict]:
@@ -3132,9 +3568,17 @@ def main() -> int:
     failed_zones: dict[str, set[str]] = {k: set() for k in SITES}
     current: dict[str, dict[str, dict]] = {k: {} for k in SITES}
     last_pages: dict[str, list[tuple[str, list[dict]]]] = {k: [] for k in SITES}
+    scrape_ok: dict[str, list[dict]] = {k: [] for k in SITES}
+    scrape_lines: dict[str, list[str]] = {k: [] for k in SITES}
     attempted = 0
     skipped_argenprop = False
     browser = _start_argenprop_browser(sources, in_actions=in_actions)
+    if (
+        not in_actions
+        and any(x.get("site") == "argenprop" for x in sources)
+        and browser is None
+    ):
+        scrape_lines["argenprop"].append("[error] Argenprop / Chrome no abrió")
 
     try:
         for src in sources:
@@ -3149,6 +3593,8 @@ def main() -> int:
                 items, last_page = scrape_source(session, src, cfg, browser=browser)
                 ok_zones[site].add(source_zone(src))
                 print(f"[ok] {label}: {len(items)} avisos", flush=True)
+                scrape_ok[site].append({"name": src["name"], "n": len(items)})
+                scrape_lines[site].append(f"[ok] {label}: {len(items)} avisos")
                 last_pages[site].append((label, last_page))
                 for i in items:
                     current[site][i["id"]] = i
@@ -3156,6 +3602,7 @@ def main() -> int:
                 failed_zones[site].add(source_zone(src))
                 msg = redact_secrets(f"{label}: {e}", token)
                 errors_by_site[site].append(msg)
+                scrape_lines[site].append(f"[error] {msg}")
                 print(f"[error] {msg}", file=sys.stderr)
                 if site == "argenprop" and browser is not None:
                     wait = random.uniform(20, 30)
@@ -3183,7 +3630,7 @@ def main() -> int:
                 if warn:
                     print(f"[warn] {warn}", file=sys.stderr)
                     coverage_notes.append(warn)
-            if process_portal(
+            result = process_portal(
                 site,
                 matched,
                 ok_zones[site],
@@ -3195,8 +3642,29 @@ def main() -> int:
                 now=now,
                 today=today,
                 coverage_notes=coverage_notes,
-            ):
+            )
+            if result.get("ok"):
                 any_ok = True
+            if site == "argenprop" and not args.dry_run:
+                write_run_report(
+                    site,
+                    build_run_report(
+                        site,
+                        now=now,
+                        ok=scrape_ok[site],
+                        errors=errors_by_site[site],
+                        matched=int(result.get("matched") or 0),
+                        new=int(result.get("new") or 0),
+                        drops=int(result.get("drops") or 0),
+                        lines=scrape_lines[site]
+                        + [
+                            f"[argenprop] filtros: {result.get('matched', 0)} · "
+                            f"nuevos: {result.get('new', 0)} · "
+                            f"bajas de precio: {result.get('drops', 0)}"
+                        ],
+                    ),
+                    persist=True,
+                )
 
         maybe_weekly_summary(
             cfg,

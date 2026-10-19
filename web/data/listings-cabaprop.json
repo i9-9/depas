@@ -1,8 +1,8 @@
 {
- "last_change": "2026-10-16T20:51:30+00:00",
+ "last_change": "2026-10-19T13:54:50+00:00",
  "listings": [
   {
-   "active": true,
+   "active": false,
    "address": "General Lucio Norberto Mansilla 2600",
    "address_unverified": false,
    "air_usd": 22500,
@@ -22,7 +22,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-16T20:44:25+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-19T13:54:50+00:00",
    "id": "cabaprop:698a123676238456d4a86bff",
    "max_offer_usd": 121782,
    "neto_base_usd": 6200,
@@ -57,7 +57,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Córdoba 2745",
    "address_unverified": false,
    "air_usd": 41250,
@@ -77,7 +77,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-16T20:44:25+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-19T13:54:50+00:00",
    "id": "cabaprop:69c6e4418b586865d2bbc0b9",
    "max_offer_usd": 125364,
    "neto_base_usd": 25375,
@@ -114,7 +114,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Córdoba 1837",
    "address_unverified": false,
    "air_usd": 3312,
@@ -134,7 +134,7 @@
    "expensas_ars": 138000,
    "expensas_text": "$ 138.000 expensas",
    "first_seen": "2026-10-16T20:44:25+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-19T13:54:50+00:00",
    "id": "cabaprop:69fd555667d04ff04fbe81eb",
    "max_offer_usd": 105813,
    "neto_base_usd": -12306,
@@ -226,7 +226,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Azcuénaga 700",
    "address_unverified": false,
    "air_usd": 412,
@@ -246,7 +246,7 @@
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 expensas",
    "first_seen": "2026-10-16T20:44:25+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-19T13:54:50+00:00",
    "id": "cabaprop:6abb2c013e6a16a18082e95e",
    "max_offer_usd": 89933,
    "neto_base_usd": -13182,
@@ -279,7 +279,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "General Lucio Norberto Mansilla 2500",
    "address_unverified": false,
    "air_usd": 19625,
@@ -299,7 +299,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-16T20:44:25+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-19T13:54:50+00:00",
    "id": "cabaprop:6ac073773e6a16a180924b4f",
    "max_offer_usd": 112827,
    "neto_base_usd": 4462,

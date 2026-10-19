@@ -16,7 +16,7 @@ function Block({
       <p className={tone === "title" ? "text-title" : "text-muted"}>{title}</p>
       <ul className="mt-2 space-y-1 text-ink">
         {items.map((item) => (
-          <li key={item}>{item}</li>
+          <li key={item}>· {item}</li>
         ))}
       </ul>
     </div>
@@ -26,11 +26,9 @@ function Block({
 export function Verdict({
   data,
   compact = false,
-  stacked = false,
 }: {
   data: VerdictData;
   compact?: boolean;
-  stacked?: boolean;
 }) {
   if (compact) {
     const bits = [
@@ -40,11 +38,18 @@ export function Verdict({
     if (!bits.length) return null;
     return <p className="text-[13px]">{bits.join(". ")}.</p>;
   }
+  const listed = data.entra.length > 0 || data.resta.length > 0;
   return (
-    <div className={stacked ? "grid gap-4" : "grid gap-6 sm:grid-cols-3"}>
-      <Block title="A favor" items={data.entra} tone="title" />
-      <Block title="En contra" items={data.resta} />
-      <Block title="No dice" items={data.falta} />
+    <div>
+      {listed ? (
+        <div className="grid gap-6 sm:grid-cols-2">
+          <Block title="A favor" items={data.entra} tone="title" />
+          <Block title="En contra" items={data.resta} />
+        </div>
+      ) : null}
+      {data.falta.length ? (
+        <p className={`${listed ? "mt-4" : ""} text-muted`}>No dice: {joinEs(data.falta)}.</p>
+      ) : null}
     </div>
   );
 }

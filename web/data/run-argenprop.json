@@ -6,12 +6,12 @@
   "argenprop · Botánico 2 amb: HTTP 202 (WAF / sin listado)"
  ],
  "lines": [
-  "[ok] argenprop · Recoleta: 12 avisos",
-  "[ok] argenprop · Barrio Norte: 6 avisos",
-  "[ok] argenprop · Botánico: 10 avisos",
-  "[ok] argenprop · Palermo Chico: 15 avisos",
-  "[ok] argenprop · Recoleta 2 amb: 10 avisos",
-  "[ok] argenprop · Recoleta 3 amb: 11 avisos",
+  "[ok] argenprop · Recoleta: 9 avisos",
+  "[ok] argenprop · Barrio Norte: 5 avisos",
+  "[ok] argenprop · Botánico: 6 avisos",
+  "[ok] argenprop · Palermo Chico: 9 avisos",
+  "[ok] argenprop · Recoleta 2 amb: 9 avisos",
+  "[ok] argenprop · Recoleta 3 amb: 10 avisos",
   "[error] argenprop · Barrio Norte 2 amb: HTTP 202 (WAF / sin listado)",
   "[error] argenprop · Barrio Norte 3 amb: HTTP 202 (WAF / sin listado)",
   "[error] argenprop · Botánico 2 amb: HTTP 202 (WAF / sin listado)",
@@ -21,30 +21,30 @@
  "new": 0,
  "ok": [
   {
-   "n": 12,
+   "n": 9,
    "name": "Recoleta"
   },
   {
-   "n": 6,
+   "n": 5,
    "name": "Barrio Norte"
   },
   {
-   "n": 10,
+   "n": 6,
    "name": "Botánico"
   },
   {
-   "n": 15,
+   "n": 9,
    "name": "Palermo Chico"
   },
   {
-   "n": 10,
+   "n": 9,
    "name": "Recoleta 2 amb"
   },
   {
-   "n": 11,
+   "n": 10,
    "name": "Recoleta 3 amb"
   }
  ],
- "ran_at": "2026-10-17T23:25:28+00:00",
+ "ran_at": "2026-10-19T13:54:50+00:00",
  "site": "argenprop"
 }

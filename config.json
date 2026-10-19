@@ -17,7 +17,8 @@
       "botanico",
       "palermo botanico",
       "jardin botanico",
-      "palermo chico"
+      "palermo chico",
+      "palermo hollywood"
     ],
     "reject_text": [
       "en pozo",
@@ -51,7 +52,6 @@
       "san nicolas",
       "balvanera",
       "palermo soho",
-      "palermo hollywood",
       "palermo viejo",
       "palermo nuevo",
       "las canitas",
@@ -81,7 +81,9 @@
       },
       {
         "street": "fitz roy",
-        "out": true
+        "min": 1301,
+        "max": 2500,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "thames",
@@ -97,19 +99,27 @@
       },
       {
         "street": "honduras",
-        "out": true
+        "min": 5452,
+        "max": 6100,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "costa rica",
-        "out": true
+        "min": 5401,
+        "max": 6100,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "nicaragua",
-        "out": true
+        "min": 5401,
+        "max": 6100,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "el salvador",
-        "out": true
+        "min": 5401,
+        "max": 6086,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "borges",
@@ -117,23 +127,33 @@
       },
       {
         "street": "godoy cruz",
-        "out": true
+        "min": 1401,
+        "max": 2700,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "carranza",
-        "out": true
+        "min": 1301,
+        "max": 2400,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "bonpland",
-        "out": true
+        "min": 1301,
+        "max": 2500,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "dorrego",
-        "out": true
+        "min": 1501,
+        "max": 2530,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "arevalo",
-        "out": true
+        "min": 1301,
+        "max": 2400,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "suipacha",
@@ -197,15 +217,21 @@
       },
       {
         "street": "soler",
-        "out": true
+        "min": 5401,
+        "max": 6100,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "humboldt",
-        "out": true
+        "min": 1301,
+        "max": 2500,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "guatemala",
-        "out": true
+        "min": 5401,
+        "max": 6100,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "malabia",
@@ -225,39 +251,19 @@
       },
       {
         "street": "cabrera",
-        "out": true
+        "min": 5471,
+        "max": 6100,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "cordoba",
-        "max": 1499,
-        "out": true
-      },
-      {
-        "street": "cordoba",
-        "min": 1500,
-        "max": 3199,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "cordoba",
-        "min": 3200,
         "out": true
       },
       {
         "street": "paraguay",
-        "max": 1499,
-        "out": true
-      },
-      {
-        "street": "paraguay",
-        "min": 1500,
-        "max": 3199,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "paraguay",
-        "min": 3200,
-        "out": true
+        "min": 5001,
+        "max": 5700,
+        "zone": "Palermo Hollywood"
       },
       {
         "street": "santa fe",
@@ -333,19 +339,6 @@
       },
       {
         "street": "mansilla",
-        "min": 1500,
-        "max": 3199,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "mansilla",
-        "min": 3200,
-        "max": 3499,
-        "zone": "Recoleta"
-      },
-      {
-        "street": "mansilla",
-        "min": 3500,
         "out": true
       },
       {
@@ -477,7 +470,12 @@
       },
       {
         "street": "scalabrini ortiz",
-        "min": 1800,
+        "max": 2499,
+        "out": true
+      },
+      {
+        "street": "scalabrini ortiz",
+        "min": 2500,
         "max": 2899,
         "zone": "Botánico"
       },
@@ -536,6 +534,10 @@
         "zone": "Recoleta"
       },
       {
+        "street": "marcelo t de alvear",
+        "out": true
+      },
+      {
         "street": "alvear",
         "max": 1499,
         "out": true
@@ -553,12 +555,12 @@
       },
       {
         "street": "callao",
-        "max": 699,
+        "max": 1099,
         "out": true
       },
       {
         "street": "callao",
-        "min": 700,
+        "min": 1100,
         "max": 1399,
         "zone": "Barrio Norte"
       },
@@ -569,12 +571,12 @@
       },
       {
         "street": "ayacucho",
-        "max": 699,
+        "max": 1099,
         "out": true
       },
       {
         "street": "ayacucho",
-        "min": 700,
+        "min": 1100,
         "max": 1399,
         "zone": "Barrio Norte"
       },
@@ -585,12 +587,12 @@
       },
       {
         "street": "junin",
-        "max": 699,
+        "max": 1099,
         "out": true
       },
       {
         "street": "junin",
-        "min": 700,
+        "min": 1100,
         "max": 1399,
         "zone": "Barrio Norte"
       },
@@ -601,12 +603,12 @@
       },
       {
         "street": "uriburu",
-        "max": 699,
+        "max": 1099,
         "out": true
       },
       {
         "street": "uriburu",
-        "min": 700,
+        "min": 1100,
         "max": 1399,
         "zone": "Barrio Norte"
       },
@@ -617,12 +619,12 @@
       },
       {
         "street": "azcuenaga",
-        "max": 699,
+        "max": 1099,
         "out": true
       },
       {
         "street": "azcuenaga",
-        "min": 700,
+        "min": 1100,
         "max": 1399,
         "zone": "Barrio Norte"
       },
@@ -633,12 +635,12 @@
       },
       {
         "street": "larrea",
-        "max": 699,
+        "max": 1099,
         "out": true
       },
       {
         "street": "larrea",
-        "min": 700,
+        "min": 1100,
         "max": 1399,
         "zone": "Barrio Norte"
       },
@@ -649,14 +651,8 @@
       },
       {
         "street": "pueyrredon",
-        "max": 699,
-        "out": true
-      },
-      {
-        "street": "pueyrredon",
-        "min": 700,
         "max": 1399,
-        "zone": "Barrio Norte"
+        "out": true
       },
       {
         "street": "pueyrredon",
@@ -665,12 +661,12 @@
       },
       {
         "street": "rodriguez pena",
-        "max": 699,
+        "max": 1099,
         "out": true
       },
       {
         "street": "rodriguez pena",
-        "min": 700,
+        "min": 1100,
         "max": 1399,
         "zone": "Barrio Norte"
       },
@@ -681,36 +677,21 @@
       },
       {
         "street": "jean jaures",
-        "max": 699,
-        "out": true
-      },
-      {
-        "street": "jean jaures",
-        "min": 700,
-        "max": 1399,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "anchorena",
-        "max": 699,
         "out": true
       },
       {
         "street": "anchorena",
-        "min": 700,
         "max": 1399,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "ecuador",
-        "max": 699,
         "out": true
       },
       {
+        "street": "anchorena",
+        "min": 1400
+      },
+      {
         "street": "ecuador",
-        "min": 700,
         "max": 1399,
-        "zone": "Barrio Norte"
+        "out": true
       },
       {
         "street": "ecuador",
@@ -719,67 +700,47 @@
       },
       {
         "street": "aguero",
-        "max": 699,
+        "max": 1599,
         "out": true
       },
       {
         "street": "aguero",
-        "min": 700,
-        "max": 1399,
-        "zone": "Barrio Norte"
+        "min": 1600
       },
       {
         "street": "laprida",
-        "max": 699,
+        "max": 1399,
         "out": true
       },
       {
         "street": "laprida",
-        "min": 700,
-        "max": 1399,
-        "zone": "Barrio Norte"
+        "min": 1400
       },
       {
         "street": "paso",
-        "max": 699,
-        "out": true
-      },
-      {
-        "street": "paso",
-        "min": 700,
-        "max": 1399,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "gallo",
-        "max": 699,
         "out": true
       },
       {
         "street": "gallo",
-        "min": 700,
-        "max": 1399,
-        "zone": "Barrio Norte"
+        "max": 1699,
+        "out": true
+      },
+      {
+        "street": "gallo",
+        "min": 1700
       },
       {
         "street": "san luis",
-        "min": 1800,
-        "max": 3199,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "san luis",
-        "min": 3200,
         "out": true
       },
       {
         "street": "riobamba",
-        "max": 699,
+        "max": 1099,
         "out": true
       },
       {
         "street": "riobamba",
-        "min": 700,
+        "min": 1100,
         "max": 1399,
         "zone": "Barrio Norte"
       },
@@ -790,20 +751,12 @@
       },
       {
         "street": "mario bravo",
-        "max": 699,
         "out": true
-      },
-      {
-        "street": "mario bravo",
-        "min": 700,
-        "max": 1399,
-        "zone": "Barrio Norte"
       },
       {
         "street": "coronel diaz",
-        "min": 1000,
         "max": 1899,
-        "zone": "Barrio Norte"
+        "out": true
       },
       {
         "street": "coronel diaz",
@@ -813,23 +766,22 @@
       },
       {
         "street": "billinghurst",
-        "max": 699,
+        "max": 1799,
         "out": true
       },
       {
         "street": "billinghurst",
-        "min": 700,
-        "max": 1399,
-        "zone": "Barrio Norte"
-      },
-      {
-        "street": "billinghurst",
-        "min": 1400,
+        "min": 1800,
         "zone": "Recoleta"
       },
       {
         "street": "austria",
-        "min": 1600,
+        "max": 1799,
+        "out": true
+      },
+      {
+        "street": "austria",
+        "min": 1800,
         "max": 2899,
         "zone": "Recoleta"
       },
@@ -1086,6 +1038,36 @@
       ]
     },
     {
+      "site": "argenprop",
+      "name": "Palermo Hollywood 1 amb",
+      "zone": "Palermo Hollywood",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/palermo-hollywood/monoambiente/dolares-hasta-140000",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Palermo Hollywood 2 amb",
+      "zone": "Palermo Hollywood",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/palermo-hollywood/2-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Palermo Hollywood 3 amb",
+      "zone": "Palermo Hollywood",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/palermo-hollywood/3-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
       "site": "zonaprop",
       "name": "Recoleta 1 amb ≤80k",
       "zone": "Recoleta",
@@ -1269,6 +1251,46 @@
       "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-chico-con-balcon-3-ambientes-menos-140000-dolar.html",
       "aliases": [
         "palermo chico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Palermo Hollywood 1 amb 120-130k",
+      "zone": "Palermo Hollywood",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-hollywood-con-balcon-1-ambiente-120000-130000-dolar.html",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Palermo Hollywood 1 amb 130-140k",
+      "zone": "Palermo Hollywood",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-hollywood-con-balcon-1-ambiente-130000-140000-dolar.html",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Palermo Hollywood 2 amb",
+      "zone": "Palermo Hollywood",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-hollywood-con-balcon-2-ambientes-120000-140000-dolar.html",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Palermo Hollywood 3 amb",
+      "zone": "Palermo Hollywood",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-palermo-hollywood-con-balcon-3-ambientes-120000-140000-dolar.html",
+      "aliases": [
+        "palermo hollywood"
       ]
     },
     {
@@ -1564,6 +1586,148 @@
       "aliases": [
         "palermo chico"
       ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Hollywood 1 amb",
+      "zone": "Palermo Hollywood",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/palermo-hollywood/",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Hollywood 2 amb",
+      "zone": "Palermo Hollywood",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/palermo-hollywood/",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Hollywood 2 amb 1 dorm",
+      "zone": "Palermo Hollywood",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/palermo-hollywood/",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Hollywood 2 amb 2 dorm",
+      "zone": "Palermo Hollywood",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/palermo-hollywood/",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Hollywood 3 amb",
+      "zone": "Palermo Hollywood",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/palermo-hollywood/",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Hollywood 3 amb 1 dorm",
+      "zone": "Palermo Hollywood",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/palermo-hollywood/",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Palermo Hollywood 3 amb 2 dorm",
+      "zone": "Palermo Hollywood",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/palermo-hollywood/",
+      "aliases": [
+        "palermo hollywood"
+      ]
+    },
+    {
+      "site": "cabaprop",
+      "name": "Recoleta",
+      "zone": "Recoleta",
+      "pages": 5,
+      "url": "https://cabaprop.com.ar/propiedades/comprar-departamento-recoleta-dolares_desde_120000_hasta_140000-ambientes_1_2_3",
+      "aliases": [
+        "recoleta"
+      ]
+    },
+    {
+      "site": "cabaprop",
+      "name": "Barrio Norte 1 amb",
+      "zone": "Barrio Norte",
+      "pages": 5,
+      "url": "https://cabaprop.com.ar/propiedades/comprar-departamento-barrio_norte-barrio_norte_la_isla-barrio_norte_parque_las_heras-barrio_norte_recoleta-dolares_desde_120000_hasta_140000-ambientes_1",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "cabaprop",
+      "name": "Barrio Norte 2 amb",
+      "zone": "Barrio Norte",
+      "pages": 3,
+      "url": "https://cabaprop.com.ar/propiedades/comprar-departamento-barrio_norte-barrio_norte_la_isla-barrio_norte_parque_las_heras-barrio_norte_recoleta-dolares_desde_120000_hasta_140000-ambientes_2",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "cabaprop",
+      "name": "Barrio Norte 3 amb",
+      "zone": "Barrio Norte",
+      "pages": 2,
+      "url": "https://cabaprop.com.ar/propiedades/comprar-departamento-barrio_norte-barrio_norte_la_isla-barrio_norte_parque_las_heras-barrio_norte_recoleta-dolares_desde_120000_hasta_140000-ambientes_3",
+      "aliases": [
+        "barrio norte"
+      ]
+    },
+    {
+      "site": "cabaprop",
+      "name": "Botánico",
+      "zone": "Botánico",
+      "pages": 1,
+      "url": "https://cabaprop.com.ar/propiedades/comprar-departamento-palermo_botanico-dolares_desde_120000_hasta_140000-ambientes_1_2_3",
+      "aliases": [
+        "botanico",
+        "palermo botanico",
+        "jardin botanico"
+      ]
+    },
+    {
+      "site": "cabaprop",
+      "name": "Palermo Chico",
+      "zone": "Palermo Chico",
+      "pages": 1,
+      "url": "https://cabaprop.com.ar/propiedades/comprar-departamento-palermo_chico-dolares_desde_120000_hasta_140000-ambientes_1_2_3",
+      "aliases": [
+        "palermo chico"
+      ]
+    },
+    {
+      "site": "cabaprop",
+      "name": "Palermo Hollywood",
+      "zone": "Palermo Hollywood",
+      "pages": 5,
+      "url": "https://cabaprop.com.ar/propiedades/comprar-departamento-palermo_hollywood-dolares_desde_120000_hasta_140000-ambientes_1_2_3",
+      "aliases": [
+        "palermo hollywood"
+      ]
     }
   ],
   "expensas_min_valid_ars": 10000,
@@ -1611,7 +1775,10 @@
     "decision_buy_pct": "supuesto, no verificado: precio ≤ 92% de la oferta máxima → comprar",
     "decision_watch_pct": "supuesto, no verificado: precio ≤ 108% de la oferta máxima → vigilar; más → descartar",
     "exit_usd_m2": "fijo por barrio; no hay ventas públicas en Argentina. No es un comparable de cuadra.",
-    "street_zones": "La calle y la altura mandan. El barrio del aviso no. Altura fuera de rango = fuera, aunque la card diga Recoleta."
+    "street_zones": "La calle y la altura mandan. El barrio del aviso no. Altura fuera de rango = fuera, aunque la card diga Recoleta. Palermo Hollywood: entre Córdoba y Santa Fe, y entre Juan B. Justo y Dorrego. Las alturas son la cuadra USIG pegada al borde, hacia adentro (2026-10-19). Córdoba y Santa Fe siguen afuera. Soho (Thames, Armenia, Serrano, Borges, Malabia) sigue afuera.",
+    "exit_usd_m2_palermo_hollywood": "Sin número verificado. No se inventó. Esos avisos entran, pero no tienen aire ni neto hasta definirlo.",
+    "notify_fetch_errors": "Argenprop: el WAF corta URLs casi todas las corridas. Queda en el log de la Mac, no en Telegram. Zonaprop, Mercado Libre y Cabaprop sí avisan.",
+    "cabaprop": "API pública del buscador (la misma que usa el sitio). 12 avisos por página, tope 5. Barrio Norte incluye La Isla, Parque Las Heras y Barrio Norte Recoleta. La calle y la altura siguen mandando."
   },
   "area_weight_covered": 1,
   "area_weight_semi": 0.5,
@@ -1625,5 +1792,11 @@
   "require_balcon": true,
   "include_unknown_balcon": false,
   "require_light": true,
-  "include_unknown_light": false
+  "include_unknown_light": false,
+  "notify_fetch_errors": {
+    "zonaprop": true,
+    "mercadolibre": true,
+    "argenprop": false,
+    "cabaprop": true
+  }
 }

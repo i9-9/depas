@@ -222,10 +222,13 @@ select {
 }
 
 .cta-dock {
-  position: sticky;
+  position: fixed;
+  right: 0;
   bottom: 0;
+  left: 0;
   z-index: 8;
-  padding: 0.75rem 0 max(0.75rem, env(safe-area-inset-bottom));
+  padding: 0.75rem max(var(--gutter), env(safe-area-inset-right)) max(0.75rem, env(safe-area-inset-bottom))
+    max(var(--gutter), env(safe-area-inset-left));
   background: var(--bg);
   border-top: 1px solid var(--line);
 }
@@ -277,6 +280,63 @@ select {
   border-bottom: 1px solid var(--line);
   font-size: 0.9375rem;
   line-height: 1.3;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.facts > div {
+  min-width: 0;
+  border-bottom: 1px solid var(--line);
+  padding-block: 0.75rem;
+}
+
+.seg {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--line);
+}
+
+.seg button {
+  min-height: 44px;
+  border-right: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.seg button:last-child {
+  border-right: 0;
+}
+
+.seg button[aria-pressed="true"] {
+  background: var(--title);
+  color: var(--bg);
+}
+
+@media (min-width: 640px) {
+  .facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .facts-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .facts-2 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .seg button:not([aria-pressed="true"]):hover {
+    background: var(--photo);
+  }
 }
 
 @media (min-width: 1024px) {
