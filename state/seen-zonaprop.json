@@ -580,6 +580,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-59785223.html",
    "zone": "Recoleta"
   },
+  "zonaprop:59787908": {
+   "first_seen": "2026-10-19T17:41:13+00:00",
+   "key": "arevalo 1582|132000|64|3",
+   "place": "arevalo 1582|65|3",
+   "price": 132000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-depto-3-amb-en-1-por-escalera-al-frente-bcon-59787908.html",
+   "zone": "Palermo Hollywood"
+  },
   "zonaprop:59792789": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "av las heras 2400|140000|58|3",
@@ -672,6 +680,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes.-ayacucho-al-1400-59930722.html",
    "zone": "Recoleta"
   },
+  "zonaprop:59940827": {
+   "first_seen": "2026-10-19T17:41:13+00:00",
+   "key": "humboldt 2260|135000|62|3",
+   "place": "humboldt 2260|60|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-depto.-3-amb.-contrafrente-3er-piso-en-palermo-59940827.html",
+   "zone": "Palermo Hollywood"
+  },
   "zonaprop:59950051": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "key": "beruti 2300|128000|55|3",
@@ -691,6 +707,14 @@
    "price": 125000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-en-recoleta-59974238.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:60032185": {
+   "first_seen": "2026-10-19T17:41:13+00:00",
+   "key": "fitz roy 2400|120000|55|2",
+   "place": "fitz roy 2400|55|2",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-palermo-hollywood-capital-60032185.html",
+   "zone": "Palermo Hollywood"
   },
   "zonaprop:60044229": {
    "first_seen": "2026-10-10T01:58:26+00:00",
@@ -741,6 +765,14 @@
    "last_seen": "2026-10-10T03:03:21+00:00",
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-ambientes-con-dependencia-o-60067830.html"
+  },
+  "zonaprop:60072950": {
+   "first_seen": "2026-10-19T17:41:13+00:00",
+   "key": "humboldt 2000|136000|57|3",
+   "place": "humboldt 2000|55|3",
+   "price": 136000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-humboldt-2000-60072950.html",
+   "zone": "Palermo Hollywood"
   },
   "zonaprop:60077990": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -1044,6 +1076,14 @@
    "price": 129900,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-60293202.html"
   },
+  "zonaprop:60306978": {
+   "first_seen": "2026-10-19T17:41:13+00:00",
+   "key": "fitz roy 2324|135000|50|2",
+   "place": "fitz roy 2324|50|2",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-palermo-hollywood-venta-tipo-ph-2-ambientes-todo-al-60306978.html",
+   "zone": "Palermo Hollywood"
+  },
   "zonaprop:60306979": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "cordoba monoambiente en venta 55|119000|55|1",
@@ -1196,6 +1236,14 @@
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-recoleta-60447256.html",
    "zone": "Barrio Norte"
+  },
+  "zonaprop:60468175": {
+   "first_seen": "2026-10-19T17:41:13+00:00",
+   "key": "costa rica 5500|120000|55|1",
+   "place": "costa rica 5500|55|1",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-monoambiente-en-palermo-hollywood-balcon-pat-60468175.html",
+   "zone": "Palermo Hollywood"
   }
  },
  "meta": {
