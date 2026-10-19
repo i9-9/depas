@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-19T17:41:13+00:00",
+ "last_change": "2026-10-19T23:51:13+00:00",
  "listings": [
   {
    "active": false,
@@ -1422,21 +1422,31 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
+   "address_unverified": false,
    "air_usd": 0,
    "ambientes": 2,
    "antiguedad_years": 45,
    "area": 52.0,
-   "closing_ref_usd": 123500,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 52.0,
+   "blurb": "USD 130.000\n$ 152.500 Expensas\n52 m² tot.\n2 amb.\n1 dorm.\n1 baño\nFitz Roy al 2400 8 Fte Balcon Super Luminoso\nBarrio Norte, Capital Federal\nEdificio de 8 pisos de 45 años, con encargado sin vivienda (media jornada). Dos unidades por piso. Depto ubicado en el piso 8 Al frente super Luminoso. Dos ambientes amplio, hall de entrada a L-C a balcón corrido, cocina completa con espacio para lavaropas, muy buena ventilación. Baño completo con ventilación y dormitorio con muy buen placard también a balcón",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 9,
+   "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-10-11T01:58:51+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/80/35/40/720x532/2045725507.jpg",
    "piso": 8,
@@ -1448,10 +1458,15 @@
      "price": 130000
     }
    ],
-   "reno_usd_m2": 250,
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
    "score": -1,
+   "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
+    "m² sin verificar",
     "sobre presupuesto"
    ],
    "title": "Edificio de 8 pisos de 45 años, con encargado sin vivienda (media jornada). Dos unidades p",
@@ -1459,7 +1474,8 @@
    "usd_per_m2": 2500,
    "vs_median_n": 68,
    "vs_median_pct": 18,
-   "zone": "Barrio Norte"
+   "zone": "Palermo Hollywood",
+   "zone_unverified": false
   },
   {
    "active": false,
