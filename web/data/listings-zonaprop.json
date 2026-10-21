@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-20T20:48:39+00:00",
+ "last_change": "2026-10-21T01:46:48+00:00",
  "listings": [
   {
    "active": false,
@@ -2179,7 +2179,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -2193,13 +2193,13 @@
    "breakeven_exit_usd_m2": 3735,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 10,
+   "days_seen": 11,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 179000,
    "expensas_text": "$ 179.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": "2026-10-20T20:48:39+00:00",
+   "gone_at": null,
    "id": "zonaprop:59574708",
    "max_offer_usd": 92159,
    "neto_base_usd": -26097,
@@ -2208,7 +2208,7 @@
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/57/47/08/720x532/2064521219.jpg",
    "piso": null,
    "price": 135000,
-   "price_drops": 0,
+   "price_drops": 1,
    "price_history": [
     {
      "date": "2026-10-10T01:31:10+00:00",
@@ -3971,7 +3971,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -3991,7 +3991,7 @@
    "expensas_ars": 179000,
    "expensas_text": "$ 179.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-21T01:46:48+00:00",
    "id": "zonaprop:60118859",
    "max_offer_usd": 92159,
    "neto_base_usd": -26097,
