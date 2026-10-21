@@ -1130,9 +1130,9 @@
   },
   "zonaprop:60351140": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "key": "pena 2400|130000|55|2",
+   "key": "pena 2400|129500|55|2",
    "place": "pena 2400|55|2",
-   "price": 130000,
+   "price": 129500,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-en-recoleta-60351140.html",
    "zone": "Recoleta"
   },
@@ -1249,6 +1249,7 @@
  },
  "meta": {
   "coverage_week": "2026-W42",
+  "last_error_day": "2026-10-21",
   "last_run": "2026-10-10T03:03:21+00:00"
  }
 }
