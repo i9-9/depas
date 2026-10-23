@@ -598,10 +598,11 @@
   },
   "zonaprop:59807839": {
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "key": "pueyrredon 900|139000|91|3",
-   "last_seen": "2026-10-10T03:03:21+00:00",
+   "key": "pueyrredon 900|139000|59|3",
+   "place": "pueyrredon 900|60|3",
    "price": 139000,
-   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-dependencia-balcon-corrido-y-vista-59807839.html"
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-dependencia-balcon-corrido-y-vista-59807839.html",
+   "zone": "Barrio Norte"
   },
   "zonaprop:59808236": {
    "first_seen": "2026-10-10T04:06:21+00:00",

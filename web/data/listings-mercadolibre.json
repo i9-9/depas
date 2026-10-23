@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-19T13:54:50+00:00",
+ "last_change": "2026-10-23T16:43:18+00:00",
  "listings": [
   {
    "active": false,
@@ -284,9 +284,9 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Pueyrredon Al 900, Barrio Norte, Capital Federal",
-   "address_unverified": null,
+   "address_unverified": false,
    "air_usd": 65250,
    "ambientes": 3,
    "antiguedad_years": null,
@@ -297,13 +297,13 @@
    "breakeven_exit_usd_m2": 2541,
    "closing_ref_usd": 133579,
    "cochera": null,
-   "days_seen": 4,
+   "days_seen": 13,
    "decision": "comprar",
    "exit_usd_m2": 2750,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": "2026-10-19T13:54:50+00:00",
+   "gone_at": null,
    "id": "mercadolibre:3740194676",
    "max_offer_usd": 154018,
    "neto_base_usd": 46475,
@@ -323,21 +323,20 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2608,
    "roi_hard": 0.0822,
-   "score": 3,
+   "score": 1,
    "seventy_offer_usd": 133300,
    "site": "mercadolibre",
    "tags": [
     "sobre presupuesto",
-    "metro muy barato",
     "aire amplio"
    ],
    "title": "3 Ambientes Con Dependencia, Balcón Corrido Y Vista Abierta  Barrio Norte",
-   "url": "https://departamento.mercadolibre.com.ar/MLA-3740194676-3-ambientes-con-dependencia-balcon-corrido-y-vista-abierta-barrio-norte-_JM#polycard_client=search-desktop&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=42&type=item&tracking_id=10306084-426b-4259-b192-76388034fb96&sid=search",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-3740194676-3-ambientes-con-dependencia-balcon-corrido-y-vista-abierta-barrio-norte-_JM",
    "usd_per_m2": 1616,
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Barrio Norte",
-   "zone_unverified": null
+   "zone_unverified": false
   },
   {
    "active": false,

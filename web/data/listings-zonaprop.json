@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-23T15:58:30+00:00",
+ "last_change": "2026-10-23T16:43:18+00:00",
  "listings": [
   {
    "active": false,
@@ -1422,7 +1422,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1442,7 +1442,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-23T16:43:18+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -2754,7 +2754,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Arévalo 1582",
    "address_unverified": false,
    "air_usd": null,
@@ -2774,7 +2774,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-23T16:43:18+00:00",
    "id": "zonaprop:59787908",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -2847,20 +2847,26 @@
    "zone": "Recoleta"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Pueyrredon al 900",
+   "address_unverified": false,
    "air_usd": 2075,
    "ambientes": 3,
+   "antiguedad_years": null,
    "area": 59.4,
    "area_covered": 43.0,
    "area_semi": 10.0,
    "area_total": 91.0,
+   "breakeven_exit_usd_m2": 3437,
+   "closing_ref_usd": 133579,
+   "cochera": null,
+   "days_seen": 13,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 280000,
    "expensas_text": "$ 280.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": "2026-10-19T13:54:50+00:00",
+   "gone_at": null,
    "id": "zonaprop:59807839",
    "max_offer_usd": 104865,
    "neto_base_usd": -14133,
@@ -2869,13 +2875,17 @@
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/80/78/39/720x532/2070197304.jpg",
    "piso": 13,
    "price": 139000,
+   "price_drops": 0,
    "price_history": [
     {
      "date": "2026-10-10T01:31:10+00:00",
      "price": 139000
     }
    ],
+   "price_source": "card",
    "reno_usd_m2": 375,
+   "roi_base": -0.0835,
+   "roi_hard": -0.1999,
    "score": -2,
    "seventy_offer_usd": 92070,
    "site": "zonaprop",
@@ -2884,7 +2894,11 @@
    ],
    "title": "Excelente 3 ambientes con dependencia, balcón corrido y vista abierta – Barrio NorteUbicad",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-dependencia-balcon-corrido-y-vista-59807839.html",
-   "zone": "Barrio Norte"
+   "usd_per_m2": 2340,
+   "vs_median_n": null,
+   "vs_median_pct": null,
+   "zone": "Barrio Norte",
+   "zone_unverified": false
   },
   {
    "active": false,
@@ -3304,7 +3318,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Humboldt 2260",
    "address_unverified": false,
    "air_usd": null,
@@ -3324,7 +3338,7 @@
    "expensas_ars": 200000,
    "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-23T16:43:18+00:00",
    "id": "zonaprop:59940827",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -3461,7 +3475,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "FITZ ROY 2400",
    "address_unverified": false,
    "air_usd": null,
@@ -3481,7 +3495,7 @@
    "expensas_ars": 130000,
    "expensas_text": "$ 130.000 Expensas",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-23T16:43:18+00:00",
    "id": "zonaprop:60032185",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -3754,7 +3768,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Humboldt 2000",
    "address_unverified": false,
    "air_usd": null,
@@ -3774,7 +3788,7 @@
    "expensas_ars": 190000,
    "expensas_text": "$ 190.000 Expensas",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-23T16:43:18+00:00",
    "id": "zonaprop:60072950",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -5266,7 +5280,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy 2324",
    "address_unverified": false,
    "air_usd": null,
@@ -5286,7 +5300,7 @@
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-23T16:43:18+00:00",
    "id": "zonaprop:60306978",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6128,7 +6142,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Laprida al 1100",
    "address_unverified": false,
    "air_usd": null,
@@ -6141,13 +6155,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 115320,
    "cochera": true,
-   "days_seen": 0,
+   "days_seen": 7,
    "decision": null,
    "exit_usd_m2": 2750,
-   "expensas_ars": 242000,
-   "expensas_text": "$ 242.000 Expensas",
+   "expensas_ars": 290000,
+   "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-16T01:29:14+00:00",
-   "gone_at": "2026-10-19T13:54:50+00:00",
+   "gone_at": null,
    "id": "zonaprop:60447256",
    "max_offer_usd": null,
    "neto_base_usd": null,

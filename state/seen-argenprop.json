@@ -2,7 +2,8 @@
  "listings": {
   "argenprop:10280375": {
    "first_seen": "2026-10-11T11:54:44+00:00",
-   "place": "visto 50|80|3",
+   "key": "cordoba 2400|132000|80|3",
+   "place": "cordoba 2400|80|3",
    "price": 132000,
    "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--10280375",
    "zone": "Barrio Norte"
@@ -44,7 +45,8 @@
   },
   "argenprop:18997022": {
    "first_seen": "2026-10-10T22:00:06+00:00",
-   "place": "visto 2000|70|3",
+   "key": "mansilla 2600|139000|68|3",
+   "place": "mansilla 2600|70|3",
    "price": 139000,
    "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--18997022",
    "zone": "Barrio Norte"
@@ -58,7 +60,8 @@
   },
   "argenprop:19533107": {
    "first_seen": "2026-10-10T22:00:06+00:00",
-   "place": "visto 4000|65|3",
+   "key": "mansilla 2500|130000|63|3",
+   "place": "mansilla 2500|65|3",
    "price": 130000,
    "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--19533107",
    "zone": "Barrio Norte"
@@ -93,7 +96,8 @@
   },
   "argenprop:20181024": {
    "first_seen": "2026-10-11T11:54:44+00:00",
-   "place": "visto 301|85|3",
+   "key": "pueyrredon 900|139000|86|3",
+   "place": "pueyrredon 900|85|3",
    "price": 139000,
    "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-3-ambientes--20181024",
    "zone": "Barrio Norte"
