@@ -1,4 +1,11 @@
-import { GUSTO_USD, RENO_USD_M2, type Listing, type RawListing, type Verdict } from "@/lib/listings";
+import {
+  formatWhen,
+  GUSTO_USD,
+  RENO_USD_M2,
+  type Listing,
+  type RawListing,
+  type Verdict,
+} from "@/lib/listings";
 
 const SAY: Record<string, string> = {
   "de época": "es de época",
@@ -184,10 +191,20 @@ export function medianLine(item: Listing): string | null {
 
 export function seenLine(item: Listing): string | null {
   const days = item.days_seen;
-  if (days == null) return null;
-  const when = days === 0 ? "hoy" : days === 1 ? "hace 1 día" : `hace ${days} días`;
+  const date = formatWhen(item.first_seen);
+  if (days == null && (!date || date === "—")) return null;
+  let when: string;
+  if (date && date !== "—") {
+    when = days === 0 ? `hoy (${date})` : `el ${date}`;
+  } else if (days === 0) {
+    when = "hoy";
+  } else if (days === 1) {
+    when = "hace 1 día";
+  } else {
+    when = `hace ${days} días`;
+  }
   const drops = item.price_drops || 0;
-  const seen = `Lo vimos ${when} (no es el “publicado hace” del portal).`;
+  const seen = `En la lista desde ${when} (no es el “publicado hace” del portal).`;
   if (drops === 0) return seen;
   const dropTxt = drops === 1 ? "bajó una vez" : `bajó ${drops} veces`;
   return `${seen} ${dropTxt[0].toUpperCase()}${dropTxt.slice(1)}.`;

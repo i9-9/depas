@@ -290,6 +290,8 @@ def _zonaprop_address(text: str) -> str:
         "barrio norte",
         "palermo chico",
         "palermo",
+        "belgrano chico",
+        "belgrano",
     )
     candidates: list[str] = []
     for i, ln in enumerate(lines[:-1]):
@@ -712,6 +714,15 @@ def _location_hay(item: dict) -> str:
     return fold(f"{item.get('address') or ''} {item.get('zone') or ''} {slug}")
 
 
+def _reject_barrio_hit(text: str, kw: str) -> bool:
+    """El barrio está en el texto, y no es solo la calle con altura (Congreso 4200)."""
+    kw = fold(str(kw))
+    if not kw or not _phrase_in(text, kw):
+        return False
+    stripped = re.sub(rf"(?<![a-z0-9]){re.escape(kw)}\s+\d{{2,5}}\b", " ", text)
+    return _phrase_in(stripped, kw)
+
+
 def apply_budget(item: dict, f: dict) -> dict:
     """125k es el gusto; pasarse un poco baja el ranking, no saca el aviso."""
     preferred = f.get("max_price_usd")
@@ -770,6 +781,8 @@ def mark_claimed_barrio(item: dict, f: dict | None = None) -> dict:
             continue
         if re.search(rf"a pasos de\s+{re.escape(k)}", title):
             continue
+        if not _reject_barrio_hit(title, k):
+            continue
         claimed_bad = True
         break
     if claimed_bad and "barrio del aviso no coincide" not in tags:
@@ -800,6 +813,7 @@ DEFAULT_EXIT_USD_M2 = {
     "Barrio Norte": 2750,
     "Botánico": 3000,
     "Palermo Chico": 3600,
+    "Belgrano": 3400,
 }
 DEFAULT_RENO_USD_M2_RECYCLE = 375
 DEFAULT_RENO_USD_M2_OK = 250
@@ -1277,7 +1291,8 @@ def save_pick(listings: list[dict]) -> dict:
 
 
 _STREET_NOISE = re.compile(
-    r"\b(recoleta|barrio norte|botanico|palermo chico|palermo|capital federal|caba|"
+    r"\b(recoleta|barrio norte|botanico|palermo chico|belgrano chico|belgrano r|belgrano c|"
+    r"belgrano|palermo|capital federal|caba|"
     r"argentina|departamento|depto|ambientes|amb|visto|fotos?)\b"
 )
 
@@ -1331,6 +1346,28 @@ _STREET_ALIASES = (
     ("mario bravo", "mario bravo"),
     ("pacheco de melo", "pacheco de melo"),
     ("vicente lopez", "vicente lopez"),
+    ("av del libertador", "libertador"),
+    ("del libertador", "libertador"),
+    ("libertador", "libertador"),
+    ("luis m campos", "luis maria campos"),
+    ("f lacroze", "federico lacroze"),
+    ("lacroze", "federico lacroze"),
+    ("crisologo larralde", "crisologo larralde"),
+    ("larralde", "crisologo larralde"),
+    ("ricardo balbin", "ricardo balbin"),
+    ("balbin", "ricardo balbin"),
+    ("romulo s naon", "romulo naon"),
+    ("romulo naon", "romulo naon"),
+    ("naon", "romulo naon"),
+    ("franklin d roosevelt", "franklin roosevelt"),
+    ("f d roosevelt", "franklin roosevelt"),
+    ("roosevelt", "franklin roosevelt"),
+    ("jose hernandez", "jose hernandez"),
+    ("hernandez", "jose hernandez"),
+    ("ramos mejia", "ramos mejia"),
+    ("o'higgins", "o higgins"),
+    ("ohiggins", "o higgins"),
+    ("11 de setiembre", "11 de septiembre"),
 )
 
 
@@ -1760,7 +1797,7 @@ def is_rejected(item: dict, f: dict) -> bool:
     if is_foreign_city(item, f):
         return True
     loc = _location_hay(item)
-    return any(_phrase_in(loc, kw) for kw in f.get("reject_barrios") or [] if str(kw).strip())
+    return any(_reject_barrio_hit(loc, kw) for kw in f.get("reject_barrios") or [] if str(kw).strip())
 
 
 def in_allowed_area(item: dict, f: dict) -> bool:
@@ -2828,6 +2865,7 @@ def infer_zone(url: str, explicit: str = "") -> str:
         ("Barrio Norte", ("barrio-norte", "barrio norte")),
         ("Botánico", ("botanico", "botánico")),
         ("Recoleta", ("recoleta",)),
+        ("Belgrano", ("belgrano",)),
     )
     for name, keys in mapping:
         if any(k in u for k in keys):

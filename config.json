@@ -18,7 +18,11 @@
       "palermo botanico",
       "jardin botanico",
       "palermo chico",
-      "palermo hollywood"
+      "palermo hollywood",
+      "belgrano",
+      "belgrano r",
+      "belgrano c",
+      "belgrano chico"
     ],
     "reject_text": [
       "en pozo",
@@ -792,6 +796,432 @@
       {
         "street": "vicente lopez",
         "zone": "Recoleta"
+      },
+      {
+        "street": "11 de septiembre",
+        "min": 1400,
+        "max": 1999,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "11 de septiembre",
+        "min": 2100,
+        "max": 2799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "3 de febrero",
+        "min": 1400,
+        "max": 2799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "amenabar",
+        "min": 1600,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "arcos",
+        "min": 1400,
+        "max": 2799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "blanco encalada",
+        "min": 800,
+        "max": 3499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "blanco encalada",
+        "min": 3600,
+        "max": 3699,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "cabildo",
+        "min": 1300,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "cazadores",
+        "min": 1800,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "ciudad de la paz",
+        "min": 1600,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "conde",
+        "min": 1600,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "conesa",
+        "min": 1800,
+        "max": 2299,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "conesa",
+        "min": 2500,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "congreso",
+        "min": 1800,
+        "max": 1899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "cramer",
+        "min": 1700,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "cuba",
+        "min": 1700,
+        "max": 2799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "de los incas",
+        "min": 3000,
+        "max": 3599,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "dragones",
+        "min": 1800,
+        "max": 2099,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "dragones",
+        "min": 2200,
+        "max": 2299,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "dragones",
+        "min": 2400,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "echeverria",
+        "min": 600,
+        "max": 3799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "elcano",
+        "min": 2700,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "figueroa alcorta",
+        "min": 6400,
+        "max": 6999,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "figueroa alcorta",
+        "min": 7100,
+        "max": 7799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "forest",
+        "min": 1600,
+        "max": 1799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "franklin roosevelt",
+        "min": 1500,
+        "max": 2099,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "franklin roosevelt",
+        "min": 2200,
+        "max": 3099,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "freire",
+        "min": 1600,
+        "max": 1899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "freire",
+        "min": 2000,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "husares",
+        "min": 1800,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "jose hernandez",
+        "min": 1300,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "juramento",
+        "min": 600,
+        "max": 799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "juramento",
+        "min": 900,
+        "max": 3799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "la pampa",
+        "min": 100,
+        "max": 3899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "libertador",
+        "min": 5200,
+        "max": 6799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "luis maria campos",
+        "min": 1400,
+        "max": 1699,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "melian",
+        "min": 1900,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "mendoza",
+        "min": 900,
+        "max": 2199,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "mendoza",
+        "min": 2300,
+        "max": 3799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "migueletes",
+        "min": 1600,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "moldes",
+        "min": 1600,
+        "max": 1699,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "moldes",
+        "min": 1800,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "monroe",
+        "min": 700,
+        "max": 2299,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "monroe",
+        "min": 2400,
+        "max": 3099,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "monroe",
+        "min": 3200,
+        "max": 3299,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "o higgins",
+        "min": 1400,
+        "max": 2799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "olazabal",
+        "min": 900,
+        "max": 3699,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "rafael obligado",
+        "min": 6100,
+        "max": 7399,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "ramsay",
+        "min": 1800,
+        "max": 2599,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "ricardo balbin",
+        "min": 2300,
+        "max": 2599,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "romulo naon",
+        "min": 1800,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "soldado de la independencia",
+        "min": 1400,
+        "max": 1599,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "sucre",
+        "min": 600,
+        "max": 899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "sucre",
+        "min": 1000,
+        "max": 3799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "superi",
+        "min": 1500,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "valentin alsina",
+        "min": 800,
+        "max": 1099,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "valentin alsina",
+        "min": 1200,
+        "max": 1599,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "vidal",
+        "min": 1600,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "virrey arredondo",
+        "min": 2200,
+        "max": 2399,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "virrey del pino",
+        "min": 1500,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "virrey del pino",
+        "min": 3000,
+        "max": 3599,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "virrey loreto",
+        "min": 1500,
+        "max": 2399,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "virrey vertiz",
+        "min": 1600,
+        "max": 2099,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "vuelta de obligado",
+        "min": 1400,
+        "max": 1599,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "vuelta de obligado",
+        "min": 1700,
+        "max": 2799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "zabala",
+        "min": 1500,
+        "max": 2399,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "zapiola",
+        "min": 1700,
+        "max": 2499,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "zapiola",
+        "min": 2600,
+        "max": 2899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "arribenos",
+        "min": 1500,
+        "max": 1899,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "arribenos",
+        "min": 2200,
+        "max": 2799,
+        "zone": "Belgrano"
+      },
+      {
+        "street": "montaneses",
+        "min": 1900,
+        "max": 2899,
+        "zone": "Belgrano"
       }
     ],
     "reject_cities": [
@@ -824,7 +1254,8 @@
     "Recoleta": 2750,
     "Barrio Norte": 2750,
     "Botánico": 3000,
-    "Palermo Chico": 3600
+    "Palermo Chico": 3600,
+    "Belgrano": 3400
   },
   "weak_streets": [
     {
@@ -1728,6 +2159,461 @@
       "aliases": [
         "palermo hollywood"
       ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Belgrano 1 amb >120k",
+      "zone": "Belgrano",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-belgrano-con-balcon-1-ambiente-mas-120000-dolar-orden-precio-ascendente.html",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Belgrano 1 amb >130k",
+      "zone": "Belgrano",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-belgrano-con-balcon-1-ambiente-mas-130000-dolar-orden-precio-ascendente.html",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Belgrano 2 amb >120k",
+      "zone": "Belgrano",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-belgrano-con-balcon-2-ambientes-mas-120000-dolar-orden-precio-ascendente.html",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Belgrano 3 amb ≤140k",
+      "zone": "Belgrano",
+      "pages": 5,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-belgrano-con-balcon-3-ambientes-menos-140000-dolar.html",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Belgrano",
+      "zone": "Belgrano",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/belgrano/dolares-hasta-140000",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Belgrano 2 amb",
+      "zone": "Belgrano",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/belgrano/2-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "argenprop",
+      "name": "Belgrano 3 amb",
+      "zone": "Belgrano",
+      "pages": 3,
+      "url": "https://www.argenprop.com/departamentos/venta/belgrano/3-ambientes/dolares-hasta-140000",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano 1 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/belgrano/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano 2 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/belgrano/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano 2 amb 1 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/belgrano/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano 2 amb 2 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/belgrano/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano 3 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/belgrano/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano 3 amb 1 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/belgrano/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano 3 amb 2 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/belgrano/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano R 1 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/belgrano-r/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano R 2 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/belgrano-r/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano R 2 amb 1 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/belgrano-r/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano R 2 amb 2 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/belgrano-r/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano R 3 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/belgrano-r/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano R 3 amb 1 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/belgrano-r/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano R 3 amb 2 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/belgrano-r/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano C 1 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/belgrano-c/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano C 2 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/belgrano-c/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano C 2 amb 1 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/belgrano-c/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano C 2 amb 2 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/belgrano-c/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano C 3 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/belgrano-c/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano C 3 amb 1 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/belgrano-c/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano C 3 amb 2 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/belgrano-c/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano Chico 1 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-ambiente/capital-federal/belgrano-chico/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano Chico 2 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-ambientes/capital-federal/belgrano-chico/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano Chico 2 amb 1 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/2-ambientes/capital-federal/belgrano-chico/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano Chico 2 amb 2 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/2-ambientes/capital-federal/belgrano-chico/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano Chico 3 amb",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/3-ambientes/capital-federal/belgrano-chico/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano Chico 3 amb 1 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/1-dormitorio/3-ambientes/capital-federal/belgrano-chico/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
+    },
+    {
+      "site": "mercadolibre",
+      "name": "Belgrano Chico 3 amb 2 dorm",
+      "zone": "Belgrano",
+      "pages": 1,
+      "url": "https://inmuebles.mercadolibre.com.ar/departamentos/venta/2-dormitorios/3-ambientes/capital-federal/belgrano-chico/",
+      "aliases": [
+        "belgrano",
+        "belgrano r",
+        "belgrano c",
+        "belgrano chico"
+      ]
     }
   ],
   "expensas_min_valid_ars": 10000,
@@ -1774,7 +2660,7 @@
     "rule_70_pct": "FlipperForce: control, no veto. Solo el 27,8% de flips rentables la cumplía.",
     "decision_buy_pct": "supuesto, no verificado: precio ≤ 92% de la oferta máxima → comprar",
     "decision_watch_pct": "supuesto, no verificado: precio ≤ 108% de la oferta máxima → vigilar; más → descartar",
-    "exit_usd_m2": "fijo por barrio; no hay ventas públicas en Argentina. No es un comparable de cuadra.",
+    "exit_usd_m2": "fijo por barrio; no hay ventas públicas en Argentina. No es un comparable de cuadra. Belgrano: mediana de publicación Mudafy, 8 oct 2026, USD 3412, redondeada a 3400. Es aviso, no cierre.",
     "street_zones": "La calle y la altura mandan. El barrio del aviso no. Altura fuera de rango = fuera, aunque la card diga Recoleta. Palermo Hollywood: entre Córdoba y Santa Fe, y entre Juan B. Justo y Dorrego. Las alturas son la cuadra USIG pegada al borde, hacia adentro (2026-10-19). Córdoba y Santa Fe siguen afuera. Soho (Thames, Armenia, Serrano, Borges, Malabia) sigue afuera.",
     "exit_usd_m2_palermo_hollywood": "Sin número verificado. No se inventó. Esos avisos entran, pero no tienen aire ni neto hasta definirlo.",
     "notify_fetch_errors": "Argenprop: el WAF corta URLs casi todas las corridas. Queda en el log de la Mac, no en Telegram. Zonaprop, Mercado Libre y Cabaprop sí avisan.",

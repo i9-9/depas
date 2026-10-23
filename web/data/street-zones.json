@@ -733,6 +733,432 @@
     {
       "street": "vicente lopez",
       "zone": "Recoleta"
+    },
+    {
+      "street": "11 de septiembre",
+      "min": 1400,
+      "max": 1999,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "11 de septiembre",
+      "min": 2100,
+      "max": 2799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "3 de febrero",
+      "min": 1400,
+      "max": 2799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "amenabar",
+      "min": 1600,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "arcos",
+      "min": 1400,
+      "max": 2799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "blanco encalada",
+      "min": 800,
+      "max": 3499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "blanco encalada",
+      "min": 3600,
+      "max": 3699,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "cabildo",
+      "min": 1300,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "cazadores",
+      "min": 1800,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "ciudad de la paz",
+      "min": 1600,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "conde",
+      "min": 1600,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "conesa",
+      "min": 1800,
+      "max": 2299,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "conesa",
+      "min": 2500,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "congreso",
+      "min": 1800,
+      "max": 1899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "cramer",
+      "min": 1700,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "cuba",
+      "min": 1700,
+      "max": 2799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "de los incas",
+      "min": 3000,
+      "max": 3599,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "dragones",
+      "min": 1800,
+      "max": 2099,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "dragones",
+      "min": 2200,
+      "max": 2299,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "dragones",
+      "min": 2400,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "echeverria",
+      "min": 600,
+      "max": 3799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "elcano",
+      "min": 2700,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "figueroa alcorta",
+      "min": 6400,
+      "max": 6999,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "figueroa alcorta",
+      "min": 7100,
+      "max": 7799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "forest",
+      "min": 1600,
+      "max": 1799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "franklin roosevelt",
+      "min": 1500,
+      "max": 2099,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "franklin roosevelt",
+      "min": 2200,
+      "max": 3099,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "freire",
+      "min": 1600,
+      "max": 1899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "freire",
+      "min": 2000,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "husares",
+      "min": 1800,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "jose hernandez",
+      "min": 1300,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "juramento",
+      "min": 600,
+      "max": 799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "juramento",
+      "min": 900,
+      "max": 3799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "la pampa",
+      "min": 100,
+      "max": 3899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "libertador",
+      "min": 5200,
+      "max": 6799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "luis maria campos",
+      "min": 1400,
+      "max": 1699,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "melian",
+      "min": 1900,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "mendoza",
+      "min": 900,
+      "max": 2199,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "mendoza",
+      "min": 2300,
+      "max": 3799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "migueletes",
+      "min": 1600,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "moldes",
+      "min": 1600,
+      "max": 1699,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "moldes",
+      "min": 1800,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "monroe",
+      "min": 700,
+      "max": 2299,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "monroe",
+      "min": 2400,
+      "max": 3099,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "monroe",
+      "min": 3200,
+      "max": 3299,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "o higgins",
+      "min": 1400,
+      "max": 2799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "olazabal",
+      "min": 900,
+      "max": 3699,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "rafael obligado",
+      "min": 6100,
+      "max": 7399,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "ramsay",
+      "min": 1800,
+      "max": 2599,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "ricardo balbin",
+      "min": 2300,
+      "max": 2599,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "romulo naon",
+      "min": 1800,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "soldado de la independencia",
+      "min": 1400,
+      "max": 1599,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "sucre",
+      "min": 600,
+      "max": 899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "sucre",
+      "min": 1000,
+      "max": 3799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "superi",
+      "min": 1500,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "valentin alsina",
+      "min": 800,
+      "max": 1099,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "valentin alsina",
+      "min": 1200,
+      "max": 1599,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "vidal",
+      "min": 1600,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "virrey arredondo",
+      "min": 2200,
+      "max": 2399,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "virrey del pino",
+      "min": 1500,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "virrey del pino",
+      "min": 3000,
+      "max": 3599,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "virrey loreto",
+      "min": 1500,
+      "max": 2399,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "virrey vertiz",
+      "min": 1600,
+      "max": 2099,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "vuelta de obligado",
+      "min": 1400,
+      "max": 1599,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "vuelta de obligado",
+      "min": 1700,
+      "max": 2799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "zabala",
+      "min": 1500,
+      "max": 2399,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "zapiola",
+      "min": 1700,
+      "max": 2499,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "zapiola",
+      "min": 2600,
+      "max": 2899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "arribenos",
+      "min": 1500,
+      "max": 1899,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "arribenos",
+      "min": 2200,
+      "max": 2799,
+      "zone": "Belgrano"
+    },
+    {
+      "street": "montaneses",
+      "min": 1900,
+      "max": 2899,
+      "zone": "Belgrano"
     }
   ],
   "reject_barrios": [

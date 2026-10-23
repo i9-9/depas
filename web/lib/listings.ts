@@ -459,6 +459,10 @@ const ALLOWED_BARRIOS = [
   "jardin botanico",
   "palermo chico",
   "palermo hollywood",
+  "belgrano",
+  "belgrano r",
+  "belgrano c",
+  "belgrano chico",
 ];
 
 const REJECT_CITIES = [
@@ -1024,7 +1028,7 @@ function streetCore(s: string): string {
   const t = tidy(s)
     .replace(/\b([A-Za-zÁÉÍÓÚÑ])\./g, "$1")
     .replace(/,?\s*(capital federal|caba|argentina)\b.*$/i, "")
-    .replace(/,?\s*(recoleta|barrio norte|botánico|botanico|palermo hollywood|palermo chico|palermo)\s*$/i, "");
+    .replace(/,?\s*(recoleta|barrio norte|botánico|botanico|palermo hollywood|palermo chico|belgrano chico|belgrano r|belgrano c|belgrano|palermo)\s*$/i, "");
   return (t.split(",")[0] || t).trim();
 }
 

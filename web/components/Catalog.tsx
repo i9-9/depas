@@ -26,7 +26,7 @@ import { specsCells } from "@/components/Specs";
 import { readPrefs, writePrefs } from "@/lib/storage";
 import { decisionLabel, joinEs } from "@/lib/verdict";
 
-type SortKey = "tier" | "new" | "price-asc" | "price-desc" | "m2-asc" | "vs-median" | "air";
+type SortKey = "tier" | "zone" | "new" | "price-asc" | "price-desc" | "m2-asc" | "vs-median" | "air";
 
 type Filters = {
   q: string;
@@ -70,7 +70,7 @@ const INITIAL: Filters = {
   belowMedian: false,
 };
 
-const SORTS: SortKey[] = ["tier", "new", "price-asc", "price-desc", "m2-asc", "vs-median", "air"];
+const SORTS: SortKey[] = ["tier", "zone", "new", "price-asc", "price-desc", "m2-asc", "vs-median", "air"];
 
 function emptyCopy(filters: Filters): { title: string; text: string } {
   if (filters.onlyGone) {
@@ -122,6 +122,7 @@ function extraLabel(filters: Filters, sort: SortKey): string | null {
   if (filters.cochera) bits.push("cochera");
   if (filters.pb) bits.push("planta baja");
   if (filters.belowMedian) bits.push("más barato que el barrio");
+  if (sort === "zone") bits.push("por barrio");
   if (sort === "new") bits.push("más nuevos");
   if (sort === "price-asc") bits.push("más barato");
   if (sort === "price-desc") bits.push("más caro");
@@ -322,6 +323,13 @@ export function Catalog({
       if (sort === "m2-asc") return (a.usd_per_m2 ?? 1e12) - (b.usd_per_m2 ?? 1e12);
       if (sort === "vs-median") return (a.vs_median_pct ?? 1e12) - (b.vs_median_pct ?? 1e12);
       if (sort === "air") return (b.air_usd ?? -1e12) - (a.air_usd ?? -1e12);
+      if (sort === "zone") {
+        const za = a.zone || "zzz";
+        const zb = b.zone || "zzz";
+        const byZone = za.localeCompare(zb, "es");
+        if (byZone) return byZone;
+        return rankByScore(a, b);
+      }
       if (sort === "tier") return rankByScore(a, b);
       return Date.parse(b.first_seen || "") - Date.parse(a.first_seen || "");
     });
@@ -585,6 +593,7 @@ function FilterFields({
       <Field label="Orden" className="col-span-12 lg:col-span-4">
         <select className="input" value={sort} onChange={(e) => onSort(e.target.value as SortKey)}>
           <option value="tier">Los que más encajan</option>
+          <option value="zone">Por barrio</option>
           <option value="new">Los más nuevos</option>
           <option value="price-asc">El más barato</option>
           <option value="price-desc">El más caro</option>
@@ -628,13 +637,27 @@ function Results({
   const hoy = items.filter(isAlert).sort(rankByScore);
   const rest = items.filter((item) => !hoy.some((h) => h.id === item.id));
   const offset = pick ? 1 : 0;
-  const groups =
+  const groups: { key: string; label: string | null; rows: Listing[] }[] =
     sort === "tier"
       ? TIERS.map((tier) => ({
-          tier,
+          key: tier.id,
+          label: tier.label,
           rows: rest.filter((item) => listingTier(item).id === tier.id),
         })).filter((g) => g.rows.length)
-      : [{ tier: null, rows: rest }];
+      : sort === "zone"
+        ? [
+            ...zonesOf(rest).map((zone) => ({
+              key: zone,
+              label: zone,
+              rows: rest.filter((item) => item.zone === zone),
+            })),
+            {
+              key: "sin-barrio",
+              label: "Sin barrio",
+              rows: rest.filter((item) => !item.zone),
+            },
+          ].filter((g) => g.rows.length)
+        : [{ key: "flat", label: null, rows: rest }];
 
   let n = offset + hoy.length;
   const ranks = new Map<string, number>();
@@ -710,10 +733,10 @@ function Results({
         </section>
       )}
       {groups.map((group) => (
-        <section key={group.tier?.id || "flat"}>
-          {group.tier && (
+        <section key={group.key}>
+          {group.label && (
             <h2 className="band flex items-center justify-between px-3 py-2.5">
-              <span>{group.tier.label}</span>
+              <span>{group.label}</span>
               <span className="text-muted">{group.rows.length}</span>
             </h2>
           )}
@@ -814,12 +837,16 @@ type Flag = { text: string; tone: "muted" | "signal" };
 
 function flags(item: Listing): Flag[] {
   const out: Flag[] = [];
+  const since = formatWhen(item.first_seen);
   if (isNew(item)) {
     const ago = publishedAgo(item.first_seen);
+    const fresh = ago ? `Lo vimos ${ago}` : "Lo vimos recién";
     out.push({
-      text: ago ? `Lo vimos ${ago}` : "Lo vimos recién",
+      text: since && since !== "—" ? `${fresh} · ${since}` : fresh,
       tone: isAlert(item) ? "signal" : "muted",
     });
+  } else if (since && since !== "—") {
+    out.push({ text: `en lista ${since}`, tone: "muted" });
   } else {
     const days = item.days_seen;
     if (days === 1) out.push({ text: "desde ayer", tone: "muted" });

@@ -1,4 +1,4 @@
-import { isNew, publishedAgo, siteLabel, streetOf, type Listing } from "@/lib/listings";
+import { formatWhen, isNew, publishedAgo, siteLabel, streetOf, type Listing } from "@/lib/listings";
 import { airLine, decisionCopy, medianLine, netLine, priceLine, seenLine } from "@/lib/verdict";
 import { dealFacts, placeFacts, type Fact } from "@/components/Specs";
 import { PricePair } from "@/components/PricePair";
@@ -8,9 +8,17 @@ import { VisitPad } from "@/components/VisitPad";
 function kickerOf(item: Listing): { text: string; tone?: "signal" | "muted" }[] {
   const out: { text: string; tone?: "signal" | "muted" }[] = [];
   if (!item.active) out.push({ text: "Ya no está", tone: "muted" });
+  const since = formatWhen(item.first_seen);
+  const sinceOk = Boolean(since && since !== "—");
   if (isNew(item)) {
     const ago = publishedAgo(item.first_seen);
-    out.push({ text: ago ? `Lo vimos ${ago}` : "Lo vimos recién", tone: "signal" });
+    const fresh = ago ? `Lo vimos ${ago}` : "Lo vimos recién";
+    out.push({
+      text: sinceOk ? `${fresh} · ${since}` : fresh,
+      tone: "signal",
+    });
+  } else if (sinceOk) {
+    out.push({ text: `en lista ${since}`, tone: "muted" });
   } else if (item.days_seen === 1) {
     out.push({ text: "desde ayer", tone: "muted" });
   } else if (item.days_seen != null && item.days_seen > 1) {
