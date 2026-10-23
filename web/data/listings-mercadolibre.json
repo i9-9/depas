@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-23T16:43:18+00:00",
+ "last_change": "2026-10-23T20:47:33+00:00",
  "listings": [
   {
    "active": false,
@@ -284,7 +284,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Pueyrredon Al 900, Barrio Norte, Capital Federal",
    "address_unverified": false,
    "air_usd": 65250,
@@ -303,7 +303,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-10T04:49:02+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-23T20:47:33+00:00",
    "id": "mercadolibre:3740194676",
    "max_offer_usd": 154018,
    "neto_base_usd": 46475,
