@@ -412,16 +412,36 @@ export function Catalog({
       ) : null}
 
       <div className="border-b border-line">
-        <label className="block">
-          <span className="sr-only">Buscar calle</span>
-          <input
-            className="input w-full"
-            type="search"
-            placeholder="Buscar calle"
-            value={filters.q}
-            onChange={(e) => set("q", e.target.value)}
-          />
-        </label>
+        <div className="grid gap-0 sm:grid-cols-[minmax(0,1fr)_minmax(10rem,14rem)]">
+          <label className="block">
+            <span className="sr-only">Buscar calle</span>
+            <input
+              className="input w-full"
+              type="search"
+              placeholder="Buscar calle"
+              value={filters.q}
+              onChange={(e) => set("q", e.target.value)}
+            />
+          </label>
+          {zones.length > 0 ? (
+            <label className="block border-t border-line sm:border-t-0 sm:border-l">
+              <span className="sr-only">Barrio</span>
+              <select
+                className="input w-full"
+                value={filters.zone}
+                onChange={(e) => set("zone", e.target.value)}
+                aria-label="Barrio"
+              >
+                <option value="">Todos los barrios</option>
+                {zones.map((z) => (
+                  <option key={z} value={z}>
+                    {z}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : null}
+        </div>
         <div className="flex flex-wrap items-center justify-between gap-x-5">
           <div className="flex flex-wrap gap-x-5">
             <Toggle
@@ -458,7 +478,6 @@ export function Catalog({
           <FilterFields
             filters={filters}
             sort={sort}
-            zones={zones}
             sites={sites}
             onFilter={set}
             onSort={setSort}
@@ -530,30 +549,18 @@ export function Catalog({
 function FilterFields({
   filters,
   sort,
-  zones,
   sites,
   onFilter,
   onSort,
 }: {
   filters: Filters;
   sort: SortKey;
-  zones: string[];
   sites: string[];
   onFilter: <K extends keyof Filters>(key: K, value: Filters[K]) => void;
   onSort: (value: SortKey) => void;
 }) {
   return (
     <div className="g pb-4 pt-2">
-      <Field label="Barrio" className="col-span-6 lg:col-span-4">
-        <select className="input" value={filters.zone} onChange={(e) => onFilter("zone", e.target.value)}>
-          <option value="">Todos</option>
-          {zones.map((z) => (
-            <option key={z} value={z}>
-              {z}
-            </option>
-          ))}
-        </select>
-      </Field>
       {sites.length > 1 ? (
         <Field label="Dónde está" className="col-span-6 lg:col-span-4">
           <select className="input" value={filters.site} onChange={(e) => onFilter("site", e.target.value)}>
