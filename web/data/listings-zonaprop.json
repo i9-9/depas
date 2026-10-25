@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-25T15:17:38+00:00",
+ "last_change": "2026-10-25T19:55:39+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1500,7 +1500,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-25T19:55:39+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6720,7 +6720,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Peña al 2400",
    "address_unverified": false,
    "air_usd": 1125,
@@ -6740,7 +6740,7 @@
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": "2026-10-25T15:17:38+00:00",
+   "gone_at": null,
    "id": "zonaprop:60351140",
    "max_offer_usd": 97201,
    "neto_base_usd": -13848,
@@ -7176,7 +7176,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "FRENCH 2700",
    "address_unverified": false,
    "air_usd": 125,
@@ -7186,16 +7186,17 @@
    "area_covered": 59.0,
    "area_semi": null,
    "area_total": 63.0,
+   "blurb": "USD 140.000\n$ 290.000 Expensas\n63 m² tot.\n3 amb.\n2 dorm.\n1 baño\nFRENCH 2700\nBarrio Norte, Capital Federal\nExcelente zona! Hermoso departamento para reciclar y tener en valor un propiedad ideal para vivir o invertir. 3 ambientes al frente con dependencia y balcón en uno de los mejores barrios porteños- Ofrece espacios funcionales para vivir y trabajar con confort. Living comedor con salida al balcón. Cocina amplia con espacio para lavadero, y salida a dependencia cómoda con toillette. Dormitorios",
    "breakeven_exit_usd_m2": 3478,
    "closing_ref_usd": 134540,
    "cochera": null,
-   "days_seen": 5,
+   "days_seen": 15,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-15T15:45:29+00:00",
+   "gone_at": null,
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -16117,
