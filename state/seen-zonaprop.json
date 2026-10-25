@@ -1478,6 +1478,14 @@
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-depto-3-amb-balcon-toilet-baulera-belgrano-60515225.html",
    "zone": "Belgrano"
+  },
+  "zonaprop:60527300": {
+   "first_seen": "2026-10-25T22:53:10+00:00",
+   "key": "ciudad de la paz 1900|134000|53|3",
+   "place": "ciudad de la paz 1900|55|3",
+   "price": 134000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-hermoso-depto-en-inmejorable-zona-al-frente-con-60527300.html",
+   "zone": "Belgrano"
   }
  },
  "meta": {

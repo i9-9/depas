@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-25T19:55:39+00:00",
+ "last_change": "2026-10-25T22:53:10+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1500,7 +1500,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-10-25T19:55:39+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6314,7 +6314,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy 2324",
    "address_unverified": false,
    "air_usd": null,
@@ -6334,7 +6334,7 @@
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-25T22:53:10+00:00",
    "id": "zonaprop:60306978",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -7176,7 +7176,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "FRENCH 2700",
    "address_unverified": false,
    "air_usd": 125,
@@ -7196,7 +7196,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-25T22:53:10+00:00",
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -16117,
@@ -7909,6 +7909,63 @@
    "usd_per_m2": 2154,
    "vs_median_n": 34,
    "vs_median_pct": -6,
+   "zone": "Belgrano",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Ciudad de la Paz 1900",
+   "address_unverified": false,
+   "air_usd": 26325,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 53.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 53.0,
+   "blurb": "USD 134.000\n$ 220.000 Expensas\n53 m² tot.\n3 amb.\n2 dorm.\n1 baño\nCiudad de la Paz 1900\nBelgrano C, Belgrano\nDepartamento super luminoso, al frente con balcon, cocina y baño reciclados, living comedor con cocina abierta y desayunador, dos dormitorios, medidas aproximadas, dormitorio principal 3x3 con placard, dormitorio niño de 2, 50x2 con un amplio placard, pasillo de distribucion, baño completo. Cocina con lugar para lavarropas y heladera. Balcon medida aproximada de 4, 40x1, 30. Edificio con do",
+   "breakeven_exit_usd_m2": 3658,
+   "closing_ref_usd": 128774,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": "descartar",
+   "exit_usd_m2": 3400,
+   "expensas_ars": 220000,
+   "expensas_text": "$ 220.000 Expensas",
+   "first_seen": "2026-10-25T22:53:10+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60527300",
+   "max_offer_usd": 122543,
+   "neto_base_usd": 9758,
+   "neto_hard_usd": -12374,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/52/73/00/720x532/2087676570.jpg",
+   "piso": null,
+   "price": 134000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-25T22:53:10+00:00",
+     "price": 134000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": 0.0604,
+   "roi_hard": -0.0706,
+   "score": 1,
+   "seventy_offer_usd": 106265,
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar",
+    "sobre presupuesto",
+    "aire"
+   ],
+   "title": "Departamento super luminoso, al frente con balcon, cocina y baño reciclados, living comedo",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-hermoso-depto-en-inmejorable-zona-al-frente-con-60527300.html",
+   "usd_per_m2": 2528,
+   "vs_median_n": 34,
+   "vs_median_pct": 10,
    "zone": "Belgrano",
    "zone_unverified": false
   }
