@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-26T01:28:40+00:00",
+ "last_change": "2026-10-26T17:41:14+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1500,7 +1500,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-26T17:41:14+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -3409,7 +3409,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Moldes 2000",
    "address_unverified": false,
    "air_usd": 37325,
@@ -3429,7 +3429,7 @@
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-26T17:41:14+00:00",
    "id": "zonaprop:59835996",
    "max_offer_usd": 123084,
    "neto_base_usd": 21697,
@@ -4106,7 +4106,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "FITZ ROY 2400",
    "address_unverified": false,
    "air_usd": null,
@@ -4126,7 +4126,7 @@
    "expensas_ars": 130000,
    "expensas_text": "$ 130.000 Expensas",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-26T17:41:14+00:00",
    "id": "zonaprop:60032185",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -4367,7 +4367,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Blanco Encalada 2400",
    "address_unverified": false,
    "air_usd": 43500,
@@ -4381,13 +4381,13 @@
    "breakeven_exit_usd_m2": 3382,
    "closing_ref_usd": 132618,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 3,
    "decision": "negociar",
    "exit_usd_m2": 3400,
    "expensas_ars": 220000,
    "expensas_text": "$ 220.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": "2026-10-26T01:28:40+00:00",
+   "gone_at": null,
    "id": "zonaprop:60067734",
    "max_offer_usd": 138885,
    "neto_base_usd": 25543,
@@ -4418,7 +4418,7 @@
    "title": "3 ambientes con balcón Y excelente luz en ubicación privilegiada. Blanco Encalada y Ciudad",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-amb.-balcon-6-piso-muy-luminoso-excelente-60067734.html",
    "usd_per_m2": 2300,
-   "vs_median_n": 34,
+   "vs_median_n": 35,
    "vs_median_pct": 0,
    "zone": "Belgrano",
    "zone_unverified": false
@@ -4466,7 +4466,7 @@
    "area_covered": null,
    "area_semi": null,
    "area_total": 57.0,
-   "blurb": "USD 136.000\n$ 190.000 Expensas\n57 m² tot.\n3 amb.\n2 dorm.\n1 baño\nHumboldt 2000\nPalermo Hollywood, Palermo\nOportunidad - venta - palermo hollywood. Departamento de 3 ambientes al frente luminoso con balcón. Cocina completa, dos dormitorios con placard, balcón cerrado y lavadero. Dormitorios con placard. Excelente ubicación en Palermo. - kpVer datos - TVer datos- - Publicado usando KiteProp crm Inmobiliario\nWhatsApp\nContactar",
+   "blurb": "USD 136.000\n$ 190.000 Expensas\n57 m² tot.\n3 amb.\n2 dorm.\n1 baño\nHumboldt 2000\nPalermo Hollywood, Palermo\nOportunidad - venta - palermo hollywood. Departamento de 3 ambientes al frente luminoso con balcón. Cocina completa, dos dormitorios con placard, balcón cerrado y lavadero. Dormitorios con placard. Excelente ubicación en Palermo. - kpVer datos - TVer datos - D8e74c6- - Publicado con KiteProp crm Inmobiliario\nWhatsApp\nContactar",
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 130696,
    "cochera": null,
@@ -6167,7 +6167,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Moldes 2300",
    "address_unverified": false,
    "air_usd": 38350,
@@ -6181,13 +6181,13 @@
    "breakeven_exit_usd_m2": 3299,
    "closing_ref_usd": 129639,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 3,
    "decision": "negociar",
    "exit_usd_m2": 3400,
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": "2026-10-26T01:28:40+00:00",
+   "gone_at": null,
    "id": "zonaprop:60291284",
    "max_offer_usd": 139565,
    "neto_base_usd": 21125,
@@ -6219,7 +6219,7 @@
    "title": "Muy luminoso 3 amb al frente con balcon, listo para mudarse, con 2 amplios dormitorios C/U",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-muy-luminoso-3-amb-al-frente-con-balcon-listo-para-60291284.html",
    "usd_per_m2": 2453,
-   "vs_median_n": 34,
+   "vs_median_n": 35,
    "vs_median_pct": 7,
    "zone": "Belgrano",
    "zone_unverified": false
@@ -6720,7 +6720,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Peña al 2400",
    "address_unverified": false,
    "air_usd": 1125,
@@ -6740,7 +6740,7 @@
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-26T17:41:14+00:00",
    "id": "zonaprop:60351140",
    "max_offer_usd": 97201,
    "neto_base_usd": -13848,
@@ -6880,7 +6880,7 @@
    "neto_base_usd": 6673,
    "neto_hard_usd": -15240,
    "old_price": null,
-   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/36/07/46/720x532/2083544687.jpg",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/36/07/46/720x532/2087846837.jpg",
    "piso": null,
    "price": 134000,
    "price_drops": 0,
@@ -7923,7 +7923,7 @@
    "area_covered": null,
    "area_semi": null,
    "area_total": 53.0,
-   "blurb": "USD 134.000\n$ 220.000 Expensas\n53 m² tot.\n3 amb.\n2 dorm.\n1 baño\nCiudad de la Paz 1900\nBelgrano C, Belgrano\nDepartamento super luminoso, al frente con balcon, cocina y baño reciclados, living comedor con cocina abierta y desayunador, dos dormitorios, medidas aproximadas, dormitorio principal 3x3 con placard, dormitorio niño de 2, 50x2 con un amplio placard, pasillo de distribucion, baño completo. Cocina con lugar para lavarropas y heladera. Balcon medida aproximada de 4, 40x1, 30. Edificio con do",
+   "blurb": "USD 134.000\n$ 220.000 Expensas\n53 m² tot.\n3 amb.\n2 dorm.\n1 baño\nCiudad de la Paz 1900\nBelgrano, Capital Federal\nDepartamento super luminoso, al frente con balcon, cocina y baño reciclados, living comedor con cocina abierta y desayunador, dos dormitorios, medidas aproximadas, dormitorio principal 3x3 con placard, dormitorio niño de 2, 50x2 con un amplio placard, pasillo de distribucion, baño completo. Cocina con lugar para lavarropas y heladera. Balcon medida aproximada de 4, 40x1, 30. Edificio c",
    "breakeven_exit_usd_m2": 3658,
    "closing_ref_usd": 128774,
    "cochera": null,
