@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-25T22:53:10+00:00",
+ "last_change": "2026-10-26T01:28:40+00:00",
  "listings": [
   {
    "active": false,
@@ -4367,7 +4367,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Blanco Encalada 2400",
    "address_unverified": false,
    "air_usd": 43500,
@@ -4387,7 +4387,7 @@
    "expensas_ars": 220000,
    "expensas_text": "$ 220.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-26T01:28:40+00:00",
    "id": "zonaprop:60067734",
    "max_offer_usd": 138885,
    "neto_base_usd": 25543,
@@ -6167,7 +6167,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Moldes 2300",
    "address_unverified": false,
    "air_usd": 38350,
@@ -6187,7 +6187,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-26T01:28:40+00:00",
    "id": "zonaprop:60291284",
    "max_offer_usd": 139565,
    "neto_base_usd": 21125,
@@ -6314,7 +6314,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy 2324",
    "address_unverified": false,
    "air_usd": null,
@@ -6328,13 +6328,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 4,
+   "days_seen": 7,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": "2026-10-25T22:53:10+00:00",
+   "gone_at": null,
    "id": "zonaprop:60306978",
    "max_offer_usd": null,
    "neto_base_usd": null,
