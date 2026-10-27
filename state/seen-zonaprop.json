@@ -1107,6 +1107,22 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dos-amb-a-estrenar-con-parrilla-60249285.html",
    "zone": ""
   },
+  "zonaprop:60250675": {
+   "first_seen": "2026-10-27T16:56:14+00:00",
+   "key": "cabildo 1600|122000|66|1",
+   "place": "cabildo 1600|65|1",
+   "price": 122000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-monoambiente-a-estrenar-en-piso-alto-full-60250675.html",
+   "zone": "Belgrano"
+  },
+  "zonaprop:60252601": {
+   "first_seen": "2026-10-27T16:56:14+00:00",
+   "key": "cabildo 1600|137000|60|1",
+   "place": "cabildo 1600|60|1",
+   "price": 137000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-monoambiente-en-venta-full-amenities-apto-profesional-60252601.html",
+   "zone": "Belgrano"
+  },
   "zonaprop:60260134": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "paraguay 1200|125900|53|3",
@@ -1485,6 +1501,14 @@
    "place": "ciudad de la paz 1900|55|3",
    "price": 134000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-hermoso-depto-en-inmejorable-zona-al-frente-con-60527300.html",
+   "zone": "Belgrano"
+  },
+  "zonaprop:60541751": {
+   "first_seen": "2026-10-27T16:56:14+00:00",
+   "key": "franklin roosevelt 2700|133000|50|3",
+   "place": "franklin roosevelt 2700|50|3",
+   "price": 133000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-departamento-8vo-piso-cfte-abierto-60541751.html",
    "zone": "Belgrano"
   }
  },

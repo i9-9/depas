@@ -42,6 +42,14 @@
    "url": "https://departamento.mercadolibre.com.ar/MLA-2169269663-venta-departamento-2-ambientes-en-palermo-zona-botanico-_JM#polycard_client=search-desktop&float_highlight=recent_publication&price_drop=not_apply&be_origin=backend&overlay_label=not_apply&search_layout=grid&position=1&type=item&tracking_id=1cdba83c-21d7-4f08-a886-3bd4fb307ceb&sid=search",
    "zone": "Botánico"
   },
+  "mercadolibre:2239816751": {
+   "first_seen": "2026-10-27T16:56:14+00:00",
+   "key": "moldes 2000|123000|50|3",
+   "place": "moldes 2000|50|3",
+   "price": 123000,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2239816751-venta-de-departamento-3-ambientes-cbalcon-al-frente-en-belgrano-_JM",
+   "zone": "Belgrano"
+  },
   "mercadolibre:3664142778": {
    "first_seen": "2026-10-10T04:49:02+00:00",
    "key": "jean jaures 1100|110000|52|3",
@@ -127,6 +135,6 @@
   }
  },
  "meta": {
-  "coverage_week": "2026-W41"
+  "coverage_week": "2026-W44"
  }
 }

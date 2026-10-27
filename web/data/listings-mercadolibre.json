@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-23T20:47:33+00:00",
+ "last_change": "2026-10-27T16:56:14+00:00",
  "listings": [
   {
    "active": false,
@@ -244,6 +244,61 @@
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Botánico"
+  },
+  {
+   "active": true,
+   "address": "Moldes 2000, Belgrano, Capital Federal",
+   "address_unverified": false,
+   "air_usd": 28250,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "area_covered": 50.0,
+   "area_semi": null,
+   "area_total": null,
+   "blurb": "Departamento en venta Venta De Departamento 3 Ambientes C/balcón Al Frente En Belgrano US$ 123.000 3 ambs. 1 baño 50 m² cubiertos Moldes 2000, Belgrano, Capital Federal Destacado",
+   "breakeven_exit_usd_m2": 3550,
+   "closing_ref_usd": 118203,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": "vigilar",
+   "exit_usd_m2": 3400,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-10-27T16:56:14+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:2239816751",
+   "max_offer_usd": 116729,
+   "neto_base_usd": 13600,
+   "neto_hard_usd": -6772,
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_771451-MLA120301134699_102026-E.webp",
+   "piso": null,
+   "price": 123000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-10-27T16:56:14+00:00",
+     "price": 123000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": 0.092,
+   "roi_hard": -0.0422,
+   "score": 2,
+   "seventy_offer_usd": 100250,
+   "site": "mercadolibre",
+   "tags": [
+    "aire"
+   ],
+   "title": "Venta De Departamento 3 Ambientes C/balcón Al Frente En Belgrano",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-2239816751-venta-de-departamento-3-ambientes-cbalcon-al-frente-en-belgrano-_JM",
+   "usd_per_m2": 2460,
+   "vs_median_n": 30,
+   "vs_median_pct": 7,
+   "zone": "Belgrano",
+   "zone_unverified": false
   },
   {
    "active": false,
