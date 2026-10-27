@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-26T17:41:14+00:00",
+ "last_change": "2026-10-27T00:12:41+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1494,13 +1494,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 15,
+   "days_seen": 17,
    "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-10-26T17:41:14+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6482,7 +6482,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "O'higgins 1800",
    "address_unverified": false,
    "air_usd": 29275,
@@ -6502,7 +6502,7 @@
    "expensas_ars": 165000,
    "expensas_text": "$ 165.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-27T00:12:41+00:00",
    "id": "zonaprop:60324487",
    "max_offer_usd": 118171,
    "neto_base_usd": 13712,
@@ -7345,7 +7345,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "French al 2900",
    "address_unverified": false,
    "air_usd": -9125,
@@ -7365,7 +7365,7 @@
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-13T18:24:03+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-27T00:12:41+00:00",
    "id": "zonaprop:60425458",
    "max_offer_usd": 94269,
    "neto_base_usd": -23630,
