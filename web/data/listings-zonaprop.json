@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-28T02:34:22+00:00",
+ "last_change": "2026-10-28T17:31:08+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1500,7 +1500,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-28T17:31:08+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -2132,7 +2132,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ramon Freire 2000",
    "address_unverified": false,
    "air_usd": 47550,
@@ -2152,7 +2152,7 @@
    "expensas_ars": 369000,
    "expensas_text": "$ 369.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-28T17:31:08+00:00",
    "id": "zonaprop:59389175",
    "max_offer_usd": 142748,
    "neto_base_usd": 28572,
@@ -2410,7 +2410,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -2430,7 +2430,7 @@
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-28T17:31:08+00:00",
    "id": "zonaprop:59574708",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -3492,7 +3492,7 @@
    "neto_base_usd": 8326,
    "neto_hard_usd": -12980,
    "old_price": null,
-   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/84/12/32/720x532/2070984981.jpg",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/59/84/12/32/720x532/2088391203.jpg",
    "piso": null,
    "price": 130000,
    "price_drops": 0,
@@ -4677,7 +4677,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -4691,13 +4691,13 @@
    "breakeven_exit_usd_m2": 3738,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 17,
+   "days_seen": 18,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": "2026-10-28T02:34:22+00:00",
+   "gone_at": null,
    "id": "zonaprop:60118859",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -6842,7 +6842,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Peña al 2400",
    "address_unverified": false,
    "air_usd": 1125,
@@ -6856,13 +6856,13 @@
    "breakeven_exit_usd_m2": 3452,
    "closing_ref_usd": 124450,
    "cochera": null,
-   "days_seen": 17,
+   "days_seen": 18,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": "2026-10-28T02:34:22+00:00",
+   "gone_at": null,
    "id": "zonaprop:60351140",
    "max_offer_usd": 97201,
    "neto_base_usd": -13848,
