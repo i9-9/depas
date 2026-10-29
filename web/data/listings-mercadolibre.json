@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-28T17:31:08+00:00",
+ "last_change": "2026-10-29T17:46:07+00:00",
  "listings": [
   {
    "active": false,
@@ -246,7 +246,7 @@
    "zone": "Botánico"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Moldes 2000, Belgrano, Capital Federal",
    "address_unverified": false,
    "air_usd": 28250,
@@ -260,13 +260,13 @@
    "breakeven_exit_usd_m2": 3550,
    "closing_ref_usd": 118203,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 2,
    "decision": "vigilar",
    "exit_usd_m2": 3400,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-27T16:56:14+00:00",
-   "gone_at": "2026-10-28T17:31:08+00:00",
+   "gone_at": null,
    "id": "mercadolibre:2239816751",
    "max_offer_usd": 116729,
    "neto_base_usd": 13600,
@@ -295,7 +295,7 @@
    "title": "Venta De Departamento 3 Ambientes C/balcón Al Frente En Belgrano",
    "url": "https://departamento.mercadolibre.com.ar/MLA-2239816751-venta-de-departamento-3-ambientes-cbalcon-al-frente-en-belgrano-_JM",
    "usd_per_m2": 2460,
-   "vs_median_n": 30,
+   "vs_median_n": 28,
    "vs_median_pct": 7,
    "zone": "Belgrano",
    "zone_unverified": false

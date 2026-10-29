@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-19T13:54:50+00:00",
+ "last_change": "2026-10-29T17:46:07+00:00",
  "listings": [
   {
    "active": false,
@@ -169,7 +169,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "French 2668",
    "address_unverified": false,
    "air_usd": -6975,
@@ -189,7 +189,7 @@
    "expensas_ars": 350000,
    "expensas_text": "$ 350.000 expensas",
    "first_seen": "2026-10-16T20:44:25+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-29T17:46:07+00:00",
    "id": "cabaprop:6aacc77e3e6a16a1805ef182",
    "max_offer_usd": 90875,
    "neto_base_usd": -21961,
