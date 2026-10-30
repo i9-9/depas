@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-28T21:59:23+00:00",
+ "last_change": "2026-10-30T00:16:02+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1500,7 +1500,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-30T00:16:02+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -3891,7 +3891,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Av. Cabildo al 2500",
    "address_unverified": false,
    "air_usd": 26275,
@@ -3911,7 +3911,7 @@
    "expensas_ars": 202000,
    "expensas_text": "$ 202.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-30T00:16:02+00:00",
    "id": "zonaprop:59949111",
    "max_offer_usd": 117971,
    "neto_base_usd": 10418,
@@ -6446,11 +6446,11 @@
    "area_covered": null,
    "area_semi": null,
    "area_total": 50.0,
-   "blurb": "USD 135.000\n$ 270.000 Expensas\n50 m² tot.\n2 amb.\n1 dorm.\n1 baño\nFitz Roy 2324\nPalermo Hollywood, Palermo\nApto credito. Departamento tipo ph en venta en Palermo Hollywood sobre calle Fitz Roy al 2300 la mejor Zona, departamento de 2 ambientes tipo ph todo al frente (Estar, dormitorio y baño) con balcón a la calle (1er piso por escalera) Estar comedor con salida a balcón, baño con ventilación a exterior, grand dormitorio con amplios placares, pisos de madera originales en buen estado, ventanas con",
+   "blurb": "USD 125.000\n7%\n$ 270.000 Expensas\n50 m² tot.\n2 amb.\n1 dorm.\n1 baño\nFitz Roy 2324\nPalermo Hollywood, Palermo\nApto credito. Departamento tipo ph en venta en Palermo Hollywood sobre calle Fitz Roy al 2300 la mejor Zona, departamento de 2 ambientes tipo ph todo al frente (Estar, dormitorio y baño) con balcón a la calle (1er piso por escalera) Estar comedor con salida a balcón, baño con ventilación a exterior, grand dormitorio con amplios placares, pisos de madera originales en buen estado, ventanas ",
    "breakeven_exit_usd_m2": null,
-   "closing_ref_usd": 129735,
+   "closing_ref_usd": 120125,
    "cochera": null,
-   "days_seen": 7,
+   "days_seen": 11,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 270000,
@@ -6461,31 +6461,34 @@
    "max_offer_usd": null,
    "neto_base_usd": null,
    "neto_hard_usd": null,
-   "old_price": null,
+   "old_price": 135000,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/30/69/78/720x532/2082357936.jpg",
    "piso": null,
-   "price": 135000,
-   "price_drops": 0,
+   "price": 125000,
+   "price_drops": 1,
    "price_history": [
     {
      "date": "2026-10-19T17:41:13+00:00",
      "price": 135000
+    },
+    {
+     "date": "2026-10-30T00:16:02+00:00",
+     "price": 125000
     }
    ],
    "price_source": "card",
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": -1,
+   "score": 0,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
-    "m² sin verificar",
-    "sobre presupuesto"
+    "m² sin verificar"
    ],
    "title": "Apto credito. Departamento tipo ph en venta en Palermo Hollywood sobre calle Fitz Roy al 2",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-palermo-hollywood-venta-tipo-ph-2-ambientes-todo-al-60306978.html",
-   "usd_per_m2": 2700,
+   "usd_per_m2": 2500,
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Palermo Hollywood",
