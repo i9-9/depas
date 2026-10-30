@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-30T00:16:02+00:00",
+ "last_change": "2026-10-30T17:20:29+00:00",
  "listings": [
   {
    "active": false,
@@ -4393,7 +4393,7 @@
    "neto_base_usd": 26593,
    "neto_hard_usd": 2036,
    "old_price": 138000,
-   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/06/77/34/720x532/2076411412.jpg",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/06/77/34/720x532/2088909910.jpg",
    "piso": 6,
    "price": 137000,
    "price_drops": 1,
@@ -6845,7 +6845,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Peña al 2400",
    "address_unverified": false,
    "air_usd": 1125,
@@ -6865,7 +6865,7 @@
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-30T17:20:29+00:00",
    "id": "zonaprop:60351140",
    "max_offer_usd": 97201,
    "neto_base_usd": -13848,
@@ -7865,7 +7865,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Superí 2400",
    "address_unverified": false,
    "air_usd": 47450,
@@ -7885,7 +7885,7 @@
    "expensas_ars": 195000,
    "expensas_text": "$ 195.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-30T17:20:29+00:00",
    "id": "zonaprop:60478037",
    "max_offer_usd": 134351,
    "neto_base_usd": 30430,
