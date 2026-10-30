@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-30T17:20:29+00:00",
+ "last_change": "2026-10-30T21:49:35+00:00",
  "listings": [
   {
    "active": false,
@@ -2410,7 +2410,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -2424,13 +2424,13 @@
    "breakeven_exit_usd_m2": 3738,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 18,
+   "days_seen": 20,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": "2026-10-28T17:31:08+00:00",
+   "gone_at": null,
    "id": "zonaprop:59574708",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -4677,7 +4677,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -4697,7 +4697,7 @@
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-30T21:49:35+00:00",
    "id": "zonaprop:60118859",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -6845,7 +6845,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Peña al 2400",
    "address_unverified": false,
    "air_usd": 1125,
@@ -6859,13 +6859,13 @@
    "breakeven_exit_usd_m2": 3452,
    "closing_ref_usd": 124450,
    "cochera": null,
-   "days_seen": 18,
+   "days_seen": 20,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": "2026-10-30T17:20:29+00:00",
+   "gone_at": null,
    "id": "zonaprop:60351140",
    "max_offer_usd": 97201,
    "neto_base_usd": -13848,
