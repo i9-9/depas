@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-30T21:49:35+00:00",
+ "last_change": "2026-10-31T02:41:27+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1494,13 +1494,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 18,
+   "days_seen": 21,
    "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-10-30T00:16:02+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -7301,7 +7301,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "FRENCH 2700",
    "address_unverified": false,
    "air_usd": 125,
@@ -7315,13 +7315,13 @@
    "breakeven_exit_usd_m2": 3478,
    "closing_ref_usd": 134540,
    "cochera": null,
-   "days_seen": 15,
+   "days_seen": 21,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-10-25T22:53:10+00:00",
+   "gone_at": null,
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -16117,
