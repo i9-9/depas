@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-31T02:41:27+00:00",
+ "last_change": "2026-10-31T16:24:35+00:00",
  "listings": [
   {
    "active": false,
@@ -2410,7 +2410,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -2430,7 +2430,7 @@
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-31T16:24:35+00:00",
    "id": "zonaprop:59574708",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -2932,7 +2932,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Cabildo al 2100",
    "address_unverified": true,
    "air_usd": 95825,
@@ -2952,7 +2952,7 @@
    "expensas_ars": 350000,
    "expensas_text": "$ 350.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-31T16:24:35+00:00",
    "id": "zonaprop:59764443",
    "max_offer_usd": 168531,
    "neto_base_usd": 75801,
@@ -4367,7 +4367,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Blanco Encalada 2400",
    "address_unverified": false,
    "air_usd": 44500,
@@ -4387,7 +4387,7 @@
    "expensas_ars": 220000,
    "expensas_text": "$ 220.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-31T16:24:35+00:00",
    "id": "zonaprop:60067734",
    "max_offer_usd": 138885,
    "neto_base_usd": 26593,
@@ -4677,7 +4677,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -4691,13 +4691,13 @@
    "breakeven_exit_usd_m2": 3738,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 18,
+   "days_seen": 21,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": "2026-10-30T21:49:35+00:00",
+   "gone_at": null,
    "id": "zonaprop:60118859",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -7301,7 +7301,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "FRENCH 2700",
    "address_unverified": false,
    "air_usd": 125,
@@ -7321,7 +7321,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-10-31T16:24:35+00:00",
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -16117,
