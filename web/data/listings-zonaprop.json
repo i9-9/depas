@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-01T02:32:51+00:00",
+ "last_change": "2026-11-01T17:27:16+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1500,7 +1500,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-01T17:27:16+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -4367,7 +4367,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Blanco Encalada 2400",
    "address_unverified": false,
    "air_usd": 44500,
@@ -4381,13 +4381,13 @@
    "breakeven_exit_usd_m2": 3362,
    "closing_ref_usd": 131657,
    "cochera": null,
-   "days_seen": 8,
+   "days_seen": 9,
    "decision": "negociar",
    "exit_usd_m2": 3400,
    "expensas_ars": 220000,
    "expensas_text": "$ 220.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": "2026-11-01T02:32:51+00:00",
+   "gone_at": null,
    "id": "zonaprop:60067734",
    "max_offer_usd": 138885,
    "neto_base_usd": 26593,
@@ -4422,7 +4422,7 @@
    "title": "3 ambientes con balcón Y excelente luz en ubicación privilegiada. Blanco Encalada y Ciudad",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-amb.-balcon-6-piso-muy-luminoso-excelente-60067734.html",
    "usd_per_m2": 2283,
-   "vs_median_n": 36,
+   "vs_median_n": 35,
    "vs_median_pct": -1,
    "zone": "Belgrano",
    "zone_unverified": false
@@ -6120,7 +6120,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Ciudad de la Paz  al 2200",
    "address_unverified": false,
    "air_usd": 55525,
@@ -6134,13 +6134,13 @@
    "breakeven_exit_usd_m2": 3158,
    "closing_ref_usd": 123969,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 9,
    "decision": "comprar",
    "exit_usd_m2": 3400,
    "expensas_ars": 200000,
    "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": "2026-11-01T02:32:51+00:00",
+   "gone_at": null,
    "id": "zonaprop:60277249",
    "max_offer_usd": 141328,
    "neto_base_usd": 37926,
@@ -6173,7 +6173,7 @@
    "title": "Departamento 3 ambientes alto A balcon A contrafrente bien abierto todo luz Y sol oportuni",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-oportunidad!-departamento-dos-dorm.-al-contrafrente-60277249.html",
    "usd_per_m2": 2115,
-   "vs_median_n": 34,
+   "vs_median_n": 35,
    "vs_median_pct": -8,
    "zone": "Belgrano",
    "zone_unverified": false
@@ -6293,7 +6293,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Moldes 2300",
    "address_unverified": false,
    "air_usd": 38350,
@@ -6307,13 +6307,13 @@
    "breakeven_exit_usd_m2": 3299,
    "closing_ref_usd": 129639,
    "cochera": null,
-   "days_seen": 3,
+   "days_seen": 9,
    "decision": "negociar",
    "exit_usd_m2": 3400,
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": "2026-11-01T02:32:51+00:00",
+   "gone_at": null,
    "id": "zonaprop:60291284",
    "max_offer_usd": 139565,
    "neto_base_usd": 21125,
@@ -7474,7 +7474,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "French al 2900",
    "address_unverified": false,
    "air_usd": -9125,
@@ -7494,7 +7494,7 @@
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-13T18:24:03+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-01T17:27:16+00:00",
    "id": "zonaprop:60425458",
    "max_offer_usd": 94269,
    "neto_base_usd": -23630,
