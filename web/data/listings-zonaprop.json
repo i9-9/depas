@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-31T20:47:52+00:00",
+ "last_change": "2026-11-01T02:32:51+00:00",
  "listings": [
   {
    "active": false,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1494,13 +1494,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 21,
+   "days_seen": 22,
    "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-10-31T20:47:52+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -4367,7 +4367,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Blanco Encalada 2400",
    "address_unverified": false,
    "air_usd": 44500,
@@ -4387,7 +4387,7 @@
    "expensas_ars": 220000,
    "expensas_text": "$ 220.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-01T02:32:51+00:00",
    "id": "zonaprop:60067734",
    "max_offer_usd": 138885,
    "neto_base_usd": 26593,
@@ -4741,37 +4741,41 @@
    "active": true,
    "address": "Blanco Encalada al 2600",
    "address_unverified": false,
-   "air_usd": 49500,
+   "air_usd": 48500,
    "ambientes": 3,
    "antiguedad_years": null,
    "area": 60.0,
    "area_covered": null,
    "area_semi": null,
    "area_total": 60.0,
-   "blurb": "USD 132.000\n$ 169.000 Expensas\n60 m² tot.\n3 amb.\n2 dorm.\n1 baño\nBlanco Encalada al 2600\nBelgrano, Capital Federal\nDepartamento de 3 ambientes con balcon corrido, vista abierta y excelente luminosidad en BelgranoUbicado en una estrategica zona del barrio de Belgrano, a 500m de la estacion Juramento del subte D y a 200m de Av. Cabildo, ofreciendo una excelente conectividad. Se encuentra en un edificio de 8 pisos con dos unidades por piso y un ascensor. La unidad cuenta con un amplio living-comedor",
+   "blurb": "USD 133.000\n$ 185.000 Expensas\n60 m² tot.\n3 amb.\n2 dorm.\n1 baño\nBlanco Encalada al 2600\nBelgrano, Capital Federal\nDepartamento de 3 ambientes con balcon corrido, vista abierta y excelente luminosidad en BelgranoUbicado en una estrategica zona del barrio de Belgrano, a 500m de la estacion Juramento del subte D y a 200m de Av. Cabildo, ofreciendo una excelente conectividad. Se encuentra en un edificio de 8 pisos con dos unidades por piso y un ascensor. La unidad cuenta con un amplio living-comedor",
    "breakeven_exit_usd_m2": 3257,
    "closing_ref_usd": 126852,
    "cochera": null,
    "days_seen": 0,
    "decision": "negociar",
    "exit_usd_m2": 3400,
-   "expensas_ars": 169000,
-   "expensas_text": "$ 169.000 Expensas",
+   "expensas_ars": 185000,
+   "expensas_text": "$ 185.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
    "gone_at": null,
    "id": "zonaprop:60120425",
-   "max_offer_usd": 139161,
-   "neto_base_usd": 32042,
-   "neto_hard_usd": 7734,
+   "max_offer_usd": 139074,
+   "neto_base_usd": 30929,
+   "neto_hard_usd": 6560,
    "old_price": null,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/12/04/25/720x532/2077677192.jpg",
    "piso": null,
-   "price": 132000,
+   "price": 133000,
    "price_drops": 0,
    "price_history": [
     {
      "date": "2026-10-23T20:47:33+00:00",
      "price": 132000
+    },
+    {
+     "date": "2026-11-01T02:32:51+00:00",
+     "price": 133000
     }
    ],
    "price_source": "card",
@@ -6116,7 +6120,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ciudad de la Paz  al 2200",
    "address_unverified": false,
    "air_usd": 55525,
@@ -6136,7 +6140,7 @@
    "expensas_ars": 200000,
    "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-01T02:32:51+00:00",
    "id": "zonaprop:60277249",
    "max_offer_usd": 141328,
    "neto_base_usd": 37926,
@@ -6289,7 +6293,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Moldes 2300",
    "address_unverified": false,
    "air_usd": 38350,
@@ -6309,7 +6313,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-01T02:32:51+00:00",
    "id": "zonaprop:60291284",
    "max_offer_usd": 139565,
    "neto_base_usd": 21125,
