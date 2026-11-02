@@ -1,5 +1,5 @@
 {
- "last_change": "2026-10-29T17:46:07+00:00",
+ "last_change": "2026-11-02T21:05:58+00:00",
  "listings": [
   {
    "active": false,
@@ -337,7 +337,7 @@
    "active": true,
    "address": "FRENCH 2700",
    "address_unverified": false,
-   "air_usd": 2975,
+   "air_usd": 3975,
    "ambientes": 3,
    "antiguedad_years": 46,
    "area": 60.2,
@@ -345,10 +345,10 @@
    "area_semi": 0.0,
    "area_total": 63.0,
    "blurb": "3 AMBIENTES C/ DEPENCIA- Balcón al frente !!! Barrio Norte!! FRENCH 2700 con balcón sin cochera 46 años EXCELENTE ZONA!!! Hermoso departamento para reciclar y tener en valor un propiedad ideal para vivir o invertir 3 ambientes al frente con dependencia y balcón en uno de los mejores barrios porteños- Ofrece espacios funcionales para vivir y trabajar con confort . Living comedor con salida al balcón Cocina amplia con espacio para lavadero, y salida a dependencia cómoda con toillette. Dormitorios,",
-   "breakeven_exit_usd_m2": 3420,
-   "closing_ref_usd": 134540,
+   "breakeven_exit_usd_m2": 3401,
+   "closing_ref_usd": 133579,
    "cochera": false,
-   "days_seen": 0,
+   "days_seen": 17,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 290000,
@@ -357,23 +357,27 @@
    "gone_at": null,
    "id": "cabaprop:6ac6ac59e1793443d22ce180",
    "max_offer_usd": 106244,
-   "neto_base_usd": -13432,
-   "neto_hard_usd": -36457,
-   "old_price": null,
+   "neto_base_usd": -12382,
+   "neto_hard_usd": -35377,
+   "old_price": 140000,
    "photo": "https://static.kiteprop.com/kp/properties/586587/e5c158/lg/e5c1584ba339c590c36c32a1b836d3cc.jpg",
    "piso": null,
-   "price": 140000,
-   "price_drops": 0,
+   "price": 139000,
+   "price_drops": 1,
    "price_history": [
     {
      "date": "2026-10-16T20:44:25+00:00",
      "price": 140000
+    },
+    {
+     "date": "2026-11-02T21:05:58+00:00",
+     "price": 139000
     }
    ],
    "price_source": "card",
    "reno_usd_m2": 375,
-   "roi_base": -0.0787,
-   "roi_hard": -0.196,
+   "roi_base": -0.073,
+   "roi_hard": -0.1913,
    "score": 0,
    "seventy_offer_usd": 93310,
    "site": "cabaprop",
@@ -383,7 +387,7 @@
    ],
    "title": "3 AMBIENTES C/ DEPENCIA- Balcón al frente !!! Barrio Norte!!",
    "url": "https://cabaprop.com.ar/propiedad/6ac6ac59e1793443d22ce180/3-ambientes-c-depencia-balcon-al-frente-barrio-norte",
-   "usd_per_m2": 2326,
+   "usd_per_m2": 2309,
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Recoleta",

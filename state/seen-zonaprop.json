@@ -1510,6 +1510,22 @@
    "price": 133000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-departamento-8vo-piso-cfte-abierto-60541751.html",
    "zone": "Belgrano"
+  },
+  "zonaprop:60600515": {
+   "first_seen": "2026-11-02T21:05:58+00:00",
+   "key": "echeverria 900|121500|50|3",
+   "place": "echeverria 900|50|3",
+   "price": 121500,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-belgrano-chico-60600515.html",
+   "zone": "Belgrano"
+  },
+  "zonaprop:60602187": {
+   "first_seen": "2026-11-02T21:05:58+00:00",
+   "key": "mariscal antonio jose de sucre 1552|139999|55|3",
+   "place": "mariscal antonio jose de sucre 1552|55|3",
+   "price": 139999,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-belgrano-con-balcon-60602187.html",
+   "zone": "Belgrano"
   }
  },
  "meta": {
