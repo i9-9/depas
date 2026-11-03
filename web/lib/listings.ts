@@ -1081,6 +1081,38 @@ export function formatWhen(iso: string | null): string {
   });
 }
 
+const ADDED_MONTHS = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+
+function calendarDay(ms: number): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Argentina/Buenos_Aires",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date(ms));
+}
+
+/** Día en que el aviso entró a la web. Hora de Argentina, no la del portal. */
+export function addedOn(iso: string | null, now = Date.now()): string {
+  if (!iso) return "—";
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return "—";
+  const day = calendarDay(t);
+  const today = calendarDay(now);
+  if (day === today) return "hoy";
+  if (day === calendarDay(now - 86_400_000)) return "ayer";
+  const [year, month, date] = day.split("-");
+  const label = `${Number(date)} ${ADDED_MONTHS[Number(month) - 1]}`;
+  return year === today.slice(0, 4) ? label : `${label} ${year}`;
+}
+
+export function addedPhrase(iso: string | null, now = Date.now()): string | null {
+  const added = addedOn(iso, now);
+  if (added === "—") return null;
+  if (added === "hoy" || added === "ayer") return `Entró ${added}`;
+  return `Entró el ${added}`;
+}
+
 export function siteLabel(site: string): string {
   if (site === "argenprop") return "Argenprop";
   if (site === "zonaprop") return "Zonaprop";

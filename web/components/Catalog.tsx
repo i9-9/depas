@@ -5,13 +5,13 @@ import {
   TIERS,
   dropLine,
   fold,
+  addedOn,
   formatNum,
   formatWhen,
   hasDrop,
   isAlert,
   isNew,
   listingTier,
-  publishedAgo,
   rankByScore,
   siteLabel,
   streetOf,
@@ -684,6 +684,7 @@ function Results({
         <span className="text-right">m²</span>
         <span className="text-right">Amb.</span>
         <span>Barrio</span>
+        <span>Entró</span>
         <span className="text-right">Precio</span>
         <span className="text-right">El m²</span>
         <span className="flex justify-end">
@@ -844,21 +845,6 @@ type Flag = { text: string; tone: "muted" | "signal" };
 
 function flags(item: Listing): Flag[] {
   const out: Flag[] = [];
-  const since = formatWhen(item.first_seen);
-  if (isNew(item)) {
-    const ago = publishedAgo(item.first_seen);
-    const fresh = ago ? `Lo vimos ${ago}` : "Lo vimos recién";
-    out.push({
-      text: since && since !== "—" ? `${fresh} · ${since}` : fresh,
-      tone: isAlert(item) ? "signal" : "muted",
-    });
-  } else if (since && since !== "—") {
-    out.push({ text: `en lista ${since}`, tone: "muted" });
-  } else {
-    const days = item.days_seen;
-    if (days === 1) out.push({ text: "desde ayer", tone: "muted" });
-    else if (days != null && days > 1) out.push({ text: `hace ${days} días`, tone: "muted" });
-  }
   if (hasDrop(item)) out.push({ text: dropLine(item, { short: true }) || "Bajó el precio", tone: "signal" });
   if (!item.active) out.push({ text: "Ya no está", tone: "muted" });
   return out;
@@ -978,7 +964,12 @@ function Row({
           onClick={onToggle}
           className="hit min-w-0 flex-1 text-left"
         >
-          <h3 className={`name text-[1.0625rem] leading-snug ${gone ? "text-muted" : "text-title"}`}>{street}</h3>
+          <div className="flex items-baseline justify-between gap-3">
+            <h3 className={`name text-[1.0625rem] leading-snug ${gone ? "text-muted" : "text-title"}`}>{street}</h3>
+            <p className={`idx shrink-0 text-[0.75rem] ${isNew(item) ? "text-signal" : "text-title"}`}>
+              {addedOn(item.first_seen)}
+            </p>
+          </div>
           <p className="mt-1 text-[0.8125rem] leading-snug text-muted">
             {meta}
             {cells.zone && cells.zone !== "—" ? ` · ${cells.zone}` : ""}
@@ -1000,7 +991,7 @@ function Row({
           title={tip}
           aria-expanded={open}
           onClick={onToggle}
-          className="hit col-span-3 grid grid-cols-subgrid items-center text-left md:col-span-8"
+          className="hit col-span-3 grid grid-cols-subgrid items-center text-left md:col-span-9"
         >
           <p className="idx text-[0.75rem] text-muted">{rank > 0 ? String(rank).padStart(2, "0") : ""}</p>
           <Photo src={item.photo} alt={street} className="size-12" />
@@ -1012,6 +1003,9 @@ function Row({
           <p className="idx text-right text-muted">{cells.m2}</p>
           <p className="idx text-right text-muted">{cells.amb}</p>
           <p className="truncate text-muted">{cells.zone}</p>
+          <p className={`idx text-[0.8125rem] ${isNew(item) ? "text-signal" : "text-title"}`}>
+            {addedOn(item.first_seen)}
+          </p>
           <p className="idx text-right text-[1.125rem] leading-none">
             <PricePair item={item} inline />
           </p>

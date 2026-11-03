@@ -1,29 +1,15 @@
-import { formatWhen, isNew, publishedAgo, siteLabel, streetOf, type Listing } from "@/lib/listings";
+import { addedPhrase, isNew, siteLabel, streetOf, type Listing } from "@/lib/listings";
 import { airLine, decisionCopy, medianLine, netLine, priceLine, seenLine } from "@/lib/verdict";
 import { dealFacts, placeFacts, type Fact } from "@/components/Specs";
 import { PricePair } from "@/components/PricePair";
 import { Verdict } from "@/components/Verdict";
 import { VisitPad } from "@/components/VisitPad";
 
-function kickerOf(item: Listing): { text: string; tone?: "signal" | "muted" }[] {
-  const out: { text: string; tone?: "signal" | "muted" }[] = [];
+function kickerOf(item: Listing): { text: string; tone?: "signal" | "muted" | "title" }[] {
+  const out: { text: string; tone?: "signal" | "muted" | "title" }[] = [];
   if (!item.active) out.push({ text: "Ya no está", tone: "muted" });
-  const since = formatWhen(item.first_seen);
-  const sinceOk = Boolean(since && since !== "—");
-  if (isNew(item)) {
-    const ago = publishedAgo(item.first_seen);
-    const fresh = ago ? `Lo vimos ${ago}` : "Lo vimos recién";
-    out.push({
-      text: sinceOk ? `${fresh} · ${since}` : fresh,
-      tone: "signal",
-    });
-  } else if (sinceOk) {
-    out.push({ text: `en lista ${since}`, tone: "muted" });
-  } else if (item.days_seen === 1) {
-    out.push({ text: "desde ayer", tone: "muted" });
-  } else if (item.days_seen != null && item.days_seen > 1) {
-    out.push({ text: `hace ${item.days_seen} días`, tone: "muted" });
-  }
+  const entered = addedPhrase(item.first_seen);
+  if (entered) out.push({ text: entered, tone: isNew(item) ? "signal" : "title" });
   if (item.zone) {
     out.push({ text: item.zone_unverified ? `${item.zone}, sin confirmar` : item.zone });
   }
@@ -137,7 +123,13 @@ export function Ficha({
               {kick.map((bit, i) => (
                 <span key={bit.text}>
                   {i > 0 ? <span className="text-muted"> · </span> : null}
-                  <span className={bit.tone === "signal" ? "text-signal" : "text-muted"}>{bit.text}</span>
+                  <span
+                    className={
+                      bit.tone === "signal" ? "text-signal" : bit.tone === "title" ? "text-title" : "text-muted"
+                    }
+                  >
+                    {bit.text}
+                  </span>
                 </span>
               ))}
             </p>
