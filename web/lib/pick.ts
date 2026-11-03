@@ -1,6 +1,7 @@
 import {
   exitMargin,
   fold,
+  GUSTO_USD,
   hasCoveredArea,
   isThesis,
   rankByExit,
@@ -19,6 +20,8 @@ export type ResolvedPick = {
   why: string;
   thesisWhy: string;
   aside: string;
+  gusto: { listing: Listing | null; why: string };
+  withoutExit: Listing[];
 };
 
 function sameListing(a: Listing, b: Listing): boolean {
@@ -69,6 +72,44 @@ function whyThesis(item: Listing): string {
   return `${lead}, con cubiertos. No es el que mejor da el número.${short}`;
 }
 
+function withoutExitOf(listings: Listing[]): Listing[] {
+  return listings
+    .filter(
+      (x) =>
+        x.active &&
+        x.price != null &&
+        x.ambientes === 3 &&
+        hasCoveredArea(x) &&
+        exitMargin(x) == null,
+    )
+    .slice()
+    .sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+}
+
+function gustoSeat(
+  race: Listing[],
+  number: Listing | null,
+  thesis: Listing | null,
+): { listing: Listing | null; why: string } {
+  if (!race.length) return { listing: null, why: "" };
+  const gusto = `USD ${GUSTO_USD.toLocaleString("es-AR")}`;
+  const under = race.filter((x) => x.price != null && x.price <= GUSTO_USD);
+  const best = bestByZone(under);
+  const already =
+    best &&
+    ((number && sameListing(best, number)) || (thesis && sameListing(best, thesis)));
+  if (best && !already) {
+    return {
+      listing: best,
+      why: `Entra en el gusto de ${gusto}, con cubiertos. El número pide más.`,
+    };
+  }
+  if (!under.length) {
+    return { listing: null, why: `Ninguno con cubiertos entra en el gusto de ${gusto}.` };
+  }
+  return { listing: null, why: "" };
+}
+
 function asideFor(listings: Listing[]): string {
   const zones = [
     ...new Set(
@@ -97,6 +138,7 @@ export function resolvePick(listings: Listing[], pick: PickFile | null): Resolve
   const race = covered.filter((x) => exitMargin(x) != null);
   const note = pick?.note || "";
   const aside = asideFor(listings);
+  const withoutExit = withoutExitOf(listings);
   const empty = (why: string): ResolvedPick => ({
     listing: null,
     thesis: null,
@@ -108,6 +150,8 @@ export function resolvePick(listings: Listing[], pick: PickFile | null): Resolve
     why,
     thesisWhy: "",
     aside,
+    gusto: gustoSeat(race, null, null),
+    withoutExit,
   });
 
   const pinned = pick?.manual ? pick.id : null;
@@ -125,6 +169,8 @@ export function resolvePick(listings: Listing[], pick: PickFile | null): Resolve
         why: note || "Lo elegiste a mano.",
         thesisWhy: "",
         aside: "",
+        gusto: gustoSeat(race, listing, null),
+        withoutExit,
       };
     }
   }
@@ -164,5 +210,7 @@ export function resolvePick(listings: Listing[], pick: PickFile | null): Resolve
     why: whyNumber(listing, race, closes),
     thesisWhy: thesis ? whyThesis(thesis) : "",
     aside,
+    gusto: gustoSeat(race, listing, thesis),
+    withoutExit,
   };
 }

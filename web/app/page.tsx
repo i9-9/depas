@@ -24,7 +24,7 @@ export default function HomePage() {
       listings={listings}
       pickId={pick.listing?.id ?? null}
     >
-      <Candidate pick={pick} />
+      <Candidate pick={pick} listings={listings} />
     </SiteChrome>
   );
 }

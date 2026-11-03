@@ -641,6 +641,13 @@ function bestGroups(trios: Listing[], smaller: Listing[]) {
     return margin != null && margin <= 0;
   }).sort(rankByExit);
   const noExit = covered.filter((item) => exitMargin(item) == null);
+  const totalsByBarrio = totals.slice().sort((a, b) => {
+    const byZone = (a.zone || "zzz").localeCompare(b.zone || "zzz", "es");
+    if (byZone) return byZone;
+    const byM2 = (a.usd_per_m2 ?? 1e12) - (b.usd_per_m2 ?? 1e12);
+    if (byM2) return byM2;
+    return (a.price ?? 1e12) - (b.price ?? 1e12);
+  });
   return [
     { key: "cierran", label: "Cierran", hint: null, rows: close },
     { key: "no", label: "No llegan", hint: null, rows: miss },
@@ -653,8 +660,8 @@ function bestGroups(trios: Listing[], smaller: Listing[]) {
     {
       key: "total",
       label: "Solo el total",
-      hint: "Tienen un total, no cubiertos. No pueden ser el candidato.",
-      rows: totals,
+      hint: "Solo tienen el total. Van por barrio, del metro más barato al más caro. No pueden ser el candidato.",
+      rows: totalsByBarrio,
     },
     { key: "menos", label: "1 y 2 ambientes", hint: null, rows: smaller },
   ].filter((g) => g.rows.length);
