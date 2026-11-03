@@ -11,10 +11,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F2F0EB" },
-    { media: "(prefers-color-scheme: dark)", color: "#111111" },
-  ],
+  themeColor: "#FEFEFE",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -22,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="es" className="bg-bg text-ink">
       <head>
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="color-scheme" content="light dark" />
+        <meta name="color-scheme" content="light" />
       </head>
       <body className="bg-bg text-ink">{children}</body>
     </html>

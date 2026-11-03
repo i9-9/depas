@@ -57,16 +57,16 @@ function NavLink({
   children: React.ReactNode;
 }) {
   const cls =
-    "col-span-6 flex min-h-11 items-end border-b-2 pb-1 text-[clamp(1.25rem,2.4vw,1.375rem)] leading-none";
+    "col-span-6 flex min-h-11 items-end border-b-2 pb-1 text-[1.0625rem] leading-none tracking-[-0.02em]";
   if (active) {
     return (
-      <span aria-current="page" className={`${cls} border-accent text-title`}>
+      <span aria-current="page" className={`${cls} border-accent font-bold text-title`}>
         {children}
       </span>
     );
   }
   return (
-    <a href={href} className={`${cls} border-transparent text-ink hover:text-title`}>
+    <a href={href} className={`${cls} border-transparent font-normal text-muted hover:text-title`}>
       {children}
     </a>
   );

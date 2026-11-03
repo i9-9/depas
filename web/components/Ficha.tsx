@@ -34,7 +34,7 @@ function FactCell({ row }: { row: Fact }) {
   return (
     <div>
       <dt className="kicker text-muted">{row.label}</dt>
-      <dd className={`idx mt-1 text-[1.25rem] leading-none ${tone}`}>{row.value}</dd>
+      <dd className={`idx mt-1 text-[1.25rem] font-bold leading-none tracking-[-0.02em] ${tone}`}>{row.value}</dd>
       {row.hint ? <p className="mt-1 text-[0.8125rem] leading-snug text-muted">{row.hint}</p> : null}
     </div>
   );
@@ -57,7 +57,7 @@ function Decision({ item }: { item: Listing }) {
         : "text-title";
   return (
     <div className={`border-l-2 pl-3 ${edge}`}>
-      <p className={`text-[1.375rem] leading-none ${word}`}>{copy.label}</p>
+      <p className={`kicker ${word}`}>{copy.label}</p>
       {copy.line ? <p className="mt-2 max-w-prose text-ink">{copy.line}</p> : null}
     </div>
   );
@@ -124,7 +124,7 @@ export function Ficha({
         <header>
           {mark ? <p className="kicker text-muted">{mark}</p> : null}
           {kick.length ? (
-            <p className="kicker">
+            <p className={`kicker ${mark ? "mt-2" : ""}`}>
               {kick.map((bit, i) => (
                 <span key={bit.text}>
                   {i > 0 ? <span className="text-muted"> · </span> : null}
@@ -140,18 +140,18 @@ export function Ficha({
             </p>
           ) : null}
           {level === "h2" ? (
-            <h2 className={`display text-title ${kick.length || mark ? "mt-3" : ""}`}>
+            <h2 className={`display-2 text-title ${kick.length || mark ? "mt-4" : ""}`}>
               {item.address || item.title || "Sin dirección"}
             </h2>
           ) : (
-            <h1 className={`display text-title ${kick.length || mark ? "mt-3" : ""}`}>
+            <h1 className={`display text-title ${kick.length || mark ? "mt-4" : ""}`}>
               {item.address || item.title || "Sin dirección"}
             </h1>
           )}
           {item.address_unverified ? (
             <p className="mt-3 text-ink">Hay que verificar la dirección.</p>
           ) : null}
-          {why ? <p className="measure mt-4 text-ink">{why}</p> : null}
+          {why ? <p className="lede mt-5 text-ink">{why}</p> : null}
         </header>
       ) : title ? (
         <p className="line-clamp-2 text-ink">{title}</p>
@@ -166,7 +166,7 @@ export function Ficha({
       <VisitPad id={item.id} />
       <details>
         <summary className="link flex min-h-11 cursor-pointer items-center text-ink">De dónde sale</summary>
-        <div className="measure space-y-2 pt-2 text-muted">
+        <div className="measure space-y-2 pt-2 text-[0.8125rem] leading-snug text-muted">
           {notes.map((line) => (
             <p key={line}>{line}</p>
           ))}

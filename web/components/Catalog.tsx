@@ -719,7 +719,7 @@ function Results({
 
   return (
     <div className="card mt-2 overflow-hidden">
-      <div className="tt sticky top-0 z-10 hidden border-b border-line bg-card px-3 py-2.5 text-muted md:grid">
+      <div className="tt kicker sticky top-0 z-10 hidden border-b border-line bg-card px-3 py-2.5 text-muted md:grid">
         <span>Nº</span>
         <span />
         <span>Dirección</span>
@@ -1045,7 +1045,7 @@ function Row({
             {cells.zone && cells.zone !== "—" ? ` · ${cells.zone}` : ""}
           </p>
           {teaser}
-          <p className="idx mt-2 text-[1.25rem] leading-none">
+          <p className="idx mt-2 text-[1.25rem] font-bold leading-none tracking-[-0.02em]">
             <PricePair item={item} inline />
             <span className="ml-2 text-[0.8125rem] text-muted">
               {cells.m2} m² · {cells.amb === "—" ? "sin ambientes" : `${cells.amb} ambientes`}
@@ -1076,7 +1076,7 @@ function Row({
           <p className={`idx text-[0.8125rem] ${isNew(item) ? "text-signal" : "text-title"}`}>
             {addedOn(item.first_seen)}
           </p>
-          <p className="idx text-right text-[1.125rem] leading-none">
+          <p className="idx text-right text-[1.0625rem] font-bold leading-none tracking-[-0.02em]">
             <PricePair item={item} inline />
           </p>
           <p className="idx text-right text-muted">

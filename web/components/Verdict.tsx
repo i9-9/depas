@@ -13,7 +13,7 @@ function Block({
   if (!items.length) return null;
   return (
     <div>
-      <p className={tone === "title" ? "text-title" : "text-muted"}>{title}</p>
+      <p className={`kicker ${tone === "title" ? "text-title" : "text-muted"}`}>{title}</p>
       <ul className="mt-2 space-y-1 text-ink">
         {items.map((item) => (
           <li key={item}>· {item}</li>

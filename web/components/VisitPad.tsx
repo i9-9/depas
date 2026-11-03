@@ -28,8 +28,8 @@ export function VisitPad({ id }: { id: string }) {
   if (!ready) return null;
   return (
     <div>
-      <p className="text-title">Esta visita</p>
-      <p className="mt-1 text-muted">Queda en este dispositivo, no se comparte.</p>
+      <p className="kicker text-title">Esta visita</p>
+      <p className="mt-2 text-[0.8125rem] leading-snug text-muted">Queda en este dispositivo, no se comparte.</p>
       <div className="seg mt-3" role="group" aria-label="Estado de la visita">
         {STATUSES.map((s) => (
           <button
