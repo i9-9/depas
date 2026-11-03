@@ -27,36 +27,41 @@ export function CoverageNotice() {
   const run = loadArgenpropRun();
   if (!gaps.length && !run) return null;
   return (
-    <div className="mt-5 border border-line px-3 py-3 text-[0.9375rem] text-ink">
-      {run ? (
-        <div>
-          <p className="text-title">Mac · Argenprop</p>
-          <p className="mt-2">{macSummary(run)}</p>
-          {run.lines.length ? (
-            <ul className="mt-2 space-y-1 text-muted">
-              {run.lines.map((line) => (
-                <li key={line}>{line.replace(/^\[(?:ok|error|argenprop)\]\s/, "")}</li>
+    <details className="mt-16 border-t border-line pt-4 text-[0.9375rem] text-ink">
+      <summary className="flex min-h-11 cursor-pointer list-none items-center text-muted [&::-webkit-details-marker]:hidden">
+        Cobertura de los portales
+      </summary>
+      <div className="pb-2">
+        {run ? (
+          <div>
+            <p className="text-title">Mac · Argenprop</p>
+            <p className="mt-2">{macSummary(run)}</p>
+            {run.lines.length ? (
+              <ul className="mt-2 space-y-1 text-muted">
+                {run.lines.map((line) => (
+                  <li key={line}>{line.replace(/^\[(?:ok|error|argenprop)\]\s/, "")}</li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        ) : null}
+        {gaps.length ? (
+          <div className={run ? "mt-3 border-t border-line pt-3" : "mt-3"}>
+            <p className="text-title">Falta cobertura</p>
+            <ul className="mt-2 space-y-1">
+              {gaps.map((g) => (
+                <li key={g.site}>
+                  {g.reason === "empty"
+                    ? g.site === "argenprop"
+                      ? `${siteLabel(g.site)} no tiene avisos. Si corre en la Mac y sigue vacío, el scrape no está dejando nada.`
+                      : `${siteLabel(g.site)} no tiene avisos.`
+                    : `${siteLabel(g.site)} no se actualiza desde ${g.last_change || "hace rato"}.`}
+                </li>
               ))}
             </ul>
-          ) : null}
-        </div>
-      ) : null}
-      {gaps.length ? (
-        <div className={run ? "mt-3 border-t border-line pt-3" : undefined}>
-          <p className="text-title">Falta cobertura</p>
-          <ul className="mt-2 space-y-1">
-            {gaps.map((g) => (
-              <li key={g.site}>
-                {g.reason === "empty"
-                  ? g.site === "argenprop"
-                    ? `${siteLabel(g.site)} no tiene avisos. Si corre en la Mac y sigue vacío, el scrape no está dejando nada.`
-                    : `${siteLabel(g.site)} no tiene avisos.`
-                  : `${siteLabel(g.site)} no se actualiza desde ${g.last_change || "hace rato"}.`}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-    </div>
+          </div>
+        ) : null}
+      </div>
+    </details>
   );
 }

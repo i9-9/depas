@@ -641,22 +641,33 @@ function Results({
   onSave: (id: string) => void;
   onDiscard: (id: string) => void;
 }) {
-  const hoy = items.filter(isAlert).sort(rankByScore);
+  const hoy = items.filter((item) => item.ambientes === 3 && isAlert(item)).sort(rankByScore);
   const rest = items.filter((item) => !hoy.some((h) => h.id === item.id));
   const offset = pick ? 1 : 0;
+  const trios = rest.filter((item) => item.ambientes === 3);
+  const smaller = rest.filter((item) => item.ambientes !== 3);
   const groups: { key: string; label: string | null; rows: Listing[] }[] =
     sort === "tier"
-      ? TIERS.map((tier) => ({
-          key: tier.id,
-          label: tier.label,
-          rows: rest.filter((item) => listingTier(item).id === tier.id),
-        })).filter((g) => g.rows.length)
+      ? [
+          ...TIERS.map((tier) => ({
+            key: tier.id,
+            label: tier.label,
+            rows: trios.filter((item) => listingTier(item).id === tier.id),
+          })),
+          {
+            key: "menos",
+            label: "1 y 2 ambientes",
+            rows: smaller,
+          },
+        ].filter((g) => g.rows.length)
       : sort === "zone"
         ? [
             ...zonesOf(rest).map((zone) => ({
               key: zone,
               label: zone,
-              rows: rest.filter((item) => item.zone === zone),
+              rows: rest
+              .filter((item) => item.zone === zone)
+              .sort((a, b) => (b.ambientes === 3 ? 1 : 0) - (a.ambientes === 3 ? 1 : 0) || rankByScore(a, b)),
             })),
             {
               key: "sin-barrio",

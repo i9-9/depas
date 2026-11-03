@@ -39,9 +39,9 @@ export function SiteChrome({
             </NavLink>
           </nav>
         </header>
-        <CoverageNotice />
         <Pulse listings={listings} pickId={pickId} current={current} />
         <div id="contenido">{children}</div>
+        <CoverageNotice />
       </div>
     </>
   );
