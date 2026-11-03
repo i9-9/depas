@@ -229,9 +229,14 @@ def parse_antiguedad(text: str) -> int | None:
     return n if n <= 200 else None
 
 
+def _glue_decimal_spaces(text: str) -> str:
+    """«28, 32 m²» es 28,32. La card mete un espacio después de la coma."""
+    return re.sub(r"(\d),\s+(\d{1,2})(?=\s*m²)", r"\1,\2", text or "", flags=re.I)
+
+
 def parse_areas(site: str, text: str, cfg: dict | None = None) -> dict:
     """Cubiertos, semicubiertos y totales. Deal pondera como Mudafy si hay desglose."""
-    blob = text or ""
+    blob = _glue_decimal_spaces(text or "")
     total = covered = semi = None
     tot = re.search(r"([\d.,]+)\s*m²\s*(?:tot(?:ales?)?\.?|tot\b)", blob, re.I)
     cub = re.search(r"([\d.,]+)\s*m²\s*(?:cubiert|cubie)", blob, re.I)
@@ -1273,7 +1278,18 @@ def resolve_pick_id(listings: list[dict], pick: dict | None = None) -> str | Non
     ids = {i["id"] for i in active}
     if pick.get("manual") and pick.get("id") in ids:
         return pick["id"]
-    ranked = prefer([i for i in active if i.get("price") is not None])
+    try:
+        filters = json.loads(CONFIG_PATH.read_text()).get("filters") or {}
+    except OSError:
+        filters = {}
+    pool = []
+    for i in active:
+        if i.get("price") is None or i.get("ambientes") != 3:
+            continue
+        if filters and classify_zone(i, filters) is None:
+            continue
+        pool.append(i)
+    ranked = prefer(pool)
     return ranked[0]["id"] if ranked else None
 
 

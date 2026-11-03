@@ -28,7 +28,7 @@ export function Candidate({
   const why =
     pick.manual && pick.note
       ? pick.note
-      : `De los ${pick.total} que hay, este es el que más encaja.`;
+      : `De los ${pick.total} de 3 ambientes, este es el que más encaja.`;
 
   return (
     <article className="g mt-8 items-start">

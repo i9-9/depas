@@ -140,6 +140,11 @@ run() {
   local branch dirty
   echo "==== $(date) ===="
   log "repo $ROOT"
+  flags=(--only argenprop)
+  if [[ -z "${TELEGRAM_BOT_TOKEN:-}" || -z "${TELEGRAM_CHAT_ID:-}" ]]; then
+    log "sin Telegram; guardo los avisos y no mando mensaje"
+    flags+=(--no-notify)
+  fi
   if [[ "$CHECK" -eq 1 ]]; then
     log "python $PY"
     dirty="$(blocking_changes || true)"
@@ -166,7 +171,7 @@ run() {
       fi
     fi
   fi
-  "$PY" "$ROOT/scraper.py" --only argenprop
+  "$PY" "$ROOT/scraper.py" "${flags[@]}"
   if [[ "$SYNC" -eq 1 ]]; then
     sync_argenprop
   else

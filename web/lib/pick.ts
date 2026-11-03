@@ -23,6 +23,7 @@ export function resolvePick(listings: Listing[], pick: PickFile | null): Resolve
       return { listing, rank: idx >= 0 ? idx + 1 : 0, total, manual: true, note };
     }
   }
-  const listing = active[0] || null;
-  return { listing, rank: listing ? 1 : 0, total, manual: false, note };
+  const trios = active.filter((x) => x.ambientes === 3);
+  const listing = trios[0] || null;
+  return { listing, rank: listing ? 1 : 0, total: trios.length, manual: false, note };
 }

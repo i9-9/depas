@@ -181,6 +181,40 @@ export function dealArea(item: Pick<Listing, "area" | "area_covered"> | RawListi
   return null;
 }
 
+function glueDecimalSpaces(text: string): string {
+  return text.replace(/(\d),\s+(\d{1,2})(?=\s*m²)/gi, "$1,$2");
+}
+
+function m2Number(raw: string): number | null {
+  const s = raw.trim();
+  const n = /,\d{1,2}$/.test(s)
+    ? Number(s.replace(/\./g, "").replace(",", "."))
+    : Number(s.replace(",", "."));
+  return Number.isFinite(n) ? n : null;
+}
+
+function m2Match(text: string, re: RegExp): number | null {
+  const m = text.match(re);
+  return m ? m2Number(m[1]) : null;
+}
+
+/** Reescribe «28, 32 m² cubiertos» como 28,32. Si no hay ese espacio, no toca nada. */
+export function areasFromCard(text: string): {
+  covered: number | null;
+  semi: number | null;
+  total: number | null;
+} {
+  const blob = glueDecimalSpaces(text || "");
+  const covered =
+    m2Match(blob, /([\d.,]+)\s*m²\s*(?:cubiert|cubie)/i) ??
+    m2Match(blob, /([\d.,]+)\s*m²\s*(?:de\s+)?superficie\s+constru/i);
+  return {
+    covered,
+    semi: m2Match(blob, /([\d.,]+)\s*m²\s*semicubiert/i),
+    total: m2Match(blob, /([\d.,]+)\s*m²\s*(?:tot(?:ales?)?\.?|tot\b)/i),
+  };
+}
+
 export function recoverAreas(raw: RawListing): {
   area: number | null;
   area_total: number | null;
@@ -191,13 +225,20 @@ export function recoverAreas(raw: RawListing): {
   let covered = raw.area_covered ?? null;
   let total = raw.area_total ?? null;
   let semi = raw.area_semi ?? null;
+  const blurb = raw.blurb || "";
+  if (/\d,\s+\d{1,2}\s*m²/i.test(blurb)) {
+    const parsed = areasFromCard(blurb);
+    if (parsed.covered != null) covered = parsed.covered;
+    if (parsed.semi != null) semi = parsed.semi;
+    if (parsed.total != null) total = parsed.total;
+  }
   if (covered == null) {
     const m = hay.match(/([\d.,]+)\s*m²\s*(?:de\s+)?superficie\s+constru/i);
-    if (m) covered = Number(m[1].replace(".", "").replace(",", "."));
+    if (m) covered = m2Number(m[1]);
   }
   if (covered == null) {
     const m = hay.match(/([\d.,]+)\s*m²\s*(?:cubiert|cubie)/i);
-    if (m) covered = Number(m[1].replace(",", "."));
+    if (m) covered = m2Number(m[1]);
   }
   if (total == null && raw.area != null && covered == null) total = raw.area;
   const deal = weightedArea(covered, semi, total) ?? raw.area ?? covered ?? total ?? null;

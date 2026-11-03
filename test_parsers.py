@@ -1288,6 +1288,18 @@ def test_verdict_and_pick():
     assert "el edificio está flojo" in pb["text"] and "es planta baja" in pb["text"]
     pool = [_item(f"zonaprop:{i}", score=10 - i, price=100000 + i, active=True) for i in range(5)]
     assert s.resolve_pick_id(pool, {"id": None, "manual": False}) == "zonaprop:0"
+    studio = _item("zonaprop:studio", ambientes=1, score=99, price=90000, neto_hard_usd=999999)
+    assert s.resolve_pick_id([studio, *pool], {"id": None, "manual": False}) == "zonaprop:0"
+    assert s.resolve_pick_id([studio], {"id": None, "manual": False}) is None
+    cabildo = _item(
+        "zonaprop:cabildo",
+        ambientes=3,
+        address="Cabildo al 2100",
+        title="3 amb Belgrano",
+        zone="Belgrano",
+        neto_hard_usd=999999,
+    )
+    assert s.resolve_pick_id([cabildo, *pool], {"id": None, "manual": False}) == "zonaprop:0"
     assert s.resolve_pick_id(pool, {"id": "zonaprop:3", "manual": True}) == "zonaprop:3"
     assert s.resolve_pick_id(pool, {"id": "gone", "manual": True}) == "zonaprop:0"
     marked = {**pool[0], "old_price": 110000, "_pick": True}
@@ -1699,6 +1711,15 @@ def test_areas_weights_expensas_signals_and_offer():
     assert rec["area"] == 45
     only_tot = s.parse_areas("zonaprop", "60 m² tot.2 amb.")
     assert only_tot["area"] == 60 and only_tot["area_covered"] is None
+    spaced = (
+        "32 m² tot.\n1 amb.\n"
+        "superficie total de 34, 64 m², distribuidos en 28, 32 m² cubiertos y 4, 67 m² semicubiertos."
+    )
+    broken = s.parse_areas("zonaprop", spaced)
+    assert broken["area_covered"] == 28.32, broken
+    assert broken["area_semi"] == 4.67, broken
+    assert broken["area_total"] == 32, broken
+    assert abs(broken["area"] - (28.32 + 4.67 * 0.5)) < 0.01, broken
     w = s.weighted_area(45, 6, 60)
     assert abs(w - 50.7) < 0.01  # 45 + 3 + 9*0.3
 

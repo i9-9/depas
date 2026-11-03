@@ -1,31 +1,41 @@
 {
  "drops": 0,
  "errors": [
+  "argenprop · Recoleta 3 amb: HTTP 202 (WAF / sin listado)",
   "argenprop · Barrio Norte 2 amb: HTTP 202 (WAF / sin listado)",
   "argenprop · Barrio Norte 3 amb: HTTP 202 (WAF / sin listado)",
-  "argenprop · Botánico 2 amb: HTTP 202 (WAF / sin listado)"
+  "argenprop · Palermo Hollywood 1 amb: HTTP 202 (WAF / sin listado)",
+  "argenprop · Palermo Hollywood 2 amb: HTTP 202 (WAF / sin listado)",
+  "argenprop · Belgrano 2 amb: HTTP 202 (WAF / sin listado)",
+  "argenprop · Belgrano 3 amb: HTTP 202 (WAF / sin listado)"
  ],
  "lines": [
-  "[ok] argenprop · Recoleta: 9 avisos",
-  "[ok] argenprop · Barrio Norte: 5 avisos",
+  "[ok] argenprop · Recoleta: 7 avisos",
+  "[ok] argenprop · Barrio Norte: 3 avisos",
   "[ok] argenprop · Botánico: 6 avisos",
-  "[ok] argenprop · Palermo Chico: 9 avisos",
-  "[ok] argenprop · Recoleta 2 amb: 9 avisos",
-  "[ok] argenprop · Recoleta 3 amb: 10 avisos",
+  "[ok] argenprop · Palermo Chico: 10 avisos",
+  "[ok] argenprop · Belgrano: 10 avisos",
+  "[ok] argenprop · Recoleta 2 amb: 11 avisos",
+  "[error] argenprop · Recoleta 3 amb: HTTP 202 (WAF / sin listado)",
   "[error] argenprop · Barrio Norte 2 amb: HTTP 202 (WAF / sin listado)",
   "[error] argenprop · Barrio Norte 3 amb: HTTP 202 (WAF / sin listado)",
-  "[error] argenprop · Botánico 2 amb: HTTP 202 (WAF / sin listado)",
-  "[argenprop] filtros: 0 · nuevos: 0 · bajas de precio: 0"
+  "[ok] argenprop · Botánico 2 amb: 5 avisos",
+  "[error] argenprop · Palermo Hollywood 1 amb: HTTP 202 (WAF / sin listado)",
+  "[error] argenprop · Palermo Hollywood 2 amb: HTTP 202 (WAF / sin listado)",
+  "[ok] argenprop · Palermo Hollywood 3 amb: 14 avisos",
+  "[error] argenprop · Belgrano 2 amb: HTTP 202 (WAF / sin listado)",
+  "[error] argenprop · Belgrano 3 amb: HTTP 202 (WAF / sin listado)",
+  "[argenprop] filtros: 2 · nuevos: 0 · bajas de precio: 0"
  ],
- "matched": 0,
+ "matched": 2,
  "new": 0,
  "ok": [
   {
-   "n": 9,
+   "n": 7,
    "name": "Recoleta"
   },
   {
-   "n": 5,
+   "n": 3,
    "name": "Barrio Norte"
   },
   {
@@ -33,18 +43,26 @@
    "name": "Botánico"
   },
   {
-   "n": 9,
+   "n": 10,
    "name": "Palermo Chico"
   },
   {
-   "n": 9,
+   "n": 10,
+   "name": "Belgrano"
+  },
+  {
+   "n": 11,
    "name": "Recoleta 2 amb"
   },
   {
-   "n": 10,
-   "name": "Recoleta 3 amb"
+   "n": 5,
+   "name": "Botánico 2 amb"
+  },
+  {
+   "n": 14,
+   "name": "Palermo Hollywood 3 amb"
   }
  ],
- "ran_at": "2026-10-19T13:54:50+00:00",
+ "ran_at": "2026-11-03T15:39:55+00:00",
  "site": "argenprop"
 }

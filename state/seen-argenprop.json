@@ -80,6 +80,14 @@
    "url": "https://www.argenprop.com/departamento-en-venta-en-barrio-norte-2-ambientes--19836772",
    "zone": "Barrio Norte"
   },
+  "argenprop:19961974": {
+   "first_seen": "2026-11-03T15:39:55+00:00",
+   "key": "juramento 1100|140000|61|3",
+   "place": "juramento 1100|60|3",
+   "price": 140000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-belgrano-chico-3-ambientes--19961974",
+   "zone": "Belgrano"
+  },
   "argenprop:20032069": {
    "first_seen": "2026-10-10T22:00:06+00:00",
    "place": "visto 3225|60|3",
@@ -108,6 +116,14 @@
    "price": 119000,
    "url": "https://www.argenprop.com/departamento-en-venta-en-recoleta-3-ambientes--20252327",
    "zone": "Barrio Norte"
+  },
+  "argenprop:20401706": {
+   "first_seen": "2026-11-03T15:39:55+00:00",
+   "key": "humboldt 2000|136000|54|3",
+   "place": "humboldt 2000|55|3",
+   "price": 136000,
+   "url": "https://www.argenprop.com/departamento-en-venta-en-palermo-3-ambientes--20401706",
+   "zone": "Palermo Hollywood"
   },
   "argenprop:20583095": {
    "first_seen": "2026-10-17T14:17:13+00:00",
