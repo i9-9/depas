@@ -1069,7 +1069,7 @@ function streetCore(s: string): string {
   const t = tidy(s)
     .replace(/\b([A-Za-zÁÉÍÓÚÑ])\./g, "$1")
     .replace(/,?\s*(capital federal|caba|argentina)\b.*$/i, "")
-    .replace(/,?\s*(recoleta|barrio norte|botánico|botanico|palermo hollywood|palermo chico|belgrano chico|belgrano r|belgrano c|belgrano|palermo)\s*$/i, "");
+    .replace(/,?\s*(recoleta|barrio norte|botánico|botanico|palermo hollywood|palermo chico|belgrano chico|belgrano r|belgrano c|belgrano|palermo|colegiales)\s*$/i, "");
   return (t.split(",")[0] || t).trim();
 }
 

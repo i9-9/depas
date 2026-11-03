@@ -15,7 +15,7 @@ export function Pulse({
 }: {
   listings: Listing[];
   pickId?: string | null;
-  current: "candidato" | "archivo";
+  current: "candidato" | "archivo" | "baratos";
 }) {
   const hot = hotListings(listings);
   if (!hot.length) return null;

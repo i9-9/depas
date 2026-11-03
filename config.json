@@ -1236,6 +1236,70 @@
     ],
     "expensas_min_valid_ars": 10000
   },
+  "filters_barato": {
+    "max_price_usd": 119000,
+    "max_price_usd_hard": 119000,
+    "min_price_usd": 70000,
+    "min_area_m2": 40,
+    "min_ambientes": 3,
+    "max_ambientes": 3,
+    "include_unknown_area": false,
+    "require_balcon": true,
+    "include_unknown_balcon": false,
+    "require_light": true,
+    "include_unknown_light": false,
+    "max_expensas_ars": 380000,
+    "allowed_barrios": ["colegiales"],
+    "reject_text": [
+      "en pozo",
+      "pozo",
+      "en construccion",
+      "en cuotas",
+      "cuotas desde",
+      "edificio a reciclar",
+      "edificio para reciclar",
+      "edificio en mal estado",
+      "edificio a demoler"
+    ],
+    "reject_barrios": [
+      "tigre",
+      "quilmes",
+      "lanus",
+      "liniers",
+      "once",
+      "congreso",
+      "abasto",
+      "valentin alsina",
+      "paternal",
+      "villa crespo",
+      "caballito",
+      "flores",
+      "almagro",
+      "san telmo",
+      "constitucion",
+      "retiro",
+      "tribunales",
+      "san nicolas",
+      "balvanera",
+      "palermo soho",
+      "palermo viejo",
+      "palermo nuevo",
+      "las canitas",
+      "chacarita"
+    ],
+    "reject_cities": [
+      "rosario",
+      "echesortu",
+      "granadero baigorria",
+      "baigorria",
+      "fisherton",
+      "pichincha",
+      "general paz",
+      "nueva cordoba",
+      "mar de las pampas",
+      "pilar"
+    ]
+  },
   "heartbeat": false,
   "notify_loud_min_score": 3,
   "notify_loud_drop_pct": 5,
@@ -2612,6 +2676,24 @@
         "belgrano c",
         "belgrano chico"
       ]
+    },
+    {
+      "site": "zonaprop",
+      "name": "Colegiales 3 amb barato",
+      "zone": "Colegiales",
+      "track": "barato",
+      "pages": 4,
+      "url": "https://www.zonaprop.com.ar/departamentos-venta-colegiales-con-balcon-3-ambientes-menos-120000-dolar.html",
+      "aliases": ["colegiales"]
+    },
+    {
+      "site": "argenprop",
+      "name": "Colegiales 3 amb barato",
+      "zone": "Colegiales",
+      "track": "barato",
+      "pages": 1,
+      "url": "https://www.argenprop.com/departamentos/venta/colegiales/3-ambientes/dolares-hasta-120000",
+      "aliases": ["colegiales"]
     }
   ],
   "expensas_min_valid_ars": 10000,
@@ -2662,7 +2744,8 @@
     "street_zones": "La calle y la altura mandan. El barrio del aviso no. Altura fuera de rango = fuera, aunque la card diga Recoleta. Palermo Hollywood: entre Córdoba y Santa Fe, y entre Juan B. Justo y Dorrego. Las alturas son la cuadra USIG pegada al borde, hacia adentro (2026-10-19). Córdoba y Santa Fe siguen afuera. Soho (Thames, Armenia, Serrano, Borges, Malabia) sigue afuera.",
     "exit_usd_m2_palermo_hollywood": "Sin número verificado. No se inventó. Esos avisos entran, pero no tienen aire ni neto hasta definirlo.",
     "notify_fetch_errors": "Argenprop: el WAF corta URLs casi todas las corridas. Queda en el log de la Mac, no en Telegram. Zonaprop, Mercado Libre y Cabaprop sí avisan.",
-    "cabaprop": "API pública del buscador (la misma que usa el sitio). 12 avisos por página, tope 5. Barrio Norte incluye La Isla, Parque Las Heras y Barrio Norte Recoleta. La calle y la altura siguen mandando."
+    "cabaprop": "API pública del buscador (la misma que usa el sitio). 12 avisos por página, tope 5. Barrio Norte incluye La Isla, Parque Las Heras y Barrio Norte Recoleta. La calle y la altura siguen mandando.",
+    "filters_barato": "Ruta /baratos. Colegiales, 3 ambientes, balcón y luz, USD 70.000 a 119.000, desde 40 m². Sin calles y sin metro de salida. No entra al candidato."
   },
   "area_weight_covered": 1,
   "area_weight_semi": 0.5,

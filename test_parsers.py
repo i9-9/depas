@@ -2015,6 +2015,45 @@ def test_cabaprop():
     assert s.is_rejected(pozo, F)
 
 
+def test_barato_track_keeps_colegiales_example():
+    """Amenábar 500 entra a la ruta aparte y no al candidato."""
+    cfg = json.loads(Path("config.json").read_text(encoding="utf-8"))
+    side = cfg["filters_barato"]
+    item = {
+        "id": "argenprop:20629940",
+        "site": "argenprop",
+        "title": "Venta de departamento 3 ambientes con balcon en colegiales, capital federal",
+        "address": "Amenábar 500, Piso 4",
+        "zone": "",
+        "blurb": "Departamento de 3 ambientes al frente con balcon. Para refaccionar. Muy luminoso.",
+        "url": "https://www.argenprop.com/departamento-en-venta-en-colegiales-3-ambientes--20629940",
+        "price": 99000,
+        "ambientes": 3,
+        "area": 46,
+        "area_covered": 46,
+        "expensas_ars": 141000,
+    }
+    src = {
+        "site": "argenprop",
+        "name": "Colegiales 3 amb barato",
+        "zone": "Colegiales",
+        "track": "barato",
+        "aliases": ["colegiales"],
+    }
+    assert s.keep_listing(item, src, side)
+    assert item["zone"] == "Colegiales"
+    assert s.matches(item, side)
+    assert not s.matches(item, cfg["filters"])
+    assert "colegiales" in cfg["filters"]["reject_barrios"]
+    assert "colegiales" not in side["reject_barrios"]
+    tiny = dict(item, area=30, area_covered=30)
+    assert not s.matches(tiny, side)
+    studio = dict(item, ambientes=1)
+    assert not s.matches(studio, side)
+    dear = dict(item, price=120000)
+    assert not s.matches(dear, side)
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

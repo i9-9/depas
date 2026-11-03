@@ -1895,6 +1895,9 @@ def matches(item: dict, f: dict) -> bool:
         return False
     if item["ambientes"] is not None and item["ambientes"] > f["max_ambientes"]:
         return False
+    min_amb = f.get("min_ambientes")
+    if min_amb is not None and (item.get("ambientes") is None or item["ambientes"] < int(min_amb)):
+        return False
     if f.get("require_balcon"):
         bal = has_balcon(item)
         if bal is False:
@@ -2387,6 +2390,16 @@ def fetch_cabaprop(session: requests.Session, url: str, *, _retried: bool = Fals
     return parse_cabaprop(rows), len(rows), total
 
 
+def filters_for(cfg: dict, src: dict | None) -> dict:
+    """La ruta barata no hereda calles, piso de precio ni barrios de la cuenta principal."""
+    if src and src.get("track") == "barato":
+        found = cfg.get("filters_barato")
+        if not found:
+            raise ValueError("falta filters_barato en config.json")
+        return found
+    return cfg.get("filters") or {}
+
+
 def scrape_source(session, src: dict, cfg: dict, browser: ChromeListings | None = None) -> tuple[list[dict], list[dict]]:
     """Devuelve (avisos, última página si se llegó al tope de páginas)."""
     site = src["site"]
@@ -2400,7 +2413,7 @@ def scrape_source(session, src: dict, cfg: dict, browser: ChromeListings | None 
         )
         max_pages = 1
     hit_cap = False
-    filters = cfg.get("filters") or {}
+    filters = filters_for(cfg, src)
     for n in range(1, max_pages + 1):
         url = page_url(site, src["url"], n)
         raw_count = 0
@@ -3639,12 +3652,74 @@ def _enrich_from_portals_run(cfg, only, session, sources, now, current, errors, 
     return 1 if errors and not updated else 0
 
 
+def _barato_row(item: dict, first_seen: str) -> dict:
+    return {
+        "id": item.get("id"),
+        "site": item.get("site"),
+        "url": item.get("url") or "",
+        "title": item.get("title") or "",
+        "blurb": item.get("blurb") or "",
+        "address": item.get("address") or "",
+        "zone": item.get("zone") or "Colegiales",
+        "price": item.get("price"),
+        "area": item.get("area"),
+        "area_covered": item.get("area_covered"),
+        "area_total": item.get("area_total"),
+        "ambientes": item.get("ambientes"),
+        "photo": item.get("photo") or "",
+        "tags": list(item.get("tags") or []),
+        "expensas_ars": item.get("expensas_ars"),
+        "expensas_text": item.get("expensas_text") or "",
+        "antiguedad_years": item.get("antiguedad_years"),
+        "piso": item.get("piso"),
+        "first_seen": first_seen,
+        "active": True,
+        "gone_at": None,
+    }
+
+
+def publish_baratos(items: list[dict], ok_sites: set[str], now: str, *, dry_run: bool) -> int:
+    """Lista aparte. No toca el catálogo ni el candidato de la home."""
+    path = WEB_DATA_DIR / "listings-baratos.json"
+    state_path = STATE_DIR / "baratos.json"
+    prev_cat = json.loads(path.read_text()) if path.exists() else {"listings": []}
+    prev_state = json.loads(state_path.read_text()) if state_path.exists() else {"listings": {}}
+    prev_rows = {i["id"]: i for i in prev_cat.get("listings") or [] if i.get("id")}
+    seen = dict(prev_state.get("listings") or {})
+    live: list[dict] = []
+    for item in dedupe(items):
+        if not item.get("id"):
+            continue
+        old = prev_rows.get(item["id"]) or {}
+        first = (seen.get(item["id"]) or {}).get("first_seen") or old.get("first_seen") or now
+        seen[item["id"]] = {"first_seen": first}
+        live.append(_barato_row(item, first))
+    live_ids = {i["id"] for i in live}
+    kept = list(live)
+    for old in prev_rows.values():
+        if old["id"] in live_ids:
+            continue
+        site = old.get("site") or ""
+        if site in ok_sites and old.get("active") is not False:
+            kept.append({**old, "active": False, "gone_at": now})
+        else:
+            kept.append(old)
+    kept.sort(key=lambda r: (0 if r.get("active") else 1, r.get("price") or 10**12))
+    active_n = sum(1 for r in kept if r.get("active") is not False)
+    print(f"[baratos] {active_n} activos", flush=True)
+    if not dry_run:
+        write_json(path, {"last_change": now, "listings": kept})
+        write_json(state_path, {"last_change": now, "listings": seen})
+    return active_n
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--no-notify", action="store_true", help="Guarda archivos; no manda Telegram.")
     ap.add_argument("--enrich", action="store_true", help="Relee listados y completa fotos. Sin Telegram.")
     ap.add_argument("--only", choices=list(SITES))
+    ap.add_argument("--track", choices=["barato"], help="Solo la ruta aparte, sin tocar el candidato.")
     args = ap.parse_args()
 
     cfg = json.loads(CONFIG_PATH.read_text())
@@ -3654,9 +3729,9 @@ def main() -> int:
         return enrich_from_portals(cfg, only=args.only)
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
-    if args.no_notify:
+    if args.no_notify or args.track:
         token, chat_id = "", ""
-    if not args.dry_run and not args.no_notify and not (token and chat_id):
+    if not args.dry_run and not args.no_notify and not args.track and not (token and chat_id):
         print("Faltan TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID", file=sys.stderr)
         return 2
 
@@ -3667,6 +3742,8 @@ def main() -> int:
     sources = prioritize_sources(
         [x for x in cfg["sources"] if not args.only or x["site"] == args.only]
     )
+    if args.track:
+        sources = [x for x in sources if x.get("track") == args.track]
 
     errors_by_site: dict[str, list[str]] = {k: [] for k in SITES}
     ok_zones: dict[str, set[str]] = {k: set() for k in SITES}
@@ -3677,6 +3754,8 @@ def main() -> int:
     scrape_lines: dict[str, list[str]] = {k: [] for k in SITES}
     attempted = 0
     skipped_argenprop = False
+    barato_items: list[dict] = []
+    barato_ok: set[str] = set()
     browser = _start_argenprop_browser(sources, in_actions=in_actions)
     if (
         not in_actions
@@ -3696,19 +3775,26 @@ def main() -> int:
             attempted += 1
             try:
                 items, last_page = scrape_source(session, src, cfg, browser=browser)
-                ok_zones[site].add(source_zone(src))
                 print(f"[ok] {label}: {len(items)} avisos", flush=True)
-                scrape_ok[site].append({"name": src["name"], "n": len(items)})
-                scrape_lines[site].append(f"[ok] {label}: {len(items)} avisos")
-                last_pages[site].append((label, last_page))
-                for i in items:
-                    current[site][i["id"]] = i
+                if src.get("track") == "barato":
+                    barato_ok.add(site)
+                    barato_items.extend(items)
+                else:
+                    ok_zones[site].add(source_zone(src))
+                    scrape_ok[site].append({"name": src["name"], "n": len(items)})
+                    scrape_lines[site].append(f"[ok] {label}: {len(items)} avisos")
+                    last_pages[site].append((label, last_page))
+                    for i in items:
+                        current[site][i["id"]] = i
             except (Blocked, requests.RequestException) as e:
-                failed_zones[site].add(source_zone(src))
                 msg = redact_secrets(f"{label}: {e}", token)
-                errors_by_site[site].append(msg)
-                scrape_lines[site].append(f"[error] {msg}")
                 print(f"[error] {msg}", file=sys.stderr)
+                if src.get("track") == "barato":
+                    pass
+                else:
+                    failed_zones[site].add(source_zone(src))
+                    errors_by_site[site].append(msg)
+                    scrape_lines[site].append(f"[error] {msg}")
                 if site == "argenprop" and browser is not None:
                     wait = random.uniform(20, 30)
                     print(f"[fetch] WAF; pausa {wait:.0f}s", file=sys.stderr)
@@ -3720,7 +3806,15 @@ def main() -> int:
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         any_ok = False
 
+        if barato_ok:
+            matched_b = [i for i in barato_items if matches(i, cfg.get("filters_barato") or {})]
+            publish_baratos(matched_b, barato_ok, now, dry_run=args.dry_run)
+            if args.track:
+                any_ok = True
+
         for site in SITES:
+            if args.track:
+                break
             if args.only and site != args.only:
                 continue
             if in_actions and site == "argenprop":
