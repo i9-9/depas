@@ -1,13 +1,11 @@
 {
  "drops": 0,
  "errors": [
-  "argenprop · Recoleta 3 amb: HTTP 202 (WAF / sin listado)",
   "argenprop · Barrio Norte 2 amb: HTTP 202 (WAF / sin listado)",
   "argenprop · Barrio Norte 3 amb: HTTP 202 (WAF / sin listado)",
   "argenprop · Botánico 2 amb: HTTP 202 (WAF / sin listado)",
   "argenprop · Palermo Hollywood 1 amb: HTTP 202 (WAF / sin listado)",
   "argenprop · Palermo Hollywood 3 amb: HTTP 202 (WAF / sin listado)",
-  "argenprop · Belgrano 2 amb: HTTP 202 (WAF / sin listado)",
   "argenprop · Belgrano 3 amb: HTTP 202 (WAF / sin listado)"
  ],
  "lines": [
@@ -17,14 +15,14 @@
   "[ok] argenprop · Palermo Chico: 10 avisos",
   "[ok] argenprop · Belgrano: 10 avisos",
   "[ok] argenprop · Recoleta 2 amb: 11 avisos",
-  "[error] argenprop · Recoleta 3 amb: HTTP 202 (WAF / sin listado)",
+  "[ok] argenprop · Recoleta 3 amb: 9 avisos",
   "[error] argenprop · Barrio Norte 2 amb: HTTP 202 (WAF / sin listado)",
   "[error] argenprop · Barrio Norte 3 amb: HTTP 202 (WAF / sin listado)",
   "[error] argenprop · Botánico 2 amb: HTTP 202 (WAF / sin listado)",
   "[error] argenprop · Palermo Hollywood 1 amb: HTTP 202 (WAF / sin listado)",
   "[ok] argenprop · Palermo Hollywood 2 amb: 8 avisos",
   "[error] argenprop · Palermo Hollywood 3 amb: HTTP 202 (WAF / sin listado)",
-  "[error] argenprop · Belgrano 2 amb: HTTP 202 (WAF / sin listado)",
+  "[ok] argenprop · Belgrano 2 amb: 10 avisos",
   "[error] argenprop · Belgrano 3 amb: HTTP 202 (WAF / sin listado)",
   "[argenprop] filtros: 2 · nuevos: 1 · bajas de precio: 0"
  ],
@@ -56,10 +54,18 @@
    "name": "Recoleta 2 amb"
   },
   {
+   "n": 9,
+   "name": "Recoleta 3 amb"
+  },
+  {
    "n": 8,
    "name": "Palermo Hollywood 2 amb"
+  },
+  {
+   "n": 10,
+   "name": "Belgrano 2 amb"
   }
  ],
- "ran_at": "2026-11-03T17:30:31+00:00",
+ "ran_at": "2026-11-03T20:30:16+00:00",
  "site": "argenprop"
 }
