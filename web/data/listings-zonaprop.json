@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-03T04:15:52+00:00",
+ "last_change": "2026-11-03T18:45:35+00:00",
  "listings": [
   {
    "active": false,
@@ -654,7 +654,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Ciudad de La Paz  al 1900",
    "address_unverified": false,
    "air_usd": null,
@@ -674,7 +674,7 @@
    "expensas_ars": 371576,
    "expensas_text": "$ 371.576 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-03T18:45:35+00:00",
    "id": "zonaprop:57006380",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1494,13 +1494,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 22,
+   "days_seen": 24,
    "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-11-02T02:49:09+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -2931,7 +2931,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Cabildo al 2100",
    "address_unverified": true,
    "air_usd": 95825,
@@ -2951,7 +2951,7 @@
    "expensas_ars": 350000,
    "expensas_text": "$ 350.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-03T18:45:35+00:00",
    "id": "zonaprop:59764443",
    "max_offer_usd": 168531,
    "neto_base_usd": 75801,
@@ -3465,7 +3465,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Av Cabildo 2500",
    "address_unverified": false,
    "air_usd": 24275,
@@ -3485,7 +3485,7 @@
    "expensas_ars": 200000,
    "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-03T18:45:35+00:00",
    "id": "zonaprop:59841232",
    "max_offer_usd": 117982,
    "neto_base_usd": 8326,
@@ -4798,7 +4798,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Av. Cabildo al 1300",
    "address_unverified": false,
    "air_usd": 38425,
@@ -4818,7 +4818,7 @@
    "expensas_ars": 238000,
    "expensas_text": "$ 238.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-03T18:45:35+00:00",
    "id": "zonaprop:60130997",
    "max_offer_usd": 131784,
    "neto_base_usd": 21108,
@@ -5743,7 +5743,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Cabildo al 1600",
    "address_unverified": false,
    "air_usd": 84325,
@@ -5763,7 +5763,7 @@
    "expensas_ars": 92000,
    "expensas_text": "$ 92.000 Expensas",
    "first_seen": "2026-10-27T16:56:14+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-03T18:45:35+00:00",
    "id": "zonaprop:60250675",
    "max_offer_usd": 167580,
    "neto_base_usd": 66732,
@@ -5800,7 +5800,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Cabildo al 1600",
    "address_unverified": false,
    "air_usd": 55000,
@@ -5820,7 +5820,7 @@
    "expensas_ars": 118000,
    "expensas_text": "$ 118.000 Expensas",
    "first_seen": "2026-10-27T16:56:14+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-03T18:45:35+00:00",
    "id": "zonaprop:60252601",
    "max_offer_usd": 153326,
    "neto_base_usd": 37640,
@@ -7304,7 +7304,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "FRENCH 2700",
    "address_unverified": false,
    "air_usd": 1125,
@@ -7324,7 +7324,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-03T18:45:35+00:00",
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -15067,
@@ -7987,7 +7987,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Cabildo 1300",
    "address_unverified": false,
    "air_usd": 56625,
@@ -8007,7 +8007,7 @@
    "expensas_ars": 320000,
    "expensas_text": "$ 320.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-03T18:45:35+00:00",
    "id": "zonaprop:60515225",
    "max_offer_usd": 150017,
    "neto_base_usd": 37328,
@@ -8168,15 +8168,15 @@
    "area_covered": null,
    "area_semi": null,
    "area_total": 50.0,
-   "blurb": "USD 121.500\n$ 280.000 Expensas\n50 m² tot.\n3 amb.\n2 dorm.\n1 baño\n1 coch.\nEcheverria al 900\nBelgrano Chico, Belgrano\nDepartamento 3 ambientes con cochera – ubicación estratégica – listo para mudarsedepartamento de 3 ambientes, ubicado en un segundo piso interno, con balcón francés y ventanas en todos sus ambientes, lo que aporta aire y luz natural a cada espacio, además de ventilación cruzada. La propiedad se encuentra en buen estado, lista para mudarte, y cuenta con cochera, un diferencial que su",
+   "blurb": "USD 121.500\n$ 170.000 Expensas\n50 m² tot.\n3 amb.\n2 dorm.\n1 baño\n1 coch.\nEcheverria al 900\nBelgrano Chico, Belgrano\nDepartamento 3 ambientes con cochera – ubicación estratégica – listo para mudarsedepartamento de 3 ambientes, ubicado en un segundo piso interno, con balcón francés y ventanas en todos sus ambientes, lo que aporta aire y luz natural a cada espacio, además de ventilación cruzada. La propiedad se encuentra en buen estado, lista para mudarte, y cuenta con cochera, un diferencial que su",
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 116762,
    "cochera": true,
    "days_seen": 0,
    "decision": null,
    "exit_usd_m2": 3400,
-   "expensas_ars": 280000,
-   "expensas_text": "$ 280.000 Expensas",
+   "expensas_ars": 170000,
+   "expensas_text": "$ 170.000 Expensas",
    "first_seen": "2026-11-02T21:05:58+00:00",
    "gone_at": null,
    "id": "zonaprop:60600515",
@@ -8226,7 +8226,7 @@
    "area_covered": null,
    "area_semi": null,
    "area_total": 55.0,
-   "blurb": "USD 139.999\n$ 360.000 Expensas\n55 m² tot.\n3 amb.\n2 dorm.\n1 baño\nMariscal Antonio Jose De Sucre 1552\nBelgrano, Capital Federal\n[rosa-196] venta | 3 ambientes con balcón Y lavadero belgrano. Sucre 1552 Belgrano, caba. Excelente departamento de 3 ambientes, ubicado en un cuarto piso al contrafrente, en muy buen estado de conservación. La propiedad cuenta con ambientes funcionales, balcón y lavadero, ofreciendo una distribución cómoda y práctica para la vida cotidiana, super luminoso. Característica",
+   "blurb": "USD 139.999\n$ 360.000 Expensas\n55 m² tot.\n3 amb.\n2 dorm.\n1 baño\nMariscal Antonio Jose De Sucre 1552\nBelgrano, Capital Federal\nVenta | 3 ambientes con balcón Y lavadero belgrano. Sucre 1552 Belgrano, caba. Excelente departamento de 3 ambientes, ubicado en un cuarto piso al contrafrente, en muy buen estado de conservación. La propiedad cuenta con ambientes funcionales, balcón y lavadero, ofreciendo una distribución cómoda y práctica para la vida cotidiana, super luminoso. Características principal",
    "breakeven_exit_usd_m2": 3694,
    "closing_ref_usd": 134539,
    "cochera": null,
@@ -8266,7 +8266,7 @@
     "expensas altas",
     "aire"
    ],
-   "title": "[rosa-196] venta | 3 ambientes con balcón Y lavadero belgrano. Sucre 1552 Belgrano, caba. ",
+   "title": "Venta | 3 ambientes con balcón Y lavadero belgrano. Sucre 1552 Belgrano, caba. Excelente d",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-belgrano-con-balcon-60602187.html",
    "usd_per_m2": 2545,
    "vs_median_n": 34,
