@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  TIERS,
+  compareBest,
+  exitMargin,
+  hasCoveredArea,
   dropLine,
   fold,
   addedOn,
@@ -11,7 +13,7 @@ import {
   hasDrop,
   isAlert,
   isNew,
-  listingTier,
+  rankByExit,
   rankByScore,
   siteLabel,
   streetOf,
@@ -257,11 +259,13 @@ export function Catalog({
   near = [],
   lastNovelty,
   pickId = null,
+  thesisId = null,
 }: {
   listings: Listing[];
   near?: Listing[];
   lastNovelty: string | null;
   pickId?: string | null;
+  thesisId?: string | null;
 }) {
   const [filters, setFilters] = useState<Filters>(INITIAL);
   const [sort, setSort] = useState<SortKey>("tier");
@@ -309,12 +313,19 @@ export function Catalog({
   const pick = pickId
     ? listings.find((x) => x.id === pickId || x.ids.includes(pickId)) ?? null
     : null;
+  const thesis = thesisId
+    ? listings.find((x) => x.id === thesisId || x.ids.includes(thesisId)) ?? null
+    : null;
   const pickShown = Boolean(pick && ready && passesFilters(pick, filters, saved, discarded));
+  const thesisShown = Boolean(
+    thesis && ready && passesFilters(thesis, filters, saved, discarded) && thesis.id !== pick?.id,
+  );
 
   const visible = useMemo(() => {
     if (!ready) return [];
     const rows = listings.filter((item) => {
       if (pickId && (item.id === pickId || item.ids.includes(pickId))) return false;
+      if (thesisId && (item.id === thesisId || item.ids.includes(thesisId))) return false;
       return passesFilters(item, filters, saved, discarded);
     });
     rows.sort((a, b) => {
@@ -334,9 +345,9 @@ export function Catalog({
       return Date.parse(b.first_seen || "") - Date.parse(a.first_seen || "");
     });
     return rows;
-  }, [listings, filters, sort, saved, discarded, pickId, ready]);
+  }, [listings, filters, sort, saved, discarded, pickId, thesisId, ready]);
 
-  const shown = visible.length + (pickShown ? 1 : 0);
+  const shown = visible.length + (pickShown ? 1 : 0) + (thesisShown ? 1 : 0);
   const extras = extraLabel(filters, sort);
   const specialView =
     filters.onlyNew || filters.onlyDrop || filters.onlyGone || filters.onlySaved || filters.onlyDiscarded;
@@ -505,6 +516,7 @@ export function Catalog({
         <Results
           items={visible}
           pick={pickShown ? pick : null}
+          thesis={thesisShown ? thesis : null}
           sort={sort}
           saved={saved}
           discarded={discarded}
@@ -620,9 +632,38 @@ function FilterFields({
   );
 }
 
+function bestGroups(trios: Listing[], smaller: Listing[]) {
+  const covered = trios.filter(hasCoveredArea);
+  const totals = trios.filter((item) => !hasCoveredArea(item));
+  const close = covered.filter((item) => (exitMargin(item) ?? -1) > 0).sort(rankByExit);
+  const miss = covered.filter((item) => {
+    const margin = exitMargin(item);
+    return margin != null && margin <= 0;
+  }).sort(rankByExit);
+  const noExit = covered.filter((item) => exitMargin(item) == null);
+  return [
+    { key: "cierran", label: "Cierran", hint: null, rows: close },
+    { key: "no", label: "No llegan", hint: null, rows: miss },
+    {
+      key: "sin-salida",
+      label: "Sin metro de salida",
+      hint: "Ese barrio no tiene metro de salida, así que no entra a la cuenta.",
+      rows: noExit,
+    },
+    {
+      key: "total",
+      label: "Solo el total",
+      hint: "Tienen un total, no cubiertos. No pueden ser el candidato.",
+      rows: totals,
+    },
+    { key: "menos", label: "1 y 2 ambientes", hint: null, rows: smaller },
+  ].filter((g) => g.rows.length);
+}
+
 function Results({
   items,
   pick,
+  thesis,
   sort,
   saved,
   discarded,
@@ -633,6 +674,7 @@ function Results({
 }: {
   items: Listing[];
   pick: Listing | null;
+  thesis: Listing | null;
   sort: SortKey;
   saved: string[];
   discarded: string[];
@@ -646,36 +688,25 @@ function Results({
   const offset = pick ? 1 : 0;
   const trios = rest.filter((item) => item.ambientes === 3);
   const smaller = rest.filter((item) => item.ambientes !== 3);
-  const groups: { key: string; label: string | null; rows: Listing[] }[] =
+  const groups: { key: string; label: string | null; hint: string | null; rows: Listing[] }[] =
     sort === "tier"
-      ? [
-          ...TIERS.map((tier) => ({
-            key: tier.id,
-            label: tier.label,
-            rows: trios.filter((item) => listingTier(item).id === tier.id),
-          })),
-          {
-            key: "menos",
-            label: "1 y 2 ambientes",
-            rows: smaller,
-          },
-        ].filter((g) => g.rows.length)
+      ? bestGroups(trios, smaller)
       : sort === "zone"
         ? [
             ...zonesOf(rest).map((zone) => ({
               key: zone,
               label: zone,
-              rows: rest
-              .filter((item) => item.zone === zone)
-              .sort((a, b) => (b.ambientes === 3 ? 1 : 0) - (a.ambientes === 3 ? 1 : 0) || rankByScore(a, b)),
+              hint: null,
+              rows: rest.filter((item) => item.zone === zone).sort(compareBest),
             })),
             {
               key: "sin-barrio",
               label: "Sin barrio",
-              rows: rest.filter((item) => !item.zone),
+              hint: null,
+              rows: rest.filter((item) => !item.zone).sort(compareBest),
             },
           ].filter((g) => g.rows.length)
-        : [{ key: "flat", label: null, rows: rest }];
+        : [{ key: "flat", label: null, hint: null, rows: rest }];
 
   let n = offset + hoy.length;
   const ranks = new Map<string, number>();
@@ -705,7 +736,7 @@ function Results({
       {pick && (
         <section>
           <h2 className="band flex items-center justify-between px-3 py-2.5">
-            <span>El de ahora</span>
+            <span>{thesis ? "El número" : "El de ahora"}</span>
             <a href="/" className="link">
               Verlo
             </a>
@@ -722,6 +753,31 @@ function Results({
                 onToggle={() => onOpen(isOpen(pick, openId) ? null : pick.id)}
                 onSave={() => onSave(pick.id)}
                 onDiscard={() => onDiscard(pick.id)}
+              />
+            </li>
+          </ul>
+        </section>
+      )}
+      {thesis && (
+        <section>
+          <h2 className="band flex items-center justify-between px-3 py-2.5">
+            <span>La tesis</span>
+            <a href="/" className="link">
+              Verla
+            </a>
+          </h2>
+          <ul>
+            <li className="border-b border-line">
+              <Row
+                item={thesis}
+                rank={0}
+                pinned
+                open={isOpen(thesis, openId)}
+                saved={isMarked(thesis, saved)}
+                discarded={isMarked(thesis, discarded)}
+                onToggle={() => onOpen(isOpen(thesis, openId) ? null : thesis.id)}
+                onSave={() => onSave(thesis.id)}
+                onDiscard={() => onDiscard(thesis.id)}
               />
             </li>
           </ul>
@@ -759,6 +815,9 @@ function Results({
               <span className="text-muted">{group.rows.length}</span>
             </h2>
           )}
+          {group.hint ? (
+            <p className="border-b border-line px-3 py-2 text-[0.8125rem] leading-snug text-muted">{group.hint}</p>
+          ) : null}
           <ul>
             {group.rows.map((item) => (
               <li key={item.id} className="border-b border-line last:border-b-0">

@@ -1084,6 +1084,52 @@ def apply_net(item: dict, cfg: dict | None = None) -> dict:
     return item
 
 
+def has_covered(item: dict) -> bool:
+    cub = item.get("area_covered")
+    if cub is None or cub <= 0:
+        return False
+    return "m² sin verificar" not in (item.get("tags") or [])
+
+
+def exit_margin(item: dict) -> float | None:
+    exit_m2 = item.get("exit_usd_m2")
+    be = item.get("breakeven_exit_usd_m2")
+    if not exit_m2 or be is None:
+        return None
+    return (float(exit_m2) - float(be)) / float(exit_m2)
+
+
+def is_thesis(item: dict) -> bool:
+    tags = item.get("tags") or []
+    folded = [fold(t) for t in tags]
+    unit = any("epoca" in t or t == "para reciclar" for t in folded)
+    bad = "edificio flojo" in tags or "edificio a reciclar" in tags
+    return unit and not bad
+
+
+def rank_by_exit(items: list[dict]) -> list[dict]:
+    def key(x: dict):
+        margin = exit_margin(x)
+        neto = x.get("neto_hard_usd")
+        return (
+            margin is not None,
+            -1e12 if margin is None else margin,
+            -1e12 if neto is None else neto,
+            -(x["price"] if x.get("price") is not None else 10**12),
+        )
+
+    return sorted(items, key=key, reverse=True)
+
+
+def best_by_zone(items: list[dict]) -> dict | None:
+    by: dict[str, list[dict]] = {}
+    for i in items:
+        by.setdefault(i.get("zone") or "", []).append(i)
+    winners = [rank_by_exit(rows)[0] for rows in by.values() if rows]
+    ranked = rank_by_exit(winners)
+    return ranked[0] if ranked else None
+
+
 def prefer(items: list[dict]) -> list[dict]:
     def key(x: dict):
         neto = x.get("neto_hard_usd")
@@ -1286,11 +1332,16 @@ def resolve_pick_id(listings: list[dict], pick: dict | None = None) -> str | Non
     for i in active:
         if i.get("price") is None or i.get("ambientes") != 3:
             continue
+        if not has_covered(i) or exit_margin(i) is None:
+            continue
         if filters and classify_zone(i, filters) is None:
             continue
-        pool.append(i)
-    ranked = prefer(pool)
-    return ranked[0]["id"] if ranked else None
+        zone = classify_zone(i, filters) if filters else (i.get("zone") or "")
+        if zone == "":
+            zone = i.get("zone") or ""
+        pool.append({**i, "zone": zone})
+    winner = best_by_zone(pool)
+    return winner["id"] if winner else None
 
 
 def save_pick(listings: list[dict]) -> dict:

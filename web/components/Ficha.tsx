@@ -67,10 +67,14 @@ export function Ficha({
   item,
   variant,
   why,
+  mark,
+  level = "h1",
 }: {
   item: Listing;
   variant: "page" | "sheet";
   why?: string | null;
+  mark?: string | null;
+  level?: "h1" | "h2";
 }) {
   const street = streetOf(item);
   const title = item.title && item.title !== street ? item.title : null;
@@ -118,6 +122,7 @@ export function Ficha({
     >
       {variant === "page" ? (
         <header>
+          {mark ? <p className="kicker text-muted">{mark}</p> : null}
           {kick.length ? (
             <p className="kicker">
               {kick.map((bit, i) => (
@@ -134,9 +139,15 @@ export function Ficha({
               ))}
             </p>
           ) : null}
-          <h1 className={`display text-title ${kick.length ? "mt-3" : ""}`}>
-            {item.address || item.title || "Sin dirección"}
-          </h1>
+          {level === "h2" ? (
+            <h2 className={`display text-title ${kick.length || mark ? "mt-3" : ""}`}>
+              {item.address || item.title || "Sin dirección"}
+            </h2>
+          ) : (
+            <h1 className={`display text-title ${kick.length || mark ? "mt-3" : ""}`}>
+              {item.address || item.title || "Sin dirección"}
+            </h1>
+          )}
           {item.address_unverified ? (
             <p className="mt-3 text-ink">Hay que verificar la dirección.</p>
           ) : null}
@@ -161,8 +172,9 @@ export function Ficha({
           ))}
           {variant === "page" ? (
             <p>
-              Lo ordenamos por el neto después de obra y gastos. El aire desempata. La salida es el
-              metro del barrio. Lo que no se arregla con obra no entra.
+              Entre los 3 ambientes con cubiertos, gana el que más margen deja contra la salida de
+              su barrio. El neto en dólares no elige el barrio. Sin cubiertos no puede ser el
+              candidato. Lo que no se arregla con obra no entra.
             </p>
           ) : null}
         </div>

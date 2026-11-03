@@ -1286,9 +1286,20 @@ def test_verdict_and_pick():
     assert "pide USD 135.000 y el gusto es USD 125.000" in v["text"]
     pb = s.verdict({"tags": ["edificio flojo"], "piso": 0, "photo": "x", "expensas_ars": 1, "area": 50})
     assert "el edificio está flojo" in pb["text"] and "es planta baja" in pb["text"]
-    pool = [_item(f"zonaprop:{i}", score=10 - i, price=100000 + i, active=True) for i in range(5)]
+    pool = [
+        _item(
+            f"zonaprop:{i}",
+            score=10 - i,
+            price=100000 + i,
+            active=True,
+            area_covered=57,
+            exit_usd_m2=2750,
+            breakeven_exit_usd_m2=2000 + i * 10,
+        )
+        for i in range(5)
+    ]
     assert s.resolve_pick_id(pool, {"id": None, "manual": False}) == "zonaprop:0"
-    studio = _item("zonaprop:studio", ambientes=1, score=99, price=90000, neto_hard_usd=999999)
+    studio = _item("zonaprop:studio", ambientes=1, score=99, price=90000, neto_hard_usd=999999, area_covered=40)
     assert s.resolve_pick_id([studio, *pool], {"id": None, "manual": False}) == "zonaprop:0"
     assert s.resolve_pick_id([studio], {"id": None, "manual": False}) is None
     cabildo = _item(
@@ -1297,11 +1308,73 @@ def test_verdict_and_pick():
         address="Cabildo al 2100",
         title="3 amb Belgrano",
         zone="Belgrano",
+        area_covered=70,
+        exit_usd_m2=3400,
+        breakeven_exit_usd_m2=2000,
         neto_hard_usd=999999,
     )
     assert s.resolve_pick_id([cabildo, *pool], {"id": None, "manual": False}) == "zonaprop:0"
     assert s.resolve_pick_id(pool, {"id": "zonaprop:3", "manual": True}) == "zonaprop:3"
     assert s.resolve_pick_id(pool, {"id": "gone", "manual": True}) == "zonaprop:0"
+    total_only = _item(
+        "zonaprop:total",
+        address="Ciudad de la Paz 2200",
+        zone="Belgrano",
+        area=80,
+        area_covered=None,
+        tags=["m² sin verificar", "de época"],
+        exit_usd_m2=3400,
+        breakeven_exit_usd_m2=2500,
+        neto_hard_usd=999999,
+    )
+    assert s.resolve_pick_id([total_only, *pool], {"id": None, "manual": False}) == "zonaprop:0"
+    fat = _item(
+        "zonaprop:fat",
+        address="Ciudad de la Paz 2200",
+        zone="Belgrano",
+        area_covered=80,
+        exit_usd_m2=3400,
+        breakeven_exit_usd_m2=3300,
+        neto_hard_usd=80000,
+        tags=[],
+    )
+    lean = _item(
+        "zonaprop:lean",
+        address="Juramento 1100",
+        zone="Belgrano",
+        area_covered=52,
+        exit_usd_m2=3400,
+        breakeven_exit_usd_m2=3000,
+        neto_hard_usd=2000,
+        tags=[],
+    )
+    reco = _item(
+        "zonaprop:reco",
+        address="French 2700",
+        zone="Recoleta",
+        area_covered=60,
+        exit_usd_m2=2750,
+        breakeven_exit_usd_m2=2400,
+        neto_hard_usd=1000,
+        tags=["para reciclar"],
+    )
+    assert s.resolve_pick_id([fat, reco], {"id": None, "manual": False}) == "zonaprop:reco"
+    assert s.resolve_pick_id([fat, lean], {"id": None, "manual": False}) == "zonaprop:lean"
+    hollywood = _item(
+        "zonaprop:ph",
+        address="Humboldt 2000",
+        zone="Palermo Hollywood",
+        area_covered=54,
+        exit_usd_m2=None,
+        breakeven_exit_usd_m2=None,
+        neto_hard_usd=999999,
+        tags=["para reciclar"],
+    )
+    assert s.resolve_pick_id([hollywood, fat], {"id": None, "manual": False}) == "zonaprop:fat"
+    thesis = s.best_by_zone([x for x in (fat, lean, reco, hollywood) if s.is_thesis(x) and s.has_covered(x) and s.exit_margin(x) is not None])
+    assert thesis["id"] == "zonaprop:reco"
+    flojo = {**reco, "id": "zonaprop:flojo", "tags": ["para reciclar", "edificio flojo"]}
+    assert s.is_thesis(flojo) is False
     marked = {**pool[0], "old_price": 110000, "_pick": True}
     assert "candidato" in s.fmt_item(marked, "📉")
 

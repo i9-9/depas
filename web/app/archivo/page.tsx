@@ -22,14 +22,15 @@ export default function ArchivoPage() {
     <SiteChrome
       current="archivo"
       listings={listings}
-      pickId={pick.listing?.id ?? null}
-    >
-      <Catalog
-        listings={listings}
-        near={loadNearListings()}
-        lastNovelty={lastNovelty(listings)}
         pickId={pick.listing?.id ?? null}
-      />
+      >
+        <Catalog
+          listings={listings}
+          near={loadNearListings()}
+          lastNovelty={lastNovelty(listings)}
+          pickId={pick.listing?.id ?? null}
+          thesisId={pick.thesis?.id ?? null}
+        />
     </SiteChrome>
   );
 }

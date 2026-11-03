@@ -85,8 +85,10 @@ export function sourceGaps(now = Date.now()): SourceGap[] {
 }
 
 function withFlags(raw: Listing): Listing {
-  const tags = [...(raw.tags || [])];
-  if (raw.area_covered == null && raw.area != null && !tags.includes("m² sin verificar")) {
+  let tags = [...(raw.tags || [])];
+  if (raw.area_covered != null && raw.area_covered > 0) {
+    tags = tags.filter((t) => t !== "m² sin verificar");
+  } else if (raw.area != null && !tags.includes("m² sin verificar")) {
     tags.push("m² sin verificar");
   }
   const hay = fold(`${raw.title || ""} ${raw.address || ""}`);

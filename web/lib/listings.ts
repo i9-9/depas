@@ -1204,6 +1204,57 @@ export function inIsoWeek(iso: string | null, week = isoWeek()): boolean {
   return Boolean(iso) && isoWeek(iso) === week;
 }
 
+/** Cubiertos vistos en la card. Un total solo no alcanza para elegir. */
+export function hasCoveredArea(item: Pick<Listing, "area_covered" | "tags">): boolean {
+  return (
+    item.area_covered != null &&
+    item.area_covered > 0 &&
+    !(item.tags || []).includes("m² sin verificar")
+  );
+}
+
+/** Margen contra la salida del propio barrio. Positivo = llega. No son dólares. */
+export function exitMargin(
+  item: Pick<Listing, "exit_usd_m2" | "breakeven_exit_usd_m2">,
+): number | null {
+  const exit = item.exit_usd_m2;
+  const be = item.breakeven_exit_usd_m2;
+  if (exit == null || exit <= 0 || be == null) return null;
+  return (exit - be) / exit;
+}
+
+/** De época o para reciclar, y el edificio no está marcado como flojo. */
+export function isThesis(item: Pick<Listing, "tags">): boolean {
+  const tags = item.tags || [];
+  const unit = tags.some((t) => fold(t).includes("epoca") || fold(t) === "para reciclar");
+  const bad = tags.includes("edificio flojo") || tags.includes("edificio a reciclar");
+  return unit && !bad;
+}
+
+export function rankByExit(a: Listing, b: Listing): number {
+  const ma = exitMargin(a);
+  const mb = exitMargin(b);
+  if (ma == null && mb == null) return rankByScore(a, b);
+  if (ma == null) return 1;
+  if (mb == null) return -1;
+  if (mb !== ma) return mb - ma;
+  return rankByScore(a, b);
+}
+
+/** 3 ambientes con cubiertos primero; entre ellos, el margen contra su salida. */
+export function compareBest(a: Listing, b: Listing): number {
+  const a3 = a.ambientes === 3 ? 1 : 0;
+  const b3 = b.ambientes === 3 ? 1 : 0;
+  if (a3 !== b3) return b3 - a3;
+  if (a3) {
+    const ac = hasCoveredArea(a) ? 1 : 0;
+    const bc = hasCoveredArea(b) ? 1 : 0;
+    if (ac !== bc) return bc - ac;
+    if (ac) return rankByExit(a, b);
+  }
+  return rankByScore(a, b);
+}
+
 export function rankByScore(a: Listing, b: Listing): number {
   const na = a.neto_hard_usd ?? -1e12;
   const nb = b.neto_hard_usd ?? -1e12;
