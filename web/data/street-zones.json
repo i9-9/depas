@@ -778,9 +778,7 @@
     },
     {
       "street": "cabildo",
-      "min": 1300,
-      "max": 2899,
-      "zone": "Belgrano"
+      "out": true
     },
     {
       "street": "cazadores",

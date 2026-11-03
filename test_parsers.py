@@ -510,6 +510,10 @@ def test_street_zones():
     assert z("Armenia 2100, Botánico") is None
     assert z("José A. Cabrera 3275") is None
     assert z("Corrientes 1900") is None
+    assert z("Cabildo al 1600") is None
+    assert z("Av. Cabildo 2134") is None
+    assert z("Cabildo 2500, Belgrano") is None
+    assert z("Moldes 2496", "Próximo a las avenidas como Cabildo") == "Belgrano"
     assert z("Tucumán 1900") is None
     assert z("Sarmiento 1400") is None
     assert z("Av. Cordoba al 1332") is None
@@ -606,6 +610,27 @@ def test_street_zones():
     bad = {"address": "Fitz Roy 800", "title": "Depto Recoleta", "url": "https://z/recoleta-1.html",
            "price": 98000, "area": 55, "ambientes": 2, "blurb": ""}
     assert not s.keep_listing(bad, src, f)
+    belgrano = {"name": "Belgrano", "zone": "Belgrano", "aliases": ["belgrano"]}
+    sobre_cabildo = {
+        "address": "Cabildo al 1600",
+        "title": "Venta monoambiente en Belgrano",
+        "url": "https://z/cabildo-1600.html",
+        "price": 122000,
+        "area": 32,
+        "ambientes": 1,
+        "blurb": "sobre Av. Cabildo 1611",
+    }
+    assert not s.keep_listing(sobre_cabildo, belgrano, f)
+    cerca = {
+        "address": "Moldes 2496",
+        "title": "3 amb Belgrano",
+        "url": "https://z/moldes-2496.html",
+        "price": 129000,
+        "area": 59,
+        "ambientes": 3,
+        "blurb": "Próximo a las principales avenidas como Cabildo y a pasos de Monroe.",
+    }
+    assert s.keep_listing(cerca, belgrano, f)
 
 
 def test_place_key_cross_portal():
