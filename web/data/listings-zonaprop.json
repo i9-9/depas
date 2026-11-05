@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-04T18:58:48+00:00",
+ "last_change": "2026-11-05T19:03:32+00:00",
  "listings": [
   {
    "active": false,
@@ -1659,12 +1659,11 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2179,
    "roi_hard": 0.0605,
-   "score": 4,
+   "score": 3,
    "seventy_offer_usd": 112280,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
-    "metro barato",
     "aire amplio"
    ],
    "title": "Ubicado sobre la reconocida Blanco Encalada, en el corazón de Belgrano R, este departament",
@@ -2290,7 +2289,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Echeverria al 900",
    "address_unverified": false,
    "air_usd": 18500,
@@ -2310,7 +2309,7 @@
    "expensas_ars": 150000,
    "expensas_text": "$ 150.000 Expensas",
    "first_seen": "2026-11-04T18:58:48+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-05T19:03:32+00:00",
    "id": "zonaprop:59547223",
    "max_offer_usd": 127492,
    "neto_base_usd": 2466,
@@ -3215,7 +3214,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Arévalo 1582",
    "address_unverified": false,
    "air_usd": null,
@@ -3235,7 +3234,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-05T19:03:32+00:00",
    "id": "zonaprop:59787908",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -5760,13 +5759,12 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2151,
    "roi_hard": 0.056,
-   "score": 1,
+   "score": 0,
    "seventy_offer_usd": 130325,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
     "sobre presupuesto",
-    "metro barato",
     "expensas altas",
     "aire amplio"
    ],
@@ -8219,7 +8217,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "ZAPIOLA 2193. Entre Mendoza",
    "address_unverified": false,
    "air_usd": 12250,
@@ -8239,7 +8237,7 @@
    "expensas_ars": 168000,
    "expensas_text": "$ 168.000 Expensas",
    "first_seen": "2026-11-04T18:58:48+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-05T19:03:32+00:00",
    "id": "zonaprop:60534981",
    "max_offer_usd": 115820,
    "neto_base_usd": -3855,
