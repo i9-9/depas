@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-04T18:58:48+00:00",
+ "last_change": "2026-11-05T01:14:35+00:00",
  "listings": [
   {
    "active": true,
@@ -98,6 +98,31 @@
    ],
    "title": "Amenábar 500, Piso 4, Colegiales",
    "url": "https://www.argenprop.com/departamento-en-venta-en-colegiales-3-ambientes--20629940",
+   "zone": "Colegiales"
+  },
+  {
+   "active": true,
+   "address": "Cespedes  al 2500",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 50.0,
+   "area_covered": null,
+   "area_total": 50.0,
+   "blurb": "USD 108.000\n50 m² tot.\n3 amb.\n2 dorm.\n1 baño\nCespedes  al 2500\nColegiales, Capital Federal\nDepartamento muy luminoso al frente, semipiso, balcón corrido (living/dormitorio), ventilación natural en baño, dormitorios ambos con placard, pasillo con placard, cocina con compartimiento heladera Y lavarropas. Excelente zona. Oportunidad.\nWhatsApp\nContactar",
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-11-05T01:14:35+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60630858",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/63/08/58/720x532/2090283563.jpg",
+   "piso": null,
+   "price": 108000,
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar"
+   ],
+   "title": "Departamento muy luminoso al frente, semipiso, balcón corrido (living/dormitorio), ventila",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-amb-al-frente-semipiso-c-balcon-60630858.html",
    "zone": "Colegiales"
   },
   {
