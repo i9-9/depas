@@ -125,6 +125,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-apto-profesional!-unico-especial-y-reciclado-con-dos-55826316.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:55933509": {
+   "first_seen": "2026-11-07T21:20:29+00:00",
+   "key": "camargo 400|127000|60|3",
+   "place": "camargo 400|60|3",
+   "price": 127000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-55933509.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:56104506": {
    "first_seen": "2026-11-07T18:23:42+00:00",
    "key": "olleros 3587|129000|59|2",
@@ -297,6 +305,14 @@
    "price": 129000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-monoambiente-divisible-a-estrenar-en-recoleta-amplio-57950626.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:58041757": {
+   "first_seen": "2026-11-07T21:20:29+00:00",
+   "key": "gurruchaga 400|122000|61|3",
+   "place": "gurruchaga 400|60|3",
+   "price": 122000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-58041757.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:58106670": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -1374,6 +1390,14 @@
    "price": 105000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-impecable-3-ambientes-73-m-sup2--doble-balcon-lanus-60216384.html",
    "zone": ""
+  },
+  "zonaprop:60219698": {
+   "first_seen": "2026-11-07T21:20:29+00:00",
+   "key": "corrientes 5500|130000|66|3",
+   "place": "corrientes 5500|65|3",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-60219698.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60221848": {
    "first_seen": "2026-10-10T01:31:10+00:00",

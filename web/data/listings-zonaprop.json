@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-07T18:23:42+00:00",
+ "last_change": "2026-11-07T21:20:29+00:00",
  "listings": [
   {
    "active": false,
@@ -688,6 +688,62 @@
    "vs_median_n": 65,
    "vs_median_pct": -59,
    "zone": "Barrio Norte"
+  },
+  {
+   "active": true,
+   "address": "CAMARGO 400",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 60.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 60.0,
+   "blurb": "USD 127.000\n$ 85.000 Expensas\n60 m² tot.\n3 amb.\n2 dorm.\n1 baño\nCAMARGO 400\nVilla Crespo, Capital Federal\nImperdible departamento de 3 ambientes con balcón al contrafrente! Este hermoso y luminoso departamento es ideal para quienes buscan confort y buena ubicación. Ubicado en una zona estratégica, a metros de la línea B del subte, te permite conectar fácilmente con toda la ciudad. Características destacadas: Amplio living-comedor con salida a un balcón al contrafrente, ideal para relajarte. Cocin",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 122047,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 85000,
+   "expensas_text": "$ 85.000 Expensas",
+   "first_seen": "2026-11-07T21:20:29+00:00",
+   "gone_at": null,
+   "id": "zonaprop:55933509",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/55/93/35/09/720x532/1968221652.jpg",
+   "piso": null,
+   "price": 127000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-07T21:20:29+00:00",
+     "price": 127000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": -1,
+   "seventy_offer_usd": null,
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar",
+    "sobre presupuesto"
+   ],
+   "title": "Imperdible departamento de 3 ambientes con balcón al contrafrente! Este hermoso y luminoso",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-55933509.html",
+   "usd_per_m2": 2117,
+   "vs_median_n": 54,
+   "vs_median_pct": -6,
+   "zone": "Villa Crespo",
+   "zone_unverified": false
   },
   {
    "active": true,
@@ -1635,6 +1691,63 @@
    "zone": "Recoleta"
   },
   {
+   "active": true,
+   "address": "GURRUCHAGA 400",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 61.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 61.0,
+   "blurb": "USD 122.000\n$ 320.000 Expensas\n61 m² tot.\n3 amb.\n2 dorm.\n1 baño\nGURRUCHAGA 400\nVilla Crespo, Capital Federal\n3 amplios ambientes con muy buena luminosidad Y estado balcon frances en el living Y habitacion. Cocina grande con espacio para office Y lavadero independiente la cual se pude conectar al living con un bonito breakfast O desayunador. El edificio, muy bien conservado, se encuentra estrategicamente ubicado en pleno centro de villa crespo, A media cuadra de la av. Corrientes, dos del subte \"",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 117242,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 320000,
+   "expensas_text": "$ 320.000 Expensas",
+   "first_seen": "2026-11-07T21:20:29+00:00",
+   "gone_at": null,
+   "id": "zonaprop:58041757",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/58/04/17/57/720x532/2062642325.jpg",
+   "piso": null,
+   "price": 122000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-07T21:20:29+00:00",
+     "price": 122000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": 0,
+   "seventy_offer_usd": null,
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar",
+    "metro barato",
+    "expensas altas"
+   ],
+   "title": "3 amplios ambientes con muy buena luminosidad Y estado balcon frances en el living Y habit",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-58041757.html",
+   "usd_per_m2": 2000,
+   "vs_median_n": 54,
+   "vs_median_pct": -12,
+   "zone": "Villa Crespo",
+   "zone_unverified": false
+  },
+  {
    "active": false,
    "address": "",
    "ambientes": null,
@@ -2215,7 +2328,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2235,7 +2348,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-07T21:20:29+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -3904,11 +4017,12 @@
    "reno_usd_m2": 375,
    "roi_base": 0.258,
    "roi_hard": 0.0912,
-   "score": 2,
+   "score": 3,
    "seventy_offer_usd": 112280,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
+    "metro barato",
     "expensas altas",
     "aire amplio"
    ],
@@ -3961,11 +4075,12 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 0,
+   "score": 1,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
-    "m² sin verificar"
+    "m² sin verificar",
+    "metro barato"
    ],
    "title": "3 ambientes al contrafrente en excelente ubicación residencial Y A 2 cuadras de avda. Fede",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-palpa-2987-colegiales-3-amb.-al-cfte.-c-vista-59615902.html",
@@ -4553,13 +4668,13 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 1,
+   "score": 0,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
     "sobre presupuesto",
-    "metro muy barato"
+    "metro barato"
    ],
    "title": "¡¡semipiso de 3 ambientes al frente con balcón en venta, en villa crespo!! Hermoso departa",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semipiso-de-3-ambientes-al-frente-en-villa-crespo-59747810.html",
@@ -7702,6 +7817,63 @@
    "title": "impecable ambientes m sup2 doble balcon lanus",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-impecable-3-ambientes-73-m-sup2--doble-balcon-lanus-60216384.html",
    "zone": ""
+  },
+  {
+   "active": true,
+   "address": "CORRIENTES 5500",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": 27,
+   "area": 66.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 66.0,
+   "blurb": "USD 130.000\n7%\n$ 200.000 Expensas\n66 m² tot.\n3 amb.\n2 dorm.\n1 baño\nCORRIENTES 5500\nVilla Crespo, Capital Federal\nHermoso departamento de 3 ambientes al frente con balcon en Corrientes y Gurruchaga. En un sexto piso, sobre un edificio de 27 años de antiguedad, tenemos esta propiedad que cuenta con un amplio living comedor con acceso al balcon, cocina independiente con lavadero incorporado, dos habitaciones amplias con placard empotrado y un baño completo con bañera remodernizado. La ubicacion est",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 124930,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
+   "first_seen": "2026-11-07T21:20:29+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60219698",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/21/96/98/720x532/2080139864.jpg",
+   "piso": null,
+   "price": 130000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-07T21:20:29+00:00",
+     "price": 130000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": 0,
+   "seventy_offer_usd": null,
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar",
+    "sobre presupuesto",
+    "metro barato"
+   ],
+   "title": "Hermoso departamento de 3 ambientes al frente con balcon en Corrientes y Gurruchaga. En un",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-60219698.html",
+   "usd_per_m2": 1970,
+   "vs_median_n": 54,
+   "vs_median_pct": -13,
+   "zone": "Villa Crespo",
+   "zone_unverified": false
   },
   {
    "active": false,
