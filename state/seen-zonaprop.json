@@ -28,12 +28,36 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-comodisimo-semipiso-apto-profesional-en-venta-ubicado-50871263.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:52868991": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "tres arroyos 397|125000|53|2",
+   "place": "tres arroyos 397|55|2",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-dos-ambientes-al-frente-con-balcon-52868991.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:52875518": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "key": null,
    "price": 131076,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-tigre-residencial-52875518.html",
    "zone": ""
+  },
+  "zonaprop:53012113": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "corrientes 4800|129999|52|2",
+   "place": "corrientes 4800|50|2",
+   "price": 129999,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-2-ambientes-a-estrenar-en-53012113.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:53012118": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "corrientes 4800|129999|57|2",
+   "place": "corrientes 4800|55|2",
+   "price": 129999,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-2-ambientes-a-estrenar-en-53012118.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:53065846": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -62,6 +86,22 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamentos-estrenar-barrio-norte-cabrera-y-mario-54766947.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:55170181": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "virrey arredondo 2684|120000|53|1",
+   "place": "virrey arredondo 2684|55|1",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-seno-piso-al-frente-muy-luminoso!-balcon-aterrazado-55170181.html",
+   "zone": "Colegiales"
+  },
+  "zonaprop:55259357": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "tres arroyos 845|120000|64|3",
+   "place": "tres arroyos 845|65|3",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-villa-crespo-55259357.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:55263580": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "azcuenaga 700|120000|57|3",
@@ -84,6 +124,14 @@
    "price": 138000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-apto-profesional!-unico-especial-y-reciclado-con-dos-55826316.html",
    "zone": "Barrio Norte"
+  },
+  "zonaprop:56104506": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "olleros 3587|129000|59|2",
+   "place": "olleros 3587|60|2",
+   "price": 129000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-duplex-de-59-m-sup2--con-1-dormitorio-y-2-banos-en-56104506.html",
+   "zone": "Chacarita"
   },
   "zonaprop:56176848": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -176,6 +224,22 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-divino-2-amb-en-barrio-norte-con-balcon-y-terraza-57416646.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:57420379": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "charlone 300|129500|62|3",
+   "place": "charlone 300|60|3",
+   "price": 129500,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-charlone-al-300-t-al-frente-impec-balcon-todo-sol-57420379.html",
+   "zone": "Chacarita"
+  },
+  "zonaprop:57460106": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "villarroel 1200|134000|65|3",
+   "place": "villarroel 1200|65|3",
+   "price": 134000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-villa-crespo-57460106.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:57700867": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "av cordoba 2700|135000|73|3",
@@ -190,12 +254,36 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-dorm.-con-patio-echesortu-57717195.html",
    "zone": ""
   },
+  "zonaprop:57754318": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "rojas 1892|134623|57|2",
+   "place": "rojas 1892|55|2",
+   "price": 134623,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-2-ambientes-en-villa-crespo-57754318.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:57810161": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "conde 900|139000|78|3",
+   "place": "conde 900|80|3",
+   "price": 139000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-colegiales-capital-federal-57810161.html",
+   "zone": "Colegiales"
+  },
   "zonaprop:57815465": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "key": "larrea 800|130000|58|3",
    "last_seen": "2026-10-10T03:03:21+00:00",
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-barrio-norte-con-balcon-reciclado-a-57815465.html"
+  },
+  "zonaprop:57876914": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "scalabrini ortiz 300|138000|56|2",
+   "place": "scalabrini ortiz 300|55|2",
+   "price": 138000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-monoambiente-divisible-a-estrenar-con-balcon-57876914.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:57906166": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -259,6 +347,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-regio-3-ambientes-totalmente-reciclado-hi-per-58479279.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:58492361": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "jorge newbery 3900|125000|70|3",
+   "place": "jorge newbery 3900|70|3",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-con-renta-depto-3-ambientes.-balcon-terraza-al-58492361.html",
+   "zone": "Chacarita"
+  },
   "zonaprop:58587120": {
    "first_seen": "2026-10-10T01:45:22+00:00",
    "key": "pueyrredon 1200|125000|53|2",
@@ -293,6 +389,14 @@
    "price": 118000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-luminoso-al-frente-58692487.html",
    "zone": ""
+  },
+  "zonaprop:58707825": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "concepcion arenal 3900|120000|52|2",
+   "place": "concepcion arenal 3900|50|2",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-venta-chacarita-2-amb-balcon-58707825.html",
+   "zone": "Chacarita"
   },
   "zonaprop:58787627": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -353,6 +457,22 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-58919977.html",
    "zone": "Recoleta"
   },
+  "zonaprop:58924451": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "san martin 1800|129900|74|3",
+   "place": "san martin 1800|75|3",
+   "price": 129900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-58924451.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:58928336": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "scalabrini ortiz 326|140000|53|2",
+   "place": "scalabrini ortiz 326|55|2",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-av-scalabrini-ortiz-y-av-corrientes-2-ambientes-al-58928336.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:58950172": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "key": "charcas 2800|135000|60|3",
@@ -394,6 +514,30 @@
    "price": 92000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-dos-ambientes-con-cochera-en-alquiler-59124802.html",
    "zone": ""
+  },
+  "zonaprop:59130047": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "charlone 509|129000|66|3",
+   "place": "charlone 509|65|3",
+   "price": 129000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-reservado-colegiales:-3-amb.-balcon-fte.-impecable.-59130047.html",
+   "zone": "Chacarita"
+  },
+  "zonaprop:59147426": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "cramer 740|134995|52|2",
+   "place": "cramer 740|50|2",
+   "price": 134995,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-ambientes-en-colegiales-a-59147426.html",
+   "zone": "Colegiales"
+  },
+  "zonaprop:59188943": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "cramer 700|134990|52|2",
+   "place": "cramer 700|50|2",
+   "price": 134990,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-colegiales-a-estrenar-59188943.html",
+   "zone": "Colegiales"
   },
   "zonaprop:59214423": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -437,6 +581,14 @@
    "price": 128000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-56-27-m-sup2--gran-monoambiente-divisible-pueyrredon-59353042.html"
   },
+  "zonaprop:59379668": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "scalabrini ortiz 300|130900|53|2",
+   "place": "scalabrini ortiz 300|55|2",
+   "price": 130900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-59379668.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:59388214": {
    "first_seen": "2026-10-10T01:45:22+00:00",
    "key": "scalabrini ortiz 2600|135000|65|2",
@@ -458,6 +610,38 @@
    "price": 119000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-duplex-dos-ambientes-y-medio-con-balcon-en-59404975.html",
    "zone": "Barrio Norte"
+  },
+  "zonaprop:59406295": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "roseti 700|139900|55|2",
+   "place": "roseti 700|55|2",
+   "price": 139900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-a-estrenar-con-balcon-parrilla-y-vista-59406295.html",
+   "zone": "Chacarita"
+  },
+  "zonaprop:59411776": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "jufre 0|130000|55|2",
+   "place": "jufre 0|55|2",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semi-piso-de-un-dormitorio-en-venta-en-villa-crespo.-59411776.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:59450011": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "roseti 720|139900|65|2",
+   "place": "roseti 720|65|2",
+   "price": 139900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-excelente-dpto-de-2-amb-en-colegiales-pura-luz-59450011.html",
+   "zone": "Chacarita"
+  },
+  "zonaprop:59461277": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "charlone 987|132000|57|3",
+   "place": "charlone 987|55|3",
+   "price": 132000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-espacioso-3-amb-con-balcon-al-frente-colegiales-59461277.html",
+   "zone": "Chacarita"
   },
   "zonaprop:59486370": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -532,6 +716,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-belgrano-59584479.html",
    "zone": "Belgrano"
   },
+  "zonaprop:59615902": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "palpa 2900|123000|59|3",
+   "place": "palpa 2900|60|3",
+   "price": 123000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-palpa-2987-colegiales-3-amb.-al-cfte.-c-vista-59615902.html",
+   "zone": "Colegiales"
+  },
   "zonaprop:59618004": {
    "first_seen": "2026-10-10T01:45:22+00:00",
    "key": "san martin 933|125000|60|3",
@@ -595,6 +787,22 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-amb-con-patio-apto-profesional-59664607.html",
    "zone": ""
   },
+  "zonaprop:59666573": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "olleros 3200|140000|61|3",
+   "place": "olleros 3200|60|3",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-amb-al-frente-c-balcon-corrido-apto-59666573.html",
+   "zone": "Colegiales"
+  },
+  "zonaprop:59669157": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "scalabrini ortiz 300|125000|51|2",
+   "place": "scalabrini ortiz 300|50|2",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-a-estrenar-en-villa-59669157.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:59692379": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "price": 76000,
@@ -607,6 +815,22 @@
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-1-dormitorio-1-bano-recoleta-59717289.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:59739090": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "amenabar 600|123000|57|1",
+   "place": "amenabar 600|55|1",
+   "price": 123000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-monoambiente-balcon-colegiales-59739090.html",
+   "zone": "Colegiales"
+  },
+  "zonaprop:59747810": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "serrano 544|135000|69|3",
+   "place": "serrano 544|70|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semipiso-de-3-ambientes-al-frente-en-villa-crespo-59747810.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:59764443": {
    "first_seen": "2026-10-23T20:47:33+00:00",
@@ -623,6 +847,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-c-balcon-amoblado-once-59771456.html",
    "zone": ""
   },
+  "zonaprop:59772653": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "padilla 870|127900|52|2",
+   "place": "padilla 870|50|2",
+   "price": 127900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-con-balcon-en-torres-59772653.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:59774102": {
    "first_seen": "2026-10-23T20:47:33+00:00",
    "key": "blanco encalada 2900|125000|50|3",
@@ -630,6 +862,14 @@
    "price": 125000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-excelente-3-amb-con-vista-abierta-le-brique-59774102.html",
    "zone": "Belgrano"
+  },
+  "zonaprop:59775783": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "estado de israel 4500|126000|50|3",
+   "place": "estado de israel 4500|50|3",
+   "price": 126000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-oportunidad!-3-ambientes-listo-para-disfrutar-en-una-59775783.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:59784399": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -681,6 +921,14 @@
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta.-3-amb-con-balcon-59823276.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:59829909": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "aguirre 100|124900|73|3",
+   "place": "aguirre 100|75|3",
+   "price": 124900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-gran-oportunidad!-muy-lindo-3-ambientes-al-frente-con-59829909.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:59835668": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -748,6 +996,22 @@
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-2-ambientes-palermo-chico-59914111.html"
   },
+  "zonaprop:59914228": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "vera 800|133000|53|2",
+   "place": "vera 800|55|2",
+   "price": 133000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-villa-crespo-a-estrenar-59914228.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:59914291": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "vera 800|135000|50|2",
+   "place": "vera 800|50|2",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-59914291.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:59919174": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "cordoba 3300|139500|78|3",
@@ -806,6 +1070,22 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-excelente-oportunidad-60004482.html",
    "zone": "Belgrano"
   },
+  "zonaprop:60015835": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "estado de israel 4499|126000|55|3",
+   "place": "estado de israel 4499|55|3",
+   "price": 126000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-villa-crespo-tres-ambientes-frente-60015835.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60028845": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "jorge newbery 3940|123000|70|3",
+   "place": "jorge newbery 3940|70|3",
+   "price": 123000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-amb.-al-frente-c-balcon-corrido-amplia-cocina-60028845.html",
+   "zone": "Chacarita"
+  },
   "zonaprop:60032185": {
    "first_seen": "2026-10-19T17:41:13+00:00",
    "key": "fitz roy 2400|120000|55|2",
@@ -820,6 +1100,14 @@
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-luminoso-en-recoleta-60044229.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:60044377": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "scalabrini ortiz 300|125000|53|2",
+   "place": "scalabrini ortiz 300|55|2",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-con-balcon-parrilla-60044377.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60047041": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -893,6 +1181,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-san-nicolas-capital-federal-60087285.html",
    "zone": "Recoleta"
   },
+  "zonaprop:60088759": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "san martin 1400|133000|60|3",
+   "place": "san martin 1400|60|3",
+   "price": 133000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-villa-crespo-60088759.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60095623": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "key": "arenales 3000|109000|51|2",
@@ -958,6 +1254,14 @@
    "price": 130000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dto-3-amb-al-frente-con-balcon-60138686.html",
    "zone": "Barrio Norte"
+  },
+  "zonaprop:60158330": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "thames 716|140000|60|3",
+   "place": "thames 716|60|3",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-excelente-departamento-en-venta-al-frente-con-balcon-60158330.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60167531": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -1100,6 +1404,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-paso-700-ed.-de-categoia-semipiso-3-ambientes-60245847.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:60248796": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "conde 1400|130000|50|3",
+   "place": "conde 1400|50|3",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-colegiales-60248796.html",
+   "zone": "Colegiales"
+  },
   "zonaprop:60249000": {
    "first_seen": "2026-10-23T20:47:33+00:00",
    "key": "ricardo balbin 2500|140000|65|3",
@@ -1166,12 +1478,36 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-el-barrio-de-san-60266750.html",
    "zone": ""
   },
+  "zonaprop:60267105": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "valentin virasoro 1900|138000|57|2",
+   "place": "valentin virasoro 1900|55|2",
+   "price": 138000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-villa-crespo-2-amb-entrega-inmediata.-60267105.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60267562": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "valentin virasoro 1900|137500|57|2",
+   "place": "valentin virasoro 1900|55|2",
+   "price": 137500,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-estrenar-villa-crespo-2-ambientes-57-m-sup2-60267562.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60273177": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "marcelo torcuato de alvear 1900|132000|56|3",
    "price": 132000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-barrio-norte-apto-credito-60273177.html",
    "zone": "Barrio Norte"
+  },
+  "zonaprop:60273457": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "murillo 600|129000|72|2",
+   "place": "murillo 600|70|2",
+   "price": 129000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-balcon-villa-crespo-60273457.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60273748": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -1195,6 +1531,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-oportunidad!-departamento-dos-dorm.-al-contrafrente-60277249.html",
    "zone": "Belgrano"
   },
+  "zonaprop:60277337": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "charlone 600|140000|67|3",
+   "place": "charlone 600|65|3",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-al-frente-con-balcon-60277337.html",
+   "zone": "Chacarita"
+  },
   "zonaprop:60278706": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "austria 2400|135000|54|3",
@@ -1215,6 +1559,14 @@
    "last_seen": "2026-10-10T03:03:21+00:00",
    "price": 115000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-barrio-norte-2-ambientes-60283321.html"
+  },
+  "zonaprop:60284520": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "rojas 1400|125000|85|3",
+   "place": "rojas 1400|85|3",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-venta-villa-crespo-3-amb-balcon-60284520.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60285117": {
    "first_seen": "2026-10-10T01:31:10+00:00",
@@ -1237,6 +1589,30 @@
    "last_seen": "2026-10-10T03:03:21+00:00",
    "price": 129900,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-60293202.html"
+  },
+  "zonaprop:60302533": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "darwin 135|130000|50|2",
+   "place": "darwin 135|50|2",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-a-estrenar-ideal-inversor-60302533.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60302656": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "estado de israel 4500|126000|55|3",
+   "place": "estado de israel 4500|55|3",
+   "price": 126000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-con-balcon-av-60302656.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60303251": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "jorge newbery 3156|130000|56|3",
+   "place": "jorge newbery 3156|55|3",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-amb-con-balcon-corrido-en-60303251.html",
+   "zone": "Colegiales"
   },
   "zonaprop:60305544": {
    "first_seen": "2026-10-23T20:47:33+00:00",
@@ -1261,6 +1637,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-monoambiente-divisible-con-balcon-y-amenities-barrio-60306979.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:60310988": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "camargo 915|125000|52|2",
+   "place": "camargo 915|50|2",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-unidades-de-2-ambientes-edificio-full-amenities!-60310988.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60312107": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "sanchez de bustamante 1313|131000|50|2",
@@ -1283,12 +1667,36 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-depto-3-amb-con-balcon-al-frente-en-belgrano-c-60324487.html",
    "zone": "Belgrano"
   },
+  "zonaprop:60338027": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "charlone 901|129000|53|3",
+   "place": "charlone 901|55|3",
+   "price": 129000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-3-ambientes-colegiales-60338027.html",
+   "zone": "Chacarita"
+  },
   "zonaprop:60343683": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "paraguay 1269|106000|52|3",
    "price": 106000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-recoleta-60343683.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:60344483": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "charlone 900|129000|53|3",
+   "place": "charlone 900|55|3",
+   "price": 129000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-de-departamento-de-3-ambientes-en-chacarita-60344483.html",
+   "zone": "Chacarita"
+  },
+  "zonaprop:60347742": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "estado de israel 4479|127000|51|2",
+   "place": "estado de israel 4479|50|2",
+   "price": 127000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-a-estrenar-piso-alto-balcon-villa-60347742.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60348201": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -1327,6 +1735,14 @@
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-recoleta-60353278.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:60357829": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "federico lacroze 3700|135000|63|3",
+   "place": "federico lacroze 3700|65|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-depto-3-ambientes-con-balcon-bano-y-cocina-60357829.html",
+   "zone": "Chacarita"
   },
   "zonaprop:60358759": {
    "first_seen": "2026-10-10T04:06:21+00:00",
@@ -1415,6 +1831,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-belgrano-60404362.html",
    "zone": "Belgrano"
   },
+  "zonaprop:60404627": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "vera 900|135000|54|2",
+   "place": "vera 900|55|2",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-en-villa-crespo-60404627.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60409929": {
    "first_seen": "2026-10-11T01:58:51+00:00",
    "key": "pena 2700|120000|65|2",
@@ -1422,6 +1846,22 @@
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-o-3-ambientes-balcon-patio-60409929.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:60413111": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "cucha cucha 1500|140000|66|3",
+   "place": "cucha cucha 1500|65|3",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-venta-en-villa-crespo-sum-60413111.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60417452": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "honorio pueyrredon 1700|120000|69|3",
+   "place": "honorio pueyrredon 1700|70|3",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-depto.-3-ambientes-con-balcon-al-frente-en-villa-60417452.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60425458": {
    "first_seen": "2026-10-13T18:24:03+00:00",
@@ -1447,6 +1887,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-recoleta-60447256.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:60460236": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "scalabrini ortiz 100|140000|70|3",
+   "place": "scalabrini ortiz 100|70|3",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-balcon-y-mucha-luz-60460236.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60462742": {
    "first_seen": "2026-10-23T20:47:33+00:00",
    "key": "moldes 2496|129000|59|3",
@@ -1463,6 +1911,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-monoambiente-en-palermo-hollywood-balcon-pat-60468175.html",
    "zone": "Palermo Hollywood"
   },
+  "zonaprop:60468856": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "corrientes 5171|135000|57|3",
+   "place": "corrientes 5171|55|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-muy-luminoso-piso-alto-60468856.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60469065": {
    "first_seen": "2026-10-23T20:47:33+00:00",
    "key": "moldes 2496|135000|59|3",
@@ -1470,6 +1926,14 @@
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-venta-belgrano-3-ambientes-balcon-60469065.html",
    "zone": "Belgrano"
+  },
+  "zonaprop:60471331": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "lerma 47|134500|59|3",
+   "place": "lerma 47|60|3",
+   "price": 134500,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-luminoso-y-amplio-3-ambientes-con-balcon-corrido.-60471331.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60472761": {
    "first_seen": "2026-10-23T20:47:33+00:00",
@@ -1487,6 +1951,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-tres-ambientes-en-belgrano-60478037.html",
    "zone": "Belgrano"
   },
+  "zonaprop:60478488": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "hidalgo 1700|130000|74|3",
+   "place": "hidalgo 1700|75|3",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-al-frente-en-villa-60478488.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60480493": {
    "first_seen": "2026-11-04T18:58:48+00:00",
    "key": "french 3000|130000|52|2",
@@ -1495,6 +1967,30 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-2-ambientes-con-balcon-al-60480493.html",
    "zone": "Recoleta"
   },
+  "zonaprop:60483019": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "acevedo 600|140000|63|2",
+   "place": "acevedo 600|65|2",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-2-amb-con-balcon-13-m-sup2--villa-crespo-60483019.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60487865": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "escalada de san martin 900|130000|55|2",
+   "place": "escalada de san martin 900|55|2",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambinetes-a-estrenar-villa-crespo-60487865.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60494550": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "roseti 722|139900|55|2",
+   "place": "roseti 722|55|2",
+   "price": 139900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-roseti-700-venta-departamento-de-dos-ambientes-en-60494550.html",
+   "zone": "Chacarita"
+  },
   "zonaprop:60496619": {
    "first_seen": "2026-10-23T20:47:33+00:00",
    "key": "corredor responsable maria montserrat vera csi 5971|139000|56|2",
@@ -1502,6 +1998,30 @@
    "price": 139000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-duplex-2-amb-balcon-y-parrilla-belgrano-60496619.html",
    "zone": "Belgrano"
+  },
+  "zonaprop:60506967": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "serrano 800|139900|71|2",
+   "place": "serrano 800|70|2",
+   "price": 139900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-2-ambientes-balcon-terraza-en-60506967.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60510308": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "araoz 600|129000|54|2",
+   "place": "araoz 600|55|2",
+   "price": 129000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-semipiso-dos-ambientes.-al-frente.-con-60510308.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60511735": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "julian alvarez 548|123500|55|3",
+   "place": "julian alvarez 548|55|3",
+   "price": 123500,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-externo-con-balcon-super-60511735.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60515225": {
    "first_seen": "2026-10-23T20:47:33+00:00",
@@ -1527,6 +2047,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-belgrano-60534981.html",
    "zone": "Belgrano"
   },
+  "zonaprop:60538782": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "warnes 300|125000|100|3",
+   "place": "warnes 300|100|3",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-100-m-sup2--en-villa-60538782.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60541751": {
    "first_seen": "2026-10-27T16:56:14+00:00",
    "key": "franklin roosevelt 2700|133000|50|3",
@@ -1534,6 +2062,54 @@
    "price": 133000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-departamento-8vo-piso-cfte-abierto-60541751.html",
    "zone": "Belgrano"
+  },
+  "zonaprop:60541829": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "olleros 3500|125000|50|2",
+   "place": "olleros 3500|50|2",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-tipo-loft-en-piso-alto.-60541829.html",
+   "zone": "Chacarita"
+  },
+  "zonaprop:60543418": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "aguirre 100|125000|75|3",
+   "place": "aguirre 100|75|3",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-villa-crespo-60543418.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60559038": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "freire 2000|140000|62|3",
+   "place": "freire 2000|60|3",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-62-m-sup2--de-3-ambientes-en-belgrano-60559038.html",
+   "zone": "Belgrano"
+  },
+  "zonaprop:60579660": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "jorge newbery 3900|130000|70|3",
+   "place": "jorge newbery 3900|70|3",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-balcon-y-patio-en-chacarita!-60579660.html",
+   "zone": "Chacarita"
+  },
+  "zonaprop:60593979": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "castillo 200|129000|51|2",
+   "place": "castillo 200|50|2",
+   "price": 129000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-villa-crespo-dos-amb-c-cochera-y-amenities-60593979.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60594223": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "corrientes 5700|128500|71|3",
+   "place": "corrientes 5700|70|3",
+   "price": 128500,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-al-frente-en-villa-crespo-60594223.html",
+   "zone": "Villa Crespo"
   },
   "zonaprop:60600515": {
    "first_seen": "2026-11-02T21:05:58+00:00",
@@ -1559,6 +2135,22 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-belgrano-con-balcon-60602187.html",
    "zone": "Belgrano"
   },
+  "zonaprop:60609186": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "scalabrini ortiz 300|139999|53|2",
+   "place": "scalabrini ortiz 300|55|2",
+   "price": 139999,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-2-ambientes-a-estrenar-en-60609186.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60613929": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "leopoldo marechal 1184|125000|60|3",
+   "place": "leopoldo marechal 1184|60|3",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-3-ambientes-con-balcon-cerrado-60613929.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60614938": {
    "first_seen": "2026-11-04T18:58:48+00:00",
    "key": "juncal 2300|138500|60|3",
@@ -1567,6 +2159,22 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-recoleta-capital-federal-60614938.html",
    "zone": "Recoleta"
   },
+  "zonaprop:60617108": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "corrientes 5171|135000|51|3",
+   "place": "corrientes 5171|50|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-3-ambientes-super-luminoso-con-balcon-60617108.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60634336": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "roseti 400|125000|61|3",
+   "place": "roseti 400|60|3",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-chacarita-60634336.html",
+   "zone": "Chacarita"
+  },
   "zonaprop:60650902": {
    "first_seen": "2026-11-07T00:26:28+00:00",
    "key": "moldes 2400|120000|57|3",
@@ -1574,6 +2182,22 @@
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-belgrano-3-ambientes-al-frente-tipo-ph-60650902.html",
    "zone": "Belgrano"
+  },
+  "zonaprop:60652409": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "amenabar 700|132000|65|3",
+   "place": "amenabar 700|65|3",
+   "price": 132000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-56-m-sup2--con-2-dorm.-en-venta-en-60652409.html",
+   "zone": "Colegiales"
+  },
+  "zonaprop:60652493": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "vera 900|139900|55|2",
+   "place": "vera 900|55|2",
+   "price": 139900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-2-ambientes-luminoso-9-piso-en-villa-crespo-60652493.html",
+   "zone": "Villa Crespo"
   }
  },
  "meta": {

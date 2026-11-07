@@ -1,5 +1,13 @@
 {
  "listings": {
+  "mercadolibre:1679400183": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "charlone 300|129500|62|3",
+   "place": "charlone 300|60|3",
+   "price": 129500,
+   "url": "https://departamento.mercadolibre.com.ar/MLA-1679400183-charlone-al-300-tal-frente-impec-balcon-todo-sol-apto-profesional-_JM",
+   "zone": "Chacarita"
+  },
   "mercadolibre:1729567163": {
    "first_seen": "2026-10-10T04:49:02+00:00",
    "key": "av cordoba 1831|89000|50|2",
@@ -135,6 +143,6 @@
   }
  },
  "meta": {
-  "coverage_week": "2026-W44"
+  "coverage_week": "2026-W45"
  }
 }

@@ -24,6 +24,30 @@
    "url": "https://cabaprop.com.ar/propiedad/69fd555667d04ff04fbe81eb/departamento-3-ambientes-recoleta",
    "zone": "Barrio Norte"
   },
+  "cabaprop:6a2c1e13ef11909923511ba0": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "jorge newbery 3600|132000|52|3",
+   "place": "jorge newbery 3600|50|3",
+   "price": 132000,
+   "url": "https://cabaprop.com.ar/propiedad/6a2c1e13ef11909923511ba0/excelente-departamento-de-3-amb-con-balcon-al-frente-vista-abierta",
+   "zone": "Chacarita"
+  },
+  "cabaprop:6a92523b3e6a16a180f4aca9": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "estado de israel 4500|126000|52|3",
+   "place": "estado de israel 4500|50|3",
+   "price": 126000,
+   "url": "https://cabaprop.com.ar/propiedad/6a92523b3e6a16a180f4aca9/departamento-3-ambientes-muy-luminoso-con-balcon-en-villa-crespo",
+   "zone": "Villa Crespo"
+  },
+  "cabaprop:6aa4c5163e6a16a1805034f3": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "olleros 3207|140000|56|3",
+   "place": "olleros 3207|55|3",
+   "price": 140000,
+   "url": "https://cabaprop.com.ar/propiedad/6aa4c5163e6a16a1805034f3/departamento-3-amb-al-frente-c-balcon-corrido-apto-profesional",
+   "zone": "Colegiales"
+  },
   "cabaprop:6aacc77e3e6a16a1805ef182": {
    "first_seen": "2026-10-16T20:44:25+00:00",
    "key": "french 2668|130000|52|3",
@@ -31,6 +55,14 @@
    "price": 130000,
    "url": "https://cabaprop.com.ar/propiedad/6aacc77e3e6a16a1805ef182/departamento-3-ambientes-con-balcon-al-frente-con-lavadero",
    "zone": "Recoleta"
+  },
+  "cabaprop:6ab3508c3e6a16a180723b17": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "corrientes 5506|130000|62|3",
+   "place": "corrientes 5506|60|3",
+   "price": 130000,
+   "url": "https://cabaprop.com.ar/propiedad/6ab3508c3e6a16a180723b17/departamento-de-3-ambientes-en-venta-en-villa-crespo",
+   "zone": "Villa Crespo"
   },
   "cabaprop:6abb2c013e6a16a18082e95e": {
    "first_seen": "2026-10-16T20:44:25+00:00",
@@ -55,6 +87,22 @@
    "price": 139000,
    "url": "https://cabaprop.com.ar/propiedad/6ac6ac59e1793443d22ce180/3-ambientes-c-depencia-balcon-al-frente-barrio-norte",
    "zone": "Recoleta"
+  },
+  "cabaprop:6ae175c4e1793443d290644c": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "aguirre 100|125000|69|3",
+   "place": "aguirre 100|70|3",
+   "price": 125000,
+   "url": "https://cabaprop.com.ar/propiedad/6ae175c4e1793443d290644c/departamento-en-venta-villa-crespo",
+   "zone": "Villa Crespo"
+  },
+  "cabaprop:6aee98b341f99e4326003967": {
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "key": "san martin 1800|129900|66|3",
+   "place": "san martin 1800|65|3",
+   "price": 129900,
+   "url": "https://cabaprop.com.ar/propiedad/6aee98b341f99e4326003967/departamento-de-3-ambientes-en-venta-en-villa-crespo",
+   "zone": "Villa Crespo"
   }
  },
  "meta": {}

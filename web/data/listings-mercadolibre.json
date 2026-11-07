@@ -1,6 +1,61 @@
 {
- "last_change": "2026-11-02T21:05:58+00:00",
+ "last_change": "2026-11-07T18:23:42+00:00",
  "listings": [
+  {
+   "active": true,
+   "address": "Charlone Al 300 4°, Colegiales, Capital Federal",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 62.0,
+   "area_covered": 62.0,
+   "area_semi": null,
+   "area_total": null,
+   "blurb": "Departamento en venta Charlone Al 300 - T/al Frente Impec Balcon Todo Sol Apto Profesional US$ 129.500 3 ambs. 1 baño 62 m² cubiertos Charlone Al 300 4°, Colegiales, Capital Federal Destacado",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 124450,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_seen": "2026-11-07T18:23:42+00:00",
+   "gone_at": null,
+   "id": "mercadolibre:1679400183",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_NQ_NP_2X_610190-MLA119048024624_112026-E.webp",
+   "piso": null,
+   "price": 129500,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-07T18:23:42+00:00",
+     "price": 129500
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": -1,
+   "seventy_offer_usd": null,
+   "site": "mercadolibre",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Charlone Al 300 - T/al Frente Impec Balcon Todo Sol Apto Profesional",
+   "url": "https://departamento.mercadolibre.com.ar/MLA-1679400183-charlone-al-300-tal-frente-impec-balcon-todo-sol-apto-profesional-_JM",
+   "usd_per_m2": 2089,
+   "vs_median_n": 18,
+   "vs_median_pct": -3,
+   "zone": "Chacarita",
+   "zone_unverified": false
+  },
   {
    "active": false,
    "address": "AV CORDOBA Al 1831. Entre Av Callao Y Riobamba, Barrio Norte, Capital Federal",
