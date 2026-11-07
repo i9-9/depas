@@ -1566,11 +1566,18 @@
    "price": 138500,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-recoleta-capital-federal-60614938.html",
    "zone": "Recoleta"
+  },
+  "zonaprop:60650902": {
+   "first_seen": "2026-11-07T00:26:28+00:00",
+   "key": "moldes 2400|120000|57|3",
+   "place": "moldes 2400|55|3",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-belgrano-3-ambientes-al-frente-tipo-ph-60650902.html",
+   "zone": "Belgrano"
   }
  },
  "meta": {
   "coverage_week": "2026-W45",
-  "last_error_day": "2026-11-06",
   "last_run": "2026-10-10T03:03:21+00:00"
  }
 }

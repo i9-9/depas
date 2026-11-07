@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-06T18:18:01+00:00",
+ "last_change": "2026-11-07T00:26:28+00:00",
  "listings": [
   {
    "active": false,
@@ -813,7 +813,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "French",
    "air_usd": 25375,
    "ambientes": 2,
@@ -825,7 +825,7 @@
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-10T01:31:10+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-07T00:26:28+00:00",
    "id": "zonaprop:57416646",
    "max_offer_usd": 115760,
    "neto_base_usd": 9520,
@@ -1480,7 +1480,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -1500,7 +1500,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-07T00:26:28+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -2601,12 +2601,11 @@
    "reno_usd_m2": 375,
    "roi_base": 0.258,
    "roi_hard": 0.0912,
-   "score": 3,
+   "score": 2,
    "seventy_offer_usd": 112280,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
-    "metro barato",
     "expensas altas",
     "aire amplio"
    ],
@@ -8559,6 +8558,64 @@
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Recoleta",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Moldes 2400",
+   "address_unverified": false,
+   "air_usd": 52425,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 57.0,
+   "blurb": "USD 120.000\n$ 250.000 Expensas\n57 m² tot.\n3 amb.\n2 dorm.\n1 baño\nMoldes 2400\nBelgrano, Capital Federal\nCorredor Responsable: Jorge Salafia cucicba 5666 / csi 5888- Contacto: Maria Carolina Voci. Venta Belgrano 3 ambientes al frente tipo ph con Balcon soleado. Departamento 3 ambientes en venta en belgrano, capital federal. Un departamento que preserva la esencia de una época dorada. Ubicado en la esquina de Av. Monroe y Moldes en el primer piso por escalera de un edificio de arquitectura clásica, ",
+   "breakeven_exit_usd_m2": 3154,
+   "closing_ref_usd": 115320,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": "comprar",
+   "exit_usd_m2": 3400,
+   "expensas_ars": 250000,
+   "expensas_text": "$ 250.000 Expensas",
+   "first_seen": "2026-11-07T00:26:28+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60650902",
+   "max_offer_usd": 131719,
+   "neto_base_usd": 35761,
+   "neto_hard_usd": 12656,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/65/09/02/720x532/2090797906.jpg",
+   "piso": null,
+   "price": 120000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-07T00:26:28+00:00",
+     "price": 120000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": 0.2411,
+   "roi_hard": 0.0779,
+   "score": 7,
+   "seventy_offer_usd": 114285,
+   "site": "zonaprop",
+   "tags": [
+    "de época",
+    "m² sin verificar",
+    "metro barato",
+    "aire amplio"
+   ],
+   "title": "Corredor Responsable: Jorge Salafia cucicba 5666 / csi 5888- Contacto: Maria Carolina Voci",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-belgrano-3-ambientes-al-frente-tipo-ph-60650902.html",
+   "usd_per_m2": 2105,
+   "vs_median_n": 26,
+   "vs_median_pct": -9,
+   "zone": "Belgrano",
    "zone_unverified": false
   }
  ]
