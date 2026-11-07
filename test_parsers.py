@@ -2077,7 +2077,8 @@ def test_barato_track_keeps_colegiales_example():
     assert item["zone"] == "Colegiales"
     assert s.matches(item, side)
     assert not s.matches(item, cfg["filters"])
-    assert "colegiales" in cfg["filters"]["reject_barrios"]
+    assert "colegiales" in cfg["filters"]["allowed_barrios"]
+    assert "colegiales" not in cfg["filters"]["reject_barrios"]
     assert "colegiales" not in side["reject_barrios"]
     tiny = dict(item, area=30, area_covered=30)
     assert not s.matches(tiny, side)
