@@ -29,7 +29,10 @@ export function SaveCandidate({ id, ids }: { id: string; ids?: string[] }) {
   }
 
   return (
-    <div className="absolute right-2 top-2 z-[1] bg-card md:right-3 md:top-3">
+    <div className="absolute right-2 top-2 z-[1] flex items-center gap-1 bg-card pl-2 md:right-3 md:top-3">
+      <span className="kicker text-muted" aria-hidden>
+        {saved ? "Guardado" : "Guardar"}
+      </span>
       <FavoriteButton on={saved} onClick={toggle} disabled={!ready} size="md" />
       <p aria-live="polite" className="sr-only">
         {note}

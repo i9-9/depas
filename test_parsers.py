@@ -218,7 +218,7 @@ def test_source_pages():
             assert "_Desde_" not in src["url"] and "_PriceRange_" not in src["url"]
             assert "_NoIndex_" not in src["url"] and "#" not in src["url"]
     ml = [src for src in CFG["sources"] if src["site"] == "mercadolibre"]
-    assert len(ml) == 35, len(ml)
+    assert len(ml) == 84, len(ml)
     from collections import defaultdict
     by_zone: dict[str, list[str]] = defaultdict(list)
     for src in ml:
@@ -499,13 +499,25 @@ def test_street_zones():
         return s.classify_zone({"address": address, "title": title}, f)
 
     assert z("Fitz Roy al 2400") == "Palermo Hollywood"
-    assert z("Fitz Roy 800") is None
+    assert z("Fitz Roy 800") == "Chacarita"
     assert z("Fitz Roy 3000") is None
+    assert z("Conde 900") == "Colegiales"
+    assert z("Murillo 700") == "Villa Crespo"
+    assert z("Corrientes 5400") == "Villa Crespo"
+    assert z("Corrientes 6500") == "Chacarita"
+    assert z("Corrientes 1900") is None
+    assert z("Scalabrini Ortiz 800") == "Villa Crespo"
+    assert z("Thames 800") == "Villa Crespo"
+    assert z("Cabildo al 2100") is None
+    assert z("Av. Cabildo 2500, Belgrano") is None
+    assert z("Blanco Encalada 1651") == "Belgrano"
+    assert z("Ciudad de la Paz al 1900") == "Belgrano"
     assert z("Honduras 5800") == "Palermo Hollywood"
     assert z("Honduras 4300") is None
     assert z("Bonpland 1800") == "Palermo Hollywood"
     assert z("Dorrego 2000") == "Palermo Hollywood"
-    assert z("Dorrego 1000") is None
+    assert z("Dorrego 1000") == "Chacarita"
+    assert z("Dorrego 400") is None
     assert z("Thames Al 2400, Botánico") is None
     assert z("Armenia 2100, Botánico") is None
     assert z("José A. Cabrera 3275") is None
@@ -607,7 +619,7 @@ def test_street_zones():
     assert web["street_zones"] == f["street_zones"]
     assert web["reject_barrios"] == f["reject_barrios"]
 
-    bad = {"address": "Fitz Roy 800", "title": "Depto Recoleta", "url": "https://z/recoleta-1.html",
+    bad = {"address": "Fitz Roy 3000", "title": "Depto Recoleta", "url": "https://z/recoleta-1.html",
            "price": 98000, "area": 55, "ambientes": 2, "blurb": ""}
     assert not s.keep_listing(bad, src, f)
     belgrano = {"name": "Belgrano", "zone": "Belgrano", "aliases": ["belgrano"]}
@@ -1929,6 +1941,11 @@ def test_recoleta_strip_config_not_closed():
     assert "palermo hollywood" in cfg["filters"]["allowed_barrios"]
     assert "palermo hollywood" not in cfg["filters"]["reject_barrios"]
     assert "Palermo Hollywood" not in cfg["exit_usd_m2"]  # sin dato verificado; no se inventa
+    for barrio in ("colegiales", "chacarita", "villa crespo"):
+        assert barrio in cfg["filters"]["allowed_barrios"]
+        assert barrio not in cfg["filters"]["reject_barrios"]
+    for zone in ("Colegiales", "Chacarita", "Villa Crespo"):
+        assert zone not in cfg["exit_usd_m2"]
 
 
 def test_cabaprop():
@@ -1953,6 +1970,22 @@ def test_cabaprop():
         "dolares_desde_120000_hasta_140000-ambientes_1_2_3"
     )
     assert s.cabaprop_body(hw)["barrios"] == [51]
+    cole = (
+        "https://cabaprop.com.ar/propiedades/comprar-departamento-colegiales-"
+        "dolares_desde_120000_hasta_140000-ambientes_1_2_3"
+    )
+    assert s.cabaprop_body(cole)["barrios"] == [29]
+    chaca = (
+        "https://cabaprop.com.ar/propiedades/comprar-departamento-chacarita-"
+        "dolares_desde_120000_hasta_140000-ambientes_1_2_3"
+    )
+    assert s.cabaprop_body(chaca)["barrios"] == [27]
+    vc = (
+        "https://cabaprop.com.ar/propiedades/comprar-departamento-villa_crespo-"
+        "dolares_desde_120000_hasta_140000-ambientes_2"
+    )
+    assert s.cabaprop_body(vc)["barrios"] == [75]
+    assert s.cabaprop_body(vc)["ambiences"] == [2]
     try:
         s.cabaprop_body("https://cabaprop.com.ar/propiedades/comprar-departamento-tigre-dolares_desde_1_hasta_2")
     except ValueError as e:

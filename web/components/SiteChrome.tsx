@@ -43,6 +43,11 @@ export function SiteChrome({
               Más baratos
             </NavLink>
           </nav>
+          <p className="measure mt-3 text-[0.8125rem] leading-snug text-muted">
+            {current === "candidato"
+              ? "El que más encaja hoy. Guardalo con la estrella o abrí el aviso."
+              : "Buscá, filtrá y abrí uno para ver por qué entra. La estrella guarda; la cruz saca."}
+          </p>
         </header>
         <Pulse listings={listings} pickId={pickId} current={current} />
         <div id="contenido">{children}</div>

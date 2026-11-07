@@ -96,6 +96,9 @@ CABAPROP_BARRIOS = {
     "palermo_botanico": 48,
     "palermo_chico": 50,
     "palermo_hollywood": 51,
+    "chacarita": 27,
+    "colegiales": 29,
+    "villa_crespo": 75,
 }
 CABAPROP_API = "https://cabaprop.com.ar/api/v1/properties/find-properties"
 CABAPROP_PAGE_SIZE = 12  # el listado del sitio pide limit=12
@@ -297,6 +300,9 @@ def _zonaprop_address(text: str) -> str:
         "palermo",
         "belgrano chico",
         "belgrano",
+        "villa crespo",
+        "colegiales",
+        "chacarita",
     )
     candidates: list[str] = []
     for i, ln in enumerate(lines[:-1]):
@@ -404,7 +410,7 @@ def parse_card(site: str, text: str, card=None) -> dict:
             text,
             re.I,
         ) or re.search(
-            r"((?:Av\.?\s+|Avenida\s+)?[A-Za-zÁÉÍÓÚÑáéíóúñ.]+\s+\d{2,5}[^,]{0,40},\s*(?:Recoleta|Barrio Norte|Botánico|Botanico|Palermo Hollywood|Palermo Chico))",
+            r"((?:Av\.?\s+|Avenida\s+)?[A-Za-zÁÉÍÓÚÑáéíóúñ.]+\s+\d{2,5}[^,]{0,40},\s*(?:Recoleta|Barrio Norte|Botánico|Botanico|Palermo Hollywood|Palermo Chico|Colegiales|Chacarita|Villa Crespo))",
             text,
         )
         if m and len(m.group(1)) < 120:
@@ -1359,7 +1365,7 @@ def save_pick(listings: list[dict]) -> dict:
 
 _STREET_NOISE = re.compile(
     r"\b(recoleta|barrio norte|botanico|palermo chico|belgrano chico|belgrano r|belgrano c|"
-    r"belgrano|palermo|capital federal|caba|"
+    r"belgrano|palermo|villa crespo|colegiales|chacarita|capital federal|caba|"
     r"argentina|departamento|depto|ambientes|amb|visto|fotos?)\b"
 )
 
@@ -1419,6 +1425,26 @@ _STREET_ALIASES = (
     ("luis m campos", "luis maria campos"),
     ("f lacroze", "federico lacroze"),
     ("lacroze", "federico lacroze"),
+    ("raul scalabrini ortiz", "scalabrini ortiz"),
+    ("scalabrini ortiz raul", "scalabrini ortiz"),
+    ("angel justiniano carranza", "carranza"),
+    ("justiniano carranza", "carranza"),
+    ("ramon freire", "freire"),
+    ("ramon cap gral freire", "freire"),
+    ("honorio pueyrredon", "honorio pueyrredon"),
+    ("honorio dr pueyrredon", "honorio pueyrredon"),
+    ("dr honorio pueyrredon", "honorio pueyrredon"),
+    ("escalada de san martin", "escalada de san martin"),
+    ("remedios de escalada de san martin", "escalada de san martin"),
+    ("r escalada de san martin", "escalada de san martin"),
+    ("jorge newbery", "jorge newbery"),
+    ("newbery", "jorge newbery"),
+    ("angel gallardo", "angel gallardo"),
+    ("a gallardo", "angel gallardo"),
+    ("gallardo", "angel gallardo"),
+    ("virrey del pino", "virrey del pino"),
+    ("virrey pino", "virrey del pino"),
+    ("del pino", "virrey del pino"),
     ("crisologo larralde", "crisologo larralde"),
     ("larralde", "crisologo larralde"),
     ("ricardo balbin", "ricardo balbin"),
@@ -1579,7 +1605,10 @@ def _mentions_out_street(text: str, f: dict | None = None) -> bool:
     for st in sorted(out_only, key=len, reverse=True):
         if not _token_in(text, st):
             continue
-        longer = [x for x in names if x != st and x.startswith(st + " ") and _token_in(text, x)]
+        longer = [
+            x for x in names
+            if x != st and (x.startswith(st + " ") or x.endswith(" " + st)) and _token_in(text, x)
+        ]
         if longer:
             continue
         return True
@@ -2940,6 +2969,9 @@ def infer_zone(url: str, explicit: str = "") -> str:
         return explicit
     u = fold(url or "")
     mapping = (
+        ("Villa Crespo", ("villa-crespo", "villa crespo")),
+        ("Colegiales", ("colegiales",)),
+        ("Chacarita", ("chacarita",)),
         ("Palermo Hollywood", ("palermo-hollywood", "palermo hollywood")),
         ("Palermo Chico", ("palermo-chico", "palermo chico")),
         ("Barrio Norte", ("barrio-norte", "barrio norte")),

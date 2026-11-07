@@ -412,7 +412,8 @@
     {
       "street": "scalabrini ortiz",
       "max": 2499,
-      "out": true
+      "out": true,
+      "min": 1100
     },
     {
       "street": "scalabrini ortiz",
@@ -1157,6 +1158,1026 @@
       "min": 1900,
       "max": 2899,
       "zone": "Belgrano"
+    },
+    {
+      "street": "acevedo",
+      "min": 0,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "acoyte",
+      "min": 1100,
+      "max": 1710,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "aguilar",
+      "min": 2400,
+      "max": 2699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "aguilar",
+      "min": 2800,
+      "max": 2899,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "aguirre",
+      "min": 1300,
+      "max": 1699,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "aguirre",
+      "min": 0,
+      "max": 1299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "amenabar",
+      "min": 400,
+      "max": 1599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "angel gallardo",
+      "min": 2,
+      "max": 1099,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "antezana",
+      "min": 0,
+      "max": 599,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "antonio cnel susini",
+      "min": 2100,
+      "max": 2399,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "araoz",
+      "min": 0,
+      "max": 1099,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "arganaras",
+      "min": 0,
+      "max": 99,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "batalla del pari",
+      "min": 400,
+      "max": 1150,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "benjamin dr canard",
+      "min": 1100,
+      "max": 1199,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "benjamin teniente matienzo",
+      "min": 2800,
+      "max": 3199,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "benjamin villafane",
+      "min": 2100,
+      "max": 2199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "bonpland",
+      "min": 700,
+      "max": 1299,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "bravard",
+      "min": 1100,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "caldas",
+      "min": 0,
+      "max": 399,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "camargo",
+      "min": 0,
+      "max": 1299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "canuelas",
+      "min": 200,
+      "max": 299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "carranza",
+      "min": 900,
+      "max": 1299,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "casafoust",
+      "min": 500,
+      "max": 799,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "castillo",
+      "min": 1240,
+      "max": 1799,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "castillo",
+      "min": 0,
+      "max": 1239,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "cespedes",
+      "min": 3500,
+      "max": 4099,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "cespedes",
+      "min": 2400,
+      "max": 2699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "cespedes",
+      "min": 2900,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "charlone",
+      "min": 0,
+      "max": 1299,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "ciudad de la paz",
+      "min": 400,
+      "max": 1599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "concepcion arenal",
+      "min": 3400,
+      "max": 4899,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "concepcion arenal",
+      "min": 2800,
+      "max": 3399,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "conde",
+      "min": 0,
+      "max": 1599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "conesa",
+      "min": 0,
+      "max": 1499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "corregidores",
+      "min": 1500,
+      "max": 1599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "corrientes",
+      "min": 6200,
+      "max": 6550,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "corrientes",
+      "min": 6600,
+      "max": 6899,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "corrientes",
+      "min": 4700,
+      "max": 6199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "cramer",
+      "min": 0,
+      "max": 1699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "cucha cucha",
+      "min": 1451,
+      "max": 2099,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "d apolinario coronel figueroa",
+      "min": 0,
+      "max": 699,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "darwin",
+      "min": 0,
+      "max": 1299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "del campo",
+      "min": 1000,
+      "max": 1249,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "del parque",
+      "min": 1200,
+      "max": 1299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "delgado",
+      "min": 300,
+      "max": 1599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "dorrego",
+      "min": 500,
+      "max": 1499,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "el alfabeto",
+      "min": 1800,
+      "max": 1899,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "elcano",
+      "min": 3600,
+      "max": 4699,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "elcano",
+      "min": 2900,
+      "max": 3599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "emilio dr ravignani",
+      "min": 1100,
+      "max": 1299,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "enrique gral martinez",
+      "min": 0,
+      "max": 1499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "escalada de san martin",
+      "min": 300,
+      "max": 1099,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "espinosa",
+      "min": 1671,
+      "max": 1899,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "estado de israel",
+      "min": 4102,
+      "max": 4799,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "estado de palestina",
+      "min": 1100,
+      "max": 1140,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "eustoquio tte general frias",
+      "min": 0,
+      "max": 599,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "federico lacroze",
+      "min": 3500,
+      "max": 4199,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "federico lacroze",
+      "min": 2400,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "ferrari",
+      "min": 200,
+      "max": 499,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "fitz roy",
+      "min": 700,
+      "max": 1299,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "fitz roy",
+      "min": 0,
+      "max": 399,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "forest",
+      "min": 300,
+      "max": 1199,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "forest",
+      "min": 1202,
+      "max": 1499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "fraga",
+      "min": 0,
+      "max": 1199,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "freire",
+      "min": 0,
+      "max": 1599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "galicia",
+      "min": 100,
+      "max": 850,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "garmendia",
+      "min": 4700,
+      "max": 4889,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "garmendia",
+      "min": 4900,
+      "max": 4999,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "girardot",
+      "min": 0,
+      "max": 399,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "giribone",
+      "min": 600,
+      "max": 1299,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "godoy cruz",
+      "min": 1200,
+      "max": 1399,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "gorostiaga",
+      "min": 2400,
+      "max": 2499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "gregoria perez",
+      "min": 3500,
+      "max": 3699,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "gregoria perez",
+      "min": 3200,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "guevara",
+      "min": 0,
+      "max": 699,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "guevara",
+      "min": 800,
+      "max": 1199,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "gurruchaga",
+      "min": 0,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "guzman",
+      "min": 0,
+      "max": 1099,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "hidalgo",
+      "min": 1100,
+      "max": 1799,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "honorio pueyrredon",
+      "min": 1100,
+      "max": 2199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "huaura",
+      "min": 1300,
+      "max": 1380,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "huaura",
+      "min": 1400,
+      "max": 1499,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "humboldt",
+      "min": 900,
+      "max": 1299,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "humboldt",
+      "min": 0,
+      "max": 899,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "iturri",
+      "min": 0,
+      "max": 399,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "jorge newbery",
+      "min": 3400,
+      "max": 4899,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "jorge newbery",
+      "min": 2402,
+      "max": 3399,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "juan gregorio gral lemos",
+      "min": 0,
+      "max": 399,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "juan ramirez de velasco",
+      "min": 1331,
+      "max": 1599,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "juan ramirez de velasco",
+      "min": 0,
+      "max": 1320,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "jufre",
+      "min": 0,
+      "max": 1150,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "jufre",
+      "min": 1171,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "julian alvarez",
+      "min": 0,
+      "max": 1099,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "lavalleja",
+      "min": 0,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "leiva",
+      "min": 3900,
+      "max": 4899,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "leopoldo marechal",
+      "min": 1100,
+      "max": 1399,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "lerma",
+      "min": 0,
+      "max": 699,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "loyola",
+      "min": 1300,
+      "max": 1699,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "loyola",
+      "min": 0,
+      "max": 1299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "luis dr belaustegui",
+      "min": 200,
+      "max": 999,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "luis maria drago",
+      "min": 0,
+      "max": 499,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "luis viale",
+      "min": 0,
+      "max": 799,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "mahatma gandhi",
+      "min": 200,
+      "max": 799,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "malabia",
+      "min": 0,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "manuel a general rodriguez",
+      "min": 1300,
+      "max": 2299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "mario bernasconi",
+      "min": 2200,
+      "max": 2299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "martinez rosas",
+      "min": 900,
+      "max": 1499,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "maturin",
+      "min": 2099,
+      "max": 2180,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "maure",
+      "min": 3500,
+      "max": 4199,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "maure",
+      "min": 2400,
+      "max": 2599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "maure",
+      "min": 2800,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "mercedes sosa",
+      "min": 2300,
+      "max": 2470,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "moldes",
+      "min": 600,
+      "max": 1599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "montenegro",
+      "min": 0,
+      "max": 399,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "mujeres de fraga",
+      "min": 4100,
+      "max": 4199,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "munecas",
+      "min": 700,
+      "max": 1499,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "murcia",
+      "min": 1500,
+      "max": 1599,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "murillo",
+      "min": 500,
+      "max": 1299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "nicolas dr repetto",
+      "min": 1400,
+      "max": 2203,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "nueva zelandia",
+      "min": 4800,
+      "max": 4899,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "olaya",
+      "min": 1100,
+      "max": 1899,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "olleros",
+      "min": 3500,
+      "max": 4199,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "olleros",
+      "min": 2400,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "otero",
+      "min": 0,
+      "max": 399,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "padilla",
+      "min": 200,
+      "max": 1299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "palpa",
+      "min": 3500,
+      "max": 4099,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "palpa",
+      "min": 2400,
+      "max": 2699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "palpa",
+      "min": 2800,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "paysandu",
+      "min": 1802,
+      "max": 2399,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "pringles",
+      "min": 1200,
+      "max": 1299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "rodney",
+      "min": 0,
+      "max": 399,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "rojas",
+      "min": 1100,
+      "max": 2299,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "roseti",
+      "min": 0,
+      "max": 1299,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "san martin",
+      "min": 1202,
+      "max": 2220,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "santos dumont",
+      "min": 3400,
+      "max": 4099,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "santos dumont",
+      "min": 4300,
+      "max": 4899,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "santos dumont",
+      "min": 3200,
+      "max": 3399,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "scalabrini ortiz",
+      "min": 0,
+      "max": 1099,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "serrano",
+      "min": 0,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "sunchales",
+      "min": 400,
+      "max": 899,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "superi",
+      "min": 1100,
+      "max": 1499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "teodoro garcia",
+      "min": 3500,
+      "max": 4099,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "teodoro garcia",
+      "min": 2400,
+      "max": 2699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "teodoro garcia",
+      "min": 2800,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "thames",
+      "min": 0,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "tres arroyos",
+      "min": 100,
+      "max": 950,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "tres lomas",
+      "min": 500,
+      "max": 699,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "triunvirato",
+      "min": 2300,
+      "max": 2699,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "uriarte",
+      "min": 800,
+      "max": 1199,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "valentin virasoro",
+      "min": 1100,
+      "max": 1999,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "vera",
+      "min": 1351,
+      "max": 1599,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "vera",
+      "min": 0,
+      "max": 1350,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "vidal",
+      "min": 1400,
+      "max": 1599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "villarroel",
+      "min": 1371,
+      "max": 1499,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "villarroel",
+      "min": 1000,
+      "max": 1370,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "virrey arredondo",
+      "min": 2400,
+      "max": 2699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "virrey arredondo",
+      "min": 2800,
+      "max": 3599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "virrey aviles",
+      "min": 2700,
+      "max": 3599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "virrey loreto",
+      "min": 3600,
+      "max": 3899,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "virrey loreto",
+      "min": 2400,
+      "max": 2699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "virrey loreto",
+      "min": 2800,
+      "max": 3599,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "virrey olaguer y feliu",
+      "min": 2400,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "warnes",
+      "min": 1436,
+      "max": 1999,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "warnes",
+      "min": 0,
+      "max": 1401,
+      "zone": "Villa Crespo"
+    },
+    {
+      "street": "zabala",
+      "min": 3500,
+      "max": 4099,
+      "zone": "Chacarita"
+    },
+    {
+      "street": "zabala",
+      "min": 2400,
+      "max": 2699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "zabala",
+      "min": 2800,
+      "max": 3499,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "zapata",
+      "min": 400,
+      "max": 699,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "zapiola",
+      "min": 0,
+      "max": 1630,
+      "zone": "Colegiales"
+    },
+    {
+      "street": "zarraga",
+      "min": 3300,
+      "max": 3520,
+      "zone": "Colegiales"
     }
   ],
   "reject_barrios": [
@@ -1169,7 +2190,6 @@
     "abasto",
     "valentin alsina",
     "paternal",
-    "villa crespo",
     "caballito",
     "flores",
     "almagro",
@@ -1182,8 +2202,6 @@
     "palermo soho",
     "palermo viejo",
     "palermo nuevo",
-    "las canitas",
-    "colegiales",
-    "chacarita"
+    "las canitas"
   ]
 }

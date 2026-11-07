@@ -27,7 +27,7 @@ export function Pulse({
   const isPick = Boolean(
     pickId && (lead.id === pickId || lead.ids.includes(pickId)),
   );
-  const href = isPick ? "/" : lead.url;
+  const href = isPick ? "/" : `/archivo/?d=${encodeURIComponent(lead.id)}`;
   const stay = current === "candidato" && isPick;
   const drop = lastDrop(lead);
 
@@ -40,12 +40,7 @@ export function Pulse({
           {rest.map((item, i) => (
             <span key={item.id}>
               {i > 0 ? (i === rest.length - 1 ? " y " : ", ") : ""}
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link"
-              >
+              <a href={`/archivo/?d=${encodeURIComponent(item.id)}`} className="link">
                 {streetOf(item).trim()}
               </a>
             </span>

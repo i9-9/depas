@@ -51,13 +51,16 @@ export function dealFacts(item: Listing): Fact[] {
     {
       label: "Neto duro",
       value: item.neto_hard_usd != null ? signed(item.neto_hard_usd) : "—",
-      hint: item.neto_hard_usd != null ? "USD" : parked,
+      hint:
+        item.neto_hard_usd != null
+          ? "USD · después de obra y gastos"
+          : parked,
       tone: item.neto_hard_usd != null && item.neto_hard_usd >= 0 ? "signal" : "title",
     },
     {
       label: "Aire",
       value: item.air_usd != null ? signed(item.air_usd) : "—",
-      hint: item.air_usd != null ? "USD" : parked,
+      hint: item.air_usd != null ? "USD · margen para negociar" : parked,
       tone: item.air_usd != null && item.air_usd >= 0 ? "signal" : "title",
     },
     {
