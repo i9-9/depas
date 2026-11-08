@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-08T02:55:16+00:00",
+ "last_change": "2026-11-08T17:30:23+00:00",
  "listings": [
   {
    "active": false,
@@ -169,7 +169,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Jorge Newbery 3600",
    "address_unverified": false,
    "air_usd": null,
@@ -189,7 +189,7 @@
    "expensas_ars": 140000,
    "expensas_text": "$ 140.000 expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-08T17:30:23+00:00",
    "id": "cabaprop:6a2c1e13ef11909923511ba0",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -431,11 +431,12 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": -1,
+   "score": 0,
    "seventy_offer_usd": null,
    "site": "cabaprop",
    "tags": [
-    "sobre presupuesto"
+    "sobre presupuesto",
+    "metro barato"
    ],
    "title": "Departamento De 3 Ambientes En Venta En Villa Crespo",
    "url": "https://cabaprop.com.ar/propiedad/6ab3508c3e6a16a180723b17/departamento-de-3-ambientes-en-venta-en-villa-crespo",
