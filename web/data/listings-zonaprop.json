@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-07T21:20:29+00:00",
+ "last_change": "2026-11-08T02:55:16+00:00",
  "listings": [
   {
    "active": false,
@@ -6337,7 +6337,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Raúl Scalabrini Ortiz al 300",
    "address_unverified": false,
    "air_usd": null,
@@ -6357,7 +6357,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-08T02:55:16+00:00",
    "id": "zonaprop:60044377",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -9418,7 +9418,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Camargo 915",
    "address_unverified": false,
    "air_usd": null,
@@ -9438,7 +9438,7 @@
    "expensas_ars": 205000,
    "expensas_text": "$ 205.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-08T02:55:16+00:00",
    "id": "zonaprop:60310988",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -10582,7 +10582,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Vera 900",
    "address_unverified": false,
    "air_usd": null,
@@ -10602,7 +10602,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-08T02:55:16+00:00",
    "id": "zonaprop:60404627",
    "max_offer_usd": null,
    "neto_base_usd": null,

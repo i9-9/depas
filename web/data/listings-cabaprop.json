@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-07T18:23:42+00:00",
+ "last_change": "2026-11-08T02:55:16+00:00",
  "listings": [
   {
    "active": false,
@@ -431,12 +431,11 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 0,
+   "score": -1,
    "seventy_offer_usd": null,
    "site": "cabaprop",
    "tags": [
-    "sobre presupuesto",
-    "metro barato"
+    "sobre presupuesto"
    ],
    "title": "Departamento De 3 Ambientes En Venta En Villa Crespo",
    "url": "https://cabaprop.com.ar/propiedad/6ab3508c3e6a16a180723b17/departamento-de-3-ambientes-en-venta-en-villa-crespo",
