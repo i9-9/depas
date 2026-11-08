@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-08T17:30:23+00:00",
+ "last_change": "2026-11-08T21:37:22+00:00",
  "listings": [
   {
    "active": false,
@@ -459,7 +459,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Virrey arredondo 2684",
    "address_unverified": false,
    "air_usd": null,
@@ -479,7 +479,7 @@
    "expensas_ars": 150000,
    "expensas_text": "$ 150.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-08T21:37:22+00:00",
    "id": "zonaprop:55170181",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6937,7 +6937,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -6951,13 +6951,13 @@
    "breakeven_exit_usd_m2": 3738,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 21,
+   "days_seen": 29,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": "2026-11-08T17:30:23+00:00",
+   "gone_at": null,
    "id": "zonaprop:60118859",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -12433,13 +12433,13 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 1,
+   "score": 0,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
     "sobre presupuesto",
-    "metro muy barato"
+    "metro barato"
    ],
    "title": "3 Ambientes con Patio y Balcon en Chacarita! Apto Profesional! Se vende con renta hasta ma",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-balcon-y-patio-en-chacarita!-60579660.html",
