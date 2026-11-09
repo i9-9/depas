@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-09T03:08:02+00:00",
+ "last_change": "2026-11-09T21:51:47+00:00",
  "listings": [
   {
    "active": false,
@@ -459,7 +459,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Virrey arredondo 2684",
    "address_unverified": false,
    "air_usd": null,
@@ -473,13 +473,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 115320,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 2,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 150000,
    "expensas_text": "$ 150.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": "2026-11-08T21:37:22+00:00",
+   "gone_at": null,
    "id": "zonaprop:55170181",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -508,8 +508,8 @@
    "title": "Excelente Mono ambiente en semi piso al frente con amplio balcón aterrazado (8, 66x2) con ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-seno-piso-al-frente-muy-luminoso!-balcon-aterrazado-55170181.html",
    "usd_per_m2": 2264,
-   "vs_median_n": 8,
-   "vs_median_pct": 2,
+   "vs_median_n": 9,
+   "vs_median_pct": 0,
    "zone": "Colegiales",
    "zone_unverified": false
   },
@@ -2328,7 +2328,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2348,7 +2348,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-09T21:51:47+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -4075,11 +4075,12 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 0,
+   "score": 1,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
-    "m² sin verificar"
+    "m² sin verificar",
+    "metro barato"
    ],
    "title": "3 ambientes al contrafrente en excelente ubicación residencial Y A 2 cuadras de avda. Fede",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-palpa-2987-colegiales-3-amb.-al-cfte.-c-vista-59615902.html",
@@ -6936,7 +6937,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -6950,13 +6951,13 @@
    "breakeven_exit_usd_m2": 3738,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 29,
+   "days_seen": 30,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": "2026-11-09T03:08:02+00:00",
+   "gone_at": null,
    "id": "zonaprop:60118859",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -8090,7 +8091,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Balbin  al 2500",
    "address_unverified": false,
    "air_usd": 56625,
@@ -8110,7 +8111,7 @@
    "expensas_ars": 360000,
    "expensas_text": "$ 360.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-09T21:51:47+00:00",
    "id": "zonaprop:60249000",
    "max_offer_usd": 149800,
    "neto_base_usd": 37172,
@@ -11541,7 +11542,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Acevedo 600",
    "address_unverified": false,
    "air_usd": null,
@@ -11561,7 +11562,7 @@
    "expensas_ars": 300000,
    "expensas_text": "$ 300.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-09T21:51:47+00:00",
    "id": "zonaprop:60483019",
    "max_offer_usd": null,
    "neto_base_usd": null,
