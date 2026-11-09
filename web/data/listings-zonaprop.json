@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-08T21:37:22+00:00",
+ "last_change": "2026-11-09T03:08:02+00:00",
  "listings": [
   {
    "active": false,
@@ -4075,12 +4075,11 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 1,
+   "score": 0,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
-    "m² sin verificar",
-    "metro barato"
+    "m² sin verificar"
    ],
    "title": "3 ambientes al contrafrente en excelente ubicación residencial Y A 2 cuadras de avda. Fede",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-palpa-2987-colegiales-3-amb.-al-cfte.-c-vista-59615902.html",
@@ -6937,7 +6936,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -6957,7 +6956,7 @@
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-09T03:08:02+00:00",
    "id": "zonaprop:60118859",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -10582,7 +10581,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Vera 900",
    "address_unverified": false,
    "air_usd": null,
@@ -10602,7 +10601,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-09T03:08:02+00:00",
    "id": "zonaprop:60404627",
    "max_offer_usd": null,
    "neto_base_usd": null,
