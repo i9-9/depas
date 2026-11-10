@@ -103,6 +103,14 @@
    "price": 129900,
    "url": "https://cabaprop.com.ar/propiedad/6aee98b341f99e4326003967/departamento-de-3-ambientes-en-venta-en-villa-crespo",
    "zone": "Villa Crespo"
+  },
+  "cabaprop:6af289fc1d30ff040e09c11c": {
+   "first_seen": "2026-11-10T05:04:26+00:00",
+   "key": "juan ramirez de velasco 944|140000|54|3",
+   "place": "juan ramirez de velasco 944|55|3",
+   "price": 140000,
+   "url": "https://cabaprop.com.ar/propiedad/6af289fc1d30ff040e09c11c/departamento-en-villa-crespo",
+   "zone": "Villa Crespo"
   }
  },
  "meta": {}

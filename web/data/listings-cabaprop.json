@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-08T17:30:23+00:00",
+ "last_change": "2026-11-10T05:04:26+00:00",
  "listings": [
   {
    "active": false,
@@ -722,6 +722,61 @@
    "usd_per_m2": 1968,
    "vs_median_n": 47,
    "vs_median_pct": -14,
+   "zone": "Villa Crespo",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Juan Ramírez de Velasco 944",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": 40,
+   "area": 54.4,
+   "area_covered": 52.0,
+   "area_semi": 0.0,
+   "area_total": 60.0,
+   "blurb": "Departamento En Villa Crespo Juan Ramírez de Velasco 944 con balcón sin cochera 40 años Departamento de tres ambientes en venta, ubicado en un piso alto con excelente luminosidad y vista abierta. Dispone de un amplio living comedor con salida a un balcón al frente, cocina equipada con muebles altos y bajos, lavadero independiente, dos dormitorios con placard y baño completo. Superficie de 60,28 metros cuadrados, orientación norte. La propiedad se encuentra en la calle J. R. de Velasc",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 134540,
+   "cochera": false,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 80000,
+   "expensas_text": "$ 80.000 expensas",
+   "first_seen": "2026-11-10T05:04:26+00:00",
+   "gone_at": null,
+   "id": "cabaprop:6af289fc1d30ff040e09c11c",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_954649-MLA116831803076_092026-O.jpg",
+   "piso": null,
+   "price": 140000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-10T05:04:26+00:00",
+     "price": 140000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": -2,
+   "seventy_offer_usd": null,
+   "site": "cabaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento En Villa Crespo",
+   "url": "https://cabaprop.com.ar/propiedad/6af289fc1d30ff040e09c11c/departamento-en-villa-crespo",
+   "usd_per_m2": 2574,
+   "vs_median_n": 47,
+   "vs_median_pct": 13,
    "zone": "Villa Crespo",
    "zone_unverified": false
   }
