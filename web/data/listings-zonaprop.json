@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-10T19:08:27+00:00",
+ "last_change": "2026-11-11T01:08:03+00:00",
  "listings": [
   {
    "active": false,
@@ -2328,7 +2328,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2342,13 +2342,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 31,
+   "days_seen": 32,
    "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-11-10T19:08:27+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6938,7 +6938,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -6952,13 +6952,13 @@
    "breakeven_exit_usd_m2": 3738,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 30,
+   "days_seen": 32,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": "2026-11-10T19:08:27+00:00",
+   "gone_at": null,
    "id": "zonaprop:60118859",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -11831,7 +11831,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Araóz al 600",
    "address_unverified": false,
    "air_usd": null,
@@ -11851,7 +11851,7 @@
    "expensas_ars": 310000,
    "expensas_text": "$ 310.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T01:08:03+00:00",
    "id": "zonaprop:60510308",
    "max_offer_usd": null,
    "neto_base_usd": null,
