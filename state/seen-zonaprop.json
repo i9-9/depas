@@ -1140,6 +1140,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-larrea-y-paraguay-tres-ambientes-con-dependencia-al-60051769.html",
    "zone": "Barrio Norte"
   },
+  "zonaprop:60053330": {
+   "first_seen": "2026-11-11T19:02:43+00:00",
+   "key": "warnes 500|130000|71|3",
+   "place": "warnes 500|70|3",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-villa-crespo-cochera-y-60053330.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60057359": {
    "first_seen": "2026-10-10T01:31:10+00:00",
    "key": "av las heras 3100|120000|57|3",

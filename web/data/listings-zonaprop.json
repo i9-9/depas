@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-11T01:08:03+00:00",
+ "last_change": "2026-11-11T19:02:43+00:00",
  "listings": [
   {
    "active": false,
@@ -459,7 +459,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Virrey arredondo 2684",
    "address_unverified": false,
    "air_usd": null,
@@ -479,7 +479,7 @@
    "expensas_ars": 150000,
    "expensas_text": "$ 150.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T19:02:43+00:00",
    "id": "zonaprop:55170181",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -2328,7 +2328,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2348,7 +2348,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T19:02:43+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -4827,7 +4827,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Blanco Encalada 2900",
    "address_unverified": false,
    "air_usd": 26250,
@@ -4847,7 +4847,7 @@
    "expensas_ars": 210000,
    "expensas_text": "$ 210.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T19:02:43+00:00",
    "id": "zonaprop:59774102",
    "max_offer_usd": 115593,
    "neto_base_usd": 10682,
@@ -5332,7 +5332,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Moldes 2000",
    "address_unverified": false,
    "air_usd": 37325,
@@ -5352,7 +5352,7 @@
    "expensas_ars": 120000,
    "expensas_text": "$ 120.000 Expensas",
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T19:02:43+00:00",
    "id": "zonaprop:59835996",
    "max_offer_usd": 123084,
    "neto_base_usd": 21697,
@@ -6199,7 +6199,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "NEWBERY, JORGE 3940. Entre Lemos, juan y Guevara",
    "address_unverified": false,
    "air_usd": null,
@@ -6219,7 +6219,7 @@
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T19:02:43+00:00",
    "id": "zonaprop:60028845",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6473,6 +6473,66 @@
    "vs_median_n": 11,
    "vs_median_pct": -25,
    "zone": "Barrio Norte",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Warnes 500",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 71.0,
+   "area_covered": 71.0,
+   "area_semi": null,
+   "area_total": 79.0,
+   "blurb": "USD 130.000\n$ 348.000 Expensas\n79 m² tot.\n3 amb.\n2 dorm.\n1 baño\n1 coch.\nWarnes 500\nVilla Crespo, Capital Federal\n# villa crespo semipiso de 3 ambientes con dependencia, balcón Y cochera fija apto crédito. --¡Excelente oportunidad en Villa Crespo! Semipiso al frente, muy luminoso, con cochera fija y gran potencial para actualizar a tu gusto. -- Ubicado en un quinto piso, este departamento cuenta con --79 m² totales (71 m² cubiertos) -- y una excelente orientación oeste, que permite disfrutar del ",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 124930,
+   "cochera": true,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 348000,
+   "expensas_text": "$ 348.000 Expensas",
+   "first_seen": "2026-11-11T19:02:43+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60053330",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/05/33/30/720x532/2091465404.jpg",
+   "piso": 0,
+   "price": 130000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-11T19:02:43+00:00",
+     "price": 130000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": 1,
+   "seventy_offer_usd": null,
+   "site": "zonaprop",
+   "tags": [
+    "para reciclar",
+    "incluye cochera",
+    "sobre presupuesto",
+    "metro muy barato",
+    "expensas altas",
+    "planta baja"
+   ],
+   "title": "# villa crespo semipiso de 3 ambientes con dependencia, balcón Y cochera fija apto crédito",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-villa-crespo-cochera-y-60053330.html",
+   "usd_per_m2": 1831,
+   "vs_median_n": 54,
+   "vs_median_pct": -20,
+   "zone": "Villa Crespo",
    "zone_unverified": false
   },
   {
@@ -6938,7 +6998,7 @@
    "zone": ""
   },
   {
-   "active": true,
+   "active": false,
    "address": "Uriburu  al 1200",
    "address_unverified": false,
    "air_usd": -11500,
@@ -6958,7 +7018,7 @@
    "expensas_ars": 207000,
    "expensas_text": "$ 207.000 Expensas",
    "first_seen": "2026-10-10T01:45:22+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T19:02:43+00:00",
    "id": "zonaprop:60118859",
    "max_offer_usd": 92007,
    "neto_base_usd": -26206,
@@ -9322,7 +9382,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy 2324",
    "address_unverified": false,
    "air_usd": null,
@@ -9342,7 +9402,7 @@
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T19:02:43+00:00",
    "id": "zonaprop:60306978",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -12797,7 +12857,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Leopoldo Marechal 1184",
    "address_unverified": false,
    "air_usd": null,
@@ -12817,7 +12877,7 @@
    "expensas_ars": 318000,
    "expensas_text": "$ 318.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-11T19:02:43+00:00",
    "id": "zonaprop:60613929",
    "max_offer_usd": null,
    "neto_base_usd": null,
