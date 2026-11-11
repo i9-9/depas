@@ -1,4 +1,5 @@
 import data from "../data/listings-baratos.json";
+import { isOnAvenue } from "@/lib/listings";
 
 export type Barato = {
   id: string;
@@ -30,5 +31,5 @@ type FileShape = {
 };
 
 export function loadBaratos(): Barato[] {
-  return ((data as FileShape).listings || []).filter((row) => row.active !== false);
+  return ((data as FileShape).listings || []).filter((row) => row.active !== false && !isOnAvenue(row));
 }

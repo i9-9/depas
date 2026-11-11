@@ -838,7 +838,42 @@ function locationHay(item: Pick<RawListing, "address" | "zone" | "url">): string
   return fold(`${item.address || ""} ${item.zone || ""} ${slug}`);
 }
 
+/** Avenidas que figuran sin "Av." en los avisos (Corrientes 5500, Warnes 500). */
+const AVENUE_NAMES = [
+  "corrientes",
+  "scalabrini ortiz",
+  "estado de israel",
+  "santa fe",
+  "las heras",
+  "pueyrredon",
+  "callao",
+  "libertador",
+  "juan b justo",
+  "rivadavia",
+  "cabildo",
+  "figueroa alcorta",
+  "cordoba",
+  "federico lacroze",
+  "warnes",
+  "alvarez thomas",
+  "elcano",
+  "forest",
+  "balbin",
+];
+
+/**
+ * El departamento da a una avenida: la dirección lleva "Av."/"Avenida" o nombra una avenida conocida.
+ * Solo mira la calle del aviso, no las transversales ("Serrano 544, entre Av Corrientes y Vera" no cuenta).
+ */
+export function isOnAvenue(item: Pick<RawListing, "address">): boolean {
+  const head = fold(item.address || "").split(/\b(?:entre|e\/|esq|esquina)\b/)[0];
+  if (!head.trim()) return false;
+  if (/\b(?:av|avda|avenida)\b/.test(head)) return true;
+  return AVENUE_NAMES.some((name) => tokenIn(head, name));
+}
+
 export function inScope(item: Pick<RawListing, "title" | "address" | "zone" | "url">): boolean {
+  if (isOnAvenue(item)) return false;
   const hay = cityHay(item);
   if (REJECT_CITIES.some((kw) => {
     if (!hay.includes(kw)) return false;
