@@ -2127,6 +2127,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-ambientes-con-balcon-y-patio-en-chacarita!-60579660.html",
    "zone": "Chacarita"
   },
+  "zonaprop:60589086": {
+   "first_seen": "2026-11-12T19:16:20+00:00",
+   "key": "juan ramirez de velasco 700|140000|64|3",
+   "place": "juan ramirez de velasco 700|65|3",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-villa-crespo-60589086.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60593979": {
    "first_seen": "2026-11-07T18:23:42+00:00",
    "key": "castillo 200|129000|51|2",
@@ -2229,6 +2237,14 @@
    "place": "vera 900|55|2",
    "price": 139900,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-2-ambientes-luminoso-9-piso-en-villa-crespo-60652493.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60686926": {
+   "first_seen": "2026-11-12T19:16:20+00:00",
+   "key": "estado de israel 4600|139000|53|2",
+   "place": "estado de israel 4600|55|2",
+   "price": 139000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-con-balcon-terraza-totalmente-reciclado-60686926.html",
    "zone": "Villa Crespo"
   }
  },

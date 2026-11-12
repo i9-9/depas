@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-12T02:16:40+00:00",
+ "last_change": "2026-11-12T19:16:20+00:00",
  "listings": [
   {
    "active": false,
@@ -459,7 +459,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Virrey arredondo 2684",
    "address_unverified": false,
    "air_usd": null,
@@ -473,13 +473,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 115320,
    "cochera": null,
-   "days_seen": 2,
+   "days_seen": 5,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 150000,
    "expensas_text": "$ 150.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": "2026-11-11T19:02:43+00:00",
+   "gone_at": null,
    "id": "zonaprop:55170181",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -2330,7 +2330,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2350,7 +2350,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-12T19:16:20+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -3593,7 +3593,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "CHARLONE 987. Entre Gregoria perez y Zabala",
    "address_unverified": false,
    "air_usd": null,
@@ -3613,7 +3613,7 @@
    "expensas_ars": 270000,
    "expensas_text": "$ 270.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-12T19:16:20+00:00",
    "id": "zonaprop:59461277",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -4078,11 +4078,12 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 0,
+   "score": 1,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
-    "m² sin verificar"
+    "m² sin verificar",
+    "metro barato"
    ],
    "title": "3 ambientes al contrafrente en excelente ubicación residencial Y A 2 cuadras de avda. Fede",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-palpa-2987-colegiales-3-amb.-al-cfte.-c-vista-59615902.html",
@@ -5744,7 +5745,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Vera  al 800",
    "address_unverified": false,
    "air_usd": null,
@@ -5758,13 +5759,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 129735,
    "cochera": null,
-   "days_seen": 3,
+   "days_seen": 5,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": "2026-11-12T02:16:40+00:00",
+   "gone_at": null,
    "id": "zonaprop:59914291",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -5795,7 +5796,7 @@
    "title": "Departamento 2 Ambientes – Villa CrespoVera 885 – Buenos AiresExcelente departamento de 2 ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-59914291.html",
    "usd_per_m2": 2700,
-   "vs_median_n": 54,
+   "vs_median_n": 55,
    "vs_median_pct": 18,
    "zone": "Villa Crespo",
    "zone_unverified": false
@@ -8500,7 +8501,7 @@
    "zone": ""
   },
   {
-   "active": false,
+   "active": true,
    "address": "Valentin Virasoro  al 1900",
    "address_unverified": false,
    "air_usd": null,
@@ -8514,13 +8515,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 132618,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 5,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": "2026-11-12T02:16:40+00:00",
+   "gone_at": null,
    "id": "zonaprop:60267105",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -8550,7 +8551,7 @@
    "title": "Diseño contemporáneo y calidad en cada detalleUnidad 4&quot;B&quot;Este departamento de 57",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-villa-crespo-2-amb-entrega-inmediata.-60267105.html",
    "usd_per_m2": 2421,
-   "vs_median_n": 47,
+   "vs_median_n": 55,
    "vs_median_pct": 6,
    "zone": "Villa Crespo",
    "zone_unverified": false
@@ -12458,7 +12459,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Jorge Newbery 3900",
    "address_unverified": false,
    "air_usd": null,
@@ -12478,7 +12479,7 @@
    "expensas_ars": 220000,
    "expensas_text": "$ 220.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-12T19:16:20+00:00",
    "id": "zonaprop:60579660",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -12512,6 +12513,62 @@
    "vs_median_n": 19,
    "vs_median_pct": -15,
    "zone": "Chacarita",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Juan Ramírez de Velasco 700",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 64.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 64.0,
+   "blurb": "USD 140.000\n$ 141.000 Expensas\n64 m² tot.\n3 amb.\n2 dorm.\n1 baño\nJuan Ramírez de Velasco 700\nVilla Crespo, Capital Federal\nCorredor Responsable: zmz bienes raices S. R. L. Verónica Zaltzman cpi 8072 - cmcpdjm 3960- Contacto: Marta Meccia. departamento de 3 ambientes en venta villa crespo capital federal con balcón. Apto credito de acuerdo A entidad otorgante - consulatr - no apto banco nación. Departamento luminoso ubicado en el séptimo piso de un edificio de siete plantas, con disposición contra",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 134540,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 141000,
+   "expensas_text": "$ 141.000 Expensas",
+   "first_seen": "2026-11-12T19:16:20+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60589086",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/58/90/86/720x532/2089219239.jpg",
+   "piso": null,
+   "price": 140000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-12T19:16:20+00:00",
+     "price": 140000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": -2,
+   "seventy_offer_usd": null,
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar",
+    "sobre presupuesto"
+   ],
+   "title": "Corredor Responsable: zmz bienes raices S. R. L. Verónica Zaltzman cpi 8072 - cmcpdjm 3960",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-villa-crespo-60589086.html",
+   "usd_per_m2": 2188,
+   "vs_median_n": 55,
+   "vs_median_pct": -4,
+   "zone": "Villa Crespo",
    "zone_unverified": false
   },
   {
@@ -13254,6 +13311,61 @@
    "usd_per_m2": 2544,
    "vs_median_n": 47,
    "vs_median_pct": 11,
+   "zone": "Villa Crespo",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Avenida Estado de Israel 4600",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 53.0,
+   "area_covered": 53.0,
+   "area_semi": null,
+   "area_total": 73.0,
+   "blurb": "USD 139.000\n$ 200.000 Expensas\n73 m² tot.\n2 amb.\n1 dorm.\n1 baño\nAvenida Estado de Israel 4600\nVilla Crespo, Capital Federal\nExcelente departamento de 2 ambientes, ubicado en un décimo piso al frente, con orientación norte, vista abierta y excelente luminosidad natural. La propiedad cuenta con 73 m² totales, distribuidos en 53 m² cubiertos y 20 m² de balcón terraza. Distribución. - Amplio living-comedor con salida al balcón terraza. - Balcón terraza de 20 m², ideal para colocar una parrilla y dis",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 133579,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
+   "first_seen": "2026-11-12T19:16:20+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60686926",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/68/69/26/720x532/2091676952.jpg",
+   "piso": null,
+   "price": 139000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-12T19:16:20+00:00",
+     "price": 139000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": -2,
+   "seventy_offer_usd": null,
+   "site": "zonaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Excelente departamento de 2 ambientes, ubicado en un décimo piso al frente, con orientació",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-con-balcon-terraza-totalmente-reciclado-60686926.html",
+   "usd_per_m2": 2623,
+   "vs_median_n": 55,
+   "vs_median_pct": 15,
    "zone": "Villa Crespo",
    "zone_unverified": false
   }

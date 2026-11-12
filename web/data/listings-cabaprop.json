@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-11T19:02:43+00:00",
+ "last_change": "2026-11-12T19:16:20+00:00",
  "listings": [
   {
    "active": false,
@@ -169,7 +169,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Avenida Jorge Newbery 3600",
    "address_unverified": false,
    "air_usd": null,
@@ -183,13 +183,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 126852,
    "cochera": false,
-   "days_seen": 0,
+   "days_seen": 5,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 140000,
    "expensas_text": "$ 140.000 expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": "2026-11-08T17:30:23+00:00",
+   "gone_at": null,
    "id": "cabaprop:6a2c1e13ef11909923511ba0",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -218,7 +218,7 @@
    "title": "Excelente departamento de 3 amb con balcón al frente. Vista abierta!",
    "url": "https://cabaprop.com.ar/propiedad/6a2c1e13ef11909923511ba0/excelente-departamento-de-3-amb-con-balcon-al-frente-vista-abierta",
    "usd_per_m2": 2563,
-   "vs_median_n": 19,
+   "vs_median_n": 16,
    "vs_median_pct": 19,
    "zone": "Chacarita",
    "zone_unverified": false
@@ -279,7 +279,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Olleros 3207",
    "address_unverified": false,
    "air_usd": null,
@@ -299,7 +299,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-12T19:16:20+00:00",
    "id": "cabaprop:6aa4c5163e6a16a1805034f3",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -777,6 +777,61 @@
    "usd_per_m2": 2574,
    "vs_median_n": 47,
    "vs_median_pct": 13,
+   "zone": "Villa Crespo",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Camargo 400",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 3,
+   "antiguedad_years": 55,
+   "area": 57.0,
+   "area_covered": 57.0,
+   "area_semi": null,
+   "area_total": 60.0,
+   "blurb": "Departamento De 3 Ambientes En Venta En Villa Crespo Camargo 400 con balcón sin cochera 55 años Imperdible departamento de 3 ambientes con balcón al contrafrente! Este hermoso y luminoso departamento es ideal para quienes buscan confort y buena ubicación. Ubicado en una zona estratégica, a metros de la línea B del subte , te permite conectar fácilmente con toda la ciudad. Características destacadas: Amplio living-comedor con salida a un balcón al contrafrente , ideal para relajarte. Cocina i",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 122047,
+   "cochera": false,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 85000,
+   "expensas_text": "$ 85.000 expensas",
+   "first_seen": "2026-11-12T19:16:20+00:00",
+   "gone_at": null,
+   "id": "cabaprop:6af531e91bf3e3e070080551",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://http2.mlstatic.com/D_922587-MLA111831070259_052026-O.jpg",
+   "piso": null,
+   "price": 127000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-12T19:16:20+00:00",
+     "price": 127000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": -1,
+   "seventy_offer_usd": null,
+   "site": "cabaprop",
+   "tags": [
+    "sobre presupuesto"
+   ],
+   "title": "Departamento De 3 Ambientes En Venta En Villa Crespo",
+   "url": "https://cabaprop.com.ar/propiedad/6af531e91bf3e3e070080551/departamento-de-3-ambientes-en-venta-en-villa-crespo",
+   "usd_per_m2": 2228,
+   "vs_median_n": 49,
+   "vs_median_pct": -3,
    "zone": "Villa Crespo",
    "zone_unverified": false
   }

@@ -111,6 +111,14 @@
    "price": 140000,
    "url": "https://cabaprop.com.ar/propiedad/6af289fc1d30ff040e09c11c/departamento-en-villa-crespo",
    "zone": "Villa Crespo"
+  },
+  "cabaprop:6af531e91bf3e3e070080551": {
+   "first_seen": "2026-11-12T19:16:20+00:00",
+   "key": "camargo 400|127000|57|3",
+   "place": "camargo 400|55|3",
+   "price": 127000,
+   "url": "https://cabaprop.com.ar/propiedad/6af531e91bf3e3e070080551/departamento-de-3-ambientes-en-venta-en-villa-crespo",
+   "zone": "Villa Crespo"
   }
  },
  "meta": {}
