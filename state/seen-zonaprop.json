@@ -135,9 +135,9 @@
   },
   "zonaprop:56104506": {
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "key": "olleros 3587|129000|59|2",
+   "key": "olleros 3587|120000|59|2",
    "place": "olleros 3587|60|2",
-   "price": 129000,
+   "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-duplex-de-59-m-sup2--con-1-dormitorio-y-2-banos-en-56104506.html",
    "zone": "Chacarita"
   },
@@ -1142,9 +1142,9 @@
   },
   "zonaprop:60053330": {
    "first_seen": "2026-11-11T19:02:43+00:00",
-   "key": "warnes 500|130000|71|3",
+   "key": "warnes 500|125000|71|3",
    "place": "warnes 500|70|3",
-   "price": 130000,
+   "price": 125000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-villa-crespo-cochera-y-60053330.html",
    "zone": "Villa Crespo"
   },
@@ -2233,7 +2233,7 @@
   }
  },
  "meta": {
-  "coverage_week": "2026-W45",
+  "coverage_week": "2026-W46",
   "last_run": "2026-10-10T03:03:21+00:00"
  }
 }
