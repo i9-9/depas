@@ -1192,6 +1192,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-humboldt-2000-60072950.html",
    "zone": "Palermo Hollywood"
   },
+  "zonaprop:60077007": {
+   "first_seen": "2026-11-13T01:25:54+00:00",
+   "key": "roseti 726|139900|65|2",
+   "place": "roseti 726|65|2",
+   "price": 139900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-venta-departamento-2-ambientes-a-estrenar-60077007.html",
+   "zone": "Chacarita"
+  },
   "zonaprop:60077990": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "price": 119000,
@@ -2246,6 +2254,14 @@
    "price": 139000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-con-balcon-terraza-totalmente-reciclado-60686926.html",
    "zone": "Villa Crespo"
+  },
+  "zonaprop:60692028": {
+   "first_seen": "2026-11-13T01:25:54+00:00",
+   "key": "blanco encalada 2300|139000|56|3",
+   "place": "blanco encalada 2300|55|3",
+   "price": 139000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-belgrano-3-amb.-60692028.html",
+   "zone": "Belgrano"
   }
  },
  "meta": {
