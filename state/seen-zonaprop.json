@@ -969,6 +969,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-sobre-av-cabildo-59841232.html",
    "zone": "Belgrano"
   },
+  "zonaprop:59847294": {
+   "first_seen": "2026-11-13T18:52:12+00:00",
+   "key": "blanco encalada 2488|137000|55|3",
+   "place": "blanco encalada 2488|55|3",
+   "price": 137000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-57-m-sup2--con-2-dorm.-en-venta-en-59847294.html",
+   "zone": "Belgrano"
+  },
   "zonaprop:59854175": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "marcelo torcuato de alvear 900|130000|56|3",
@@ -1662,6 +1670,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-3-ambientes-belgrano-60305544.html",
    "zone": "Belgrano"
   },
+  "zonaprop:60305564": {
+   "first_seen": "2026-11-13T18:52:12+00:00",
+   "key": "thames 300|135000|51|2",
+   "place": "thames 300|50|2",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-a-estrenar-con-suite-y-balcon-con-parrilla-60305564.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60306978": {
    "first_seen": "2026-10-19T17:41:13+00:00",
    "key": "fitz roy 2324|125000|50|2",
@@ -2262,6 +2278,14 @@
    "price": 139000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-belgrano-3-amb.-60692028.html",
    "zone": "Belgrano"
+  },
+  "zonaprop:60698310": {
+   "first_seen": "2026-11-13T18:52:12+00:00",
+   "key": "forest 400|135000|69|3",
+   "place": "forest 400|70|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-amb-c-dep-balcon-al-frente-chacarita-60698310.html",
+   "zone": "Chacarita"
   }
  },
  "meta": {

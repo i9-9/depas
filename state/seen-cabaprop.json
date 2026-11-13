@@ -119,6 +119,22 @@
    "price": 127000,
    "url": "https://cabaprop.com.ar/propiedad/6af531e91bf3e3e070080551/departamento-de-3-ambientes-en-venta-en-villa-crespo",
    "zone": "Villa Crespo"
+  },
+  "cabaprop:6af67f62e8b634872c01df33": {
+   "first_seen": "2026-11-13T18:52:12+00:00",
+   "key": "estado de israel 4500|126000|50|3",
+   "place": "estado de israel 4500|50|3",
+   "price": 126000,
+   "url": "https://cabaprop.com.ar/propiedad/6af67f62e8b634872c01df33/oportunidad-3-ambientes-listo-para-disfrutar-en-una-de-las-zonas-mas-buscadas-de-la-ciudad",
+   "zone": "Villa Crespo"
+  },
+  "cabaprop:6af682186f344de27e04ddc5": {
+   "first_seen": "2026-11-13T18:52:12+00:00",
+   "key": "gurruchaga 448|122000|61|3",
+   "place": "gurruchaga 448|60|3",
+   "price": 122000,
+   "url": "https://cabaprop.com.ar/propiedad/6af682186f344de27e04ddc5/departamento-de-3-ambientes-en-venta-en-villa-crespo",
+   "zone": "Villa Crespo"
   }
  },
  "meta": {}
