@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-13T18:52:12+00:00",
+ "last_change": "2026-11-14T17:25:17+00:00",
  "listings": [
   {
    "active": false,
@@ -224,7 +224,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Avenida Estado de Israel 4500",
    "address_unverified": false,
    "air_usd": null,
@@ -238,13 +238,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 121086,
    "cochera": false,
-   "days_seen": 0,
+   "days_seen": 7,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 85000,
    "expensas_text": "$ 85.000 expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": "2026-11-13T18:52:12+00:00",
+   "gone_at": null,
    "id": "cabaprop:6a92523b3e6a16a180f4aca9",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -273,7 +273,7 @@
    "title": "Departamento 3 Ambientes Muy Luminoso Con Balcon En Villa Crespo",
    "url": "https://cabaprop.com.ar/propiedad/6a92523b3e6a16a180f4aca9/departamento-3-ambientes-muy-luminoso-con-balcon-en-villa-crespo",
    "usd_per_m2": 2447,
-   "vs_median_n": 47,
+   "vs_median_n": 52,
    "vs_median_pct": 7,
    "zone": "Villa Crespo",
    "zone_unverified": false
@@ -391,7 +391,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Corrientes 5506",
    "address_unverified": false,
    "air_usd": null,
@@ -411,7 +411,7 @@
    "expensas_ars": 200000,
    "expensas_text": "$ 200.000 expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-14T17:25:17+00:00",
    "id": "cabaprop:6ab3508c3e6a16a180723b17",
    "max_offer_usd": null,
    "neto_base_usd": null,

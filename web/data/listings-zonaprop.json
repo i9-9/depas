@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-14T01:15:19+00:00",
+ "last_change": "2026-11-14T17:25:17+00:00",
  "listings": [
   {
    "active": false,
@@ -2563,7 +2563,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": false,
+   "active": true,
    "address": "SAN MARTIN AV. 1800",
    "address_unverified": false,
    "air_usd": null,
@@ -2577,13 +2577,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124834,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 7,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 130000,
    "expensas_text": "$ 130.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": "2026-11-14T01:15:19+00:00",
+   "gone_at": null,
    "id": "zonaprop:58924451",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -2614,7 +2614,7 @@
    "title": "Hermosa unidad 3 ambientes y medio con balcón corrido al frente. Súper luminosa y con exce",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-58924451.html",
    "usd_per_m2": 1755,
-   "vs_median_n": 47,
+   "vs_median_n": 58,
    "vs_median_pct": -23,
    "zone": "Villa Crespo",
    "zone_unverified": false
@@ -6533,7 +6533,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Warnes 500",
    "address_unverified": false,
    "air_usd": null,
@@ -6547,13 +6547,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 120125,
    "cochera": true,
-   "days_seen": 1,
+   "days_seen": 3,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 348000,
    "expensas_text": "$ 348.000 Expensas",
    "first_seen": "2026-11-11T19:02:43+00:00",
-   "gone_at": "2026-11-14T01:15:19+00:00",
+   "gone_at": null,
    "id": "zonaprop:60053330",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6590,7 +6590,7 @@
    "title": "# villa crespo semipiso de 3 ambientes con dependencia, balcón Y cochera fija apto crédito",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-villa-crespo-cochera-y-60053330.html",
    "usd_per_m2": 1761,
-   "vs_median_n": 50,
+   "vs_median_n": 58,
    "vs_median_pct": -23,
    "zone": "Villa Crespo",
    "zone_unverified": false
@@ -8007,7 +8007,7 @@
    "area_covered": null,
    "area_semi": null,
    "area_total": 66.0,
-   "blurb": "USD 130.000\n7%\n$ 200.000 Expensas\n66 m² tot.\n3 amb.\n2 dorm.\n1 baño\nCORRIENTES 5500\nVilla Crespo, Capital Federal\nHermoso departamento de 3 ambientes al frente con balcon en Corrientes y Gurruchaga. En un sexto piso, sobre un edificio de 27 años de antiguedad, tenemos esta propiedad que cuenta con un amplio living comedor con acceso al balcon, cocina independiente con lavadero incorporado, dos habitaciones amplias con placard empotrado y un baño completo con bañera remodernizado. La ubicacion est",
+   "blurb": "USD 130.000\n$ 200.000 Expensas\n66 m² tot.\n3 amb.\n2 dorm.\n1 baño\nCORRIENTES 5500\nVilla Crespo, Capital Federal\nHermoso departamento de 3 ambientes al frente con balcon en Corrientes y Gurruchaga. En un sexto piso, sobre un edificio de 27 años de antiguedad, tenemos esta propiedad que cuenta con un amplio living comedor con acceso al balcon, cocina independiente con lavadero incorporado, dos habitaciones amplias con placard empotrado y un baño completo con bañera remodernizado. La ubicacion estrat",
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
@@ -10700,7 +10700,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "FRENCH 2700",
    "address_unverified": false,
    "air_usd": 1125,
@@ -10714,13 +10714,13 @@
    "breakeven_exit_usd_m2": 3457,
    "closing_ref_usd": 133579,
    "cochera": null,
-   "days_seen": 34,
+   "days_seen": 35,
    "decision": "descartar",
    "exit_usd_m2": 2750,
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": "2026-11-13T18:52:12+00:00",
+   "gone_at": null,
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -15067,
@@ -12290,7 +12290,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "ZAPIOLA 2193. Entre Mendoza",
    "address_unverified": false,
    "air_usd": 12250,
@@ -12310,7 +12310,7 @@
    "expensas_ars": 168000,
    "expensas_text": "$ 168.000 Expensas",
    "first_seen": "2026-11-04T18:58:48+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-14T17:25:17+00:00",
    "id": "zonaprop:60534981",
    "max_offer_usd": 115820,
    "neto_base_usd": -3855,
