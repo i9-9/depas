@@ -2286,6 +2286,22 @@
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-amb-c-dep-balcon-al-frente-chacarita-60698310.html",
    "zone": "Chacarita"
+  },
+  "zonaprop:60700361": {
+   "first_seen": "2026-11-14T01:15:19+00:00",
+   "key": "padilla 600|125000|72|2",
+   "place": "padilla 600|70|2",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dos-ambientes-al-frente-con-balcon-terraza-y-cochera-60700361.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60702662": {
+   "first_seen": "2026-11-14T01:15:19+00:00",
+   "key": "charlone 900|129100|53|3",
+   "place": "charlone 900|55|3",
+   "price": 129100,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-de-departamento-de-3-ambientes-en-chacarita-60702662.html",
+   "zone": "Chacarita"
   }
  },
  "meta": {
