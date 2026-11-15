@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-14T17:25:17+00:00",
+ "last_change": "2026-11-15T03:00:20+00:00",
  "listings": [
   {
    "active": false,
@@ -10700,7 +10700,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "FRENCH 2700",
    "address_unverified": false,
    "air_usd": 1125,
@@ -10720,7 +10720,7 @@
    "expensas_ars": 290000,
    "expensas_text": "$ 290.000 Expensas",
    "first_seen": "2026-10-10T04:06:21+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-15T03:00:20+00:00",
    "id": "zonaprop:60393807",
    "max_offer_usd": 104095,
    "neto_base_usd": -15067,
@@ -12609,13 +12609,12 @@
    "reno_usd_m2": 375,
    "roi_base": 0.1664,
    "roi_hard": 0.0158,
-   "score": 1,
+   "score": 0,
    "seventy_offer_usd": 124310,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
     "sobre presupuesto",
-    "metro barato",
     "expensas altas",
     "aire amplio"
    ],
