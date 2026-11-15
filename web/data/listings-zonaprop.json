@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-15T03:00:20+00:00",
+ "last_change": "2026-11-15T18:03:27+00:00",
  "listings": [
   {
    "active": false,
@@ -2330,7 +2330,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2344,13 +2344,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 34,
+   "days_seen": 36,
    "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-11-14T01:15:19+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -10016,7 +10016,7 @@
    "neto_base_usd": null,
    "neto_hard_usd": null,
    "old_price": null,
-   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/77/42/720x532/2086998467.jpg",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/34/77/42/720x532/2092422458.jpg",
    "piso": 8,
    "price": 127000,
    "price_drops": 0,
