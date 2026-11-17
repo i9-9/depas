@@ -1,6 +1,7 @@
 import { Photo } from "@/components/Photo";
 import { formatNum, streetOf } from "@/lib/listings";
 import type { Amiga as AmigaRow } from "@/lib/load-amiga";
+import { rankAmiga, type Ranked } from "@/lib/rank-amiga";
 
 const SITE: Record<string, string> = {
   zonaprop: "Zonaprop",
@@ -21,14 +22,14 @@ const VISITA = [
 ];
 
 export function Amiga({ rows }: { rows: AmigaRow[] }) {
-  const list = rows.slice().sort((a, b) => (a.price ?? 1e12) - (b.price ?? 1e12));
+  const list = rankAmiga(rows);
   return (
     <section className="mt-10">
       <p className="kicker text-muted">Aparte de la cuenta</p>
       <h1 className="display mt-3 text-title">Para Mailén</h1>
       <p className="lede mt-4 max-w-xl text-ink">
         2 o 3 ambientes con balcón y luz, hasta USD 100.000, desde 45 m² cubiertos. Barrios: {BARRIOS}.
-        No entran al candidato.
+        Ordenados de mejor a peor según lo que pidió: orientación, balcón, vista alta, parquet, luz, metros y precio por m². Lo que el aviso no dice no suma ni resta.
       </p>
       <p className="mt-6 text-[0.8125rem] font-bold text-title">A mirar en la visita (el portal no lo dice)</p>
       <ul className="mt-2 text-[0.8125rem] leading-snug text-muted">
@@ -38,9 +39,9 @@ export function Amiga({ rows }: { rows: AmigaRow[] }) {
       </ul>
       {list.length ? (
         <ul className="mt-10 border-t border-line">
-          {list.map((item) => (
-            <li key={item.id}>
-              <Row item={item} />
+          {list.map((r, i) => (
+            <li key={r.item.id}>
+              <Row ranked={r} pos={i + 1} />
             </li>
           ))}
         </ul>
@@ -51,7 +52,8 @@ export function Amiga({ rows }: { rows: AmigaRow[] }) {
   );
 }
 
-function Row({ item }: { item: AmigaRow }) {
+function Row({ ranked, pos }: { ranked: Ranked; pos: number }) {
+  const { item, score, reasons, flags } = ranked;
   const street = streetOf(item);
   const covered = item.area_covered != null;
   const meters = covered ? item.area_covered : item.area;
@@ -67,7 +69,7 @@ function Row({ item }: { item: AmigaRow }) {
       <Photo src={item.photo} alt="" className="aspect-[4/3] w-full" />
       <div className="min-w-0">
         <p className="kicker text-muted">
-          {item.zone || "CABA"} · {SITE[item.site] || item.site}
+          #{pos} · {item.zone || "CABA"} · {SITE[item.site] || item.site} · {score} pts
         </p>
         <a
           href={item.url}
@@ -81,6 +83,8 @@ function Row({ item }: { item: AmigaRow }) {
           USD {formatNum(item.price)}
         </p>
         <p className="mt-3 text-[0.8125rem] text-muted">{bits.join(" · ")}</p>
+        {reasons.length ? <p className="mt-2 text-[0.8125rem] text-ink">+ {reasons.join(" · ")}</p> : null}
+        {flags.length ? <p className="mt-1 text-[0.8125rem] text-muted">− {flags.join(" · ")}</p> : null}
       </div>
     </article>
   );
