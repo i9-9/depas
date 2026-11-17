@@ -70,7 +70,7 @@ function NavLink({
   children: React.ReactNode;
 }) {
   const cls =
-    "flex min-h-11 items-end border-b-2 pb-1 text-[1.0625rem] leading-none tracking-[-0.02em] md:col-span-4";
+    "flex min-h-11 items-end border-b-2 pb-1 text-[1.0625rem] leading-none tracking-[-0.02em] md:col-span-3";
   if (active) {
     return (
       <span aria-current="page" className={`${cls} border-accent font-bold text-title`}>

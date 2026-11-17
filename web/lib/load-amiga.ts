@@ -22,6 +22,8 @@ export type Amiga = {
   first_seen: string | null;
   active: boolean;
   gone_at: string | null;
+  /** El mismo depto en otro portal (lo arma la web). */
+  mirrors?: { site: string; url: string }[];
 };
 
 type FileShape = {
@@ -31,4 +33,8 @@ type FileShape = {
 
 export function loadAmiga(): Amiga[] {
   return ((data as FileShape).listings || []).filter((row) => row.active !== false);
+}
+
+export function loadAmigaMeta(): { lastChange: string | null } {
+  return { lastChange: (data as FileShape).last_change || null };
 }
