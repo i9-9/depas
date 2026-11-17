@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-16T21:28:07+00:00",
+ "last_change": "2026-11-17T05:26:10+00:00",
  "listings": [
   {
    "active": false,
@@ -615,7 +615,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Aguirre 100",
    "address_unverified": false,
    "air_usd": null,
@@ -635,7 +635,7 @@
    "expensas_ars": 250000,
    "expensas_text": "$ 250.000 expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-17T05:26:10+00:00",
    "id": "cabaprop:6ae175c4e1793443d290644c",
    "max_offer_usd": null,
    "neto_base_usd": null,

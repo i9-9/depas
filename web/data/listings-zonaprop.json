@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-15T18:03:27+00:00",
+ "last_change": "2026-11-17T05:26:10+00:00",
  "listings": [
   {
    "active": false,
@@ -11210,7 +11210,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Raúl Scalabrini Ortiz 100",
    "address_unverified": false,
    "air_usd": null,
@@ -11230,7 +11230,7 @@
    "expensas_ars": 135000,
    "expensas_text": "$ 135.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-17T05:26:10+00:00",
    "id": "zonaprop:60460236",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -12513,7 +12513,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Aguirre al 100",
    "address_unverified": false,
    "air_usd": null,
@@ -12533,7 +12533,7 @@
    "expensas_ars": 250000,
    "expensas_text": "$ 250.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-17T05:26:10+00:00",
    "id": "zonaprop:60543418",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -13227,7 +13227,7 @@
    "neto_base_usd": null,
    "neto_hard_usd": null,
    "old_price": null,
-   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/61/71/08/720x532/2089929073.jpg",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/61/71/08/720x532/2089949370.jpg",
    "piso": 14,
    "price": 135000,
    "price_drops": 0,
