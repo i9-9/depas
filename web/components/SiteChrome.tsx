@@ -43,7 +43,7 @@ export function SiteChrome({
               Más baratos
             </NavLink>
             <NavLink href="/amiga/" active={current === "amiga"}>
-              Para una amiga
+              Para Mailén
             </NavLink>
           </nav>
           <p className="measure mt-3 text-[0.8125rem] leading-snug text-muted">

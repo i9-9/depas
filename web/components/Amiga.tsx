@@ -25,7 +25,7 @@ export function Amiga({ rows }: { rows: AmigaRow[] }) {
   return (
     <section className="mt-10">
       <p className="kicker text-muted">Aparte de la cuenta</p>
-      <h1 className="display mt-3 text-title">Para una amiga</h1>
+      <h1 className="display mt-3 text-title">Para Mailén</h1>
       <p className="lede mt-4 max-w-xl text-ink">
         2 o 3 ambientes con balcón y luz, hasta USD 100.000, desde 45 m² cubiertos. Barrios: {BARRIOS}.
         No entran al candidato.
