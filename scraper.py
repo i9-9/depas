@@ -27,6 +27,8 @@ from urllib.parse import parse_qs, urlparse
 import requests
 from bs4 import BeautifulSoup
 
+import geo
+
 ROOT = Path(__file__).parent
 CONFIG_PATH = ROOT / "config.json"
 
@@ -637,6 +639,10 @@ def parse_cabaprop(rows: list) -> list[dict]:
             "cochera": (True if gar.get("active") else False) if gar is not None else None,
             "price_source": "card",
         }
+        try:
+            item["lat"], item["lng"] = float(loc["lat"]), float(loc["lng"])
+        except (KeyError, TypeError, ValueError):
+            pass
         listings[item["id"]] = item
     return list(listings.values())
 
@@ -3728,11 +3734,34 @@ def _barato_row(item: dict, first_seen: str) -> dict:
         "first_seen": first_seen,
         "active": True,
         "gone_at": None,
+        "lat": item.get("lat"),
+        "lng": item.get("lng"),
     }
 
 
+def _enrich_geo(rows: list[dict], *, dry_run: bool) -> None:
+    """Distancia a villas (seguridad). Falla en silencio: sin dato, el aviso queda como "sin verificar"."""
+    cache_path = STATE_DIR / "geocache.json"
+    try:
+        cache = json.loads(cache_path.read_text()) if cache_path.exists() else {}
+        new = geo.enrich_rows(rows, cache)
+        have = sum(1 for r in rows if r.get("villa_m") is not None)
+        print(f"[geo] {have}/{len(rows)} con distancia a villas ({new} direcciones nuevas)", flush=True)
+        if new and not dry_run:
+            write_json(cache_path, cache)
+    except Exception as e:  # noqa: BLE001 - la geografía nunca debe tirar la búsqueda
+        print(f"[geo] sin distancia a villas: {e}", file=sys.stderr)
+
+
 def publish_track(
-    track: str, items: list[dict], ok_sites: set[str], now: str, *, dry_run: bool, failed_zones: set[str] | None = None
+    track: str,
+    items: list[dict],
+    ok_sites: set[str],
+    now: str,
+    *,
+    dry_run: bool,
+    failed_zones: set[str] | None = None,
+    use_geo: bool = True,
 ) -> int:
     """Lista aparte. No toca el catálogo ni el candidato de la home."""
     path = WEB_DATA_DIR / TRACKS[track]["listings"]
@@ -3748,7 +3777,16 @@ def publish_track(
         old = prev_rows.get(item["id"]) or {}
         first = (seen.get(item["id"]) or {}).get("first_seen") or old.get("first_seen") or now
         seen[item["id"]] = {"first_seen": first}
-        live.append(_barato_row(item, first))
+        row = _barato_row(item, first)
+        # Historial de precio: queda cada cambio, para marcar bajas (negociables) y subas.
+        hist = list(old.get("price_history") or [])
+        if old.get("price") is not None and row["price"] is not None and old["price"] != row["price"]:
+            hist.append({"at": now, "from": old["price"], "to": row["price"]})
+        row["price_history"] = hist
+        row["first_price"] = old.get("first_price") or old.get("price") or row["price"]
+        live.append(row)
+    if track == "amiga" and use_geo:
+        _enrich_geo(live, dry_run=dry_run)
     live_ids = {i["id"] for i in live}
     kept = list(live)
     for old in prev_rows.values():
@@ -3762,7 +3800,9 @@ def publish_track(
     kept.sort(key=lambda r: (0 if r.get("active") else 1, r.get("price") or 10**12))
     active_n = sum(1 for r in kept if r.get("active") is not False)
     print(f"[{track}] {active_n} activos", flush=True)
-    if not dry_run:
+    changed = kept != (prev_cat.get("listings") or [])
+    if not dry_run and (changed or not path.exists()):
+        # Sin novedades no se reescribe: no hay commit ni deploy por una corrida igual.
         write_json(path, {"last_change": now, "listings": kept})
         write_json(state_path, {"last_change": now, "listings": seen})
     return active_n

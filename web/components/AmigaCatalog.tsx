@@ -6,10 +6,18 @@ import { Photo } from "@/components/Photo";
 import { VisitPad } from "@/components/VisitPad";
 import { addedOn, formatNum, siteLabel, streetOf } from "@/lib/listings";
 import type { Amiga } from "@/lib/load-amiga";
-import { TIER_LABEL, rankAmiga, type Check, type CheckState, type Ranked } from "@/lib/rank-amiga";
+import {
+  VERDICT_LABEL,
+  questionsMessage,
+  rankAmiga,
+  type Check,
+  type CheckState,
+  type Ranked,
+  type Verdict,
+} from "@/lib/rank-amiga";
 import { readPrefs, toggleId, writePrefs } from "@/lib/storage";
 
-type SortKey = "fit" | "price" | "m2price" | "area" | "new";
+type SortKey = "fit" | "opportunity" | "price" | "m2price" | "area" | "new";
 
 type Filters = {
   q: string;
@@ -26,6 +34,10 @@ type Filters = {
   balcon5: boolean;
   alto: boolean;
   noAvenue: boolean;
+  lejosVilla: boolean;
+  verdict: Verdict | "";
+  onlyDrop: boolean;
+  onlyOpportunity: boolean;
 };
 
 const INITIAL: Filters = {
@@ -43,10 +55,15 @@ const INITIAL: Filters = {
   balcon5: false,
   alto: false,
   noAvenue: false,
+  lejosVilla: false,
+  verdict: "",
+  onlyDrop: false,
+  onlyOpportunity: false,
 };
 
 const SORTS: { id: SortKey; label: string }[] = [
   { id: "fit", label: "Mejor ajuste" },
+  { id: "opportunity", label: "Mayor oportunidad (más bajo su barrio)" },
   { id: "price", label: "Precio, de menor a mayor" },
   { id: "m2price", label: "USD por m², de menor a mayor" },
   { id: "area", label: "Más metros" },
@@ -119,6 +136,10 @@ function passes(
   if (f.balcon5 && !r.facets.balcon5) return false;
   if (f.alto && !r.facets.alto) return false;
   if (f.noAvenue && r.onAvenue) return false;
+  if (f.lejosVilla && !r.facets.lejosVilla) return false;
+  if (f.verdict && r.verdict !== f.verdict) return false;
+  if (f.onlyDrop && !r.drop) return false;
+  if (f.onlyOpportunity && !r.opportunity) return false;
   if (f.q.trim()) {
     const hay = fold(`${it.address} ${it.title} ${it.zone}`);
     if (!f.q.trim().split(/\s+/).every((w) => hay.includes(fold(w)))) return false;
@@ -157,12 +178,18 @@ export function AmigaCatalog({ rows, lastChange }: { rows: Amiga[]; lastChange: 
     for (const r of ranked) if (r.item.zone) c.set(r.item.zone, (c.get(r.item.zone) || 0) + 1);
     return [...c.entries()].sort((a, b) => b[1] - a[1]);
   }, [ranked]);
+  const verdictCount = useMemo(() => {
+    const c: Record<Verdict, number> = { ver: 0, preguntar: 0, tal_vez: 0, descartar: 0 };
+    for (const r of ranked) c[r.verdict] += 1;
+    return c;
+  }, [ranked]);
   const sites = useMemo(() => [...new Set(rows.map((r) => r.site))], [rows]);
 
   const visible = useMemo(() => {
     const list = ranked.filter((r) => passes(r, filters, saved, discarded, fresh));
     const by: Record<SortKey, (a: Ranked, b: Ranked) => number> = {
       fit: () => 0,
+      opportunity: (a, b) => (a.valuePct ?? 1e6) - (b.valuePct ?? 1e6) || b.score - a.score,
       price: (a, b) => (a.item.price ?? 1e12) - (b.item.price ?? 1e12),
       m2price: (a, b) => (a.usdM2 ?? 1e12) - (b.usdM2 ?? 1e12),
       area: (a, b) => (b.item.area_covered ?? b.item.area ?? 0) - (a.item.area_covered ?? a.item.area ?? 0),
@@ -244,13 +271,29 @@ export function AmigaCatalog({ rows, lastChange }: { rows: Amiga[]; lastChange: 
           ))}
         </div>
 
+        <div className="flex flex-wrap gap-x-4 gap-y-1 border-t border-line py-2" role="group" aria-label="Veredicto">
+          <Chip on={!filters.verdict} onClick={() => set("verdict", "")}>
+            Todos
+          </Chip>
+          {(Object.keys(VERDICT_LABEL) as Verdict[]).map((v) => (
+            <Chip key={v} on={filters.verdict === v} onClick={() => set("verdict", filters.verdict === v ? "" : v)}>
+              {VERDICT_LABEL[v]} <span className="idx text-muted">{verdictCount[v]}</span>
+            </Chip>
+          ))}
+        </div>
+
         <div className="flex flex-wrap items-center justify-between gap-x-5 border-t border-line">
           <div className="flex flex-wrap gap-x-5">
             <Toggle on={filters.onlySaved} onChange={(v) => set("onlySaved", v)} label="Guardados" icon />
+            <Toggle on={filters.onlyOpportunity} onChange={(v) => set("onlyOpportunity", v)} label="Oportunidad" />
+            {ranked.some((r) => r.drop) ? (
+              <Toggle on={filters.onlyDrop} onChange={(v) => set("onlyDrop", v)} label="Bajó el precio" />
+            ) : null}
             <Toggle on={filters.norte} onChange={(v) => set("norte", v)} label="Norte" />
             <Toggle on={filters.balcon5} onChange={(v) => set("balcon5", v)} label="Balcón 5 m²+" />
             <Toggle on={filters.alto} onChange={(v) => set("alto", v)} label="Vista alta" />
             <Toggle on={filters.parquet} onChange={(v) => set("parquet", v)} label="Parquet" />
+            <Toggle on={filters.lejosVilla} onChange={(v) => set("lejosVilla", v)} label="Lejos de villas (600 m+)" />
             <Toggle on={filters.noAvenue} onChange={(v) => set("noAvenue", v)} label="Sin avenidas" />
             {fresh.size > 0 ? <Toggle on={filters.onlyNew} onChange={(v) => set("onlyNew", v)} label="Nuevos" /> : null}
             {discarded.length > 0 ? (
@@ -315,7 +358,7 @@ export function AmigaCatalog({ rows, lastChange }: { rows: Amiga[]; lastChange: 
             : "Sin resultados"}
           {medM2 ? ` · mediana USD ${formatNum(medM2)}/m²` : ""}
         </p>
-        <p>{lastChange ? `Revisado ${addedOn(lastChange)}` : ""}</p>
+        <p>{lastChange ? `Última novedad ${addedOn(lastChange)}` : ""}</p>
       </div>
       <p aria-live="polite" className={note ? "kicker pb-2 text-muted" : "sr-only"}>
         {note}
@@ -408,16 +451,16 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function TierPill({ tier, score }: { tier: Ranked["tier"]; score: number }) {
+function VerdictPill({ verdict, score }: { verdict: Verdict; score: number }) {
   const cls =
-    tier === "top"
+    verdict === "ver"
       ? "bg-title text-bg"
-      : tier === "buena"
+      : verdict === "preguntar"
         ? "border border-title text-title"
         : "border border-line text-muted";
   return (
     <span className={`kicker inline-block px-1.5 py-0.5 ${cls}`} title={`${score} puntos`}>
-      {TIER_LABEL[tier]} · {score}
+      {VERDICT_LABEL[verdict]} · {score}
     </span>
   );
 }
@@ -483,9 +526,16 @@ function Row({
         <button type="button" aria-expanded={open} onClick={onToggle} className="hit min-w-0 flex-1 text-left">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
             <span className="idx text-[0.75rem] text-muted">{String(pos).padStart(2, "0")}</span>
-            <TierPill tier={r.tier} score={r.score} />
+            <VerdictPill verdict={r.verdict} score={r.score} />
             {isNew ? <span className="kicker text-signal">Nuevo</span> : null}
             {r.onAvenue ? <span className="kicker text-muted">Avenida</span> : null}
+            {r.opportunity ? <span className="kicker text-signal">Oportunidad</span> : null}
+            {r.drop ? <span className="kicker text-signal">Bajó {r.drop.pct}%</span> : null}
+            {r.rise ? <span className="kicker text-muted">Subió {r.rise.pct}%</span> : null}
+            {r.suspicious ? <span className="kicker text-muted">Precio raro</span> : null}
+            {item.villa_m != null && item.villa_m < 600 ? (
+              <span className="kicker text-title">Villa a {item.villa_m} m</span>
+            ) : null}
           </div>
           <h3 className="name mt-1 text-[1.0625rem] leading-snug text-title md:text-[1.1875rem]">{street}</h3>
           <p className="mt-0.5 text-[0.8125rem] leading-snug text-muted">
@@ -498,6 +548,7 @@ function Row({
               {m2 != null ? `${m2} m²${item.area_covered != null ? " cub." : ""}` : "sin m²"}
               {item.ambientes != null ? ` · ${item.ambientes} amb` : ""}
               {r.usdM2 != null ? ` · USD ${formatNum(r.usdM2)}/m²` : ""}
+              {r.valuePct != null ? ` (${r.valuePct > 0 ? "+" : ""}${r.valuePct}% vs barrio)` : ""}
             </span>
           </p>
           {!open && (chips.length || r.flags.length) ? (
@@ -539,6 +590,35 @@ function CheckRow({ c }: { c: Check }) {
   );
 }
 
+function Questions({ r }: { r: Ranked }) {
+  const [copied, setCopied] = useState(false);
+  const text = questionsMessage(r, siteLabel(r.item.site));
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* sin permiso de portapapeles: el texto queda visible para copiarlo a mano */
+    }
+  }
+  return (
+    <div className="mt-6">
+      <p className="kicker text-title">Para preguntarle a la inmobiliaria</p>
+      <ul className="mt-2 text-[0.9375rem] leading-snug text-ink">
+        {r.questions.slice(0, 6).map((q) => (
+          <li key={q} className="py-0.5">
+            · {q}
+          </li>
+        ))}
+      </ul>
+      <button type="button" className="btn-ghost" onClick={copy}>
+        {copied ? "Copiado" : "Copiar como mensaje"}
+      </button>
+    </div>
+  );
+}
+
 function Fact({ label, value, hint }: { label: string; value: string; hint?: string }) {
   const missing = value === "—";
   return (
@@ -556,7 +636,10 @@ function Detail({ r }: { r: Ranked }) {
   const { item } = r;
   const street = streetOf(item);
   const desc = description(item);
-  const map = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${street}, ${item.zone || ""}, Ciudad de Buenos Aires`)}`;
+  const map =
+    item.lat != null && item.lng != null
+      ? `https://www.google.com/maps/search/?api=1&query=${item.lat},${item.lng}`
+      : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${street}, ${item.zone || ""}, Ciudad de Buenos Aires`)}`;
   const confirmed = r.checks.filter((c) => c.state === "si").length;
   const partial = r.checks.filter((c) => c.state === "parcial").length;
   const open = r.checks.filter((c) => c.state === "?").length;
@@ -585,7 +668,14 @@ function Detail({ r }: { r: Ranked }) {
         </div>
 
         <div className="min-w-0">
-          <dl className="facts">
+          <div className="border-l-2 border-accent pl-3">
+            <p className="kicker text-title">
+              {VERDICT_LABEL[r.verdict]} · {r.score} puntos · datos del aviso {r.certainty}%
+            </p>
+            <p className="mt-1 text-[0.9375rem] leading-snug text-ink">{r.why}</p>
+          </div>
+
+          <dl className="facts mt-5">
             <Fact label="Precio" value={`USD ${formatNum(item.price)}`} />
             <Fact
               label={item.area_covered != null ? "Cubiertos" : "Metros"}
@@ -595,7 +685,7 @@ function Detail({ r }: { r: Ranked }) {
             <Fact label="USD por m²" value={r.usdM2 != null ? formatNum(r.usdM2) : "—"} />
             <Fact label="Ambientes" value={item.ambientes != null ? String(item.ambientes) : "—"} />
             <Fact label="Expensas" value={item.expensas_ars != null ? `$ ${formatNum(item.expensas_ars)}` : "—"} />
-            <Fact label="Piso" value={item.piso != null ? (item.piso === 0 ? "PB" : String(item.piso)) : "—"} />
+            <Fact label="Piso" value={r.piso != null ? (r.piso === 0 ? "PB" : String(r.piso)) : "—"} />
             <Fact label="Antigüedad" value={item.antiguedad_years != null ? `${item.antiguedad_years} años` : "—"} />
             <Fact label="Barrio" value={item.zone || "—"} />
           </dl>
@@ -611,12 +701,31 @@ function Detail({ r }: { r: Ranked }) {
             </ul>
           </div>
 
-          {r.reasons.length || r.flags.length ? (
+          {r.group && r.usdM2 != null && r.valuePct != null ? (
             <p className="mt-5 text-[0.9375rem] leading-snug">
+              <span className="text-title">
+                USD {formatNum(r.usdM2)}/m² contra una mediana de USD {formatNum(Math.round(r.group.median))}/m²
+              </span>{" "}
+              <span className="text-muted">
+                en {r.group.label} ({r.group.n} avisos): {r.valuePct <= 0 ? `${-r.valuePct}% más barato` : `${r.valuePct}% más caro`}.
+                {r.suspicious ? " Tanta diferencia suele esconder algo: confirmar estado, ocupación y metros." : ""}
+              </span>
+            </p>
+          ) : null}
+          {item.price_history?.length ? (
+            <p className="mt-2 text-[0.9375rem] leading-snug text-muted">
+              Precio: {item.price_history.map((h) => `USD ${formatNum(h.from)} → ${formatNum(h.to)} (${addedOn(h.at)})`).join(", ")}.
+              {r.drop ? " Una baja deja margen para ofertar." : ""}
+            </p>
+          ) : null}
+          {r.reasons.length || r.flags.length ? (
+            <p className="mt-2 text-[0.9375rem] leading-snug">
               {r.reasons.length ? <span className="text-title">Suma: {r.reasons.join(", ")}. </span> : null}
               {r.flags.length ? <span className="text-muted">Resta: {r.flags.join(", ")}.</span> : null}
             </p>
           ) : null}
+
+          {r.questions.length ? <Questions r={r} /> : null}
 
           {desc ? <p className="measure mt-5 text-[0.9375rem] leading-relaxed text-ink">{desc}</p> : null}
 

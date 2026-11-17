@@ -2088,6 +2088,45 @@ def test_barato_track_keeps_colegiales_example():
     assert not s.matches(dear, side)
 
 
+def test_amiga_publish_price_history_and_noop():
+    """Una baja queda en price_history; una corrida igual no reescribe los archivos."""
+    tmp = Path(tempfile.mkdtemp())
+    _portal_dirs(tmp)
+    try:
+        item = {
+            "id": "zonaprop:h1", "site": "zonaprop", "url": "https://z/h1.html", "title": "t",
+            "address": "Cuenca 3100", "zone": "Villa del Parque", "price": 100000, "ambientes": 2, "area": 50,
+        }
+        s.publish_track("amiga", [dict(item)], {"zonaprop"}, "2026-11-01T10:00:00+00:00", dry_run=False, use_geo=False)
+        path = s.WEB_DATA_DIR / "listings-amiga.json"
+        first = json.loads(path.read_text())
+        assert first["listings"][0]["price_history"] == [] and first["listings"][0]["first_price"] == 100000
+        s.publish_track("amiga", [dict(item)], {"zonaprop"}, "2026-11-02T10:00:00+00:00", dry_run=False, use_geo=False)
+        same = json.loads(path.read_text())
+        assert same["last_change"] == "2026-11-01T10:00:00+00:00"  # sin novedades, no se reescribe
+        s.publish_track("amiga", [dict(item, price=94000)], {"zonaprop"}, "2026-11-03T10:00:00+00:00", dry_run=False, use_geo=False)
+        row = json.loads(path.read_text())["listings"][0]
+        assert row["price"] == 94000 and row["first_price"] == 100000
+        assert row["price_history"] == [{"at": "2026-11-03T10:00:00+00:00", "from": 100000, "to": 94000}]
+    finally:
+        _restore_paths()
+
+
+def test_geo_distance_and_address():
+    import geo
+    sq = {"name": "Villa Test", "rings": [[[-58.40, -34.60], [-58.39, -34.60], [-58.39, -34.59], [-58.40, -34.59]]]}
+    assert geo.nearest_villa(-34.595, -58.395, [sq]) == (0, "Villa Test")  # adentro
+    d, name = geo.nearest_villa(-34.595, -58.388, [sq])  # ~0,001° al este
+    assert name == "Villa Test" and 150 <= d <= 220
+    far = geo.nearest_villa(-34.62, -58.40, [sq])
+    assert far and far[0] > 2000
+    assert geo.clean_address("Alcaraz 4400. Entre Segurola") == "Alcaraz 4400"
+    assert geo.clean_address("Crespo al 2100") == "Crespo 2100"
+    assert geo.clean_address("Av. Nazca 2718") == "Av. Nazca 2718"
+    assert geo.clean_address("Tte. Cnel. Gregorio Pomar al 4100") == "Tte. Cnel. Gregorio Pomar 4100"
+    assert geo.clean_address("Entre Rios y Cordoba") is None
+
+
 def test_amiga_track():
     """La ruta de la amiga: 2/3 amb, 45 m², hasta USD 100k, sus 10 barrios; no toca el candidato."""
     cfg = json.loads(Path("config.json").read_text(encoding="utf-8"))

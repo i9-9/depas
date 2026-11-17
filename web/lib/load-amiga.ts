@@ -22,6 +22,13 @@ export type Amiga = {
   first_seen: string | null;
   active: boolean;
   gone_at: string | null;
+  lat?: number | null;
+  lng?: number | null;
+  /** Metros a la villa más cercana (0 = adentro) y su nombre; falta si no se pudo ubicar. */
+  villa_m?: number | null;
+  villa_name?: string | null;
+  price_history?: { at: string; from: number; to: number }[];
+  first_price?: number | null;
   /** El mismo depto en otro portal (lo arma la web). */
   mirrors?: { site: string; url: string }[];
 };

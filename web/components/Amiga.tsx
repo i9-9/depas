@@ -13,6 +13,7 @@ const PEDIDO = [
   "Mínimo 45 m² cubiertos",
   "2 o 3 ambientes",
   "Hasta USD 100.000",
+  "No estar al lado de una villa",
 ];
 
 export function Amiga({ rows, lastChange }: { rows: AmigaRow[]; lastChange: string | null }) {
@@ -34,9 +35,11 @@ export function Amiga({ rows, lastChange }: { rows: AmigaRow[]; lastChange: stri
           ))}
         </ul>
         <p className="mt-3 text-[0.8125rem] leading-snug text-muted">
-          Barrios: {BARRIOS}. El orden suma por orientación, balcón, vista alta, parquet, luz, metros y precio por m², y
-          resta por planta baja, alfombra, avenida u ocupado. Lo que el aviso no dice no suma ni resta: queda como «a
-          verificar» para la visita.
+          Barrios: {BARRIOS}. Cada depa se compara con lo que pidió (orientación, balcón, vista alta, parquet, luz,
+          metros) y con el precio por m² de su barrio y cantidad de ambientes. Resta planta baja, alfombra, sin ascensor,
+          avenida u ocupado, y estar a menos de 600 m de una villa (a menos de 350 m se descarta); suma una baja de precio. Lo que el aviso no dice no suma ni resta: queda como pregunta para
+          la inmobiliaria. «Ir a verla» es puntaje alto y precio razonable; «Oportunidad» es 10% o más bajo su barrio y
+          encima encaja; la distancia a villas sale de polígonos de OpenStreetMap y de la dirección del aviso: es una referencia, no un estudio de seguridad de la cuadra, así que conviene caminarla; «Precio raro» es 28% o más bajo: verificar antes de entusiasmarse.
         </p>
       </details>
       <div className="mt-6">

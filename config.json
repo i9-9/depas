@@ -4718,7 +4718,12 @@
       "edificio a reciclar",
       "edificio para reciclar",
       "edificio en mal estado",
-      "edificio a demoler"
+      "edificio a demoler",
+      "nuda propiedad",
+      "usufructo",
+      "sucesion",
+      "venta con inquilino",
+      "ocupado por inquilino"
     ],
     "reject_barrios": [
       "tigre",
