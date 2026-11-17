@@ -2419,12 +2419,23 @@ def fetch_cabaprop(session: requests.Session, url: str, *, _retried: bool = Fals
     return parse_cabaprop(rows), len(rows), total
 
 
+# Rutas aparte de la cuenta principal: cada una tiene sus filtros y su lista en la web.
+TRACKS = {
+    "barato": {"filters": "filters_barato", "listings": "listings-baratos.json", "state": "baratos.json"},
+    "amiga": {"filters": "filters_amiga", "listings": "listings-amiga.json", "state": "amiga.json"},
+}
+
+
 def filters_for(cfg: dict, src: dict | None) -> dict:
-    """La ruta barata no hereda calles, piso de precio ni barrios de la cuenta principal."""
-    if src and src.get("track") == "barato":
-        found = cfg.get("filters_barato")
+    """Las rutas aparte no heredan calles, piso de precio ni barrios de la cuenta principal."""
+    track = src.get("track") if src else None
+    if track:
+        if track not in TRACKS:
+            raise ValueError(f"ruta desconocida: {track!r}")
+        key = TRACKS[track]["filters"]
+        found = cfg.get(key)
         if not found:
-            raise ValueError("falta filters_barato en config.json")
+            raise ValueError(f"falta {key} en config.json")
         return found
     return cfg.get("filters") or {}
 
@@ -3692,7 +3703,7 @@ def _barato_row(item: dict, first_seen: str) -> dict:
         "title": item.get("title") or "",
         "blurb": item.get("blurb") or "",
         "address": item.get("address") or "",
-        "zone": item.get("zone") or "Colegiales",
+        "zone": item.get("zone") or "",
         "price": item.get("price"),
         "area": item.get("area"),
         "area_covered": item.get("area_covered"),
@@ -3710,10 +3721,12 @@ def _barato_row(item: dict, first_seen: str) -> dict:
     }
 
 
-def publish_baratos(items: list[dict], ok_sites: set[str], now: str, *, dry_run: bool) -> int:
+def publish_track(
+    track: str, items: list[dict], ok_sites: set[str], now: str, *, dry_run: bool, failed_zones: set[str] | None = None
+) -> int:
     """Lista aparte. No toca el catálogo ni el candidato de la home."""
-    path = WEB_DATA_DIR / "listings-baratos.json"
-    state_path = STATE_DIR / "baratos.json"
+    path = WEB_DATA_DIR / TRACKS[track]["listings"]
+    state_path = STATE_DIR / TRACKS[track]["state"]
     prev_cat = json.loads(path.read_text()) if path.exists() else {"listings": []}
     prev_state = json.loads(state_path.read_text()) if state_path.exists() else {"listings": {}}
     prev_rows = {i["id"]: i for i in prev_cat.get("listings") or [] if i.get("id")}
@@ -3732,17 +3745,21 @@ def publish_baratos(items: list[dict], ok_sites: set[str], now: str, *, dry_run:
         if old["id"] in live_ids:
             continue
         site = old.get("site") or ""
-        if site in ok_sites and old.get("active") is not False:
+        if site in ok_sites and old.get("zone") not in (failed_zones or set()) and old.get("active") is not False:
             kept.append({**old, "active": False, "gone_at": now})
         else:
             kept.append(old)
     kept.sort(key=lambda r: (0 if r.get("active") else 1, r.get("price") or 10**12))
     active_n = sum(1 for r in kept if r.get("active") is not False)
-    print(f"[baratos] {active_n} activos", flush=True)
+    print(f"[{track}] {active_n} activos", flush=True)
     if not dry_run:
         write_json(path, {"last_change": now, "listings": kept})
         write_json(state_path, {"last_change": now, "listings": seen})
     return active_n
+
+
+def publish_baratos(items: list[dict], ok_sites: set[str], now: str, *, dry_run: bool) -> int:
+    return publish_track("barato", items, ok_sites, now, dry_run=dry_run)
 
 
 def main() -> int:
@@ -3751,7 +3768,7 @@ def main() -> int:
     ap.add_argument("--no-notify", action="store_true", help="Guarda archivos; no manda Telegram.")
     ap.add_argument("--enrich", action="store_true", help="Relee listados y completa fotos. Sin Telegram.")
     ap.add_argument("--only", choices=list(SITES))
-    ap.add_argument("--track", choices=["barato"], help="Solo la ruta aparte, sin tocar el candidato.")
+    ap.add_argument("--track", choices=list(TRACKS), help="Solo la ruta aparte, sin tocar el candidato.")
     args = ap.parse_args()
 
     cfg = json.loads(CONFIG_PATH.read_text())
@@ -3786,8 +3803,9 @@ def main() -> int:
     scrape_lines: dict[str, list[str]] = {k: [] for k in SITES}
     attempted = 0
     skipped_argenprop = False
-    barato_items: list[dict] = []
-    barato_ok: set[str] = set()
+    track_items: dict[str, list[dict]] = {t: [] for t in TRACKS}
+    track_ok: dict[str, set[str]] = {t: set() for t in TRACKS}
+    track_failed: dict[str, set[str]] = {t: set() for t in TRACKS}
     browser = _start_argenprop_browser(sources, in_actions=in_actions)
     if (
         not in_actions
@@ -3808,9 +3826,9 @@ def main() -> int:
             try:
                 items, last_page = scrape_source(session, src, cfg, browser=browser)
                 print(f"[ok] {label}: {len(items)} avisos", flush=True)
-                if src.get("track") == "barato":
-                    barato_ok.add(site)
-                    barato_items.extend(items)
+                if src.get("track"):
+                    track_ok[src["track"]].add(site)
+                    track_items[src["track"]].extend(items)
                 else:
                     ok_zones[site].add(source_zone(src))
                     scrape_ok[site].append({"name": src["name"], "n": len(items)})
@@ -3821,8 +3839,8 @@ def main() -> int:
             except (Blocked, requests.RequestException) as e:
                 msg = redact_secrets(f"{label}: {e}", token)
                 print(f"[error] {msg}", file=sys.stderr)
-                if src.get("track") == "barato":
-                    pass
+                if src.get("track"):
+                    track_failed[src["track"]].add(source_zone(src))
                 else:
                     failed_zones[site].add(source_zone(src))
                     errors_by_site[site].append(msg)
@@ -3838,9 +3856,13 @@ def main() -> int:
         today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         any_ok = False
 
-        if barato_ok:
-            matched_b = [i for i in barato_items if matches(i, cfg.get("filters_barato") or {})]
-            publish_baratos(matched_b, barato_ok, now, dry_run=args.dry_run)
+        for track, spec in TRACKS.items():
+            if not track_ok[track]:
+                continue
+            matched_t = [i for i in track_items[track] if matches(i, cfg.get(spec["filters"]) or {})]
+            publish_track(
+                track, matched_t, track_ok[track], now, dry_run=args.dry_run, failed_zones=track_failed[track]
+            )
             if args.track:
                 any_ok = True
 

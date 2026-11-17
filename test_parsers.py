@@ -2088,6 +2088,41 @@ def test_barato_track_keeps_colegiales_example():
     assert not s.matches(dear, side)
 
 
+def test_amiga_track():
+    """La ruta de la amiga: 2/3 amb, 45 m², hasta USD 100k, sus 10 barrios; no toca el candidato."""
+    cfg = json.loads(Path("config.json").read_text(encoding="utf-8"))
+    side = cfg["filters_amiga"]
+    item = {
+        "id": "zonaprop:amiga1",
+        "site": "zonaprop",
+        "title": "Departamento 2 ambientes con balcon en Villa del Parque",
+        "address": "Cuenca 3100",
+        "zone": "",
+        "blurb": "Muy luminoso, al frente, con balcon.",
+        "url": "https://www.zonaprop.com.ar/propiedades/amiga1.html",
+        "price": 95000,
+        "ambientes": 2,
+        "area": 50,
+        "area_covered": 50,
+    }
+    src = {"site": "zonaprop", "name": "Villa del Parque 2 amb amiga", "zone": "Villa del Parque",
+           "track": "amiga", "aliases": ["villa del parque"]}
+    assert s.filters_for(cfg, src) is side
+    assert s.keep_listing(item, src, side)
+    assert s.matches(item, side)
+    assert not s.matches(item, cfg["filters"])
+    assert not s.matches(dict(item, price=105000), side)
+    assert not s.matches(dict(item, area=40, area_covered=40), side)
+    assert not s.matches(dict(item, ambientes=1), side)
+    assert not s.matches(dict(item, ambientes=4), side)
+    nobal = dict(item, title="Departamento 2 ambientes en Villa del Parque", blurb="Muy luminoso, al frente.")
+    assert not s.matches(nobal, side)  # sin balcón
+    for b in side["allowed_barrios"]:
+        assert b not in side["reject_barrios"]
+    amiga_src = [x for x in cfg["sources"] if x.get("track") == "amiga"]
+    assert len(amiga_src) == 20 and all(x["site"] == "zonaprop" for x in amiga_src)
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

@@ -10,7 +10,7 @@ export function SiteChrome({
   kicker = "Recoleta y alrededores",
   children,
 }: {
-  current: "candidato" | "archivo" | "baratos";
+  current: "candidato" | "archivo" | "baratos" | "amiga";
   archiveCount?: number;
   listings?: Listing[];
   pickId?: string | null;
@@ -41,6 +41,9 @@ export function SiteChrome({
             </NavLink>
             <NavLink href="/baratos/" active={current === "baratos"}>
               Más baratos
+            </NavLink>
+            <NavLink href="/amiga/" active={current === "amiga"}>
+              Para una amiga
             </NavLink>
           </nav>
           <p className="measure mt-3 text-[0.8125rem] leading-snug text-muted">
