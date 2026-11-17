@@ -2120,7 +2120,12 @@ def test_amiga_track():
     for b in side["allowed_barrios"]:
         assert b not in side["reject_barrios"]
     amiga_src = [x for x in cfg["sources"] if x.get("track") == "amiga"]
-    assert len(amiga_src) == 20 and all(x["site"] == "zonaprop" for x in amiga_src)
+    assert len(amiga_src) == 40
+    assert {x["site"] for x in amiga_src} == {"zonaprop", "cabaprop"}
+    for x in amiga_src:
+        if x["site"] == "cabaprop":
+            body = s.cabaprop_body(x["url"])
+            assert body["barrios"] and body["price"]["max"] == 100000 and body["ambiences"]
 
 
 if __name__ == "__main__":

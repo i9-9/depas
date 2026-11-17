@@ -99,6 +99,16 @@ CABAPROP_BARRIOS = {
     "chacarita": 27,
     "colegiales": 29,
     "villa_crespo": 75,
+    # Ruta de Mailén (ids del selector de barrios de cabaprop.com.ar)
+    "agronomia": 2,
+    "almagro": 3,
+    "boedo": 19,
+    "caballito": 20,
+    "la_paternal": 38,
+    "parque_chacabuco": 59,
+    "villa_del_parque": 76,
+    "villa_general_mitre": 78,
+    "villa_santa_rita": 85,
 }
 CABAPROP_API = "https://cabaprop.com.ar/api/v1/properties/find-properties"
 CABAPROP_PAGE_SIZE = 12  # el listado del sitio pide limit=12
