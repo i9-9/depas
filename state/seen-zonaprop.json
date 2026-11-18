@@ -1817,9 +1817,9 @@
   },
   "zonaprop:60360746": {
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "key": "zapiola 2200|134000|52|2",
+   "key": "zapiola 2200|128000|52|2",
    "place": "zapiola 2200|50|2",
-   "price": 134000,
+   "price": 128000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-depto-duplex-doble-altura-con-vistas-verdes-60360746.html",
    "zone": "Belgrano"
   },
@@ -2310,6 +2310,14 @@
    "price": 129100,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-de-departamento-de-3-ambientes-en-chacarita-60702662.html",
    "zone": "Chacarita"
+  },
+  "zonaprop:60735780": {
+   "first_seen": "2026-11-18T19:57:51+00:00",
+   "key": "scalabrini ortiz 300|140000|53|2",
+   "place": "scalabrini ortiz 300|55|2",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-a-estrenar-con-balcon-y-60735780.html",
+   "zone": "Villa Crespo"
   }
  },
  "meta": {

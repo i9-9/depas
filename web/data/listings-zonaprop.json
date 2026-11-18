@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-18T02:57:58+00:00",
+ "last_change": "2026-11-18T19:57:51+00:00",
  "listings": [
   {
    "active": true,
@@ -2567,11 +2567,12 @@
    "reno_usd_m2": 375,
    "roi_base": 0.2179,
    "roi_hard": 0.0605,
-   "score": 3,
+   "score": 4,
    "seventy_offer_usd": 112280,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
+    "metro barato",
     "aire amplio"
    ],
    "title": "Ubicado sobre la reconocida Blanco Encalada, en el corazón de Belgrano R, este departament",
@@ -3765,7 +3766,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Echeverria al 900",
    "address_unverified": false,
    "air_usd": 18500,
@@ -3779,13 +3780,13 @@
    "breakeven_exit_usd_m2": 3675,
    "closing_ref_usd": 133579,
    "cochera": null,
-   "days_seen": 6,
+   "days_seen": 14,
    "decision": "descartar",
    "exit_usd_m2": 3400,
    "expensas_ars": 150000,
    "expensas_text": "$ 150.000 Expensas",
    "first_seen": "2026-11-04T18:58:48+00:00",
-   "gone_at": "2026-11-18T02:57:58+00:00",
+   "gone_at": null,
    "id": "zonaprop:59547223",
    "max_offer_usd": 127492,
    "neto_base_usd": 2466,
@@ -3816,8 +3817,8 @@
    "title": "Departamento 3 ambientes excelente estado- ubicacion estrategica- super luminoso Y funcion",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-belgrano-59547223.html",
    "usd_per_m2": 2780,
-   "vs_median_n": 24,
-   "vs_median_pct": 17,
+   "vs_median_n": 23,
+   "vs_median_pct": 18,
    "zone": "Belgrano",
    "zone_unverified": false
   },
@@ -5081,7 +5082,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Arévalo 1582",
    "address_unverified": false,
    "air_usd": null,
@@ -5101,7 +5102,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-18T19:57:51+00:00",
    "id": "zonaprop:59787908",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6452,7 +6453,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Raúl Scalabrini Ortiz al 300",
    "address_unverified": false,
    "air_usd": null,
@@ -6472,7 +6473,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-18T19:57:51+00:00",
    "id": "zonaprop:60044377",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -8094,13 +8095,13 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 0,
+   "score": 1,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
     "sobre presupuesto",
-    "metro barato"
+    "metro muy barato"
    ],
    "title": "Hermoso departamento de 3 ambientes al frente con balcon en Corrientes y Gurruchaga. En un",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-60219698.html",
@@ -10442,19 +10443,19 @@
    "active": true,
    "address": "Zapiola al 2200",
    "address_unverified": false,
-   "air_usd": 23300,
+   "air_usd": 29300,
    "ambientes": 2,
    "antiguedad_years": null,
    "area": 52.0,
    "area_covered": null,
    "area_semi": null,
    "area_total": 52.0,
-   "blurb": "USD 134.000\n$ 279.000 Expensas\n52 m² tot.\n2 amb.\n1 dorm.\n1 baño\nZapiola al 2200\nBelgrano R, Belgrano\nVenta depto dúplex - doble altura con vistas verdes amenitieszapiola al 2200 - Belgrano R2 ambientes - 51, 98 m² totales - Disposición frente - Piso 2Una propuesta de diseño poco común en la zona. La doble altura del living genera una amplitud visualy una entrada de luz natural que transforma el espacio. planta bajaliving comedor con doble altura y grandes ventanales al frenteSalida a balcón ater",
-   "breakeven_exit_usd_m2": 3724,
-   "closing_ref_usd": 128774,
+   "blurb": "USD 128.000\n$ 279.000 Expensas\n52 m² tot.\n2 amb.\n1 dorm.\n1 baño\nZapiola al 2200\nBelgrano R, Belgrano\nVenta depto dúplex - doble altura con vistas verdes amenitieszapiola al 2200 - Belgrano R2 ambientes - 51, 98 m² totales - Disposición frente - Piso 2Una propuesta de diseño poco común en la zona. La doble altura del living genera una amplitud visualy una entrada de luz natural que transforma el espacio. planta bajaliving comedor con doble altura y grandes ventanales al frenteSalida a balcón ater",
+   "breakeven_exit_usd_m2": 3586,
+   "closing_ref_usd": 123008,
    "cochera": null,
-   "days_seen": 0,
-   "decision": "descartar",
+   "days_seen": 26,
+   "decision": "vigilar",
    "exit_usd_m2": 3400,
    "expensas_ars": 279000,
    "expensas_text": "$ 279.000 Expensas",
@@ -10462,35 +10463,40 @@
    "gone_at": null,
    "id": "zonaprop:60360746",
    "max_offer_usd": 119889,
-   "neto_base_usd": 6673,
-   "neto_hard_usd": -15240,
-   "old_price": null,
+   "neto_base_usd": 12973,
+   "neto_hard_usd": -8760,
+   "old_price": 134000,
    "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/36/07/46/720x532/2087846837.jpg",
    "piso": null,
-   "price": 134000,
-   "price_drops": 0,
+   "price": 128000,
+   "price_drops": 1,
    "price_history": [
     {
      "date": "2026-10-23T20:47:33+00:00",
      "price": 134000
+    },
+    {
+     "date": "2026-11-18T19:57:51+00:00",
+     "price": 128000
     }
    ],
    "price_source": "card",
    "reno_usd_m2": 375,
-   "roi_base": 0.0414,
-   "roi_hard": -0.0871,
-   "score": -1,
+   "roi_base": 0.0837,
+   "roi_hard": -0.052,
+   "score": 1,
    "seventy_offer_usd": 104260,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
-    "sobre presupuesto"
+    "sobre presupuesto",
+    "aire"
    ],
    "title": "Venta depto dúplex - doble altura con vistas verdes amenitieszapiola al 2200 - Belgrano R2",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-depto-duplex-doble-altura-con-vistas-verdes-60360746.html",
-   "usd_per_m2": 2577,
-   "vs_median_n": 34,
-   "vs_median_pct": 12,
+   "usd_per_m2": 2462,
+   "vs_median_n": 20,
+   "vs_median_pct": 6,
    "zone": "Belgrano",
    "zone_unverified": false
   },
@@ -12106,7 +12112,7 @@
    "reno_usd_m2": 250,
    "roi_base": null,
    "roi_hard": null,
-   "score": -3,
+   "score": -2,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
@@ -12114,7 +12120,7 @@
     "incluye cochera",
     "m² sin verificar",
     "sobre presupuesto",
-    "metro barato"
+    "metro muy barato"
    ],
    "title": "Venta de departamento de 2 ambientes con balcón terraza a estrenarAmplitud, calidad y una ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-2-ambientes-balcon-terraza-en-60506967.html",
@@ -13828,6 +13834,65 @@
    "vs_median_n": 22,
    "vs_median_pct": 13,
    "zone": "Chacarita",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Av. Raúl Scalabrini Ortiz  al 300",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 2,
+   "antiguedad_years": 0,
+   "area": 53.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 53.0,
+   "blurb": "USD 140.000\n$ 300.000 Expensas\n53 m² tot.\n2 amb.\n1 dorm.\n1 baño\nAv. Raúl Scalabrini Ortiz  al 300\nVilla Crespo, Capital Federal\nExcelente departamento de 2 ambientes a estrenar, ubicado al frente en la esquina de Av. Scalabrini Ortiz y Av. Corrientes, en una de las zonas de mayor crecimiento y proyección de Villa Crespo. La unidad se destaca por su excelente luminosidad, gracias a su orientación y amplio balcón corrido. Cuenta con un cómodo living comedor, cocina integrada con mobiliario complet",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 134540,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 300000,
+   "expensas_text": "$ 300.000 Expensas",
+   "first_seen": "2026-11-18T19:57:51+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60735780",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/73/57/80/720x532/2093107350.jpg",
+   "piso": 0,
+   "price": 140000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-18T19:57:51+00:00",
+     "price": 140000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 250,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": -6,
+   "seventy_offer_usd": null,
+   "site": "zonaprop",
+   "tags": [
+    "ya hecho",
+    "m² sin verificar",
+    "sobre presupuesto",
+    "expensas altas",
+    "planta baja"
+   ],
+   "title": "Excelente departamento de 2 ambientes a estrenar, ubicado al frente en la esquina de Av. S",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-a-estrenar-con-balcon-y-60735780.html",
+   "usd_per_m2": 2642,
+   "vs_median_n": 52,
+   "vs_median_pct": 14,
+   "zone": "Villa Crespo",
    "zone_unverified": false
   }
  ]
