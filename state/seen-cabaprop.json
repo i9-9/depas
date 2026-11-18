@@ -1,5 +1,13 @@
 {
  "listings": {
+  "cabaprop:68f95d6f5f9b3aad85445cce": {
+   "first_seen": "2026-11-18T02:57:58+00:00",
+   "key": "villarroel 1200|134000|52|3",
+   "place": "villarroel 1200|50|3",
+   "price": 134000,
+   "url": "https://cabaprop.com.ar/propiedad/68f95d6f5f9b3aad85445cce/departamento-3-ambientes-villa-crespo-capital-federal",
+   "zone": "Villa Crespo"
+  },
   "cabaprop:698a123676238456d4a86bff": {
    "first_seen": "2026-10-16T20:44:25+00:00",
    "key": "general lucio norberto mansilla 2600|139000|68|3",

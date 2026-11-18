@@ -1,674 +1,678 @@
 {
-  "Av. Corrientes 6100|Villa Crespo": [
-    -34.592819,
-    -58.446532
-  ],
-  "Crespo 2100|Parque Chacabuco": [
-    -34.644036,
-    -58.437312
-  ],
-  "Av Chiclana 3700|Boedo": [
-    -34.637526,
-    -58.416028
-  ],
-  "CONDARCO 2651|Villa del Parque": [
-    -34.603864,
-    -58.484244
-  ],
-  "Emilio Mitre 1700|Parque Chacabuco": [
-    -34.639042,
-    -58.437447
-  ],
-  "SANCHEZ DE BUSTAMANTE 100|Almagro": [
-    -34.609393,
-    -58.414586
-  ],
-  "Rio De Janeiro 100|Caballito": [
-    -34.614108,
-    -58.430145
-  ],
-  "Avenida Cobo 1100|Parque Chacabuco": [
-    -34.641532,
-    -58.430987
-  ],
-  "Combate de los Pozos 1500|Boedo": [
-    -34.626354,
-    -58.392271
-  ],
-  "Avenida Cobo 1000|Parque Chacabuco": [
-    -34.641337,
-    -58.4298
-  ],
-  "Hipólito Yrigoyen 3188|Almagro": [
-    -34.611771,
-    -58.411439
-  ],
-  "Condarco 1700|Villa General Mitre": [
-    -34.613172,
-    -58.476434
-  ],
-  "Av. La Plata 1117|Caballito": [
-    -34.628645,
-    -58.426488
-  ],
-  "General José Gervasio Artigas 2000|Villa General Mitre": [
-    -34.608854,
-    -58.476285
-  ],
-  "Mexico 3700|Almagro": [
-    -34.619947,
-    -58.418044
-  ],
-  "Humberto Primo 3100|Boedo": [
-    -34.623528,
-    -58.40888
-  ],
-  "Neuquén 2900|Villa Santa Rita": [
-    -34.621191,
-    -58.473784
-  ],
-  "Condarco 1700|Paternal": [
-    -34.613172,
-    -58.476434
-  ],
-  "Tte. Cnel. Gregorio Pomar 4100|Boedo": [
-    -34.641056,
-    -58.419442
-  ],
-  "Zelarrayan 1600|Parque Chacabuco": [
-    -34.641836,
-    -58.43802
-  ],
-  "Avenida Álvarez Jonte 3100|Villa Santa Rita": [
-    -34.609611,
-    -58.486246
-  ],
-  "Centenera 1600|Parque Chacabuco": [
-    -34.637014,
-    -58.433177
-  ],
-  "Gral Jose Gervasio Artigas 2000|Villa General Mitre": [
-    -34.608854,
-    -58.476285
-  ],
-  "Hipolito Yrigoyen 3300|Almagro": [
-    -34.612641,
-    -58.413244
-  ],
-  "Castro Barros 1300|Boedo": [
-    -34.628138,
-    -58.418229
-  ],
-  "Av Cobo 1000|Parque Chacabuco": [
-    -34.641337,
-    -58.4298
-  ],
-  "J. G. Artigas 2000|Villa General Mitre": [
-    -34.608854,
-    -58.476285
-  ],
-  "TRES ARROYOS 1204|Caballito": [
-    -34.607129,
-    -58.456746
-  ],
-  "Salvigny 1600|Parque Chacabuco": [
-    -34.644591,
-    -58.433718
-  ],
-  "Avenida Hipólito Yrigoyen 3190|Almagro": [
-    -34.611812,
-    -58.411524
-  ],
-  "Galicia 2802|Villa Santa Rita": [
-    -34.61788,
-    -58.47465
-  ],
-  "Av Juan B Justo 5727|Villa Santa Rita": [
-    -34.618342,
-    -58.476465
-  ],
-  "Pavón 3700|Boedo": [
-    -34.630308,
-    -58.416344
-  ],
-  "Avenida Chiclana 3400|Boedo": [
-    -34.635229,
-    -58.412258
-  ],
-  "SALVIGNY 1641|Parque Chacabuco": [
-    -34.644722,
-    -58.434655
-  ],
-  "Avenida San Martín 2688|Paternal": [
-    -34.603282,
-    -58.463635
-  ],
-  "Puán 855|Parque Chacabuco": [
-    -34.632444,
-    -58.444981
-  ],
-  "Cuenca 2040|Villa Santa Rita": [
-    -34.611007,
-    -58.487206
-  ],
-  "Rio de Janeiro 600|Almagro": [
-    -34.60882,
-    -58.430531
-  ],
-  "Salguero 200|Almagro": [
-    -34.608638,
-    -58.420101
-  ],
-  "Albarracín 1758|Parque Chacabuco": [
-    -34.637125,
-    -58.429415
-  ],
-  "Del Barco Centenera 1052|Parque Chacabuco": [
-    -34.631689,
-    -58.437573
-  ],
-  "Colombres 900|Boedo": [
-    -34.624411,
-    -58.417742
-  ],
-  "Juan Agustin Garcia 2600|Paternal": [
-    -34.608374,
-    -58.478261
-  ],
-  "Metán 4200|Boedo": [
-    -34.636983,
-    -58.422967
-  ],
-  "Camargo 1000|Villa Crespo": [
-    -34.596477,
-    -58.444616
-  ],
-  "AV ALVAREZ JONTE 2723|Villa del Parque": [
-    -34.608189,
-    -58.480878
-  ],
-  "Avenida San Martín 4268|Villa del Parque": [
-    -34.598754,
-    -58.48127
-  ],
-  "Galicia 2800|Villa Santa Rita": [
-    -34.617772,
-    -58.474448
-  ],
-  "Av San Martin 4600|Villa del Parque": [
-    -34.597788,
-    -58.484251
-  ],
-  "Quintino Bocayuva 300|Almagro": [
-    -34.615708,
-    -58.422859
-  ],
-  "Castro 1157|Boedo": [
-    -34.626823,
-    -58.420145
-  ],
-  "Baldomero Fernández Moreno 1500|Parque Chacabuco": [
-    -34.632665,
-    -58.44694
-  ],
-  "Av. Juan B. Justo 3900|Villa Crespo": [
-    -34.603793,
-    -58.457253
-  ],
-  "Paysandú 1600|Caballito": [
-    -34.606108,
-    -58.457383
-  ],
-  "Senillosa 1000|Parque Chacabuco": [
-    -34.628421,
-    -58.427847
-  ],
-  "Luis Viale 2100|Villa General Mitre": [
-    -34.61436,
-    -58.465285
-  ],
-  "Pasaje La Fronda 1604|Villa General Mitre": [
-    -34.611452,
-    -58.468663
-  ],
-  "Bufano 2300|Villa del Parque": [
-    -34.606748,
-    -58.476179
-  ],
-  "Ricardo Gutiérrez 3300|Villa del Parque": [
-    -34.601793,
-    -58.496829
-  ],
-  "Álvarez Jonte 3822|Villa del Parque": [
-    -34.614076,
-    -58.494871
-  ],
-  "Marcos Sastre 3700|Villa del Parque": [
-    -34.608572,
-    -58.496816
-  ],
-  "Virrey Liniers 1200|Boedo": [
-    -34.625042,
-    -58.413525
-  ],
-  "Vernet 300|Parque Chacabuco": [
-    -34.633074,
-    -58.429302
-  ],
-  "Doctor Luis Beláustegui 1800|Villa General Mitre": [
-    -34.609537,
-    -58.464248
-  ],
-  "Cesar Diaz 2900|Villa Santa Rita": [
-    -34.614417,
-    -58.478895
-  ],
-  "Cesar Diaz 2995|Villa Santa Rita": [
-    -34.614996,
-    -58.480215
-  ],
-  "Av Juan B Justo 3500|Paternal": [
-    -34.601498,
-    -58.45387
-  ],
-  "Adolfo Alsina 3200|Almagro": [
-    -34.613046,
-    -58.411346
-  ],
-  "Peron 3500|Almagro": [
-    -34.607022,
-    -58.416187
-  ],
-  "Andrés Lamas 2000|Paternal": [
-    -34.606835,
-    -58.469518
-  ],
-  "Remedios de Escalada de San Martín 2700|Villa Santa Rita": [
-    -34.614059,
-    -58.475542
-  ],
-  "Av. San Martin 1890|Villa Crespo": [
-    -34.605407,
-    -58.455267
-  ],
-  "Av.Juan B Justo 5727|Villa Santa Rita": [
-    -34.618342,
-    -58.476465
-  ],
-  "Av. Nazca 2718|Villa del Parque": [
-    -34.604548,
-    -58.48737
-  ],
-  "Colombres 1712|Boedo": [
-    -34.634349,
-    -58.416678
-  ],
-  "Humboldt 500|Villa Crespo": [
-    -34.594268,
-    -58.447144
-  ],
-  "Caracas 200|Caballito": [
-    -34.626555,
-    -58.462073
-  ],
-  "Dr. Luis Belaustegui 1532|Caballito": [
-    -34.607881,
-    -58.46121
-  ],
-  "Avenida La Plata 1900|Boedo": [
-    -34.6372,
-    -58.424165
-  ],
-  "General Manuel A. Rodríguez 1700|Villa General Mitre": [
-    -34.603181,
-    -58.452548
-  ],
-  "Fragata Presidente Sarmiento 1800|Villa General Mitre": [
-    -34.605313,
-    -58.459509
-  ],
-  "General José Gervasio Artigas 3000|Villa del Parque": [
-    -34.59931,
-    -58.485452
-  ],
-  "Av. Alvarez Jonte 1800|Villa General Mitre": [
-    -34.601656,
-    -58.468747
-  ],
-  "Diaz Vélez 3793|Almagro": [
-    -34.608455,
-    -58.419882
-  ],
-  "Av. Gaona 3600|Villa Santa Rita": [
-    -34.62133,
-    -58.475592
-  ],
-  "Av. Juan B. Justo 5877|Villa Santa Rita": [
-    -34.619532,
-    -58.477992
-  ],
-  "ACOYTE 600|Caballito": [
-    -34.611764,
-    -58.438952
-  ],
-  "Sarmiento 3500|Almagro": [
-    -34.605921,
-    -58.414851
-  ],
-  "RIO DE Janeiro 900|Almagro": [
-    -34.605076,
-    -58.431487
-  ],
-  "Don Bosco 3700|Almagro": [
-    -34.612504,
-    -58.417718
-  ],
-  "Camargo 700|Villa Crespo": [
-    -34.59907,
-    -58.441741
-  ],
-  "Gascon 1100|Almagro": [
-    -34.598072,
-    -58.423468
-  ],
-  "Rio de Janeiro 500|Almagro": [
-    -34.609898,
-    -58.430451
-  ],
-  "Avenida San Juan 3968|Boedo": [
-    -34.62623,
-    -58.420971
-  ],
-  "Tres Arroyos 875|Villa Crespo": [
-    -34.605146,
-    -58.453287
-  ],
-  "Loyola 600|Villa Crespo": [
-    -34.595338,
-    -58.436175
-  ],
-  "AV CORRIENTES 3645|Almagro": [
-    -34.603634,
-    -58.416116
-  ],
-  "Juan b Justo 2400|Villa Crespo": [
-    -34.593672,
-    -58.442525
-  ],
-  "YERBAL 309|Caballito": [
-    -34.616123,
-    -58.434917
-  ],
-  " Av. Directorio 943|Caballito": [
-    -34.628926,
-    -58.440522
-  ],
-  "Sanchez de Bustamante 500|Almagro": [
-    -34.6041,
-    -58.414585
-  ],
-  "Av. Díaz Vélez 3500|Almagro": [
-    -34.608586,
-    -58.415955
-  ],
-  "Asamblea 300|Parque Chacabuco": [
-    -34.631992,
-    -58.429542
-  ],
-  "Senillosa 1000|Caballito": [
-    -34.628421,
-    -58.427847
-  ],
-  "Puan 100|Parque Chacabuco": [
-    -34.624356,
-    -58.448248
-  ],
-  "Angel Gallardo 600|Villa Crespo": [
-    -34.605599,
-    -58.439267
-  ],
-  "Av. Nazca 3000|Villa del Parque": [
-    -34.601859,
-    -58.489839
-  ],
-  "Avenida Belgrano 3600|Almagro": [
-    -34.615764,
-    -58.416903
-  ],
-  "Tte. Gral Juan Domingo Peron 4300|Almagro": [
-    -34.605994,
-    -58.427468
-  ],
-  "Tte. Gral. Juan Domingo Perón 3400|Almagro": [
-    -34.607218,
-    -58.414659
-  ],
-  "Potosí 3791|Almagro": [
-    -34.60723,
-    -58.419743
-  ],
-  "Colombres 1000|Boedo": [
-    -34.625566,
-    -58.417634
-  ],
-  "Avenida La Plata 816|Boedo": [
-    -34.625467,
-    -58.426999
-  ],
-  "Zañartu 1100|Parque Chacabuco": [
-    -34.639575,
-    -58.432339
-  ],
-  "Avenida la Plata 1100|Parque Chacabuco": [
-    -34.628207,
-    -58.426379
-  ],
-  "Lavalleja 100|Villa Crespo": [
-    -34.603081,
-    -58.437897
-  ],
-  "Antezana 100|Villa Crespo": [
-    -34.60354,
-    -58.442676
-  ],
-  "Luis Viale 2000|Caballito": [
-    -34.613698,
-    -58.464072
-  ],
-  "José Juan Biedma 500|Caballito": [
-    -34.618935,
-    -58.453225
-  ],
-  "Neuquén 700|Caballito": [
-    -34.615981,
-    -58.440164
-  ],
-  "Neuquén 1272|Caballito": [
-    -34.615789,
-    -58.451372
-  ],
-  "Yerbal 901|Caballito": [
-    -34.619895,
-    -58.443438
-  ],
-  "Remedios de Escalada de San Martin 2400|Villa General Mitre": [
-    -34.612085,
-    -58.471815
-  ],
-  "Argerich 1600|Villa Santa Rita": [
-    -34.616212,
-    -58.479488
-  ],
-  "Yapeyú 63|Almagro": [
-    -34.61289,
-    -58.4222
-  ],
-  "Carlos Calvo 3700|Boedo": [
-    -34.62455,
-    -58.417664
-  ],
-  "Sarmiento 4500|Almagro": [
-    -34.604167,
-    -58.428721
-  ],
-  "PRINGLES 200|Almagro": [
-    -34.610623,
-    -58.427568
-  ],
-  "Av. Rivadavia 4000|Almagro": [
-    -34.612096,
-    -58.422271
-  ],
-  "Cochabamba 2900|Boedo": [
-    -34.6258,
-    -58.405487
-  ],
-  "Cuenca 1000|Villa Santa Rita": [
-    -34.62156,
-    -58.4788
-  ],
-  "Alcaraz 4400|Villa del Parque": [
-    -34.618059,
-    -58.500206
-  ],
-  "José Pedro Varela 3410|Villa del Parque": [
-    -34.600296,
-    -58.500257
-  ],
-  "Jeronimo Salguero 33|Almagro": [
-    -34.610689,
-    -58.419736
-  ],
-  "Av. Independencia 3726|Boedo": [
-    -34.621207,
-    -58.418474
-  ],
-  "SAN JOSE DE CALASANZ 400|Caballito": [
-    -34.623095,
-    -58.437704
-  ],
-  "Manuel Ricardo Trelles 1964|Villa General Mitre": [
-    -34.605514,
-    -58.465327
-  ],
-  "Terrada 2000|Villa Santa Rita": [
-    -34.61086,
-    -58.480157
-  ],
-  "Gavilan 2220|Villa General Mitre": [
-    -34.605761,
-    -58.473747
-  ],
-  "Estado de Palestina 600|Almagro": [
-    -34.604397,
-    -58.425937
-  ],
-  "Av. Diaz Velez 3700|Almagro": [
-    -34.60862,
-    -58.418681
-  ],
-  "Avenida Corrientes 4500|Almagro": [
-    -34.602512,
-    -58.428476
-  ],
-  "Avenida Juan B. Justo 2300|Villa Crespo": [
-    -34.592987,
-    -58.441542
-  ],
-  "Av Honorio Pueyrredon 1400|Villa Crespo": [
-    -34.604832,
-    -58.447864
-  ],
-  "Avenida Warnes 700|Villa Crespo": [
-    -34.600925,
-    -58.446229
-  ],
-  "Emilio Mitre 48|Caballito": [
-    -34.622365,
-    -58.444012
-  ],
-  "Valle 49|Caballito": [
-    -34.623657,
-    -58.428228
-  ],
-  "Rawson 200|Caballito": [
-    -34.610408,
-    -58.426059
-  ],
-  "Espinosa 1900|Caballito": [
-    -34.603116,
-    -58.457793
-  ],
-  "San Jose de Calasanz 100|Caballito": [
-    -34.620081,
-    -58.438711
-  ],
-  "Remedios de Escalada de San Martin 2500|Villa General Mitre": [
-    -34.6127,
-    -58.472974
-  ],
-  "Melincué 2673|Villa del Parque": [
-    -34.599016,
-    -58.487621
-  ],
-  "Fragata Presidente Sarmiento 2000|Paternal": [
-    -34.602783,
-    -58.459677
-  ],
-  "Alvarez Jonte 2700|Villa del Parque": [
-    -34.608147,
-    -58.480285
-  ],
-  "Tejedor 300|Parque Chacabuco": [
-    -34.629994,
-    -58.430279
-  ],
-  "Avenida San Martín 1629|Villa Crespo": [
-    -34.605992,
-    -58.452358
-  ],
-  "Bartolomé Mitre 3700|Almagro": [
-    -34.609667,
-    -58.41854
-  ],
-  "Gavilan 1800|Villa General Mitre": [
-    -34.610035,
-    -58.470491
-  ],
-  "BILLINGHURST 415|Almagro": [
-    -34.605427,
-    -58.415925
-  ],
-  "Tucumán 3500|Almagro": [
-    -34.599676,
-    -58.414848
-  ],
-  "Bartolome Mitre 4030|Almagro": [
-    -34.609987,
-    -58.423223
-  ],
-  "Guardia Vieja 4000|Almagro": [
-    -34.600757,
-    -58.42051
-  ],
-  "33 Orientales 900|Boedo": [
-    -34.624771,
-    -58.423177
-  ],
-  "Av. Pueyrredón 800|Parque Chacabuco": [
-    -34.600951,
-    -58.404627
-  ],
-  "Av. ASAMBLEA 388|Parque Chacabuco": [
-    -34.632982,
-    -58.43107
-  ],
-  "Castro Barros 970|Boedo": [
-    -34.62379,
-    -58.419137
-  ],
-  "Rojas 316|Caballito": [
-    -34.617115,
-    -58.442915
-  ]
+ "33 Orientales 900|Boedo": [
+  -34.624771,
+  -58.423177
+ ],
+ "ACOYTE 600|Caballito": [
+  -34.611764,
+  -58.438952
+ ],
+ "AV ALVAREZ JONTE 2723|Villa del Parque": [
+  -34.608189,
+  -58.480878
+ ],
+ "AV CORRIENTES 3645|Almagro": [
+  -34.603634,
+  -58.416116
+ ],
+ "Adolfo Alsina 3200|Almagro": [
+  -34.613046,
+  -58.411346
+ ],
+ "Albarracín 1758|Parque Chacabuco": [
+  -34.637125,
+  -58.429415
+ ],
+ "Alcaraz 4400|Villa del Parque": [
+  -34.618059,
+  -58.500206
+ ],
+ "Alvarez Jonte 2700|Villa del Parque": [
+  -34.608147,
+  -58.480285
+ ],
+ "Andrés Lamas 2000|Paternal": [
+  -34.606835,
+  -58.469518
+ ],
+ "Angel Gallardo 600|Villa Crespo": [
+  -34.605599,
+  -58.439267
+ ],
+ "Antezana 100|Villa Crespo": [
+  -34.60354,
+  -58.442676
+ ],
+ "Argerich 1600|Villa Santa Rita": [
+  -34.616212,
+  -58.479488
+ ],
+ "Asamblea 300|Parque Chacabuco": [
+  -34.631992,
+  -58.429542
+ ],
+ "Av Chiclana 3700|Boedo": [
+  -34.637526,
+  -58.416028
+ ],
+ "Av Cobo 1000|Parque Chacabuco": [
+  -34.641337,
+  -58.4298
+ ],
+ "Av Honorio Pueyrredon 1400|Villa Crespo": [
+  -34.604832,
+  -58.447864
+ ],
+ "Av Juan B Justo 3500|Paternal": [
+  -34.601498,
+  -58.45387
+ ],
+ "Av Juan B Justo 5727|Villa Santa Rita": [
+  -34.618342,
+  -58.476465
+ ],
+ "Av San Martin 4600|Villa del Parque": [
+  -34.597788,
+  -58.484251
+ ],
+ "Av. ASAMBLEA 388|Parque Chacabuco": [
+  -34.632982,
+  -58.43107
+ ],
+ "Av. Alvarez Jonte 1800|Villa General Mitre": [
+  -34.601656,
+  -58.468747
+ ],
+ "Av. Corrientes 6100|Villa Crespo": [
+  -34.592819,
+  -58.446532
+ ],
+ "Av. Diaz Velez 3700|Almagro": [
+  -34.60862,
+  -58.418681
+ ],
+ "Av. Díaz Vélez 3500|Almagro": [
+  -34.608586,
+  -58.415955
+ ],
+ "Av. Gaona 3600|Villa Santa Rita": [
+  -34.62133,
+  -58.475592
+ ],
+ "Av. Independencia 3726|Boedo": [
+  -34.621207,
+  -58.418474
+ ],
+ "Av. Juan B. Justo 3900|Villa Crespo": [
+  -34.603793,
+  -58.457253
+ ],
+ "Av. Juan B. Justo 5877|Villa Santa Rita": [
+  -34.619532,
+  -58.477992
+ ],
+ "Av. La Plata 1117|Caballito": [
+  -34.628645,
+  -58.426488
+ ],
+ "Av. Nazca 2718|Villa del Parque": [
+  -34.604548,
+  -58.48737
+ ],
+ "Av. Nazca 3000|Villa del Parque": [
+  -34.601859,
+  -58.489839
+ ],
+ "Av. Pueyrredón 800|Parque Chacabuco": [
+  -34.600951,
+  -58.404627
+ ],
+ "Av. Rivadavia 4000|Almagro": [
+  -34.612096,
+  -58.422271
+ ],
+ "Av. San Martin 1890|Villa Crespo": [
+  -34.605407,
+  -58.455267
+ ],
+ "Av.Juan B Justo 5727|Villa Santa Rita": [
+  -34.618342,
+  -58.476465
+ ],
+ "Avenida Belgrano 3600|Almagro": [
+  -34.615764,
+  -58.416903
+ ],
+ "Avenida Chiclana 3400|Boedo": [
+  -34.635229,
+  -58.412258
+ ],
+ "Avenida Cobo 1000|Parque Chacabuco": [
+  -34.641337,
+  -58.4298
+ ],
+ "Avenida Cobo 1100|Parque Chacabuco": [
+  -34.641532,
+  -58.430987
+ ],
+ "Avenida Corrientes 4500|Almagro": [
+  -34.602512,
+  -58.428476
+ ],
+ "Avenida Hipólito Yrigoyen 3190|Almagro": [
+  -34.611812,
+  -58.411524
+ ],
+ "Avenida Juan B. Justo 2300|Villa Crespo": [
+  -34.592987,
+  -58.441542
+ ],
+ "Avenida La Plata 1900|Boedo": [
+  -34.6372,
+  -58.424165
+ ],
+ "Avenida La Plata 816|Boedo": [
+  -34.625467,
+  -58.426999
+ ],
+ "Avenida San Juan 3968|Boedo": [
+  -34.62623,
+  -58.420971
+ ],
+ "Avenida San Martín 1629|Villa Crespo": [
+  -34.605992,
+  -58.452358
+ ],
+ "Avenida San Martín 2688|Paternal": [
+  -34.603282,
+  -58.463635
+ ],
+ "Avenida San Martín 4268|Villa del Parque": [
+  -34.598754,
+  -58.48127
+ ],
+ "Avenida Warnes 700|Villa Crespo": [
+  -34.600925,
+  -58.446229
+ ],
+ "Avenida la Plata 1100|Parque Chacabuco": [
+  -34.628207,
+  -58.426379
+ ],
+ "Avenida Álvarez Jonte 3100|Villa Santa Rita": [
+  -34.609611,
+  -58.486246
+ ],
+ "BILLINGHURST 415|Almagro": [
+  -34.605427,
+  -58.415925
+ ],
+ "Baldomero Fernández Moreno 1500|Parque Chacabuco": [
+  -34.632665,
+  -58.44694
+ ],
+ "Bartolome Mitre 4030|Almagro": [
+  -34.609987,
+  -58.423223
+ ],
+ "Bartolomé Mitre 3700|Almagro": [
+  -34.609667,
+  -58.41854
+ ],
+ "Bufano 2300|Villa del Parque": [
+  -34.606748,
+  -58.476179
+ ],
+ "CONDARCO 2651|Villa del Parque": [
+  -34.603864,
+  -58.484244
+ ],
+ "Camargo 1000|Villa Crespo": [
+  -34.596477,
+  -58.444616
+ ],
+ "Camargo 700|Villa Crespo": [
+  -34.59907,
+  -58.441741
+ ],
+ "Caracas 200|Caballito": [
+  -34.626555,
+  -58.462073
+ ],
+ "Carlos Calvo 3600|Boedo": [
+  -34.62395,
+  -58.4161
+ ],
+ "Carlos Calvo 3700|Boedo": [
+  -34.62455,
+  -58.417664
+ ],
+ "Castro 1157|Boedo": [
+  -34.626823,
+  -58.420145
+ ],
+ "Castro Barros 1300|Boedo": [
+  -34.628138,
+  -58.418229
+ ],
+ "Castro Barros 970|Boedo": [
+  -34.62379,
+  -58.419137
+ ],
+ "Centenera 1600|Parque Chacabuco": [
+  -34.637014,
+  -58.433177
+ ],
+ "Cesar Diaz 2900|Villa Santa Rita": [
+  -34.614417,
+  -58.478895
+ ],
+ "Cesar Diaz 2995|Villa Santa Rita": [
+  -34.614996,
+  -58.480215
+ ],
+ "Cochabamba 2900|Boedo": [
+  -34.6258,
+  -58.405487
+ ],
+ "Colombres 1000|Boedo": [
+  -34.625566,
+  -58.417634
+ ],
+ "Colombres 1712|Boedo": [
+  -34.634349,
+  -58.416678
+ ],
+ "Colombres 900|Boedo": [
+  -34.624411,
+  -58.417742
+ ],
+ "Combate de los Pozos 1500|Boedo": [
+  -34.626354,
+  -58.392271
+ ],
+ "Condarco 1700|Paternal": [
+  -34.613172,
+  -58.476434
+ ],
+ "Condarco 1700|Villa General Mitre": [
+  -34.613172,
+  -58.476434
+ ],
+ "Crespo 2100|Parque Chacabuco": [
+  -34.644036,
+  -58.437312
+ ],
+ "Cuenca 1000|Villa Santa Rita": [
+  -34.62156,
+  -58.4788
+ ],
+ "Cuenca 2040|Villa Santa Rita": [
+  -34.611007,
+  -58.487206
+ ],
+ "Del Barco Centenera 1052|Parque Chacabuco": [
+  -34.631689,
+  -58.437573
+ ],
+ "Diaz Vélez 3793|Almagro": [
+  -34.608455,
+  -58.419882
+ ],
+ "Doctor Luis Beláustegui 1800|Villa General Mitre": [
+  -34.609537,
+  -58.464248
+ ],
+ "Don Bosco 3700|Almagro": [
+  -34.612504,
+  -58.417718
+ ],
+ "Dr. Luis Belaustegui 1532|Caballito": [
+  -34.607881,
+  -58.46121
+ ],
+ "Emilio Mitre 1700|Parque Chacabuco": [
+  -34.639042,
+  -58.437447
+ ],
+ "Emilio Mitre 48|Caballito": [
+  -34.622365,
+  -58.444012
+ ],
+ "Espinosa 1900|Caballito": [
+  -34.603116,
+  -58.457793
+ ],
+ "Estado de Palestina 600|Almagro": [
+  -34.604397,
+  -58.425937
+ ],
+ "Fragata Presidente Sarmiento 1800|Villa General Mitre": [
+  -34.605313,
+  -58.459509
+ ],
+ "Fragata Presidente Sarmiento 2000|Paternal": [
+  -34.602783,
+  -58.459677
+ ],
+ "Galicia 2800|Villa Santa Rita": [
+  -34.617772,
+  -58.474448
+ ],
+ "Galicia 2802|Villa Santa Rita": [
+  -34.61788,
+  -58.47465
+ ],
+ "Gascon 1100|Almagro": [
+  -34.598072,
+  -58.423468
+ ],
+ "Gavilan 1800|Villa General Mitre": [
+  -34.610035,
+  -58.470491
+ ],
+ "Gavilan 2220|Villa General Mitre": [
+  -34.605761,
+  -58.473747
+ ],
+ "General José Gervasio Artigas 2000|Villa General Mitre": [
+  -34.608854,
+  -58.476285
+ ],
+ "General José Gervasio Artigas 3000|Villa del Parque": [
+  -34.59931,
+  -58.485452
+ ],
+ "General Manuel A. Rodríguez 1700|Villa General Mitre": [
+  -34.603181,
+  -58.452548
+ ],
+ "Gral Jose Gervasio Artigas 2000|Villa General Mitre": [
+  -34.608854,
+  -58.476285
+ ],
+ "Guardia Vieja 4000|Almagro": [
+  -34.600757,
+  -58.42051
+ ],
+ "Hipolito Yrigoyen 3300|Almagro": [
+  -34.612641,
+  -58.413244
+ ],
+ "Hipólito Yrigoyen 3188|Almagro": [
+  -34.611771,
+  -58.411439
+ ],
+ "Humberto Primo 3100|Boedo": [
+  -34.623528,
+  -58.40888
+ ],
+ "Humboldt 500|Villa Crespo": [
+  -34.594268,
+  -58.447144
+ ],
+ "J. G. Artigas 2000|Villa General Mitre": [
+  -34.608854,
+  -58.476285
+ ],
+ "Jeronimo Salguero 33|Almagro": [
+  -34.610689,
+  -58.419736
+ ],
+ "José Juan Biedma 500|Caballito": [
+  -34.618935,
+  -58.453225
+ ],
+ "José Pedro Varela 3410|Villa del Parque": [
+  -34.600296,
+  -58.500257
+ ],
+ "Juan Agustin Garcia 2600|Paternal": [
+  -34.608374,
+  -58.478261
+ ],
+ "Juan b Justo 2400|Villa Crespo": [
+  -34.593672,
+  -58.442525
+ ],
+ "Lavalleja 100|Villa Crespo": [
+  -34.603081,
+  -58.437897
+ ],
+ "Loyola 600|Villa Crespo": [
+  -34.595338,
+  -58.436175
+ ],
+ "Luis Viale 2000|Caballito": [
+  -34.613698,
+  -58.464072
+ ],
+ "Luis Viale 2100|Villa General Mitre": [
+  -34.61436,
+  -58.465285
+ ],
+ "Manuel Ricardo Trelles 1964|Villa General Mitre": [
+  -34.605514,
+  -58.465327
+ ],
+ "Marcos Sastre 3700|Villa del Parque": [
+  -34.608572,
+  -58.496816
+ ],
+ "Melincué 2673|Villa del Parque": [
+  -34.599016,
+  -58.487621
+ ],
+ "Metán 4200|Boedo": [
+  -34.636983,
+  -58.422967
+ ],
+ "Mexico 3700|Almagro": [
+  -34.619947,
+  -58.418044
+ ],
+ "Neuquén 1272|Caballito": [
+  -34.615789,
+  -58.451372
+ ],
+ "Neuquén 2900|Villa Santa Rita": [
+  -34.621191,
+  -58.473784
+ ],
+ "Neuquén 700|Caballito": [
+  -34.615981,
+  -58.440164
+ ],
+ "PRINGLES 200|Almagro": [
+  -34.610623,
+  -58.427568
+ ],
+ "Pasaje La Fronda 1604|Villa General Mitre": [
+  -34.611452,
+  -58.468663
+ ],
+ "Pavón 3700|Boedo": [
+  -34.630308,
+  -58.416344
+ ],
+ "Paysandú 1600|Caballito": [
+  -34.606108,
+  -58.457383
+ ],
+ "Peron 3500|Almagro": [
+  -34.607022,
+  -58.416187
+ ],
+ "Potosí 3791|Almagro": [
+  -34.60723,
+  -58.419743
+ ],
+ "Puan 100|Parque Chacabuco": [
+  -34.624356,
+  -58.448248
+ ],
+ "Puán 855|Parque Chacabuco": [
+  -34.632444,
+  -58.444981
+ ],
+ "Quintino Bocayuva 300|Almagro": [
+  -34.615708,
+  -58.422859
+ ],
+ "RIO DE Janeiro 900|Almagro": [
+  -34.605076,
+  -58.431487
+ ],
+ "Rawson 200|Caballito": [
+  -34.610408,
+  -58.426059
+ ],
+ "Remedios de Escalada de San Martin 2400|Villa General Mitre": [
+  -34.612085,
+  -58.471815
+ ],
+ "Remedios de Escalada de San Martin 2500|Villa General Mitre": [
+  -34.6127,
+  -58.472974
+ ],
+ "Remedios de Escalada de San Martín 2700|Villa Santa Rita": [
+  -34.614059,
+  -58.475542
+ ],
+ "Ricardo Gutiérrez 3300|Villa del Parque": [
+  -34.601793,
+  -58.496829
+ ],
+ "Rio De Janeiro 100|Caballito": [
+  -34.614108,
+  -58.430145
+ ],
+ "Rio de Janeiro 500|Almagro": [
+  -34.609898,
+  -58.430451
+ ],
+ "Rio de Janeiro 600|Almagro": [
+  -34.60882,
+  -58.430531
+ ],
+ "Rojas 316|Caballito": [
+  -34.617115,
+  -58.442915
+ ],
+ "SALVIGNY 1641|Parque Chacabuco": [
+  -34.644722,
+  -58.434655
+ ],
+ "SAN JOSE DE CALASANZ 400|Caballito": [
+  -34.623095,
+  -58.437704
+ ],
+ "SANCHEZ DE BUSTAMANTE 100|Almagro": [
+  -34.609393,
+  -58.414586
+ ],
+ "Salguero 200|Almagro": [
+  -34.608638,
+  -58.420101
+ ],
+ "Salvigny 1600|Parque Chacabuco": [
+  -34.644591,
+  -58.433718
+ ],
+ "San Jose de Calasanz 100|Caballito": [
+  -34.620081,
+  -58.438711
+ ],
+ "Sanchez de Bustamante 500|Almagro": [
+  -34.6041,
+  -58.414585
+ ],
+ "Sarmiento 3500|Almagro": [
+  -34.605921,
+  -58.414851
+ ],
+ "Sarmiento 4500|Almagro": [
+  -34.604167,
+  -58.428721
+ ],
+ "Senillosa 1000|Caballito": [
+  -34.628421,
+  -58.427847
+ ],
+ "Senillosa 1000|Parque Chacabuco": [
+  -34.628421,
+  -58.427847
+ ],
+ "TRES ARROYOS 1204|Caballito": [
+  -34.607129,
+  -58.456746
+ ],
+ "Tejedor 300|Parque Chacabuco": [
+  -34.629994,
+  -58.430279
+ ],
+ "Terrada 2000|Villa Santa Rita": [
+  -34.61086,
+  -58.480157
+ ],
+ "Tres Arroyos 875|Villa Crespo": [
+  -34.605146,
+  -58.453287
+ ],
+ "Tte. Cnel. Gregorio Pomar 4100|Boedo": [
+  -34.641056,
+  -58.419442
+ ],
+ "Tte. Gral Juan Domingo Peron 4300|Almagro": [
+  -34.605994,
+  -58.427468
+ ],
+ "Tte. Gral. Juan Domingo Perón 3400|Almagro": [
+  -34.607218,
+  -58.414659
+ ],
+ "Tucumán 3500|Almagro": [
+  -34.599676,
+  -58.414848
+ ],
+ "Valle 49|Caballito": [
+  -34.623657,
+  -58.428228
+ ],
+ "Vernet 300|Parque Chacabuco": [
+  -34.633074,
+  -58.429302
+ ],
+ "Virrey Liniers 1200|Boedo": [
+  -34.625042,
+  -58.413525
+ ],
+ "YERBAL 309|Caballito": [
+  -34.616123,
+  -58.434917
+ ],
+ "Yapeyú 63|Almagro": [
+  -34.61289,
+  -58.4222
+ ],
+ "Yerbal 901|Caballito": [
+  -34.619895,
+  -58.443438
+ ],
+ "Zañartu 1100|Parque Chacabuco": [
+  -34.639575,
+  -58.432339
+ ],
+ "Zelarrayan 1600|Parque Chacabuco": [
+  -34.641836,
+  -58.43802
+ ],
+ "Álvarez Jonte 3822|Villa del Parque": [
+  -34.614076,
+  -58.494871
+ ],
+ " Av. Directorio 943|Caballito": [
+  -34.628926,
+  -58.440522
+ ]
 }

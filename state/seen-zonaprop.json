@@ -1,5 +1,13 @@
 {
  "listings": {
+  "zonaprop:45350683": {
+   "first_seen": "2026-11-18T02:57:58+00:00",
+   "key": "bonpland 2287|140000|50|1",
+   "place": "bonpland 2287|50|1",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-espectacular-dpto-a-estrenar-para-alquiler-temporario-45350683.html",
+   "zone": "Palermo Hollywood"
+  },
   "zonaprop:47694195": {
    "first_seen": "2026-10-10T01:45:22+00:00",
    "key": "araoz 2400|110000|x|3",
@@ -1625,9 +1633,9 @@
   },
   "zonaprop:60291284": {
    "first_seen": "2026-10-23T20:47:33+00:00",
-   "key": "moldes 2300|134900|55|3",
+   "key": "moldes 2300|129900|55|3",
    "place": "moldes 2300|55|3",
-   "price": 134900,
+   "price": 129900,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-muy-luminoso-3-amb-al-frente-con-balcon-listo-para-60291284.html",
    "zone": "Belgrano"
   },
@@ -2305,7 +2313,7 @@
   }
  },
  "meta": {
-  "coverage_week": "2026-W46",
+  "coverage_week": "2026-W47",
   "last_run": "2026-10-10T03:03:21+00:00"
  }
 }
