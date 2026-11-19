@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-18T19:57:51+00:00",
+ "last_change": "2026-11-19T02:23:44+00:00",
  "listings": [
   {
    "active": true,
@@ -2388,7 +2388,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2408,7 +2408,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-19T02:23:44+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -5082,7 +5082,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Arévalo 1582",
    "address_unverified": false,
    "air_usd": null,
@@ -5096,13 +5096,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 126852,
    "cochera": null,
-   "days_seen": 18,
+   "days_seen": 31,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": "2026-11-18T19:57:51+00:00",
+   "gone_at": null,
    "id": "zonaprop:59787908",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6254,6 +6254,64 @@
    "usd_per_m2": 2295,
    "vs_median_n": 34,
    "vs_median_pct": 0,
+   "zone": "Belgrano",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Mcal. Antonio José de Sucre 1500",
+   "address_unverified": false,
+   "air_usd": 26475,
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 55.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 55.0,
+   "blurb": "USD 139.900\n6%\n$ 300.000 Expensas\n55 m² tot.\n3 amb.\n2 dorm.\n1 baño\nMcal. Antonio José de Sucre 1500\nBelgrano, Capital Federal\nExcelente departamento ubicado en una de las zonas más buscadas de Belgrano Chico. La propiedad cuenta con un amplio y luminoso living-comedor, con salida al balcón, brindando una agradable conexión con el exterior. Dispone de dos cómodos dormitorios, ambos con placard, y baño completo. La unidad cuenta además con una cocina independiente y sector de lavadero, aportando m",
+   "breakeven_exit_usd_m2": 3685,
+   "closing_ref_usd": 134444,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": "descartar",
+   "exit_usd_m2": 3400,
+   "expensas_ars": 300000,
+   "expensas_text": "$ 300.000 Expensas",
+   "first_seen": "2026-11-19T02:23:44+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60008679",
+   "max_offer_usd": 126779,
+   "neto_base_usd": 8961,
+   "neto_hard_usd": -14171,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/00/86/79/720x532/2093247030.jpg",
+   "piso": null,
+   "price": 139900,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-19T02:23:44+00:00",
+     "price": 139900
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 375,
+   "roi_base": 0.0531,
+   "roi_hard": -0.0774,
+   "score": -1,
+   "seventy_offer_usd": 110275,
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar",
+    "sobre presupuesto",
+    "expensas altas",
+    "aire"
+   ],
+   "title": "Excelente departamento ubicado en una de las zonas más buscadas de Belgrano Chico. La prop",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-amb-luminoso-con-balcon-y-lavadero-en-60008679.html",
+   "usd_per_m2": 2544,
+   "vs_median_n": 24,
+   "vs_median_pct": 6,
    "zone": "Belgrano",
    "zone_unverified": false
   },
@@ -8095,13 +8153,13 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 1,
+   "score": 0,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
     "sobre presupuesto",
-    "metro muy barato"
+    "metro barato"
    ],
    "title": "Hermoso departamento de 3 ambientes al frente con balcon en Corrientes y Gurruchaga. En un",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-60219698.html",
@@ -11712,12 +11770,13 @@
    "reno_usd_m2": 375,
    "roi_base": 0.1939,
    "roi_hard": 0.04,
-   "score": 2,
+   "score": 3,
    "seventy_offer_usd": 116290,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
     "sobre presupuesto",
+    "metro barato",
     "aire amplio"
    ],
    "title": "Se ofrece este departamento en venta ubicado en Belgrano C, una excelente zona residencial",
@@ -12112,7 +12171,7 @@
    "reno_usd_m2": 250,
    "roi_base": null,
    "roi_hard": null,
-   "score": -2,
+   "score": -3,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
@@ -12120,7 +12179,7 @@
     "incluye cochera",
     "m² sin verificar",
     "sobre presupuesto",
-    "metro muy barato"
+    "metro barato"
    ],
    "title": "Venta de departamento de 2 ambientes con balcón terraza a estrenarAmplitud, calidad y una ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-2-ambientes-balcon-terraza-en-60506967.html",
@@ -12864,7 +12923,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Corrientes 5700",
    "address_unverified": false,
    "air_usd": null,
@@ -12884,7 +12943,7 @@
    "expensas_ars": 160000,
    "expensas_text": "$ 160.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-19T02:23:44+00:00",
    "id": "zonaprop:60594223",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -13278,7 +13337,7 @@
    "area_covered": 51.0,
    "area_semi": null,
    "area_total": 57.0,
-   "blurb": "USD 135.000\n$ 200.000 Expensas\n57 m² tot.\n3 amb.\n2 dorm.\n1 baño\nAv. Corrientes 5171\nVilla Crespo, Capital Federal\n¡Luz natural, vista abierta y ubicación privilegiada en el corazón de Villa Crespo! Excelente departamento ubicado en un piso 14, al contrafrente, con orientación noreste, que se destaca por su extraordinaria luminosidad y sus vistas abiertas a la ciudad. Uno de sus grandes atractivos es su balcón corrido de 6 metros de largo, y una vista panorámica de Buenos Aires. Ubicado sobre Av.",
+   "blurb": "USD 135.000\n$ 200.000 Expensas\n57 m² tot.\n3 amb.\n2 dorm.\n1 baño\nAv. Corrientes 5171\nVilla Crespo, Capital Federal\nDueño vende. ¡Luz natural, vista abierta y ubicación privilegiada en el corazón de Villa Crespo! Excelente departamento de 3 ambientes, 1 baño completo y 1 toilette, ubicado en piso 14, al contrafrente, con orientación noreste, que se destaca por su luz y sus vistas abiertas a la ciudad. Balcón corrido de 6 metros de largo, y una vista panorámica de Buenos Aires. Y parrilla. Ubicado ",
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 129735,
    "cochera": null,
@@ -13294,7 +13353,7 @@
    "neto_base_usd": null,
    "neto_hard_usd": null,
    "old_price": null,
-   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/61/71/08/720x532/2089949370.jpg",
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/61/71/08/720x532/2092069941.jpg",
    "piso": 14,
    "price": 135000,
    "price_drops": 0,
@@ -13314,7 +13373,7 @@
    "tags": [
     "sobre presupuesto"
    ],
-   "title": "¡Luz natural, vista abierta y ubicación privilegiada en el corazón de Villa Crespo! Excele",
+   "title": "Dueño vende. ¡Luz natural, vista abierta y ubicación privilegiada en el corazón de Villa C",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-3-ambientes-super-luminoso-con-balcon-60617108.html",
    "usd_per_m2": 2647,
    "vs_median_n": 47,
