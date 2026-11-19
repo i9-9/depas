@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-19T02:23:44+00:00",
+ "last_change": "2026-11-19T20:02:15+00:00",
  "listings": [
   {
    "active": true,
@@ -2388,7 +2388,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2402,13 +2402,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 36,
+   "days_seen": 40,
    "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-11-19T02:23:44+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -8153,13 +8153,13 @@
    "reno_usd_m2": 375,
    "roi_base": null,
    "roi_hard": null,
-   "score": 0,
+   "score": 1,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
     "m² sin verificar",
     "sobre presupuesto",
-    "metro barato"
+    "metro muy barato"
    ],
    "title": "Hermoso departamento de 3 ambientes al frente con balcon en Corrientes y Gurruchaga. En un",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-en-villa-crespo-60219698.html",
@@ -12171,7 +12171,7 @@
    "reno_usd_m2": 250,
    "roi_base": null,
    "roi_hard": null,
-   "score": -3,
+   "score": -2,
    "seventy_offer_usd": null,
    "site": "zonaprop",
    "tags": [
@@ -12179,7 +12179,7 @@
     "incluye cochera",
     "m² sin verificar",
     "sobre presupuesto",
-    "metro barato"
+    "metro muy barato"
    ],
    "title": "Venta de departamento de 2 ambientes con balcón terraza a estrenarAmplitud, calidad y una ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-2-ambientes-balcon-terraza-en-60506967.html",
