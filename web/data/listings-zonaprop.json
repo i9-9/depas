@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-19T20:02:15+00:00",
+ "last_change": "2026-11-20T02:18:29+00:00",
  "listings": [
   {
    "active": true,
@@ -2388,7 +2388,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2408,7 +2408,7 @@
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-20T02:18:29+00:00",
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -4688,7 +4688,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "SERRANO 544. Entre Av Corrientes y Vera",
    "address_unverified": false,
    "air_usd": null,
@@ -4708,7 +4708,7 @@
    "expensas_ars": 157000,
    "expensas_text": "$ 157.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-20T02:18:29+00:00",
    "id": "zonaprop:59747810",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -6258,7 +6258,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Mcal. Antonio José de Sucre 1500",
    "address_unverified": false,
    "air_usd": 26475,
@@ -6278,7 +6278,7 @@
    "expensas_ars": 300000,
    "expensas_text": "$ 300.000 Expensas",
    "first_seen": "2026-11-19T02:23:44+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-20T02:18:29+00:00",
    "id": "zonaprop:60008679",
    "max_offer_usd": 126779,
    "neto_base_usd": 8961,
@@ -6967,7 +6967,7 @@
    "area_covered": null,
    "area_semi": null,
    "area_total": 65.0,
-   "blurb": "USD 139.900\n$ 150.000 Expensas\n65 m² tot.\n2 amb.\n1 dorm.\n1 baño\nRoseti 726\nColegiales, Capital Federal\nPando heredia negocios inmobiliarios. Venta Colegiales/Chacarita 2 Ambientes A estrenar. - 55 m2 cubiertos - 65m2 totales. - Contrafrente. - Balcón y Parrilla individual. - Piso alto con vista panorámica. Muy luminoso. - Cómodo living con salida al balcón y acceso directo a la cocina (amplia y gran espacio de guardado). A gas. - Desde la cocina se accede a espacio semicubierto/balcón con parril",
+   "blurb": "USD 139.900\n$ 150.000 Expensas\n65 m² tot.\n2 amb.\n1 dorm.\n1 baño\nRoseti 726\nColegiales, Capital Federal\n- comercializa pando heredia negocios inmobiliarios- Venta Colegiales/Chacarita 2 Ambientes A estrenar. - 55 m2 cubiertos - 65m2 totales. - Contrafrente. - Balcón y Parrilla individual. - Piso alto con vista panorámica. Muy luminoso. - Cómodo living con salida al balcón y acceso directo a la cocina (amplia y gran espacio de guardado). A gas. - Desde la cocina se accede a espacio semicubierto/ba",
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 134444,
    "cochera": null,
@@ -7005,7 +7005,7 @@
     "m² sin verificar",
     "sobre presupuesto"
    ],
-   "title": "Pando heredia negocios inmobiliarios. Venta Colegiales/Chacarita 2 Ambientes A estrenar. -",
+   "title": "comercializa pando heredia negocios inmobiliarios- Venta Colegiales/Chacarita 2 Ambientes ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclappa-venta-departamento-2-ambientes-a-estrenar-60077007.html",
    "usd_per_m2": 2152,
    "vs_median_n": 20,

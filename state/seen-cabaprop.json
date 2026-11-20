@@ -145,5 +145,7 @@
    "zone": "Villa Crespo"
   }
  },
- "meta": {}
+ "meta": {
+  "last_error_day": "2026-11-20"
+ }
 }
