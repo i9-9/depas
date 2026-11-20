@@ -1747,6 +1747,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-3-ambientes-colegiales-60338027.html",
    "zone": "Chacarita"
   },
+  "zonaprop:60342033": {
+   "first_seen": "2026-11-20T19:39:27+00:00",
+   "key": "cramer 780|140000|52|2",
+   "place": "cramer 780|50|2",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-con-balcon-a-estrenar-60342033.html",
+   "zone": "Colegiales"
+  },
   "zonaprop:60343683": {
    "first_seen": "2026-10-10T04:06:21+00:00",
    "key": "paraguay 1269|106000|52|3",
@@ -2201,9 +2209,9 @@
   },
   "zonaprop:60600630": {
    "first_seen": "2026-11-06T18:18:01+00:00",
-   "key": "blanco encalada 2300|139000|57|3",
+   "key": "blanco encalada 2300|138900|57|3",
    "place": "blanco encalada 2300|55|3",
-   "price": 139000,
+   "price": 138900,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-venta-3-ambientes-belgrano-2-balcones-60600630.html",
    "zone": "Belgrano"
   },
@@ -2289,9 +2297,9 @@
   },
   "zonaprop:60692028": {
    "first_seen": "2026-11-13T01:25:54+00:00",
-   "key": "blanco encalada 2300|139000|56|3",
+   "key": "blanco encalada 2300|138000|56|3",
    "place": "blanco encalada 2300|55|3",
-   "price": 139000,
+   "price": 138000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-belgrano-3-amb.-60692028.html",
    "zone": "Belgrano"
   },
@@ -2326,6 +2334,14 @@
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-a-estrenar-con-balcon-y-60735780.html",
    "zone": "Villa Crespo"
+  },
+  "zonaprop:60762953": {
+   "first_seen": "2026-11-20T19:39:27+00:00",
+   "key": "charcas 3100|120000|52|2",
+   "place": "charcas 3100|50|2",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-2-amb-c-balcon-lavadero-barrio-norte-60762953.html",
+   "zone": "Barrio Norte"
   }
  },
  "meta": {
