@@ -1,8 +1,8 @@
 {
- "last_change": "2026-11-20T02:18:29+00:00",
+ "last_change": "2026-11-21T18:31:22+00:00",
  "listings": [
   {
-   "active": true,
+   "active": false,
    "address": "Villarroel 1200",
    "address_unverified": false,
    "air_usd": null,
@@ -22,7 +22,7 @@
    "expensas_ars": 206000,
    "expensas_text": "$ 206.000 expensas",
    "first_seen": "2026-11-18T02:57:58+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-21T18:31:22+00:00",
    "id": "cabaprop:68f95d6f5f9b3aad85445cce",
    "max_offer_usd": null,
    "neto_base_usd": null,
