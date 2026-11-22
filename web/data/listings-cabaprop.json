@@ -1,8 +1,8 @@
 {
- "last_change": "2026-11-21T18:31:22+00:00",
+ "last_change": "2026-11-22T19:03:21+00:00",
  "listings": [
   {
-   "active": false,
+   "active": true,
    "address": "Villarroel 1200",
    "address_unverified": false,
    "air_usd": null,
@@ -16,13 +16,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 128774,
    "cochera": false,
-   "days_seen": 0,
+   "days_seen": 4,
    "decision": null,
    "exit_usd_m2": null,
    "expensas_ars": 206000,
    "expensas_text": "$ 206.000 expensas",
    "first_seen": "2026-11-18T02:57:58+00:00",
-   "gone_at": "2026-11-21T18:31:22+00:00",
+   "gone_at": null,
    "id": "cabaprop:68f95d6f5f9b3aad85445cce",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -51,7 +51,7 @@
    "title": "DEPARTAMENTO 3 AMBIENTES - VILLA CRESPO, CAPITAL FEDERAL",
    "url": "https://cabaprop.com.ar/propiedad/68f95d6f5f9b3aad85445cce/departamento-3-ambientes-villa-crespo-capital-federal",
    "usd_per_m2": 2589,
-   "vs_median_n": 46,
+   "vs_median_n": 43,
    "vs_median_pct": 10,
    "zone": "Villa Crespo",
    "zone_unverified": false

@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-21T18:31:22+00:00",
+ "last_change": "2026-11-22T19:03:21+00:00",
  "listings": [
   {
    "active": true,
@@ -2391,7 +2391,7 @@
    "zone": "Barrio Norte"
   },
   {
-   "active": false,
+   "active": true,
    "address": "Fitz Roy al 2400 8 Fte Balcon Super Luminoso",
    "address_unverified": false,
    "air_usd": 0,
@@ -2405,13 +2405,13 @@
    "breakeven_exit_usd_m2": null,
    "closing_ref_usd": 124930,
    "cochera": null,
-   "days_seen": 41,
+   "days_seen": 43,
    "decision": null,
    "exit_usd_m2": 2750,
    "expensas_ars": 152500,
    "expensas_text": "$ 152.500 Expensas",
    "first_seen": "2026-10-10T14:42:59+00:00",
-   "gone_at": "2026-11-21T18:31:22+00:00",
+   "gone_at": null,
    "id": "zonaprop:58803540",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -13161,7 +13161,7 @@
    "zone_unverified": false
   },
   {
-   "active": false,
+   "active": true,
    "address": "Mariscal Antonio Jose De Sucre 1552",
    "address_unverified": false,
    "air_usd": 26376,
@@ -13175,13 +13175,13 @@
    "breakeven_exit_usd_m2": 3694,
    "closing_ref_usd": 134539,
    "cochera": null,
-   "days_seen": 0,
+   "days_seen": 20,
    "decision": "descartar",
    "exit_usd_m2": 3400,
    "expensas_ars": 360000,
    "expensas_text": "$ 360.000 Expensas",
    "first_seen": "2026-11-02T21:05:58+00:00",
-   "gone_at": "2026-11-21T18:31:22+00:00",
+   "gone_at": null,
    "id": "zonaprop:60602187",
    "max_offer_usd": 126454,
    "neto_base_usd": 8623,
@@ -13214,8 +13214,8 @@
    "title": "[rosa-196] venta | 3 ambientes con balcón Y lavadero belgrano. Sucre 1552 Belgrano, caba. ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-belgrano-con-balcon-60602187.html",
    "usd_per_m2": 2545,
-   "vs_median_n": 34,
-   "vs_median_pct": 10,
+   "vs_median_n": 24,
+   "vs_median_pct": 6,
    "zone": "Belgrano",
    "zone_unverified": false
   },
