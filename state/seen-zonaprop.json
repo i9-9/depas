@@ -2342,6 +2342,14 @@
    "price": 120000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-2-amb-c-balcon-lavadero-barrio-norte-60762953.html",
    "zone": "Barrio Norte"
+  },
+  "zonaprop:60774341": {
+   "first_seen": "2026-11-23T01:23:11+00:00",
+   "key": "estado de israel 4600|139000|73|2",
+   "place": "estado de israel 4600|75|2",
+   "price": 139000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-reciclado-a-nuevo-balcon-terraza-20-60774341.html",
+   "zone": "Villa Crespo"
   }
  },
  "meta": {

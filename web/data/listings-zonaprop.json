@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-22T19:03:21+00:00",
+ "last_change": "2026-11-23T01:23:11+00:00",
  "listings": [
   {
    "active": true,
@@ -571,7 +571,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Tres Arroyos 845",
    "address_unverified": false,
    "air_usd": null,
@@ -591,7 +591,7 @@
    "expensas_ars": 110000,
    "expensas_text": "$ 110.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-23T01:23:11+00:00",
    "id": "zonaprop:55259357",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -1754,7 +1754,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "GURRUCHAGA 400",
    "address_unverified": false,
    "air_usd": null,
@@ -1774,7 +1774,7 @@
    "expensas_ars": 320000,
    "expensas_text": "$ 320.000 Expensas",
    "first_seen": "2026-11-07T21:20:29+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-23T01:23:11+00:00",
    "id": "zonaprop:58041757",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -5086,7 +5086,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Arévalo 1582",
    "address_unverified": false,
    "air_usd": null,
@@ -5106,7 +5106,7 @@
    "expensas_ars": null,
    "expensas_text": "",
    "first_seen": "2026-10-19T17:41:13+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-23T01:23:11+00:00",
    "id": "zonaprop:59787908",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -5303,7 +5303,7 @@
    "zone": "Recoleta"
   },
   {
-   "active": true,
+   "active": false,
    "address": "Aguirre 100",
    "address_unverified": false,
    "air_usd": null,
@@ -5323,7 +5323,7 @@
    "expensas_ars": 274000,
    "expensas_text": "$ 274.000 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-23T01:23:11+00:00",
    "id": "zonaprop:59829909",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -11849,7 +11849,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Hidalgo 1700",
    "address_unverified": false,
    "air_usd": null,
@@ -11869,7 +11869,7 @@
    "expensas_ars": 190005,
    "expensas_text": "$ 190.005 Expensas",
    "first_seen": "2026-11-07T18:23:42+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-23T01:23:11+00:00",
    "id": "zonaprop:60478488",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -13334,7 +13334,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Juncal 2300",
    "address_unverified": false,
    "air_usd": null,
@@ -13354,7 +13354,7 @@
    "expensas_ars": 240000,
    "expensas_text": "$ 240.000 Expensas",
    "first_seen": "2026-11-04T18:58:48+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-23T01:23:11+00:00",
    "id": "zonaprop:60614938",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -13677,7 +13677,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Estado de Israel 4600",
    "address_unverified": false,
    "air_usd": null,
@@ -13697,7 +13697,7 @@
    "expensas_ars": 200000,
    "expensas_text": "$ 200.000 Expensas",
    "first_seen": "2026-11-12T19:16:20+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-23T01:23:11+00:00",
    "id": "zonaprop:60686926",
    "max_offer_usd": null,
    "neto_base_usd": null,
@@ -14076,6 +14076,64 @@
    "vs_median_n": null,
    "vs_median_pct": null,
    "zone": "Barrio Norte",
+   "zone_unverified": false
+  },
+  {
+   "active": true,
+   "address": "Avenida Estado de Israel 4600",
+   "address_unverified": false,
+   "air_usd": null,
+   "ambientes": 2,
+   "antiguedad_years": null,
+   "area": 73.0,
+   "area_covered": null,
+   "area_semi": null,
+   "area_total": 73.0,
+   "blurb": "USD 139.000\n$ 200.000 Expensas\n73 m² tot.\n2 amb.\n1 dorm.\n1 baño\nAvenida Estado de Israel 4600\nVilla Crespo, Capital Federal\nDepartamento de 2 ambientes totalmente reciclado, ubicado en un décimo piso al frente, con orientación norte, vista abierta y gran luminosidad natural. La propiedad cuenta con 73 m² totales, de los cuales 20 m² corresponden a un amplio balcón terraza privado, ideal para disfrutar del aire libre con posibilidad de agregarle parrilla. Una combinación difícil de encontrar: pis",
+   "breakeven_exit_usd_m2": null,
+   "closing_ref_usd": 133579,
+   "cochera": null,
+   "days_seen": 0,
+   "decision": null,
+   "exit_usd_m2": null,
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
+   "first_seen": "2026-11-23T01:23:11+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60774341",
+   "max_offer_usd": null,
+   "neto_base_usd": null,
+   "neto_hard_usd": null,
+   "old_price": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/77/43/41/720x532/2094056776.jpg",
+   "piso": null,
+   "price": 139000,
+   "price_drops": 0,
+   "price_history": [
+    {
+     "date": "2026-11-23T01:23:11+00:00",
+     "price": 139000
+    }
+   ],
+   "price_source": "card",
+   "reno_usd_m2": 250,
+   "roi_base": null,
+   "roi_hard": null,
+   "score": -2,
+   "seventy_offer_usd": null,
+   "site": "zonaprop",
+   "tags": [
+    "ya hecho",
+    "m² sin verificar",
+    "sobre presupuesto",
+    "metro muy barato"
+   ],
+   "title": "Departamento de 2 ambientes totalmente reciclado, ubicado en un décimo piso al frente, con",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-reciclado-a-nuevo-balcon-terraza-20-60774341.html",
+   "usd_per_m2": 1904,
+   "vs_median_n": 49,
+   "vs_median_pct": -19,
+   "zone": "Villa Crespo",
    "zone_unverified": false
   }
  ]
