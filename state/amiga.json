@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-23T23:11:56+00:00",
+ "last_change": "2026-11-25T06:10:09+00:00",
  "listings": {
   "cabaprop:67081334a028f98394752776": {
    "first_seen": "2026-11-22T19:03:21+00:00"
@@ -34,6 +34,9 @@
   "cabaprop:6a7fe5cc0fb47fb50d884123": {
    "first_seen": "2026-11-17T18:04:59+00:00"
   },
+  "cabaprop:6a8bd7ff9f7c3e4e637b8ef1": {
+   "first_seen": "2026-11-25T06:10:09+00:00"
+  },
   "cabaprop:6a8bfe949f7c3e4e637c5857": {
    "first_seen": "2026-11-17T18:04:59+00:00"
   },
@@ -51,6 +54,9 @@
   },
   "cabaprop:6ac80eb5e1793443d232ea8c": {
    "first_seen": "2026-11-17T18:04:59+00:00"
+  },
+  "cabaprop:6acc22ffe1793443d2423ab5": {
+   "first_seen": "2026-11-25T06:10:09+00:00"
   },
   "cabaprop:6acef27be1793443d24db1dc": {
    "first_seen": "2026-11-17T18:04:59+00:00"
@@ -87,6 +93,9 @@
   },
   "cabaprop:6b025d49612010112f060300": {
    "first_seen": "2026-11-22T19:03:21+00:00"
+  },
+  "cabaprop:6b04fef22ffdc4003e0fa96e": {
+   "first_seen": "2026-11-25T06:10:09+00:00"
   },
   "zonaprop:44188047": {
    "first_seen": "2026-11-17T17:41:59+00:00"
