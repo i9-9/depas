@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-25T06:10:09+00:00",
+ "last_change": "2026-11-26T05:43:59+00:00",
  "listings": [
   {
    "active": true,
@@ -3736,6 +3736,35 @@
    "villa_m": 1131,
    "villa_name": "Barrio Illia",
    "zone": "Parque Chacabuco"
+  },
+  {
+   "active": true,
+   "address": "Camargo 700",
+   "ambientes": 3,
+   "antiguedad_years": 45,
+   "area": 51.5,
+   "area_covered": 50.0,
+   "area_total": 55.0,
+   "blurb": "Departamento En Venta En Villa Crespo Camargo 700 con balcón sin cochera 45 años DEPARTAMENTO 3 AMBIENTES AL CONTRAFRENTE - LUMINOSO - BALCON - LIVING COMEDOR - 2 DORMITORIOS CON PLACARD - COCINA Y BAÑO COMPLETO - LAVADERO INDEPENDIENTE SUPERFICIE TOTAL: 55 METROS Inmueble accesible para personas con movilidad reducida (Ley 5115) CONTACTO: David Peijovich Propiedades",
+   "expensas_ars": 210000,
+   "expensas_text": "$ 210.000 expensas",
+   "first_price": 90000,
+   "first_seen": "2026-11-26T05:43:59+00:00",
+   "gone_at": null,
+   "id": "cabaprop:6b07a2dedf999d2853019452",
+   "lat": -34.598958,
+   "lng": -58.441985,
+   "photo": "https://http2.mlstatic.com/D_632325-MLA104313921506_012026-O.webp",
+   "piso": null,
+   "price": 90000,
+   "price_history": [],
+   "site": "cabaprop",
+   "tags": [],
+   "title": "Departamento En Venta En Villa Crespo",
+   "url": "https://cabaprop.com.ar/propiedad/6b07a2dedf999d2853019452/departamento-en-venta-en-villa-crespo",
+   "villa_m": 1977,
+   "villa_name": "Villa Fraga - Playón de Chacarita",
+   "zone": "Villa Crespo"
   },
   {
    "active": true,
