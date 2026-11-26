@@ -1453,6 +1453,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-amb.-recoleta-apto-prof.-63-m-60225749.html",
    "zone": "Recoleta"
   },
+  "zonaprop:60231443": {
+   "first_seen": "2026-11-26T20:43:22+00:00",
+   "key": "billinghurst 2100|139000|52|3",
+   "place": "billinghurst 2100|50|3",
+   "price": 139000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-espacio-60231443.html",
+   "zone": "Recoleta"
+  },
   "zonaprop:60233554": {
    "first_seen": "2026-10-10T01:58:26+00:00",
    "key": "azcuenaga 1000|139000|56|3",
@@ -2327,6 +2335,14 @@
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-de-departamento-de-3-ambientes-en-chacarita-60702662.html",
    "zone": "Chacarita"
   },
+  "zonaprop:60728212": {
+   "first_seen": "2026-11-26T20:43:22+00:00",
+   "key": "warnes 430|140000|60|2",
+   "place": "warnes 430|60|2",
+   "price": 140000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-ambientes-balcon-terraza-60728212.html",
+   "zone": "Villa Crespo"
+  },
   "zonaprop:60735780": {
    "first_seen": "2026-11-18T19:57:51+00:00",
    "key": "scalabrini ortiz 300|140000|53|2",
@@ -2334,6 +2350,14 @@
    "price": 140000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-a-estrenar-con-balcon-y-60735780.html",
    "zone": "Villa Crespo"
+  },
+  "zonaprop:60741329": {
+   "first_seen": "2026-11-26T20:43:22+00:00",
+   "key": "guevara 200|135000|68|3",
+   "place": "guevara 200|70|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-duplex-chacarita-luminoso-60741329.html",
+   "zone": "Chacarita"
   },
   "zonaprop:60762953": {
    "first_seen": "2026-11-20T19:39:27+00:00",
@@ -2349,6 +2373,30 @@
    "place": "estado de israel 4600|75|2",
    "price": 139000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-reciclado-a-nuevo-balcon-terraza-20-60774341.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60781756": {
+   "first_seen": "2026-11-26T20:43:22+00:00",
+   "key": "nicaragua 5800|139900|71|2",
+   "place": "nicaragua 5800|70|2",
+   "price": 139900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-con-balcon-aterrazado-en-palermo-60781756.html",
+   "zone": "Palermo Hollywood"
+  },
+  "zonaprop:60796867": {
+   "first_seen": "2026-11-26T20:43:22+00:00",
+   "key": "montaneses 2036|130000|75|2",
+   "place": "montaneses 2036|75|2",
+   "price": 130000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-amb-barrio-chino-oportunidad-60796867.html",
+   "zone": "Belgrano"
+  },
+  "zonaprop:60799910": {
+   "first_seen": "2026-11-26T20:43:22+00:00",
+   "key": "corrientes 5100|135000|57|3",
+   "place": "corrientes 5100|55|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-av-corrientes-5100-venta-departamento-de-tres-60799910.html",
    "zone": "Villa Crespo"
   }
  },

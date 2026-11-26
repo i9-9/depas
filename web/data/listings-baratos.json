@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-18T02:57:58+00:00",
+ "last_change": "2026-11-26T20:43:22+00:00",
  "listings": [
   {
    "active": true,
@@ -106,6 +106,36 @@
    ],
    "title": "Amenábar 500, Piso 4, Colegiales",
    "url": "https://www.argenprop.com/departamento-en-venta-en-colegiales-3-ambientes--20629940",
+   "zone": "Colegiales"
+  },
+  {
+   "active": true,
+   "address": "Conde al 700",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 57.0,
+   "area_covered": null,
+   "area_total": 57.0,
+   "blurb": "USD 105.000\n$ 200.000 Expensas\n57 m² tot.\n3 amb.\n2 dorm.\n1 baño\nConde al 700\nColegiales, Capital Federal\nSi estás buscando un departamento con mucho potencial en una de las mejores zonas de Colegiales, este 3 ambientes en primer piso al frente es ideal. Tiene una distribución súper funcional, dos espacios al aire libre (balcón corrido y patio) y muchísima luz natural. ¿Cómo está el departamento? Está para refaccionar y dejarlo a tu gusto. Actualmente funciona todo perfectamente (agua, luz, gas),",
+   "expensas_ars": 200000,
+   "expensas_text": "$ 200.000 Expensas",
+   "first_price": 105000,
+   "first_seen": "2026-11-26T20:43:22+00:00",
+   "gone_at": null,
+   "id": "zonaprop:60770105",
+   "lat": null,
+   "lng": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/77/01/05/720x532/2093948841.jpg",
+   "piso": null,
+   "price": 105000,
+   "price_history": [],
+   "site": "zonaprop",
+   "tags": [
+    "para reciclar",
+    "m² sin verificar"
+   ],
+   "title": "Si estás buscando un departamento con mucho potencial en una de las mejores zonas de Coleg",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-57-53-m-sup2--al-frente-con-60770105.html",
    "zone": "Colegiales"
   },
   {
