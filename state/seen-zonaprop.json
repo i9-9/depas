@@ -1104,9 +1104,9 @@
   },
   "zonaprop:60008679": {
    "first_seen": "2026-11-19T02:23:44+00:00",
-   "key": "mcal antonio jose de sucre 1500|139900|55|3",
+   "key": "mcal antonio jose de sucre 1500|138000|55|3",
    "place": "mcal antonio jose de sucre 1500|55|3",
-   "price": 139900,
+   "price": 138000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dpto-3-amb-luminoso-con-balcon-y-lavadero-en-60008679.html",
    "zone": "Belgrano"
   },
@@ -2398,6 +2398,54 @@
    "price": 135000,
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-av-corrientes-5100-venta-departamento-de-tres-60799910.html",
    "zone": "Villa Crespo"
+  },
+  "zonaprop:60814680": {
+   "first_seen": "2026-11-27T20:29:10+00:00",
+   "key": "corrientes 5100|135000|51|3",
+   "place": "corrientes 5100|50|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-villa-crespo-capital-60814680.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60816231": {
+   "first_seen": "2026-11-27T20:29:10+00:00",
+   "key": "blanco encalada 2300|135000|54|3",
+   "place": "blanco encalada 2300|55|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-balcon-y-vista-abierta-60816231.html",
+   "zone": "Belgrano"
+  },
+  "zonaprop:60816604": {
+   "first_seen": "2026-11-27T20:29:10+00:00",
+   "key": "monroe 3000|120000|50|3",
+   "place": "monroe 3000|50|3",
+   "price": 120000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-belgrano-r-60816604.html",
+   "zone": "Belgrano"
+  },
+  "zonaprop:60817004": {
+   "first_seen": "2026-11-27T20:29:10+00:00",
+   "key": "serrano 800|139900|70|2",
+   "place": "serrano 800|70|2",
+   "price": 139900,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-2-ambientes-balcon-terraza-en-60817004.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60818194": {
+   "first_seen": "2026-11-27T20:29:10+00:00",
+   "key": "estado de israel 4500|135000|51|3",
+   "place": "estado de israel 4500|50|3",
+   "price": 135000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-3-ambientes-balcon-villa-crespo-60818194.html",
+   "zone": "Villa Crespo"
+  },
+  "zonaprop:60819442": {
+   "first_seen": "2026-11-27T20:29:10+00:00",
+   "key": "elcano 2700|125000|121|3",
+   "place": "elcano 2700|120|3",
+   "price": 125000,
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-alquiler-3-ambientes-belgrano-doble-balcon-cochera-60819442.html",
+   "zone": "Belgrano"
   }
  },
  "meta": {

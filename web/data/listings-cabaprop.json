@@ -1,5 +1,5 @@
 {
- "last_change": "2026-11-26T20:43:22+00:00",
+ "last_change": "2026-11-27T20:29:10+00:00",
  "listings": [
   {
    "active": true,
@@ -891,7 +891,7 @@
    "zone_unverified": false
   },
   {
-   "active": true,
+   "active": false,
    "address": "Avenida Estado de Israel 4500",
    "address_unverified": false,
    "air_usd": null,
@@ -911,7 +911,7 @@
    "expensas_ars": 85000,
    "expensas_text": "$ 85.000 expensas",
    "first_seen": "2026-11-13T18:52:12+00:00",
-   "gone_at": null,
+   "gone_at": "2026-11-27T20:29:10+00:00",
    "id": "cabaprop:6af67f62e8b634872c01df33",
    "max_offer_usd": null,
    "neto_base_usd": null,

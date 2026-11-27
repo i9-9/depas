@@ -1,35 +1,6 @@
 {
- "last_change": "2026-11-26T20:43:22+00:00",
+ "last_change": "2026-11-27T20:29:10+00:00",
  "listings": [
-  {
-   "active": true,
-   "address": "Delgado  826",
-   "ambientes": 3,
-   "antiguedad_years": null,
-   "area": 43.0,
-   "area_covered": null,
-   "area_total": 43.0,
-   "blurb": "USD 95.000\n43 m² tot.\n3 amb.\n2 dorm.\n1 baño\nDelgado  826\nColegiales, Capital Federal\nVenta - 3 ambientes - al frente con balcón - reciclado – colegiales - apto créditoliving - comedor amplio y luminoso, con salida directa al balcón para aprovechar la luz natural todo el día y el aire libre en cada rincón. Ambientes hiperluminosos con ventilación cruzada, que mantienen el aire siempre fresco y renovado. Ventanas con doble vidriado hermético (dvh), sinónimo de silencio total y temperatura estable ",
-   "expensas_ars": null,
-   "expensas_text": "",
-   "first_price": 95000,
-   "first_seen": "2026-11-03T19:38:31+00:00",
-   "gone_at": null,
-   "id": "zonaprop:60590215",
-   "lat": null,
-   "lng": null,
-   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/59/02/15/720x532/2089242992.jpg",
-   "piso": null,
-   "price": 95000,
-   "price_history": [],
-   "site": "zonaprop",
-   "tags": [
-    "m² sin verificar"
-   ],
-   "title": "Venta - 3 ambientes - al frente con balcón - reciclado – colegiales - apto créditoliving -",
-   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-tres-ambientes-colegiales-60590215.html",
-   "zone": "Colegiales"
-  },
   {
    "active": true,
    "address": "Delgado 800",
@@ -246,6 +217,35 @@
    ],
    "title": "Oportunidad! Venta / colegiales. Dpto. 3 amb. Muy Amplios y Luminosos en Venta con balcon ",
    "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-3-amb-amplios-luminosos!balcon-cocina-y-lavadero-54374885.html",
+   "zone": "Colegiales"
+  },
+  {
+   "active": false,
+   "address": "Delgado  826",
+   "ambientes": 3,
+   "antiguedad_years": null,
+   "area": 43.0,
+   "area_covered": null,
+   "area_total": 43.0,
+   "blurb": "USD 95.000\n43 m² tot.\n3 amb.\n2 dorm.\n1 baño\nDelgado  826\nColegiales, Capital Federal\nVenta - 3 ambientes - al frente con balcón - reciclado – colegiales - apto créditoliving - comedor amplio y luminoso, con salida directa al balcón para aprovechar la luz natural todo el día y el aire libre en cada rincón. Ambientes hiperluminosos con ventilación cruzada, que mantienen el aire siempre fresco y renovado. Ventanas con doble vidriado hermético (dvh), sinónimo de silencio total y temperatura estable ",
+   "expensas_ars": null,
+   "expensas_text": "",
+   "first_price": 95000,
+   "first_seen": "2026-11-03T19:38:31+00:00",
+   "gone_at": "2026-11-27T20:29:10+00:00",
+   "id": "zonaprop:60590215",
+   "lat": null,
+   "lng": null,
+   "photo": "https://imgar.zonapropcdn.com/avisos/1/00/60/59/02/15/720x532/2089242992.jpg",
+   "piso": null,
+   "price": 95000,
+   "price_history": [],
+   "site": "zonaprop",
+   "tags": [
+    "m² sin verificar"
+   ],
+   "title": "Venta - 3 ambientes - al frente con balcón - reciclado – colegiales - apto créditoliving -",
+   "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-tres-ambientes-colegiales-60590215.html",
    "zone": "Colegiales"
   },
   {
